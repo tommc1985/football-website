@@ -69,7 +69,7 @@ Each helper function performs one specific task, with no dependence on other fun
 <p>CodeIgniter does not load Helper Files by default, so the first step in using
 a Helper is to load it.  Once loaded, it becomes globally available in your <a href="../general/controllers.html">controller</a> and <a href="../general/views.html">views</a>.</p>
 
-<p>Helpers are typically stored in your <dfn>system/helpers</dfn>, or <dfn>application/helpers </dfn>directory.	CodeIgniter will look first in your <dfn>application/helpers</dfn>
+<p>Helpers are typically stored in your <dfn>system/helpers</dfn>, or <dfn>application/helpers </dfn>directory.    CodeIgniter will look first in your <dfn>application/helpers</dfn>
 directory.  If the directory does not exist or the specified helper is not located there CI will instead look in your global
 <dfn>system/helpers</dfn> folder.</p>
 
@@ -120,10 +120,10 @@ This is done by opening the <var>application/config/autoload.php</var> file and 
 <p>To "extend" Helpers, create a file in your <dfn>application/helpers/</dfn> folder with an identical name to the existing Helper, but prefixed with <kbd>MY_</kbd> (this item is configurable.  See below.).</p>
 
 <p>If all you need to do is add some functionality to an existing helper - perhaps add a function or two, or change how a particular
-	helper function operates - then it's overkill to replace the entire helper with your version.  In this case it's better to simply
-	"extend" the Helper.  The term "extend" is used loosely since Helper functions are procedural and discrete and cannot be extended
-	in the traditional programmatic sense.  Under the hood, this gives you the ability to add to the functions a Helper provides,
-	or to modify how the native Helper functions operate.</p>
+    helper function operates - then it's overkill to replace the entire helper with your version.  In this case it's better to simply
+    "extend" the Helper.  The term "extend" is used loosely since Helper functions are procedural and discrete and cannot be extended
+    in the traditional programmatic sense.  Under the hood, this gives you the ability to add to the functions a Helper provides,
+    or to modify how the native Helper functions operate.</p>
 
 <p>For example, to extend the native <kbd>Array Helper</kbd> you'll create a file named <dfn>application/helpers/</dfn><kbd>MY_array_helper.php</kbd>, and add or override functions:</p>
 
@@ -132,7 +132,7 @@ This is done by opening the <var>application/config/autoload.php</var> file and 
 function any_in_array($needle, $haystack)<br />
 {<br />
 &nbsp;&nbsp;&nbsp;&nbsp;$needle = (is_array($needle)) ? $needle : array($needle);<br />
-	<br />
+    <br />
 &nbsp;&nbsp;&nbsp;&nbsp;foreach ($needle as $item)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;{<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (in_array($item, $haystack))<br />
@@ -140,7 +140,7 @@ function any_in_array($needle, $haystack)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return TRUE;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
-	<br />
+    <br />
 &nbsp;&nbsp;&nbsp;&nbsp;return FALSE;<br />
 }<br />
 <br />

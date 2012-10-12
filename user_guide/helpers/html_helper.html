@@ -61,14 +61,14 @@ HTML Helper
 <p>The HTML Helper file contains functions that assist in working with HTML.</p>
 
 <ul>
-	<li><a href="#br">br()</a></li>
-	<li><a href="#heading">heading()</a></li>
-	<li><a href="#img">img()</a></li>
-	<li><a href="#link_tag">link_tag()</a></li>
-	<li><a href="#nbs">nbs()</a></li>
-	<li><a href="#ol_and_ul">ol() and ul()</a></li>
-	<li><a href="#meta">meta()</a></li>
-	<li><a href="#doctype">doctype()</a></li>
+    <li><a href="#br">br()</a></li>
+    <li><a href="#heading">heading()</a></li>
+    <li><a href="#img">img()</a></li>
+    <li><a href="#link_tag">link_tag()</a></li>
+    <li><a href="#nbs">nbs()</a></li>
+    <li><a href="#ol_and_ul">ol() and ul()</a></li>
+    <li><a href="#meta">meta()</a></li>
+    <li><a href="#doctype">doctype()</a></li>
 </ul>
 
 <h2>Loading this Helper</h2>
@@ -103,17 +103,17 @@ second the size of the heading.  Example:</p>
 // gives &lt;img src=&quot;http://site.com/index.php/images/picture.jpg&quot; alt=&quot;&quot; /&gt;</code></p>
 <p>Additionally, an associative array can be passed to the img() function for complete control over all attributes and values. If an alt attribute is not provided, CodeIgniter will generate an empty string.</p>
 <p><code> $image_properties = array(<br />
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'src' =&gt; 'images/picture.jpg',<br />
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'alt' =&gt; 'Me, demonstrating how to eat 4 slices of pizza at one time',<br />
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'class' =&gt; 'post_images',<br />
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'width' =&gt; '200',<br />
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'height' =&gt; '200',<br />
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'title' =&gt; 'That was quite a night',<br />
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'rel' =&gt; 'lightbox',<br />
-	);<br />
-	<br />
-	img($image_properties);<br />
-	// &lt;img src=&quot;http://site.com/index.php/images/picture.jpg&quot; alt=&quot;Me, demonstrating how to eat 4 slices of pizza at one time&quot; class=&quot;post_images&quot; width=&quot;200&quot; height=&quot;200&quot; title=&quot;That was quite a night&quot; rel=&quot;lightbox&quot; /&gt;</code></p>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'src' =&gt; 'images/picture.jpg',<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'alt' =&gt; 'Me, demonstrating how to eat 4 slices of pizza at one time',<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'class' =&gt; 'post_images',<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'width' =&gt; '200',<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'height' =&gt; '200',<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'title' =&gt; 'That was quite a night',<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'rel' =&gt; 'lightbox',<br />
+    );<br />
+    <br />
+    img($image_properties);<br />
+    // &lt;img src=&quot;http://site.com/index.php/images/picture.jpg&quot; alt=&quot;Me, demonstrating how to eat 4 slices of pizza at one time&quot; class=&quot;post_images&quot; width=&quot;200&quot; height=&quot;200&quot; title=&quot;That was quite a night&quot; rel=&quot;lightbox&quot; /&gt;</code></p>
 
 <h2><a name="link_tag"></a>link_tag()</h2>
 <p>Lets you create HTML &lt;link /> tags.  This is useful for stylesheet links, as well as other links. The parameters are href, with optional rel, type, title, media and index_page. index_page is a TRUE/FALSE value that specifics if the href should have the page specified by $config['index_page'] added to the address it creates.<code>
@@ -122,23 +122,23 @@ echo link_tag('css/mystyles.css');<br />
 <p>Further examples:</p>
 
 <code>
-	echo link_tag('favicon.ico', 'shortcut icon', 'image/ico');<br />
-	// &lt;link href=&quot;http://site.com/favicon.ico&quot; rel=&quot;shortcut icon&quot; type=&quot;image/ico&quot; /&gt;
-	<br />
-	<br />
-	echo link_tag('feed', 'alternate', 'application/rss+xml', 'My RSS Feed');<br />
-	// &lt;link href=&quot;http://site.com/feed&quot; rel=&quot;alternate&quot; type=&quot;application/rss+xml&quot; title=&quot;My RSS Feed&quot; /&gt; </code>
+    echo link_tag('favicon.ico', 'shortcut icon', 'image/ico');<br />
+    // &lt;link href=&quot;http://site.com/favicon.ico&quot; rel=&quot;shortcut icon&quot; type=&quot;image/ico&quot; /&gt;
+    <br />
+    <br />
+    echo link_tag('feed', 'alternate', 'application/rss+xml', 'My RSS Feed');<br />
+    // &lt;link href=&quot;http://site.com/feed&quot; rel=&quot;alternate&quot; type=&quot;application/rss+xml&quot; title=&quot;My RSS Feed&quot; /&gt; </code>
 <p>Additionally, an associative array can be passed to the link() function for complete control over all attributes and values.</p>
 <p><code>
-	$link = array(<br />
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'href' =&gt; 'css/printer.css',<br />
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'rel' =&gt; 'stylesheet',<br />
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'type' =&gt; 'text/css',<br />
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'media' =&gt; 'print'<br />
-	);<br />
-	<br />
-	echo link_tag($link);<br />
-	// &lt;link href=&quot;http://site.com/css/printer.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; media=&quot;print&quot; /&gt;</code></p>
+    $link = array(<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'href' =&gt; 'css/printer.css',<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'rel' =&gt; 'stylesheet',<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'type' =&gt; 'text/css',<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'media' =&gt; 'print'<br />
+    );<br />
+    <br />
+    echo link_tag($link);<br />
+    // &lt;link href=&quot;http://site.com/css/printer.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; media=&quot;print&quot; /&gt;</code></p>
 
 <h2><a name="nbs"></a>nbs()</h2>
 <p>Generates non-breaking spaces (&amp;nbsp;) based on the number you submit. Example:</p>
@@ -322,51 +322,51 @@ echo doctype('html4-trans');<br />
 <p>The following is a list of doctype choices.  These are configurable, and pulled from <samp>application/config/doctypes.php</samp></p>
 
 <table cellpadding="0" cellspacing="1" border="0" style="width:100%" class="tableborder">
-	<tr>
-	<th>Doctype</th>
-	<th>Option</th>
-	<th>Result</th>
-	</tr>
-	<tr>
-	<td class="td">XHTML 1.1</td>
-	<td class="td">doctype('xhtml11')</td>
-	<td class="td">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"&gt;</td>
-	</tr>
-	<tr>
-	<td class="td">XHTML 1.0 Strict</td>
-	<td class="td">doctype('xhtml1-strict')</td>
-	<td class="td">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;</td>
-	</tr>
-	<tr>
-	<td class="td">XHTML 1.0 Transitional</td>
-	<td class="td">doctype('xhtml1-trans')</td>
-	<td class="td">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</td>
-	</tr>
-	<tr>
-	<td class="td">XHTML 1.0 Frameset</td>
-	<td class="td">doctype('xhtml1-frame')</td>
-	<td class="td">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd"&gt;</td>
-	</tr>
-	<tr>
-	<td class="td">HTML 5</td>
-	<td class="td">doctype('html5')</td>
-	<td class="td">&lt;!DOCTYPE html&gt;</td>
-	</tr>
-	<tr>
-	<td class="td">HTML 4 Strict</td>
-	<td class="td">doctype('html4-strict')</td>
-	<td class="td">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;</td>
-	</tr>
-	<tr>
-	<td class="td">HTML 4 Transitional</td>
-	<td class="td">doctype('html4-trans')</td>
-	<td class="td">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</td>
-	</tr>
-	<tr>
-	<td class="td">HTML 4 Frameset</td>
-	<td class="td">doctype('html4-frame')</td>
-	<td class="td">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd"&gt;</td>
-	</tr>
+    <tr>
+    <th>Doctype</th>
+    <th>Option</th>
+    <th>Result</th>
+    </tr>
+    <tr>
+    <td class="td">XHTML 1.1</td>
+    <td class="td">doctype('xhtml11')</td>
+    <td class="td">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"&gt;</td>
+    </tr>
+    <tr>
+    <td class="td">XHTML 1.0 Strict</td>
+    <td class="td">doctype('xhtml1-strict')</td>
+    <td class="td">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;</td>
+    </tr>
+    <tr>
+    <td class="td">XHTML 1.0 Transitional</td>
+    <td class="td">doctype('xhtml1-trans')</td>
+    <td class="td">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</td>
+    </tr>
+    <tr>
+    <td class="td">XHTML 1.0 Frameset</td>
+    <td class="td">doctype('xhtml1-frame')</td>
+    <td class="td">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd"&gt;</td>
+    </tr>
+    <tr>
+    <td class="td">HTML 5</td>
+    <td class="td">doctype('html5')</td>
+    <td class="td">&lt;!DOCTYPE html&gt;</td>
+    </tr>
+    <tr>
+    <td class="td">HTML 4 Strict</td>
+    <td class="td">doctype('html4-strict')</td>
+    <td class="td">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;</td>
+    </tr>
+    <tr>
+    <td class="td">HTML 4 Transitional</td>
+    <td class="td">doctype('html4-trans')</td>
+    <td class="td">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</td>
+    </tr>
+    <tr>
+    <td class="td">HTML 4 Frameset</td>
+    <td class="td">doctype('html4-frame')</td>
+    <td class="td">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd"&gt;</td>
+    </tr>
 </table>
 
 

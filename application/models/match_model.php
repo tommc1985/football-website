@@ -25,7 +25,7 @@ class Match_model extends CI_Model {
      */
     public function fetchEarliest($limit = 1)
     {
-    	$this->db->select('*')
+        $this->db->select('*')
             ->from($this->tableName)
             ->where('deleted', 0)
             ->order_by('date', 'asc')

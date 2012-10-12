@@ -212,23 +212,23 @@ class&nbsp;Blog_controller&nbsp;extends&nbsp;CI_Controller&nbsp;{<br />
 <li>You can tell the model loading function to auto-connect by passing <kbd>TRUE</kbd> (boolean) via the third parameter,
 and connectivity settings, as defined in your database config file will be used:
 
-	<code>$this->load->model('<var>Model_name</var>', '', <kbd>TRUE</kbd>);</code>
-	</li>
+    <code>$this->load->model('<var>Model_name</var>', '', <kbd>TRUE</kbd>);</code>
+    </li>
 
 
 <li>You can manually pass database connectivity settings via the third parameter:
 
 
-		<code>$config['hostname'] = "localhost";<br />
-		$config['username'] = "myusername";<br />
-		$config['password'] = "mypassword";<br />
-		$config['database'] = "mydatabase";<br />
-		$config['dbdriver'] = "mysql";<br />
-		$config['dbprefix'] = "";<br />
-		$config['pconnect'] = FALSE;<br />
-		$config['db_debug'] = TRUE;<br />
-		<br />
-		$this->load->model('<var>Model_name</var>', '', <kbd>$config</kbd>);</code></li>
+        <code>$config['hostname'] = "localhost";<br />
+        $config['username'] = "myusername";<br />
+        $config['password'] = "mypassword";<br />
+        $config['database'] = "mydatabase";<br />
+        $config['dbdriver'] = "mysql";<br />
+        $config['dbprefix'] = "";<br />
+        $config['pconnect'] = FALSE;<br />
+        $config['db_debug'] = TRUE;<br />
+        <br />
+        $this->load->model('<var>Model_name</var>', '', <kbd>$config</kbd>);</code></li>
 </ul>
 
 

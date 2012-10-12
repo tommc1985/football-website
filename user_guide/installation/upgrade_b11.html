@@ -93,15 +93,15 @@ the following item to your version: <dfn>language/english/calendar_lang.php</dfn
 
 <p>The original <kbd>application/config/config.php</kbd> file has a typo in it  Open the file and look for the items related to cookies:</p>
 
-<code>$conf['cookie_prefix']	= "";<br />
-$conf['cookie_domain']	= "";<br />
-$conf['cookie_path']	= "/";</code>
+<code>$conf['cookie_prefix']    = "";<br />
+$conf['cookie_domain']    = "";<br />
+$conf['cookie_path']    = "/";</code>
 
 <p>Change the array name from <kbd>$conf</kbd> to <kbd>$config</kbd>, like this:</p>
 
-<code>$config['cookie_prefix']	= "";<br />
-$config['cookie_domain']	= "";<br />
-$config['cookie_path']	= "/";</code>
+<code>$config['cookie_prefix']    = "";<br />
+$config['cookie_domain']    = "";<br />
+$config['cookie_path']    = "/";</code>
 
 <p>Lastly, add the following new item to the config file (and edit the option if needed):</p>
 
@@ -117,12 +117,12 @@ $config['cookie_path']	= "/";</code>
 | If your links do not seem to work, try one of <br />
 | the other delicious flavors:<br />
 | <br />
-| 'auto'			Default - auto detects<br />
-| 'path_info'		Uses the PATH_INFO <br />
-| 'query_string'	Uses the QUERY_STRING<br />
+| 'auto'            Default - auto detects<br />
+| 'path_info'        Uses the PATH_INFO <br />
+| 'query_string'    Uses the QUERY_STRING<br />
 */<br />
 <br />
-$config['uri_protocol']	= "auto";</code>
+$config['uri_protocol']    = "auto";</code>
 
 
 </div>

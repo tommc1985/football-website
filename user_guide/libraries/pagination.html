@@ -85,13 +85,13 @@ echo  $this->pagination->create_links();</code>
 minimum you need the three shown.  Here is a description of what those items represent:</p>
 
 <ul>
-	<li><strong>base_url</strong> This is the full URL to the controller class/function containing your pagination.  In the example
-	above, it is pointing to a controller called "Test" and a function called "page".  Keep in mind that you can
-	<a href="../general/routing.html">re-route your URI</a> if you need a different structure.</li>
-	<li><strong>total_rows</strong> This number represents the total rows in the result set you are creating pagination for.
-	Typically this number will be the total rows that your database query returned.
-	</li>
-	<li><strong>per_page</strong> The number of items you intend to show per page.  In the above example, you would be showing 20 items per page.</li>
+    <li><strong>base_url</strong> This is the full URL to the controller class/function containing your pagination.  In the example
+    above, it is pointing to a controller called "Test" and a function called "page".  Keep in mind that you can
+    <a href="../general/routing.html">re-route your URI</a> if you need a different structure.</li>
+    <li><strong>total_rows</strong> This number represents the total rows in the result set you are creating pagination for.
+    Typically this number will be the total rows that your database query returned.
+    </li>
+    <li><strong>per_page</strong> The number of items you intend to show per page.  In the above example, you would be showing 20 items per page.</li>
 </ul>
 
 <p>The <var>create_links()</var> function returns an empty string when there is no pagination to show.</p>
@@ -118,7 +118,7 @@ something different you can specify it.</p>
 <h4>$config['num_links'] = 2;</h4>
 
 <p>The number of &quot;digit&quot; links you would like before and after the selected page number. For example, the number 2
-	will place two digits on either side, as in the example links at the very top of this page.</p>
+    will place two digits on either side, as in the example links at the very top of this page.</p>
 
 <h4>$config['use_page_numbers'] = TRUE;</h4>
 <p>By default, the URI segment will use the starting index for the items you are paginating. If you prefer to show the the actual page number, set this to TRUE.</p>

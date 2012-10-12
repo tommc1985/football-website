@@ -62,16 +62,16 @@ Caching Driver
 
 <h2>Table of Contents</h2>
 <ul>
-	<li><a href="#example_usage" title="Example Usage">Example Usage</a></li>
-	<li><a href="#function_reference" title="Function Reference">Function Reference</a></li>
+    <li><a href="#example_usage" title="Example Usage">Example Usage</a></li>
+    <li><a href="#function_reference" title="Function Reference">Function Reference</a></li>
 </ul>
 
 <h3>Available Drivers</h3>
 <ul>
-	<li><a href="#apc" title="APC Cache">Alternative PHP Cache (APC) Caching</a></li>
-	<li><a href="#file" title="File Caching">File-based Caching</a></li>
-	<li><a href="#memcached" title="Memcached">Memcached Caching</a></li>
-	<li><a href="#dummy" title="Dummy Caching">Dummy Cache</a></li>
+    <li><a href="#apc" title="APC Cache">Alternative PHP Cache (APC) Caching</a></li>
+    <li><a href="#file" title="File Caching">File-based Caching</a></li>
+    <li><a href="#memcached" title="Memcached">Memcached Caching</a></li>
+    <li><a href="#dummy" title="Dummy Caching">Dummy Cache</a></li>
 </ul>
 
 <h2 id="example_usage">Example Usage</h2>
@@ -149,7 +149,7 @@ if ($this->cache->apc->is_supported())<br />
 
 <p>All of the functions listed above can be accessed without passing a specific adapter to the driver loader as follows:</p>
 <code>$this->load->driver('cache');<br />
-	$this->cache->apc->save('foo', 'bar', 10);</code>
+    $this->cache->apc->save('foo', 'bar', 10);</code>
 <p>For more information on APC, please see <a href="http://php.net/apc">http://php.net/apc</a></p>
 
 <h2 id="file">File-based Caching</h2>
@@ -158,7 +158,7 @@ if ($this->cache->apc->is_supported())<br />
 
 <p>All of the functions listed above can be accessed without passing a specific adapter to the driver loader as follows:</p>
 <code>$this->load->driver('cache');<br />
-	$this->cache->file->save('foo', 'bar', 10);</code>
+    $this->cache->file->save('foo', 'bar', 10);</code>
 
 <h2 id="memcached">Memcached Caching</h2>
 
@@ -166,7 +166,7 @@ if ($this->cache->apc->is_supported())<br />
 
 <p>All of the functions listed above can be accessed without passing a specific adapter to the driver loader as follows:</p>
 <code>$this->load->driver('cache');<br />
-	$this->cache->memcached->save('foo', 'bar', 10);</code>
+    $this->cache->memcached->save('foo', 'bar', 10);</code>
 
 <p>For more information on Memcached, please see <a href="http://php.net/memcached">http://php.net/memcached</a></p>
 

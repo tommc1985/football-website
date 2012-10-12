@@ -71,10 +71,10 @@ News section
 &lt;?php
 class News_model extends CI_Model {
 
-	public function __construct()
-	{
-		$this->load->database();
-	}
+    public function __construct()
+    {
+        $this->load->database();
+    }
 }
 </pre>
 
@@ -84,12 +84,12 @@ class News_model extends CI_Model {
 
 <pre>
 CREATE TABLE news (
-	id int(11) NOT NULL AUTO_INCREMENT,
-	title varchar(128) NOT NULL,
-	slug varchar(128) NOT NULL,
-	text text NOT NULL,
-	PRIMARY KEY (id),
-	KEY slug (slug)
+    id int(11) NOT NULL AUTO_INCREMENT,
+    title varchar(128) NOT NULL,
+    slug varchar(128) NOT NULL,
+    text text NOT NULL,
+    PRIMARY KEY (id),
+    KEY slug (slug)
 );
 </pre>
 
@@ -98,14 +98,14 @@ CREATE TABLE news (
 <pre>
 public function get_news($slug = FALSE)
 {
-	if ($slug === FALSE)
-	{
-		$query = $this->db->get('news');
-		return $query->result_array();
-	}
-	
-	$query = $this->db->get_where('news', array('slug' => $slug));
-	return $query->row_array();
+    if ($slug === FALSE)
+    {
+        $query = $this->db->get('news');
+        return $query->result_array();
+    }
+
+    $query = $this->db->get_where('news', array('slug' => $slug));
+    return $query->row_array();
 }
 </pre>
 
@@ -119,21 +119,21 @@ public function get_news($slug = FALSE)
 &lt;?php
 class News extends CI_Controller {
 
-	public function __construct()
-	{
-		parent::__construct();
-		$this->load->model('news_model');
-	}
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('news_model');
+    }
 
-	public function index()
-	{
-		$data['news'] = $this->news_model->get_news();
-	}
+    public function index()
+    {
+        $data['news'] = $this->news_model->get_news();
+    }
 
-	public function view($slug)
-	{
-		$data['news'] = $this->news_model->get_news($slug);
-	}
+    public function view($slug)
+    {
+        $data['news'] = $this->news_model->get_news($slug);
+    }
 }
 </pre>
 
@@ -146,12 +146,12 @@ class News extends CI_Controller {
 <pre>
 public function index()
 {
-	$data['news'] = $this->news_model->get_news();
-	$data['title'] = 'News archive';
+    $data['news'] = $this->news_model->get_news();
+    $data['title'] = 'News archive';
 
-	$this->load->view('templates/header', $data);
-	$this->load->view('news/index', $data);
-	$this->load->view('templates/footer');
+    $this->load->view('templates/header', $data);
+    $this->load->view('news/index', $data);
+    $this->load->view('templates/footer');
 }
 </pre>
 
@@ -176,18 +176,18 @@ public function index()
 <pre>
 public function view($slug)
 {
-	$data['news_item'] = $this->news_model->get_news($slug);
+    $data['news_item'] = $this->news_model->get_news($slug);
 
-	if (empty($data['news_item']))
-	{
-		show_404();
-	}
+    if (empty($data['news_item']))
+    {
+        show_404();
+    }
 
-	$data['title'] = $data['news_item']['title'];
+    $data['title'] = $data['news_item']['title'];
 
-	$this->load->view('templates/header', $data);
-	$this->load->view('news/view', $data);
-	$this->load->view('templates/footer');
+    $this->load->view('templates/header', $data);
+    $this->load->view('news/view', $data);
+    $this->load->view('templates/footer');
 }
 </pre>
 

@@ -77,7 +77,7 @@ you should do so before continuing.</p>
 &lt;title>My Blog&lt;/title>
 &lt;/head>
 &lt;body>
-	&lt;h1>Welcome to my Blog!&lt;/h1>
+    &lt;h1>Welcome to my Blog!&lt;/h1>
 &lt;/body>
 &lt;/html>
 </textarea>
@@ -100,10 +100,10 @@ you should do so before continuing.</p>
 &lt;?php
 class Blog extends CI_Controller {
 
-	function index()
-	{
-		$this->load->view('blogview');
-	}
+    function index()
+    {
+        $this->load->view('blogview');
+    }
 }
 ?&gt;
 </textarea>
@@ -129,7 +129,7 @@ class Page extends CI_Controller {<br /><br />
 &nbsp;&nbsp;&nbsp;}<br />
 <br />
 }<br />
-	?&gt;</code></p>
+    ?&gt;</code></p>
 <p>In the example above, we are using &quot;dynamically added data&quot;, which you will see below.</p>
 <h2>Storing Views within Sub-folders</h2>
 <p>Your view files can also be stored within sub-folders if you prefer that type of organization.  When doing so you will need
@@ -165,13 +165,13 @@ $this->load->view('blogview', <var>$data</var>);</code>
 &lt;?php
 class Blog extends CI_Controller {
 
-	function index()
-	{
-		$data['title'] = "My Real Title";
-		$data['heading'] = "My Real Heading";
+    function index()
+    {
+        $data['title'] = "My Real Title";
+        $data['heading'] = "My Real Heading";
 
-		$this->load->view('blogview', $data);
-	}
+        $this->load->view('blogview', $data);
+    }
 }
 ?&gt;
 </textarea>
@@ -186,7 +186,7 @@ class Blog extends CI_Controller {
 &lt;title>&lt;?php echo $title;?>&lt;/title>
 &lt;/head>
 &lt;body>
-	&lt;h1>&lt;?php echo $heading;?>&lt;/h1>
+    &lt;h1>&lt;?php echo $heading;?>&lt;/h1>
 &lt;/body>
 &lt;/html>
 </textarea>
@@ -205,15 +205,15 @@ pull data from your database it will typically be in the form of a multi-dimensi
 &lt;?php
 class Blog extends CI_Controller {
 
-	function index()
-	{
-		$data['todo_list'] = array('Clean House', 'Call Mom', 'Run Errands');
+    function index()
+    {
+        $data['todo_list'] = array('Clean House', 'Call Mom', 'Run Errands');
 
-		$data['title'] = "My Real Title";
-		$data['heading'] = "My Real Heading";
+        $data['title'] = "My Real Title";
+        $data['heading'] = "My Real Heading";
 
-		$this->load->view('blogview', $data);
-	}
+        $this->load->view('blogview', $data);
+    }
 }
 ?&gt;
 </textarea>

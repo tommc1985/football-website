@@ -92,11 +92,11 @@ identical. You will set some preferences corresponding to the action you intend 
 call one of four available processing functions.  For example, to create an image thumbnail you'll do this:</p>
 
 <code>$config['image_library'] = 'gd2';<br />
-$config['source_image']	= '/path/to/image/mypic.jpg';<br />
+$config['source_image']    = '/path/to/image/mypic.jpg';<br />
 $config['create_thumb'] = TRUE;<br />
 $config['maintain_ratio'] = TRUE;<br />
-$config['width']		= 75;<br />
-$config['height']	= 50;<br />
+$config['width']        = 75;<br />
+$config['height']    = 50;<br />
 <br />
 $this->load->library('image_lib', $config);
 <br />
@@ -364,7 +364,7 @@ $config['y_axis'] = '40';</code>
 
 <code>$config['image_library'] = 'imagemagick';<br />
 $config['library_path'] = '/usr/X11R6/bin/';<br />
-$config['source_image']	= '/path/to/image/mypic.jpg';<br />
+$config['source_image']    = '/path/to/image/mypic.jpg';<br />
 $config['x_axis'] = '100';<br />
 $config['y_axis'] = '60';<br />
 <br />
@@ -402,7 +402,7 @@ area be selected.</p>
 
 <code>$config['image_library'] = 'netpbm';<br />
 $config['library_path'] = '/usr/bin/';<br />
-$config['source_image']	= '/path/to/image/mypic.jpg';<br />
+$config['source_image']    = '/path/to/image/mypic.jpg';<br />
 $config['rotation_angle'] = 'hor';<br />
 <br />
 $this->image_lib->initialize($config);
@@ -446,11 +446,11 @@ involves setting the preferences corresponding to the action you intend to perfo
 calling the watermark function.  Here is an example:</p>
 
 <code>
-$config['source_image']	= '/path/to/image/mypic.jpg';<br />
+$config['source_image']    = '/path/to/image/mypic.jpg';<br />
 $config['wm_text'] = 'Copyright 2006 - John Doe';<br />
 $config['wm_type'] = 'text';<br />
 $config['wm_font_path'] = './system/fonts/texb.ttf';<br />
-$config['wm_font_size']	= '16';<br />
+$config['wm_font_size']    = '16';<br />
 $config['wm_font_color'] = 'ffffff';<br />
 $config['wm_vrt_alignment']  = 'bottom';<br />
 $config['wm_hor_alignment']  = 'center';<br />

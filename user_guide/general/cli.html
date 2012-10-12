@@ -58,7 +58,7 @@ Running via the CLI
 <h1>Running via the CLI</h1>
 
 <p>
-	As well as calling an applications <a href="./controllers.html">Controllers</a> via the URL in a browser they can also be loaded via the command-line interface (CLI).
+    As well as calling an applications <a href="./controllers.html">Controllers</a> via the URL in a browser they can also be loaded via the command-line interface (CLI).
 </p>
 
 
@@ -79,13 +79,13 @@ Running via the CLI
 <h2>Why run via the command-line?</h2>
 
 <p>
-	There are many reasons for running CodeIgniter from the command-line, but they are not always obvious.</p>
+    There are many reasons for running CodeIgniter from the command-line, but they are not always obvious.</p>
 
 <ul>
-	<li>Run your cron-jobs without needing to use wget or curl</li>
-	<li>Make your cron-jobs inaccessible from being loaded in the URL by checking for <kbd>$this->input->is_cli_request()</kbd></li>
-	<li>Make interactive "tasks" that can do things like set permissions, prune cache folders, run backups, etc.</li>
-	<li>Integrate with other applications in other languages. For example, a random C++ script could call one command and run code in your models!</li>
+    <li>Run your cron-jobs without needing to use wget or curl</li>
+    <li>Make your cron-jobs inaccessible from being loaded in the URL by checking for <kbd>$this->input->is_cli_request()</kbd></li>
+    <li>Make interactive "tasks" that can do things like set permissions, prune cache folders, run backups, etc.</li>
+    <li>Integrate with other applications in other languages. For example, a random C++ script could call one command and run code in your models!</li>
 </ul>
 
 <a name="how"></a>
@@ -97,10 +97,10 @@ Running via the CLI
 &lt;?php
 class Tools extends CI_Controller {
 
-	public function message($to = 'World')
-	{
-		echo "Hello {$to}!".PHP_EOL;
-	}
+    public function message($to = 'World')
+    {
+        echo "Hello {$to}!".PHP_EOL;
+    }
 }
 ?&gt;
 </textarea>
@@ -114,14 +114,14 @@ class Tools extends CI_Controller {
 <p>Instead, we are going to open Terminal in Mac/Lunix or go to Run > "cmd" in Windows and navigate to our CodeIgniter project.</p>
 
 <blockquote>
-	$ cd /path/to/project;<br/>
-	$ php index.php tools message
+    $ cd /path/to/project;<br/>
+    $ php index.php tools message
 </blockquote>
 
 <p>If you did it right, you should see <samp>Hello World!</samp>.</p>
 
 <blockquote>
-	$ php index.php tools message "John Smith"
+    $ php index.php tools message "John Smith"
 </blockquote>
 
 <p>Here we are passing it a argument in the same way that URL parameters work. "John Smith" is passed as a argument and output is: <samp>Hello John Smith!</samp>.</p>

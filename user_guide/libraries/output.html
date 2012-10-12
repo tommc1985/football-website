@@ -120,7 +120,7 @@ $this->output->set_header("HTTP/1.1 200 OK");<br />
 $this->output->set_header('Last-Modified: '.gmdate('D, d M Y H:i:s', $last_update).' GMT');<br />
 $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate");<br />
 $this->output->set_header("Cache-Control: post-check=0, pre-check=0");<br />
-$this->output->set_header("Pragma: no-cache");	</code>
+$this->output->set_header("Pragma: no-cache");    </code>
 
 
 <h2>$this->output->set_status_header(<var>code</var>, '<var>text</var>');</h2>
@@ -154,9 +154,9 @@ at the bottom of your pages for debugging and optimization purposes.</p>
 
 <h2>Parsing Execution Variables</h2>
 
-	<p>CodeIgniter will parse the pseudo-variables <var>{elapsed_time}</var> and <var>{memory_usage}</var> in your output by default.  To disable this, set the <var>$parse_exec_vars</var> class property to <var>FALSE</var> in your controller.
+    <p>CodeIgniter will parse the pseudo-variables <var>{elapsed_time}</var> and <var>{memory_usage}</var> in your output by default.  To disable this, set the <var>$parse_exec_vars</var> class property to <var>FALSE</var> in your controller.
 
-	<code>$this->output->parse_exec_vars = FALSE;</code>
+    <code>$this->output->parse_exec_vars = FALSE;</code>
 
 </div>
 <!-- END CONTENT -->

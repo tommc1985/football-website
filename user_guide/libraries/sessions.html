@@ -159,12 +159,12 @@ having to run a database query when you need it.</p>
 
 
 <p><code>$newdata = array(<br />
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'username'&nbsp; => 'johndoe',<br />
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'email'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=> 'johndoe@some-site.com',<br />
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'logged_in' => TRUE<br />
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<br />
-	<br />
-	$this->session->set_userdata(<samp>$newdata</samp>);</code></p>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'username'&nbsp; => 'johndoe',<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'email'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=> 'johndoe@some-site.com',<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'logged_in' => TRUE<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<br />
+    <br />
+    $this->session->set_userdata(<samp>$newdata</samp>);</code></p>
 <p>If you want to add userdata one value at a time, set_userdata() also supports this syntax. </p>
 <p><code>$this-&gt;session-&gt;set_userdata('some_name', 'some_value');</code></p>
 <p class="important"><strong>Note:</strong> Cookies can only hold 4KB of data, so be careful not to exceed the capacity.  The
@@ -220,13 +220,13 @@ prototype (for MySQL) required by the session class:</p>
 
 <textarea class="textarea" style="width:100%" cols="50" rows="10">
 CREATE TABLE IF NOT EXISTS  `ci_sessions` (
-	session_id varchar(40) DEFAULT '0' NOT NULL,
-	ip_address varchar(16) DEFAULT '0' NOT NULL,
-	user_agent varchar(120) NOT NULL,
-	last_activity int(10) unsigned DEFAULT 0 NOT NULL,
-	user_data text NOT NULL,
-	PRIMARY KEY (session_id),
-	KEY `last_activity_idx` (`last_activity`)
+    session_id varchar(40) DEFAULT '0' NOT NULL,
+    ip_address varchar(16) DEFAULT '0' NOT NULL,
+    user_agent varchar(120) NOT NULL,
+    last_activity int(10) unsigned DEFAULT 0 NOT NULL,
+    user_data text NOT NULL,
+    PRIMARY KEY (session_id),
+    KEY `last_activity_idx` (`last_activity`)
 );
 </textarea>
 
@@ -259,65 +259,65 @@ do not need to write your own routine to do it.</p>
 
 <table cellpadding="0" cellspacing="1" border="0" style="width:100%" class="tableborder">
 <tr>
-	<th>Preference</th>
-	<th>Default</th>
-	<th>Options</th>
-	<th>Description</th>
+    <th>Preference</th>
+    <th>Default</th>
+    <th>Options</th>
+    <th>Description</th>
 </tr>
 <tr>
-	<td class="td"><strong>sess_cookie_name</strong></td>
-	<td class="td">ci_session</td>
-	<td class="td">None</td>
-	<td class="td">The name you want the session cookie saved as.</td>
+    <td class="td"><strong>sess_cookie_name</strong></td>
+    <td class="td">ci_session</td>
+    <td class="td">None</td>
+    <td class="td">The name you want the session cookie saved as.</td>
 </tr>
 <tr>
-	<td class="td"><strong>sess_expiration</strong></td>
-	<td class="td">7200</td>
-	<td class="td">None</td>
-	<td class="td">The number of seconds you would like the session to last. The default value is 2 hours (7200 seconds). If you would like a non-expiring session set the value to zero: 0</td>
+    <td class="td"><strong>sess_expiration</strong></td>
+    <td class="td">7200</td>
+    <td class="td">None</td>
+    <td class="td">The number of seconds you would like the session to last. The default value is 2 hours (7200 seconds). If you would like a non-expiring session set the value to zero: 0</td>
 </tr>
 <tr>
-	<td class="td"><strong>sess_expire_on_close</strong></td>
-	<td class="td">FALSE</td>
-	<td class="td">TRUE/FALSE (boolean)</td>
-	<td class="td">Whether to cause the session to expire automatically when the browser window is closed.</td>
+    <td class="td"><strong>sess_expire_on_close</strong></td>
+    <td class="td">FALSE</td>
+    <td class="td">TRUE/FALSE (boolean)</td>
+    <td class="td">Whether to cause the session to expire automatically when the browser window is closed.</td>
 </tr>
 <tr>
-	<td class="td"><strong>sess_encrypt_cookie</strong></td>
-	<td class="td">FALSE</td>
-	<td class="td">TRUE/FALSE (boolean)</td>
-	<td class="td">Whether to encrypt the session data.</td>
+    <td class="td"><strong>sess_encrypt_cookie</strong></td>
+    <td class="td">FALSE</td>
+    <td class="td">TRUE/FALSE (boolean)</td>
+    <td class="td">Whether to encrypt the session data.</td>
 </tr>
 <tr>
-	<td class="td"><strong>sess_use_database</strong></td>
-	<td class="td">FALSE</td>
-	<td class="td">TRUE/FALSE (boolean)</td>
-	<td class="td">Whether to save the session data to a database.  You must create the table before enabling this option.</td>
+    <td class="td"><strong>sess_use_database</strong></td>
+    <td class="td">FALSE</td>
+    <td class="td">TRUE/FALSE (boolean)</td>
+    <td class="td">Whether to save the session data to a database.  You must create the table before enabling this option.</td>
 </tr>
 <tr>
-	<td class="td"><strong>sess_table_name</strong></td>
-	<td class="td">ci_sessions</td>
-	<td class="td">Any valid SQL table name</td>
-	<td class="td">The name of the session database table.</td>
+    <td class="td"><strong>sess_table_name</strong></td>
+    <td class="td">ci_sessions</td>
+    <td class="td">Any valid SQL table name</td>
+    <td class="td">The name of the session database table.</td>
 </tr>
 <tr>
-	<td class="td"><strong>sess_time_to_update</strong></td>
-	<td class="td">300</td>
-	<td class="td">Time in seconds</td>
-	<td class="td">This options controls how often the session class will regenerate itself and create a new session id.</td>
+    <td class="td"><strong>sess_time_to_update</strong></td>
+    <td class="td">300</td>
+    <td class="td">Time in seconds</td>
+    <td class="td">This options controls how often the session class will regenerate itself and create a new session id.</td>
 </tr>
 <tr>
-	<td class="td"><strong>sess_match_ip</strong></td>
-	<td class="td">FALSE</td>
-	<td class="td">TRUE/FALSE (boolean)</td>
-	<td class="td">Whether to match the user's IP address when reading the session data.  Note that some ISPs dynamically
-	changes the IP, so if you want a non-expiring session you will likely set this to FALSE.</td>
+    <td class="td"><strong>sess_match_ip</strong></td>
+    <td class="td">FALSE</td>
+    <td class="td">TRUE/FALSE (boolean)</td>
+    <td class="td">Whether to match the user's IP address when reading the session data.  Note that some ISPs dynamically
+    changes the IP, so if you want a non-expiring session you will likely set this to FALSE.</td>
 </tr>
 <tr>
-	<td class="td"><strong>sess_match_useragent</strong></td>
-	<td class="td">TRUE</td>
-	<td class="td">TRUE/FALSE (boolean)</td>
-	<td class="td">Whether to match the User Agent when reading the session data.</td>
+    <td class="td"><strong>sess_match_useragent</strong></td>
+    <td class="td">TRUE</td>
+    <td class="td">TRUE/FALSE (boolean)</td>
+    <td class="td">Whether to match the User Agent when reading the session data.</td>
 </tr>
 </table>
 

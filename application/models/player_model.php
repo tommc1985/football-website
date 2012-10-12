@@ -13,7 +13,7 @@ class Player_model extends CI_Model {
 
     public function fetchPlayers()
     {
-    	$query = $this->db->get('player', 10);
+        $query = $this->db->get('player', 10);
         return $query->result();
     }
 

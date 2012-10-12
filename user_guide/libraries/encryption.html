@@ -170,38 +170,38 @@ function:</p>
 
 <h2 id="legacy">$this->encrypt->encode_from_legacy(<kbd>$orig_data</kbd>, <kbd>$legacy_mode</kbd> = MCRYPT_MODE_ECB, <kbd>$key</kbd> = '');</h2>
 <p>Enables you to re-encode data that was originally encrypted with CodeIgniter 1.x to be compatible with the Encryption library in CodeIgniter 2.x.  It is only
-	necessary to use this method if you have encrypted data stored permanently such as in a file or database and are on a server that supports Mcrypt.  "Light" use encryption
-	such as encrypted session data or transitory encrypted flashdata require no intervention on your part.  However, existing encrypted Sessions will be
-	destroyed since data encrypted prior to 2.x will not be decoded.</p>
+    necessary to use this method if you have encrypted data stored permanently such as in a file or database and are on a server that supports Mcrypt.  "Light" use encryption
+    such as encrypted session data or transitory encrypted flashdata require no intervention on your part.  However, existing encrypted Sessions will be
+    destroyed since data encrypted prior to 2.x will not be decoded.</p>
 
 <p class="important"><strong>Why only a method to re-encode the data instead of maintaining legacy methods for both encoding and decoding?</strong>  The algorithms in
-	the Encryption library have improved in CodeIgniter 2.x	both for performance and security, and we do not wish to encourage continued use of the older methods.
-	You can of course extend the Encryption library if you wish and replace the new methods with the old and retain seamless compatibility with CodeIgniter 1.x
-	encrypted data, but this a decision that a developer should make cautiously and deliberately, if at all.</p>
+    the Encryption library have improved in CodeIgniter 2.x    both for performance and security, and we do not wish to encourage continued use of the older methods.
+    You can of course extend the Encryption library if you wish and replace the new methods with the old and retain seamless compatibility with CodeIgniter 1.x
+    encrypted data, but this a decision that a developer should make cautiously and deliberately, if at all.</p>
 
 <code>$new_data = $this->encrypt->encode_from_legacy(<kbd>$old_encrypted_string</kbd>);</code>
 
 <table cellpadding="0" cellspacing="1" border="0" style="width:100%" class="tableborder">
 <tr>
-	<th>Parameter</th>
-	<th>Default</th>
-	<th>Description</th>
+    <th>Parameter</th>
+    <th>Default</th>
+    <th>Description</th>
 </tr>
 <tr>
-	<td class="td"><strong>$orig_data</strong></td>
-	<td class="td">n/a</td>
-	<td class="td">The original encrypted data from CodeIgniter 1.x's Encryption library</td>
+    <td class="td"><strong>$orig_data</strong></td>
+    <td class="td">n/a</td>
+    <td class="td">The original encrypted data from CodeIgniter 1.x's Encryption library</td>
 </tr>
 <tr>
-	<td class="td"><strong>$legacy_mode</strong></td>
-	<td class="td">MCRYPT_MODE_ECB</td>
-	<td class="td">The Mcrypt mode that was used to generate the original encrypted data.  CodeIgniter 1.x's default was MCRYPT_MODE_ECB, and it will
-		assume that to be the case unless overridden by this parameter.</td>
+    <td class="td"><strong>$legacy_mode</strong></td>
+    <td class="td">MCRYPT_MODE_ECB</td>
+    <td class="td">The Mcrypt mode that was used to generate the original encrypted data.  CodeIgniter 1.x's default was MCRYPT_MODE_ECB, and it will
+        assume that to be the case unless overridden by this parameter.</td>
 </tr>
 <tr>
-	<td class="td"><strong>$key</strong></td>
-	<td class="td">n/a</td>
-	<td class="td">The encryption key.  This it typically specified in your config file as outlined above.</td>
+    <td class="td"><strong>$key</strong></td>
+    <td class="td">n/a</td>
+    <td class="td">The encryption key.  This it typically specified in your config file as outlined above.</td>
 </tr>
 </table>
 

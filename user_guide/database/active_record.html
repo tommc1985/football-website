@@ -216,54 +216,54 @@ $this->db->join('comments', 'comments.id = blogs.id', <strong>'left'</strong>);<
 <p class="important"><strong>Note:</strong> All values passed to this function are escaped automatically, producing safer queries.</p>
 
 <ol>
-	<li><strong>Simple key/value method:</strong>
+    <li><strong>Simple key/value method:</strong>
 
-	<code>$this->db->where('name', $name);
-	<br /><br />// Produces: WHERE name = 'Joe'	</code>
+    <code>$this->db->where('name', $name);
+    <br /><br />// Produces: WHERE name = 'Joe'    </code>
 
-	<p>Notice that the equal sign is added for you.</p>
+    <p>Notice that the equal sign is added for you.</p>
 
-	<p>If you use multiple function calls they will be chained together with <var>AND</var> between them:</p>
+    <p>If you use multiple function calls they will be chained together with <var>AND</var> between them:</p>
 
-	<code>$this->db->where('name', $name);<br />
-	$this->db->where('title', $title);<br />
-	$this->db->where('status', $status);
-	<br /><br />// WHERE name = 'Joe' AND title = 'boss' AND status = 'active'	</code>	</li>
+    <code>$this->db->where('name', $name);<br />
+    $this->db->where('title', $title);<br />
+    $this->db->where('status', $status);
+    <br /><br />// WHERE name = 'Joe' AND title = 'boss' AND status = 'active'    </code>    </li>
 
-	<li><strong>Custom key/value method:</strong>
+    <li><strong>Custom key/value method:</strong>
 
-	<p>You can include an operator in the first parameter in order to control the comparison:</p>
+    <p>You can include an operator in the first parameter in order to control the comparison:</p>
 
-	<code>$this->db->where('name !=', $name);<br />
-	$this->db->where('id <', $id);
-	<br /><br />// Produces: WHERE name != 'Joe' AND id < 45	</code>	</li>
-	<li><strong>Associative array method:</strong>
+    <code>$this->db->where('name !=', $name);<br />
+    $this->db->where('id <', $id);
+    <br /><br />// Produces: WHERE name != 'Joe' AND id < 45    </code>    </li>
+    <li><strong>Associative array method:</strong>
 
 
-	<code>
-	$array = array('name' => $name, 'title' => $title, 'status' => $status);<br /><br />
+    <code>
+    $array = array('name' => $name, 'title' => $title, 'status' => $status);<br /><br />
 
-	$this->db->where($array);
-	<br /><br />// Produces: WHERE name = 'Joe' AND title = 'boss' AND status = 'active'	</code>
+    $this->db->where($array);
+    <br /><br />// Produces: WHERE name = 'Joe' AND title = 'boss' AND status = 'active'    </code>
 
-	<p>You can include your own operators using this method as well:</p>
+    <p>You can include your own operators using this method as well:</p>
 
-	<code>
-	$array = array('name !=' => $name, 'id <' => $id, 'date >' => $date);<br /><br />
+    <code>
+    $array = array('name !=' => $name, 'id <' => $id, 'date >' => $date);<br /><br />
 
-	$this->db->where($array);</code>	</li>
-		<li><strong>Custom string:</strong>
+    $this->db->where($array);</code>    </li>
+        <li><strong>Custom string:</strong>
 
-		<p>You can write your own clauses manually:</p>
+        <p>You can write your own clauses manually:</p>
 
-		<code>
-		$where = "name='Joe' AND status='boss' OR status='active'";<br /><br />
-		$this->db->where($where);</code></li>
-	</ol>
+        <code>
+        $where = "name='Joe' AND status='boss' OR status='active'";<br /><br />
+        $this->db->where($where);</code></li>
+    </ol>
 
 
 <p>$this-&gt;db-&gt;where() accepts an optional third parameter. If you set it to FALSE, CodeIgniter will not try to protect your field or table names with backticks.</p>
-<p><code>		$this-&gt;db-&gt;where('MATCH (field) AGAINST (&quot;value&quot;)', NULL, FALSE);<br />
+<p><code>        $this-&gt;db-&gt;where('MATCH (field) AGAINST (&quot;value&quot;)', NULL, FALSE);<br />
 </code></p>
 <h2>$this->db->or_where();</h2>
 <p>This function is identical to the one above, except that multiple instances are joined by OR:</p>
@@ -280,30 +280,30 @@ $this->db->or_where('id >', $id);
 <h2>$this->db->where_in();</h2>
 <p>Generates a WHERE field IN ('item', 'item') SQL query joined with  AND if appropriate</p>
 <p><code>
-	$names = array('Frank', 'Todd', 'James');<br />
-	$this->db->where_in('username', $names);<br />
-	// Produces: WHERE username IN ('Frank', 'Todd', 'James')</code></p>
+    $names = array('Frank', 'Todd', 'James');<br />
+    $this->db->where_in('username', $names);<br />
+    // Produces: WHERE username IN ('Frank', 'Todd', 'James')</code></p>
 
 <h2>$this->db->or_where_in();</h2>
 <p>Generates a WHERE field IN ('item', 'item') SQL query joined with OR if appropriate</p>
 <p><code>
-	$names = array('Frank', 'Todd', 'James');<br />
-	$this->db->or_where_in('username', $names);<br />
-	// Produces: OR username IN ('Frank', 'Todd', 'James')</code></p>
+    $names = array('Frank', 'Todd', 'James');<br />
+    $this->db->or_where_in('username', $names);<br />
+    // Produces: OR username IN ('Frank', 'Todd', 'James')</code></p>
 
 <h2>$this->db->where_not_in();</h2>
 <p>Generates a WHERE field NOT IN ('item', 'item') SQL query joined with AND if appropriate</p>
 <p><code>
-	$names = array('Frank', 'Todd', 'James');<br />
-	$this->db->where_not_in('username', $names);<br />
-	// Produces: WHERE username NOT IN ('Frank', 'Todd', 'James')</code></p>
+    $names = array('Frank', 'Todd', 'James');<br />
+    $this->db->where_not_in('username', $names);<br />
+    // Produces: WHERE username NOT IN ('Frank', 'Todd', 'James')</code></p>
 
 <h2>$this->db->or_where_not_in();</h2>
 <p>Generates a WHERE field NOT IN ('item', 'item') SQL query joined with OR if appropriate</p>
 <p><code>
-	$names = array('Frank', 'Todd', 'James');<br />
-	$this->db->or_where_not_in('username', $names);<br />
-	// Produces: OR username NOT IN ('Frank', 'Todd', 'James')</code></p>
+    $names = array('Frank', 'Todd', 'James');<br />
+    $this->db->or_where_not_in('username', $names);<br />
+    // Produces: OR username NOT IN ('Frank', 'Todd', 'James')</code></p>
 
 <h2>$this->db->like();</h2>
 <p>This function enables you to generate <strong>LIKE</strong> clauses, useful for doing searches.</p>
@@ -312,43 +312,43 @@ $this->db->or_where('id >', $id);
 
 
 <ol>
-	<li><strong>Simple key/value method:</strong>
+    <li><strong>Simple key/value method:</strong>
 
-	<code>$this->db->like('title', 'match');
-	<br /><br />// Produces: WHERE title LIKE '%match%'	</code>
+    <code>$this->db->like('title', 'match');
+    <br /><br />// Produces: WHERE title LIKE '%match%'    </code>
 
-	<p>If you use multiple function calls they will be chained together with <var>AND</var> between them:</p>
+    <p>If you use multiple function calls they will be chained together with <var>AND</var> between them:</p>
 
-	<code>$this->db->like('title', 'match');<br />
-	$this->db->like('body', 'match');
-	<br /><br />
-	// WHERE title LIKE '%match%' AND  body LIKE '%match%</code>
-	If you want to control where the wildcard (%) is placed, you can use an optional third argument. Your options are 'before', 'after' and 'both' (which is the default).
-	<code>$this->db->like('title', 'match', 'before');
-	<br />
-		// Produces: WHERE title LIKE '%match'	<br />
-		<br />
-	$this-&gt;db-&gt;like('title', 'match', 'after'); <br />
+    <code>$this->db->like('title', 'match');<br />
+    $this->db->like('body', 'match');
+    <br /><br />
+    // WHERE title LIKE '%match%' AND  body LIKE '%match%</code>
+    If you want to control where the wildcard (%) is placed, you can use an optional third argument. Your options are 'before', 'after' and 'both' (which is the default).
+    <code>$this->db->like('title', 'match', 'before');
+    <br />
+        // Produces: WHERE title LIKE '%match'    <br />
+        <br />
+    $this-&gt;db-&gt;like('title', 'match', 'after'); <br />
 // Produces: WHERE title LIKE 'match%' <br />
 <br />
-	$this-&gt;db-&gt;like('title', 'match', 'both'); <br />
-// Produces: WHERE title LIKE '%match%' </code>	</li>
+    $this-&gt;db-&gt;like('title', 'match', 'both'); <br />
+// Produces: WHERE title LIKE '%match%' </code>    </li>
 
 If you do not want to use the wildcard (%) you can pass to the optional third argument the option 'none'.
 
 <code>
-	$this-&gt;db-&gt;like('title', 'match', 'none'); <br />
+    $this-&gt;db-&gt;like('title', 'match', 'none'); <br />
 // Produces: WHERE title LIKE 'match'
 </code>
 
-	<li><strong>Associative array method:</strong>
+    <li><strong>Associative array method:</strong>
 
-	<code>
-	$array = array('title' => $match, 'page1' => $match, 'page2' => $match);<br /><br />
+    <code>
+    $array = array('title' => $match, 'page1' => $match, 'page2' => $match);<br /><br />
 
-	$this->db->like($array);
-	<br /><br />// WHERE title LIKE '%match%' AND  page1 LIKE '%match%' AND  page2 LIKE '%match%'</code></li>
-	</ol>
+    $this->db->like($array);
+    <br /><br />// WHERE title LIKE '%match%' AND  page1 LIKE '%match%' AND  page2 LIKE '%match%'</code></li>
+    </ol>
 
 
 <h2>$this->db->or_like();</h2>
@@ -394,9 +394,9 @@ $this-&gt;db-&gt;or_not_like('body', 'match'); <br />
 </h2>
 <p>Adds the &quot;DISTINCT&quot; keyword to  a query</p>
 <p><code>$this-&gt;db-&gt;distinct();<br />
-	$this-&gt;db-&gt;get('table');<br />
-		<br />
-	// Produces: SELECT DISTINCT * FROM table</code></p>
+    $this-&gt;db-&gt;get('table');<br />
+        <br />
+    // Produces: SELECT DISTINCT * FROM table</code></p>
 <h2>$this->db->having();</h2>
 <p>Permits you to write the HAVING portion of your query. There are 2 possible syntaxes, 1 argument or 2:</p>
 
@@ -413,13 +413,13 @@ $this-&gt;db-&gt;having('user_id',  45); <br />
 
 
 <p><code>$this->db->having(array('title =' => 'My Title', 'id <' => $id)); <br />
-		<br />
-	// Produces: HAVING title = 'My Title', id < 45</code></p>
+        <br />
+    // Produces: HAVING title = 'My Title', id < 45</code></p>
 <p>If you are using a database that CodeIgniter escapes queries for, you can prevent escaping content by passing an optional third argument, and setting it to FALSE.</p>
 <p><code>$this-&gt;db-&gt;having('user_id',  45); <br />
 // Produces: HAVING `user_id` = 45 in some databases such as MySQL
-		<br />
-		$this-&gt;db-&gt;having('user_id',  45, FALSE); <br />
+        <br />
+        $this-&gt;db-&gt;having('user_id',  45, FALSE); <br />
 // Produces: HAVING user_id = 45</code></p>
 <h2>$this-&gt;db-&gt;or_having();</h2>
 <p>Identical to having(), only separates multiple clauses with &quot;OR&quot;.</p>
@@ -442,10 +442,10 @@ The second parameter lets you set the direction of the result.  Options are <kbd
 <p>Or multiple function calls can be made if you need multiple fields.</p>
 
 <p><code>$this->db->order_by("title", "desc");<br />
-	$this->db->order_by("name", "asc"); <br />
-	<br />
-	// Produces: ORDER BY title DESC, name ASC
-	</code></p>
+    $this->db->order_by("name", "asc"); <br />
+    <br />
+    // Produces: ORDER BY title DESC, name ASC
+    </code></p>
 <p class="important">Note: order_by() was formerly known as orderby(), which has been removed.</p>
 <p class="important">Note: random ordering is not currently supported in Oracle or MSSQL drivers. These will default to 'ASC'.</p>
 <h2>$this->db->limit();</h2>
@@ -575,12 +575,12 @@ $this-&gt;db-&gt;set('status', $status);<br />
 $this-&gt;db-&gt;insert('mytable'); </code>
 <p><strong>set()</strong> will also accept an optional third parameter ($escape), that will prevent data from being escaped if set to FALSE. To illustrate the difference, here is set() used both with and without the escape parameter.</p>
 <p><code>$this-&gt;db-&gt;set('field', 'field+1', FALSE);<br />
-	$this-&gt;db-&gt;insert('mytable'); <br />
-	// gives INSERT INTO mytable (field) VALUES (field+1)<br />
-	<br />
-	$this-&gt;db-&gt;set('field', 'field+1');<br />
-	$this-&gt;db-&gt;insert('mytable'); <br />
-	// gives INSERT INTO mytable (field) VALUES ('field+1')</code></p>
+    $this-&gt;db-&gt;insert('mytable'); <br />
+    // gives INSERT INTO mytable (field) VALUES (field+1)<br />
+    <br />
+    $this-&gt;db-&gt;set('field', 'field+1');<br />
+    $this-&gt;db-&gt;insert('mytable'); <br />
+    // gives INSERT INTO mytable (field) VALUES ('field+1')</code></p>
 <p>You can also pass an associative array to this function:</p>
 <code>
 $array = array('name' => $name, 'title' => $title, 'status' => $status);<br /><br />
@@ -724,19 +724,19 @@ $this->db->delete('mytable', array('id' => $id));
 the data to the second parameter of the function:</p>
 
 <p><code> $this->db->where('id', $id);<br />
-	$this->db->delete('mytable'); <br />
-	<br />
-	// Produces:<br />
-	// DELETE FROM mytable <br />
-	// WHERE id = $id</code></p>
+    $this->db->delete('mytable'); <br />
+    <br />
+    // Produces:<br />
+    // DELETE FROM mytable <br />
+    // WHERE id = $id</code></p>
 <p>An array of table names can be passed into delete() if you would like to delete data from more than 1 table.</p>
 <p><code>$tables = array('table1', 'table2', 'table3');<br />
 $this-&gt;db-&gt;where('id', '5');<br />
 $this-&gt;db-&gt;delete($tables);</code></p>
 <p>If you want to delete all data from a table, you can use the <dfn>truncate()</dfn> function, or <dfn>empty_table()</dfn>.</p>
 <h2>$this-&gt;db-&gt;empty_table();</h2>
-<p>Generates a delete SQL string and runs the query.<code>	$this-&gt;db-&gt;empty_table('mytable'); <br />
-	<br />
+<p>Generates a delete SQL string and runs the query.<code>    $this-&gt;db-&gt;empty_table('mytable'); <br />
+    <br />
 // Produces<br />
 // DELETE FROM mytable</code></p>
 <h2>$this-&gt;db-&gt;truncate();</h2>
