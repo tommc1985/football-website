@@ -63,9 +63,10 @@ class Cache_Player_model extends CI_Model {
     {
         $this->db->select('*')
             ->from($this->queueTableName)
+            ->where('in_progress', 0)
             ->where('completed', 0)
             ->where('deleted', 0)
-            ->order_by('id', 'asc')
+            ->order_by('date_added', 'asc')
             ->limit(5, 0);
 
         return $this->db->get();
@@ -95,6 +96,10 @@ class Cache_Player_model extends CI_Model {
      */
     public function processQueuedRow($row)
     {
+        // Flag the row is being processed
+        $row->in_progress = 1;
+        $this->updateEntry($row);
+
         if (is_null($row->player_id)) { // Cache all players
             if (is_null($row->by_type)) { // "Overall" statistics
                 $this->allOverallStatistics($row->season);
@@ -109,6 +114,8 @@ class Cache_Player_model extends CI_Model {
             }
         }
 
+        // Flag that row is no longer being processed and is complete
+        $row->in_progress = 0;
         $row->completed = 1;
 
         return $this->updateEntry($row);
