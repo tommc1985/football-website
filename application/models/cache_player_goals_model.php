@@ -26,12 +26,14 @@ class Cache_Player_Goals_model extends CI_Model {
         $this->tableName = 'cache_player_goal_statistics';
         $this->queueTableName = 'cache_queue_player_goal_statistics';
 
-        $this->chartTypeFunctionMap = array(1 => 'byGoalType',
-            2 => 'byBodyPart',
-            3 => 'byDistance',
-            4 => 'byAssister',
-            5 => 'byScorer',
-            6 => 'byMinuteInterval');
+        $this->chartTypeFunctionMap = array(
+            'by_goal_type'       => 'byGoalType',
+            'by_body_part'       => 'byBodyPart',
+            'by_distance'        => 'byDistance',
+            'by_assister'        => 'byAssister',
+            'by_scorer'          => 'byScorer',
+            'by_minute_interval' => 'byMinuteInterval'
+        );
     }
 
     /**
@@ -74,9 +76,10 @@ class Cache_Player_Goals_model extends CI_Model {
     {
         $this->db->select('*')
             ->from($this->queueTableName)
+            ->where('in_progress', 0)
             ->where('completed', 0)
             ->where('deleted', 0)
-            ->order_by('id', 'asc')
+            ->order_by('date_added', 'asc')
             ->limit($limit, 0);
 
         return $this->db->get();
@@ -106,7 +109,10 @@ class Cache_Player_Goals_model extends CI_Model {
      */
     public function processQueuedRow($row)
     {
-        if ($row->cache_data > 0) {
+        $row->in_progress = 1;
+        $this->updateEntry($row);
+
+        if (!empty($row->cache_data)) {
             $method = $this->chartTypeFunctionMap[$row->cache_data];
 
             if (is_null($row->player_id)) { // Cache all players
@@ -127,6 +133,7 @@ class Cache_Player_Goals_model extends CI_Model {
             $this->generateAllStatistics();
         }
 
+        $row->in_progress = 0;
         $row->completed = 1;
 
         return $this->updateEntry($row);
@@ -566,7 +573,7 @@ WHERE c.competitive = 1
      */
     public function deleteByBodyPart($byType = false, $season = NULL, $playerId = NULL)
     {
-        return $this->deleteRows('by_body_type', $byType, $season, $playerId);
+        return $this->deleteRows('by_body_part', $byType, $season, $playerId);
     }
 
     /**
