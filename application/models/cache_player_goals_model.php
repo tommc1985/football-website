@@ -142,7 +142,7 @@ class Cache_Player_Goals_model extends CI_Model {
 SELECT
     {competition_type} as type,
     {season} as season,
-    {statistic_group} as statistic_group,
+    '{statistic_group}' as statistic_group,
     {extra_fields}
 FROM goal g
 LEFT JOIN matches m ON g.match_id = m.id
@@ -215,7 +215,7 @@ WHERE c.competitive = 1
         self::deleteByGoalType($byType, $season, $playerId);
 
         $competitionType = $byType ? '' : "'overall'";
-        $statisticGroup  = 1;
+        $statisticGroup  = 'by_goal_type';
         $extraFields     = array();
         $extraJoins      = array();
         $whereConditions = array();
@@ -270,7 +270,7 @@ WHERE c.competitive = 1
         self::deleteByBodyPart($byType, $season, $playerId);
 
         $competitionType = $byType ? '' : "'overall'";
-        $statisticGroup  = 2;
+        $statisticGroup  = 'by_body_part';
         $extraFields     = array();
         $extraJoins      = array();
         $whereConditions = array();
@@ -325,7 +325,7 @@ WHERE c.competitive = 1
         self::deleteByDistance($byType, $season, $playerId);
 
         $competitionType = $byType ? '' : "'overall'";
-        $statisticGroup  = 3;
+        $statisticGroup  = 'by_distance';
         $extraFields     = array();
         $extraJoins      = array();
         $whereConditions = array();
@@ -380,7 +380,7 @@ WHERE c.competitive = 1
         self::deleteByDistance($byType, $season, $playerId);
 
         $competitionType = $byType ? '' : "'overall'";
-        $statisticGroup  = 4;
+        $statisticGroup  = 'by_assister';
         $extraFields     = array();
         $extraJoins      = array();
         $whereConditions = array();
@@ -435,7 +435,7 @@ WHERE c.competitive = 1
         self::deleteByDistance($byType, $season, $playerId);
 
         $competitionType = $byType ? '' : "'overall'";
-        $statisticGroup  = 5;
+        $statisticGroup  = 'by_scorer';
         $extraFields     = array();
         $extraJoins      = array();
         $whereConditions = array();
@@ -490,7 +490,7 @@ WHERE c.competitive = 1
         self::deleteByMinuteInterval($byType, $season, $playerId);
 
         $competitionType = $byType ? '' : "'overall'";
-        $statisticGroup  = 6;
+        $statisticGroup  = 'by_minute_interval';
         $extraFields     = array();
         $extraJoins      = array();
         $whereConditions = array();
@@ -554,7 +554,7 @@ WHERE c.competitive = 1
      */
     public function deleteByGoalType($byType = false, $season = NULL, $playerId = NULL)
     {
-        return $this->deleteRows(1, $byType, $season, $playerId);
+        return $this->deleteRows('by_goal_type', $byType, $season, $playerId);
     }
 
     /**
@@ -566,7 +566,7 @@ WHERE c.competitive = 1
      */
     public function deleteByBodyPart($byType = false, $season = NULL, $playerId = NULL)
     {
-        return $this->deleteRows(2, $byType, $season, $playerId);
+        return $this->deleteRows('by_body_type', $byType, $season, $playerId);
     }
 
     /**
@@ -578,7 +578,7 @@ WHERE c.competitive = 1
      */
     public function deleteByDistance($byType = false, $season = NULL, $playerId = NULL)
     {
-        return $this->deleteRows(3, $byType, $season, $playerId);
+        return $this->deleteRows('by_distance', $byType, $season, $playerId);
     }
 
     /**
@@ -590,7 +590,7 @@ WHERE c.competitive = 1
      */
     public function deleteAssister($byType = false, $season = NULL, $playerId = NULL)
     {
-        return $this->deleteRows(4, $byType, $season, $playerId);
+        return $this->deleteRows('by_assister', $byType, $season, $playerId);
     }
 
     /**
@@ -602,7 +602,7 @@ WHERE c.competitive = 1
      */
     public function deleteScorer($byType = false, $season = NULL, $playerId = NULL)
     {
-        return $this->deleteRows(5, $byType, $season, $playerId);
+        return $this->deleteRows('by_scorer', $byType, $season, $playerId);
     }
 
     /**
@@ -614,7 +614,7 @@ WHERE c.competitive = 1
      */
     public function deleteByMinuteInterval($byType = false, $season = NULL, $playerId = NULL)
     {
-        return $this->deleteRows(6, $byType, $season, $playerId);
+        return $this->deleteRows('by_minute_interval', $byType, $season, $playerId);
     }
 
     /**
