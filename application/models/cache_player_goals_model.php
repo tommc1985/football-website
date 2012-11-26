@@ -630,33 +630,19 @@ WHERE c.competitive = 1
      */
     public function generateAllStatistics()
     {
-        $this->byGoalType();
-        $this->byGoalType(true);
-        $this->byBodyPart();
-        $this->byBodyPart(true);
-        $this->byDistance();
-        $this->byDistance(true);
-        $this->byAssister();
-        $this->byAssister(true);
-        $this->byScorer();
-        $this->byScorer(true);
-        $this->byMinuteInterval();
-        $this->byMinuteInterval(true);
+        foreach ($this->chartTypeFunctionMap as $method) {
+            $this->$method();
+            $this->$method(true);
+        }
 
         $season = $this->ci->Season_model->fetchEarliestYear();
         while($season <= Season_model::fetchCurrentSeason()){
-            $this->byGoalType(false, $season);
-            $this->byGoalType(true, $season);
-            $this->byBodyPart(false, $season);
-            $this->byBodyPart(true, $season);
-            $this->byDistance(false, $season);
-            $this->byDistance(true, $season);
-            $this->byAssister(false, $season);
-            $this->byAssister(true, $season);
-            $this->byScorer(false, $season);
-            $this->byScorer(true, $season);
-            $this->byMinuteInterval(false, $season);
-            $this->byMinuteInterval(true, $season);
+
+            foreach ($this->chartTypeFunctionMap as $method) {
+                $this->$method(false, $season);
+                $this->$method(true, $season);
+            }
+
             $season++;
         }
 
