@@ -480,7 +480,7 @@ ORDER BY m.date DESC";
      */
     public function sequenceBase($comparisonCode, $statisticGroup, $type = false, $season = NULL)
     {
-        self::deleteLongestWinningSequence($type, $season);
+        $this->deleteRows($statisticGroup, $type, $season);
 
         $matches = $this->ci->Season_model->fetchMatches($type, $season);
 
