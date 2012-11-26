@@ -109,6 +109,8 @@ class Cache_Player_Goals_model extends CI_Model {
      */
     public function processQueuedRow($row)
     {
+        $startUnixTime = time();
+
         $row->in_progress = 1;
         $this->updateEntry($row);
 
@@ -135,6 +137,11 @@ class Cache_Player_Goals_model extends CI_Model {
 
         $row->in_progress = 0;
         $row->completed = 1;
+
+        $finishUnixTime = time();
+        $row->process_duration = $finishUnixTime - $startUnixTime;
+
+        $row->peak_memory_usage = number_format(memory_get_peak_usage(true) / 1048576, 2);
 
         return $this->updateEntry($row);
     }

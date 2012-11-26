@@ -96,6 +96,8 @@ class Cache_Player_model extends CI_Model {
      */
     public function processQueuedRow($row)
     {
+        $startUnixTime = time();
+
         // Flag the row is being processed
         $row->in_progress = 1;
         $this->updateEntry($row);
@@ -117,6 +119,11 @@ class Cache_Player_model extends CI_Model {
         // Flag that row is no longer being processed and is complete
         $row->in_progress = 0;
         $row->completed = 1;
+
+        $finishUnixTime = time();
+        $row->process_duration = $finishUnixTime - $startUnixTime;
+
+        $row->peak_memory_usage = number_format(memory_get_peak_usage(true) / 1048576, 2);
 
         return $this->updateEntry($row);
     }
