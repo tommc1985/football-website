@@ -10,7 +10,7 @@ class Cache_Player_Goals_model extends CI_Model {
     public $tableName;
     public $queueTableName;
 
-    public $chartTypeFunctionMap;
+    public $methodMap;
 
     /**
      * Constructor
@@ -26,7 +26,7 @@ class Cache_Player_Goals_model extends CI_Model {
         $this->tableName = 'cache_player_goal_statistics';
         $this->queueTableName = 'cache_queue_player_goal_statistics';
 
-        $this->chartTypeFunctionMap = array(
+        $this->methodMap = array(
             'by_goal_type'       => 'byGoalType',
             'by_body_part'       => 'byBodyPart',
             'by_distance'        => 'byDistance',
@@ -113,7 +113,7 @@ class Cache_Player_Goals_model extends CI_Model {
         $this->updateEntry($row);
 
         if (!empty($row->cache_data)) {
-            $method = $this->chartTypeFunctionMap[$row->cache_data];
+            $method = $this->methodMap[$row->cache_data];
 
             if (is_null($row->player_id)) { // Cache all players
                 if (is_null($row->by_type)) { // "Overall" statistics
@@ -630,7 +630,7 @@ WHERE c.competitive = 1
      */
     public function generateAllStatistics()
     {
-        foreach ($this->chartTypeFunctionMap as $method) {
+        foreach ($this->methodMap as $method) {
             $this->$method();
             $this->$method(true);
         }
@@ -638,7 +638,7 @@ WHERE c.competitive = 1
         $season = $this->ci->Season_model->fetchEarliestYear();
         while($season <= Season_model::fetchCurrentSeason()){
 
-            foreach ($this->chartTypeFunctionMap as $method) {
+            foreach ($this->methodMap as $method) {
                 $this->$method(false, $season);
                 $this->$method(true, $season);
             }
