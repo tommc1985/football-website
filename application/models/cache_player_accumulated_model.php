@@ -1,5 +1,5 @@
 <?php
-class Cache_Player_model extends CI_Model {
+class Cache_Player_Accumulated_model extends CI_Model {
 
     /**
      * CodeIgniter instance
