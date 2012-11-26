@@ -63,6 +63,26 @@ class Season_model extends CI_Model {
     }
 
     /**
+     * Fetch all competition types
+     * @return results Query Object
+     */
+    public function fetchCompetitionTypes()
+    {
+        $this->db->select('DISTINCT(competition.type) as competition_type')
+            ->from('competition')
+            ->where('deleted = 0');
+
+        $rows = $this->db->get()->result();
+
+        $types = array();
+        foreach ($rows as $row) {
+            $types[] = $row->competition_type;
+        }
+
+        return $types;
+    }
+
+    /**
      * Generate Start/End dates for SQL statements
      * @param  int $season      Four digit integer for the season
      * @param  int $startMonth  Month season starts
@@ -79,6 +99,43 @@ class Season_model extends CI_Model {
 
         return array('startDate' => ">= '{$season}-{$startMonth}-{$startDay} 00:00:00'",
             'endDate' => "< '" . ($season + 1) . "-{$startMonth}-{$startDay} 00:00:00'");
+    }
+
+    /**
+     * Fetch list of matches matches stored in the system
+     * @param  integer $limit Number of matches to return
+     * @return array|object   Earliest match/matches
+     */
+    public function fetchMatches($type = false, $season = NULL)
+    {
+        $whereConditions = array();
+        if (!is_null($season)) {
+            $dates = Season_model::generateStartEndDates($season);
+            $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
+        }
+
+        if (is_string($type)) {
+            $whereConditions[] = "(c.type = '{$type}')";
+        }
+        $whereConditions[] = "(c.competitive = 1)";
+
+        $sql = "SELECT m.*, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation
+FROM matches m
+LEFT JOIN opposition o ON o.id = m.opposition
+LEFT JOIN competition c ON c.id = m.competition
+LEFT JOIN competition_stage cs ON cs.id = m.stage
+" . (count($whereConditions) > 0 ? "
+WHERE " . implode(" \r\nAND ", $whereConditions) : '') . "
+    AND c.competitive = 1
+    AND m.deleted = 0
+    AND o.deleted = 0
+    AND c.deleted = 0
+    AND cs.deleted = 0
+ORDER BY m.date ASC";
+
+        $query = $this->db->query($sql);
+
+        return $query->result();
     }
 
 }
