@@ -21,8 +21,8 @@ class Cache_Player_Accumulated_model extends CI_Model {
         $this->ci =& get_instance();
         $this->ci->load->model('Season_model');
 
-        $this->tableName = 'cache_player_statistics';
-        $this->queueTableName = 'cache_queue_player_statistics';
+        $this->tableName = 'cache_player_accumulated_statistics';
+        $this->queueTableName = 'cache_queue_player_accumulated_statistics';
     }
 
     /**
