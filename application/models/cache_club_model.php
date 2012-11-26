@@ -66,7 +66,7 @@ class Cache_Club_model extends CI_Model {
      * @param  int|NULL $cacheData  What specific data to cache
      * @return boolean
      */
-    public function insertEntry($byType = NULL, $season = NULL, $playerId = NULL, $cacheData = NULL)
+    public function insertEntry($byType = NULL, $season = NULL, $cacheData = NULL)
     {
         $data = array('by_type' => $byType,
             'season' => $season,
