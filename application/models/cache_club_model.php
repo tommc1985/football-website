@@ -210,33 +210,21 @@ class Cache_Club_model extends CI_Model {
         }
 
         if (is_string($type)) {
-            $whereConditions[] = "(c.type = '{$type}')";
+            $whereConditions[] = "(m.type = '{$type}')";
         }
 
-        $sql = "SELECT m.*, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation, (m.h - m.a) as difference
-FROM matches m
-LEFT JOIN opposition o ON o.id = m.opposition
-LEFT JOIN competition c ON c.id = m.competition
-LEFT JOIN competition_stage cs ON cs.id = m.stage
+        $sql = "SELECT m.*, (m.h - m.a) as difference
+FROM view_competitive_matches m
 WHERE (m.h - m.a) = (
     SELECT (m.h - m.a) as difference
-    FROM matches m
-    LEFT JOIN competition c ON c.id = m.competition
+    FROM view_competitive_matches m
     WHERE !ISNULL(m.h)
-        AND m.h > m.a
-        AND c.competitive = 1" . (count($whereConditions) > 0 ? "
+        AND m.h > m.a" . (count($whereConditions) > 0 ? "
         AND " . implode(" \r\nAND ", $whereConditions) : '') . "
-        AND m.deleted = 0
-        AND c.deleted = 0
     ORDER BY difference DESC, m.h DESC
     LIMIT 1)
-    AND c.competitive = 1
     AND m.h > m.a " . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
-    AND m.deleted = 0
-    AND o.deleted = 0
-    AND c.deleted = 0
-    AND (cs.deleted = 0 || ISNULL(m.stage))
 ORDER BY m.date DESC";
 
         $query = $this->db->query($sql);
@@ -264,33 +252,21 @@ ORDER BY m.date DESC";
         }
 
         if (is_string($type)) {
-            $whereConditions[] = "(c.type = '{$type}')";
+            $whereConditions[] = "(m.type = '{$type}')";
         }
 
-        $sql = "SELECT m.*, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation, (m.a - m.h) as difference
-FROM matches m
-LEFT JOIN opposition o ON o.id = m.opposition
-LEFT JOIN competition c ON c.id = m.competition
-LEFT JOIN competition_stage cs ON cs.id = m.stage
+        $sql = "SELECT m.*, (m.a - m.h) as difference
+FROM view_competitive_matches m
 WHERE (m.a - m.h) = (
     SELECT (m.a - m.h) as difference
-    FROM matches m
-    LEFT JOIN competition c ON c.id = m.competition
+    FROM view_competitive_matches m
     WHERE !ISNULL(m.h)
-        AND m.h < m.a
-        AND c.competitive = 1" . (count($whereConditions) > 0 ? "
+        AND m.h < m.a" . (count($whereConditions) > 0 ? "
         AND " . implode(" \r\nAND ", $whereConditions) : '') . "
-        AND m.deleted = 0
-        AND c.deleted = 0
     ORDER BY difference DESC, m.h DESC
     LIMIT 1)
-    AND c.competitive = 1
     AND m.h < m.a " . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
-    AND m.deleted = 0
-    AND o.deleted = 0
-    AND c.deleted = 0
-    AND (cs.deleted = 0 || ISNULL(m.stage))
 ORDER BY m.date DESC";
 
         $query = $this->db->query($sql);
@@ -318,33 +294,21 @@ ORDER BY m.date DESC";
         }
 
         if (is_string($type)) {
-            $whereConditions[] = "(c.type = '{$type}')";
+            $whereConditions[] = "(m.type = '{$type}')";
         }
 
-        $sql = "SELECT m.*, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation, (m.a + m.h) as total_goals
-FROM matches m
-LEFT JOIN opposition o ON o.id = m.opposition
-LEFT JOIN competition c ON c.id = m.competition
-LEFT JOIN competition_stage cs ON cs.id = m.stage
+        $sql = "SELECT m.*, (m.a + m.h) as total_goals
+FROM view_competitive_matches m
 WHERE (m.a + m.h) = (
     SELECT (m.a + m.h) as total_goals
-    FROM matches m
-    LEFT JOIN competition c ON c.id = m.competition
+    FROM view_competitive_matches m
     WHERE !ISNULL(m.h)
-        AND m.h = m.a
-        AND c.competitive = 1" . (count($whereConditions) > 0 ? "
+        AND m.h = m.a" . (count($whereConditions) > 0 ? "
         AND " . implode(" \r\nAND ", $whereConditions) : '') . "
-        AND m.deleted = 0
-        AND c.deleted = 0
     ORDER BY total_goals DESC, m.h DESC
     LIMIT 1)
-    AND c.competitive = 1
     AND m.h = m.a " . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
-    AND m.deleted = 0
-    AND o.deleted = 0
-    AND c.deleted = 0
-    AND (cs.deleted = 0 || ISNULL(m.stage))
 ORDER BY m.date DESC";
 
         $query = $this->db->query($sql);
@@ -575,36 +539,22 @@ ORDER BY m.date DESC";
         }
 
         if (is_string($type)) {
-            $whereConditions[] = "(c.type = '{$type}')";
+            $whereConditions[] = "(m.type = '{$type}')";
         }
 
-        $sql = "SELECT m.*, g.match_id, g.scorer_id, g.assist_id, g.minute, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation, p.first_name, p.surname
+        $sql = "SELECT m.*, g.match_id, g.scorer_id, g.assist_id, g.minute, p.first_name, p.surname
 FROM goal g
-LEFT JOIN matches m ON g.match_id = m.id
-LEFT JOIN opposition o ON o.id = m.opposition
-LEFT JOIN competition c ON c.id = m.competition
-LEFT JOIN competition_stage cs ON cs.id = m.stage
+LEFT JOIN view_competitive_matches m ON g.match_id = m.id
 LEFT JOIN player p ON p.id = g.scorer_id
 WHERE g.minute = (
     SELECT g.minute as goal_minute
     FROM goal g
     LEFT JOIN matches m ON g.match_id = m.id
-    LEFT JOIN competition c ON c.id = m.competition
-    WHERE g.minute > 0 && g.minute <= 120
-        AND c.competitive = 1" . (count($whereConditions) > 0 ? "
+    WHERE g.minute > 0 && g.minute <= 120" . (count($whereConditions) > 0 ? "
         AND " . implode(" \r\nAND ", $whereConditions) : '') . "
-        AND m.deleted = 0
-        AND c.deleted = 0
-        AND m.status != 'unused'
     ORDER BY goal_minute ASC, m.date DESC
-    LIMIT 1)
-    AND c.competitive = 1" . (count($whereConditions) > 0 ? "
+    LIMIT 1)" . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
-    AND m.status != 'unused'
-    AND m.deleted = 0
-    AND o.deleted = 0
-    AND c.deleted = 0
-    AND (cs.deleted = 0 || ISNULL(m.stage))
 ORDER BY m.date DESC";
 
         $query = $this->db->query($sql);
@@ -974,11 +924,10 @@ ORDER BY m.date DESC";
         }
 
         $sql = "SELECT COUNT(m.id) as games
-FROM matches m
+FROM view_competitive_matches m
 LEFT JOIN competition c ON c.id = m.competition
 WHERE c.competitive = 1" . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
-    AND c.deleted = 0
     AND m.a = 0";
 
         $query = $this->db->query($sql);
