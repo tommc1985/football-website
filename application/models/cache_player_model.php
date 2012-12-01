@@ -1483,7 +1483,7 @@ ORDER BY matches DESC";
     }
 
     /**
-     * Particular Club Statistics, based on Season and/or Competition Type
+     * Particular Player Statistics, based on Season and/or Competition Type
      * @param  int $statisticGroup  Statistic Group
      * @param  int      $playerId   Player ID
      * @param  boolean  $byType     Generate by competition type, set to false for "overall"
