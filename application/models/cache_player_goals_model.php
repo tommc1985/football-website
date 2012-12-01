@@ -104,6 +104,7 @@ class Cache_Player_Goals_model extends CI_Model {
 
     /**
      * Fetch latest rows to be processed/cached
+     * @param  int     $limit  Number of rows to return
      * @return results Query Object
      */
     public function fetchLatest($limit = 25)
