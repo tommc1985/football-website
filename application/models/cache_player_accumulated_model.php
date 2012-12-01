@@ -27,6 +27,31 @@ class Cache_Player_Accumulated_model extends CI_Model {
 
     /**
      * Insert row into process queue table to be processed
+     * @param  int|NULL $season     Season "career"
+     * @return boolean
+     */
+    public function insertEntries($season = NULL)
+    {
+        $this->insertEntry();
+        $this->insertEntry(1);
+
+        if (is_null($season)) {
+            $i = $this->ci->Season_model->fetchEarliestYear();
+            while($i <= Season_model::fetchCurrentSeason()){
+
+                $this->insertEntry(NULL, $i);
+                $this->insertEntry(1, $i);
+
+                $i++;
+            }
+        } else {
+            $this->insertEntry(NULL, $season);
+            $this->insertEntry(1, $season);
+        }
+    }
+
+    /**
+     * Insert row into process queue table to be processed
      * @param  int|NULL $byType   Group by "type" or "overall"
      * @param  int|NULL $season   Season "career"
      * @param  int|NULL $playerId Single Player
@@ -59,17 +84,17 @@ class Cache_Player_Accumulated_model extends CI_Model {
      * Fetch latest rows to be processed/cached
      * @return results Query Object
      */
-    public function fetchLatest()
+    public function fetchLatest($limit = 5)
     {
         $this->db->select('*')
             ->from($this->queueTableName)
             ->where('in_progress', 0)
             ->where('completed', 0)
             ->where('deleted', 0)
-            ->order_by('date_added', 'asc')
-            ->limit(5, 0);
+            ->order_by('date_added, id', 'asc')
+            ->limit($limit, 0);
 
-        return $this->db->get();
+        return $this->db->get()->result();
     }
 
     /**
@@ -81,7 +106,7 @@ class Cache_Player_Accumulated_model extends CI_Model {
         $rowCount = 0;
         $rows = $this->fetchLatest();
 
-        foreach($rows->result() as $row) {
+        foreach($rows as $row) {
             $this->processQueuedRow($row);
             $rowCount++;
         }
@@ -134,7 +159,7 @@ class Cache_Player_Accumulated_model extends CI_Model {
      */
     public static function playerStatisticsSQL()
     {
-        return "INSERT INTO cache_player_statistics (player_id, type, season, appearances, starter_appearances, substitute_appearances, goals, assists, motms, yellows, reds, average_rating)
+        return "INSERT INTO cache_player_accumulated_statistics (player_id, type, season, appearances, starter_appearances, substitute_appearances, goals, assists, motms, yellows, reds, average_rating)
 SELECT
     vamc.player_id,
     {competition_type} as type,
