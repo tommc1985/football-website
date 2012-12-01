@@ -12,6 +12,7 @@ class Cache_Player_model extends CI_Model {
 
     public $methodMap;
     public $hungryMethodMap;
+    public $otherMethodMap;
 
     /**
      * Constructor
@@ -31,12 +32,7 @@ class Cache_Player_model extends CI_Model {
         );
 
         $this->hungryMethodMap = array(
-            'debut'                                => 'debut',
-            'first_goal'                           => 'firstGoal',
-            'scored_on_debut'                      => 'scoredOnDebut',
             'hattricks'                            => 'hattricks',
-            'debut_and_first_goal_time_difference' => 'debutAndFirstGoalTimeDifference',
-            'debut_and_first_goal_game_difference' => 'debutAndFirstGoalGameDifference',
             'real_points_gained'                   => 'realPointsGained',
             'average_points_gained'                => 'averagePointsGained',
             'real_points'                          => 'realPoints',
@@ -57,17 +53,55 @@ class Cache_Player_model extends CI_Model {
             'most_common_left_hand_side_pairing'   => 'mostCommonLeftHandSidePairing',
             'most_common_strike_partner'           => 'mostCommonStrikePartner',
         );
+
+        $this->otherMethodMap = array(
+            'debut'                                => 'debut',
+            'first_goal'                           => 'firstGoal',
+            'scored_on_debut'                      => 'scoredOnDebut',
+            'debut_and_first_goal_time_difference' => 'debutAndFirstGoalTimeDifference',
+            'debut_and_first_goal_game_difference' => 'debutAndFirstGoalGameDifference',
+        );
+    }
+
+    /**
+     * Insert row into process queue table to be processed
+     * @param  int|NULL $season     Season "career"
+     * @return boolean
+     */
+    public function insertEntries($season = NULL)
+    {
+        $this->insertEntry();
+        $this->insertEntry(NULL, NULL, 'debut');
+        $this->insertEntry(NULL, NULL, 'first_goal');
+        $this->insertEntry(NULL, NULL, 'scored_on_debut');
+        $this->insertEntry(NULL, NULL, 'debut_and_first_goal_time_difference');
+        $this->insertEntry(NULL, NULL, 'debut_and_first_goal_game_difference');
+
+        foreach ($this->hungryMethodMap as $cacheData => $method) {
+            $this->insertEntry(1, NULL, $cacheData);
+
+            if (is_null($season)) {
+                $i = $this->ci->Season_model->fetchEarliestYear();
+                while($i <= Season_model::fetchCurrentSeason()){
+
+                    $this->insertEntry(1, $i, $cacheData);
+
+                    $i++;
+                }
+            } else {
+                $this->insertEntry(1, $season, $cacheData);
+            }
+        }
     }
 
     /**
      * Insert row into process queue table to be processed
      * @param  int|NULL $byType     Group by "type" or "overall"
      * @param  int|NULL $season     Season "career"
-     * @param  int|NULL $playerId   Single Player
      * @param  int|NULL $cacheData  What specific data to cache
      * @return boolean
      */
-    public function insertEntry($byType = NULL, $season = NULL, $playerId = NULL, $cacheData = NULL)
+    public function insertEntry($byType = NULL, $season = NULL, $cacheData = NULL)
     {
         $data = array('by_type' => $byType,
             'season' => $season,
@@ -94,7 +128,7 @@ class Cache_Player_model extends CI_Model {
      * Fetch latest rows to be processed/cached
      * @return results Query Object
      */
-    public function fetchLatest($limit = 5)
+    public function fetchLatest($limit = 1)
     {
         $this->db->select('*')
             ->from($this->queueTableName)
@@ -114,7 +148,7 @@ class Cache_Player_model extends CI_Model {
     public function processQueuedRows()
     {
         $rowCount = 0;
-        $rows = $this->fetchLatest(1);
+        $rows = $this->fetchLatest();
 
         foreach($rows->result() as $row) {
             $this->processQueuedRow($row);
@@ -139,8 +173,12 @@ class Cache_Player_model extends CI_Model {
         if (!empty($row->cache_data)) {
             if (isset($this->methodMap[$row->cache_data])) {
                 $method = $this->methodMap[$row->cache_data];
-            } else {
+            } elseif (isset($this->hungryMethodMap[$row->cache_data])) {
                 $method = $this->hungryMethodMap[$row->cache_data];
+            } elseif (isset($this->otherMethodMap[$row->cache_data])) {
+                $method = $this->otherMethodMap[$row->cache_data];
+            } else {
+                return false;
             }
 
             $this->$method(false, $row->season);
