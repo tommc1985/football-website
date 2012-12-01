@@ -1495,16 +1495,11 @@ ORDER BY matches DESC";
         $whereConditions = array();
 
         $whereConditions['statistic_group'] = $statisticGroup;
+        $whereConditions['type']            = $type ? $type : 'overall';
         $whereConditions['season']          = $season ? $season : 'career';
 
         if ($playerId) {
             $whereConditions['player_id']   = $playerId;
-        }
-
-        if ($type) {
-            $whereConditions['type']        = $type;
-        } else {
-            $whereConditions['type']        = 'overall';
         }
 
         return $this->db->delete($this->tableName, $whereConditions);

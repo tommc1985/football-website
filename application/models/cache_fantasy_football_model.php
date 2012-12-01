@@ -373,13 +373,8 @@ WHERE " . implode(" \r\nAND ", $whereConditions) : '');
     {
         $whereConditions = array();
 
-        $whereConditions['season']          = $season ? $season : 'career';
-
-        if ($type) {
-            $whereConditions['type']        = $type;
-        } else {
-            $whereConditions['type']        = 'overall';
-        }
+        $whereConditions['type']   = $type ? $type : 'overall';
+        $whereConditions['season'] = $season ? $season : 'career';
 
         return $this->db->delete($this->tableName, $whereConditions);
     }

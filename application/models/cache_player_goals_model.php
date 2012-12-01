@@ -710,16 +710,16 @@ WHERE c.competitive = 1
         $whereConditions = array();
 
         $whereConditions['statistic_group'] = $statisticGroup;
-        $whereConditions['season']           = $season ? $season : 'career';
+        $whereConditions['season']          = $season ? $season : 'career';
 
         if ($byType) {
-            $whereConditions['type !=']       = 'overall';
+            $whereConditions['type !=']     = 'overall';
         } else {
-            $whereConditions['type']       = 'overall';
+            $whereConditions['type']        = 'overall';
         }
 
         if ($playerId) {
-            $whereConditions['player_id']       = $playerId;
+            $whereConditions['player_id']   = $playerId;
         }
 
         return $this->db->delete($this->tableName, $whereConditions);

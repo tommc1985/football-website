@@ -1230,13 +1230,8 @@ WHERE c.competitive = 1" . (count($whereConditions) > 0 ? "
         $whereConditions = array();
 
         $whereConditions['statistic_group'] = $statisticGroup;
-        $whereConditions['season']           = $season ? $season : 'career';
-
-        if ($type) {
-            $whereConditions['type']       = $type;
-        } else {
-            $whereConditions['type']       = 'overall';
-        }
+        $whereConditions['type']            = $type ? $type : 'overall';
+        $whereConditions['season']          = $season ? $season : 'career';
 
         return $this->db->delete($this->tableName, $whereConditions);
     }
