@@ -41,11 +41,7 @@ class Cache_Club_model extends CI_Model {
             'longest_scoring_sequence'             => 'longestScoringSequence',
             'longest_sequence_without_scoring'     => 'longestSequenceWithoutScoring',
             'quickest_goal'                        => 'quickestGoal',
-            'clean_sheets_in_a_season'             => 'cleanSheetsInASeason',/*
-
-            - Most clean sheets in a season
-            - Points gained by a players goals
-            - Consecutive games a player has scored */
+            'clean_sheets_in_a_season'             => 'cleanSheetsInASeason',
         );
 
         $this->hungryMethodMap = array(
@@ -60,10 +56,35 @@ class Cache_Club_model extends CI_Model {
 
     /**
      * Insert row into process queue table to be processed
-     * @param  int|NULL $byType     Group by "type" or "overall"
      * @param  int|NULL $season     Season "career"
-     * @param  int|NULL $playerId   Single Player
-     * @param  int|NULL $cacheData  What specific data to cache
+     * @return boolean
+     */
+    public function insertEntries($season = NULL)
+    {
+        $this->insertEntry();
+
+        foreach ($this->hungryMethodMap as $cacheData => $method) {
+            $this->insertEntry(1, NULL, $cacheData);
+
+            if (is_null($season)) {
+                $i = $this->ci->Season_model->fetchEarliestYear();
+                while($i <= Season_model::fetchCurrentSeason()){
+
+                    $this->insertEntry(1, $i, $cacheData);
+
+                    $i++;
+                }
+            } else {
+                $this->insertEntry(1, $season, $cacheData);
+            }
+        }
+    }
+
+    /**
+     * Insert row into process queue table to be processed
+     * @param  int|NULL $byType         Group by "type" or "overall"
+     * @param  int|NULL $season         Season "career"
+     * @param  string|NULL $cacheData   What specific data to cache
      * @return boolean
      */
     public function insertEntry($byType = NULL, $season = NULL, $cacheData = NULL)
@@ -93,7 +114,7 @@ class Cache_Club_model extends CI_Model {
      * Fetch latest rows to be processed/cached
      * @return results Query Object
      */
-    public function fetchLatest($limit = 5)
+    public function fetchLatest($limit = 1)
     {
         $this->db->select('*')
             ->from($this->queueTableName)
@@ -103,7 +124,7 @@ class Cache_Club_model extends CI_Model {
             ->order_by('date_added', 'asc')
             ->limit($limit, 0);
 
-        return $this->db->get();
+        return $this->db->get()->result();
     }
 
     /**
@@ -113,9 +134,9 @@ class Cache_Club_model extends CI_Model {
     public function processQueuedRows()
     {
         $rowCount = 0;
-        $rows = $this->fetchLatest(2);
+        $rows = $this->fetchLatest();
 
-        foreach($rows->result() as $row) {
+        foreach($rows as $row) {
             $this->processQueuedRow($row);
             $rowCount++;
         }
@@ -138,8 +159,10 @@ class Cache_Club_model extends CI_Model {
         if (!empty($row->cache_data)) {
             if (isset($this->methodMap[$row->cache_data])) {
                 $method = $this->methodMap[$row->cache_data];
-            } else {
+            } elseif (isset($this->hungryMethodMap[$row->cache_data])) {
                 $method = $this->hungryMethodMap[$row->cache_data];
+            } else {
+                return false;
             }
 
             $this->$method(false, $row->season);
