@@ -65,7 +65,7 @@ class Cache_Player_Goals_model extends CI_Model {
                 }
             } else {
                 $this->insertEntry(NULL, $season, $cacheData);
-                $this->insertEntry(1, $season, NULL, $cacheData);
+                $this->insertEntry(1, $season, $cacheData);
             }
         }
     }
