@@ -10,8 +10,8 @@ class Season_model extends CI_Model {
      */
     public $ci;
 
-    public static $startMonth = 6;
-    public static $startDay = 1;
+    public static $startMonth;
+    public static $startDay;
 
     /**
      * Constructor
@@ -23,6 +23,12 @@ class Season_model extends CI_Model {
 
         $this->ci =& get_instance();
         $this->ci->load->model('Match_model');
+    }
+
+    public static function __callStatic($name, $arguments)
+    {
+        self::$startMonth = Configuration::get('start_month');
+        self::$startDay = Configuration::get('start_day');
     }
 
     /**
