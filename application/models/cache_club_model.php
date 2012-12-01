@@ -112,7 +112,8 @@ class Cache_Club_model extends CI_Model {
 
     /**
      * Fetch latest rows to be processed/cached
-     * @return results Query Object
+     * @param  int     $limit  Number of rows to return
+     * @return results Query   Object
      */
     public function fetchLatest($limit = 1)
     {
