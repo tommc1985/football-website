@@ -11,6 +11,7 @@ class Cache_Player_Goals_model extends CI_Model {
     public $queueTableName;
 
     public $methodMap;
+    public $hungryMethodMap;
 
     /**
      * Constructor
@@ -27,6 +28,9 @@ class Cache_Player_Goals_model extends CI_Model {
         $this->queueTableName = 'cache_queue_player_goal_statistics';
 
         $this->methodMap = array(
+        );
+
+        $this->hungryMethodMap = array(
             'by_goal_type'       => 'byGoalType',
             'by_body_part'       => 'byBodyPart',
             'by_distance'        => 'byDistance',
@@ -38,13 +42,43 @@ class Cache_Player_Goals_model extends CI_Model {
 
     /**
      * Insert row into process queue table to be processed
-     * @param  int|NULL $byType     Group by "type" or "overall"
      * @param  int|NULL $season     Season "career"
-     * @param  int|NULL $playerId   Single Player
-     * @param  int|NULL $cacheData  What specific data to cache
      * @return boolean
      */
-    public function insertEntry($byType = NULL, $season = NULL, $playerId = NULL, $cacheData = NULL)
+    public function insertEntries($season = NULL)
+    {
+        $this->insertEntry();
+        $this->insertEntry(1);
+
+        foreach ($this->hungryMethodMap as $cacheData => $method) {
+            $this->insertEntry(NULL, NULL, $cacheData);
+            $this->insertEntry(1, NULL, $cacheData);
+
+            if (is_null($season)) {
+                $i = $this->ci->Season_model->fetchEarliestYear();
+                while($i <= Season_model::fetchCurrentSeason()){
+
+                    $this->insertEntry(NULL, $i, $cacheData);
+                    $this->insertEntry(1, $i, $cacheData);
+
+                    $i++;
+                }
+            } else {
+                $this->insertEntry(NULL, $season, $cacheData);
+                $this->insertEntry(1, $season, NULL, $cacheData);
+            }
+        }
+    }
+
+    /**
+     * Insert row into process queue table to be processed
+     * @param  int|NULL $byType     Group by "type" or "overall"
+     * @param  int|NULL $season     Season "career"
+     * @param  int|NULL $cacheData  What specific data to cache
+     * @param  int|NULL $playerId   Single Player
+     * @return boolean
+     */
+    public function insertEntry($byType = NULL, $season = NULL, $cacheData = NULL, $playerId = NULL)
     {
         $data = array('by_type' => $byType,
             'season' => $season,
@@ -72,7 +106,7 @@ class Cache_Player_Goals_model extends CI_Model {
      * Fetch latest rows to be processed/cached
      * @return results Query Object
      */
-    public function fetchLatest($limit = 5)
+    public function fetchLatest($limit = 25)
     {
         $this->db->select('*')
             ->from($this->queueTableName)
@@ -82,7 +116,7 @@ class Cache_Player_Goals_model extends CI_Model {
             ->order_by('date_added', 'asc')
             ->limit($limit, 0);
 
-        return $this->db->get();
+        return $this->db->get()->result();
     }
 
     /**
@@ -94,7 +128,7 @@ class Cache_Player_Goals_model extends CI_Model {
         $rowCount = 0;
         $rows = $this->fetchLatest();
 
-        foreach($rows->result() as $row) {
+        foreach($rows as $row) {
             $this->processQueuedRow($row);
             $rowCount++;
         }
@@ -115,7 +149,13 @@ class Cache_Player_Goals_model extends CI_Model {
         $this->updateEntry($row);
 
         if (!empty($row->cache_data)) {
-            $method = $this->methodMap[$row->cache_data];
+            if (isset($this->methodMap[$row->cache_data])) {
+                $method = $this->methodMap[$row->cache_data];
+            } elseif (isset($this->hungryMethodMap[$row->cache_data])) {
+                $method = $this->hungryMethodMap[$row->cache_data];
+            } else {
+                return false;
+            }
 
             if (is_null($row->player_id)) { // Cache all players
                 if (is_null($row->by_type)) { // "Overall" statistics
