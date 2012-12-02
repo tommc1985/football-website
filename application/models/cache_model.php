@@ -22,6 +22,7 @@ class Cache_model extends CI_Model {
         $this->cacheModels = array(
             'Cache_Club_model',
             'Cache_Fantasy_Football_model',
+            'Cache_League_model',
             'Cache_Player_Accumulated_model',
             'Cache_Player_Goals_model',
             'Cache_Player_model',
