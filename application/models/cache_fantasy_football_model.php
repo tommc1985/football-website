@@ -58,7 +58,8 @@ class Cache_Fantasy_Football_model extends CI_Model {
      */
     public function insertEntry($byType = NULL, $season = NULL)
     {
-        $data = array('by_type' => $byType,
+        $data = array(
+            'by_type' => $byType,
             'season' => $season,
             'date_added' => time(),
             'date_updated' => time());

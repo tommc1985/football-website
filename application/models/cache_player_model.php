@@ -103,7 +103,8 @@ class Cache_Player_model extends CI_Model {
      */
     public function insertEntry($byType = NULL, $season = NULL, $cacheData = NULL)
     {
-        $data = array('by_type' => $byType,
+        $data = array(
+            'by_type' => $byType,
             'season' => $season,
             'cache_data' => $cacheData,
             'date_added' => time(),

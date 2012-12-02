@@ -80,7 +80,8 @@ class Cache_Player_Goals_model extends CI_Model {
      */
     public function insertEntry($byType = NULL, $season = NULL, $cacheData = NULL, $playerId = NULL)
     {
-        $data = array('by_type' => $byType,
+        $data = array(
+            'by_type' => $byType,
             'season' => $season,
             'player_id' => $playerId,
             'cache_data' => $cacheData,
