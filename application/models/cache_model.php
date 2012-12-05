@@ -20,12 +20,12 @@ class Cache_model extends CI_Model {
         $this->ci =& get_instance();
 
         $this->cacheModels = array(
-            'Cache_Club_model',
+            'Cache_Club_Statistics_model',
             'Cache_Fantasy_Football_model',
             'Cache_League_model',
-            'Cache_Player_Accumulated_model',
-            'Cache_Player_Goals_model',
-            'Cache_Player_model',
+            'Cache_Player_Accumulated_Statistics_model',
+            'Cache_Player_Goals_Statistics_model',
+            'Cache_Player_Statistics_model',
         );
 
         $this->loadModels();

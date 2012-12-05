@@ -1,5 +1,5 @@
 <?php
-class Cache_Player_Goals_model extends CI_Model {
+class Cache_Player_Goals_Statistics_model extends CI_Model {
 
     /**
      * CodeIgniter instance

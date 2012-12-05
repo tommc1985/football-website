@@ -1,5 +1,5 @@
 <?php
-class Cache_Club_model extends CI_Model {
+class Cache_Club_Statistics_model extends CI_Model {
 
     /**
      * CodeIgniter instance
