@@ -13,6 +13,8 @@ class Cache_Club_model extends CI_Model {
     public $methodMap;
     public $hungryMethodMap;
 
+    public $venues;
+
     /**
      * Constructor
      */
@@ -51,6 +53,13 @@ class Cache_Club_model extends CI_Model {
             'youngest_debutant'                    => 'youngestDebutant',
             'oldest_scorer'                        => 'oldestScorer',
             'youngest_scorer'                      => 'youngestScorer',
+        );
+
+        $this->venues = array(
+            NULL,
+            'h',
+            'a',
+            'n'
         );
     }
 
@@ -167,13 +176,20 @@ class Cache_Club_model extends CI_Model {
                 return false;
             }
 
-            $this->$method(false, $row->season);
+            $competitionTypes = $this->ci->Season_model->fetchCompetitionTypes();
 
-            if (!is_null($row->by_type)) { // Generate all statistics
-                $competitionTypes = $this->ci->Season_model->fetchCompetitionTypes();
+            foreach ($this->venues as $venue) {
+                if (in_array($method, $this->hungryMethodMap) && !is_null($venue)) {
+                    continue;
+                }
 
-                foreach ($competitionTypes as $competitionType) {
-                    $this->$method($competitionType, $row->season);
+                $this->$method(false, $row->season, $venue);
+
+                if (!is_null($row->by_type)) { // Generate all statistics
+
+                    foreach ($competitionTypes as $competitionType) {
+                        $this->$method($competitionType, $row->season, $venue);
+                    }
                 }
             }
 
@@ -222,21 +238,30 @@ class Cache_Club_model extends CI_Model {
      * Generate and cache Biggest Win Statistics by season or type
      * @param  boolean $byType      Generate by competition type, set to false for "overall"
      * @param  int|NULL $season     Season to generate, set to null for entire career
+     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
      * @return boolean              Whether query was executed correctly
      */
-    public function biggestWin($type = false, $season = NULL)
+    public function biggestWin($type = false, $season = NULL, $venue = NULL)
     {
-        self::deleteBiggestWin($type, $season);
+        $statisticGroup = 'biggest_win';
 
         $whereConditions = array();
+
+        if (is_string($type)) {
+            $whereConditions[] = "(m.type = '{$type}')";
+        }
+
         if (!is_null($season)) {
             $dates = Season_model::generateStartEndDates($season);
             $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
         }
 
-        if (is_string($type)) {
-            $whereConditions[] = "(m.type = '{$type}')";
+        if (!is_null($venue)) {
+            $statisticGroup .= "_{$venue}";
+            $whereConditions[] = "(m.venue = '{$venue}')";
         }
+
+        $this->deleteRows($statisticGroup, $type, $season);
 
         $sql = "SELECT m.*, (m.h - m.a) as difference
 FROM view_competitive_matches m
@@ -256,7 +281,7 @@ ORDER BY m.date DESC";
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('biggest_win', $type, $season, $row->difference, serialize($row));
+            $this->insertCache($statisticGroup, $type, $season, $row->difference, serialize($row));
         }
     }
 
@@ -264,21 +289,30 @@ ORDER BY m.date DESC";
      * Generate and cache Biggest Loss Statistics by season or type
      * @param  boolean $byType      Generate by competition type, set to false for "overall"
      * @param  int|NULL $season     Season to generate, set to null for entire career
+     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
      * @return boolean              Whether query was executed correctly
      */
-    public function biggestLoss($type = false, $season = NULL)
+    public function biggestLoss($type = false, $season = NULL, $venue = NULL)
     {
-        self::deleteBiggestLoss($type, $season);
+        $statisticGroup = 'biggest_loss';
 
         $whereConditions = array();
+
+        if (is_string($type)) {
+            $whereConditions[] = "(m.type = '{$type}')";
+        }
+
         if (!is_null($season)) {
             $dates = Season_model::generateStartEndDates($season);
             $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
         }
 
-        if (is_string($type)) {
-            $whereConditions[] = "(m.type = '{$type}')";
+        if (!is_null($venue)) {
+            $statisticGroup .= "_{$venue}";
+            $whereConditions[] = "(m.venue = '{$venue}')";
         }
+
+        $this->deleteRows($statisticGroup, $type, $season);
 
         $sql = "SELECT m.*, (m.a - m.h) as difference
 FROM view_competitive_matches m
@@ -298,7 +332,7 @@ ORDER BY m.date DESC";
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('biggest_loss', $type, $season, $row->difference, serialize($row));
+            $this->insertCache($statisticGroup, $type, $season, $row->difference, serialize($row));
         }
     }
 
@@ -306,21 +340,30 @@ ORDER BY m.date DESC";
      * Generate and cache Highest Scoring Draw Statistics by season or type
      * @param  boolean $byType      Generate by competition type, set to false for "overall"
      * @param  int|NULL $season     Season to generate, set to null for entire career
+     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
      * @return boolean              Whether query was executed correctly
      */
-    public function highestScoringDraw($type = false, $season = NULL)
+    public function highestScoringDraw($type = false, $season = NULL, $venue = NULL)
     {
-        self::deleteHighestScoringDraw($type, $season);
+        $statisticGroup = 'highest_scoring_draw';
 
         $whereConditions = array();
+
+        if (is_string($type)) {
+            $whereConditions[] = "(m.type = '{$type}')";
+        }
+
         if (!is_null($season)) {
             $dates = Season_model::generateStartEndDates($season);
             $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
         }
 
-        if (is_string($type)) {
-            $whereConditions[] = "(m.type = '{$type}')";
+        if (!is_null($venue)) {
+            $statisticGroup .= "_{$venue}";
+            $whereConditions[] = "(m.venue = '{$venue}')";
         }
+
+        $this->deleteRows($statisticGroup, $type, $season);
 
         $sql = "SELECT m.*, (m.a + m.h) as total_goals
 FROM view_competitive_matches m
@@ -332,6 +375,7 @@ WHERE (m.a + m.h) = (
         AND " . implode(" \r\nAND ", $whereConditions) : '') . "
     ORDER BY total_goals DESC, m.h DESC
     LIMIT 1)
+    AND !ISNULL(m.h)
     AND m.h = m.a " . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
 ORDER BY m.date DESC";
@@ -340,7 +384,7 @@ ORDER BY m.date DESC";
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('highest_scoring_draw', $type, $season, $row->total_goals, serialize($row));
+            $this->insertCache($statisticGroup, $type, $season, $row->total_goals, serialize($row));
         }
     }
 
@@ -348,130 +392,176 @@ ORDER BY m.date DESC";
      * Generate and cache Longest Winning Sequence Statistics by season or type
      * @param  boolean $byType      Generate by competition type, set to false for "overall"
      * @param  int|NULL $season     Season to generate, set to null for entire career
+     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
      * @return boolean              Whether query was executed correctly
      */
-    public function longestWinningSequence($type = false, $season = NULL)
+    public function longestWinningSequence($type = false, $season = NULL, $venue = NULL)
     {
-        self::deleteLongestWinningSequence($type, $season);
+        $statisticGroup = 'longest_winning_sequence';
 
-        $this->sequenceBase("\$match->h > \$match->a", 'longest_winning_sequence', $type, $season);
+        if (!is_null($venue)) {
+            $statisticGroup .= "_{$venue}";
+        }
+
+        $this->sequenceBase("\$match->h > \$match->a", $statisticGroup, $type, $season, $venue);
     }
 
     /**
      * Generate and cache Longest Losing Sequence Statistics by season or type
      * @param  boolean $byType      Generate by competition type, set to false for "overall"
      * @param  int|NULL $season     Season to generate, set to null for entire career
+     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
      * @return boolean              Whether query was executed correctly
      */
-    public function longestLosingSequence($type = false, $season = NULL)
+    public function longestLosingSequence($type = false, $season = NULL, $venue = NULL)
     {
-        self::deleteLongestLosingSequence($type, $season);
+        $statisticGroup = 'longest_losing_sequence';
 
-        $this->sequenceBase("\$match->h < \$match->a", 'longest_losing_sequence', $type, $season);
+        if (!is_null($venue)) {
+            $statisticGroup .= "_{$venue}";
+        }
+
+        $this->sequenceBase("\$match->h < \$match->a", $statisticGroup, $type, $season, $venue);
     }
 
     /**
      * Generate and cache Longest Drawing Sequence Statistics by season or type
      * @param  boolean $byType      Generate by competition type, set to false for "overall"
      * @param  int|NULL $season     Season to generate, set to null for entire career
+     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
      * @return boolean              Whether query was executed correctly
      */
-    public function longestDrawingSequence($type = false, $season = NULL)
+    public function longestDrawingSequence($type = false, $season = NULL, $venue = NULL)
     {
-        self::deleteLongestDrawingSequence($type, $season);
+        $statisticGroup = 'longest_drawing_sequence';
 
-        $this->sequenceBase("\$match->h == \$match->a", 'longest_drawing_sequence', $type, $season);
+        if (!is_null($venue)) {
+            $statisticGroup .= "_{$venue}";
+        }
+
+        $this->sequenceBase("\$match->h == \$match->a", $statisticGroup, $type, $season, $venue);
     }
 
     /**
      * Generate and cache Longest Unbeaten Sequence Statistics by season or type
      * @param  boolean $byType      Generate by competition type, set to false for "overall"
      * @param  int|NULL $season     Season to generate, set to null for entire career
+     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
      * @return boolean              Whether query was executed correctly
      */
-    public function longestUnbeatenSequence($type = false, $season = NULL)
+    public function longestUnbeatenSequence($type = false, $season = NULL, $venue = NULL)
     {
-        self::deleteLongestUnbeatenSequence($type, $season);
+        $statisticGroup = 'longest_unbeaten_sequence';
 
-        $this->sequenceBase("\$match->h == \$match->a || \$match->h > \$match->a", 'longest_unbeaten_sequence', $type, $season);
+        if (!is_null($venue)) {
+            $statisticGroup .= "_{$venue}";
+        }
+
+        $this->sequenceBase("\$match->h == \$match->a || \$match->h > \$match->a", $statisticGroup, $type, $season, $venue);
     }
 
     /**
      * Generate and cache Longest Sequence without Win Statistics by season or type
      * @param  boolean $byType      Generate by competition type, set to false for "overall"
      * @param  int|NULL $season     Season to generate, set to null for entire career
+     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
      * @return boolean              Whether query was executed correctly
      */
-    public function longestSequenceWithoutWin($type = false, $season = NULL)
+    public function longestSequenceWithoutWin($type = false, $season = NULL, $venue = NULL)
     {
-        self::deleteLongestSequenceWithoutWin($type, $season);
+        $statisticGroup = 'longest_sequence_without_win';
 
-        $this->sequenceBase("\$match->h < \$match->a || \$match->h == \$match->a", 'longest_sequence_without_win', $type, $season);
+        if (!is_null($venue)) {
+            $statisticGroup .= "_{$venue}";
+        }
+
+        $this->sequenceBase("\$match->h < \$match->a || \$match->h == \$match->a", $statisticGroup, $type, $season, $venue);
     }
 
     /**
      * Generate and cache Longest Clean Sheet Sequence Statistics by season or type
      * @param  boolean $byType      Generate by competition type, set to false for "overall"
      * @param  int|NULL $season     Season to generate, set to null for entire career
+     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
      * @return boolean              Whether query was executed correctly
      */
-    public function longestCleanSheetSequence($type = false, $season = NULL)
+    public function longestCleanSheetSequence($type = false, $season = NULL, $venue = NULL)
     {
-        self::deleteLongestCleanSheetSequence($type, $season);
+        $statisticGroup = 'longest_clean_sheet_sequence';
 
-        $this->sequenceBase("\$match->a == 0", 'longest_clean_sheet_sequence', $type, $season);
+        if (!is_null($venue)) {
+            $statisticGroup .= "_{$venue}";
+        }
+
+        $this->sequenceBase("\$match->a == 0", $statisticGroup, $type, $season, $venue);
     }
 
     /**
      * Generate and cache Longest Sequence Without Clean Sheet Statistics by season or type
      * @param  boolean $byType      Generate by competition type, set to false for "overall"
      * @param  int|NULL $season     Season to generate, set to null for entire career
+     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
      * @return boolean              Whether query was executed correctly
      */
-    public function longestSequenceWithoutCleanSheet($type = false, $season = NULL)
+    public function longestSequenceWithoutCleanSheet($type = false, $season = NULL, $venue = NULL)
     {
-        self::deleteLongestSequenceWithoutCleanSheet($type, $season);
+        $statisticGroup = 'longest_sequence_without_clean_sheet';
 
-        $this->sequenceBase("\$match->a > 0", 'longest_sequence_without_clean_sheet', $type, $season);
+        if (!is_null($venue)) {
+            $statisticGroup .= "_{$venue}";
+        }
+
+        $this->sequenceBase("\$match->a > 0", $statisticGroup, $type, $season, $venue);
     }
 
     /**
      * Generate and cache Longest Scoring Sequence Statistics by season or type
      * @param  boolean $byType      Generate by competition type, set to false for "overall"
      * @param  int|NULL $season     Season to generate, set to null for entire career
+     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
      * @return boolean              Whether query was executed correctly
      */
-    public function longestScoringSequence($type = false, $season = NULL)
+    public function longestScoringSequence($type = false, $season = NULL, $venue = NULL)
     {
-        self::deleteLongestScoringSequence($type, $season);
+        $statisticGroup = 'longest_scoring_sequence';
 
-        $this->sequenceBase("\$match->h > 0", 'longest_scoring_sequence', $type, $season);
+        if (!is_null($venue)) {
+            $statisticGroup .= "_{$venue}";
+        }
+
+        $this->sequenceBase("\$match->h > 0", $statisticGroup, $type, $season, $venue);
     }
 
     /**
      * Generate and cache Longest Sequence Without Scoring Statistics by season or type
      * @param  boolean $byType      Generate by competition type, set to false for "overall"
      * @param  int|NULL $season     Season to generate, set to null for entire career
+     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
      * @return boolean              Whether query was executed correctly
      */
-    public function longestSequenceWithoutScoring($type = false, $season = NULL)
+    public function longestSequenceWithoutScoring($type = false, $season = NULL, $venue = NULL)
     {
-        self::deleteLongestSequenceWithoutScoring($type, $season);
+        $statisticGroup = 'longest_sequence_without_scoring';
 
-        $this->sequenceBase("\$match->h == 0", 'longest_sequence_without_scoring', $type, $season);
+        if (!is_null($venue)) {
+            $statisticGroup .= "_{$venue}";
+        }
+
+        $this->sequenceBase("\$match->h == 0", 'longest_sequence_without_scoring', $type, $season, $venue);
     }
 
     /**
      * Generate and cache Base Method Statistics by season or type
      * @param  boolean $byType      Generate by competition type, set to false for "overall"
      * @param  int|NULL $season     Season to generate, set to null for entire career
+     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
      * @return boolean              Whether query was executed correctly
      */
-    public function sequenceBase($comparisonCode, $statisticGroup, $type = false, $season = NULL)
+    public function sequenceBase($comparisonCode, $statisticGroup, $type = false, $season = NULL, $venue = NULL)
     {
         $this->deleteRows($statisticGroup, $type, $season);
 
-        $matches = $this->ci->Season_model->fetchMatches($type, $season);
+        $matches = $this->ci->Season_model->fetchMatches($type, $season, $venue);
 
         $records = array();
 
@@ -487,7 +577,7 @@ ORDER BY m.date DESC";
             $currentSequenceFinish = '';
 
             foreach ($matches as $match) {
-                eval("\$comparisonResult = " . $comparisonCode . ";");
+                eval("\$comparisonResult = (" . $comparisonCode . ") && !is_null(\$match->h) && !is_null(\$match->a);");
 
                 if ($comparisonResult) {
                     $currentSequence++;
@@ -555,17 +645,20 @@ ORDER BY m.date DESC";
      */
     public function quickestGoal($type = false, $season = NULL)
     {
-        self::deleteQuickestGoal($type, $season);
+        $statisticGroup = 'quickest_goal';
 
         $whereConditions = array();
+
+        if (is_string($type)) {
+            $whereConditions[] = "(m.type = '{$type}')";
+        }
+
         if (!is_null($season)) {
             $dates = Season_model::generateStartEndDates($season);
             $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
         }
 
-        if (is_string($type)) {
-            $whereConditions[] = "(m.type = '{$type}')";
-        }
+        $this->deleteRows($statisticGroup, $type, $season);
 
         $sql = "SELECT m.*, g.match_id, g.scorer_id, g.assist_id, g.minute, p.first_name, p.surname
 FROM goal g
@@ -586,7 +679,7 @@ ORDER BY m.date DESC";
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('quickest_goal', $type, $season, $row->minute, serialize($row));
+            $this->insertCache($statisticGroup, $type, $season, $row->minute, serialize($row));
         }
     }
 
@@ -598,17 +691,20 @@ ORDER BY m.date DESC";
      */
     public function oldestAppearanceHolder($type = false, $season = NULL)
     {
-        self::deleteOldestAppearanceHolder($type, $season);
+        $statisticGroup = 'oldest_appearance_holder';
 
         $whereConditions = array();
+
+        if (is_string($type)) {
+            $whereConditions[] = "(c.type = '{$type}')";
+        }
+
         if (!is_null($season)) {
             $dates = Season_model::generateStartEndDates($season);
             $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
         }
 
-        if (is_string($type)) {
-            $whereConditions[] = "(c.type = '{$type}')";
-        }
+        $this->deleteRows($statisticGroup, $type, $season);
 
         $sql = "SELECT m.*, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation, p.first_name, p.surname
 FROM view_appearances_ages m
@@ -639,7 +735,7 @@ ORDER BY m.date DESC";
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('oldest_appearance_holder', $type, $season, $row->age, serialize($row));
+            $this->insertCache($statisticGroup, $type, $season, $row->age, serialize($row));
         }
     }
 
@@ -651,17 +747,20 @@ ORDER BY m.date DESC";
      */
     public function youngestAppearanceHolder($type = false, $season = NULL)
     {
-        self::deleteYoungestAppearanceHolder($type, $season);
+        $statisticGroup = 'youngest_appearance_holder';
 
         $whereConditions = array();
+
+        if (is_string($type)) {
+            $whereConditions[] = "(c.type = '{$type}')";
+        }
+
         if (!is_null($season)) {
             $dates = Season_model::generateStartEndDates($season);
             $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
         }
 
-        if (is_string($type)) {
-            $whereConditions[] = "(c.type = '{$type}')";
-        }
+        $this->deleteRows($statisticGroup, $type, $season);
 
         $sql = "SELECT m.*, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation, p.first_name, p.surname
 FROM view_appearances_ages m
@@ -692,7 +791,7 @@ ORDER BY m.date DESC";
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('youngest_appearance_holder', $type, $season, $row->age, serialize($row));
+            $this->insertCache($statisticGroup, $type, $season, $row->age, serialize($row));
         }
     }
 
@@ -704,19 +803,22 @@ ORDER BY m.date DESC";
      */
     public function oldestDebutant($type = false, $season = NULL)
     {
-        self::deleteOldestDebutant($type, $season);
+        $statisticGroup = 'oldest_debutant';
 
         $whereConditions = array();
         $whereConditions2 = array();
-        if (!is_null($season)) {
-            $dates = Season_model::generateStartEndDates($season);
-            $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
-        }
 
         if (is_string($type)) {
             $whereConditions[] = "(m.competition_type = '{$type}')";
             $whereConditions2[] = "(m2.competition_type = '{$type}')";
         }
+
+        if (!is_null($season)) {
+            $dates = Season_model::generateStartEndDates($season);
+            $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
+        }
+
+        $this->deleteRows($statisticGroup, $type, $season);
 
         $sql = "SELECT m.*, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation,
     (SELECT COUNT(m2.id)
@@ -753,7 +855,7 @@ ORDER BY m.age DESC";
             }
 
             if ($age == $row->age) {
-                $this->insertCache('oldest_debutant', $type, $season, $row->age, serialize($row));
+                $this->insertCache($statisticGroup, $type, $season, $row->age, serialize($row));
             }
         }
     }
@@ -766,19 +868,22 @@ ORDER BY m.age DESC";
      */
     public function youngestDebutant($type = false, $season = NULL)
     {
-        self::deleteYoungestDebutant($type, $season);
+        $statisticGroup = 'youngest_debutant';
 
         $whereConditions = array();
         $whereConditions2 = array();
-        if (!is_null($season)) {
-            $dates = Season_model::generateStartEndDates($season);
-            $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
-        }
 
         if (is_string($type)) {
             $whereConditions[] = "(m.competition_type = '{$type}')";
             $whereConditions2[] = "(m2.competition_type = '{$type}')";
         }
+
+        if (!is_null($season)) {
+            $dates = Season_model::generateStartEndDates($season);
+            $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
+        }
+
+        $this->deleteRows($statisticGroup, $type, $season);
 
         $sql = "SELECT m.*, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation,
     (SELECT COUNT(m2.id)
@@ -815,7 +920,7 @@ ORDER BY m.age ASC";
             }
 
             if ($age == $row->age) {
-                $this->insertCache('youngest_debutant', $type, $season, $row->age, serialize($row));
+                $this->insertCache($statisticGroup, $type, $season, $row->age, serialize($row));
             }
         }
     }
@@ -828,17 +933,20 @@ ORDER BY m.age ASC";
      */
     public function oldestScorer($type = false, $season = NULL)
     {
-        self::deleteOldestScorer($type, $season);
+        $statisticGroup = 'oldest_scorer';
 
         $whereConditions = array();
+
+        if (is_string($type)) {
+            $whereConditions[] = "(c.type = '{$type}')";
+        }
+
         if (!is_null($season)) {
             $dates = Season_model::generateStartEndDates($season);
             $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
         }
 
-        if (is_string($type)) {
-            $whereConditions[] = "(c.type = '{$type}')";
-        }
+        $this->deleteRows($statisticGroup, $type, $season);
 
         $sql = "SELECT m.*, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation, p.first_name, p.surname
 FROM view_appearances_matches_combined m
@@ -870,7 +978,7 @@ ORDER BY m.date DESC";
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('oldest_scorer', $type, $season, $row->age, serialize($row));
+            $this->insertCache($statisticGroup, $type, $season, $row->age, serialize($row));
         }
     }
 
@@ -882,17 +990,20 @@ ORDER BY m.date DESC";
      */
     public function youngestScorer($type = false, $season = NULL)
     {
-        self::deleteYoungestScorer($type, $season);
+        $statisticGroup = 'youngest_scorer';
 
         $whereConditions = array();
+
+        if (is_string($type)) {
+            $whereConditions[] = "(c.type = '{$type}')";
+        }
+
         if (!is_null($season)) {
             $dates = Season_model::generateStartEndDates($season);
             $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
         }
 
-        if (is_string($type)) {
-            $whereConditions[] = "(c.type = '{$type}')";
-        }
+        $this->deleteRows($statisticGroup, $type, $season);
 
         $sql = "SELECT m.*, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation, p.first_name, p.surname
 FROM view_appearances_matches_combined m
@@ -924,7 +1035,7 @@ ORDER BY m.date DESC";
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('youngest_scorer', $type, $season, $row->age, serialize($row));
+            $this->insertCache($statisticGroup, $type, $season, $row->age, serialize($row));
         }
     }
 
@@ -932,21 +1043,30 @@ ORDER BY m.date DESC";
      * Generate and cache Clean Sheets In A Season Statistics by season or type
      * @param  boolean $byType      Generate by competition type, set to false for "overall"
      * @param  int|NULL $season     Season to generate, set to null for entire career
+     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
      * @return boolean              Whether query was executed correctly
      */
-    public function cleanSheetsInASeason($type = false, $season = NULL)
+    public function cleanSheetsInASeason($type = false, $season = NULL, $venue = NULL)
     {
-        self::deleteCleanSheetsInASeason($type, $season);
+        $statisticGroup = 'clean_sheets_in_a_season';
 
         $whereConditions = array();
+
+        if (is_string($type)) {
+            $whereConditions[] = "(c.type = '{$type}')";
+        }
+
         if (!is_null($season)) {
             $dates = Season_model::generateStartEndDates($season);
             $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
         }
 
-        if (is_string($type)) {
-            $whereConditions[] = "(c.type = '{$type}')";
+        if (!is_null($venue)) {
+            $statisticGroup .= "_{$venue}";
+            $whereConditions[] = "(m.venue = '{$venue}')";
         }
+
+        $this->deleteRows($statisticGroup, $type, $season);
 
         $sql = "SELECT COUNT(m.id) as games
 FROM view_competitive_matches m
@@ -959,228 +1079,8 @@ WHERE c.competitive = 1" . (count($whereConditions) > 0 ? "
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('clean_sheets_in_a_season', $type, $season, $row->games, '');
+            $this->insertCache($statisticGroup, $type, $season, $row->games, '');
         }
-    }
-
-    /**
-     * Delete cached Biggest Win Statistics
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteBiggestWin($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('biggest_win', $byType, $season);
-    }
-
-    /**
-     * Delete cached Biggest Loss Statistics
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteBiggestLoss($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('biggest_loss', $byType, $season);
-    }
-
-    /**
-     * Delete cached Highest Scoring Draw Statistics
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteHighestScoringDraw($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('highest_scoring_draw', $byType, $season);
-    }
-
-    /**
-     * Delete cached Longest Winning Sequence Statistics
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteLongestWinningSequence($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('longest_winning_sequence', $byType, $season);
-    }
-
-    /**
-     * Delete cached Longest Losing Sequence Statistics
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteLongestLosingSequence($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('longest_losing_sequence', $byType, $season);
-    }
-
-    /**
-     * Delete cached Longest Drawing Sequence Statistics
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteLongestDrawingSequence($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('longest_drawing_sequence', $byType, $season);
-    }
-
-    /**
-     * Delete cached Longest Unbeaten Sequence Statistics
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteLongestUnbeatenSequence($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('longest_unbeaten_sequence', $byType, $season);
-    }
-
-    /**
-     * Delete cached Longest Sequence Without a Win Statistics
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteLongestSequenceWithoutWin($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('longest_sequence_without_win', $byType, $season);
-    }
-
-    /**
-     * Delete cached Longest Clean Sheet Sequence Statistics
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteLongestCleanSheetSequence($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('longest_clean_sheet_sequence', $byType, $season);
-    }
-
-    /**
-     * Delete cached Longest Sequence Without a Clean Sheet Statistics
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteLongestSequenceWithoutCleanSheet($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('longest_sequence_without_clean_sheet', $byType, $season);
-    }
-
-    /**
-     * Delete cached Longest Scoring Sequence Statistics
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteLongestScoringSequence($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('longest_scoring_sequence', $byType, $season);
-    }
-
-    /**
-     * Delete cached Longest Sequence without Scoring Statistics
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteLongestSequenceWithoutScoring($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('longest_sequence_without_scoring', $byType, $season);
-    }
-
-    /**
-     * Delete cached Quickest Goal Statistics
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteQuickestGoal($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('quickest_goal', $byType, $season);
-    }
-
-    /**
-     * Delete cached Oldest Appearance Holder Statistics
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteOldestAppearanceHolder($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('oldest_appearance_holder', $byType, $season);
-    }
-
-    /**
-     * Delete cached Youngest Appearance Holder Statistics
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteYoungestAppearanceHolder($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('youngest_appearance_holder', $byType, $season);
-    }
-
-    /**
-     * Delete cached Oldest Debutant Statistics
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteOldestDebutant($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('oldest_debutant', $byType, $season);
-    }
-
-    /**
-     * Delete cached Youngest Debutant Statistics
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteYoungestDebutant($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('youngest_debutant', $byType, $season);
-    }
-
-    /**
-     * Delete cached Oldest Scorer Statistics
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteOldestScorer($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('oldest_scorer', $byType, $season);
-    }
-
-    /**
-     * Delete cached Youngest Scorer Statistics
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteYoungestScorer($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('youngest_scorer', $byType, $season);
-    }
-
-    /**
-     * Delete cached Most Clean Sheets in a Season Statistics
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteCleanSheetsInASeason($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('clean_sheets_in_a_season', $byType, $season);
     }
 
 
@@ -1190,30 +1090,30 @@ WHERE c.competitive = 1" . (count($whereConditions) > 0 ? "
      */
     public function generateAllStatistics()
     {
-        //$this->emptyCache();
-
         $competitionTypes = $this->ci->Season_model->fetchCompetitionTypes();
 
-        foreach ($this->methodMap as $method) {
-            $this->$method();
-
-            foreach ($competitionTypes as $competitionType) {
-                $this->$method($competitionType);
-            }
-        }
-
-        $season = $this->ci->Season_model->fetchEarliestYear();
-        while($season <= Season_model::fetchCurrentSeason()){
-
+        foreach ($this->venues as $venue) {
             foreach ($this->methodMap as $method) {
-                $this->$method(false, $season);
+                $this->$method();
 
                 foreach ($competitionTypes as $competitionType) {
-                    $this->$method($competitionType, $season);
+                    $this->$method($competitionType);
                 }
             }
 
-            $season++;
+            $season = $this->ci->Season_model->fetchEarliestYear();
+            while($season <= Season_model::fetchCurrentSeason()){
+
+                foreach ($this->methodMap as $method) {
+                    $this->$method(false, $season);
+
+                    foreach ($competitionTypes as $competitionType) {
+                        $this->$method($competitionType, $season);
+                    }
+                }
+
+                $season++;
+            }
         }
 
         return true;
