@@ -1,10 +1,6 @@
 <?php
 class Match_model extends CI_Model {
 
-    var $title   = '';
-    var $content = '';
-    var $date    = '';
-
     public $tableName;
 
     /**
