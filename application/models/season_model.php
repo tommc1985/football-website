@@ -112,34 +112,33 @@ class Season_model extends CI_Model {
 
     /**
      * Fetch list of matches matches stored in the system
-     * @param  integer $limit Number of matches to return
+     * @param  boolean $byType      Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season     Season to generate, set to null for entire career
+     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
      * @return array|object   Earliest match/matches
      */
-    public function fetchMatches($type = false, $season = NULL)
+    public function fetchMatches($type = false, $season = NULL, $venue = NULL)
     {
         $whereConditions = array();
+
+        if (is_string($type)) {
+            $whereConditions[] = "(m.type = '{$type}')";
+        }
+
         if (!is_null($season)) {
             $dates = Season_model::generateStartEndDates($season);
             $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
         }
 
-        if (is_string($type)) {
-            $whereConditions[] = "(c.type = '{$type}')";
+        if (!is_null($venue)) {
+            $whereConditions[] = "(m.venue = '{$venue}')";
         }
-        $whereConditions[] = "(c.competitive = 1)";
 
-        $sql = "SELECT m.*, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation
-FROM matches m
-LEFT JOIN opposition o ON o.id = m.opposition
-LEFT JOIN competition c ON c.id = m.competition
-LEFT JOIN competition_stage cs ON cs.id = m.stage
-" . (count($whereConditions) > 0 ? "
+        $whereConditions[] = "(m.competitive = 1)";
+
+        $sql = "SELECT m.*
+FROM view_competitive_matches m" . (count($whereConditions) > 0 ? "
 WHERE " . implode(" \r\nAND ", $whereConditions) : '') . "
-    AND c.competitive = 1
-    AND m.deleted = 0
-    AND o.deleted = 0
-    AND c.deleted = 0
-    AND cs.deleted = 0
 ORDER BY m.date ASC";
 
         $query = $this->db->query($sql);
