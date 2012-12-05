@@ -264,7 +264,9 @@ class Cache_Player_Statistics_model extends CI_Model {
      */
     public function debut($type = false, $season = NULL)
     {
-        self::deleteDebut($type, $season);
+        $statisticGroup = 'debut';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
 
         $whereConditions = array();
         $whereConditions2 = array();
@@ -305,7 +307,7 @@ ORDER BY m.date ASC";
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('debut', $type, $season, $row->player_id, $row->match_id, serialize($row));
+            $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->match_id, serialize($row));
         }
     }
 
@@ -317,7 +319,9 @@ ORDER BY m.date ASC";
      */
     public function firstGoal($type = false, $season = NULL)
     {
-        self::deleteFirstGoal($type, $season);
+        $statisticGroup = 'first_goal';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
 
         $whereConditions = array();
         $whereConditions2 = array();
@@ -360,7 +364,7 @@ ORDER BY m.date ASC";
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('first_goal', $type, $season, $row->player_id, $row->match_id, serialize($row));
+            $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->match_id, serialize($row));
         }
     }
 
@@ -372,7 +376,9 @@ ORDER BY m.date ASC";
      */
     public function scoredOnDebut($type = false, $season = NULL)
     {
-        self::deleteScoredOnDebut($type, $season);
+        $statisticGroup = 'scored_on_debut';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
 
         $whereConditions = array();
         $whereConditions2 = array();
@@ -415,7 +421,7 @@ ORDER BY m.date ASC";
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('scored_on_debut', $type, $season, $row->player_id, $row->match_id, serialize($row));
+            $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->match_id, serialize($row));
         }
     }
 
@@ -427,7 +433,9 @@ ORDER BY m.date ASC";
      */
     public function hattricks($type = false, $season = NULL)
     {
-        self::deleteHattricks($type, $season);
+        $statisticGroup = 'hattricks';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
 
         $whereConditions = array();
         $whereConditions2 = array();
@@ -459,7 +467,7 @@ ORDER BY m.goals DESC";
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('hattricks', $type, $season, $row->player_id, $row->goals, serialize($row));
+            $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->goals, serialize($row));
         }
     }
 
@@ -471,7 +479,9 @@ ORDER BY m.goals DESC";
      */
     public function debutAndFirstGoalTimeDifference($type = false, $season = NULL)
     {
-        self::deleteDebutAndFirstGoalTimeDifference($type, $season);
+        $statisticGroup = 'debut_and_first_goal_time_difference';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
 
         $whereConditions = array();
 
@@ -493,7 +503,7 @@ ORDER BY days_elapsed DESC";
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('debut_and_first_goal_time_difference', $type, $season, $row->player_id, $row->days_elapsed, serialize($row));
+            $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->days_elapsed, serialize($row));
         }
     }
 
@@ -505,7 +515,9 @@ ORDER BY days_elapsed DESC";
      */
     public function debutAndFirstGoalGameDifference($type = false, $season = NULL)
     {
-        self::deleteDebutAndFirstGoalGameDifference($type, $season);
+        $statisticGroup = 'debut_and_first_goal_game_difference';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
 
         $sql = "SELECT * FROM (
     SELECT m.*, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation,
@@ -543,7 +555,7 @@ ORDER BY player_id ASC";
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('debut_and_first_goal_game_difference', $type, $season, $row->player_id, $row->games_elapsed, serialize($row));
+            $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->games_elapsed, serialize($row));
         }
     }
 
@@ -555,7 +567,9 @@ ORDER BY player_id ASC";
      */
     public function realPointsGained($type = false, $season = NULL)
     {
-        self::deleteRealPointsGained($type, $season);
+        $statisticGroup = 'real_points_gained';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
 
         $whereConditions = array();
         if (!is_null($season)) {
@@ -580,7 +594,7 @@ ORDER BY points_gained DESC";
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('real_points_gained', $type, $season, $row->player_id, $row->points_gained, serialize($row));
+            $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->points_gained, serialize($row));
         }
     }
 
@@ -592,7 +606,9 @@ ORDER BY points_gained DESC";
      */
     public function averagePointsGained($type = false, $season = NULL)
     {
-        self::deleteAveragePointsGained($type, $season);
+        $statisticGroup = 'average_points_gained';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
 
         $whereConditions = array();
         if (!is_null($season)) {
@@ -617,7 +633,7 @@ ORDER BY points_gained DESC";
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('average_points_gained', $type, $season, $row->player_id, $row->points_gained, serialize($row));
+            $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->points_gained, serialize($row));
         }
     }
 
@@ -629,7 +645,9 @@ ORDER BY points_gained DESC";
      */
     public function realPoints($type = false, $season = NULL)
     {
-        self::deleteRealPoints($type, $season);
+        $statisticGroup = 'average_points_gained';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
 
         $whereConditions = array();
         if (!is_null($season)) {
@@ -654,7 +672,7 @@ ORDER BY points DESC";
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('real_points', $type, $season, $row->player_id, $row->points, serialize($row));
+            $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->points, serialize($row));
         }
     }
 
@@ -666,7 +684,10 @@ ORDER BY points DESC";
      */
     public function averagePoints($type = false, $season = NULL)
     {
-        self::deleteAveragePoints($type, $season);
+        $statisticGroup = 'average_points';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
+
 
         $whereConditions = array();
         if (!is_null($season)) {
@@ -691,7 +712,7 @@ ORDER BY points DESC";
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('average_points', $type, $season, $row->player_id, $row->points, serialize($row));
+            $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->points, serialize($row));
         }
     }
 
@@ -703,7 +724,9 @@ ORDER BY points DESC";
      */
     public function realGoalsGained($type = false, $season = NULL)
     {
-        self::deleteRealGoalsGained($type, $season);
+        $statisticGroup = 'real_goals_gained';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
 
         $whereConditions = array();
         if (!is_null($season)) {
@@ -728,7 +751,7 @@ ORDER BY goals_gained DESC";
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('real_goals_gained', $type, $season, $row->player_id, $row->goals_gained, serialize($row));
+            $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->goals_gained, serialize($row));
         }
     }
 
@@ -740,7 +763,9 @@ ORDER BY goals_gained DESC";
      */
     public function averageGoalsGained($type = false, $season = NULL)
     {
-        self::deleteAverageGoalsGained($type, $season);
+        $statisticGroup = 'average_goals_gained';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
 
         $whereConditions = array();
         if (!is_null($season)) {
@@ -765,7 +790,7 @@ ORDER BY goals_gained DESC";
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('average_goals_gained', $type, $season, $row->player_id, $row->goals_gained, serialize($row));
+            $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->goals_gained, serialize($row));
         }
     }
 
@@ -777,7 +802,9 @@ ORDER BY goals_gained DESC";
      */
     public function realGoals($type = false, $season = NULL)
     {
-        self::deleteRealGoals($type, $season);
+        $statisticGroup = 'real_goals';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
 
         $whereConditions = array();
         if (!is_null($season)) {
@@ -802,7 +829,7 @@ ORDER BY goals DESC";
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('real_goals', $type, $season, $row->player_id, $row->goals, serialize($row));
+            $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->goals, serialize($row));
         }
     }
 
@@ -814,7 +841,9 @@ ORDER BY goals DESC";
      */
     public function averageGoalsFor($type = false, $season = NULL)
     {
-        self::deleteAverageGoalsFor($type, $season);
+        $statisticGroup = 'average_goals_for';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
 
         $whereConditions = array();
         if (!is_null($season)) {
@@ -839,7 +868,7 @@ ORDER BY goals DESC";
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('average_goals_for', $type, $season, $row->player_id, $row->goals, serialize($row));
+            $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->goals, serialize($row));
         }
     }
 
@@ -851,7 +880,9 @@ ORDER BY goals DESC";
      */
     public function averageGoalsAgainst($type = false, $season = NULL)
     {
-        self::deleteAverageGoalsAgainst($type, $season);
+        $statisticGroup = 'average_goals_against';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
 
         $whereConditions = array();
         if (!is_null($season)) {
@@ -876,7 +907,7 @@ ORDER BY goals DESC";
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('average_goals_against', $type, $season, $row->player_id, $row->goals, serialize($row));
+            $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->goals, serialize($row));
         }
     }
 
@@ -888,7 +919,9 @@ ORDER BY goals DESC";
      */
     public function totalCleanSheets($type = false, $season = NULL)
     {
-        self::deleteTotalCleanSheets($type, $season);
+        $statisticGroup = 'total_clean_sheets';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
 
         $whereConditions = array();
         if (!is_null($season)) {
@@ -913,7 +946,7 @@ ORDER BY clean_sheets DESC";
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('total_clean_sheets', $type, $season, $row->player_id, $row->clean_sheets, serialize($row));
+            $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->clean_sheets, serialize($row));
         }
     }
 
@@ -925,7 +958,9 @@ ORDER BY clean_sheets DESC";
      */
     public function averageCleanSheets($type = false, $season = NULL)
     {
-        self::deleteAverageCleanSheets($type, $season);
+        $statisticGroup = 'average_clean_sheets';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
 
         $whereConditions = array();
         if (!is_null($season)) {
@@ -950,7 +985,7 @@ ORDER BY clean_sheets DESC";
         $rows = $query->result();
 
         foreach ($rows as $row) {
-            $this->insertCache('average_clean_sheets', $type, $season, $row->player_id, $row->clean_sheets, serialize($row));
+            $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->clean_sheets, serialize($row));
         }
     }
 
@@ -962,6 +997,10 @@ ORDER BY clean_sheets DESC";
      */
     public function consecutiveGamesScored($type = false, $season = NULL)
     {
+        $statisticGroup = 'consecutive_games_scored';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
+
         $whereConditions = array();
         if (!is_null($season)) {
             $dates = Season_model::generateStartEndDates($season);
@@ -984,7 +1023,7 @@ ORDER BY m.date ASC";
         $matches = $query->result();
 
         foreach ($distinctPlayers as $player) {
-            $this->sequenceBase($matches, $player->id, "\$match->goals > 0", 'consecutive_games_scored', $type, $season);
+            $this->sequenceBase($matches, $player->id, "\$match->goals > 0", $statisticGroup, $type, $season);
         }
     }
 
@@ -996,6 +1035,10 @@ ORDER BY m.date ASC";
      */
     public function consecutiveGamesAssisted($type = false, $season = NULL)
     {
+        $statisticGroup = 'consecutive_games_assisted';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
+
         $whereConditions = array();
         if (!is_null($season)) {
             $dates = Season_model::generateStartEndDates($season);
@@ -1018,7 +1061,7 @@ ORDER BY m.date ASC";
         $matches = $query->result();
 
         foreach ($distinctPlayers as $player) {
-            $this->sequenceBase($matches, $player->id, "\$match->assists > 0", 'consecutive_games_assisted', $type, $season);
+            $this->sequenceBase($matches, $player->id, "\$match->assists > 0", $statisticGroup, $type, $season);
         }
     }
 
@@ -1032,8 +1075,6 @@ ORDER BY m.date ASC";
      */
     public function sequenceBase($matches, $playerId, $comparisonCode, $statisticGroup, $type = false, $season = NULL)
     {
-        $this->deleteRows($statisticGroup, $playerId, $type, $season);
-
         $records = array();
 
         $record = new stdClass();
@@ -1101,8 +1142,6 @@ ORDER BY m.date ASC";
      */
     public function appearanceCombinationBase($type = false, $season = NULL, $playerCount = 2, $positions = array(), $startsOnly = true)
     {
-        self::deleteAverageCleanSheets($type, $season);
-
         $selectFields = array('COUNT(a1.id) as matches');
         $fromSection = array();
         $whereConditions = array();
@@ -1174,12 +1213,14 @@ ORDER BY matches DESC";
      */
     public function mostCommonTwoPlayerCombination($type = false, $season = NULL)
     {
-        $this->deleteRows('most_common_two_player_combination', false, $type, $season);
+        $statisticGroup = 'most_common_two_player_combination';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
 
         $records = $this->appearanceCombinationBase($type, $season);
 
         foreach ($records as $record) {
-            $this->insertCache('most_common_two_player_combination', $type, $season, $record->player_1_id, $record->matches, serialize($record));
+            $this->insertCache($statisticGroup, $type, $season, $record->player_1_id, $record->matches, serialize($record));
         }
     }
 
@@ -1191,12 +1232,14 @@ ORDER BY matches DESC";
      */
     public function mostCommonCentreBackPairing($type = false, $season = NULL)
     {
-        $this->deleteRows('most_common_centre_back_pairing', false, $type, $season);
+        $statisticGroup = 'most_common_centre_back_pairing';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
 
         $records = $this->appearanceCombinationBase($type, $season, 2, array(4));
 
         foreach ($records as $record) {
-            $this->insertCache('most_common_centre_back_pairing', $type, $season, $record->player_1_id, $record->matches, serialize($record));
+            $this->insertCache($statisticGroup, $type, $season, $record->player_1_id, $record->matches, serialize($record));
         }
     }
 
@@ -1208,12 +1251,14 @@ ORDER BY matches DESC";
      */
     public function mostCommonCentreMidfieldPairing($type = false, $season = NULL)
     {
-        $this->deleteRows('most_common_centre_midfield_pairing', false, $type, $season);
+        $statisticGroup = 'most_common_centre_midfield_pairing';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
 
         $records = $this->appearanceCombinationBase($type, $season, 2, array(11));
 
         foreach ($records as $record) {
-            $this->insertCache('most_common_centre_midfield_pairing', $type, $season, $record->player_1_id, $record->matches, serialize($record));
+            $this->insertCache($statisticGroup, $type, $season, $record->player_1_id, $record->matches, serialize($record));
         }
     }
 
@@ -1225,12 +1270,14 @@ ORDER BY matches DESC";
      */
     public function mostCommonRightHandSidePairing($type = false, $season = NULL)
     {
-        $this->deleteRows('most_common_right_hand_side_pairing', false, $type, $season);
+        $statisticGroup = 'most_common_right_hand_side_pairing';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
 
         $records = $this->appearanceCombinationBase($type, $season, 2, array(2, 9));
 
         foreach ($records as $record) {
-            $this->insertCache('most_common_right_hand_side_pairing', $type, $season, $record->player_1_id, $record->matches, serialize($record));
+            $this->insertCache($statisticGroup, $type, $season, $record->player_1_id, $record->matches, serialize($record));
         }
     }
 
@@ -1242,12 +1289,14 @@ ORDER BY matches DESC";
      */
     public function mostCommonLeftHandSidePairing($type = false, $season = NULL)
     {
-        $this->deleteRows('most_common_left_hand_side_pairing', false, $type, $season);
+        $statisticGroup = 'most_common_right_hand_side_pairing';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
 
         $records = $this->appearanceCombinationBase($type, $season, 2, array(3, 10));
 
         foreach ($records as $record) {
-            $this->insertCache('most_common_left_hand_side_pairing', $type, $season, $record->player_1_id, $record->matches, serialize($record));
+            $this->insertCache($statisticGroup, $type, $season, $record->player_1_id, $record->matches, serialize($record));
         }
     }
 
@@ -1259,200 +1308,15 @@ ORDER BY matches DESC";
      */
     public function mostCommonStrikePartner($type = false, $season = NULL)
     {
-        $this->deleteRows('most_common_strike_partner', false, $type, $season);
+        $statisticGroup = 'most_common_strike_partner';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
 
         $records = $this->appearanceCombinationBase($type, $season, 2, array(16));
 
         foreach ($records as $record) {
-            $this->insertCache('most_common_strike_partner', $type, $season, $record->player_1_id, $record->matches, serialize($record));
+            $this->insertCache($statisticGroup, $type, $season, $record->player_1_id, $record->matches, serialize($record));
         }
-    }
-
-    /**
-     * Delete cached Debut
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteDebut($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('debut', false, $byType, $season);
-    }
-
-    /**
-     * Delete cached First Goal
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteFirstGoal($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('first_goal', false, $byType, $season);
-    }
-
-    /**
-     * Delete cached Scored on Debut
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteScoredOnDebut($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('scored_on_debut', false, $byType, $season);
-    }
-
-    /**
-     * Delete cached Hattricks
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteHattricks($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('hattricks', false, $byType, $season);
-    }
-
-    /**
-     * Delete cached Debut & First Goal Time Difference
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteDebutAndFirstGoalTimeDifference($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('debut_and_first_goal_time_difference', false, $byType, $season);
-    }
-
-    /**
-     * Delete cached Debut & First Goal Game Difference
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteDebutAndFirstGoalGameDifference($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('debut_and_first_goal_game_difference', false, $byType, $season);
-    }
-
-    /**
-     * Delete cached Real Points Gained
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteRealPointsGained($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('real_points_gained', false, $byType, $season);
-    }
-
-    /**
-     * Delete cached Average Points Gained
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteAveragePointsGained($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('average_points_gained', false, $byType, $season);
-    }
-
-    /**
-     * Delete cached Real Points
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteRealPoints($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('real_points', false, $byType, $season);
-    }
-
-    /**
-     * Delete cached Average Points
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteAveragePoints($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('average_points', false, $byType, $season);
-    }
-
-    /**
-     * Delete cached Real Goals Gained
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteRealGoalsGained($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('real_goals_gained', false, $byType, $season);
-    }
-
-    /**
-     * Delete cached Average Goals Gained
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteAverageGoalsGained($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('average_goals_gained', false, $byType, $season);
-    }
-
-    /**
-     * Delete cached Real Goals
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteRealGoals($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('real_goals', false, $byType, $season);
-    }
-
-    /**
-     * Delete cached Average Goals For
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteAverageGoalsFor($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('average_goals_for', false, $byType, $season);
-    }
-
-    /**
-     * Delete cached Average Goals Against
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteAverageGoalsAgainst($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('average_goals_against', false, $byType, $season);
-    }
-
-    /**
-     * Delete cached Total Clean Sheets
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteTotalCleanSheets($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('total_clean_sheets', false, $byType, $season);
-    }
-
-    /**
-     * Delete cached Average Clean Sheets
-     * @param  boolean  $byType   Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return boolean            Were rows deleted
-     */
-    public function deleteAverageCleanSheets($byType = false, $season = NULL)
-    {
-        return $this->deleteRows('average_clean_sheets', false, $byType, $season);
     }
 
     /**
@@ -1461,8 +1325,6 @@ ORDER BY matches DESC";
      */
     public function generateAllStatistics()
     {
-        //$this->emptyCache();
-
         $competitionTypes = $this->ci->Season_model->fetchCompetitionTypes();
 
         foreach ($this->methodMap as $method) {
