@@ -12,6 +12,7 @@ class Cache_Fantasy_Football_model extends CI_Model {
 
     /**
      * Constructor
+     * @return NULL
      */
     public function __construct()
     {
@@ -27,8 +28,8 @@ class Cache_Fantasy_Football_model extends CI_Model {
 
     /**
      * Insert row into process queue table to be processed
-     * @param  int|NULL $season     Season "career"
-     * @return boolean
+     * @param  int|NULL $season     The stats to insert for a specific season, or NULL to insert all of them
+     * @return NULL
      */
     public function insertEntries($season = NULL)
     {
@@ -52,9 +53,9 @@ class Cache_Fantasy_Football_model extends CI_Model {
 
     /**
      * Insert row into process queue table to be processed
-     * @param  int|NULL $byType   Group by "type" or "overall"
-     * @param  int|NULL $season   Season "career"
-     * @return boolean
+     * @param  int|NULL $byType   Generate by "type" or "overall"
+     * @param  int|NULL $season   The stats to insert for a specific season, or NULL for "career"
+     * @return boolean            Whether the row was inserted successfully
      */
     public function insertEntry($byType = NULL, $season = NULL)
     {
@@ -70,7 +71,7 @@ class Cache_Fantasy_Football_model extends CI_Model {
     /**
      * Update row in process queue table to be processed
      * @param  object $object   Existing row in table
-     * @return boolean
+     * @return boolean          Whether the row was updated successfully
      */
     public function updateEntry($object)
     {
@@ -82,7 +83,7 @@ class Cache_Fantasy_Football_model extends CI_Model {
     /**
      * Fetch latest rows to be processed/cached
      * @param  int     $limit  Number of rows to return
-     * @return results Query Object
+     * @return results         Query Object
      */
     public function fetchLatest($limit = 2)
     {
@@ -151,9 +152,9 @@ class Cache_Fantasy_Football_model extends CI_Model {
 
     /**
      * Fetch matches
-     * @param  boolean  $type     Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return array List of matches
+     * @param  string|boolean $type     Group by "competition_type" or "overall"
+     * @param  int|NULL $season         Season "career"
+     * @return array                    List of matches
      */
     public function fetchMatches($type = false, $season = NULL)
     {
@@ -181,10 +182,10 @@ WHERE " . implode(" \r\nAND ", $whereConditions) : '');
 
     /**
      * Create Fantasy Football Statistics object
-     * @param  int  $playerId     Unique Player Id
-     * @param  boolean  $type     Competition Type
-     * @param  int|NULL $season   Season or Career
-     * @return object Fantasy Football Statistics object
+     * @param  int  $playerId         Unique Player Id
+     * @param  string|boolean  $type  Competition Type
+     * @param  int|NULL $season       Season or Career
+     * @return object                 Fantasy Football Statistics object
      */
     public function createObject($playerId, $type = false, $season = NULL)
     {
@@ -234,7 +235,7 @@ WHERE " . implode(" \r\nAND ", $whereConditions) : '');
      * Add points to Player object from Appearance object
      * @param  object   $player     Player Object
      * @param  object   $appearance Appearance Object
-     * @return object Fantasy Football Statistics object
+     * @return object               Fantasy Football Statistics object
      */
     public function calculatePointsFromAppearance($player, $appearance)
     {
@@ -330,6 +331,8 @@ WHERE " . implode(" \r\nAND ", $whereConditions) : '');
 
     /**
      * Generate statistics
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
      * @return boolean Whether query was executed correctly
      */
     public function generateStatistics($type = false, $season = NULL)
@@ -355,8 +358,8 @@ WHERE " . implode(" \r\nAND ", $whereConditions) : '');
 
     /**
      * Delete statistics
-     * @param  boolean  $type     Competition Type
-     * @param  int|NULL $season   Season or Career
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
      * @return boolean            Were rows deleted
      */
     public function deleteStatistics($type = false, $season = NULL)

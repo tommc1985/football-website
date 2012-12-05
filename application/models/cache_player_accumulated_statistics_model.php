@@ -12,6 +12,7 @@ class Cache_Player_Accumulated_Statistics_model extends CI_Model {
 
     /**
      * Constructor
+     * @return NULL
      */
     public function __construct()
     {
@@ -27,8 +28,8 @@ class Cache_Player_Accumulated_Statistics_model extends CI_Model {
 
     /**
      * Insert row into process queue table to be processed
-     * @param  int|NULL $season     Season "career"
-     * @return boolean
+     * @param  int|NULL $season     The stats to insert for a specific season, or NULL to insert all of them
+     * @return NULL
      */
     public function insertEntries($season = NULL)
     {
@@ -52,10 +53,10 @@ class Cache_Player_Accumulated_Statistics_model extends CI_Model {
 
     /**
      * Insert row into process queue table to be processed
-     * @param  int|NULL $byType   Group by "type" or "overall"
-     * @param  int|NULL $season   Season "career"
-     * @param  int|NULL $playerId Single Player
-     * @return boolean
+     * @param  int|NULL $byType         Group by "type" or "overall"
+     * @param  int|NULL $season         Season "career"
+     * @param  int|NULL $cacheData      What specific player data to cache
+     * @return boolean                  Whether the row was inserted successfully
      */
     public function insertEntry($byType = NULL, $season = NULL, $playerId = NULL)
     {
@@ -72,7 +73,7 @@ class Cache_Player_Accumulated_Statistics_model extends CI_Model {
     /**
      * Update row in process queue table to be processed
      * @param  object $object   Existing row in table
-     * @return boolean
+     * @return boolean          Whether the row was updated successfully
      */
     public function updateEntry($object)
     {
@@ -83,8 +84,8 @@ class Cache_Player_Accumulated_Statistics_model extends CI_Model {
 
     /**
      * Fetch latest rows to be processed/cached
-     * @param  int     $limit  Number of rows to return
-     * @return results Query Object
+     * @param  int     $limit   Number of rows to return
+     * @return results          Query Object
      */
     public function fetchLatest($limit = 5)
     {

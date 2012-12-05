@@ -17,6 +17,7 @@ class Cache_Club_Statistics_model extends CI_Model {
 
     /**
      * Constructor
+     * @return NULL
      */
     public function __construct()
     {
@@ -65,8 +66,8 @@ class Cache_Club_Statistics_model extends CI_Model {
 
     /**
      * Insert row into process queue table to be processed
-     * @param  int|NULL $season     Season "career"
-     * @return boolean
+     * @param  int|NULL $season     The stats to insert for a specific season, or NULL to insert all of them
+     * @return NULL
      */
     public function insertEntries($season = NULL)
     {
@@ -94,7 +95,7 @@ class Cache_Club_Statistics_model extends CI_Model {
      * @param  int|NULL $byType         Group by "type" or "overall"
      * @param  int|NULL $season         Season "career"
      * @param  string|NULL $cacheData   What specific data to cache
-     * @return boolean
+     * @return boolean                  Whether the row was inserted successfully
      */
     public function insertEntry($byType = NULL, $season = NULL, $cacheData = NULL)
     {
@@ -111,7 +112,7 @@ class Cache_Club_Statistics_model extends CI_Model {
     /**
      * Update row in process queue table to be processed
      * @param  object $object   Existing row in table
-     * @return boolean
+     * @return boolean          Whether the row was updated successfully
      */
     public function updateEntry($object)
     {
@@ -122,8 +123,8 @@ class Cache_Club_Statistics_model extends CI_Model {
 
     /**
      * Fetch latest rows to be processed/cached
-     * @param  int     $limit  Number of rows to return
-     * @return results Query   Object
+     * @param  int     $limit   Number of rows to return
+     * @return results          Query Object
      */
     public function fetchLatest($limit = 1)
     {
@@ -209,9 +210,13 @@ class Cache_Club_Statistics_model extends CI_Model {
     }
 
     /**
-     * Replace placeholder with values from array
-     * @param  array $data Key/Value pairs of data to replace placeholders
-     * @return string       Return SQL with specified values inserted
+     * Insert Statistic into cache table
+     * @param  string $statisticGroup   Unique identifier for statistic
+     * @param  string|boolean $type     Competition Type - false, "league", "cup", etc
+     * @param  int|boolean $season      Season relating to the statistic - false or integer
+     * @param  string $statisticKey     Most Likely the most important value related to the statistic
+     * @param  string $statisticValue   Most Likely a serialized object of all data related to the statistic
+     * @return NULL
      */
     public function insertCache($statisticGroup, $type, $season, $statisticKey, $statisticValue)
     {
@@ -235,11 +240,11 @@ class Cache_Club_Statistics_model extends CI_Model {
     }
 
     /**
-     * Generate and cache Biggest Win Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Biggest Win Statistics by competition type, season or venue
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @param  string|NULL $venue      Whether to include all, home, away or neutral venues
+     * @return NULL
      */
     public function biggestWin($type = false, $season = NULL, $venue = NULL)
     {
@@ -286,11 +291,11 @@ ORDER BY m.date DESC";
     }
 
     /**
-     * Generate and cache Biggest Loss Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Biggest Loss Statistics by competition type, season or venue
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @param  string|NULL $venue      Whether to include all, home, away or neutral venues
+     * @return NULL
      */
     public function biggestLoss($type = false, $season = NULL, $venue = NULL)
     {
@@ -337,11 +342,11 @@ ORDER BY m.date DESC";
     }
 
     /**
-     * Generate and cache Highest Scoring Draw Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Highest Scoring Draw Statistics by competition type, season or venue
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @param  string|NULL $venue      Whether to include all, home, away or neutral venues
+     * @return NULL
      */
     public function highestScoringDraw($type = false, $season = NULL, $venue = NULL)
     {
@@ -389,11 +394,11 @@ ORDER BY m.date DESC";
     }
 
     /**
-     * Generate and cache Longest Winning Sequence Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Longest Winning Sequence Statistics by competition type, season or venue
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @param  string|NULL $venue      Whether to include all, home, away or neutral venues
+     * @return NULL
      */
     public function longestWinningSequence($type = false, $season = NULL, $venue = NULL)
     {
@@ -407,11 +412,11 @@ ORDER BY m.date DESC";
     }
 
     /**
-     * Generate and cache Longest Losing Sequence Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Longest Losing Sequence Statistics by competition type, season or venue
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @param  string|NULL $venue      Whether to include all, home, away or neutral venues
+     * @return NULL
      */
     public function longestLosingSequence($type = false, $season = NULL, $venue = NULL)
     {
@@ -425,11 +430,11 @@ ORDER BY m.date DESC";
     }
 
     /**
-     * Generate and cache Longest Drawing Sequence Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Longest Drawing Sequence Statistics by competition type, season or venue
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @param  string|NULL $venue      Whether to include all, home, away or neutral venues
+     * @return NULL
      */
     public function longestDrawingSequence($type = false, $season = NULL, $venue = NULL)
     {
@@ -443,11 +448,11 @@ ORDER BY m.date DESC";
     }
 
     /**
-     * Generate and cache Longest Unbeaten Sequence Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Longest Unbeaten Sequence Statistics by competition type, season or venue
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @param  string|NULL $venue      Whether to include all, home, away or neutral venues
+     * @return NULL
      */
     public function longestUnbeatenSequence($type = false, $season = NULL, $venue = NULL)
     {
@@ -461,11 +466,11 @@ ORDER BY m.date DESC";
     }
 
     /**
-     * Generate and cache Longest Sequence without Win Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Longest Sequence without Win Statistics by competition type, season or venue
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @param  string|NULL $venue      Whether to include all, home, away or neutral venues
+     * @return NULL
      */
     public function longestSequenceWithoutWin($type = false, $season = NULL, $venue = NULL)
     {
@@ -479,11 +484,11 @@ ORDER BY m.date DESC";
     }
 
     /**
-     * Generate and cache Longest Clean Sheet Sequence Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Longest Clean Sheet Sequence Statistics by competition type, season or venue
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @param  string|NULL $venue      Whether to include all, home, away or neutral venues
+     * @return NULL
      */
     public function longestCleanSheetSequence($type = false, $season = NULL, $venue = NULL)
     {
@@ -497,11 +502,11 @@ ORDER BY m.date DESC";
     }
 
     /**
-     * Generate and cache Longest Sequence Without Clean Sheet Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Longest Sequence Without Clean Sheet Statistics by competition type, season or venue
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @param  string|NULL $venue      Whether to include all, home, away or neutral venues
+     * @return NULL
      */
     public function longestSequenceWithoutCleanSheet($type = false, $season = NULL, $venue = NULL)
     {
@@ -515,11 +520,11 @@ ORDER BY m.date DESC";
     }
 
     /**
-     * Generate and cache Longest Scoring Sequence Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Longest Scoring Sequence Statistics by competition type, season or venue
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @param  string|NULL $venue      Whether to include all, home, away or neutral venues
+     * @return NULL
      */
     public function longestScoringSequence($type = false, $season = NULL, $venue = NULL)
     {
@@ -533,11 +538,11 @@ ORDER BY m.date DESC";
     }
 
     /**
-     * Generate and cache Longest Sequence Without Scoring Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Longest Sequence Without Scoring Statistics by competition type, season or venue
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @param  string|NULL $venue      Whether to include all, home, away or neutral venues
+     * @return NULL
      */
     public function longestSequenceWithoutScoring($type = false, $season = NULL, $venue = NULL)
     {
@@ -551,11 +556,13 @@ ORDER BY m.date DESC";
     }
 
     /**
-     * Generate and cache Base Method Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Base Method Statistics by competition type, season or venue
+     * @param  string $comparisonCode  PHP Code that qualifies the match to be included in the sequence
+     * @param  string $statisticGroup   Unique identifier for statistic
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @param  string|NULL $venue      Whether to include all, home, away or neutral venues
+     * @return NULL
      */
     public function sequenceBase($comparisonCode, $statisticGroup, $type = false, $season = NULL, $venue = NULL)
     {
@@ -638,10 +645,10 @@ ORDER BY m.date DESC";
     }
 
     /**
-     * Generate and cache Quickest Goal Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Quickest Goal Statistics by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function quickestGoal($type = false, $season = NULL)
     {
@@ -684,10 +691,10 @@ ORDER BY m.date DESC";
     }
 
     /**
-     * Generate and cache Oldest Appearance Holder Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Oldest Appearance Holder Statistics by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function oldestAppearanceHolder($type = false, $season = NULL)
     {
@@ -740,10 +747,10 @@ ORDER BY m.date DESC";
     }
 
     /**
-     * Generate and cache Youngest Appearance Holder Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Youngest Appearance Holder Statistics by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function youngestAppearanceHolder($type = false, $season = NULL)
     {
@@ -796,10 +803,10 @@ ORDER BY m.date DESC";
     }
 
     /**
-     * Generate and cache Oldest Debutant Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Oldest Debutant Statistics by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function oldestDebutant($type = false, $season = NULL)
     {
@@ -861,10 +868,10 @@ ORDER BY m.age DESC";
     }
 
     /**
-     * Generate and cache Youngest Debutant Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Youngest Debutant Statistics by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function youngestDebutant($type = false, $season = NULL)
     {
@@ -926,10 +933,10 @@ ORDER BY m.age ASC";
     }
 
     /**
-     * Generate and cache Oldest Scorer Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Oldest Scorer Statistics by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function oldestScorer($type = false, $season = NULL)
     {
@@ -983,10 +990,10 @@ ORDER BY m.date DESC";
     }
 
     /**
-     * Generate and cache Youngest Scorer Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Youngest Scorer Statistics by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function youngestScorer($type = false, $season = NULL)
     {
@@ -1040,11 +1047,11 @@ ORDER BY m.date DESC";
     }
 
     /**
-     * Generate and cache Clean Sheets In A Season Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Clean Sheets In A Season Statistics by competition type, season or venue
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @param  string|NULL $venue      Whether to include all, home, away or neutral venues
+     * @return NULL
      */
     public function cleanSheetsInASeason($type = false, $season = NULL, $venue = NULL)
     {
@@ -1086,7 +1093,7 @@ WHERE c.competitive = 1" . (count($whereConditions) > 0 ? "
 
     /**
      * Generate all statistics
-     * @return boolean Whether query was executed correctly
+     * @return boolean      Whether query was executed correctly
      */
     public function generateAllStatistics()
     {
@@ -1121,10 +1128,10 @@ WHERE c.competitive = 1" . (count($whereConditions) > 0 ? "
 
     /**
      * Particular Club Statistics, based on Season and/or Competition Type
-     * @param  int $statisticGroup  Statistic Group
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @return boolean              Whether query was executed correctly
+     * @param  int $statisticGroup     Statistic Group
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @return boolean                 Whether query was executed correctly
      */
     public function deleteRows($statisticGroup, $type = false, $season = NULL)
     {

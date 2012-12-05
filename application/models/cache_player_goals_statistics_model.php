@@ -15,6 +15,7 @@ class Cache_Player_Goals_Statistics_model extends CI_Model {
 
     /**
      * Constructor
+     * @return NULL
      */
     public function __construct()
     {
@@ -42,8 +43,8 @@ class Cache_Player_Goals_Statistics_model extends CI_Model {
 
     /**
      * Insert row into process queue table to be processed
-     * @param  int|NULL $season     Season "career"
-     * @return boolean
+     * @param  int|NULL $season     The stats to insert for a specific season, or NULL to insert all of them
+     * @return NULL
      */
     public function insertEntries($season = NULL)
     {
@@ -72,11 +73,11 @@ class Cache_Player_Goals_Statistics_model extends CI_Model {
 
     /**
      * Insert row into process queue table to be processed
-     * @param  int|NULL $byType     Group by "type" or "overall"
-     * @param  int|NULL $season     Season "career"
-     * @param  int|NULL $cacheData  What specific data to cache
-     * @param  int|NULL $playerId   Single Player
-     * @return boolean
+     * @param  int|NULL $byType         Group by "type" or "overall"
+     * @param  int|NULL $season         Season "career"
+     * @param  string|NULL $cacheData   What specific data to cache
+     * @param  int|NULL $playerId       Unique Player ID or NULL for all
+     * @return boolean                  Whether the row was inserted successfully
      */
     public function insertEntry($byType = NULL, $season = NULL, $cacheData = NULL, $playerId = NULL)
     {
@@ -94,7 +95,7 @@ class Cache_Player_Goals_Statistics_model extends CI_Model {
     /**
      * Update row in process queue table to be processed
      * @param  object $object   Existing row in table
-     * @return boolean
+     * @return boolean          Whether the row was updated successfully
      */
     public function updateEntry($object)
     {
@@ -105,8 +106,8 @@ class Cache_Player_Goals_Statistics_model extends CI_Model {
 
     /**
      * Fetch latest rows to be processed/cached
-     * @param  int     $limit  Number of rows to return
-     * @return results Query Object
+     * @param  int     $limit   Number of rows to return
+     * @return results          Query Object
      */
     public function fetchLatest($limit = 25)
     {
@@ -215,7 +216,7 @@ WHERE c.competitive = 1
 
     /**
      * Replace placeholder with values from array
-     * @param  array $data Key/Value pairs of data to replace placeholders
+     * @param  array $data  Key/Value pairs of data to replace placeholders
      * @return string       Return SQL with specified values inserted
      */
     public static function insertSQLValues($data)
@@ -263,7 +264,7 @@ WHERE c.competitive = 1
      * Generate and cache Goal Type Statistics by season, type or player
      * @param  boolean $byType      Generate by competition type, set to false for "overall"
      * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @param  int|ULL $playerId    Specific player, leave empty for entire team
+     * @param  int|NULL $playerId   Specific player, leave empty for entire team
      * @return boolean              Whether query was executed correctly
      */
     public function byGoalType($byType = false, $season = NULL, $playerId = NULL)

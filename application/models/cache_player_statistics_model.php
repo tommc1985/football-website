@@ -16,6 +16,7 @@ class Cache_Player_Statistics_model extends CI_Model {
 
     /**
      * Constructor
+     * @return NULL
      */
     public function __construct()
     {
@@ -65,8 +66,8 @@ class Cache_Player_Statistics_model extends CI_Model {
 
     /**
      * Insert row into process queue table to be processed
-     * @param  int|NULL $season     Season "career"
-     * @return boolean
+     * @param  int|NULL $season     The stats to insert for a specific season, or NULL to insert all of them
+     * @return NULL
      */
     public function insertEntries($season = NULL)
     {
@@ -96,10 +97,10 @@ class Cache_Player_Statistics_model extends CI_Model {
 
     /**
      * Insert row into process queue table to be processed
-     * @param  int|NULL $byType     Group by "type" or "overall"
-     * @param  int|NULL $season     Season "career"
-     * @param  int|NULL $cacheData  What specific data to cache
-     * @return boolean
+     * @param  int|NULL $byType         Group by "type" or "overall"
+     * @param  int|NULL $season         Season "career"
+     * @param  string|NULL $cacheData   What specific data to cache
+     * @return boolean                  Whether the row was inserted successfully
      */
     public function insertEntry($byType = NULL, $season = NULL, $cacheData = NULL)
     {
@@ -116,7 +117,7 @@ class Cache_Player_Statistics_model extends CI_Model {
     /**
      * Update row in process queue table to be processed
      * @param  object $object   Existing row in table
-     * @return boolean
+     * @return boolean          Whether the row was updated successfully
      */
     public function updateEntry($object)
     {
@@ -127,8 +128,8 @@ class Cache_Player_Statistics_model extends CI_Model {
 
     /**
      * Fetch latest rows to be processed/cached
-     * @param  int     $limit  Number of rows to return
-     * @return results Query Object
+     * @param  int     $limit   Number of rows to return
+     * @return results          Query Object
      */
     public function fetchLatest($limit = 1)
     {
@@ -209,9 +210,15 @@ class Cache_Player_Statistics_model extends CI_Model {
     }
 
     /**
-     * Replace placeholder with values from array
-     * @param  array $data Key/Value pairs of data to replace placeholders
-     * @return string       Return SQL with specified values inserted
+     * Insert Statistic into cache table
+     * Insert Statistic into cache table
+     * @param  string $statisticGroup   Unique identifier for statistic
+     * @param  string|boolean $type     Competition Type - false, "league", "cup", etc
+     * @param  int|boolean $season      Season relating to the statistic - false or integer
+     * @param  int $playerId            Player ID
+     * @param  string $statisticKey     Most Likely the most important value related to the statistic
+     * @param  string $statisticValue   Most Likely a serialized object of all data related to the statistic
+     * @return NULL
      */
     public function insertCache($statisticGroup, $type, $season, $playerId, $statisticKey, $statisticValue)
     {
@@ -237,7 +244,7 @@ class Cache_Player_Statistics_model extends CI_Model {
 
     /**
      * Fetch distinct player ids
-     * @return results Query Object
+     * @return results          Query Object
      */
     public function fetchDistinctPlayerIds()
     {
@@ -250,10 +257,10 @@ class Cache_Player_Statistics_model extends CI_Model {
     }
 
     /**
-     * Generate and cache Debut by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Debut by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function debut($type = false, $season = NULL)
     {
@@ -303,10 +310,10 @@ ORDER BY m.date ASC";
     }
 
     /**
-     * Generate and cache First Goal by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache First Goal by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function firstGoal($type = false, $season = NULL)
     {
@@ -358,10 +365,10 @@ ORDER BY m.date ASC";
     }
 
     /**
-     * Generate and cache Scored on Debut by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Scored on Debut by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function scoredOnDebut($type = false, $season = NULL)
     {
@@ -413,10 +420,10 @@ ORDER BY m.date ASC";
     }
 
     /**
-     * Generate and cache Hattricks by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Hattricks by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function hattricks($type = false, $season = NULL)
     {
@@ -457,10 +464,10 @@ ORDER BY m.goals DESC";
     }
 
     /**
-     * Generate and cache Debut & First Goal Time Difference Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Debut & First Goal Time Difference Statistics by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function debutAndFirstGoalTimeDifference($type = false, $season = NULL)
     {
@@ -491,10 +498,10 @@ ORDER BY days_elapsed DESC";
     }
 
     /**
-     * Generate and cache Debut & First Goal Game Difference Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Debut & First Goal Game Difference Statistics by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function debutAndFirstGoalGameDifference($type = false, $season = NULL)
     {
@@ -541,10 +548,10 @@ ORDER BY player_id ASC";
     }
 
     /**
-     * Generate and cache Real Points Gained Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Real Points Gained Statistics by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function realPointsGained($type = false, $season = NULL)
     {
@@ -578,10 +585,10 @@ ORDER BY points_gained DESC";
     }
 
     /**
-     * Generate and cache Average Points Gained Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Average Points Gained Statistics by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function averagePointsGained($type = false, $season = NULL)
     {
@@ -615,10 +622,10 @@ ORDER BY points_gained DESC";
     }
 
     /**
-     * Generate and cache Real Points Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Real Points Statistics by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function realPoints($type = false, $season = NULL)
     {
@@ -652,10 +659,10 @@ ORDER BY points DESC";
     }
 
     /**
-     * Generate and cache Average Points Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Average Points Statistics by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function averagePoints($type = false, $season = NULL)
     {
@@ -689,10 +696,10 @@ ORDER BY points DESC";
     }
 
     /**
-     * Generate and cache Real Goals Gained Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Real Goals Gained Statistics by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function realGoalsGained($type = false, $season = NULL)
     {
@@ -726,10 +733,10 @@ ORDER BY goals_gained DESC";
     }
 
     /**
-     * Generate and cache Average Goals Gained Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Average Goals Gained Statistics by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function averageGoalsGained($type = false, $season = NULL)
     {
@@ -763,10 +770,10 @@ ORDER BY goals_gained DESC";
     }
 
     /**
-     * Generate and cache Real Goals Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Real Goals Statistics by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function realGoals($type = false, $season = NULL)
     {
@@ -800,10 +807,10 @@ ORDER BY goals DESC";
     }
 
     /**
-     * Generate and cache Average Goals For Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Average Goals For Statistics by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function averageGoalsFor($type = false, $season = NULL)
     {
@@ -837,10 +844,10 @@ ORDER BY goals DESC";
     }
 
     /**
-     * Generate and cache Average Goals Against Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Average Goals Against Statistics by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function averageGoalsAgainst($type = false, $season = NULL)
     {
@@ -874,10 +881,10 @@ ORDER BY goals DESC";
     }
 
     /**
-     * Generate and cache Total Clean Sheets Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Total Clean Sheets Statistics by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function totalCleanSheets($type = false, $season = NULL)
     {
@@ -911,10 +918,10 @@ ORDER BY clean_sheets DESC";
     }
 
     /**
-     * Generate and cache Average Clean Sheets Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Average Clean Sheets Statistics by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function averageCleanSheets($type = false, $season = NULL)
     {
@@ -948,10 +955,10 @@ ORDER BY clean_sheets DESC";
     }
 
     /**
-     * Generate and cache Consecutive Games a Player Scored-In Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Consecutive Games a Player Scored-In Statistics by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function consecutiveGamesScored($type = false, $season = NULL)
     {
@@ -982,10 +989,10 @@ ORDER BY m.date ASC";
     }
 
     /**
-     * Generate and cache Consecutive Games a Player Assisted-In Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Consecutive Games a Player Assisted-In Statistics by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
      */
     public function consecutiveGamesAssisted($type = false, $season = NULL)
     {
@@ -1016,7 +1023,7 @@ ORDER BY m.date ASC";
     }
 
     /**
-     * Generate and cache Base Method Statistics by season or type
+     * Generate and cache Base Method Statistics by competition type or season
      * @param  array    $matches    List of Matches
      * @param  int      $playerId   Player ID
      * @param  boolean  $byType     Generate by competition type, set to false for "overall"
@@ -1084,8 +1091,8 @@ ORDER BY m.date ASC";
     }
 
     /**
-     * Base Class for Generating and Caching Appearance Combination Statistics by season or type
-     * @param  boolean  $byType      Generate by competition type, set to false for "overall"
+     * Base Class for Generating and Caching Appearance Combination Statistics by competition type or season
+     * @param  boolean|string $type  Generate by competition type, set to false for "overall"
      * @param  int|NULL $season      Season to generate, set to null for entire career
      * @param  int      $playerCount Players involved in combination
      * @param  array    $positions   Positions to include in combination, if any
@@ -1160,10 +1167,10 @@ ORDER BY matches DESC";
     }
 
     /**
-     * Generate and cache Most Common Two Player Combination Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Most Common Two Player Combination Statistics by competition type or season
+     * @param  boolean|string $type  Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season      Season to generate, set to null for entire career
+     * @return NULL
      */
     public function mostCommonTwoPlayerCombination($type = false, $season = NULL)
     {
@@ -1177,10 +1184,10 @@ ORDER BY matches DESC";
     }
 
     /**
-     * Generate and cache Most Common Centre Back Pairing Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Most Common Centre Back Pairing Statistics by competition type or season
+     * @param  boolean|string $type  Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season      Season to generate, set to null for entire career
+     * @return NULL
      */
     public function mostCommonCentreBackPairing($type = false, $season = NULL)
     {
@@ -1194,10 +1201,10 @@ ORDER BY matches DESC";
     }
 
     /**
-     * Generate and cache Most Common Centre Midfield Pairing Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Most Common Centre Midfield Pairing Statistics by competition type or season
+     * @param  boolean|string $type  Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season      Season to generate, set to null for entire career
+     * @return NULL
      */
     public function mostCommonCentreMidfieldPairing($type = false, $season = NULL)
     {
@@ -1211,10 +1218,10 @@ ORDER BY matches DESC";
     }
 
     /**
-     * Generate and cache Most Common Right Hand Side Pairing Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Most Common Right Hand Side Pairing Statistics by competition type or season
+     * @param  boolean|string $type  Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season      Season to generate, set to null for entire career
+     * @return NULL
      */
     public function mostCommonRightHandSidePairing($type = false, $season = NULL)
     {
@@ -1228,10 +1235,10 @@ ORDER BY matches DESC";
     }
 
     /**
-     * Generate and cache Most Common Left Hand Side Pairing Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Most Common Left Hand Side Pairing Statistics by competition type or season
+     * @param  boolean|string $type  Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season      Season to generate, set to null for entire career
+     * @return NULL
      */
     public function mostCommonLeftHandSidePairing($type = false, $season = NULL)
     {
@@ -1245,10 +1252,10 @@ ORDER BY matches DESC";
     }
 
     /**
-     * Generate and cache Most Common Strike Partners Statistics by season or type
-     * @param  boolean $byType      Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * Generate and cache Most Common Strike Partners Statistics by competition type or season
+     * @param  boolean|string $type  Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season      Season to generate, set to null for entire career
+     * @return NULL
      */
     public function mostCommonStrikePartner($type = false, $season = NULL)
     {
@@ -1486,10 +1493,10 @@ ORDER BY matches DESC";
     /**
      * Particular Player Statistics, based on Season and/or Competition Type
      * @param  int $statisticGroup  Statistic Group
-     * @param  int      $playerId   Player ID
-     * @param  boolean  $byType     Generate by competition type, set to false for "overall"
-     * @param  int|NULL $season     Season to generate, set to null for entire career
-     * @return boolean              Whether query was executed correctly
+     * @param  int|boolean $playerId   Player ID, false for all
+     * @param  boolean  $byType        Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return boolean                 Whether query was executed correctly
      */
     public function deleteRows($statisticGroup, $playerId = false, $type = false, $season = NULL)
     {
