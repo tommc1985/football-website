@@ -22,6 +22,7 @@ class Cache_League_model extends CI_Model {
         parent::__construct();
 
         $this->ci =& get_instance();
+        $this->ci->load->model('League_model');
         $this->ci->load->model('Season_model');
 
         $this->tableName = 'cache_league_results_collated';
@@ -142,56 +143,6 @@ class Cache_League_model extends CI_Model {
         $row->peak_memory_usage = number_format(memory_get_peak_usage(true) / 1048576, 2);
 
         return $this->updateEntry($row);
-    }
-
-    /**
-     * Fetch league data
-     * @param  int $leagueId  League ID
-     * @return object         League Object
-     */
-    public function fetchLeagueData($leagueId)
-    {
-        $this->db->select('*')
-            ->from('league l')
-            ->where('l.id', $leagueId)
-            ->where('l.deleted', 0)
-            ->limit(1, 0);
-
-        $leagueData = $this->db->get()->result();
-
-        if ($leagueData !== false) {
-            return $leagueData[0];
-        }
-    }
-
-    /**
-     * Fetch matches
-     * @param  int $leagueId     League ID
-     * @return array List of matches
-     */
-    public function fetchMatches($leagueId)
-    {
-        $this->db->select('*')
-            ->from('league_match lm')
-            ->where('lm.league_id', $leagueId)
-            ->where('lm.deleted', 0)
-            ->order_by('lm.date', 'asc');
-
-        return $this->db->get()->result();
-    }
-
-    /**
-     * Fetch Club Registrations
-     * @param  int $leagueId     League ID
-     * @return array List of Registrations
-     */
-    public function fetchClubRegistrations($leagueId)
-    {
-        $this->db->select('*')
-            ->from('league_registration lr')
-            ->where('lr.deleted', 0);
-
-        return $this->db->get()->result();
     }
 
     /**
@@ -367,13 +318,13 @@ class Cache_League_model extends CI_Model {
     {
         $this->deleteStatistics($leagueId);
 
-        $this->leagueData = $this->fetchLeagueData($leagueId);
+        $this->leagueData = $this->ci->League_model->fetchLeagueData($leagueId);
 
-        $matches = $this->fetchMatches($leagueId);
+        $matches = $this->ci->League_model->fetchMatches($leagueId);
 
         $this->clubs = array();
 
-        foreach($this->fetchClubRegistrations($leagueId) as $club) {
+        foreach($this->ci->League_model->fetchClubRegistrations($leagueId) as $club) {
             $this->clubs[$club->opposition_id] = array(
                 'overall' => $this->createObject($leagueId, $club->opposition_id, 'overall'),
                 'home' => $this->createObject($leagueId, $club->opposition_id, 'home'),
