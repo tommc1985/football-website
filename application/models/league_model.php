@@ -19,6 +19,21 @@ class League_model extends CI_Model {
     }
 
     /**
+     * Fetch all Leagues
+     * @return array         Array of Leagues
+     */
+    public function fetchAllLeagues()
+    {
+        $this->db->select('*')
+            ->from("{$this->leagueTableName} l")
+            ->where('l.deleted', 0)
+            ->order_by('l.id', 'asc');
+
+        return $this->db->get()->result();
+
+    }
+
+    /**
      * Fetch league data
      * @param  int $leagueId  League ID
      * @return object         League Object
@@ -40,16 +55,21 @@ class League_model extends CI_Model {
 
     /**
      * Fetch matches
-     * @param  int $leagueId     League ID
-     * @return array List of matches
+     * @param  int $leagueId      League ID
+     * @param  int|NULL $clubId  Club ID
+     * @return array              List of matches
      */
-    public function fetchMatches($leagueId)
+    public function fetchMatches($leagueId, $clubId = NULL)
     {
         $this->db->select('*')
             ->from("{$this->leagueMatchTableName} lm")
             ->where('lm.league_id', $leagueId)
             ->where('lm.deleted', 0)
             ->order_by('lm.date', 'asc');
+
+        if (!is_null($clubId)) {
+            $this->db->where("(lm.h_opposition_id = {$clubId} OR lm.a_opposition_id = {$clubId})");
+        }
 
         return $this->db->get()->result();
     }
@@ -63,6 +83,7 @@ class League_model extends CI_Model {
     {
         $this->db->select('*')
             ->from("{$this->leagueRegistrationTableName} lr")
+            ->where('lr.league_id', $leagueId)
             ->where('lr.deleted', 0);
 
         return $this->db->get()->result();
