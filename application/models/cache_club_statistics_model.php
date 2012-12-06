@@ -34,6 +34,7 @@ class Cache_Club_Statistics_model extends CI_Model {
             'biggest_win'                          => 'biggestWin',
             'biggest_loss'                         => 'biggestLoss',
             'highest_scoring_draw'                 => 'highestScoringDraw',
+            'highest_scoring_match'                => 'highestScoringMatch',
             'longest_winning_sequence'             => 'longestWinningSequence',
             'longest_losing_sequence'              => 'longestLosingSequence',
             'longest_drawing_sequence'             => 'longestDrawingSequence',
@@ -45,6 +46,7 @@ class Cache_Club_Statistics_model extends CI_Model {
             'longest_sequence_without_scoring'     => 'longestSequenceWithoutScoring',
             'quickest_goal'                        => 'quickestGoal',
             'clean_sheets_in_a_season'             => 'cleanSheetsInASeason',
+            'fail_to_score_in_a_season'            => 'failToScoreInASeason',
         );
 
         $this->hungryMethodMap = array(
@@ -394,6 +396,56 @@ ORDER BY m.date DESC";
     }
 
     /**
+     * Generate and cache Highest Scoring Match Statistics by competition type, season or venue
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @param  string|NULL $venue      Whether to include all, home, away or neutral venues
+     * @return NULL
+     */
+    public function highestScoringMatch($type = false, $season = NULL, $venue = NULL)
+    {
+        $statisticGroup = 'highest_scoring_match';
+
+        $whereConditions = array();
+
+        if (is_string($type)) {
+            $whereConditions[] = "(m.type = '{$type}')";
+        }
+
+        if (!is_null($season)) {
+            $dates = Season_model::generateStartEndDates($season);
+            $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
+        }
+
+        if (!is_null($venue)) {
+            $statisticGroup .= "_{$venue}";
+            $whereConditions[] = "(m.venue = '{$venue}')";
+        }
+
+        $this->deleteRows($statisticGroup, $type, $season);
+
+        $sql = "SELECT m.*, (m.a + m.h) as total_goals
+FROM view_competitive_matches m
+WHERE (m.a + m.h) = (
+    SELECT (m.a + m.h) as total_goals
+    FROM view_competitive_matches m
+    WHERE !ISNULL(m.h)" . (count($whereConditions) > 0 ? "
+        AND " . implode(" \r\nAND ", $whereConditions) : '') . "
+    ORDER BY total_goals DESC, m.h DESC
+    LIMIT 1)
+    AND !ISNULL(m.h)" . (count($whereConditions) > 0 ? "
+    AND " . implode(" \r\nAND ", $whereConditions) : '') . "
+ORDER BY m.date DESC";
+
+        $query = $this->db->query($sql);
+        $rows = $query->result();
+
+        foreach ($rows as $row) {
+            $this->insertCache($statisticGroup, $type, $season, $row->total_goals, serialize($row));
+        }
+    }
+
+    /**
      * Generate and cache Longest Winning Sequence Statistics by competition type, season or venue
      * @param  boolean|string $type    Generate by competition type, set to false for "overall"
      * @param  int|NULL $season        Season to generate, set to null for entire career
@@ -403,10 +455,6 @@ ORDER BY m.date DESC";
     public function longestWinningSequence($type = false, $season = NULL, $venue = NULL)
     {
         $statisticGroup = 'longest_winning_sequence';
-
-        if (!is_null($venue)) {
-            $statisticGroup .= "_{$venue}";
-        }
 
         $this->sequenceBase("\$match->h > \$match->a", $statisticGroup, $type, $season, $venue);
     }
@@ -422,10 +470,6 @@ ORDER BY m.date DESC";
     {
         $statisticGroup = 'longest_losing_sequence';
 
-        if (!is_null($venue)) {
-            $statisticGroup .= "_{$venue}";
-        }
-
         $this->sequenceBase("\$match->h < \$match->a", $statisticGroup, $type, $season, $venue);
     }
 
@@ -439,10 +483,6 @@ ORDER BY m.date DESC";
     public function longestDrawingSequence($type = false, $season = NULL, $venue = NULL)
     {
         $statisticGroup = 'longest_drawing_sequence';
-
-        if (!is_null($venue)) {
-            $statisticGroup .= "_{$venue}";
-        }
 
         $this->sequenceBase("\$match->h == \$match->a", $statisticGroup, $type, $season, $venue);
     }
@@ -458,10 +498,6 @@ ORDER BY m.date DESC";
     {
         $statisticGroup = 'longest_unbeaten_sequence';
 
-        if (!is_null($venue)) {
-            $statisticGroup .= "_{$venue}";
-        }
-
         $this->sequenceBase("\$match->h == \$match->a || \$match->h > \$match->a", $statisticGroup, $type, $season, $venue);
     }
 
@@ -475,10 +511,6 @@ ORDER BY m.date DESC";
     public function longestSequenceWithoutWin($type = false, $season = NULL, $venue = NULL)
     {
         $statisticGroup = 'longest_sequence_without_win';
-
-        if (!is_null($venue)) {
-            $statisticGroup .= "_{$venue}";
-        }
 
         $this->sequenceBase("\$match->h < \$match->a || \$match->h == \$match->a", $statisticGroup, $type, $season, $venue);
     }
@@ -494,10 +526,6 @@ ORDER BY m.date DESC";
     {
         $statisticGroup = 'longest_clean_sheet_sequence';
 
-        if (!is_null($venue)) {
-            $statisticGroup .= "_{$venue}";
-        }
-
         $this->sequenceBase("\$match->a == 0", $statisticGroup, $type, $season, $venue);
     }
 
@@ -511,10 +539,6 @@ ORDER BY m.date DESC";
     public function longestSequenceWithoutCleanSheet($type = false, $season = NULL, $venue = NULL)
     {
         $statisticGroup = 'longest_sequence_without_clean_sheet';
-
-        if (!is_null($venue)) {
-            $statisticGroup .= "_{$venue}";
-        }
 
         $this->sequenceBase("\$match->a > 0", $statisticGroup, $type, $season, $venue);
     }
@@ -530,10 +554,6 @@ ORDER BY m.date DESC";
     {
         $statisticGroup = 'longest_scoring_sequence';
 
-        if (!is_null($venue)) {
-            $statisticGroup .= "_{$venue}";
-        }
-
         $this->sequenceBase("\$match->h > 0", $statisticGroup, $type, $season, $venue);
     }
 
@@ -547,10 +567,6 @@ ORDER BY m.date DESC";
     public function longestSequenceWithoutScoring($type = false, $season = NULL, $venue = NULL)
     {
         $statisticGroup = 'longest_sequence_without_scoring';
-
-        if (!is_null($venue)) {
-            $statisticGroup .= "_{$venue}";
-        }
 
         $this->sequenceBase("\$match->h == 0", 'longest_sequence_without_scoring', $type, $season, $venue);
     }
@@ -566,6 +582,10 @@ ORDER BY m.date DESC";
      */
     public function sequenceBase($comparisonCode, $statisticGroup, $type = false, $season = NULL, $venue = NULL)
     {
+        if (!is_null($venue)) {
+            $statisticGroup .= "_{$venue}";
+        }
+
         $this->deleteRows($statisticGroup, $type, $season);
 
         $matches = $this->ci->Season_model->fetchMatches($type, $season, $venue);
@@ -1090,6 +1110,49 @@ WHERE c.competitive = 1" . (count($whereConditions) > 0 ? "
         }
     }
 
+    /**
+     * Generate and cache Failed to Score In A Season Statistics by competition type, season or venue
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @param  string|NULL $venue      Whether to include all, home, away or neutral venues
+     * @return NULL
+     */
+    public function failToScoreInASeason($type = false, $season = NULL, $venue = NULL)
+    {
+        $statisticGroup = 'fail_to_score_in_a_season';
+
+        $whereConditions = array();
+
+        if (is_string($type)) {
+            $whereConditions[] = "(c.type = '{$type}')";
+        }
+
+        if (!is_null($season)) {
+            $dates = Season_model::generateStartEndDates($season);
+            $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
+        }
+
+        if (!is_null($venue)) {
+            $statisticGroup .= "_{$venue}";
+            $whereConditions[] = "(m.venue = '{$venue}')";
+        }
+
+        $this->deleteRows($statisticGroup, $type, $season);
+
+        $sql = "SELECT COUNT(m.id) as games
+FROM view_competitive_matches m
+LEFT JOIN competition c ON c.id = m.competition
+WHERE c.competitive = 1" . (count($whereConditions) > 0 ? "
+    AND " . implode(" \r\nAND ", $whereConditions) : '') . "
+    AND m.h = 0";
+
+        $query = $this->db->query($sql);
+        $rows = $query->result();
+
+        foreach ($rows as $row) {
+            $this->insertCache($statisticGroup, $type, $season, $row->games, '');
+        }
+    }
 
     /**
      * Generate all statistics
