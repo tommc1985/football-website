@@ -55,11 +55,13 @@ class League_model extends CI_Model {
 
     /**
      * Fetch matches
-     * @param  int $leagueId      League ID
-     * @param  int|NULL $clubId  Club ID
-     * @return array              List of matches
+     * @param  int $leagueId           League ID
+     * @param  int|NULL $clubId        Club ID
+     * @param  string|NULL $dateFrom   Date From (inclusive)
+     * @param  string|NULL $dateUntil  Date Until (inclusive)
+     * @return array                   List of matches
      */
-    public function fetchMatches($leagueId, $clubId = NULL)
+    public function fetchMatches($leagueId, $clubId = NULL, $dateFrom = NULL, $dateUntil = NULL)
     {
         $this->db->select('*')
             ->from("{$this->leagueMatchTableName} lm")
@@ -70,6 +72,15 @@ class League_model extends CI_Model {
         if (!is_null($clubId)) {
             $this->db->where("(lm.h_opposition_id = {$clubId} OR lm.a_opposition_id = {$clubId})");
         }
+
+        if (!is_null($dateFrom)) {
+            $this->db->where("(lm.date >= '{$dateFrom}')", NULL, false);
+        }
+
+        if (!is_null($dateUntil)) {
+            $this->db->where("(lm.date <= '{$dateUntil}')", NULL, false);
+        }
+
 
         return $this->db->get()->result();
     }
@@ -85,6 +96,32 @@ class League_model extends CI_Model {
             ->from("{$this->leagueRegistrationTableName} lr")
             ->where('lr.league_id', $leagueId)
             ->where('lr.deleted', 0);
+
+        return $this->db->get()->result();
+    }
+
+    /**
+     * Fetch Distinct Match Dates for the specified league
+     * @param  int $leagueId         League ID
+     * @param  boolean $resultsOnly  Results Only
+     * @return array                 List of objects
+     */
+    public function fetchDistinctMatchDates($leagueId, $resultsOnly = true)
+    {
+        $this->db->select('DISTINCT(lm.date) as date')
+            ->from("{$this->leagueMatchTableName} lm")
+            ->where('lm.league_id', $leagueId)
+            ->where('lm.deleted', 0)
+            ->order_by('date', 'asc');
+
+        if ($resultsOnly) {
+            $this->db->where('(
+(!ISNULL(lm.h_score)
+    AND !ISNULL(lm.a_score))
+OR lm.status = "hw"
+OR lm.status = "aw"
+)');
+        }
 
         return $this->db->get()->result();
     }

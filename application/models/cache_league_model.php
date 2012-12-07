@@ -147,12 +147,13 @@ class Cache_League_model extends CI_Model {
 
     /**
      * Create League Results object
-     * @param  int  $leagueId     Unique League Id
-     * @param  int  $oppositionId Unique Opposition Id
-     * @param  string $type       Type ("overall", "home", "away")
-     * @return object Fantasy Football Statistics object
+     * @param  int  $leagueId          Unique League Id
+     * @param  int  $oppositionId      Unique Opposition Id
+     * @param  string $type            Type ("overall", "home", "away")
+     * @param  string|NULL $dateUntil  The date the league table data in the rest of the object includes
+     * @return object League Table Statistics object
      */
-    public function createObject($leagueId, $oppositionId, $type)
+    public function createObject($leagueId, $oppositionId, $type, $dateUntil = NULL)
     {
         $row = new stdClass();
 
@@ -169,6 +170,7 @@ class Cache_League_model extends CI_Model {
         $row->gd = 0;
         $row->points = 0;
         $row->form = '';
+        $row->date_until = is_null($dateUntil) ? 'overall' : $dateUntil;
 
         return $row;
     }
@@ -320,25 +322,32 @@ class Cache_League_model extends CI_Model {
 
         $this->leagueData = $this->ci->League_model->fetchLeagueData($leagueId);
 
-        $matches = $this->ci->League_model->fetchMatches($leagueId);
+        $distinctDates = $this->ci->League_model->fetchDistinctMatchDates($leagueId);
 
-        $this->clubs = array();
+        $object->date = NULL;
+        $distinctDates[] = $object;
 
-        foreach($this->ci->League_model->fetchClubRegistrations($leagueId) as $club) {
-            $this->clubs[$club->opposition_id] = array(
-                'overall' => $this->createObject($leagueId, $club->opposition_id, 'overall'),
-                'home' => $this->createObject($leagueId, $club->opposition_id, 'home'),
-                'away' => $this->createObject($leagueId, $club->opposition_id, 'away'),
-            );
-        }
+        foreach ($distinctDates as $distinctDate) {
+            $matches = $this->ci->League_model->fetchMatches($leagueId, NULL, NULL, $distinctDate->date);
 
-        foreach ($matches as $match) {
-            $this->calculatePointsFromMatch($match);
-        }
+            $this->clubs = array();
 
-        foreach ($this->clubs as $club) {
-            foreach ($club as $resultsObject) {
-                $this->db->insert($this->tableName, $resultsObject);
+            foreach($this->ci->League_model->fetchClubRegistrations($leagueId) as $club) {
+                $this->clubs[$club->opposition_id] = array(
+                    'overall' => $this->createObject($leagueId, $club->opposition_id, 'overall', $distinctDate->date),
+                    'home' => $this->createObject($leagueId, $club->opposition_id, 'home', $distinctDate->date),
+                    'away' => $this->createObject($leagueId, $club->opposition_id, 'away', $distinctDate->date),
+                );
+            }
+
+            foreach ($matches as $match) {
+                $this->calculatePointsFromMatch($match);
+            }
+
+            foreach ($this->clubs as $club) {
+                foreach ($club as $resultsObject) {
+                    $this->db->insert($this->tableName, $resultsObject);
+                }
             }
         }
     }
