@@ -67,7 +67,7 @@ class Player extends CI_Controller/*Backend_Controller*/
         $this->Player_model->formValidation();
 
         if ($this->form_validation->run() !== false) {
-            $this->Player_model->insertEntry(array(
+            $insertId = $this->Player_model->insertEntry(array(
                 'first_name' => $this->form_validation->set_value('first_name', NULL),
                 'surname' => $this->form_validation->set_value('surname', NULL),
                 'dob' => $this->form_validation->set_value('dob', NULL),
@@ -78,7 +78,9 @@ class Player extends CI_Controller/*Backend_Controller*/
                 'gender' => $this->form_validation->set_value('gender', NULL),
             ));
 
-            $this->session->set_flashdata('message', 'Player Added');
+            $player = $this->Player_model->fetch($insertId);
+
+            $this->session->set_flashdata('message', "{$player->first_name} {$player->surname} has been added");
             redirect('/admin/player');
         }
 
@@ -121,11 +123,13 @@ class Player extends CI_Controller/*Backend_Controller*/
                 'gender' => $this->form_validation->set_value('gender', NULL),
             ));
 
-            $this->session->set_flashdata('message', 'Player Updated');
+            $player = $this->Player_model->fetch($parameters['id']);
+
+            $this->session->set_flashdata('message', "{$player->first_name} {$player->surname} has been updated");
             redirect('/admin/player');
         }
 
-        $data['player'] = $player[0];
+        $data['player'] = $player;
 
         $this->load->view('admin/player/edit', $data);
     }
@@ -150,7 +154,7 @@ class Player extends CI_Controller/*Backend_Controller*/
             return;
         }
 
-        $data['player'] = $player[0];
+        $data['player'] = $player;
 
         if ($this->input->post('confirm_delete') !== false) {
             $this->Player_model->deleteEntry($parameters['id']);
