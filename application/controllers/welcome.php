@@ -20,18 +20,8 @@ class Welcome extends CI_Controller {
     public function index()
     {
         $this->load->database();
-        $this->load->model('Player_model');
-        $this->load->model('Season_model');
-        $this->load->model('Cache_Player_model');
-        $this->load->model('Cache_Player_Goals_model');
 
-        $data['players'] = $this->Player_model->fetchPlayers();
-
-        $this->Cache_Player_Goals_model->generateAllStatistics();
-        $this->Cache_Player_model->generateAllStatistics();
-
-        //$this->Cache_Player_Goals_model->processQueuedRows();
-
+        $data = array();
         $this->load->view('welcome_message', $data);
     }
 }
