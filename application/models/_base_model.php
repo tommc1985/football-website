@@ -52,7 +52,13 @@ class Base_Model extends CI_Model {
         $this->db->where('id', $id);
         $this->db->where('deleted', 0);
 
-        return $this->db->get()->result();
+        $result = $this->db->get()->result();
+
+        if (count($result) == 1) {
+            return $result[0];
+        }
+
+        return false;
     }
 
     public function fetchAll($limit = false, $offset = false, $orderBy = false, $order = false)
