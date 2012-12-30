@@ -2,8 +2,15 @@
 
 require_once('backend_controller.php');
 
+/**
+ * The Backend Controller for managing Players
+ */
 class Player extends CI_Controller/*Backend_Controller*/
 {
+    /**
+     * Constructor
+     * @return NULL
+     */
     public function __construct()
     {
         parent::__construct();
@@ -14,6 +21,10 @@ class Player extends CI_Controller/*Backend_Controller*/
         $this->load->config('player', true);
     }
 
+    /**
+     * Index Action - Show Paginated List of Players
+     * @return NULL
+     */
     public function index()
     {
         $this->load->library('pagination');
@@ -43,10 +54,13 @@ class Player extends CI_Controller/*Backend_Controller*/
         $this->load->view('admin/player/index', $data);
     }
 
+    /**
+     * Add Action - Add a Player
+     * @return NULL
+     */
     public function add()
     {
         $this->load->helper(array('form', 'url', 'html5_form_fields'));
-        $this->load->library('form_validation');
 
         $data['submitButtonText'] = 'Save';
 
@@ -71,10 +85,13 @@ class Player extends CI_Controller/*Backend_Controller*/
         $this->load->view('admin/player/add', $data);
     }
 
+    /**
+     * Edit Action - Edit a Player
+     * @return NULL
+     */
     public function edit()
     {
         $this->load->helper(array('form', 'url', 'html5_form_fields'));
-        $this->load->library('form_validation');
 
         $parameters = $this->uri->uri_to_assoc(4, array('id'));
 
@@ -113,6 +130,10 @@ class Player extends CI_Controller/*Backend_Controller*/
         $this->load->view('admin/player/edit', $data);
     }
 
+    /**
+     * Delete Action - Delete a Player
+     * @return NULL
+     */
     public function delete()
     {
         $this->load->helper(array('form', 'url'));
