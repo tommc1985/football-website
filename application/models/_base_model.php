@@ -1,9 +1,25 @@
 <?php
+/**
+ * Base Model
+ */
 class Base_Model extends CI_Model {
 
+    /**
+     * CodeIgniter instance
+     * @var object
+     */
     public $ci;
+
+    /**
+     * Name of database table
+     * @var string
+     */
     public $tableName;
 
+    /**
+     * Constructor
+     * @return NULL
+     */
     public function __construct()
     {
         // Call the Model constructor
@@ -12,6 +28,11 @@ class Base_Model extends CI_Model {
         $this->ci =& get_instance();
     }
 
+    /**
+     * Insert new instance into specified table
+     * @param  array $data  Data for insertion
+     * @return int          MySQL Insert ID
+     */
     public function insertEntry($data)
     {
         $data['date_added'] = time();
@@ -23,6 +44,12 @@ class Base_Model extends CI_Model {
         return $this->db->insert_id();
     }
 
+    /**
+     * Update an existing instance in specified table
+     * @param  int   $id    Unique ID for existing instance
+     * @param  array $data  Data for insertion
+     * @return NULL
+     */
     public function updateEntry($id, $data)
     {
         $data['date_updated'] = time();
@@ -30,6 +57,11 @@ class Base_Model extends CI_Model {
         $this->db->update($this->tableName, $data, array('id' => $id));
     }
 
+    /**
+     * Delete an existing instance in specified table
+     * @param  int   $id    Unique ID for existing instance
+     * @return int          MySQL Insert ID
+     */
     public function deleteEntry($id)
     {
         $data['date_updated'] = time();
@@ -38,6 +70,10 @@ class Base_Model extends CI_Model {
         $this->db->update($this->tableName, $data, array('id' => $id));
     }
 
+    /**
+     * Count all rows in the specified table
+     * @return int    Number of rows
+     */
     public function countAll()
     {
         $this->db->from($this->tableName);
@@ -45,6 +81,11 @@ class Base_Model extends CI_Model {
         return $this->db->count_all_results();
     }
 
+    /**
+     * Fetch single row from table based on passed ID
+     * @param  int $id       Unique ID for existing instance
+     * @return object|false  The object (or false if not found)
+     */
     public function fetch($id)
     {
         $this->db->select('*');
@@ -61,6 +102,14 @@ class Base_Model extends CI_Model {
         return false;
     }
 
+    /**
+     * Fetch all rows for specified table
+     * @param  int|false $limit      Number of rows to return
+     * @param  int|false $offset     The offset
+     * @param  string|false $orderBy Which fields to order results by
+     * @param  string|false $order   Order the results Ascending or Descending
+     * @return array                 Returned rows
+     */
     public function fetchAll($limit = false, $offset = false, $orderBy = false, $order = false)
     {
         $orderBy = $this->getOrderBy($orderBy);
@@ -83,11 +132,21 @@ class Base_Model extends CI_Model {
         return $this->db->get()->result();
     }
 
+    /**
+     * Return string of fields to order data by
+     * @param  string $orderBy Fields passwed
+     * @return string          Processed string of fields
+     */
     public function getOrderBy($orderBy)
     {
         return 'id';
     }
 
+    /**
+     * Return "asc" or "desc" depending on value passed
+     * @param  string $order Either "asc" or "desc"
+     * @return string        Either "asc" or "desc"
+     */
     public function getOrder($order)
     {
         if ($order == 'desc') {
