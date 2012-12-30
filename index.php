@@ -1,5 +1,5 @@
 <?php
-
+require('config_values.php');
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
