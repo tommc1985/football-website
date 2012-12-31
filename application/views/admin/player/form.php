@@ -59,32 +59,32 @@ $gender = array(
 echo form_open($this->uri->uri_string()); ?>
 <table>
     <?php echo form_hidden('id', set_value('id', isset($player->id) ? $player->id : '')); ?>
-    <?php echo form_hidden('nationality', set_value('nationality', isset($player->nationality) ? $player->nationality : '')); ?>
-    <?php echo form_hidden('current', set_value('current', isset($player->current) ? $player->current : '')); ?>
-    <?php echo form_hidden('image_id', set_value('image_id', isset($player->image_id) ? $player->image_id : '')); ?>
+    <?php echo form_hidden($nationality['name'], set_value($nationality['name'], isset($player->nationality) ? $player->nationality : '')); ?>
+    <?php echo form_hidden($current['name'], set_value($current['name'], isset($player->current) ? $player->current : '')); ?>
+    <?php echo form_hidden($image_id['name'], set_value($image_id['name'], isset($player->image_id) ? $player->image_id : '')); ?>
     <tr>
-        <td><?php echo form_label('First Name', 'first_name'); ?></td>
-        <td><?php echo form_input('first_name', set_value('first_name', isset($player->first_name) ? $player->first_name : '')); ?></td>
+        <td><?php echo form_label('First Name', $first_name['name']); ?></td>
+        <td><?php echo form_input($first_name['name'], set_value($first_name['name'], isset($player->first_name) ? $player->first_name : '')); ?></td>
         <td class="error"><?php echo form_error($first_name['name']); ?><?php echo isset($errors[$first_name['name']]) ? $errors[$first_name['name']] : ''; ?></td>
     </tr>
     <tr>
-        <td><?php echo form_label('Surname', 'surname'); ?></td>
-        <td><?php echo form_input('surname', set_value('surname', isset($player->surname) ? $player->surname : '')); ?></td>
+        <td><?php echo form_label('Surname', $surname['name']); ?></td>
+        <td><?php echo form_input($surname['name'], set_value($surname['name'], isset($player->surname) ? $player->surname : '')); ?></td>
         <td class="error"><?php echo form_error($surname['name']); ?><?php echo isset($errors[$surname['name']]) ? $errors[$surname['name']] : ''; ?></td>
     </tr>
     <tr>
-        <td><?php echo form_label('Date of Birth', 'dob'); ?></td>
-        <td><?php echo form_date('dob', set_value('dob', isset($player->dob) ? $player->dob : '')); ?></td>
+        <td><?php echo form_label('Date of Birth', $dob['name']); ?></td>
+        <td><?php echo form_date($dob['name'], set_value($dob['name'], isset($player->dob) ? $player->dob : '')); ?></td>
         <td class="error"><?php echo form_error($dob['name']); ?><?php echo isset($errors[$dob['name']]) ? $errors[$dob['name']] : ''; ?></td>
     </tr>
     <tr>
-        <td><?php echo form_label('Gender', 'gender'); ?></td>
-        <td><?php echo form_dropdown('gender', $gender['options'], set_value('gender', isset($player->gender) ? $player->gender : '')); ?></td>
+        <td><?php echo form_label('Gender', $gender['name']); ?></td>
+        <td><?php echo form_dropdown($gender['name'], $gender['options'], set_value($gender['name'], isset($player->gender) ? $player->gender : '')); ?></td>
         <td class="error"><?php echo form_error($gender['name']); ?><?php echo isset($errors[$gender['name']]) ? $errors[$gender['name']] : ''; ?></td>
     </tr>
     <tr>
-        <td><?php echo form_label('Profile', 'profile'); ?></td>
-        <td><?php echo form_textarea('profile', set_value('profile', isset($player->profile) ? $player->profile : '')); ?></td>
+        <td><?php echo form_label('Profile', $profile['name']); ?></td>
+        <td><?php echo form_textarea($profile['name'], set_value($profile['name'], isset($player->profile) ? $player->profile : '')); ?></td>
         <td class="error"><?php echo form_error($profile['name']); ?><?php echo isset($errors[$profile['name']]) ? $errors[$profile['name']] : ''; ?></td>
     </tr>
 </table>
