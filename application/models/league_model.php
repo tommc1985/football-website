@@ -1,5 +1,10 @@
 <?php
-class League_model extends CI_Model {
+require_once('_base_model.php');
+
+/**
+ * Model for League data
+ */
+class League_model extends Base_Model {
 
     public $leagueTableName;
     public $leagueMatchTableName;
@@ -13,9 +18,38 @@ class League_model extends CI_Model {
         // Call the Model constructor
         parent::__construct();
 
+        $this->tableName = 'league';
+
         $this->leagueTableName = 'league';
         $this->leagueMatchTableName = 'league_match';
         $this->leagueRegistrationTableName = 'league_registration';
+    }
+
+    /**
+     * Return string of fields to order a SQL statement by (dependent upon argument passed)
+     * @param  string $orderBy Field Name
+     * @return string          Field Names
+     */
+    public function getOrderBy($orderBy)
+    {
+        return 'name';
+    }
+
+    /**
+     * Apply Form Validation for Adding & Updating Leagues
+     * @return NULL
+     */
+    public function formValidation()
+    {
+        $this->ci->load->library('form_validation');
+
+        $this->ci->form_validation->set_rules('competition_id', 'Competition', 'trim|required|xss_clean');
+        $this->ci->form_validation->set_rules('season', 'Season', 'trim|xss_clean');
+        $this->ci->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
+        $this->ci->form_validation->set_rules('short_name', 'Short Name', 'trim|xss_clean');
+        $this->ci->form_validation->set_rules('abbreviation', 'Abbreviation', 'trim|xss_clean');
+        $this->ci->form_validation->set_rules('points_for_win', 'Points for win', 'trim|xss_clean');
+        $this->ci->form_validation->set_rules('points_for_draw', 'Points for draw', 'trim|xss_clean');
     }
 
     /**
