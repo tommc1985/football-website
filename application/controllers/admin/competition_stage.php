@@ -69,12 +69,7 @@ class Competition_Stage extends CI_Controller/*Backend_Controller*/
         if ($this->form_validation->run() !== false) {
             $insertId = $this->Competition_Stage_model->insertEntry(array(
                 'name' => $this->form_validation->set_value('name', NULL),
-                'short_name' => $this->form_validation->set_value('short_name', NULL),
                 'abbreviation' => $this->form_validation->set_value('abbreviation', NULL),
-                'type' => $this->form_validation->set_value('type', NULL),
-                'starts' => $this->form_validation->set_value('starts', NULL),
-                'subs' => $this->form_validation->set_value('subs', NULL),
-                'competitive' => $this->form_validation->set_value('competitive', NULL),
             ));
 
             $competitionStage = $this->Competition_Stage_model->fetch($insertId);
@@ -113,12 +108,7 @@ class Competition_Stage extends CI_Controller/*Backend_Controller*/
         if ($this->form_validation->run() !== false) {
             $this->Competition_Stage_model->updateEntry($parameters['id'], array(
                 'name' => $this->form_validation->set_value('name', NULL),
-                'short_name' => $this->form_validation->set_value('short_name', NULL),
                 'abbreviation' => $this->form_validation->set_value('abbreviation', NULL),
-                'type' => $this->form_validation->set_value('type', NULL),
-                'starts' => $this->form_validation->set_value('starts', NULL),
-                'subs' => $this->form_validation->set_value('subs', NULL),
-                'competitive' => $this->form_validation->set_value('competitive', NULL),
             ));
 
             $competitionStage = $this->Competition_Stage_model->fetch($parameters['id']);
