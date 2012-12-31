@@ -72,9 +72,9 @@ class Match extends CI_Controller/*Backend_Controller*/
 
         if ($this->form_validation->run() !== false) {
             $insertId = $this->Match_model->insertEntry(array(
-                'opposition' => $this->form_validation->set_value('opposition', NULL),
-                'competition' => $this->form_validation->set_value('competition', NULL),
-                'stage' => $this->form_validation->set_value('stage', NULL),
+                'opposition_id' => $this->form_validation->set_value('opposition_id', NULL),
+                'competition_id' => $this->form_validation->set_value('competition_id', NULL),
+                'competition_stage_id' => $this->form_validation->set_value('competition_stage_id', NULL),
                 'venue' => $this->form_validation->set_value('venue', NULL),
                 'location' => $this->form_validation->set_value('location', NULL),
                 'official_id' => $this->form_validation->set_value('official_id', NULL),
@@ -124,9 +124,9 @@ class Match extends CI_Controller/*Backend_Controller*/
 
         if ($this->form_validation->run() !== false) {
             $this->Match_model->updateEntry($parameters['id'], array(
-                'opposition' => $this->form_validation->set_value('opposition', NULL),
-                'competition' => $this->form_validation->set_value('competition', NULL),
-                'stage' => $this->form_validation->set_value('stage', NULL),
+                'opposition_id' => $this->form_validation->set_value('opposition_id', NULL),
+                'competition_id' => $this->form_validation->set_value('competition_id', NULL),
+                'competition_stage_id' => $this->form_validation->set_value('competition_stage_id', NULL),
                 'venue' => $this->form_validation->set_value('venue', NULL),
                 'location' => $this->form_validation->set_value('location', NULL),
                 'official_id' => $this->form_validation->set_value('official_id', NULL),
