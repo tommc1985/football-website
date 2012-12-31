@@ -6,10 +6,10 @@ $id = array(
 );
 
 $league_id = array(
-    'name'    => 'competition_id',
-    'id'      => 'competition_id',
+    'name'    => 'league_id',
+    'id'      => 'league_id',
     'options' => array('' => '--- Select ---'),
-    'value'   => set_value('competition_id'),
+    'value'   => set_value('league_id'),
 );
 
 $date = array(
