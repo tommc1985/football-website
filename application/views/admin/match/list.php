@@ -6,7 +6,7 @@ if (count($matches) > 0) { ?>
             <tr>
                 <td>Date</td>
                 <td>Opposition</td>
-                <td>Compeititon</td>
+                <td>Competition</td>
                 <td>Score</td>
                 <td></td>
                 <td></td>
@@ -17,8 +17,8 @@ if (count($matches) > 0) { ?>
     foreach ($matches as $match) { ?>
             <tr>
                 <td><?php echo $match->date; ?></td>
-                <td><?php echo $match->opposition; ?></td>
-                <td><?php echo $match->competition; ?></td>
+                <td><?php echo $match->opposition_id; ?></td>
+                <td><?php echo $match->competition_id; ?></td>
                 <td><?php echo $match->h; ?> <?php echo $match->a; ?></td>
                 <td><a href="/admin/match/edit/id/<?php echo $match->id;?>">Edit</a></td>
                 <td><a href="/admin/match/delete/id/<?php echo $match->id;?>">Delete</a></td>

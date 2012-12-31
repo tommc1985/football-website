@@ -57,9 +57,9 @@ class Match_model extends Base_Model {
     {
         $this->ci->load->library('form_validation');
 
-        $this->ci->form_validation->set_rules('opposition', 'Opposition', 'trim|xss_clean');
-        $this->ci->form_validation->set_rules('competition', 'Competition', 'trim|required|xss_clean');
-        $this->ci->form_validation->set_rules('stage', 'Competition Stage', 'trim|xss_clean');
+        $this->ci->form_validation->set_rules('opposition_id', 'Opposition', 'trim|xss_clean');
+        $this->ci->form_validation->set_rules('competition_id', 'Competition', 'trim|required|xss_clean');
+        $this->ci->form_validation->set_rules('competition_stage_id', 'Competition Stage', 'trim|xss_clean');
         $this->ci->form_validation->set_rules('venue', 'Venue', 'trim|required|xss_clean');
         $this->ci->form_validation->set_rules('location', 'Location', 'trim|xss_clean');
         $this->ci->form_validation->set_rules('official_id', 'Official', 'trim|xss_clean');

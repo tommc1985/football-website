@@ -5,25 +5,25 @@ $id = array(
     'value' => set_value('id'),
 );
 
-$opposition = array(
-    'name'    => 'opposition',
-    'id'      => 'opposition',
+$opposition_id = array(
+    'name'    => 'opposition_id',
+    'id'      => 'opposition_id',
     'options' => array('' => '--- Select ---'),
-    'value'   => set_value('opposition'),
+    'value'   => set_value('opposition_id'),
 );
 
-$competition = array(
-    'name'    => 'competition',
-    'id'      => 'competition',
+$competition_id = array(
+    'name'    => 'competition_id',
+    'id'      => 'competition_id',
     'options' => array('' => '--- Select ---'),
-    'value'   => set_value('competition'),
+    'value'   => set_value('competition_id'),
 );
 
-$stage = array(
-    'name'    => 'stage',
-    'id'      => 'stage',
+$competition_stage_id = array(
+    'name'    => 'competition_stage_id',
+    'id'      => 'competition_stage_id',
     'options' => array('' => '--- Select ---'),
-    'value'   => set_value('stage'),
+    'value'   => set_value('competition_stage_id'),
 );
 
 $venue = array(
@@ -110,19 +110,19 @@ echo form_open($this->uri->uri_string()); ?>
         <td class="error"><?php echo form_error($date['name']); ?><?php echo isset($errors[$date['name']]) ? $errors[$date['name']] : ''; ?></td>
     </tr>
     <tr>
-        <td><?php echo form_label('Opposition', $opposition['name']); ?></td>
-        <td><?php echo form_dropdown($opposition['name'], $opposition['options'], set_value($opposition['name'], isset($match->opposition) ? $match->opposition : '')); ?></td>
-        <td class="error"><?php echo form_error($opposition['name']); ?><?php echo isset($errors[$opposition['name']]) ? $errors[$opposition['name']] : ''; ?></td>
+        <td><?php echo form_label('Opposition', $opposition_id['name']); ?></td>
+        <td><?php echo form_dropdown($opposition_id['name'], $opposition_id['options'], set_value($opposition_id['name'], isset($match->opposition_id) ? $match->opposition_id : '')); ?></td>
+        <td class="error"><?php echo form_error($opposition_id['name']); ?><?php echo isset($errors[$opposition_id['name']]) ? $errors[$opposition_id['name']] : ''; ?></td>
     </tr>
     <tr>
-        <td><?php echo form_label('Competition', $competition['name']); ?></td>
-        <td><?php echo form_dropdown($competition['name'], $competition['options'], set_value($competition['name'], isset($match->competition) ? $match->competition : '')); ?></td>
-        <td class="error"><?php echo form_error($competition['name']); ?><?php echo isset($errors[$competition['name']]) ? $errors[$competition['name']] : ''; ?></td>
+        <td><?php echo form_label('Competition', $competition_id['name']); ?></td>
+        <td><?php echo form_dropdown($competition_id['name'], $competition_id['options'], set_value($competition_id['name'], isset($match->competition_id) ? $match->competition_id : '')); ?></td>
+        <td class="error"><?php echo form_error($competition_id['name']); ?><?php echo isset($errors[$competition_id['name']]) ? $errors[$competition_id['name']] : ''; ?></td>
     </tr>
     <tr>
-        <td><?php echo form_label('Stage', $stage['name']); ?></td>
-        <td><?php echo form_dropdown($stage['name'], $stage['options'], set_value($stage['name'], isset($match->stage) ? $match->stage : '')); ?></td>
-        <td class="error"><?php echo form_error($stage['name']); ?><?php echo isset($errors[$stage['name']]) ? $errors[$stage['name']] : ''; ?></td>
+        <td><?php echo form_label('Stage', $competition_stage_id['name']); ?></td>
+        <td><?php echo form_dropdown($competition_stage_id['name'], $competition_stage_id['options'], set_value($competition_stage_id['name'], isset($match->competition_stage_id) ? $match->competition_stage_id : '')); ?></td>
+        <td class="error"><?php echo form_error($competition_stage_id['name']); ?><?php echo isset($errors[$competition_stage_id['name']]) ? $errors[$competition_stage_id['name']] : ''; ?></td>
     </tr>
     <tr>
         <td><?php echo form_label('Venue', $venue['name']); ?></td>
