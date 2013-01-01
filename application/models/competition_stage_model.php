@@ -43,7 +43,7 @@ class Competition_Stage_model extends Base_Model {
 
         $this->ci->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
         $this->ci->form_validation->set_rules('abbreviation', 'Abbreviation', "trim|required|max_length[" .
-        $this->config->item('abbreviation_max_length', 'competition_stage') . "]|alpha_numeric|strtoupper|xss_clean");
+        $this->config->item('abbreviation_max_length', 'competition_stage') . "]|regex_match[/^[A-Za-z0-9']+$/]|strtoupper|xss_clean");
     }
 
 }
