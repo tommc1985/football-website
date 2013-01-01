@@ -1,4 +1,6 @@
 <?php
+$this->load->model('Player_model');
+
 $id = array(
     'name'  => 'id',
     'id'    => 'id',
@@ -52,7 +54,7 @@ $image_id = array(
 $gender = array(
     'name'    => 'gender',
     'id'      => 'gender',
-    'options' => $this->config->item('gender_options', 'player'),
+    'options' => array('' => '--- Select ---') + Player_model::fetchGenders(),
     'value'   => set_value('image_id'),
 );
 
