@@ -1,4 +1,6 @@
 <?php
+$this->load->model('Competition_model');
+
 $id = array(
     'name'  => 'id',
     'id'    => 'id',
@@ -26,7 +28,7 @@ $abbreviation = array(
 $type = array(
     'name'    => 'type',
     'id'      => 'type',
-    'options' => array('' => '--- Select ---'),
+    'options' => array('' => '--- Select ---') + Competition_model::fetchTypes(),
     'value'   => set_value('type'),
 );
 
@@ -45,7 +47,7 @@ $subs = array(
 $competitive = array(
     'name'  => 'competitive',
     'id'    => 'competitive',
-    'options' => array('' => '--- Select ---'),
+    'options' => array('' => '--- Select ---') + Competition_model::fetchCompetitive(),
     'value' => set_value('competitive'),
 );
 
@@ -69,7 +71,7 @@ echo form_open($this->uri->uri_string()); ?>
     </tr>
     <tr>
         <td><?php echo form_label('Type', $type['name']); ?></td>
-        <td><?php echo form_dropdown($type['name'], $type['options'], set_value($type['name'], isset($match->type) ? $match->type : '')); ?></td>
+        <td><?php echo form_dropdown($type['name'], $type['options'], set_value($type['name'], isset($competition->type) ? $competition->type : '')); ?></td>
         <td class="error"><?php echo form_error($type['name']); ?><?php echo isset($errors[$type['name']]) ? $errors[$type['name']] : ''; ?></td>
     </tr>
     <tr>
@@ -84,7 +86,7 @@ echo form_open($this->uri->uri_string()); ?>
     </tr>
     <tr>
         <td><?php echo form_label('Competitive', $competitive['name']); ?></td>
-        <td><?php echo form_dropdown($competitive['name'], $competitive['options'], set_value($competitive['name'], isset($match->competitive) ? $match->competitive : '')); ?></td>
+        <td><?php echo form_dropdown($competitive['name'], $competitive['options'], set_value($competitive['name'], isset($competition->competitive) ? $competition->competitive : '')); ?></td>
         <td class="error"><?php echo form_error($competitive['name']); ?><?php echo isset($errors[$competitive['name']]) ? $errors[$competitive['name']] : ''; ?></td>
     </tr>
 </table>
