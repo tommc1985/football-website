@@ -19,6 +19,23 @@ class Opposition_model extends Base_Model {
     }
 
     /**
+     * Fetch All Opposition and format for dropdown
+     * @return array List of oppositions
+     */
+    public function fetchForDropdown()
+    {
+        $results = $this->fetchAll(false, false, 'name', 'asc');
+
+        $dropdownOptions = array();
+
+        foreach ($results as $result) {
+            $dropdownOptions[$result->id] = $result->name;
+        }
+
+        return $dropdownOptions;
+    }
+
+    /**
      * Return string of fields to order a SQL statement by (dependent upon argument passed)
      * @param  string $orderBy Field Name
      * @return string          Field Names
