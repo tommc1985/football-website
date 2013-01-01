@@ -1,4 +1,6 @@
 <?php
+$this->load->model('Competition_Stage_model');
+
 $id = array(
     'name'  => 'id',
     'id'    => 'id',
