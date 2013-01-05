@@ -56,4 +56,21 @@ class Opposition_model extends Base_Model {
         $this->ci->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
     }
 
+    /**
+     * Fetch all values and return an array for dropdown menu
+     * @return array                 List of objects
+     */
+    public function fetchForDropdown()
+    {
+        $rows = $this->fetchAll();
+
+        $options = array();
+
+        foreach ($rows as $row) {
+            $options[$row->id] = $row->name;
+        }
+
+        return $options;
+    }
+
 }
