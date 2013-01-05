@@ -73,4 +73,21 @@ class Player_model extends Base_Model {
         $this->ci->form_validation->set_rules('gender', 'Gender', 'trim|regex_match[/^(m)|(f)$/]|xss_clean');
     }
 
+    /**
+     * Fetch All Players and format for dropdown
+     * @return array List of Players
+     */
+    public function fetchForDropdown()
+    {
+        $results = $this->fetchAll();
+
+        $dropdownOptions = array();
+
+        foreach ($results as $result) {
+            $dropdownOptions[$result->id] = "{$result->surname}, {$result->first_name}";
+        }
+
+        return $dropdownOptions;
+    }
+
 }
