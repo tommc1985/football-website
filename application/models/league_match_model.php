@@ -36,12 +36,12 @@ class League_Match_model extends Base_Model {
     {
         $this->ci->load->library('form_validation');
 
-        $this->ci->form_validation->set_rules('league_id', 'League', 'trim|xss_clean');
-        $this->ci->form_validation->set_rules('date', 'Date', 'trim|required|xss_clean');
-        $this->ci->form_validation->set_rules('h_opposition_id', 'Home Team', 'trim|xss_clean');
-        $this->ci->form_validation->set_rules('a_opposition_id', 'Away Team', 'trim|xss_clean');
-        $this->ci->form_validation->set_rules('h_score', 'Home Score', 'trim|xss_clean');
-        $this->ci->form_validation->set_rules('a_score', 'Away Score', 'trim|xss_clean');
+        $this->ci->form_validation->set_rules('league_id', 'League', 'trim|required|integer|xss_clean');
+        $this->ci->form_validation->set_rules('date', 'Date', 'trim|required||regex_match[/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/]xss_clean');
+        $this->ci->form_validation->set_rules('h_opposition_id', 'Home Team', 'trim|required|xss_clean');
+        $this->ci->form_validation->set_rules('a_opposition_id', 'Away Team', 'trim|required|xss_clean');
+        $this->ci->form_validation->set_rules('h_score', 'Home Score', 'trim|is_natural|xss_clean');
+        $this->ci->form_validation->set_rules('a_score', 'Away Score', 'trim|is_natural|xss_clean');
         $this->ci->form_validation->set_rules('status', 'Status', 'trim|xss_clean');
     }
 

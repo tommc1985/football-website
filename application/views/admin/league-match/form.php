@@ -1,4 +1,8 @@
 <?php
+$this->load->model('League_model');
+$this->load->model('League_Match_model');
+$this->load->model('Opposition_model');
+
 $id = array(
     'name'  => 'id',
     'id'    => 'id',
@@ -8,7 +12,7 @@ $id = array(
 $league_id = array(
     'name'    => 'league_id',
     'id'      => 'league_id',
-    'options' => array('' => '--- Select ---'),
+    'options' => array('' => '--- Select ---') + $this->League_model->fetchForDropdown(),
     'value'   => set_value('league_id'),
 );
 
@@ -76,17 +80,17 @@ echo form_open($this->uri->uri_string()); ?>
     </tr>
     <tr>
         <td><?php echo form_label('Home Score', $h_score['name']); ?></td>
-        <td><?php echo form_input($h_score['name'], set_value($h_score['name'], isset($match->h_score) ? $match->h_score : '')); ?></td>
+        <td><?php echo form_input($h_score['name'], set_value($h_score['name'], isset($leagueMatch->h_score) ? $leagueMatch->h_score : '')); ?></td>
         <td class="error"><?php echo form_error($h_score['name']); ?><?php echo isset($errors[$h_score['name']]) ? $errors[$h_score['name']] : ''; ?></td>
     </tr>
     <tr>
         <td><?php echo form_label('Away Score', $a_score['name']); ?></td>
-        <td><?php echo form_input($a_score['name'], set_value($a_score['name'], isset($match->a_score) ? $match->a_score : '')); ?></td>
+        <td><?php echo form_input($a_score['name'], set_value($a_score['name'], isset($leagueMatch->a_score) ? $leagueMatch->a_score : '')); ?></td>
         <td class="error"><?php echo form_error($a_score['name']); ?><?php echo isset($errors[$a_score['name']]) ? $errors[$a_score['name']] : ''; ?></td>
     </tr>
     <tr>
         <td><?php echo form_label('Status', $status['name']); ?></td>
-        <td><?php echo form_dropdown($status['name'], $status['options'], set_value($status['name'], isset($match->status) ? $match->status : '')); ?></td>
+        <td><?php echo form_dropdown($status['name'], $status['options'], set_value($status['name'], isset($leagueMatch->status) ? $leagueMatch->status : '')); ?></td>
         <td class="error"><?php echo form_error($status['name']); ?><?php echo isset($errors[$status['name']]) ? $errors[$status['name']] : ''; ?></td>
     </tr>
 </table>
