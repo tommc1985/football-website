@@ -49,4 +49,21 @@ class Official_model extends Base_Model {
         $this->ci->form_validation->set_rules('surname', 'Surname', 'trim|required|xss_clean');
     }
 
+    /**
+     * Fetch All Officials and format for dropdown
+     * @return array List of Officials
+     */
+    public function fetchForDropdown()
+    {
+        $results = $this->fetchAll();
+
+        $dropdownOptions = array();
+
+        foreach ($results as $result) {
+            $dropdownOptions[$result->id] = "{$result->surname}, $result->first_name";
+        }
+
+        return $dropdownOptions;
+    }
+
 }
