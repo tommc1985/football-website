@@ -81,4 +81,21 @@ class Competition_model extends Base_Model {
         $this->ci->form_validation->set_rules('competitive', 'Competitive', 'trim|integer|xss_clean');
     }
 
+    /**
+     * Fetch All Competitions and format for dropdown
+     * @return array List of competitions
+     */
+    public function fetchForDropdown()
+    {
+        $results = $this->fetchAll(false, false, 'name', 'asc');
+
+        $dropdownOptions = array();
+
+        foreach ($results as $result) {
+            $dropdownOptions[$result->id] = $result->short_name;
+        }
+
+        return $dropdownOptions;
+    }
+
 }
