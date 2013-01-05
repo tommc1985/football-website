@@ -45,4 +45,36 @@ class League_Match_model extends Base_Model {
         $this->ci->form_validation->set_rules('status', 'Status', 'trim|xss_clean');
     }
 
+    /**
+     * Fetch all matches from a particular League
+     * @param  int $leagueId         League ID
+     * @param  int|false $limit      Number of rows to return
+     * @param  int|false $offset     The offset
+     * @param  string|false $orderBy Which fields to order results by
+     * @param  string|false $order   Order the results Ascending or Descending
+     * @return array                 Returned rows
+     */
+    public function fetchByLeagueId($leagueId, $limit = false, $offset = false, $orderBy = false, $order = false)
+    {
+        $orderBy = $this->getOrderBy($orderBy);
+        $order   = self::getOrder($order);
+
+        $this->db->select('*');
+        $this->db->from($this->tableName);
+        $this->db->where('league_id', $leagueId);
+        $this->db->where('deleted', 0);
+
+        if ($limit !== false) {
+            if ($offset !== false) {
+                $this->db->limit($limit, $offset);
+            } else {
+                $this->db->limit($limit);
+            }
+        }
+
+        $this->db->order_by($orderBy, $order);
+
+        return $this->db->get()->result();
+    }
+
 }
