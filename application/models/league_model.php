@@ -32,6 +32,12 @@ class League_model extends Base_Model {
      */
     public function getOrderBy($orderBy)
     {
+        switch ($orderBy) {
+            case 'season':
+                return 'season desc, name';
+                break;
+        }
+
         return 'name';
     }
 
@@ -158,6 +164,23 @@ OR lm.status = "aw"
         }
 
         return $this->db->get()->result();
+    }
+
+    /**
+     * Fetch all values and return an array for dropdown menu
+     * @return array                 List of objects
+     */
+    public function fetchForDropdown()
+    {
+        $rows = $this->fetchAll(false, false, 'season', 'asc');
+
+        $options = array();
+
+        foreach ($rows as $row) {
+            $options[$row->id] = $row->season . "/" . ($row->season + 1) . " - " . $row->short_name;
+        }
+
+        return $options;
     }
 
 }
