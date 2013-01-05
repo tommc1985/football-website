@@ -19,6 +19,7 @@ class League_Match extends CI_Controller/*Backend_Controller*/
         $this->load->library('session');
         $this->load->model('League_model');
         $this->load->model('League_Match_model');
+        $this->load->model('League_Registration_model');
         $this->load->config('league_match', true);
     }
 
@@ -38,7 +39,11 @@ class League_Match extends CI_Controller/*Backend_Controller*/
             $offset = $parameters['offset'];
         }
 
-        $data['leagueMatches'] = $this->League_Match_model->fetchAll($perPage, $offset, $parameters['order-by'], $parameters['order']);
+        $order = 'desc';
+        if ($parameters['order'] !== false && strlen($parameters['offset']) > 0) {
+            $order = $parameters['order'];
+        }
+        $data['leagueMatches'] = $this->League_Match_model->fetchAll($perPage, $offset, $parameters['order-by'], $order);
 
         $config['base_url'] = '/admin/league-match/index/offset/';
         $config['total_rows'] = $this->League_Match_model->countAll();
@@ -63,14 +68,33 @@ class League_Match extends CI_Controller/*Backend_Controller*/
     {
         $this->load->helper(array('form', 'url', 'html5_form_fields'));
 
+        $parameters = $this->uri->uri_to_assoc(4, array('league-id'));
+
         $data['submitButtonText'] = 'Save';
+
+        $league = false;
+        if ($parameters['league-id'] !== false) {
+            $league = $this->League_model->fetch($parameters['league-id']);
+        }
+
+        if (empty($league)) {
+            $this->load->view('admin/league/not_found', $data);
+            return;
+        }
+
+        $data['league'] = $league;
 
         $this->League_Match_model->formValidation();
 
         if ($this->form_validation->run() !== false) {
             $insertId = $this->League_Match_model->insertEntry(array(
-                'name' => $this->form_validation->set_value('name', NULL),
-                'abbreviation' => $this->form_validation->set_value('abbreviation', NULL),
+                'league_id' => $this->form_validation->set_value('league_id', NULL),
+                'date' => $this->form_validation->set_value('date', NULL),
+                'h_opposition_id' => $this->form_validation->set_value('h_opposition_id', NULL),
+                'a_opposition_id' => $this->form_validation->set_value('a_opposition_id', NULL),
+                'h_score' => $this->form_validation->set_value('h_score', NULL),
+                'a_score' => $this->form_validation->set_value('a_score', NULL),
+                'status' => $this->form_validation->set_value('status', NULL),
             ));
 
             $leagueMatch = $this->League_Match_model->fetch($insertId);
@@ -104,12 +128,19 @@ class League_Match extends CI_Controller/*Backend_Controller*/
             return;
         }
 
+        $data['league'] = $this->League_model->fetch($leagueMatch->league_id);
+
         $this->League_Match_model->formValidation();
 
         if ($this->form_validation->run() !== false) {
             $this->League_Match_model->updateEntry($parameters['id'], array(
-                'name' => $this->form_validation->set_value('name', NULL),
-                'abbreviation' => $this->form_validation->set_value('abbreviation', NULL),
+                'league_id' => $this->form_validation->set_value('league_id', NULL),
+                'date' => $this->form_validation->set_value('date', NULL),
+                'h_opposition_id' => $this->form_validation->set_value('h_opposition_id', NULL),
+                'a_opposition_id' => $this->form_validation->set_value('a_opposition_id', NULL),
+                'h_score' => $this->form_validation->set_value('h_score', NULL),
+                'a_score' => $this->form_validation->set_value('a_score', NULL),
+                'status' => $this->form_validation->set_value('status', NULL),
             ));
 
             $leagueMatch = $this->League_Match_model->fetch($parameters['id']);

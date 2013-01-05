@@ -19,6 +19,20 @@ class League_Match_model extends Base_Model {
     }
 
     /**
+     * Fetch list of Status options
+     * @return array List of Status options
+     */
+    public static function fetchStatuses()
+    {
+        return array(
+            'hw' => 'Home Win',
+            'aw' => 'Away Win',
+            'p'  => 'Postponed',
+            'a'  => 'Abandoned',
+        );
+    }
+
+    /**
      * Return string of fields to order a SQL statement by (dependent upon argument passed)
      * @param  string $orderBy Field Name
      * @return string          Field Names

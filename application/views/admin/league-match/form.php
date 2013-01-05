@@ -1,6 +1,7 @@
 <?php
 $this->load->model('League_model');
 $this->load->model('League_Match_model');
+$this->load->model('League_Registration_model');
 $this->load->model('Opposition_model');
 
 $id = array(
@@ -25,14 +26,14 @@ $date = array(
 $h_opposition_id = array(
     'name'    => 'h_opposition_id',
     'id'      => 'h_opposition_id',
-    'options' => array('' => '--- Select ---'),
+    'options' => array('' => '--- Select ---') + $this->League_Registration_model->fetchForDropdown($league->id),
     'value'   => set_value('h_opposition_id'),
 );
 
 $a_opposition_id = array(
     'name'    => 'a_opposition_id',
     'id'      => 'a_opposition_id',
-    'options' => array('' => '--- Select ---'),
+    'options' => array('' => '--- Select ---') + $this->League_Registration_model->fetchForDropdown($league->id),
     'value'   => set_value('a_opposition_id'),
 );
 
@@ -51,17 +52,18 @@ $a_score = array(
 $status = array(
     'name'    => 'status',
     'id'      => 'status',
-    'options' => array('' => '--- Select ---'),
+    'options' => array('' => '--- Select ---') + $this->League_Match_model->fetchStatuses(),
     'value'   => set_value('status'),
 );
 
 echo form_open($this->uri->uri_string()); ?>
 <table>
     <?php echo form_hidden('id', set_value('id', isset($leagueMatch->id) ? $leagueMatch->id : '')); ?>
+    <?php echo form_hidden('league_id', set_value('league_id', isset($league->id) ? $league->id : '')); ?>
     <tr>
         <td><?php echo form_label('League', $league_id['name']); ?></td>
-        <td><?php echo form_dropdown($league_id['name'], $league_id['options'], set_value($league_id['name'], isset($leagueMatch->league_id) ? $leagueMatch->league_id : '')); ?></td>
-        <td class="error"><?php echo form_error($league_id['name']); ?><?php echo isset($errors[$league_id['name']]) ? $errors[$league_id['name']] : ''; ?></td>
+        <td><?php echo $league->short_name; ?></td>
+        <td class="error"></td>
     </tr>
     <tr>
         <td><?php echo form_label('Date', $date['name']); ?></td>
