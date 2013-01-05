@@ -46,4 +46,21 @@ class Competition_Stage_model extends Base_Model {
         $this->config->item('abbreviation_max_length', 'competition_stage') . "]|alpha_numeric|strtoupper|xss_clean");
     }
 
+    /**
+     * Fetch All Competition Stages and format for dropdown
+     * @return array List of Competition Stages
+     */
+    public function fetchForDropdown()
+    {
+        $results = $this->fetchAll(false, false, 'name', 'asc');
+
+        $dropdownOptions = array();
+
+        foreach ($results as $result) {
+            $dropdownOptions[$result->id] = $result->name;
+        }
+
+        return $dropdownOptions;
+    }
+
 }
