@@ -7,4 +7,6 @@
 | These details are used in emails sent by authentication library.
 |--------------------------------------------------------------------------
 */
-$config['first_name_max_length'] = 30;
+$config['name_max_length'] = 255;
+$config['short_name_max_length'] = 255;
+$config['abbreviation_max_length'] = 10;

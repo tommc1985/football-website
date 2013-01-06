@@ -50,12 +50,12 @@ class League_model extends Base_Model {
         $this->ci->load->library('form_validation');
 
         $this->ci->form_validation->set_rules('competition_id', 'Competition', 'trim|required|xss_clean');
-        $this->ci->form_validation->set_rules('season', 'Season', 'trim|xss_clean');
-        $this->ci->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
-        $this->ci->form_validation->set_rules('short_name', 'Short Name', 'trim|xss_clean');
-        $this->ci->form_validation->set_rules('abbreviation', 'Abbreviation', 'trim|xss_clean');
-        $this->ci->form_validation->set_rules('points_for_win', 'Points for win', 'trim|xss_clean');
-        $this->ci->form_validation->set_rules('points_for_draw', 'Points for draw', 'trim|xss_clean');
+        $this->ci->form_validation->set_rules('season', 'Season', 'trim|required|integer|xss_clean');
+        $this->ci->form_validation->set_rules('name', 'Name', "trim|required|max_length[" . $this->config->item('name_max_length', 'league') . "]|xss_clean");
+        $this->ci->form_validation->set_rules('short_name', 'Short Name', "trim|required|max_length[" . $this->config->item('short_name_max_length', 'league') . "]|xss_clean");
+        $this->ci->form_validation->set_rules('abbreviation', 'Abbreviation', "trim|required|max_length[" . $this->config->item('abbreviation_max_length', 'league') . "]|regex_match[/^[A-Za-z0-9']+$/]|strtoupper|xss_clean");
+        $this->ci->form_validation->set_rules('points_for_win', 'Points for win', 'trim|required|integer|xss_clean');
+        $this->ci->form_validation->set_rules('points_for_draw', 'Points for draw', 'trim|required|integer|xss_clean');
     }
 
     /**

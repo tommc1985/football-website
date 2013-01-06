@@ -146,4 +146,22 @@ ORDER BY m.date ASC";
         return $query->result();
     }
 
+    /**
+     * Fetch all seasons and return an array for dropdown menu
+     * @return array                 List of season
+     */
+    public function fetchForDropdown()
+    {
+        $options = array();
+
+        $i = $this->fetchCurrentSeason();
+        while ($i > 1990) { //@TODO
+            $options[$i] = $i . "/" . ($i + 1) ;
+
+            $i--;
+        }
+
+        return $options;
+    }
+
 }

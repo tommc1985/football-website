@@ -17,7 +17,9 @@ class League extends CI_Controller/*Backend_Controller*/
 
         $this->load->database();
         $this->load->library('session');
+        $this->load->model('Competition_model');
         $this->load->model('League_model');
+        $this->load->model('Season_model');
         $this->load->config('league', true);
     }
 
