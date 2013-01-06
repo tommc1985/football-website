@@ -117,7 +117,7 @@ echo form_open($this->uri->uri_string()); ?>
     </tr>
     <tr>
         <td><?php echo form_label('Time', $time['name']); ?></td>
-        <td><?php echo form_time($time['name'], set_value($time['name'], isset($match->date) ? substr($match->date, 11, 5) : '')); ?></td>
+        <td><?php echo form_time($time['name'], set_value($time['name'], isset($match->date) ? substr($match->date, 11, 5) : Configuration::get('usual_match_ko_time'))); ?></td>
         <td class="error"><?php echo form_error($time['name']); ?><?php echo isset($errors[$time['name']]) ? $errors[$time['name']] : ''; ?></td>
     </tr>
     <tr>
