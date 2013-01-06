@@ -28,8 +28,8 @@ class League_Registration_model extends Base_Model {
     {
         $this->ci->load->library('form_validation');
 
-        $this->ci->form_validation->set_rules('league_id', 'League', 'trim|xss_clean');
-        $this->ci->form_validation->set_rules('opposition_id', 'Team', 'trim|xss_clean');
+        $this->ci->form_validation->set_rules('league_id', 'League', 'trim|required|xss_clean');
+        $this->ci->form_validation->set_rules('opposition_id', 'Team', 'trim|required|xss_clean');
     }
 
     /**

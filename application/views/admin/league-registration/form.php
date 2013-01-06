@@ -8,14 +8,14 @@ $id = array(
 $league_id = array(
     'name'    => 'league_id',
     'id'      => 'league_id',
-    'options' => array('' => '--- Select ---'),
+    'options' => array('' => '--- Select ---') + $this->League_model->fetchForDropdown(),
     'value'   => set_value('league_id'),
 );
 
 $opposition_id = array(
     'name'    => 'opposition_id',
     'id'      => 'opposition_id',
-    'options' => array('' => '--- Select ---'),
+    'options' => array('' => '--- Select ---') + $this->Opposition_model->fetchForDropdown(),
     'value'   => set_value('opposition_id'),
 );
 

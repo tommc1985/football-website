@@ -17,7 +17,9 @@ class League_Registration extends CI_Controller/*Backend_Controller*/
 
         $this->load->database();
         $this->load->library('session');
+        $this->load->model('League_model');
         $this->load->model('League_Registration_model');
+        $this->load->model('Opposition_model');
         $this->load->config('league_registration', true);
     }
 
