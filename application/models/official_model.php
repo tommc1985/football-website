@@ -45,8 +45,8 @@ class Official_model extends Base_Model {
     {
         $this->ci->load->library('form_validation');
 
-        $this->ci->form_validation->set_rules('first_name', 'First Name', 'trim|required|xss_clean');
-        $this->ci->form_validation->set_rules('surname', 'Surname', 'trim|required|xss_clean');
+        $this->ci->form_validation->set_rules('first_name', 'First Name', "trim|required|regex_match[/^[A-Za-z -']+$/]|max_length[" . $this->config->item('first_name_max_length', 'player') . "]|xss_clean");
+        $this->ci->form_validation->set_rules('surname', 'Surname', "trim|required|regex_match[/^[A-Za-z -']+$/]|max_length[" . $this->config->item('surname_max_length', 'player') . "]|xss_clean");
     }
 
     /**
