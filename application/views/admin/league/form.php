@@ -8,14 +8,14 @@ $id = array(
 $competition_id = array(
     'name'    => 'competition_id',
     'id'      => 'competition_id',
-    'options' => array('' => '--- Select ---'),
+    'options' => array('' => '--- Select ---') + $this->Competition_model->fetchForDropdown(),
     'value'   => set_value('competition_id'),
 );
 
 $season = array(
     'name'    => 'season',
     'id'      => 'season',
-    'options' => array('' => '--- Select ---'),
+    'options' => array('' => '--- Select ---') + $this->Season_model->fetchForDropdown(),
     'value'   => set_value('season'),
 );
 
