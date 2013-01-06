@@ -8,28 +8,28 @@ $id = array(
 $opposition_id = array(
     'name'    => 'opposition_id',
     'id'      => 'opposition_id',
-    'options' => array('' => '--- Select ---'),
+    'options' => array('' => '--- Select ---') + $this->Opposition_model->fetchForDropdown(),
     'value'   => set_value('opposition_id'),
 );
 
 $competition_id = array(
     'name'    => 'competition_id',
     'id'      => 'competition_id',
-    'options' => array('' => '--- Select ---'),
+    'options' => array('' => '--- Select ---') + $this->Competition_model->fetchForDropdown(),
     'value'   => set_value('competition_id'),
 );
 
 $competition_stage_id = array(
     'name'    => 'competition_stage_id',
     'id'      => 'competition_stage_id',
-    'options' => array('' => '--- Select ---'),
+    'options' => array('' => '--- Select ---') + $this->Competition_Stage_model->fetchForDropdown(),
     'value'   => set_value('competition_stage_id'),
 );
 
 $venue = array(
     'name'    => 'venue',
     'id'      => 'venue',
-    'options' => array('' => '--- Select ---'),
+    'options' => array('' => '--- Select ---') + $this->Match_model->fetchVenues(),
     'value'   => set_value('venue'),
 );
 
@@ -42,7 +42,7 @@ $location = array(
 $official_id = array(
     'name'    => 'official_id',
     'id'      => 'official_id',
-    'options' => array('' => '--- Select ---'),
+    'options' => array('' => '--- Select ---') + $this->Official_model->fetchForDropdown(),
     'value'   => set_value('official_id'),
 );
 
@@ -68,6 +68,12 @@ $date = array(
     'name'  => 'date',
     'id'    => 'date',
     'value' => set_value('date'),
+);
+
+$time = array(
+    'name'  => 'time',
+    'id'    => 'time',
+    'value' => set_value('time'),
 );
 
 $h_et = array(
@@ -97,7 +103,7 @@ $a_pen = array(
 $status = array(
     'name'    => 'status',
     'id'      => 'status',
-    'options' => array('' => '--- Select ---'),
+    'options' => array('' => '--- Select ---') + $this->Match_model->fetchStatuses(),
     'value'   => set_value('status'),
 );
 
@@ -106,8 +112,13 @@ echo form_open($this->uri->uri_string()); ?>
     <?php echo form_hidden('id', set_value('id', isset($match->id) ? $match->id : '')); ?>
     <tr>
         <td><?php echo form_label('Date', $date['name']); ?></td>
-        <td><?php echo form_datetime($date['name'], set_value($date['name'], isset($match->date) ? $match->date : '')); ?></td>
+        <td><?php echo form_date($date['name'], set_value($date['name'], isset($match->date) ? substr($match->date, 0, 10) : '')); ?></td>
         <td class="error"><?php echo form_error($date['name']); ?><?php echo isset($errors[$date['name']]) ? $errors[$date['name']] : ''; ?></td>
+    </tr>
+    <tr>
+        <td><?php echo form_label('Time', $time['name']); ?></td>
+        <td><?php echo form_time($time['name'], set_value($time['name'], isset($match->date) ? substr($match->date, 11, 5) : '')); ?></td>
+        <td class="error"><?php echo form_error($time['name']); ?><?php echo isset($errors[$time['name']]) ? $errors[$time['name']] : ''; ?></td>
     </tr>
     <tr>
         <td><?php echo form_label('Opposition', $opposition_id['name']); ?></td>
@@ -151,7 +162,7 @@ echo form_open($this->uri->uri_string()); ?>
     </tr>
     <tr>
         <td><?php echo form_label('Report', $report['name']); ?></td>
-        <td><?php echo form_input($report['name'], set_value($report['name'], isset($match->report) ? $match->report : '')); ?></td>
+        <td><?php echo form_textarea($report['name'], set_value($report['name'], isset($match->report) ? $match->report : '')); ?></td>
         <td class="error"><?php echo form_error($report['name']); ?><?php echo isset($errors[$report['name']]) ? $errors[$report['name']] : ''; ?></td>
     </tr>
     <tr>
@@ -176,7 +187,7 @@ echo form_open($this->uri->uri_string()); ?>
     </tr>
     <tr>
         <td><?php echo form_label('Status', $status['name']); ?></td>
-        <td><?php echo form_dropdown($status['name'], $official_id['options'], set_value($status['name'], isset($match->status) ? $match->status : '')); ?></td>
+        <td><?php echo form_dropdown($status['name'], $status['options'], set_value($status['name'], isset($match->status) ? $match->status : '')); ?></td>
         <td class="error"><?php echo form_error($status['name']); ?><?php echo isset($errors[$status['name']]) ? $errors[$status['name']] : ''; ?></td>
     </tr>
 </table>

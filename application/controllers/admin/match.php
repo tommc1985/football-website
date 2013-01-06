@@ -17,7 +17,11 @@ class Match extends CI_Controller/*Backend_Controller*/
 
         $this->load->database();
         $this->load->library('session');
+        $this->load->model('Competition_model');
+        $this->load->model('Competition_Stage_model');
         $this->load->model('Match_model');
+        $this->load->model('Official_model');
+        $this->load->model('Opposition_model');
         $this->load->config('match', true);
     }
 
@@ -81,7 +85,7 @@ class Match extends CI_Controller/*Backend_Controller*/
                 'h' => $this->form_validation->set_value('h', NULL),
                 'a' => $this->form_validation->set_value('a', NULL),
                 'report' => $this->form_validation->set_value('report', NULL),
-                'date' => $this->form_validation->set_value('date', NULL),
+                'date' => $this->form_validation->set_value('date', NULL) . ' ' . $this->form_validation->set_value('time', NULL) . ':00',
                 'h_et' => $this->form_validation->set_value('h_et', NULL),
                 'a_et' => $this->form_validation->set_value('a_et', NULL),
                 'h_pen' => $this->form_validation->set_value('h_pen', NULL),
@@ -133,7 +137,7 @@ class Match extends CI_Controller/*Backend_Controller*/
                 'h' => $this->form_validation->set_value('h', NULL),
                 'a' => $this->form_validation->set_value('a', NULL),
                 'report' => $this->form_validation->set_value('report', NULL),
-                'date' => $this->form_validation->set_value('date', NULL),
+                'date' => $this->form_validation->set_value('date', NULL) . ' ' . $this->form_validation->set_value('time', NULL) . ':00',
                 'h_et' => $this->form_validation->set_value('h_et', NULL),
                 'a_et' => $this->form_validation->set_value('a_et', NULL),
                 'h_pen' => $this->form_validation->set_value('h_pen', NULL),
