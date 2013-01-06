@@ -61,10 +61,8 @@ class Player_model extends Base_Model {
         $this->ci->load->library('form_validation');
         $this->load->config('player', true);
 
-        $this->ci->form_validation->set_rules('first_name', 'First Name', "trim|required|regex_match[/^[A-Za-z -']+$/]|max_length[" .
-        $this->config->item('first_name_max_length', 'player') . "]|xss_clean");
-        $this->ci->form_validation->set_rules('surname', 'Surname', "trim|regex_match[/^[A-Za-z -']+$/]|max_length[" .
-        $this->config->item('surname_max_length', 'player') . "]|xss_clean");
+        $this->ci->form_validation->set_rules('first_name', 'First Name', "trim|required|regex_match[/^[A-Za-z -']+$/]|max_length[" . $this->config->item('first_name_max_length', 'player') . "]|xss_clean");
+        $this->ci->form_validation->set_rules('surname', 'Surname', "trim|regex_match[/^[A-Za-z -']+$/]|max_length[" . $this->config->item('surname_max_length', 'player') . "]|xss_clean");
         $this->ci->form_validation->set_rules('dob', 'Date of Birth', 'trim|regex_match[/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/]|xss_clean');
         $this->ci->form_validation->set_rules('nationality', 'Nationality', 'trim|xss_clean');
         $this->ci->form_validation->set_rules('profile', 'Profile', 'trim|xss_clean');
