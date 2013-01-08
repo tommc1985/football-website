@@ -67,10 +67,7 @@ class Official extends CI_Controller/*Backend_Controller*/
         $this->Official_model->formValidation();
 
         if ($this->form_validation->run() !== false) {
-            $insertId = $this->Official_model->insertEntry(array(
-                'first_name' => $this->form_validation->set_value('first_name', NULL),
-                'surname' => $this->form_validation->set_value('surname', NULL),
-            ));
+            $insertId = $this->Official_model->processInsert();
 
             $official = $this->Official_model->fetch($insertId);
 
@@ -106,10 +103,7 @@ class Official extends CI_Controller/*Backend_Controller*/
         $this->Official_model->formValidation();
 
         if ($this->form_validation->run() !== false) {
-            $this->Official_model->updateEntry($parameters['id'], array(
-                'first_name' => $this->form_validation->set_value('first_name', NULL),
-                'surname' => $this->form_validation->set_value('surname', NULL),
-            ));
+            $this->Official_model->processUpdate($parameters['id']);
 
             $official = $this->Official_model->fetch($parameters['id']);
 

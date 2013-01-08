@@ -69,10 +69,7 @@ class Player_Registration extends CI_Controller/*Backend_Controller*/
         $this->Player_Registration_model->formValidation();
 
         if ($this->form_validation->run() !== false) {
-            $insertId = $this->Player_Registration_model->insertEntry(array(
-                'player_id' => $this->form_validation->set_value('player_id', NULL),
-                'season' => $this->form_validation->set_value('season', NULL),
-            ));
+            $insertId = $this->Player_Registration_model->processInsert();
 
             $playerRegistration = $this->Player_Registration_model->fetch($insertId);
 
@@ -108,10 +105,7 @@ class Player_Registration extends CI_Controller/*Backend_Controller*/
         $this->Player_Registration_model->formValidation();
 
         if ($this->form_validation->run() !== false) {
-            $this->Player_Registration_model->updateEntry($parameters['id'], array(
-                'player_id' => $this->form_validation->set_value('player_id', NULL),
-                'season' => $this->form_validation->set_value('season', NULL),
-            ));
+            $this->Player_Registration_model->processUpdate($parameters['id']);
 
             $playerRegistration = $this->Player_Registration_model->fetch($parameters['id']);
 

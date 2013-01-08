@@ -73,15 +73,7 @@ class League extends CI_Controller/*Backend_Controller*/
         $this->League_model->formValidation();
 
         if ($this->form_validation->run() !== false) {
-            $insertId = $this->League_model->insertEntry(array(
-                'competition_id' => $this->form_validation->set_value('competition_id', NULL),
-                'season' => $this->form_validation->set_value('season', NULL),
-                'name' => $this->form_validation->set_value('name', NULL),
-                'short_name' => $this->form_validation->set_value('short_name', NULL),
-                'abbreviation' => $this->form_validation->set_value('abbreviation', NULL),
-                'points_for_win' => $this->form_validation->set_value('points_for_win', NULL),
-                'points_for_draw' => $this->form_validation->set_value('points_for_draw', NULL),
-            ));
+            $insertId = $this->League_model->processInsert();
 
             $league = $this->League_model->fetch($insertId);
 
@@ -117,15 +109,7 @@ class League extends CI_Controller/*Backend_Controller*/
         $this->League_model->formValidation();
 
         if ($this->form_validation->run() !== false) {
-            $this->League_model->updateEntry($parameters['id'], array(
-                'competition_id' => $this->form_validation->set_value('competition_id', NULL),
-                'season' => $this->form_validation->set_value('season', NULL),
-                'name' => $this->form_validation->set_value('name', NULL),
-                'short_name' => $this->form_validation->set_value('short_name', NULL),
-                'abbreviation' => $this->form_validation->set_value('abbreviation', NULL),
-                'points_for_win' => $this->form_validation->set_value('points_for_win', NULL),
-                'points_for_draw' => $this->form_validation->set_value('points_for_draw', NULL),
-            ));
+            $this->League_model->processUpdate($parameters['id']);
 
             $league = $this->League_model->fetch($parameters['id']);
 

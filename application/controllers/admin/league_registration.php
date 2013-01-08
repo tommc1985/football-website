@@ -69,10 +69,7 @@ class League_Registration extends CI_Controller/*Backend_Controller*/
         $this->League_Registration_model->formValidation();
 
         if ($this->form_validation->run() !== false) {
-            $insertId = $this->League_Registration_model->insertEntry(array(
-                'name' => $this->form_validation->set_value('name', NULL),
-                'abbreviation' => $this->form_validation->set_value('abbreviation', NULL),
-            ));
+            $insertId = $this->League_Registration_model->processInsert();
 
             $leagueRegistration = $this->League_Registration_model->fetch($insertId);
 
@@ -108,10 +105,7 @@ class League_Registration extends CI_Controller/*Backend_Controller*/
         $this->League_Registration_model->formValidation();
 
         if ($this->form_validation->run() !== false) {
-            $this->League_Registration_model->updateEntry($parameters['id'], array(
-                'name' => $this->form_validation->set_value('name', NULL),
-                'abbreviation' => $this->form_validation->set_value('abbreviation', NULL),
-            ));
+            $this->League_Registration_model->processUpdate($parameters['id']);
 
             $leagueRegistration = $this->League_Registration_model->fetch($parameters['id']);
 

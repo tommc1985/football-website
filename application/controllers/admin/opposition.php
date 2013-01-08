@@ -67,9 +67,7 @@ class Opposition extends CI_Controller/*Backend_Controller*/
         $this->Opposition_model->formValidation();
 
         if ($this->form_validation->run() !== false) {
-            $insertId = $this->Opposition_model->insertEntry(array(
-                'name' => $this->form_validation->set_value('name', NULL),
-            ));
+            $insertId = $this->Opposition_model->processInsert();
 
             $opposition = $this->Opposition_model->fetch($insertId);
 
@@ -105,10 +103,7 @@ class Opposition extends CI_Controller/*Backend_Controller*/
         $this->Opposition_model->formValidation();
 
         if ($this->form_validation->run() !== false) {
-            $this->Opposition_model->updateEntry($parameters['id'], array(
-                'first_name' => $this->form_validation->set_value('first_name', NULL),
-                'surname' => $this->form_validation->set_value('surname', NULL),
-            ));
+            $this->Opposition_model->processUpdate($parameters['id']);
 
             $opposition = $this->Opposition_model->fetch($parameters['id']);
 

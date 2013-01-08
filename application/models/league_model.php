@@ -26,6 +26,41 @@ class League_model extends Base_Model {
     }
 
     /**
+     * Insert a League from a valid submitted form
+     * @return int Inserted ID
+     */
+    public function processInsert()
+    {
+        return $this->insertEntry(array(
+            'competition_id' => $this->ci->form_validation->set_value('competition_id', NULL),
+            'season' => $this->ci->form_validation->set_value('season', NULL),
+            'name' => $this->ci->form_validation->set_value('name', NULL),
+            'short_name' => $this->ci->form_validation->set_value('short_name', NULL),
+            'abbreviation' => $this->ci->form_validation->set_value('abbreviation', NULL),
+            'points_for_win' => $this->ci->form_validation->set_value('points_for_win', NULL),
+            'points_for_draw' => $this->ci->form_validation->set_value('points_for_draw', NULL),
+        ));
+    }
+
+    /**
+     * Update a League from a valid submitted form
+     * @param  int $int    ID
+     * @return int         Updated ID
+     */
+    public function processUpdate($id)
+    {
+        return $this->updateEntry($id, array(
+            'competition_id' => $this->ci->form_validation->set_value('competition_id', NULL),
+            'season' => $this->ci->form_validation->set_value('season', NULL),
+            'name' => $this->ci->form_validation->set_value('name', NULL),
+            'short_name' => $this->ci->form_validation->set_value('short_name', NULL),
+            'abbreviation' => $this->ci->form_validation->set_value('abbreviation', NULL),
+            'points_for_win' => $this->ci->form_validation->set_value('points_for_win', NULL),
+            'points_for_draw' => $this->ci->form_validation->set_value('points_for_draw', NULL),
+        ));
+    }
+
+    /**
      * Return string of fields to order a SQL statement by (dependent upon argument passed)
      * @param  string $orderBy Field Name
      * @return string          Field Names

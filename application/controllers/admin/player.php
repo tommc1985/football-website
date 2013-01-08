@@ -67,16 +67,7 @@ class Player extends CI_Controller/*Backend_Controller*/
         $this->Player_model->formValidation();
 
         if ($this->form_validation->run() !== false) {
-            $insertId = $this->Player_model->insertEntry(array(
-                'first_name' => $this->form_validation->set_value('first_name', NULL),
-                'surname' => $this->form_validation->set_value('surname', NULL),
-                'dob' => $this->form_validation->set_value('dob', NULL),
-                'nationality' => $this->form_validation->set_value('nationality', NULL),
-                'profile' => $this->form_validation->set_value('profile', NULL),
-                'current' => $this->form_validation->set_value('current', NULL),
-                'image_id' => $this->form_validation->set_value('image_id', NULL),
-                'gender' => $this->form_validation->set_value('gender', NULL),
-            ));
+            $insertId = $this->Player_model->processInsert();
 
             $player = $this->Player_model->fetch($insertId);
 
@@ -112,16 +103,7 @@ class Player extends CI_Controller/*Backend_Controller*/
         $this->Player_model->formValidation();
 
         if ($this->form_validation->run() !== false) {
-            $this->Player_model->updateEntry($parameters['id'], array(
-                'first_name' => $this->form_validation->set_value('first_name', NULL),
-                'surname' => $this->form_validation->set_value('surname', NULL),
-                'dob' => $this->form_validation->set_value('dob', NULL),
-                'nationality' => $this->form_validation->set_value('nationality', NULL),
-                'profile' => $this->form_validation->set_value('profile', NULL),
-                'current' => $this->form_validation->set_value('current', NULL),
-                'image_id' => $this->form_validation->set_value('image_id', NULL),
-                'gender' => $this->form_validation->set_value('gender', NULL),
-            ));
+            $this->Player_model->processUpdate($parameters['id']);
 
             $player = $this->Player_model->fetch($parameters['id']);
 

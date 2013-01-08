@@ -19,6 +19,29 @@ class Opposition_model extends Base_Model {
     }
 
     /**
+     * Insert a Opposition from a valid submitted form
+     * @return int Inserted ID
+     */
+    public function processInsert()
+    {
+        return $this->insertEntry(array(
+            'name' => $this->ci->form_validation->set_value('name', NULL),
+        ));
+    }
+
+    /**
+     * Update a Opposition from a valid submitted form
+     * @param  int $int    ID
+     * @return int         Updated ID
+     */
+    public function processUpdate($id)
+    {
+        return $this->updateEntry($id, array(
+            'name' => $this->ci->form_validation->set_value('name', NULL),
+        ));
+    }
+
+    /**
      * Return string of fields to order a SQL statement by (dependent upon argument passed)
      * @param  string $orderBy Field Name
      * @return string          Field Names

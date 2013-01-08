@@ -18,6 +18,57 @@ class Match_model extends Base_Model {
     }
 
     /**
+     * Insert a Match from a valid submitted form
+     * @return int Inserted ID
+     */
+    public function processInsert()
+    {
+        return $this->insertEntry(array(
+            'opposition_id' => $this->ci->form_validation->set_value('opposition_id', NULL),
+            'competition_id' => $this->ci->form_validation->set_value('competition_id', NULL),
+            'competition_stage_id' => $this->ci->form_validation->set_value('competition_stage_id', NULL),
+            'venue' => $this->ci->form_validation->set_value('venue', NULL),
+            'location' => $this->ci->form_validation->set_value('location', NULL),
+            'official_id' => $this->ci->form_validation->set_value('official_id', NULL),
+            'h' => $this->ci->form_validation->set_value('h', NULL),
+            'a' => $this->ci->form_validation->set_value('a', NULL),
+            'report' => $this->ci->form_validation->set_value('report', NULL),
+            'date' => $this->ci->form_validation->set_value('date', NULL) . ' ' . $this->ci->form_validation->set_value('time', NULL) . ':00',
+            'h_et' => $this->ci->form_validation->set_value('h_et', NULL),
+            'a_et' => $this->ci->form_validation->set_value('a_et', NULL),
+            'h_pen' => $this->ci->form_validation->set_value('h_pen', NULL),
+            'a_pen' => $this->ci->form_validation->set_value('a_pen', NULL),
+            'status' => $this->ci->form_validation->set_value('status', NULL),
+        ));
+    }
+
+    /**
+     * Update a Match from a valid submitted form
+     * @param  int $int    ID
+     * @return int         Updated ID
+     */
+    public function processUpdate($id)
+    {
+        return $this->updateEntry($id, array(
+            'opposition_id' => $this->ci->form_validation->set_value('opposition_id', NULL),
+            'competition_id' => $this->ci->form_validation->set_value('competition_id', NULL),
+            'competition_stage_id' => $this->ci->form_validation->set_value('competition_stage_id', NULL),
+            'venue' => $this->ci->form_validation->set_value('venue', NULL),
+            'location' => $this->ci->form_validation->set_value('location', NULL),
+            'official_id' => $this->ci->form_validation->set_value('official_id', NULL),
+            'h' => $this->ci->form_validation->set_value('h', NULL),
+            'a' => $this->ci->form_validation->set_value('a', NULL),
+            'report' => $this->ci->form_validation->set_value('report', NULL),
+            'date' => $this->ci->form_validation->set_value('date', NULL) . ' ' . $this->ci->form_validation->set_value('time', NULL) . ':00',
+            'h_et' => $this->ci->form_validation->set_value('h_et', NULL),
+            'a_et' => $this->ci->form_validation->set_value('a_et', NULL),
+            'h_pen' => $this->ci->form_validation->set_value('h_pen', NULL),
+            'a_pen' => $this->ci->form_validation->set_value('a_pen', NULL),
+            'status' => $this->ci->form_validation->set_value('status', NULL),
+        ));
+    }
+
+    /**
      * Fetch list of Venue options
      * @return array List of Venue options
      */

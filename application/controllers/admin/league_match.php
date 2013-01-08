@@ -87,15 +87,7 @@ class League_Match extends CI_Controller/*Backend_Controller*/
         $this->League_Match_model->formValidation();
 
         if ($this->form_validation->run() !== false) {
-            $insertId = $this->League_Match_model->insertEntry(array(
-                'league_id' => $this->form_validation->set_value('league_id', NULL),
-                'date' => $this->form_validation->set_value('date', NULL),
-                'h_opposition_id' => $this->form_validation->set_value('h_opposition_id', NULL),
-                'a_opposition_id' => $this->form_validation->set_value('a_opposition_id', NULL),
-                'h_score' => $this->form_validation->set_value('h_score', NULL),
-                'a_score' => $this->form_validation->set_value('a_score', NULL),
-                'status' => $this->form_validation->set_value('status', NULL),
-            ));
+            $insertId = $this->League_Match_model->processInsert();
 
             $leagueMatch = $this->League_Match_model->fetch($insertId);
 
@@ -133,15 +125,7 @@ class League_Match extends CI_Controller/*Backend_Controller*/
         $this->League_Match_model->formValidation();
 
         if ($this->form_validation->run() !== false) {
-            $this->League_Match_model->updateEntry($parameters['id'], array(
-                'league_id' => $this->form_validation->set_value('league_id', NULL),
-                'date' => $this->form_validation->set_value('date', NULL),
-                'h_opposition_id' => $this->form_validation->set_value('h_opposition_id', NULL),
-                'a_opposition_id' => $this->form_validation->set_value('a_opposition_id', NULL),
-                'h_score' => $this->form_validation->set_value('h_score', NULL),
-                'a_score' => $this->form_validation->set_value('a_score', NULL),
-                'status' => $this->form_validation->set_value('status', NULL),
-            ));
+            $this->League_Match_model->processUpdate($parameters['id']);
 
             $leagueMatch = $this->League_Match_model->fetch($parameters['id']);
 

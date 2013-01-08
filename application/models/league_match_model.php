@@ -19,6 +19,41 @@ class League_Match_model extends Base_Model {
     }
 
     /**
+     * Insert a League Match from a valid submitted form
+     * @return int Inserted ID
+     */
+    public function processInsert()
+    {
+        return $this->insertEntry(array(
+            'league_id' => $this->ci->form_validation->set_value('league_id', NULL),
+            'date' => $this->ci->form_validation->set_value('date', NULL),
+            'h_opposition_id' => $this->ci->form_validation->set_value('h_opposition_id', NULL),
+            'a_opposition_id' => $this->ci->form_validation->set_value('a_opposition_id', NULL),
+            'h_score' => $this->ci->form_validation->set_value('h_score', NULL),
+            'a_score' => $this->ci->form_validation->set_value('a_score', NULL),
+            'status' => $this->ci->form_validation->set_value('status', NULL),
+        ));
+    }
+
+    /**
+     * Update a League Match from a valid submitted form
+     * @param  int $int    ID
+     * @return int         Updated ID
+     */
+    public function processUpdate($id)
+    {
+        return $this->updateEntry($id, array(
+            'league_id' => $this->ci->form_validation->set_value('league_id', NULL),
+            'date' => $this->ci->form_validation->set_value('date', NULL),
+            'h_opposition_id' => $this->ci->form_validation->set_value('h_opposition_id', NULL),
+            'a_opposition_id' => $this->ci->form_validation->set_value('a_opposition_id', NULL),
+            'h_score' => $this->ci->form_validation->set_value('h_score', NULL),
+            'a_score' => $this->ci->form_validation->set_value('a_score', NULL),
+            'status' => $this->ci->form_validation->set_value('status', NULL),
+        ));
+    }
+
+    /**
      * Fetch list of Status options
      * @return array List of Status options
      */
@@ -56,7 +91,7 @@ class League_Match_model extends Base_Model {
         $this->ci->form_validation->set_rules('a_opposition_id', 'Away Team', 'trim|required|xss_clean');
         $this->ci->form_validation->set_rules('h_score', 'Home Score', 'trim|is_natural|xss_clean');
         $this->ci->form_validation->set_rules('a_score', 'Away Score', 'trim|is_natural|xss_clean');
-        $this->ci->form_validation->set_rules('status', 'Status', 'trim|regex_match[/^([hw])|([aw])|([p])|([a])$/]|xss_clean');
+        $this->ci->form_validation->set_rules('status', 'Status', 'trim|regex_match[/^(hw)|(aw)|(p)|(a)$/]|xss_clean');
     }
 
     /**

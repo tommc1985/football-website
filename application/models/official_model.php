@@ -19,6 +19,31 @@ class Official_model extends Base_Model {
     }
 
     /**
+     * Insert a Official from a valid submitted form
+     * @return int Inserted ID
+     */
+    public function processInsert()
+    {
+        return $this->insertEntry(array(
+            'first_name' => $this->ci->form_validation->set_value('first_name', NULL),
+            'surname' => $this->ci->form_validation->set_value('surname', NULL),
+        ));
+    }
+
+    /**
+     * Update a Official from a valid submitted form
+     * @param  int $int    ID
+     * @return int         Updated ID
+     */
+    public function processUpdate($id)
+    {
+        return $this->updateEntry($id, array(
+            'first_name' => $this->ci->form_validation->set_value('first_name', NULL),
+            'surname' => $this->ci->form_validation->set_value('surname', NULL),
+        ));
+    }
+
+    /**
      * Return string of fields to order a SQL statement by (dependent upon argument passed)
      * @param  string $orderBy Field Name
      * @return string          Field Names
@@ -45,8 +70,8 @@ class Official_model extends Base_Model {
     {
         $this->ci->load->library('form_validation');
 
-        $this->ci->form_validation->set_rules('first_name', 'First Name', "trim|required|regex_match[/^[A-Za-z -']+$/]|max_length[" . $this->config->item('first_name_max_length', 'player') . "]|xss_clean");
-        $this->ci->form_validation->set_rules('surname', 'Surname', "trim|required|regex_match[/^[A-Za-z -']+$/]|max_length[" . $this->config->item('surname_max_length', 'player') . "]|xss_clean");
+        $this->ci->form_validation->set_rules('first_name', 'First Name', "trim|required|regex_match[/^[A-Za-z -']+$/]|max_length[" . $this->config->item('first_name_max_length', 'official') . "]|xss_clean");
+        $this->ci->form_validation->set_rules('surname', 'Surname', "trim|required|regex_match[/^[A-Za-z -']+$/]|max_length[" . $this->config->item('surname_max_length', 'official') . "]|xss_clean");
     }
 
     /**

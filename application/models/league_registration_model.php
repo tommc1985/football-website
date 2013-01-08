@@ -21,6 +21,31 @@ class League_Registration_model extends Base_Model {
     }
 
     /**
+     * Insert a League Registration from a valid submitted form
+     * @return int Inserted ID
+     */
+    public function processInsert()
+    {
+        return $this->insertEntry(array(
+            'league_id' => $this->ci->form_validation->set_value('league_id', NULL),
+            'opposition_id' => $this->ci->form_validation->set_value('opposition_id', NULL),
+        ));
+    }
+
+    /**
+     * Update a League Registration from a valid submitted form
+     * @param  int $int    ID
+     * @return int         Updated ID
+     */
+    public function processUpdate($id)
+    {
+        return $this->updateEntry($id, array(
+            'league_id' => $this->ci->form_validation->set_value('league_id', NULL),
+            'opposition_id' => $this->ci->form_validation->set_value('opposition_id', NULL),
+        ));
+    }
+
+    /**
      * Apply Form Validation for Adding & Updating League Registrations
      * @return NULL
      */

@@ -18,6 +18,41 @@ class Competition_model extends Base_Model {
     }
 
     /**
+     * Insert a Competition from a valid submitted form
+     * @return int Inserted ID
+     */
+    public function processInsert()
+    {
+        return $this->insertEntry(array(
+            'name' => $this->ci->form_validation->set_value('name', NULL),
+            'short_name' => $this->ci->form_validation->set_value('short_name', NULL),
+            'abbreviation' => $this->ci->form_validation->set_value('abbreviation', NULL),
+            'type' => $this->ci->form_validation->set_value('type', NULL),
+            'starts' => $this->ci->form_validation->set_value('starts', NULL),
+            'subs' => $this->ci->form_validation->set_value('subs', NULL),
+            'competitive' => $this->ci->form_validation->set_value('competitive', NULL),
+        ));
+    }
+
+    /**
+     * Update a Competition from a valid submitted form
+     * @param  int $int    ID
+     * @return int         Updated ID
+     */
+    public function processUpdate($id)
+    {
+        return $this->updateEntry($id, array(
+            'name' => $this->ci->form_validation->set_value('name', NULL),
+            'short_name' => $this->ci->form_validation->set_value('short_name', NULL),
+            'abbreviation' => $this->ci->form_validation->set_value('abbreviation', NULL),
+            'type' => $this->ci->form_validation->set_value('type', NULL),
+            'starts' => $this->ci->form_validation->set_value('starts', NULL),
+            'subs' => $this->ci->form_validation->set_value('subs', NULL),
+            'competitive' => $this->ci->form_validation->set_value('competitive', NULL),
+        ));
+    }
+
+    /**
      * Fetch list of Types
      * @return array List of competition types
      */

@@ -19,6 +19,43 @@ class Player_model extends Base_Model {
     }
 
     /**
+     * Insert a Player from a valid submitted form
+     * @return int Inserted ID
+     */
+    public function processInsert()
+    {
+        return $this->insertEntry(array(
+            'first_name' => $this->ci->form_validation->set_value('first_name', NULL),
+            'surname' => $this->ci->form_validation->set_value('surname', NULL),
+            'dob' => $this->ci->form_validation->set_value('dob', NULL),
+            'nationality' => $this->ci->form_validation->set_value('nationality', NULL),
+            'profile' => $this->ci->form_validation->set_value('profile', NULL),
+            'current' => $this->ci->form_validation->set_value('current', NULL),
+            'image_id' => $this->ci->form_validation->set_value('image_id', NULL),
+            'gender' => $this->ci->form_validation->set_value('gender', NULL),
+        ));
+    }
+
+    /**
+     * Update a Player from a valid submitted form
+     * @param  int $int    ID
+     * @return int         Updated ID
+     */
+    public function processUpdate($id)
+    {
+        return $this->updateEntry($id, array(
+            'first_name' => $this->ci->form_validation->set_value('first_name', NULL),
+            'surname' => $this->ci->form_validation->set_value('surname', NULL),
+            'dob' => $this->ci->form_validation->set_value('dob', NULL),
+            'nationality' => $this->ci->form_validation->set_value('nationality', NULL),
+            'profile' => $this->ci->form_validation->set_value('profile', NULL),
+            'current' => $this->ci->form_validation->set_value('current', NULL),
+            'image_id' => $this->ci->form_validation->set_value('image_id', NULL),
+            'gender' => $this->ci->form_validation->set_value('gender', NULL),
+        ));
+    }
+
+    /**
      * Fetch list of genders
      * @return array List of genders
      */

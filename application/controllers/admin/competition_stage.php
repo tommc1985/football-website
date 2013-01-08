@@ -67,10 +67,7 @@ class Competition_Stage extends CI_Controller/*Backend_Controller*/
         $this->Competition_Stage_model->formValidation();
 
         if ($this->form_validation->run() !== false) {
-            $insertId = $this->Competition_Stage_model->insertEntry(array(
-                'name' => $this->form_validation->set_value('name', NULL),
-                'abbreviation' => $this->form_validation->set_value('abbreviation', NULL),
-            ));
+            $insertId = $this->Competition_Stage_model->processInsert();
 
             $competitionStage = $this->Competition_Stage_model->fetch($insertId);
 
@@ -106,10 +103,7 @@ class Competition_Stage extends CI_Controller/*Backend_Controller*/
         $this->Competition_Stage_model->formValidation();
 
         if ($this->form_validation->run() !== false) {
-            $this->Competition_Stage_model->updateEntry($parameters['id'], array(
-                'name' => $this->form_validation->set_value('name', NULL),
-                'abbreviation' => $this->form_validation->set_value('abbreviation', NULL),
-            ));
+            $this->Competition_Stage_model->processUpdate($parameters['id']);
 
             $competitionStage = $this->Competition_Stage_model->fetch($parameters['id']);
 
