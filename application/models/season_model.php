@@ -155,7 +155,7 @@ ORDER BY m.date ASC";
         $options = array();
 
         $i = $this->fetchCurrentSeason();
-        while ($i > 1990) { //@TODO
+        while ($i >= Configuration::get('earliest_season')) {
             $options[$i] = $i . "/" . ($i + 1) ;
 
             $i--;
