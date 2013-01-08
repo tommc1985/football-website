@@ -76,7 +76,7 @@ class League_Registration extends CI_Controller/*Backend_Controller*/
 
             $leagueRegistration = $this->League_Registration_model->fetch($insertId);
 
-            $this->session->set_flashdata('message', "League Match has been added");
+            $this->session->set_flashdata('message', "League Registration has been added");
             redirect('/admin/league-registration');
         }
 
@@ -115,7 +115,7 @@ class League_Registration extends CI_Controller/*Backend_Controller*/
 
             $leagueRegistration = $this->League_Registration_model->fetch($parameters['id']);
 
-            $this->session->set_flashdata('message', "League Match has been updated");
+            $this->session->set_flashdata('message', "League Registration has been updated");
             redirect('/admin/league-registration');
         }
 
@@ -148,7 +148,7 @@ class League_Registration extends CI_Controller/*Backend_Controller*/
 
         if ($this->input->post('confirm_delete') !== false) {
             $this->League_Registration_model->deleteEntry($parameters['id']);
-            $this->session->set_flashdata('message', "League Match has been deleted");
+            $this->session->set_flashdata('message', "League Registration has been deleted");
             redirect('/admin/league-registration');
         }
 
