@@ -15,6 +15,9 @@ class Competition_model extends Base_Model {
         parent::__construct();
 
         $this->tableName = 'competition';
+
+        $this->ci->load->model('League_model');
+        $this->ci->load->model('Match_model');
     }
 
     /**
@@ -131,6 +134,23 @@ class Competition_model extends Base_Model {
         }
 
         return $dropdownOptions;
+    }
+
+    /**
+     * Can the Competition be deleted without affecting other data
+     * @param  int $int    ID
+     * @return boolean Can the specified Competition be deleted?
+     */
+    public function isDeletable($id)
+    {
+        $leagues = $this->ci->League_model->fetchAllByField('competition_id', $id);
+        $matches = $this->ci->Match_model->fetchAllByField('competition_id', $id);
+
+        if ($leagues || $matches) {
+            return false;
+        }
+
+        return true;
     }
 
 }
