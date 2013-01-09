@@ -146,6 +146,11 @@ class Match extends CI_Controller/*Backend_Controller*/
 
         $data['match'] = $match;
 
+        if (!$this->Match_model->isDeletable($parameters['id'])) {
+            $this->load->view('admin/match/cannot_delete', $data);
+            return;
+        }
+
         if ($this->input->post('confirm_delete') !== false) {
             $this->Match_model->deleteEntry($parameters['id']);
             $this->session->set_flashdata('message', "Match has been deleted");

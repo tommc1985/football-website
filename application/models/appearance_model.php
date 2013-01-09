@@ -14,7 +14,7 @@ class Appearance_model extends Base_Model {
         // Call the Model constructor
         parent::__construct();
 
-        $this->tableName = 'matches';
+        $this->tableName = 'appearance';
     }
 
     /**
@@ -51,7 +51,7 @@ class Appearance_model extends Base_Model {
      */
     public function getOrderBy($orderBy)
     {
-        return 'date';
+        return 'order';
     }
 
     /**
