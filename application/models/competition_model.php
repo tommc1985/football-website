@@ -15,14 +15,6 @@ class Competition_model extends Base_Model {
         parent::__construct();
 
         $this->tableName = 'competition';
-
-        if (class_exists('League_model')) {
-            $this->ci->load->model('League_model');
-        }
-
-        if (class_exists('Match_model')) {
-            $this->ci->load->model('Match_model');
-        }
     }
 
     /**
@@ -116,8 +108,7 @@ class Competition_model extends Base_Model {
 
         $this->ci->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
         $this->ci->form_validation->set_rules('short_name', 'Short Name', 'trim|required|xss_clean');
-        $this->ci->form_validation->set_rules('abbreviation', 'Abbreviation', "trim|required|regex_match[/^[A-Za-z0-9']+$/]|max_length[" .
-        $this->config->item('abbreviation_max_length', 'competition') . "]|strtoupper|xss_clean");
+        $this->ci->form_validation->set_rules('abbreviation', 'Abbreviation', "trim|required|regex_match[/^[A-Za-z0-9']+$/]|max_length[" . $this->config->item('abbreviation_max_length', 'competition') . "]|strtoupper|xss_clean");
         $this->ci->form_validation->set_rules('type', 'Type', 'trim|xss_clean');
         $this->ci->form_validation->set_rules('starts', 'Starts', 'trim|is_natural_no_zero|xss_clean');
         $this->ci->form_validation->set_rules('subs', 'Substitutes', 'trim|is_natural|xss_clean');
@@ -148,8 +139,12 @@ class Competition_model extends Base_Model {
      */
     public function isDeletable($id)
     {
-        $leagues = $this->ci->League_model->fetchAllByField('competition_id', $id);
-        $matches = $this->ci->Match_model->fetchAllByField('competition_id', $id);
+        $ci =& get_instance();
+        $ci->load->model('League_model');
+        $ci->load->model('Match_model');
+
+        $leagues = $ci->League_model->fetchAllByField('competition_id', $id);
+        $matches = $ci->Match_model->fetchAllByField('competition_id', $id);
 
         if ($leagues || $matches) {
             return false;

@@ -16,14 +16,6 @@ class Opposition_model extends Base_Model {
         parent::__construct();
 
         $this->tableName = 'opposition';
-
-        if (class_exists('League_Match_model')) {
-            $this->ci->load->model('League_Match_model');
-        }
-
-        if (class_exists('League_Registration_model')) {
-            $this->ci->load->model('League_Registration_model');
-        }
     }
 
     /**
@@ -94,9 +86,13 @@ class Opposition_model extends Base_Model {
      */
     public function isDeletable($id)
     {
-        $homeLeagueMatches = $this->ci->League_Match_model->fetchAllByField('h_opposition_id', $id);
-        $awayLeagueMatches = $this->ci->League_Match_model->fetchAllByField('a_opposition_id', $id);
-        $leagueRegistrations = $this->ci->League_Registration_model->fetchAllByField('opposition_id', $id);
+        $ci =& get_instance();
+        $ci->load->model('League_Match_model');
+        $ci->load->model('League_Registration_model');
+
+        $homeLeagueMatches = $ci->League_Match_model->fetchAllByField('h_opposition_id', $id);
+        $awayLeagueMatches = $ci->League_Match_model->fetchAllByField('a_opposition_id', $id);
+        $leagueRegistrations = $ci->League_Registration_model->fetchAllByField('opposition_id', $id);
 
         if ($homeLeagueMatches || $awayLeagueMatches || $leagueRegistrations) {
             return false;

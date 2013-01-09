@@ -15,10 +15,6 @@ class Competition_Stage_model extends Base_Model {
         parent::__construct();
 
         $this->tableName = 'competition_stage';
-
-        if (class_exists('Match_model')) {
-            $this->ci->load->model('Match_model');
-        }
     }
 
     /**
@@ -98,7 +94,10 @@ class Competition_Stage_model extends Base_Model {
      */
     public function isDeletable($id)
     {
-        $matches = $this->ci->Match_model->fetchAllByField('competition_stage_id', $id);
+        $ci =& get_instance();
+        $ci->load->model('Match_model');
+
+        $matches = $ci->Match_model->fetchAllByField('competition_stage_id', $id);
 
         if ($matches) {
             return false;

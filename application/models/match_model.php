@@ -15,18 +15,6 @@ class Match_model extends Base_Model {
         parent::__construct();
 
         $this->tableName = 'matches';
-
-        if (class_exists('Appearance_model')) {
-            $this->ci->load->model('Appearance_model');
-        }
-
-        if (class_exists('Card_model')) {
-            $this->ci->load->model('Card_model');
-        }
-
-        if (class_exists('Goal_model')) {
-            $this->ci->load->model('Goal_model');
-        }
     }
 
     /**
@@ -150,11 +138,16 @@ class Match_model extends Base_Model {
      */
     public function isDeletable($id)
     {
-        $appearances = $this->ci->Appearance_model->fetchAllByField('match_id', $id);
-        $cards = $this->ci->Card_model->fetchAllByField('match_id', $id);
-        $goals = $this->ci->Goal_model->fetchAllByField('match_id', $id);
+        $ci =& get_instance();
+        $ci->load->model('Appearance_model');
+        $ci->load->model('Card_model');
+        $ci->load->model('Goal_model');
 
-        if ($appearances ||$cards ||$goals) {
+        $appearances = $ci->Appearance_model->fetchAllByField('match_id', $id);
+        $cards = $ci->Card_model->fetchAllByField('match_id', $id);
+        $goals = $ci->Goal_model->fetchAllByField('match_id', $id);
+
+        if ($appearances || $cards || $goals) {
             return false;
         }
 

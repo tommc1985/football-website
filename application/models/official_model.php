@@ -98,6 +98,15 @@ class Official_model extends Base_Model {
      */
     public function isDeletable($id)
     {
+        $ci =& get_instance();
+        $ci->load->model('Match_model');
+
+        $matches = $ci->Match_model->fetchAllByField('official_id', $id);
+
+        if ($matches) {
+            return false;
+        }
+
         return true;
     }
 
