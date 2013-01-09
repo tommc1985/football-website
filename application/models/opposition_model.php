@@ -18,6 +18,7 @@ class Opposition_model extends Base_Model {
         $this->tableName = 'opposition';
 
         $this->ci->load->model('League_Match_model');
+        $this->ci->load->model('League_Registration_model');
     }
 
     /**
