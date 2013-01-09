@@ -17,6 +17,7 @@ class League_Registration_model extends Base_Model {
 
         $this->tableName = 'league_registration';
 
+        $this->ci->load->model('League_Match_model');
         $this->ci->load->model('Opposition_model');
     }
 
@@ -95,6 +96,23 @@ class League_Registration_model extends Base_Model {
         }
 
         return $dropdownOptions;
+    }
+
+    /**
+     * Can the League Registration be deleted without affecting other data
+     * @param  int $int    ID
+     * @return boolean Can the specified League Registration be deleted?
+     */
+    public function isDeletable($id)
+    {
+        $homeLeagueMatches = $this->ci->League_Match_model->fetchAllByField('h_opposition_id', $id);
+        $awayLeagueMatches = $this->ci->League_Match_model->fetchAllByField('a_opposition_id', $id);
+
+        if ($homeLeagueMatches || $awayLeagueMatches) {
+            return false;
+        }
+
+        return true;
     }
 
 }
