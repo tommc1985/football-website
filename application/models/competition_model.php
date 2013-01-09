@@ -111,8 +111,7 @@ class Competition_model extends Base_Model {
 
         $this->ci->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
         $this->ci->form_validation->set_rules('short_name', 'Short Name', 'trim|required|xss_clean');
-        $this->ci->form_validation->set_rules('abbreviation', 'Abbreviation', "trim|required|regex_match[/^[A-Za-z0-9']+$/]|max_length[" .
-        $this->config->item('abbreviation_max_length', 'competition') . "]|strtoupper|xss_clean");
+        $this->ci->form_validation->set_rules('abbreviation', 'Abbreviation', "trim|required|regex_match[/^[A-Za-z0-9']+$/]|max_length[" . $this->config->item('abbreviation_max_length', 'competition') . "]|strtoupper|xss_clean");
         $this->ci->form_validation->set_rules('type', 'Type', 'trim|xss_clean');
         $this->ci->form_validation->set_rules('starts', 'Starts', 'trim|is_natural_no_zero|xss_clean');
         $this->ci->form_validation->set_rules('subs', 'Substitutes', 'trim|is_natural|xss_clean');
