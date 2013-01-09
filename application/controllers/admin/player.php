@@ -138,6 +138,11 @@ class Player extends CI_Controller/*Backend_Controller*/
 
         $data['player'] = $player;
 
+        if (!$this->Player_model->isDeletable($parameters['id'])) {
+            $this->load->view('admin/player/cannot_delete', $data);
+            return;
+        }
+
         if ($this->input->post('confirm_delete') !== false) {
             $this->Player_model->deleteEntry($parameters['id']);
             $this->session->set_flashdata('message', "{$data['player']->first_name} {$data['player']->surname} has been deleted");
