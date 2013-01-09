@@ -132,11 +132,16 @@ class Competition_Stage extends CI_Controller/*Backend_Controller*/
         }
 
         if (empty($competitionStage)) {
-            $this->load->view('admin/competition-stage/not_found', $data);
+            $this->load->view('admin/competition-stage/not_found');
             return;
         }
 
         $data['competitionStage'] = $competitionStage;
+
+        if (!$this->Competition_Stage_model->isDeletable($parameters['id'])) {
+            $this->load->view('admin/competition-stage/cannot_delete', $data);
+            return;
+        }
 
         if ($this->input->post('confirm_delete') !== false) {
             $this->Competition_Stage_model->deleteEntry($parameters['id']);
