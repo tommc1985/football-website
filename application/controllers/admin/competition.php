@@ -132,7 +132,7 @@ class Competition extends CI_Controller/*Backend_Controller*/
         }
 
         if (empty($competition)) {
-            $this->load->view('admin/competition/not_found', $data);
+            $this->load->view('admin/competition/not_found');
             return;
         }
 
