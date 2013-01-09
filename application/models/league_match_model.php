@@ -126,4 +126,14 @@ class League_Match_model extends Base_Model {
         return $this->db->get()->result();
     }
 
+    /**
+     * Can the League Match be deleted without affecting other data
+     * @param  int $int    ID
+     * @return boolean Can the specified League Match be deleted?
+     */
+    public function isDeletable($id)
+    {
+        return true;
+    }
+
 }
