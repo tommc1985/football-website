@@ -46,6 +46,16 @@ class League extends CI_Controller/*Backend_Controller*/
         $data['leagues'] = $this->League_model->fetchAll($perPage, $offset, $parameters['order-by'], $order);
 
         $config['base_url'] = '/admin/league/index/offset/';
+
+        if ($parameters['order-by']) {
+            $config['base_url'] .= "order-by/{$parameters['order-by']}/";
+        }
+
+        if ($parameters['order']) {
+            $config['base_url'] .= "order/{$parameters['order']}/";
+        }
+
+        $config['base_url'] .= 'offset/';
         $config['total_rows'] = $this->League_model->countAll();
         $config['per_page'] = $perPage;
         $config['cur_page'] = $offset;
