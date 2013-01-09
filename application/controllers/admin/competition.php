@@ -138,6 +138,11 @@ class Competition extends CI_Controller/*Backend_Controller*/
 
         $data['competition'] = $competition;
 
+        if (!$this->Competition_model->isDeletable($parameters['id'])) {
+            $this->load->view('admin/competition/cannot_delete', $data);
+            return;
+        }
+
         if ($this->input->post('confirm_delete') !== false) {
             $this->Competition_model->deleteEntry($parameters['id']);
             $this->session->set_flashdata('message', "Competition has been deleted");
