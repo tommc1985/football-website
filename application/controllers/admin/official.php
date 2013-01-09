@@ -138,6 +138,11 @@ class Official extends CI_Controller/*Backend_Controller*/
 
         $data['official'] = $official;
 
+        if (!$this->Official_model->isDeletable($parameters['id'])) {
+            $this->load->view('admin/official/cannot_delete', $data);
+            return;
+        }
+
         if ($this->input->post('confirm_delete') !== false) {
             $this->Official_model->deleteEntry($parameters['id']);
             $this->session->set_flashdata('message', "{$data['official']->first_name} {$data['official']->surname} has been deleted");
