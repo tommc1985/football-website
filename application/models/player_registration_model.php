@@ -17,7 +17,9 @@ class Player_Registration_model extends Base_Model {
 
         $this->tableName = 'player_registration';
 
-        $this->ci->load->model('Player_model');
+        if (class_exists('Player_model')) {
+            $this->ci->load->model('Player_model');
+        }
     }
 
     /**

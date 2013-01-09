@@ -16,7 +16,9 @@ class Competition_Stage_model extends Base_Model {
 
         $this->tableName = 'competition_stage';
 
-        $this->ci->load->model('Match_model');
+        if (class_exists('Match_model')) {
+            $this->ci->load->model('Match_model');
+        }
     }
 
     /**

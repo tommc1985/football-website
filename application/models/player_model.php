@@ -17,10 +17,21 @@ class Player_model extends Base_Model {
 
         $this->tableName = 'player';
 
-        $this->ci->load->model('Appearance_model');
-        $this->ci->load->model('Card_model');
-        $this->ci->load->model('Goal_model');
-        $this->ci->load->model('Player_Registration_model');
+        if (class_exists('Appearance_model')) {
+            $this->ci->load->model('Appearance_model');
+        }
+
+        if (class_exists('Card_model')) {
+            $this->ci->load->model('Card_model');
+        }
+
+        if (class_exists('Goal_model')) {
+            $this->ci->load->model('Goal_model');
+        }
+
+        if (class_exists('Player_Registration_model')) {
+            $this->ci->load->model('Player_Registration_model');
+        }
     }
 
     /**

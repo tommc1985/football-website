@@ -16,8 +16,13 @@ class Competition_model extends Base_Model {
 
         $this->tableName = 'competition';
 
-        $this->ci->load->model('League_model');
-        $this->ci->load->model('Match_model');
+        if (class_exists('League_model')) {
+            $this->ci->load->model('League_model');
+        }
+
+        if (class_exists('Match_model')) {
+            $this->ci->load->model('Match_model');
+        }
     }
 
     /**

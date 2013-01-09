@@ -17,8 +17,13 @@ class Opposition_model extends Base_Model {
 
         $this->tableName = 'opposition';
 
-        $this->ci->load->model('League_Match_model');
-        $this->ci->load->model('League_Registration_model');
+        if (class_exists('League_Match_model')) {
+            $this->ci->load->model('League_Match_model');
+        }
+
+        if (class_exists('League_Registration_model')) {
+            $this->ci->load->model('League_Registration_model');
+        }
     }
 
     /**
