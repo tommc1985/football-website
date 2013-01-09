@@ -97,4 +97,14 @@ class Player_Registration_model extends Base_Model {
         return $dropdownOptions;
     }
 
+    /**
+     * Can the Player Registrations be deleted without affecting other data
+     * @param  int $int    ID
+     * @return boolean Can the specified Player Registrations be deleted?
+     */
+    public function isDeletable($id)
+    {
+        return true;
+    }
+
 }
