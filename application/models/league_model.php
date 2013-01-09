@@ -23,6 +23,9 @@ class League_model extends Base_Model {
         $this->leagueTableName = 'league';
         $this->leagueMatchTableName = 'league_match';
         $this->leagueRegistrationTableName = 'league_registration';
+
+        $this->ci->load->model('League_Match_model');
+        $this->ci->load->model('League_Registration_model');
     }
 
     /**
@@ -216,6 +219,23 @@ OR lm.status = "aw"
         }
 
         return $options;
+    }
+
+    /**
+     * Can the League be deleted without affecting other data
+     * @param  int $int    ID
+     * @return boolean Can the specified League be deleted?
+     */
+    public function isDeletable($id)
+    {
+        $leagueMatches = $this->ci->League_Match_model->fetchAllByField('league_id', $id);
+        $leagueRegistrations = $this->ci->League_Registration_model->fetchAllByField('league_id', $id);
+
+        if ($leagueMatches || $leagueRegistrations) {
+            return false;
+        }
+
+        return true;
     }
 
 }
