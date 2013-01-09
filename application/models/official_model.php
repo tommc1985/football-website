@@ -91,4 +91,14 @@ class Official_model extends Base_Model {
         return $dropdownOptions;
     }
 
+    /**
+     * Can the Official be deleted without affecting other data
+     * @param  int $int    ID
+     * @return boolean Can the specified Official be deleted?
+     */
+    public function isDeletable($id)
+    {
+        return true;
+    }
+
 }
