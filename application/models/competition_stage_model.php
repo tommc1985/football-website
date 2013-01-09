@@ -15,6 +15,8 @@ class Competition_Stage_model extends Base_Model {
         parent::__construct();
 
         $this->tableName = 'competition_stage';
+
+        $this->ci->load->model('Match_model');
     }
 
     /**
