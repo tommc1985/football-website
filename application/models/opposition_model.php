@@ -16,6 +16,9 @@ class Opposition_model extends Base_Model {
         parent::__construct();
 
         $this->tableName = 'opposition';
+
+        $this->ci->load->model('League_Match_model');
+        $this->ci->load->model('League_Registration_model');
     }
 
     /**
@@ -77,6 +80,24 @@ class Opposition_model extends Base_Model {
         }
 
         return $dropdownOptions;
+    }
+
+    /**
+     * Can the Opposition be deleted without affecting other data
+     * @param  int $int    ID
+     * @return boolean Can the specified Opposition be deleted?
+     */
+    public function isDeletable($id)
+    {
+        $homeLeagueMatches = $this->ci->League_Match_model->fetchAllByField('h_opposition_id', $id);
+        $awayLeagueMatches = $this->ci->League_Match_model->fetchAllByField('a_opposition_id', $id);
+        $leagueRegistrations = $this->ci->League_Registration_model->fetchAllByField('opposition_id', $id);
+
+        if ($homeLeagueMatches || $awayLeagueMatches || $leagueRegistrations) {
+            return false;
+        }
+
+        return true;
     }
 
 }
