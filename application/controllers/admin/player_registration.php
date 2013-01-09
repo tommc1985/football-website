@@ -140,6 +140,11 @@ class Player_Registration extends CI_Controller/*Backend_Controller*/
 
         $data['playerRegistration'] = $playerRegistration;
 
+        if (!$this->Player_Registration_model->isDeletable($parameters['id'])) {
+            $this->load->view('admin/player-registration/cannot_delete', $data);
+            return;
+        }
+
         if ($this->input->post('confirm_delete') !== false) {
             $this->Player_Registration_model->deleteEntry($parameters['id']);
             $this->session->set_flashdata('message', "Player Registration has been deleted");
