@@ -138,6 +138,11 @@ class Opposition extends CI_Controller/*Backend_Controller*/
 
         $data['opposition'] = $opposition;
 
+        if (!$this->Opposition_model->isDeletable($parameters['id'])) {
+            $this->load->view('admin/opposition/cannot_delete', $data);
+            return;
+        }
+
         if ($this->input->post('confirm_delete') !== false) {
             $this->Opposition_model->deleteEntry($parameters['id']);
             $this->session->set_flashdata('message', "{$data['opposition']->name} has been deleted");
