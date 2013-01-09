@@ -3,6 +3,8 @@
 $configValues['start_month']                      = '6';
 $configValues['start_day']                        = '1';
 
+$configValues['earliest_season']                  = '1997';
+
 $configValues['usual_match_ko_time']              = '10:30';
 
 $configValues['starting_appearance_points']       = '2';
