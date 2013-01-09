@@ -138,11 +138,16 @@ class League extends CI_Controller/*Backend_Controller*/
         }
 
         if (empty($league)) {
-            $this->load->view('admin/league/not_found', $data);
+            $this->load->view('admin/league/not_found');
             return;
         }
 
         $data['league'] = $league;
+
+        if (!$this->League_model->isDeletable($parameters['id'])) {
+            $this->load->view('admin/league/cannot_delete', $data);
+            return;
+        }
 
         if ($this->input->post('confirm_delete') !== false) {
             $this->League_model->deleteEntry($parameters['id']);

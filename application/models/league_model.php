@@ -226,7 +226,7 @@ OR lm.status = "aw"
     public function isDeletable($id)
     {
         $ci =& get_instance();
-        $ci->load->model('League_model');
+        $ci->load->model('League_Match_model');
         $ci->load->model('League_Registration_model');
 
         $leagueMatches = $ci->League_Match_model->fetchAllByField('league_id', $id);
