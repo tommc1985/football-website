@@ -15,6 +15,10 @@ class Match_model extends Base_Model {
         parent::__construct();
 
         $this->tableName = 'matches';
+
+        $this->ci->load->model('Appearance_model');
+        $this->ci->load->model('Card_model');
+        $this->ci->load->model('Goal_model');
     }
 
     /**
@@ -129,6 +133,24 @@ class Match_model extends Base_Model {
         $this->ci->form_validation->set_rules('h_pen', 'Your Score Penalties', 'trim|is_natural|xss_clean');
         $this->ci->form_validation->set_rules('a_pen', 'Opposition Score Penalties', 'trim|is_natural|xss_clean');
         $this->ci->form_validation->set_rules('status', 'Status', 'trim|regex_match[/^(hw)|(aw)|(p)|(a)$/]|xss_clean');
+    }
+
+    /**
+     * Can the Match be deleted without affecting other data
+     * @param  int $int    ID
+     * @return boolean Can the specified Match be deleted?
+     */
+    public function isDeletable($id)
+    {
+        $appearances = $this->ci->Appearance_model->fetchAllByField('match_id', $id);
+        $cards = $this->ci->Card_model->fetchAllByField('match_id', $id);
+        $goals = $this->ci->Goal_model->fetchAllByField('match_id', $id);
+
+        if ($appearances ||$cards ||$goals) {
+            return false;
+        }
+
+        return true;
     }
 
 }
