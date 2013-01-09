@@ -87,4 +87,20 @@ class Competition_Stage_model extends Base_Model {
         return $dropdownOptions;
     }
 
+    /**
+     * Can the Competition Stage be deleted without affecting other data
+     * @param  int $int    ID
+     * @return boolean Can the specified Competition Stage be deleted?
+     */
+    public function isDeletable($id)
+    {
+        $matches = $this->ci->Match_model->fetchAllByField('competition_stage_id', $id);
+
+        if ($matches) {
+            return false;
+        }
+
+        return true;
+    }
+
 }
