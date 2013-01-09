@@ -140,6 +140,11 @@ class League_Registration extends CI_Controller/*Backend_Controller*/
 
         $data['leagueRegistration'] = $leagueRegistration;
 
+        if (!$this->League_Registration_model->isDeletable($leagueRegistration->opposition_id)) {
+            $this->load->view('admin/league-registration/cannot_delete', $data);
+            return;
+        }
+
         if ($this->input->post('confirm_delete') !== false) {
             $this->League_Registration_model->deleteEntry($parameters['id']);
             $this->session->set_flashdata('message', "League Registration has been deleted");
