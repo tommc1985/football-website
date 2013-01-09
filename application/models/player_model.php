@@ -16,6 +16,11 @@ class Player_model extends Base_Model {
         parent::__construct();
 
         $this->tableName = 'player';
+
+        $this->ci->load->model('Appearance_model');
+        $this->ci->load->model('Card_model');
+        $this->ci->load->model('Goal_model');
+        $this->ci->load->model('Player_Registration_model');
     }
 
     /**
@@ -123,6 +128,26 @@ class Player_model extends Base_Model {
         }
 
         return $dropdownOptions;
+    }
+
+    /**
+     * Can the Player be deleted without affecting other data
+     * @param  int $int    ID
+     * @return boolean Can the specified Player be deleted?
+     */
+    public function isDeletable($id)
+    {
+        $appearances = $this->ci->Appearance_model->fetchAllByField('player_id', $id);
+        $cards = $this->ci->Card_model->fetchAllByField('player_id', $id);
+        $goals = $this->ci->Goal_model->fetchAllByField('scorer_id', $id);
+        $assists = $this->ci->Goal_model->fetchAllByField('assist_id', $id);
+        $playerRegistrations = $this->ci->Player_Registration_model->fetchAllByField('player_id', $id);
+
+        if ($appearances || $cards || $goals || $assists || $playerRegistrations) {
+            return false;
+        }
+
+        return true;
     }
 
 }
