@@ -22,6 +22,8 @@ class Appearance extends CI_Controller/*Backend_Controller*/
         $this->load->model('Match_model');
         $this->load->model('Official_model');
         $this->load->model('Opposition_model');
+        $this->load->model('Player_model');
+        $this->load->model('Position_model');
         $this->load->config('match', true);
     }
 
@@ -47,7 +49,12 @@ class Appearance extends CI_Controller/*Backend_Controller*/
             return;
         }
 
-        $this->Match_model->formValidation();
+        $competition = $this->Competition_model->fetch($match->competition_id);
+
+        $data['playerCounts'] = array('starts' => $competition->starts,
+                'subs' => $competition->subs);
+
+        $this->Match_model->formValidation($competition->starts, $competition->subs);
 
         if ($this->form_validation->run() !== false) {
             $this->Match_model->updateEntry($parameters['id'], array(
