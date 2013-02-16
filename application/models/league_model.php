@@ -89,8 +89,8 @@ class League_model extends Base_Model {
         $this->ci->form_validation->set_rules('name', 'Name', "trim|required|max_length[" . $this->config->item('name_max_length', 'league') . "]|xss_clean");
         $this->ci->form_validation->set_rules('short_name', 'Short Name', "trim|required|max_length[" . $this->config->item('short_name_max_length', 'league') . "]|xss_clean");
         $this->ci->form_validation->set_rules('abbreviation', 'Abbreviation', "trim|required|max_length[" . $this->config->item('abbreviation_max_length', 'league') . "]|regex_match[/^[A-Za-z0-9']+$/]|strtoupper|xss_clean");
-        $this->ci->form_validation->set_rules('points_for_win', 'Points for win', 'trim|required|integer|xss_clean');
-        $this->ci->form_validation->set_rules('points_for_draw', 'Points for draw', 'trim|required|integer|xss_clean');
+        $this->ci->form_validation->set_rules('points_for_win', 'Points for win', 'trim|required|is_natural|xss_clean');
+        $this->ci->form_validation->set_rules('points_for_draw', 'Points for draw', 'trim|required|is_natural|xss_clean');
     }
 
     /**
@@ -226,7 +226,7 @@ OR lm.status = "aw"
     public function isDeletable($id)
     {
         $ci =& get_instance();
-        $ci->load->model('League_model');
+        $ci->load->model('League_Match_model');
         $ci->load->model('League_Registration_model');
 
         $leagueMatches = $ci->League_Match_model->fetchAllByField('league_id', $id);

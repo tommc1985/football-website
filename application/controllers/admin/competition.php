@@ -40,6 +40,16 @@ class Competition extends CI_Controller/*Backend_Controller*/
         $data['competitions'] = $this->Competition_model->fetchAll($perPage, $offset, $parameters['order-by'], $parameters['order']);
 
         $config['base_url'] = '/admin/competition/index/offset/';
+
+        if ($parameters['order-by']) {
+            $config['base_url'] .= "order-by/{$parameters['order-by']}/";
+        }
+
+        if ($parameters['order']) {
+            $config['base_url'] .= "order/{$parameters['order']}/";
+        }
+
+        $config['base_url'] .= 'offset/';
         $config['total_rows'] = $this->Competition_model->countAll();
         $config['per_page'] = $perPage;
         $config['cur_page'] = $offset;
@@ -132,7 +142,7 @@ class Competition extends CI_Controller/*Backend_Controller*/
         }
 
         if (empty($competition)) {
-            $this->load->view('admin/competition/not_found', $data);
+            $this->load->view('admin/competition/not_found');
             return;
         }
 

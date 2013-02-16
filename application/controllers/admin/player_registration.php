@@ -42,6 +42,16 @@ class Player_Registration extends CI_Controller/*Backend_Controller*/
         $data['playerRegistrations'] = $this->Player_Registration_model->fetchAll($perPage, $offset, $parameters['order-by'], $parameters['order']);
 
         $config['base_url'] = '/admin/player-registration/index/offset/';
+
+        if ($parameters['order-by']) {
+            $config['base_url'] .= "order-by/{$parameters['order-by']}/";
+        }
+
+        if ($parameters['order']) {
+            $config['base_url'] .= "order/{$parameters['order']}/";
+        }
+
+        $config['base_url'] .= 'offset/';
         $config['total_rows'] = $this->Player_Registration_model->countAll();
         $config['per_page'] = $perPage;
         $config['cur_page'] = $offset;
@@ -139,6 +149,11 @@ class Player_Registration extends CI_Controller/*Backend_Controller*/
         }
 
         $data['playerRegistration'] = $playerRegistration;
+
+        if (!$this->Player_Registration_model->isDeletable($parameters['id'])) {
+            $this->load->view('admin/player-registration/cannot_delete', $data);
+            return;
+        }
 
         if ($this->input->post('confirm_delete') !== false) {
             $this->Player_Registration_model->deleteEntry($parameters['id']);
