@@ -42,6 +42,16 @@ class League_Registration extends CI_Controller/*Backend_Controller*/
         $data['leagueRegistrations'] = $this->League_Registration_model->fetchAll($perPage, $offset, $parameters['order-by'], $parameters['order']);
 
         $config['base_url'] = '/admin/league-registration/index/offset/';
+
+        if ($parameters['order-by']) {
+            $config['base_url'] .= "order-by/{$parameters['order-by']}/";
+        }
+
+        if ($parameters['order']) {
+            $config['base_url'] .= "order/{$parameters['order']}/";
+        }
+
+        $config['base_url'] .= 'offset/';
         $config['total_rows'] = $this->League_Registration_model->countAll();
         $config['per_page'] = $perPage;
         $config['cur_page'] = $offset;
@@ -139,6 +149,11 @@ class League_Registration extends CI_Controller/*Backend_Controller*/
         }
 
         $data['leagueRegistration'] = $leagueRegistration;
+
+        if (!$this->League_Registration_model->isDeletable($leagueRegistration->opposition_id)) {
+            $this->load->view('admin/league-registration/cannot_delete', $data);
+            return;
+        }
 
         if ($this->input->post('confirm_delete') !== false) {
             $this->League_Registration_model->deleteEntry($parameters['id']);

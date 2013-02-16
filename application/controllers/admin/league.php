@@ -46,6 +46,16 @@ class League extends CI_Controller/*Backend_Controller*/
         $data['leagues'] = $this->League_model->fetchAll($perPage, $offset, $parameters['order-by'], $order);
 
         $config['base_url'] = '/admin/league/index/offset/';
+
+        if ($parameters['order-by']) {
+            $config['base_url'] .= "order-by/{$parameters['order-by']}/";
+        }
+
+        if ($parameters['order']) {
+            $config['base_url'] .= "order/{$parameters['order']}/";
+        }
+
+        $config['base_url'] .= 'offset/';
         $config['total_rows'] = $this->League_model->countAll();
         $config['per_page'] = $perPage;
         $config['cur_page'] = $offset;
@@ -138,11 +148,16 @@ class League extends CI_Controller/*Backend_Controller*/
         }
 
         if (empty($league)) {
-            $this->load->view('admin/league/not_found', $data);
+            $this->load->view('admin/league/not_found');
             return;
         }
 
         $data['league'] = $league;
+
+        if (!$this->League_model->isDeletable($parameters['id'])) {
+            $this->load->view('admin/league/cannot_delete', $data);
+            return;
+        }
 
         if ($this->input->post('confirm_delete') !== false) {
             $this->League_model->deleteEntry($parameters['id']);

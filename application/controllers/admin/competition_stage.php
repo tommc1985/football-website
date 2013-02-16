@@ -40,6 +40,16 @@ class Competition_Stage extends CI_Controller/*Backend_Controller*/
         $data['competitionStages'] = $this->Competition_Stage_model->fetchAll($perPage, $offset, $parameters['order-by'], $parameters['order']);
 
         $config['base_url'] = '/admin/competition-stage/index/offset/';
+
+        if ($parameters['order-by']) {
+            $config['base_url'] .= "order-by/{$parameters['order-by']}/";
+        }
+
+        if ($parameters['order']) {
+            $config['base_url'] .= "order/{$parameters['order']}/";
+        }
+
+        $config['base_url'] .= 'offset/';
         $config['total_rows'] = $this->Competition_Stage_model->countAll();
         $config['per_page'] = $perPage;
         $config['cur_page'] = $offset;
@@ -132,11 +142,16 @@ class Competition_Stage extends CI_Controller/*Backend_Controller*/
         }
 
         if (empty($competitionStage)) {
-            $this->load->view('admin/competition-stage/not_found', $data);
+            $this->load->view('admin/competition-stage/not_found');
             return;
         }
 
         $data['competitionStage'] = $competitionStage;
+
+        if (!$this->Competition_Stage_model->isDeletable($parameters['id'])) {
+            $this->load->view('admin/competition-stage/cannot_delete', $data);
+            return;
+        }
 
         if ($this->input->post('confirm_delete') !== false) {
             $this->Competition_Stage_model->deleteEntry($parameters['id']);

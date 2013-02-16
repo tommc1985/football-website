@@ -40,6 +40,16 @@ class Official extends CI_Controller/*Backend_Controller*/
         $data['officials'] = $this->Official_model->fetchAll($perPage, $offset, $parameters['order-by'], $parameters['order']);
 
         $config['base_url'] = '/admin/official/index/offset/';
+
+        if ($parameters['order-by']) {
+            $config['base_url'] .= "order-by/{$parameters['order-by']}/";
+        }
+
+        if ($parameters['order']) {
+            $config['base_url'] .= "order/{$parameters['order']}/";
+        }
+
+        $config['base_url'] .= 'offset/';
         $config['total_rows'] = $this->Official_model->countAll();
         $config['per_page'] = $perPage;
         $config['cur_page'] = $offset;
@@ -137,6 +147,11 @@ class Official extends CI_Controller/*Backend_Controller*/
         }
 
         $data['official'] = $official;
+
+        if (!$this->Official_model->isDeletable($parameters['id'])) {
+            $this->load->view('admin/official/cannot_delete', $data);
+            return;
+        }
 
         if ($this->input->post('confirm_delete') !== false) {
             $this->Official_model->deleteEntry($parameters['id']);
