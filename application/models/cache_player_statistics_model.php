@@ -104,14 +104,45 @@ class Cache_Player_Statistics_model extends CI_Model {
      */
     public function insertEntry($byType = NULL, $season = NULL, $cacheData = NULL)
     {
-        $data = array(
-            'by_type' => $byType,
-            'season' => $season,
-            'cache_data' => $cacheData,
-            'date_added' => time(),
-            'date_updated' => time());
+        if (!$this->entryExists($byType, $season, $cacheData)) {
+            $data = array(
+                'by_type' => $byType,
+                'season' => $season,
+                'cache_data' => $cacheData,
+                'date_added' => time(),
+                'date_updated' => time());
 
-        return $this->db->insert($this->queueTableName, $data);
+            return $this->db->insert($this->queueTableName, $data);
+        }
+
+        return false;
+    }
+
+    /**
+     * Does an entry with the specified parameters already exist in the queue
+     * @param  int|NULL $byType         Group by "type" or "overall"
+     * @param  int|NULL $season         Season "career"
+     * @param  string|NULL $cacheData   What specific data to cache
+     * @return boolean                  Does the queue entry already exist?
+     */
+    public function entryExists($byType, $season, $cacheData)
+    {
+        $this->db->select('*')
+            ->from($this->queueTableName)
+            ->where('by_type', $byType)
+            ->where('season', $season)
+            ->where('cache_data', $cacheData)
+            ->where('in_progress', 0)
+            ->where('completed', 0)
+            ->where('deleted', 0);
+
+        $result = $this->db->get()->result();
+
+        if (count($result) > 0) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

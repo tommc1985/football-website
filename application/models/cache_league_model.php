@@ -49,12 +49,39 @@ class Cache_League_model extends CI_Model {
      */
     public function insertEntry($leagueId)
     {
-        $data = array(
-            'league_id' => $leagueId,
-            'date_added' => time(),
-            'date_updated' => time());
+        if (!$this->entryExists($leagueId)) {
+            $data = array(
+                'league_id' => $leagueId,
+                'date_added' => time(),
+                'date_updated' => time());
 
-        return $this->db->insert($this->queueTableName, $data);
+            return $this->db->insert($this->queueTableName, $data);
+        }
+
+        return false;
+    }
+
+    /**
+     * Does an entry with the specified parameters already exist in the queue
+     * @param  int $leagueId        League ID
+     * @return boolean              Does the queue entry already exist?
+     */
+    public function entryExists($leagueId)
+    {
+        $this->db->select('*')
+            ->from($this->queueTableName)
+            ->where('league_id', $leagueId)
+            ->where('in_progress', 0)
+            ->where('completed', 0)
+            ->where('deleted', 0);
+
+        $result = $this->db->get()->result();
+
+        if (count($result) > 0) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

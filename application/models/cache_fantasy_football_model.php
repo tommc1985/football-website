@@ -59,13 +59,42 @@ class Cache_Fantasy_Football_model extends CI_Model {
      */
     public function insertEntry($byType = NULL, $season = NULL)
     {
-        $data = array(
-            'by_type' => $byType,
-            'season' => $season,
-            'date_added' => time(),
-            'date_updated' => time());
+        if (!$this->entryExists($byType, $season)) {
+            $data = array(
+                'by_type' => $byType,
+                'season' => $season,
+                'date_added' => time(),
+                'date_updated' => time());
 
-        return $this->db->insert($this->queueTableName, $data);
+            return $this->db->insert($this->queueTableName, $data);
+        }
+
+        return false;
+    }
+
+    /**
+     * Does an entry with the specified parameters already exist in the queue
+     * @param  int|NULL $byType         Group by "type" or "overall"
+     * @param  int|NULL $season         Season "career"
+     * @return boolean                  Does the queue entry already exist?
+     */
+    public function entryExists($byType = NULL, $season = NULL)
+    {
+        $this->db->select('*')
+            ->from($this->queueTableName)
+            ->where('by_type', $byType)
+            ->where('season', $season)
+            ->where('in_progress', 0)
+            ->where('completed', 0)
+            ->where('deleted', 0);
+
+        $result = $this->db->get()->result();
+
+        if (count($result) > 0) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
