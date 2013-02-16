@@ -25,7 +25,7 @@ class Position_model extends Base_Model {
      */
     public function getOrderBy($orderBy)
     {
-        return 'id';
+        return 'sort_order';
     }
 
     /**
