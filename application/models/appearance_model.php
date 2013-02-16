@@ -18,44 +18,58 @@ class Appearance_model extends Base_Model {
     }
 
     /**
-     * Fetch list of Venue options
-     * @return array List of Venue options
+     * Insert a Match from a valid submitted form
+     * @return int Inserted ID
      */
-    public static function fetchVenues()
+    public function processInsert()
     {
-        return array(
-            'h' => 'Home',
-            'a' => 'Away',
-            'n'  => 'Neutral',
-        );
+        return $this->insertEntry(array(
+            'opposition_id' => $this->ci->form_validation->set_value('opposition_id', NULL),
+            'competition_id' => $this->ci->form_validation->set_value('competition_id', NULL),
+            'competition_stage_id' => $this->ci->form_validation->set_value('competition_stage_id', NULL),
+            'venue' => $this->ci->form_validation->set_value('venue', NULL),
+            'location' => $this->ci->form_validation->set_value('location', NULL),
+            'official_id' => $this->ci->form_validation->set_value('official_id', NULL),
+            'h' => $this->ci->form_validation->set_value('h', NULL),
+            'a' => $this->ci->form_validation->set_value('a', NULL),
+            'report' => $this->ci->form_validation->set_value('report', NULL),
+            'date' => $this->ci->form_validation->set_value('date', NULL) . ' ' . $this->ci->form_validation->set_value('time', NULL) . ':00',
+            'h_et' => $this->ci->form_validation->set_value('h_et', NULL),
+            'a_et' => $this->ci->form_validation->set_value('a_et', NULL),
+            'h_pen' => $this->ci->form_validation->set_value('h_pen', NULL),
+            'a_pen' => $this->ci->form_validation->set_value('a_pen', NULL),
+            'status' => $this->ci->form_validation->set_value('status', NULL),
+        ));
     }
 
     /**
-     * Fetch list of Status options
-     * @return array List of Status options
+     * Update a Match from a valid submitted form
+     * @param  int $int    ID
+     * @return int         Updated ID
      */
-    public static function fetchStatuses()
+    public function processUpdate($id)
     {
-        return array(
-            'hw' => 'Home Win',
-            'aw' => 'Away Win',
-            'p'  => 'Postponed',
-            'a'  => 'Abandoned',
-        );
+        return $this->updateEntry($id, array(
+            'opposition_id' => $this->ci->form_validation->set_value('opposition_id', NULL),
+            'competition_id' => $this->ci->form_validation->set_value('competition_id', NULL),
+            'competition_stage_id' => $this->ci->form_validation->set_value('competition_stage_id', NULL),
+            'venue' => $this->ci->form_validation->set_value('venue', NULL),
+            'location' => $this->ci->form_validation->set_value('location', NULL),
+            'official_id' => $this->ci->form_validation->set_value('official_id', NULL),
+            'h' => $this->ci->form_validation->set_value('h', NULL),
+            'a' => $this->ci->form_validation->set_value('a', NULL),
+            'report' => $this->ci->form_validation->set_value('report', NULL),
+            'date' => $this->ci->form_validation->set_value('date', NULL) . ' ' . $this->ci->form_validation->set_value('time', NULL) . ':00',
+            'h_et' => $this->ci->form_validation->set_value('h_et', NULL),
+            'a_et' => $this->ci->form_validation->set_value('a_et', NULL),
+            'h_pen' => $this->ci->form_validation->set_value('h_pen', NULL),
+            'a_pen' => $this->ci->form_validation->set_value('a_pen', NULL),
+            'status' => $this->ci->form_validation->set_value('status', NULL),
+        ));
     }
 
     /**
-     * Return string of fields to order a SQL statement by (dependent upon argument passed)
-     * @param  string $orderBy Field Name
-     * @return string          Field Names
-     */
-    public function getOrderBy($orderBy)
-    {
-        return 'order';
-    }
-
-    /**
-     * Apply Form Validation for Adding & Updating Matches
+     * Apply Form Validation for Adding & Updating Appearance Data
      * @return NULL
      */
     public function formValidation()
