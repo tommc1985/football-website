@@ -154,4 +154,25 @@ class Match_model extends Base_Model {
         return true;
     }
 
+    /**
+     * Fetch the earliest match stored in the system
+     * @return object         Earliest match
+     */
+    public function fetchEarliest()
+    {
+        $this->db->select('*')
+            ->from($this->tableName)
+            ->where('deleted', 0)
+            ->order_by('date', 'asc')
+            ->limit(1, 0);
+
+        $matches = $this->db->get()->result();
+
+        if (count($matches) > 0) {
+            return reset($matches);
+        }
+
+        return false;
+    }
+
 }
