@@ -17,6 +17,7 @@ class Appearance extends CI_Controller/*Backend_Controller*/
 
         $this->load->database();
         $this->load->library('session');
+        $this->load->model('Appearance_model');
         $this->load->model('Competition_model');
         $this->load->model('Competition_Stage_model');
         $this->load->model('Match_model');
@@ -51,11 +52,13 @@ class Appearance extends CI_Controller/*Backend_Controller*/
             return;
         }
 
+        $data['appearances'] = $this->Appearance_model->fetch($match->id);
         $data['season'] = Season_model::fetchSeasonFromDateTime($match->date);
         $competition = $this->Competition_model->fetch($match->competition_id);
 
-        $data['playerCounts'] = array('starts' => $competition->starts,
-                'subs' => $competition->subs);
+        $data['playerCounts'] = array(
+            'starts' => $competition->starts,
+            'subs' => $competition->subs);
 
         $this->Match_model->formValidation($competition->starts, $competition->subs);
 
