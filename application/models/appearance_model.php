@@ -69,6 +69,40 @@ class Appearance_model extends Base_Model {
     }
 
     /**
+     * Fetch appearance data for a particular match
+     * @param  int $matchId  The ID for the specified Match
+     * @return object|false  The object (or false if not found)
+     */
+    public function fetch($matchId)
+    {
+        $this->db->select('*')
+            ->from($this->tableName)
+            ->where('match_id', $matchId)
+            ->where('deleted', 0)
+            ->order_by('order');
+
+        $result = $this->db->get()->result();
+
+        $appearances = array(
+            'starts' => array(),
+            'subs' => array());
+
+        foreach ($result as $appearance) {
+            switch ($appearance->status) {
+                case 'starter':
+                    $appearances['starts'][] = $appearance;
+                    break;
+                case 'substitute':
+                case 'unused':
+                    $appearances['subs'][] = $appearance;
+                    break;
+            }
+        }
+
+        return $appearances;
+    }
+
+    /**
      * Apply Form Validation for Adding & Updating Appearance Data
      * @return NULL
      */
