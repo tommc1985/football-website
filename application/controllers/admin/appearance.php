@@ -23,6 +23,7 @@ class Appearance extends CI_Controller/*Backend_Controller*/
         $this->load->model('Official_model');
         $this->load->model('Opposition_model');
         $this->load->model('Player_model');
+        $this->load->model('Player_Registration_model');
         $this->load->model('Position_model');
         $this->load->model('Season_model');
         $this->load->config('match', true);
@@ -50,7 +51,7 @@ class Appearance extends CI_Controller/*Backend_Controller*/
             return;
         }
 
-
+        $data['season'] = Season_model::fetchCurrentSeasonFromDateTime($match->date);
         $competition = $this->Competition_model->fetch($match->competition_id);
 
         $data['playerCounts'] = array('starts' => $competition->starts,

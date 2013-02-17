@@ -17,7 +17,7 @@ foreach ($playerCounts as $appearanceType => $playerCount) {
         $player_id[$appearanceType][$i] = array(
             'name'    => "player_id[{$appearanceType}][{$i}]",
             'id'      => "player_id_{$appearanceType}_{$i}",
-            'options' => array('' => '--- Select ---') + $this->Player_model->fetchForDropdown(),
+            'options' => array('' => '--- Select ---') + $this->Player_Registration_model->fetchForDropdown($season),
             'value'   => set_value("player_id[{$appearanceType}][{$i}]"),
         );
 
