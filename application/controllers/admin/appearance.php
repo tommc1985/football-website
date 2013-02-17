@@ -24,6 +24,7 @@ class Appearance extends CI_Controller/*Backend_Controller*/
         $this->load->model('Opposition_model');
         $this->load->model('Player_model');
         $this->load->model('Position_model');
+        $this->load->model('Season_model');
         $this->load->config('match', true);
     }
 
@@ -48,6 +49,7 @@ class Appearance extends CI_Controller/*Backend_Controller*/
             $this->load->view('admin/appearance/not_found', $data);
             return;
         }
+
 
         $competition = $this->Competition_model->fetch($match->competition_id);
 
