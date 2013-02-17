@@ -46,7 +46,7 @@ class Season_model extends CI_Model {
     /**
      * Fetch which season a particular date is in, depending upon the Timestamp supplied
      * @param  int $startMonth                  Month season starts
-     * @param  int $startDay                    May season starts
+     * @param  int $startDay                    Day season starts
      * @param  int|NULL $comparisonTimestamp    Timestamp for comparison, leave empty for current timestamp
      * @return int                              Four digit integer
      */
