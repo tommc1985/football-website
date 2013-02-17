@@ -48,11 +48,11 @@ class Season_model extends CI_Model {
      * @param  string $matchDate                Date of the match
      * @return int                              Four digit integer
      */
-    public static function fetchCurrentSeasonFromDateTime($matchDate)
+    public static function fetchSeasonFromDateTime($matchDate)
     {
         $timestamp = strtotime($matchDate);
 
-        return self::fetchSeason(date("m", $timestamp), date("d", $timestamp));
+        return self::fetchSeason(self::$startMonth, self::$startDay, $timestamp);
     }
 
     /**

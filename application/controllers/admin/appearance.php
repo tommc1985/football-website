@@ -51,7 +51,8 @@ class Appearance extends CI_Controller/*Backend_Controller*/
             return;
         }
 
-        $data['season'] = Season_model::fetchCurrentSeasonFromDateTime($match->date);
+        $data['season'] = Season_model::fetchSeasonFromDateTime($match->date);
+        var_dump($data);die();
         $competition = $this->Competition_model->fetch($match->competition_id);
 
         $data['playerCounts'] = array('starts' => $competition->starts,
