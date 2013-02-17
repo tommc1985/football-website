@@ -76,7 +76,7 @@ class Player_Registration_model extends Base_Model {
         $this->db->where('season', $season);
         $this->db->where("{$this->tableName}.deleted", 0);
         $this->db->where("{$this->ci->Player_model->tableName}.deleted", 0);
-        $this->db->order_by("{$this->ci->Player_model->tableName}.name", "asc");
+        $this->db->order_by("{$this->ci->Player_model->tableName}.surname, {$this->ci->Player_model->tableName}.first_name", "asc");
 
         return $this->db->get()->result();
     }
