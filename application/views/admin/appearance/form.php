@@ -48,7 +48,7 @@ foreach ($playerCounts as $appearanceType => $playerCount) {
         $position[$appearanceType][$i] = array(
             'name'  => "position[{$appearanceType}][{$i}]",
             'id'    => "position_{$appearanceType}_{$i}",
-            'options' => array('' => '--- Select ---') + $this->Position_model->fetchForDropdown(),
+            'options' => array('' => '---') + $this->Position_model->fetchForDropdown(),
             'value' => set_value("position[{$appearanceType}][{$i}]"),
         );
 
