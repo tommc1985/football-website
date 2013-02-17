@@ -65,7 +65,7 @@ class Season_model extends CI_Model {
     public static function fetchSeason($startMonth, $startDay, $comparisonTimestamp = NULL)
     {
         $comparisonTimestamp = is_null($comparisonTimestamp) ? time() : $comparisonTimestamp;
-        $endTimestamp        = mktime(0, 0, 0, $startMonth, $startDay);
+        $endTimestamp        = mktime(0, 0, 0, $startMonth, $startDay, date("Y", $comparisonTimestamp));
 
         return (int) ($comparisonTimestamp < $endTimestamp ? date("Y", $comparisonTimestamp) - 1 : date("Y", $comparisonTimestamp));
     }
