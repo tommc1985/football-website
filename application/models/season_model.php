@@ -44,6 +44,18 @@ class Season_model extends CI_Model {
     }
 
     /**
+     * Fetch current season from MySQL DateTime
+     * @param  string $matchDate                Date of the match
+     * @return int                              Four digit integer
+     */
+    public static function fetchCurrentSeasonFromDateTime($matchDate)
+    {
+        $timestamp = strtotime($matchDate);
+
+        return self::fetchSeason(date("m", $timestamp), date("d", $timestamp));
+    }
+
+    /**
      * Fetch which season a particular date is in, depending upon the Timestamp supplied
      * @param  int $startMonth                  Month season starts
      * @param  int $startDay                    Day season starts
