@@ -60,10 +60,10 @@ class Appearance extends CI_Controller/*Backend_Controller*/
             'starts' => $competition->starts,
             'subs' => $competition->subs);
 
-        $this->Match_model->formValidation($competition->starts, $competition->subs);
+        $this->Appearance_model->formValidation($data['playerCounts']);
 
         if ($this->form_validation->run() !== false) {
-            $this->Match_model->updateEntry($parameters['id'], array(
+            /*$this->Match_model->updateEntry($parameters['id'], array(
                 'opposition_id' => $this->form_validation->set_value('opposition_id', NULL),
                 'competition_id' => $this->form_validation->set_value('competition_id', NULL),
                 'competition_stage_id' => $this->form_validation->set_value('competition_stage_id', NULL),
@@ -81,10 +81,10 @@ class Appearance extends CI_Controller/*Backend_Controller*/
                 'status' => $this->form_validation->set_value('status', NULL),
             ));
 
-            $match = $this->Match_model->fetch($parameters['id']);
+            $match = $this->Match_model->fetch($parameters['id']);*/
 
-            $this->session->set_flashdata('message', "Appearances have been updated");
-            redirect('/admin/appearance');
+            //$this->session->set_flashdata('message', "Appearances have been updated");
+            //redirect('/admin/appearance');
         }
 
         $data['match'] = $match;
