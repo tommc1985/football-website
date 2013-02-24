@@ -6,6 +6,7 @@ $match_id = array(
 );
 
 $noMotm = true;
+$injuries = is_null($this->input->post("injury")) ? array() : $this->input->post("injury");
 foreach ($playerCounts as $appearanceType => $playerCount) {
     $i = 0;
     while($i < $playerCount) {
@@ -50,7 +51,7 @@ foreach ($playerCounts as $appearanceType => $playerCount) {
         $injury[$appearanceType][$i] = array(
             'name'  => "injury[{$appearanceType}][{$i}]",
             'id'    => "injury_{$appearanceType}_{$i}",
-            'checked' => isset($appearances[$appearanceType][$i]->injury) && $appearances[$appearanceType][$i]->injury == 1 ? true : false,
+            'checked' => (isset($injuries[$appearanceType]) && in_array($i, $injuries[$appearanceType])) || isset($appearances[$appearanceType][$i]->injury) && $appearances[$appearanceType][$i]->injury == 1 ? true : false,
             'value' => $i,
         );
 
@@ -58,7 +59,7 @@ foreach ($playerCounts as $appearanceType => $playerCount) {
             'name'  => "position[{$appearanceType}][{$i}]",
             'id'    => "position_{$appearanceType}_{$i}",
             'options' => array('' => '---') + $this->Position_model->fetchForDropdown(),
-            'value' => set_value("position[{$appearanceType}][{$i}]", isset($appearances[$appearanceType][$i]->position) ?$appearances[$appearanceType][$i]->position : ''),
+            'value' => set_value("position[{$appearanceType}][{$i}]", isset($appearances[$appearanceType][$i]->position) ? $appearances[$appearanceType][$i]->position : ''),
         );
 
         $order[$appearanceType][$i] = array(
@@ -70,21 +71,21 @@ foreach ($playerCounts as $appearanceType => $playerCount) {
         $shirt[$appearanceType][$i] = array(
             'name'  => "shirt[{$appearanceType}][{$i}]",
             'id'    => "shirt_{$appearanceType}_{$i}",
-            'value' => set_value("shirt[{$appearanceType}][{$i}]", isset($appearances[$appearanceType][$i]->shirt) ?$appearances[$appearanceType][$i]->shirt : ''),
+            'value' => set_value("shirt[{$appearanceType}][{$i}]", isset($appearances[$appearanceType][$i]->shirt) ? $appearances[$appearanceType][$i]->shirt : ''),
             'maxlength' => 3,
         );
 
         $on[$appearanceType][$i] = array(
             'name'  => "on[{$appearanceType}][{$i}]",
             'id'    => "on_{$appearanceType}_{$i}",
-            'value' => set_value("on[{$appearanceType}][{$i}]", isset($appearances[$appearanceType][$i]->on) ?$appearances[$appearanceType][$i]->on : ''),
+            'value' => set_value("on[{$appearanceType}][{$i}]", isset($appearances[$appearanceType][$i]->on) ? $appearances[$appearanceType][$i]->on : ''),
             'maxlength' => 3,
         );
 
         $off[$appearanceType][$i] = array(
             'name'  => "off[{$appearanceType}][{$i}]",
             'id'    => "off_{$appearanceType}_{$i}",
-            'value' => set_value("off[{$appearanceType}][{$i}]", isset($appearances[$appearanceType][$i]->off) ?$appearances[$appearanceType][$i]->off : '' ),
+            'value' => set_value("off[{$appearanceType}][{$i}]", isset($appearances[$appearanceType][$i]->off) ? $appearances[$appearanceType][$i]->off : '' ),
             'maxlength' => 3,
         );
 
