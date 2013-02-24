@@ -5,6 +5,7 @@ $match_id = array(
     'value' => set_value('match_id', $match->id),
 );
 
+$noMotm = true;
 foreach ($playerCounts as $appearanceType => $playerCount) {
     $i = 0;
     while($i < $playerCount) {
@@ -40,6 +41,10 @@ foreach ($playerCounts as $appearanceType => $playerCount) {
             'checked' => isset($appearances[$appearanceType][$i]->motm) && $appearances[$appearanceType][$i]->motm == 1 ? true : false,
             'value'   => $i,
         );
+
+        if (isset($appearances[$appearanceType][$i]->motm) && $appearances[$appearanceType][$i]->motm == 1) {
+            $noMotm = false;
+        }
 
         $injury[$appearanceType][$i] = array(
             'name'  => "injury[{$appearanceType}][{$i}]",
@@ -83,6 +88,13 @@ foreach ($playerCounts as $appearanceType => $playerCount) {
     }
 }
 
+$motm['no_motm'] = array(
+    'name'    => "motm",
+    'id'      => "motm_no_motm",
+    'checked' => $noMotm,
+    'value'   => 0,
+);
+
 echo form_open($this->uri->uri_string()); ?>
 <table>
     <?php echo form_hidden($match_id['name'], $match_id['value']); ?>
@@ -117,5 +129,8 @@ echo form_open($this->uri->uri_string()); ?>
         }
     } ?>
 </table>
+
+<p><?php echo form_label('No Man of the Match', ''); ?><?php echo form_radio($motm['no_motm']); ?></p>
+
 <?php echo form_submit('submit', $submitButtonText); ?>
 <?php echo form_close(); ?>
