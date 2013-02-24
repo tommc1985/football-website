@@ -95,8 +95,8 @@ class Appearance extends CI_Controller/*Backend_Controller*/
 
     /**
      * Check if the player has only been selected once
-     * @param  int  $playerId [description]
-     * @return boolean        [description]
+     * @param  int  $playerId The specified Player ID
+     * @return boolean        Has the player been chosen more than once for the same game?
      */
     public function is_unique_player_id($playerId)
     {
