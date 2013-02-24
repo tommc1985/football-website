@@ -119,7 +119,7 @@ class Appearance_model extends Base_Model {
             $i = 0;
             while($i < $playerCount) {
                 $this->ci->form_validation->set_rules("id[{$appearanceType}][{$i}]", "Appearance Id", 'trim|integer|xss_clean');
-                $this->ci->form_validation->set_rules("player_id[{$appearanceType}][{$i}]", "Player Id", 'trim|integer|xss_clean');
+                $this->ci->form_validation->set_rules("player_id[{$appearanceType}][{$i}]", "Player Id", "trim|integer|callback_is_unique_player_id|xss_clean");
                 $this->ci->form_validation->set_rules("rating[{$appearanceType}][{$i}]", "Rating", 'trim|integer|xss_clean');
                 $this->ci->form_validation->set_rules("injury[{$appearanceType}][]", "Injury", 'trim|integer|xss_clean');
                 $this->ci->form_validation->set_rules("position[{$appearanceType}][{$i}]", "Position", 'trim|integer|xss_clean');

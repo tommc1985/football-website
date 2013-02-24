@@ -32,7 +32,7 @@ foreach ($playerCounts as $appearanceType => $playerCount) {
         $rating[$appearanceType][$i] = array(
             'name'  => "rating[{$appearanceType}][{$i}]",
             'id'    => "rating_{$appearanceType}_{$i}",
-            'value' => set_value("rating[{$appearanceType}][{$i}]", isset($appearances[$appearanceType][$i]->rating) ?$appearances[$appearanceType][$i]->rating : ''),
+            'value' => set_value("rating[{$appearanceType}][{$i}]", isset($appearances[$appearanceType][$i]->rating) ? $appearances[$appearanceType][$i]->rating : ''),
         );
 
         $motm[$appearanceType][$i] = array(

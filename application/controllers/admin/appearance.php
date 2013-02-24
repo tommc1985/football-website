@@ -59,6 +59,7 @@ class Appearance extends CI_Controller/*Backend_Controller*/
         $data['playerCounts'] = array(
             'starts' => $competition->starts,
             'subs' => $competition->subs);
+        $this->playerCounts = $data['playerCounts'];
 
         $this->Appearance_model->formValidation($data['playerCounts']);
 
@@ -90,6 +91,42 @@ class Appearance extends CI_Controller/*Backend_Controller*/
         $data['match'] = $match;
 
         $this->load->view('admin/appearance/edit', $data);
+    }
+
+    /**
+     * Check if the player has only been selected once
+     * @param  int  $playerId [description]
+     * @return boolean        [description]
+     */
+    public function is_unique_player_id($playerId)
+    {
+        $values = array();
+        $playerIdValues = $this->input->post("player_id");
+
+        foreach ($this->playerCounts as $appearanceType => $playerCount) {
+            $i = 0;
+            while($i < $playerCount) {
+                $value = $playerIdValues[$appearanceType][$i];
+
+                if (!empty($value)) {
+                    $values[] = $value;
+                }
+
+                $i++;
+            }
+        }
+
+        $valuesCounted = array_count_values($values);
+
+        if (isset($valuesCounted[$playerId]) && $valuesCounted[$playerId] > 1)
+        {
+            $this->form_validation->set_message('is_unique_player_id', 'This Player has been selected more than once for the same match');
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
+        }
     }
 }
 
