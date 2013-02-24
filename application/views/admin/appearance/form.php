@@ -127,7 +127,7 @@ echo form_open($this->uri->uri_string()); ?>
         <td><?php echo form_checkbox($injury[$appearanceType][$i]); ?></td>
         <td><?php echo form_dropdown($position[$appearanceType][$i]['name'], $position[$appearanceType][$i]['options'], $position[$appearanceType][$i]['value']); ?></td>
         <td><?php echo form_input($shirt[$appearanceType][$i]); ?></td>
-        <td><?php echo form_input($on[$appearanceType][$i]); ?></td>
+        <td><?php echo $appearanceType == 'starts' ? '' : form_input($on[$appearanceType][$i]); ?></td>
         <td><?php echo form_input($off[$appearanceType][$i]); ?></td>
     </tr>
     <?php
