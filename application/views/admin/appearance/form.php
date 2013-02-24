@@ -33,6 +33,7 @@ foreach ($playerCounts as $appearanceType => $playerCount) {
             'name'  => "rating[{$appearanceType}][{$i}]",
             'id'    => "rating_{$appearanceType}_{$i}",
             'value' => set_value("rating[{$appearanceType}][{$i}]", isset($appearances[$appearanceType][$i]->rating) ? $appearances[$appearanceType][$i]->rating : ''),
+            'maxlength' => 3,
         );
 
         $motm[$appearanceType][$i] = array(
@@ -70,18 +71,21 @@ foreach ($playerCounts as $appearanceType => $playerCount) {
             'name'  => "shirt[{$appearanceType}][{$i}]",
             'id'    => "shirt_{$appearanceType}_{$i}",
             'value' => set_value("shirt[{$appearanceType}][{$i}]", isset($appearances[$appearanceType][$i]->shirt) ?$appearances[$appearanceType][$i]->shirt : ''),
+            'maxlength' => 3,
         );
 
         $on[$appearanceType][$i] = array(
             'name'  => "on[{$appearanceType}][{$i}]",
             'id'    => "on_{$appearanceType}_{$i}",
             'value' => set_value("on[{$appearanceType}][{$i}]", isset($appearances[$appearanceType][$i]->on) ?$appearances[$appearanceType][$i]->on : ''),
+            'maxlength' => 3,
         );
 
         $off[$appearanceType][$i] = array(
             'name'  => "off[{$appearanceType}][{$i}]",
             'id'    => "off_{$appearanceType}_{$i}",
             'value' => set_value("off[{$appearanceType}][{$i}]", isset($appearances[$appearanceType][$i]->off) ?$appearances[$appearanceType][$i]->off : '' ),
+            'maxlength' => 3,
         );
 
         $i++;

@@ -24,8 +24,11 @@ $configValues['man_of_the_match_points']          = '10';
 $configValues['yellow_card_points']               = '-5';
 $configValues['red_card_points']                  = '-15';
 
-
 $configValues['per_page']                         = '25';
+
+$configValues['max_appearance_rating']            = '100';
+
+$configValues['max_minute']                       = '120';
 
 class Configuration {
     public function _construct() {}
