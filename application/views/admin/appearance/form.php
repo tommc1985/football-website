@@ -40,11 +40,11 @@ foreach ($playerCounts as $appearanceType => $playerCount) {
         $motm[$appearanceType][$i] = array(
             'name'    => "motm",
             'id'      => "motm_{$appearanceType}_{$i}",
-            'checked' => set_radio('motm', $i, isset($appearances[$appearanceType][$i]->motm) && $appearances[$appearanceType][$i]->motm == 1),
-            'value'   => $i,
+            'checked' => set_radio('motm', "{$appearanceType}_{$i}", isset($appearances[$appearanceType][$i]->motm) && $appearances[$appearanceType][$i]->motm == 1),
+            'value'   => "{$appearanceType}_{$i}",
         );
 
-        if (set_radio('motm', $i, isset($appearances[$appearanceType][$i]->motm) && $appearances[$appearanceType][$i]->motm == 1)) {
+        if (set_radio('motm', "{$appearanceType}_{$i}", isset($appearances[$appearanceType][$i]->motm) && $appearances[$appearanceType][$i]->motm == 1)) {
             $noMotm = false;
         }
 

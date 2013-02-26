@@ -113,7 +113,7 @@ class Appearance_model extends Base_Model {
 
         $this->ci->form_validation->set_rules('match_id', 'Match', 'trim|required|integer|xss_clean');
         $this->ci->form_validation->set_rules("captain", 'Captain', 'trim|required|integer|xss_clean');
-        $this->ci->form_validation->set_rules("motm", 'Man of the Match', 'trim|required|integer|xss_clean');
+        $this->ci->form_validation->set_rules("motm", 'Man of the Match', 'trim|required|xss_clean');
 
         foreach ($playerCounts as $appearanceType => $playerCount) {
             $i = 0;
