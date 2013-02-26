@@ -122,7 +122,7 @@ echo form_open($this->uri->uri_string()); ?>
         while($i < $playerCount) { ?>
     <tr>
         <td><?php echo form_hidden($id[$appearanceType][$i]['name'], $id[$appearanceType][$i]['value']); ?><?php echo form_dropdown($player_id[$appearanceType][$i]['name'], $player_id[$appearanceType][$i]['options'], $player_id[$appearanceType][$i]['value']); ?></td>
-        <td><?php echo form_radio($captain[$appearanceType][$i]); ?></td>
+        <td><?php echo $appearanceType == 'starts' ? form_radio($captain[$appearanceType][$i]) : ''; ?></td>
         <td><?php echo form_input($rating[$appearanceType][$i]); ?></td>
         <td><?php echo form_radio($motm[$appearanceType][$i]); ?></td>
         <td><?php echo form_checkbox($injury[$appearanceType][$i]); ?></td>
