@@ -64,28 +64,80 @@ class Appearance extends CI_Controller/*Backend_Controller*/
         $this->Appearance_model->formValidation($data['playerCounts']);
 
         if ($this->form_validation->run() !== false) {
-            /*$this->Match_model->updateEntry($parameters['id'], array(
-                'opposition_id' => $this->form_validation->set_value('opposition_id', NULL),
-                'competition_id' => $this->form_validation->set_value('competition_id', NULL),
-                'competition_stage_id' => $this->form_validation->set_value('competition_stage_id', NULL),
-                'venue' => $this->form_validation->set_value('venue', NULL),
-                'location' => $this->form_validation->set_value('location', NULL),
-                'official_id' => $this->form_validation->set_value('official_id', NULL),
-                'h' => $this->form_validation->set_value('h', NULL),
-                'a' => $this->form_validation->set_value('a', NULL),
-                'report' => $this->form_validation->set_value('report', NULL),
-                'date' => $this->form_validation->set_value('date', NULL) . ' ' . $this->form_validation->set_value('time', NULL) . ':00',
-                'h_et' => $this->form_validation->set_value('h_et', NULL),
-                'a_et' => $this->form_validation->set_value('a_et', NULL),
-                'h_pen' => $this->form_validation->set_value('h_pen', NULL),
-                'a_pen' => $this->form_validation->set_value('a_pen', NULL),
-                'status' => $this->form_validation->set_value('status', NULL),
-            ));
+            $matchId = $parameters['id'];
+            $selectedCaptain = $this->form_validation->set_value("captain", '');
+            $selectedMotm = $this->form_validation->set_value("motm", '');
+            $injuries = $this->input->post("injury", '');
 
-            $match = $this->Match_model->fetch($parameters['id']);*/
+            $j = 1;
+            foreach ($this->playerCounts as $appearanceType => $playerCount) {
+                $i = 0;
+                while($i < $playerCount) {
+                    $id       = $this->form_validation->set_value("id[{$appearanceType}][{$i}]", '');
+                    $playerId = $this->form_validation->set_value("player_id[{$appearanceType}][{$i}]", '');
+                    $captain  = $selectedCaptain == $i ? 1 : 0;
+                    $rating   = $this->form_validation->set_value("rating[{$appearanceType}][{$i}]", '');
+                    $motm     = $selectedMotm == "{$appearanceType}_{$i}" ? 1 : 0;
+                    $injury   = isset($injuries[$appearanceType]) && in_array($i, $injuries[$appearanceType]) ? 1 : 0;
+                    $position = $this->form_validation->set_value("position[{$appearanceType}][{$i}]", '');
+                    $order    = $j;
+                    $shirt    = $this->form_validation->set_value("shirt[{$appearanceType}][{$i}]", '');
+                    $on       = $this->form_validation->set_value("on[{$appearanceType}][{$i}]", '');
+                    $off      = $this->form_validation->set_value("off[{$appearanceType}][{$i}]", '');
+                    $status   = $appearanceType == 'starts' ? 'starter' : $on != '' ? 'substitute' : 'unused';
 
-            //$this->session->set_flashdata('message', "Appearances have been updated");
-            //redirect('/admin/appearance');
+                        $a = array(
+                            'id' => $id,
+                            'match_id' => $matchId,
+                            'player_id' => $playerId,
+                            'rating' => $rating,
+                            'motm' => $motm,
+                            'injury' => $injury,
+                            'position' => $position,
+                            'order' => $order,
+                            'shirt' => $shirt,
+                            'status' => $status,
+                            'on' => $on,
+                            'off' => $off,
+                        );
+
+                        echo '<pre>';
+                        var_dump($a);
+                        echo '</pre>';
+
+
+                    if (empty($id)) { // Insert
+                    } else { // Update or Delete
+                        if (empty($playerId)) { // Delete
+                            //$this->Appearance_model->deleteEntry($id);
+                        } else { // Update
+                            /*$this->Appearance_model->updateEntry($parameters['id'], array(
+                                'opposition_id' => $this->form_validation->set_value("player_id[{$appearanceType}][{$i}]", NULL),
+                                'competition_id' => $this->form_validation->set_value('competition_id', NULL),
+                                'competition_stage_id' => $this->form_validation->set_value('competition_stage_id', NULL),
+                                'venue' => $this->form_validation->set_value('venue', NULL),
+                                'location' => $this->form_validation->set_value('location', NULL),
+                                'official_id' => $this->form_validation->set_value('official_id', NULL),
+                                'h' => $this->form_validation->set_value('h', NULL),
+                                'a' => $this->form_validation->set_value('a', NULL),
+                                'report' => $this->form_validation->set_value('report', NULL),
+                                'date' => $this->form_validation->set_value('date', NULL) . ' ' . $this->form_validation->set_value('time', NULL) . ':00',
+                                'h_et' => $this->form_validation->set_value('h_et', NULL),
+                                'a_et' => $this->form_validation->set_value('a_et', NULL),
+                                'h_pen' => $this->form_validation->set_value('h_pen', NULL),
+                                'a_pen' => $this->form_validation->set_value('a_pen', NULL),
+                                'status' => $this->form_validation->set_value('status', NULL),
+                            ));*/
+                        }
+                    }
+
+                    $i++;
+                    $j++;
+                }
+            }
+
+            //$this->session->set_flashdata('message', "Appearances for Match {$match->id} have been updated");
+            //redirect('/admin/match');
         }
 
         $data['match'] = $match;
