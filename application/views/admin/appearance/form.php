@@ -62,12 +62,6 @@ foreach ($playerCounts as $appearanceType => $playerCount) {
             'value' => set_value("position[{$appearanceType}][{$i}]", isset($appearances[$appearanceType][$i]->position) ? $appearances[$appearanceType][$i]->position : ''),
         );
 
-        $order[$appearanceType][$i] = array(
-            'name'  => "order[{$appearanceType}][{$i}]",
-            'id'    => "order_{$appearanceType}_{$i}",
-            'value' => ($i + 1),
-        );
-
         $shirt[$appearanceType][$i] = array(
             'name'  => "shirt[{$appearanceType}][{$i}]",
             'id'    => "shirt_{$appearanceType}_{$i}",
