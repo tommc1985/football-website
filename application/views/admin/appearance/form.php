@@ -31,7 +31,7 @@ foreach ($playerCounts as $appearanceType => $playerCount) {
         );
 
         $rating[$appearanceType][$i] = array(
-            'name'  => "rating[{$appearanceType}][{$i}]",
+            'name'  => "rating[]",
             'id'    => "rating_{$appearanceType}_{$i}",
             'value' => set_value("rating[{$appearanceType}][{$i}]", isset($appearances[$appearanceType][$i]->rating) ? $appearances[$appearanceType][$i]->rating : ''),
             'maxlength' => 3,
