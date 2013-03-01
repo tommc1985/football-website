@@ -26,7 +26,7 @@ foreach ($playerCounts as $appearanceType => $playerCount) {
         $captain[$appearanceType][$i] = array(
             'name'    => "captain",
             'id'      => "captain_{$appearanceType}_{$i}",
-            'checked' => set_radio('captain', $i, isset($appearances[$appearanceType][$i]->captain) && $appearances[$appearanceType][$i]->captain),
+            'checked' => set_radio('captain', $i, isset($appearances[$appearanceType][$i]->captain) && $appearances[$appearanceType][$i]->captain == 1),
             'value'   => $i,
         );
 
