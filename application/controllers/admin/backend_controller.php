@@ -19,4 +19,4 @@ class Backend_Controller extends CI_Controller
 }
 
 /* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
+/* Location: ./application/controllers/admin/backend_controller.php */
