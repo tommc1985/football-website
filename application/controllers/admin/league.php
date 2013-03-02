@@ -170,4 +170,4 @@ class League extends CI_Controller/*Backend_Controller*/
 }
 
 /* End of file league.php */
-/* Location: ./application/controllers/league.php */
+/* Location: ./application/controllers/admin/league.php */
