@@ -139,4 +139,4 @@ class Appearance extends CI_Controller/*Backend_Controller*/
 }
 
 /* End of file goal.php */
-/* Location: ./application/controllers/goal.php */
+/* Location: ./application/controllers/admin/goal.php */
