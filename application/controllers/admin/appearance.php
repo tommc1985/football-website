@@ -267,4 +267,4 @@ class Appearance extends CI_Controller/*Backend_Controller*/
 }
 
 /* End of file appearance.php */
-/* Location: ./application/controllers/appearance.php */
+/* Location: ./application/controllers/admin/appearance.php */
