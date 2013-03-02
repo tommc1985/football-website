@@ -200,7 +200,7 @@ class Appearance extends CI_Controller/*Backend_Controller*/
      * Has a rating been set for the specified player
      * @param  int  $value    Rating Value
      * @param  int  $indexes  Indexes of Rating field
-     * @return boolean        Is the selected captain a valid choice
+     * @return boolean        Has a Rating value been entered (if it should be)
      */
     public function is_rating_set($value, $indexes)
     {
@@ -211,7 +211,7 @@ class Appearance extends CI_Controller/*Backend_Controller*/
         list($appearanceType, $index) = explode("_", $indexes);
 
         if ($value == '' &&  $playerIdValues[$appearanceType][$index] != '' && ($appearanceType == 'starts' || ($appearanceType == 'subs' && isset($onValues[$appearanceType][$index]) && $onValues[$appearanceType][$index] != ''))) {
-            $this->form_validation->set_message('is_rating_set', 'No rating has been entered for this Player');
+            $this->form_validation->set_message('is_rating_set', 'No Rating has been entered for this Player');
             return FALSE;
         }
 
