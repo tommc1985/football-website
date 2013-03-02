@@ -164,4 +164,4 @@ class Competition_Stage extends CI_Controller/*Backend_Controller*/
 }
 
 /* End of file competition_stage.php */
-/* Location: ./application/controllers/competition_stage.php */
+/* Location: ./application/controllers/admin/competition_stage.php */
