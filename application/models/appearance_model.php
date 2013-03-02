@@ -118,16 +118,16 @@ class Appearance_model extends Base_Model {
         foreach ($playerCounts as $appearanceType => $playerCount) {
             $i = 0;
             while($i < $playerCount) {
-                $this->ci->form_validation->set_rules("id[{$appearanceType}][{$i}]", "Appearance Id", 'trim|integer|xss_clean');
+                $this->ci->form_validation->set_rules("id[{$appearanceType}][{$i}]", "Appearance Id", "trim|integer|xss_clean");
                 $this->ci->form_validation->set_rules("player_id[{$appearanceType}][{$i}]", "Player Id", "trim|integer|callback_is_unique_player_id|xss_clean");
-                $this->ci->form_validation->set_rules("rating[{$appearanceType}][{$i}]", "Rating", 'trim|integer|less_than[' . (Configuration::get('max_appearance_rating') + 1) . ']|greater_than[0]|xss_clean');
-                $this->ci->form_validation->set_rules("injury[{$appearanceType}][]", "Injury", 'trim|integer|xss_clean');
-                $this->ci->form_validation->set_rules("position[{$appearanceType}][{$i}]", "Position", 'trim|greater_than[0]|integer|xss_clean');
-                $this->ci->form_validation->set_rules("order[{$appearanceType}][{$i}]", "Order", 'trim|integer|xss_clean');
-                $this->ci->form_validation->set_rules("shirt[{$appearanceType}][{$i}]", "Shirt", 'trim|integer|xss_clean');
+                $this->ci->form_validation->set_rules("rating[{$appearanceType}][{$i}]", "Rating", "trim|integer|less_than[" . (Configuration::get('max_appearance_rating') + 1) . "]|greater_than[0]|xss_clean");
+                $this->ci->form_validation->set_rules("injury[{$appearanceType}][]", "Injury", "trim|integer|xss_clean");
+                $this->ci->form_validation->set_rules("position[{$appearanceType}][{$i}]", "Position", "trim|greater_than[0]|integer|xss_clean");
+                $this->ci->form_validation->set_rules("order[{$appearanceType}][{$i}]", "Order", "trim|integer|xss_clean");
+                $this->ci->form_validation->set_rules("shirt[{$appearanceType}][{$i}]", "Shirt", "trim|integer|xss_clean");
 
-                $this->ci->form_validation->set_rules("on[{$appearanceType}][{$i}]", "Substituted On", 'trim|less_than[' . (Configuration::get('max_minute') + 1) . ']|greater_than[0]|integer|xss_clean');
-                $this->ci->form_validation->set_rules("off[{$appearanceType}][{$i}]", "Substituted Off", 'trim|less_than[' . (Configuration::get('max_minute') + 1) . ']|greater_than[0]|integer|xss_clean');
+                $this->ci->form_validation->set_rules("on[{$appearanceType}][{$i}]", "Substituted On", "trim|less_than[" . (Configuration::get('max_minute') + 1) . "]|greater_than[0]|integer|xss_clean");
+                $this->ci->form_validation->set_rules("off[{$appearanceType}][{$i}]", "Substituted Off", 'trim|less_than[' . (Configuration::get('max_minute') + 1) . "]|greater_than[0]|integer|xss_clean");
 
                 $i++;
             }
