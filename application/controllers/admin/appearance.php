@@ -206,10 +206,11 @@ class Appearance extends CI_Controller/*Backend_Controller*/
     {
         $values = array();
         $playerIdValues = $this->input->post("player_id");
+        $onValues = $this->input->post("on");
 
         list($appearanceType, $index) = explode("_", $indexes);
 
-        if ($value == '' &&  $playerIdValues[$appearanceType][$index] != '') {
+        if ($value == '' &&  $playerIdValues[$appearanceType][$index] != '' && ($appearanceType == 'starts' || ($appearanceType == 'subs' && isset($onValues[$appearanceType][$index]) && $onValues[$appearanceType][$index] != ''))) {
             $this->form_validation->set_message('is_rating_set', 'No rating has been entered for this Player');
             return FALSE;
         }
