@@ -166,4 +166,4 @@ class Player_Registration extends CI_Controller/*Backend_Controller*/
 }
 
 /* End of file player_registration.php */
-/* Location: ./application/controllers/player_registration.php */
+/* Location: ./application/controllers/admin/player_registration.php */
