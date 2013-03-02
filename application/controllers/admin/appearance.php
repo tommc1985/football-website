@@ -3,7 +3,7 @@
 require_once('backend_controller.php');
 
 /**
- * The Backend Controller for managing Matches
+ * The Backend Controller for managing Appearances
  */
 class Appearance extends CI_Controller/*Backend_Controller*/
 {
