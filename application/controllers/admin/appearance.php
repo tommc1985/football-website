@@ -195,6 +195,27 @@ class Appearance extends CI_Controller/*Backend_Controller*/
         $this->form_validation->set_message('is_valid_captain', 'The chosen Captain is not linked to a Player');
         return FALSE;
     }
+
+    /**
+     * Has a position been set for the specified player
+     * @param  int  $value    Rating Value
+     * @param  int  $indexes  Indexes of Rating field
+     * @return boolean        Is the selected captain a valid choice
+     */
+    public function is_rating_set($value, $indexes)
+    {
+        $values = array();
+        $playerIdValues = $this->input->post("player_id");
+
+        list($appearanceType, $index) = explode("_", $indexes);
+
+        if ($value == '' &&  $playerIdValues[$appearanceType][$index] != '') {
+            $this->form_validation->set_message('is_rating_set', 'No rating has been entered for this Player');
+            return FALSE;
+        }
+
+        return TRUE;
+    }
 }
 
 /* End of file appearance.php */
