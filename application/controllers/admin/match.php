@@ -172,4 +172,4 @@ class Match extends CI_Controller/*Backend_Controller*/
 }
 
 /* End of file match.php */
-/* Location: ./application/controllers/match.php */
+/* Location: ./application/controllers/admin/match.php */
