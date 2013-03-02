@@ -166,4 +166,4 @@ class League_Registration extends CI_Controller/*Backend_Controller*/
 }
 
 /* End of file league_registration.php */
-/* Location: ./application/controllers/league_registration.php */
+/* Location: ./application/controllers/admin/league_registration.php */
