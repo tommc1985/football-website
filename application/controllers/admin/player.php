@@ -164,4 +164,4 @@ class Player extends CI_Controller/*Backend_Controller*/
 }
 
 /* End of file player.php */
-/* Location: ./application/controllers/player.php */
+/* Location: ./application/controllers/admin/player.php */
