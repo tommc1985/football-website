@@ -222,7 +222,7 @@ class Appearance extends CI_Controller/*Backend_Controller*/
      * Has a Position been set for the specified player
      * @param  int  $value    Position Value
      * @param  int  $indexes  Indexes of Position field
-     * @return boolean        Has a position value been set (if it should be)
+     * @return boolean        Has a Position value been set (if it should be)
      */
     public function is_position_set($value, $indexes)
     {
