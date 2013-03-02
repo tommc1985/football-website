@@ -164,4 +164,4 @@ class Official extends CI_Controller/*Backend_Controller*/
 }
 
 /* End of file official.php */
-/* Location: ./application/controllers/official.php */
+/* Location: ./application/controllers/admin/official.php */
