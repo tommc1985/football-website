@@ -186,6 +186,22 @@ class Appearance extends CI_Controller/*Backend_Controller*/
         $values = array();
         $playerIdValues = $this->input->post("player_id");
 
+        $appearanceCount = 0;
+        foreach ($this->playerCounts as $appearanceType => $playerCount) {
+            $i = 0;
+            while($i < $playerCount) {
+                if ($playerIdValues[$appearanceType][$i] != '') {
+                    $appearanceCount++;
+                }
+                $i++;
+            }
+        }
+
+        if ($appearanceCount > 0 && $index == '') {
+            $this->form_validation->set_message('is_valid_captain', 'A Captain must be selected for this Match');
+            return FALSE;
+        }
+
         if (isset($playerIdValues['starts'][$index])) {
             if ($playerIdValues['starts'][$index] != '') {
                 return TRUE;
