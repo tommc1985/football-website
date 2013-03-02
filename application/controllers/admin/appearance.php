@@ -197,7 +197,7 @@ class Appearance extends CI_Controller/*Backend_Controller*/
     }
 
     /**
-     * Has a position been set for the specified player
+     * Has a rating been set for the specified player
      * @param  int  $value    Rating Value
      * @param  int  $indexes  Indexes of Rating field
      * @return boolean        Is the selected captain a valid choice
