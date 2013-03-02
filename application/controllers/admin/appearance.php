@@ -131,8 +131,8 @@ class Appearance extends CI_Controller/*Backend_Controller*/
                 }
             }
 
-            //$this->session->set_flashdata('message', "Appearances for Match {$match->id} have been updated");
-            //redirect('/admin/match');
+            $this->session->set_flashdata('message', "Appearances for Match {$match->id} have been updated");
+            redirect('/admin/match');
         }
 
         $data['match'] = $match;
@@ -174,6 +174,26 @@ class Appearance extends CI_Controller/*Backend_Controller*/
         {
             return TRUE;
         }
+    }
+
+    /**
+     * Check if the selected captain is a valid choice
+     * @param  int  $index    Index of the selected captain
+     * @return boolean        Is the selected captain a valid choice
+     */
+    public function is_valid_captain($index)
+    {
+        $values = array();
+        $playerIdValues = $this->input->post("player_id");
+
+        if (isset($playerIdValues['starts'][$index])) {
+            if ($playerIdValues['starts'][$index] != '') {
+                return TRUE;
+            }
+        }
+
+        $this->form_validation->set_message('is_valid_captain', 'The chosen Captain is not linked to a Player');
+        return FALSE;
     }
 }
 
