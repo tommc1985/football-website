@@ -52,6 +52,11 @@ class Appearance extends CI_Controller/*Backend_Controller*/
             return;
         }
 
+        if (is_null($match->h)) {
+            $this->load->view('admin/appearance/no_result', $data);
+            return;
+        }
+
         $data['appearances'] = $this->Appearance_model->fetch($match->id);
         $data['season'] = Season_model::fetchSeasonFromDateTime($match->date);
         $competition = $this->Competition_model->fetch($match->competition_id);
