@@ -186,4 +186,4 @@ class League_Match extends CI_Controller/*Backend_Controller*/
 }
 
 /* End of file league_match.php */
-/* Location: ./application/controllers/league_match.php */
+/* Location: ./application/controllers/admin/league_match.php */
