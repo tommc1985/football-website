@@ -197,9 +197,13 @@ class Appearance extends CI_Controller/*Backend_Controller*/
             }
         }
 
-        if ($appearanceCount > 0 && $index == '') {
-            $this->form_validation->set_message('is_valid_captain', 'A Captain must be selected for this Match');
-            return FALSE;
+        if ($index == '') {
+            if ($appearanceCount > 0) {
+                $this->form_validation->set_message('is_valid_captain', 'A Captain must be selected for this Match');
+                return FALSE;
+            } else {
+                return TRUE;
+            }
         }
 
         if (isset($playerIdValues['starts'][$index])) {
