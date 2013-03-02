@@ -217,6 +217,28 @@ class Appearance extends CI_Controller/*Backend_Controller*/
 
         return TRUE;
     }
+
+    /**
+     * Has a position been set for the specified player
+     * @param  int  $value    Position Value
+     * @param  int  $indexes  Indexes of Rating field
+     * @return boolean        Has a position value been set (if it should be)
+     */
+    public function is_position_set($value, $indexes)
+    {
+        $values = array();
+        $playerIdValues = $this->input->post("player_id");
+        $onValues = $this->input->post("on");
+
+        list($appearanceType, $index) = explode("_", $indexes);
+
+        if ($value == '' &&  $playerIdValues[$appearanceType][$index] != '' && ($appearanceType == 'starts' || ($appearanceType == 'subs' && isset($onValues[$appearanceType][$index]) && $onValues[$appearanceType][$index] != ''))) {
+            $this->form_validation->set_message('is_position_set', 'A Position has not been selected for this Player');
+            return FALSE;
+        }
+
+        return TRUE;
+    }
 }
 
 /* End of file appearance.php */
