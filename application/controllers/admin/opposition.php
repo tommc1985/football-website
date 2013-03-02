@@ -164,4 +164,4 @@ class Opposition extends CI_Controller/*Backend_Controller*/
 }
 
 /* End of file opposition.php */
-/* Location: ./application/controllers/opposition.php */
+/* Location: ./application/controllers/admin/opposition.php */
