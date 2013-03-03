@@ -31,7 +31,8 @@ while($i < $match->h) {
     $assistId[$i] = array(
         'name'  => "assist_id[{$i}]",
         'id'    => "assist_id{$i}",
-        'options' => array('' => '--- Select ---') + $this->Appearance_model->fetchForDropdown($match->id),
+        'options' => array('' => '--- Select ---',
+            '0' => '-- No Assist --') + $this->Appearance_model->fetchForDropdown($match->id),
         'value' => set_value("assist_id[{$i}]", isset($goals[$i]->assist_id) ? $goals[$i]->assist_id : ''),
     );
 
