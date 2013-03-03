@@ -58,6 +58,11 @@ class Goal extends CI_Controller/*Backend_Controller*/
             return;
         }
 
+        if ($match->h == 0) {
+            $this->load->view('admin/goal/no_goals', $data);
+            return;
+        }
+
         $data['goals'] = $this->Goal_model->fetch($match->id);
 
         $this->Goal_model->formValidation();
