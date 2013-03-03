@@ -14,9 +14,10 @@ while($i < $match->h) {
     );
 
     $minute[$i] = array(
-        'name'  => "minute[{$i}]",
-        'id'    => "minute{$i}",
-        'value' => set_value("minute[{$i}]", isset($goals[$i]->minute) ? $goals[$i]->minute : ''),
+        'name'    => "minute[{$i}]",
+        'id'      => "minute{$i}",
+        'options' => array('' => '--- Select ---') + Match_model::fetchMinutes(),
+        'value'   => set_value("minute[{$i}]", isset($goals[$i]->minute) ? $goals[$i]->minute : ''),
     );
 
     $scorerId[$i] = array(
@@ -82,7 +83,7 @@ echo form_open($this->uri->uri_string()); ?>
     $i = 0;
     while($i < $match->h) { ?>
     <tr>
-        <td><?php echo form_input($id[$i]); ?><?php echo form_input($minute[$i]); ?></td>
+        <td><?php echo form_hidden($id[$i]['name'], $id[$i]['value']); ?><?php echo form_dropdown($minute[$i]['name'], $minute[$i]['options'], $minute[$i]['value']); ?></td>
         <td><?php echo form_input($scorerId[$i]); ?></td>
         <td><?php echo form_input($assistId[$i]); ?></td>
         <td><?php echo form_input($type[$i]); ?></td>
@@ -100,6 +101,7 @@ echo form_open($this->uri->uri_string()); ?>
         echo form_error($distance[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
         echo form_error($rating[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
         echo form_error($description[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
+
         $i++;
     } ?>
 </table>
