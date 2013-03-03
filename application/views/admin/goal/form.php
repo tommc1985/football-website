@@ -76,7 +76,7 @@ while($i < $match->h) {
 echo form_open($this->uri->uri_string()); ?>
 <table>
     <?php echo form_hidden($match_id['name'], $match_id['value']);
-    echo form_error('match_id', '<tr class="error"><td colspan="9">', '</td></tr>'); ?>
+    echo form_error('match_id', '<tr class="error"><td colspan="8">', '</td></tr>'); ?>
     <tr>
         <td><?php echo form_label('Minute', ''); ?></td>
         <td><?php echo form_label('Scorer', ''); ?></td>
@@ -101,15 +101,15 @@ echo form_open($this->uri->uri_string()); ?>
         <td><?php echo form_textarea($description[$i]); ?></td>
     </tr>
     <?php
-        echo form_error($id[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
-        echo form_error($minute[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
-        echo form_error($scorerId[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
-        echo form_error($assistId[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
-        echo form_error($type[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
-        echo form_error($bodyPart[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
-        echo form_error($distance[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
-        echo form_error($rating[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
-        echo form_error($description[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
+        echo form_error($id[$i]['name'], '<tr class="error"><td colspan="8">', '</td></tr>');
+        echo form_error($minute[$i]['name'], '<tr class="error"><td colspan="8">', '</td></tr>');
+        echo form_error($scorerId[$i]['name'], '<tr class="error"><td colspan="8">', '</td></tr>');
+        echo form_error($assistId[$i]['name'], '<tr class="error"><td colspan="8">', '</td></tr>');
+        echo form_error($type[$i]['name'], '<tr class="error"><td colspan="8">', '</td></tr>');
+        echo form_error($bodyPart[$i]['name'], '<tr class="error"><td colspan="8">', '</td></tr>');
+        echo form_error($distance[$i]['name'], '<tr class="error"><td colspan="8">', '</td></tr>');
+        echo form_error($rating[$i]['name'], '<tr class="error"><td colspan="8">', '</td></tr>');
+        echo form_error($description[$i]['name'], '<tr class="error"><td colspan="8">', '</td></tr>');
 
         $i++;
     } ?>
