@@ -81,4 +81,18 @@ class Goal_model extends Base_Model {
         );
     }
 
+    /**
+     * Fetch Body Parts for dropdown
+     * @return array List of Body Parts
+     */
+    public static function fetchBodyParts()
+    {
+        return array(
+            '1' => 'Right Foot',
+            '2' => 'Left Foot',
+            '3' => 'Head',
+            '4' => 'Other',
+        );
+    }
+
 }

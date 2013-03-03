@@ -42,6 +42,7 @@ while($i < $match->h) {
     $bodyPart[$i] = array(
         'name'  => "body_part[{$i}]",
         'id'    => "body_part{$i}",
+        'options' => array('' => '--- Select ---') + Goal_model::fetchBodyParts(),
         'value' => set_value("body_part[{$i}]", isset($goals[$i]->body_part) ? $goals[$i]->body_part : ''),
     );
 
@@ -88,7 +89,7 @@ echo form_open($this->uri->uri_string()); ?>
         <td><?php echo form_input($scorerId[$i]); ?></td>
         <td><?php echo form_input($assistId[$i]); ?></td>
         <td><?php echo form_dropdown($type[$i]['name'], $type[$i]['options'], $type[$i]['value']); ?></td>
-        <td><?php echo form_input($bodyPart[$i]); ?></td>
+        <td><?php echo form_dropdown($bodyPart[$i]['name'], $bodyPart[$i]['options'], $bodyPart[$i]['value']); ?></td>
         <td><?php echo form_input($distance[$i]); ?></td>
         <td><?php echo form_input($rating[$i]); ?></td>
         <td><?php echo form_input($description[$i]); ?></td>
