@@ -70,66 +70,51 @@ class Goal extends CI_Controller/*Backend_Controller*/
         if ($this->form_validation->run() !== false) {
             $matchId = $parameters['id'];
 
-            $j = 1;
-            foreach ($this->playerCounts as $appearanceType => $playerCount) {
-                $i = 0;
-                while($i < $playerCount) {
-                    /*$id       = $this->form_validation->set_value("id[{$appearanceType}][{$i}]", '');
-                    $playerId = $this->form_validation->set_value("player_id[{$appearanceType}][{$i}]", '');
-                    $captain  = $selectedCaptain == ($j - 1) ? 1 : 0;
-                    $rating   = $this->form_validation->set_value("rating[{$appearanceType}][{$i}]", '');
-                    $motm     = $selectedMotm == "{$appearanceType}_{$i}" ? 1 : 0;
-                    $injury   = isset($injuries[$appearanceType]) && in_array($i, $injuries[$appearanceType]) ? 1 : 0;
-                    $position = $this->form_validation->set_value("position[{$appearanceType}][{$i}]", '');
-                    $order    = $j;
-                    $shirt    = $this->form_validation->set_value("shirt[{$appearanceType}][{$i}]", '');
-                    $on       = $this->form_validation->set_value("on[{$appearanceType}][{$i}]", '');
-                    $on       = empty($on) ? NULL : $on;
-                    $off      = $this->form_validation->set_value("off[{$appearanceType}][{$i}]", '');
-                    $off      = empty($off) ? NULL : $off;
-                    $status   = $appearanceType == 'starts' ? 'starter' : (is_null($on) ? 'unused' : 'substitute');
+            $i = 0;
+            while($i < $match->h) {
+                $id          = $this->form_validation->set_value("id[{$i}]", '');
+                $scorerId    = $this->form_validation->set_value("scorer_id[{$i}]", '');
+                $assistId    = $this->form_validation->set_value("assist_id[{$i}]", '');
+                $minute      = $this->form_validation->set_value("minute[{$i}]", '');
+                $type        = $this->form_validation->set_value("type[{$i}]", '');
+                $bodyPart    = $this->form_validation->set_value("body_part[{$i}]", '');
+                $distance    = $this->form_validation->set_value("distance[{$i}]", '');
+                $rating      = $this->form_validation->set_value("rating[{$i}]", '');
+                $description = $this->form_validation->set_value("description[{$i}]", '');
 
-                    if (empty($id)) { // Insert
-                        if (!empty($playerId)) {
-                            $this->Appearance_model->insertEntry(array(
-                                'match_id' => $matchId,
-                                'player_id' => $playerId,
-                                'captain' => $captain,
-                                'rating' => $rating,
-                                'motm' => $motm,
-                                'injury' => $injury,
-                                'position' => $position,
-                                'order' => $order,
-                                'shirt' => $shirt,
-                                'status' => $status,
-                                'on' => $on,
-                                'off' => $off,
-                            ));
-                        }
-                    } else { // Update or Delete
-                        if (empty($playerId)) { // Delete
-                            $this->Appearance_model->deleteEntry($id);
-                        } else { // Update
-                            $this->Appearance_model->updateEntry($id, array(
-                                'match_id' => $matchId,
-                                'player_id' => $playerId,
-                                'captain' => $captain,
-                                'rating' => $rating,
-                                'motm' => $motm,
-                                'injury' => $injury,
-                                'position' => $position,
-                                'order' => $order,
-                                'shirt' => $shirt,
-                                'status' => $status,
-                                'on' => $on,
-                                'off' => $off,
-                            ));
-                        }
-                    }*/
-
-                    $i++;
-                    $j++;
+                if (empty($id)) { // Insert
+                    if (!empty($minute)) {
+                        $this->Goal_model->insertEntry(array(
+                            'match_id'    => $matchId,
+                            'scorer_id'   => $scorerId,
+                            'assist_id'   => $assistId,
+                            'minute'      => $minute,
+                            'type'        => $type,
+                            'body_part'   => $bodyPart,
+                            'distance'    => $distance,
+                            'rating'      => $rating,
+                            'description' => $description,
+                        ));
+                    }
+                } else { // Update or Delete
+                    if (empty($minute)) { // Delete
+                        $this->Goal_model->deleteEntry($id);
+                    } else { // Update
+                        $this->Goal_model->updateEntry($id, array(
+                            'match_id'    => $matchId,
+                            'scorer_id'   => $scorerId,
+                            'assist_id'   => $assistId,
+                            'minute'      => $minute,
+                            'type'        => $type,
+                            'body_part'   => $bodyPart,
+                            'distance'    => $distance,
+                            'rating'      => $rating,
+                            'description' => $description,
+                        ));
+                    }
                 }
+
+                $i++;
             }
 
             $this->session->set_flashdata('message', "Goals for Match {$match->id} have been updated");
