@@ -30,6 +30,7 @@ while($i < $match->h) {
     $assistId[$i] = array(
         'name'  => "assist_id[{$i}]",
         'id'    => "assist_id{$i}",
+        'options' => array('' => '--- Select ---') + $this->Appearance_model->fetchForDropdown($match->id),
         'value' => set_value("assist_id[{$i}]", isset($goals[$i]->assist_id) ? $goals[$i]->assist_id : ''),
     );
 
@@ -90,7 +91,7 @@ echo form_open($this->uri->uri_string()); ?>
     <tr>
         <td><?php echo form_hidden($id[$i]['name'], $id[$i]['value']); ?><?php echo form_dropdown($minute[$i]['name'], $minute[$i]['options'], $minute[$i]['value']); ?></td>
         <td><?php echo form_dropdown($scorerId[$i]['name'], $scorerId[$i]['options'], $scorerId[$i]['value']); ?></td>
-        <td><?php echo form_input($assistId[$i]); ?></td>
+        <td><?php echo form_dropdown($assistId[$i]['name'], $assistId[$i]['options'], $assistId[$i]['value']); ?></td>
         <td><?php echo form_dropdown($type[$i]['name'], $type[$i]['options'], $type[$i]['value']); ?></td>
         <td><?php echo form_dropdown($bodyPart[$i]['name'], $bodyPart[$i]['options'], $bodyPart[$i]['value']); ?></td>
         <td><?php echo form_dropdown($distance[$i]['name'], $distance[$i]['options'], $distance[$i]['value']); ?></td>
