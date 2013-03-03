@@ -18,6 +18,22 @@ class Goal_model extends Base_Model {
     }
 
     /**
+     * Fetch goal data for a particular match
+     * @param  int $matchId  The ID for the specified Match
+     * @return object|false  The object (or false if not found)
+     */
+    public function fetch($matchId)
+    {
+        $this->db->select('*')
+            ->from($this->tableName)
+            ->where('match_id', $matchId)
+            ->where('deleted', 0)
+            ->order_by('minute');
+
+        return $this->db->get()->result();
+    }
+
+    /**
      * Apply Form Validation for Adding & Updating Goals
      * @return NULL
      */
