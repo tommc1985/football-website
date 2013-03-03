@@ -125,6 +125,25 @@ class Goal extends CI_Controller/*Backend_Controller*/
 
         $this->load->view('admin/goal/edit', $data);
     }
+
+    /**
+     * Has the scorer and assister been set to the same player
+     * @param  int  $value    Selected Scorer Value
+     * @param  int  $index    Indexes of Scorer field
+     * @return boolean        Has the scorer and assister been set to the same player (and not o.g.)
+     */
+    public function is_same_assister($value, $index)
+    {
+        $values = array();
+        $assisterIdValues = $this->input->post("assist_id");
+
+        if ($value == $assisterIdValues[$index] && $value != '0') {
+            $this->form_validation->set_message('is_same_assister', 'A player cannot assist themselves');
+            return FALSE;
+        }
+
+        return TRUE;
+    }
 }
 
 /* End of file goal.php */

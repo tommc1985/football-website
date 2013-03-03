@@ -47,7 +47,7 @@ class Goal_model extends Base_Model {
         while ($i < $goalCount) {
             $this->ci->form_validation->set_rules("id[{$i}]", 'Goal', "trim|integer|xss_clean");
             $this->ci->form_validation->set_rules("minute[{$i}]", 'Minute', "trim|integer|less_than[" . (Configuration::get('max_minute') + 1) . "]|xss_clean");
-            $this->ci->form_validation->set_rules("scorer_id[{$i}]", 'Scorer', "trim|required|integer|xss_clean");
+            $this->ci->form_validation->set_rules("scorer_id[{$i}]", 'Scorer', "trim|required|integer|callback_is_same_assister[{$i}]|xss_clean");
             $this->ci->form_validation->set_rules("assist_id[{$i}]", 'Assist', "trim|required|integer|xss_clean");
             $this->ci->form_validation->set_rules("type[{$i}]", 'Type', "trim|required|integer|xss_clean");
             $this->ci->form_validation->set_rules("body_part[{$i}]", 'Body Part', "trim|required|integer|xss_clean");
