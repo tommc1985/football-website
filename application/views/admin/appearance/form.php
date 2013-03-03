@@ -80,6 +80,7 @@ foreach ($playerCounts as $appearanceType => $playerCount) {
         $off[$appearanceType][$i] = array(
             'name'  => "off[{$appearanceType}][{$i}]",
             'id'    => "off_{$appearanceType}_{$i}",
+            'options' => array('' => '----') + Match_model::fetchMinutes(),
             'value' => set_value("off[{$appearanceType}][{$i}]", isset($appearances[$appearanceType][$i]->off) ? $appearances[$appearanceType][$i]->off : '' ),
             'maxlength' => 3,
         );
@@ -124,7 +125,7 @@ echo form_open($this->uri->uri_string()); ?>
         <td><?php echo form_dropdown($position[$appearanceType][$i]['name'], $position[$appearanceType][$i]['options'], $position[$appearanceType][$i]['value']); ?></td>
         <td><?php echo form_input($shirt[$appearanceType][$i]); ?></td>
         <td><?php echo $appearanceType == 'starts' ? '' : form_dropdown($on[$appearanceType][$i]['name'], $on[$appearanceType][$i]['options'], $on[$appearanceType][$i]['value']); ?></td>
-        <td><?php echo form_input($off[$appearanceType][$i]); ?></td>
+        <td><?php echo form_dropdown($off[$appearanceType][$i]['name'], $off[$appearanceType][$i]['options'], $off[$appearanceType][$i]['value']); ?></td>
     </tr>
     <?php
             echo form_error($id[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
