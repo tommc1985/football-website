@@ -144,6 +144,25 @@ class Goal extends CI_Controller/*Backend_Controller*/
 
         return TRUE;
     }
+
+    /**
+     * If the Goal Type field is set to "Own Goal", is the Scorer field set to "Own Goal" too
+     * @param  int  $value    Selected Goal Type Value
+     * @param  int  $index    Index of Goal Type field
+     * @return boolean        If the Goal Type field is set to "Own Goal", is the Scorer field set to "Own Goal" too
+     */
+    public function is_own_goal($value, $index)
+    {
+        $values = array();
+        $scorerIdValues = $this->input->post("scorer_id");
+
+        if (($value == '0' && $scorerIdValues[$index] != '0') || ($value != '0' && $scorerIdValues[$index] == '0')) {
+            $this->form_validation->set_message('is_own_goal', 'Both "Scorer and "Type" fields must be set to "Own Goal", not one or the other');
+            return FALSE;
+        }
+
+        return TRUE;
+    }
 }
 
 /* End of file goal.php */
