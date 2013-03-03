@@ -6,11 +6,59 @@ $match_id = array(
 );
 
 $i = 0;
-while($i < $goalCount) {
+while($i < $match->h) {
     $id[$i] = array(
         'name'  => "id[{$i}]",
         'id'    => "id_{$i}",
         'value' => set_value("id[{$i}]", isset($goals[$i]->id) ? $goals[$i]->id : ''),
+    );
+
+    $minute[$i] = array(
+        'name'  => "minute[{$i}]",
+        'id'    => "minute{$i}",
+        'value' => set_value("minute[{$i}]", isset($goals[$i]->minute) ? $goals[$i]->minute : ''),
+    );
+
+    $scorerId[$i] = array(
+        'name'  => "scorer_id[{$i}]",
+        'id'    => "scorer_id{$i}",
+        'value' => set_value("scorer_id[{$i}]", isset($goals[$i]->scorer_id) ? $goals[$i]->scorer_id : ''),
+    );
+
+    $assistId[$i] = array(
+        'name'  => "assist_id[{$i}]",
+        'id'    => "assist_id{$i}",
+        'value' => set_value("assist_id[{$i}]", isset($goals[$i]->assist_id) ? $goals[$i]->assist_id : ''),
+    );
+
+    $type[$i] = array(
+        'name'  => "type[{$i}]",
+        'id'    => "type{$i}",
+        'value' => set_value("type[{$i}]", isset($goals[$i]->type) ? $goals[$i]->type : ''),
+    );
+
+    $bodyPart[$i] = array(
+        'name'  => "body_part[{$i}]",
+        'id'    => "body_part{$i}",
+        'value' => set_value("body_part[{$i}]", isset($goals[$i]->body_part) ? $goals[$i]->body_part : ''),
+    );
+
+    $distance[$i] = array(
+        'name'  => "distance[{$i}]",
+        'id'    => "distance{$i}",
+        'value' => set_value("distance[{$i}]", isset($goals[$i]->distance) ? $goals[$i]->distance : ''),
+    );
+
+    $rating[$i] = array(
+        'name'  => "rating[{$i}]",
+        'id'    => "rating{$i}",
+        'value' => set_value("rating[{$i}]", isset($goals[$i]->rating) ? $goals[$i]->rating : ''),
+    );
+
+    $description[$i] = array(
+        'name'  => "description[{$i}]",
+        'id'    => "description{$i}",
+        'value' => set_value("description[{$i}]", isset($goals[$i]->description) ? $goals[$i]->description : ''),
     );
 
     $i++;
@@ -32,27 +80,26 @@ echo form_open($this->uri->uri_string()); ?>
     </tr>
     <?php
     $i = 0;
-    while($i < $goalCount) { ?>
+    while($i < $match->h) { ?>
     <tr>
-        <td><?php echo form_hidden($id[$appearanceType][$i]['name'], $id[$appearanceType][$i]['value']); ?><?php echo form_dropdown($player_id[$appearanceType][$i]['name'], $player_id[$appearanceType][$i]['options'], $player_id[$appearanceType][$i]['value']); ?></td>
-        <td><?php echo $appearanceType == 'starts' ? form_radio($captain[$appearanceType][$i]) : ''; ?></td>
-        <td><?php echo form_input($rating[$appearanceType][$i]); ?></td>
-        <td><?php echo form_radio($motm[$appearanceType][$i]); ?></td>
-        <td><?php echo form_checkbox($injury[$appearanceType][$i]); ?></td>
-        <td><?php echo form_dropdown($position[$appearanceType][$i]['name'], $position[$appearanceType][$i]['options'], $position[$appearanceType][$i]['value']); ?></td>
-        <td><?php echo form_input($shirt[$appearanceType][$i]); ?></td>
-        <td><?php echo $appearanceType == 'starts' ? '' : form_input($on[$appearanceType][$i]); ?></td>
-        <td><?php echo form_input($off[$appearanceType][$i]); ?></td>
+        <td><?php echo form_input($id[$i]); ?><?php echo form_input($minute[$i]); ?></td>
+        <td><?php echo form_input($scorerId[$i]); ?></td>
+        <td><?php echo form_input($assistId[$i]); ?></td>
+        <td><?php echo form_input($type[$i]); ?></td>
+        <td><?php echo form_input($bodyPart[$i]); ?></td>
+        <td><?php echo form_input($distance[$i]); ?></td>
+        <td><?php echo form_input($rating[$i]); ?></td>
+        <td><?php echo form_input($description[$i]); ?></td>
     </tr>
     <?php
-        echo form_error($id[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
-        echo form_error($player_id[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
-        echo form_error($rating[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
-        echo form_error($injury[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
-        echo form_error($position[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
-        echo form_error($shirt[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
-        echo form_error($on[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
-        echo form_error($off[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
+        echo form_error($id[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
+        echo form_error($scorerId[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
+        echo form_error($assistId[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
+        echo form_error($type[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
+        echo form_error($bodyPart[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
+        echo form_error($distance[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
+        echo form_error($rating[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
+        echo form_error($description[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
         $i++;
     } ?>
 </table>
