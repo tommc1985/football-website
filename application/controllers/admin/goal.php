@@ -65,7 +65,7 @@ class Goal extends CI_Controller/*Backend_Controller*/
 
         $data['goals'] = $this->Goal_model->fetch($match->id);
 
-        $this->Goal_model->formValidation();
+        $this->Goal_model->formValidation($match->h);
 
         if ($this->form_validation->run() !== false) {
             $matchId = $parameters['id'];

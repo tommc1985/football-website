@@ -37,26 +37,26 @@ class Goal_model extends Base_Model {
      * Apply Form Validation for Adding & Updating Goals
      * @return NULL
      */
-    public function formValidation()
+    public function formValidation($goalCount)
     {
         $this->ci->load->library('form_validation');
 
-        $this->ci->form_validation->set_rules('opposition_id', 'Opposition', 'trim|required|integer|xss_clean');
-        $this->ci->form_validation->set_rules('competition_id', 'Competition', 'trim|required|integer|xss_clean');
-        $this->ci->form_validation->set_rules('competition_stage_id', 'Competition Stage', 'trim|integer|xss_clean');
-        $this->ci->form_validation->set_rules('venue', 'Venue', "trim|required|regex_match[/^(h)|(a)|(n)$/|xss_clean");
-        $this->ci->form_validation->set_rules('location', 'Location', "trim||max_length[" . $this->config->item('location_max_length', 'match') . "]xss_clean");
-        $this->ci->form_validation->set_rules('official_id', 'Official', 'trim|integer|xss_clean');
-        $this->ci->form_validation->set_rules('h', 'Your Score', 'trim|is_natural|xss_clean');
-        $this->ci->form_validation->set_rules('a', 'Opposition Score', 'trim|is_natural|xss_clean');
-        $this->ci->form_validation->set_rules('report', 'Report', 'trim|xss_clean');
-        $this->ci->form_validation->set_rules('date', 'Date', 'trim|required|regex_match[/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/]|xss_clean');
-        $this->ci->form_validation->set_rules('time', 'Time', 'trim|required|regex_match[/^[0-9]{2}:[0-9]{2}$/]|xss_clean');
-        $this->ci->form_validation->set_rules('h_et', 'Your Goals After 90 mins (If Extra Time is played)', 'trim|is_natural|xss_clean');
-        $this->ci->form_validation->set_rules('a_et', 'Opposition Goals After 90 mins (If Extra Time is played)', 'trim|is_natural|xss_clean');
-        $this->ci->form_validation->set_rules('h_pen', 'Your Score Penalties', 'trim|is_natural|xss_clean');
-        $this->ci->form_validation->set_rules('a_pen', 'Opposition Score Penalties', 'trim|is_natural|xss_clean');
-        $this->ci->form_validation->set_rules('status', 'Status', 'trim|regex_match[/^(hw)|(aw)|(p)|(a)$/]|xss_clean');
+        $this->ci->form_validation->set_rules("match_id", 'Match ID', "trim|integer|required|xss_clean");
+
+        $i = 0;
+        while ($i < $goalCount) {
+            $this->ci->form_validation->set_rules("id[{$i}]", 'Goal', "trim|integer|xss_clean");
+            $this->ci->form_validation->set_rules("minute[{$i}]", 'Minute', "trim|required|integer|less_than[" . (Configuration::get('max_minute') + 1) . "]|xss_clean");
+            $this->ci->form_validation->set_rules("scorer_id[{$i}]", 'Scorer', "trim|required|integer|xss_clean");
+            $this->ci->form_validation->set_rules("assist_id[{$i}]", 'Assist', "trim|required|integer|xss_clean");
+            $this->ci->form_validation->set_rules("type[{$i}]", 'Type', "trim|required|integer|xss_clean");
+            $this->ci->form_validation->set_rules("body_part[{$i}]", 'Body Part', "trim|required|integer|xss_clean");
+            $this->ci->form_validation->set_rules("distance[{$i}]", 'Distance', "trim|required|integer|xss_clean");
+            $this->ci->form_validation->set_rules("rating[{$i}]", 'Rating', "trim|integer|less_than[" . (Configuration::get('max_goal_rating') + 1) . "]|xss_clean");
+            $this->ci->form_validation->set_rules("description[{$i}]", 'Distance', "trim|xss_clean");
+
+            $i++;
+        }
     }
 
     /**
