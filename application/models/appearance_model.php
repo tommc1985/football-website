@@ -135,6 +135,42 @@ class Appearance_model extends Base_Model {
     }
 
     /**
+     * Fetch all player appearances for a particular Match
+     * @param  int $matchId         Match Id
+     * @return array                Returned rows
+     */
+    public function fetchByMatch($matchId)
+    {
+        $this->db->select("{$this->ci->Player_model->tableName}.*");
+        $this->db->from($this->tableName);
+        $this->db->join($this->ci->Player_model->tableName, "{$this->tableName}.player_id = {$this->ci->Player_model->tableName}.id");
+        $this->db->where('match_id', $matchId);
+        $this->db->where("{$this->tableName}.deleted", 0);
+        $this->db->where("{$this->ci->Player_model->tableName}.deleted", 0);
+        $this->db->order_by("{$this->ci->Player_model->tableName}.surname, {$this->ci->Player_model->tableName}.first_name", "asc");
+
+        return $this->db->get()->result();
+    }
+
+    /**
+     * Fetch All Players that appeared in the specified match and format for dropdown
+     * @param  int $matchId         Match Id
+     * @return array                List of Player Appearances
+     */
+    public function fetchForDropdown($matchId)
+    {
+        $results = $this->fetchByMatch($matchId);
+
+        $dropdownOptions = array();
+
+        foreach ($results as $result) {
+            $dropdownOptions[$result->id] = "{$result->surname}, {$result->first_name}";
+        }
+
+        return $dropdownOptions;
+    }
+
+    /**
      * Fetch ratings for dropdown
      * @return array List of ratings
      */
