@@ -72,6 +72,7 @@ foreach ($playerCounts as $appearanceType => $playerCount) {
         $on[$appearanceType][$i] = array(
             'name'  => "on[{$appearanceType}][{$i}]",
             'id'    => "on_{$appearanceType}_{$i}",
+            'options' => array('' => '----') + Match_model::fetchMinutes(),
             'value' => set_value("on[{$appearanceType}][{$i}]", isset($appearances[$appearanceType][$i]->on) ? $appearances[$appearanceType][$i]->on : ''),
             'maxlength' => 3,
         );
@@ -122,7 +123,7 @@ echo form_open($this->uri->uri_string()); ?>
         <td><?php echo form_checkbox($injury[$appearanceType][$i]); ?></td>
         <td><?php echo form_dropdown($position[$appearanceType][$i]['name'], $position[$appearanceType][$i]['options'], $position[$appearanceType][$i]['value']); ?></td>
         <td><?php echo form_input($shirt[$appearanceType][$i]); ?></td>
-        <td><?php echo $appearanceType == 'starts' ? '' : form_input($on[$appearanceType][$i]); ?></td>
+        <td><?php echo $appearanceType == 'starts' ? '' : form_dropdown($on[$appearanceType][$i]['name'], $on[$appearanceType][$i]['options'], $on[$appearanceType][$i]['value']); ?></td>
         <td><?php echo form_input($off[$appearanceType][$i]); ?></td>
     </tr>
     <?php
