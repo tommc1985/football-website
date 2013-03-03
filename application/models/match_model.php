@@ -175,4 +175,22 @@ class Match_model extends Base_Model {
         return false;
     }
 
+    /**
+     * Fetch minutes for dropdown
+     * @return array List of minutes
+     */
+    public static function fetchMinutes()
+    {
+        $i = 1;
+        $minutes = array();
+
+        while ($i <= Configuration::get('max_minute')) {
+            $minutes[$i] = $i;
+
+            $i++;
+        }
+
+        return $minutes;
+    }
+
 }
