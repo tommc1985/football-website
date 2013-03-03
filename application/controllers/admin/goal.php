@@ -59,7 +59,6 @@ class Goal extends CI_Controller/*Backend_Controller*/
         }
 
         $data['goals'] = $this->Goal_model->fetch($match->id);
-        $competition = $this->Competition_model->fetch($match->competition_id);
 
         $this->Goal_model->formValidation();
 
