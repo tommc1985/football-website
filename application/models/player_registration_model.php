@@ -60,13 +60,9 @@ class Player_Registration_model extends Base_Model {
     }
 
     /**
-     * Fetch all matches from a particular Player
-     * @param  int $season           Season
-     * @param  int|false $limit      Number of rows to return
-     * @param  int|false $offset     The offset
-     * @param  string|false $orderBy Which fields to order results by
-     * @param  string|false $order   Order the results Ascending or Descending
-     * @return array                 Returned rows
+     * Fetch all players registered a particular Season
+     * @param  int $season          Season
+     * @return array                Returned rows
      */
     public function fetchBySeason($season)
     {
