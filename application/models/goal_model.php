@@ -59,4 +59,26 @@ class Goal_model extends Base_Model {
         $this->ci->form_validation->set_rules('status', 'Status', 'trim|regex_match[/^(hw)|(aw)|(p)|(a)$/]|xss_clean');
     }
 
+    /**
+     * Fetch Goal Types for dropdown
+     * @return array List of Goal Types
+     */
+    public static function fetchTypes()
+    {
+        return array(
+            '1'  => 'Bundled',
+            '2'  => 'Corner',
+            '3'  => 'Cross',
+            '4'  => 'Direct Free Kick',
+            '5'  => 'Free Kick',
+            '6'  => 'Individual Effort',
+            '7'  => 'Opposition Error',
+            '8'  => 'Scramble',
+            '9'  => 'Through Ball',
+            '10' => 'Team Goal',
+            '11' => 'Penalty',
+            '0'  => 'Own Goal',
+        );
+    }
+
 }

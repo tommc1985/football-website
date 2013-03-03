@@ -35,6 +35,7 @@ while($i < $match->h) {
     $type[$i] = array(
         'name'  => "type[{$i}]",
         'id'    => "type{$i}",
+        'options' => array('' => '--- Select ---') + Goal_model::fetchTypes(),
         'value' => set_value("type[{$i}]", isset($goals[$i]->type) ? $goals[$i]->type : ''),
     );
 
@@ -86,7 +87,7 @@ echo form_open($this->uri->uri_string()); ?>
         <td><?php echo form_hidden($id[$i]['name'], $id[$i]['value']); ?><?php echo form_dropdown($minute[$i]['name'], $minute[$i]['options'], $minute[$i]['value']); ?></td>
         <td><?php echo form_input($scorerId[$i]); ?></td>
         <td><?php echo form_input($assistId[$i]); ?></td>
-        <td><?php echo form_input($type[$i]); ?></td>
+        <td><?php echo form_dropdown($type[$i]['name'], $type[$i]['options'], $type[$i]['value']); ?></td>
         <td><?php echo form_input($bodyPart[$i]); ?></td>
         <td><?php echo form_input($distance[$i]); ?></td>
         <td><?php echo form_input($rating[$i]); ?></td>
