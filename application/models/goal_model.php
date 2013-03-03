@@ -95,4 +95,19 @@ class Goal_model extends Base_Model {
         );
     }
 
+    /**
+     * Fetch Goal Distances for dropdown
+     * @return array List of Goal Distances
+     */
+    public static function fetchDistances()
+    {
+        return array(
+            '1' => '6 yard box',
+            '2' => 'Penalty Area',
+            '3' => 'Edge of Penalty Area',
+            '4' => 'Outside Penalty Area',
+            '5' => 'Halfway Line',
+        );
+    }
+
 }

@@ -49,6 +49,7 @@ while($i < $match->h) {
     $distance[$i] = array(
         'name'  => "distance[{$i}]",
         'id'    => "distance{$i}",
+        'options' => array('' => '--- Select ---') + Goal_model::fetchDistances(),
         'value' => set_value("distance[{$i}]", isset($goals[$i]->distance) ? $goals[$i]->distance : ''),
     );
 
@@ -90,7 +91,7 @@ echo form_open($this->uri->uri_string()); ?>
         <td><?php echo form_input($assistId[$i]); ?></td>
         <td><?php echo form_dropdown($type[$i]['name'], $type[$i]['options'], $type[$i]['value']); ?></td>
         <td><?php echo form_dropdown($bodyPart[$i]['name'], $bodyPart[$i]['options'], $bodyPart[$i]['value']); ?></td>
-        <td><?php echo form_input($distance[$i]); ?></td>
+        <td><?php echo form_dropdown($distance[$i]['name'], $distance[$i]['options'], $distance[$i]['value']); ?></td>
         <td><?php echo form_input($rating[$i]); ?></td>
         <td><?php echo form_input($description[$i]); ?></td>
     </tr>
