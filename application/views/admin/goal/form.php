@@ -93,7 +93,7 @@ echo form_open($this->uri->uri_string()); ?>
         <td><?php echo form_dropdown($bodyPart[$i]['name'], $bodyPart[$i]['options'], $bodyPart[$i]['value']); ?></td>
         <td><?php echo form_dropdown($distance[$i]['name'], $distance[$i]['options'], $distance[$i]['value']); ?></td>
         <td><?php echo form_input($rating[$i]); ?></td>
-        <td><?php echo form_input($description[$i]); ?></td>
+        <td><?php echo form_textarea($description[$i]); ?></td>
     </tr>
     <?php
         echo form_error($id[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
