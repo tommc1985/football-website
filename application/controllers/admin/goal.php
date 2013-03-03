@@ -69,7 +69,7 @@ class Goal extends CI_Controller/*Backend_Controller*/
             foreach ($this->playerCounts as $appearanceType => $playerCount) {
                 $i = 0;
                 while($i < $playerCount) {
-                    $id       = $this->form_validation->set_value("id[{$appearanceType}][{$i}]", '');
+                    /*$id       = $this->form_validation->set_value("id[{$appearanceType}][{$i}]", '');
                     $playerId = $this->form_validation->set_value("player_id[{$appearanceType}][{$i}]", '');
                     $captain  = $selectedCaptain == ($j - 1) ? 1 : 0;
                     $rating   = $this->form_validation->set_value("rating[{$appearanceType}][{$i}]", '');
@@ -120,7 +120,7 @@ class Goal extends CI_Controller/*Backend_Controller*/
                                 'off' => $off,
                             ));
                         }
-                    }
+                    }*/
 
                     $i++;
                     $j++;
