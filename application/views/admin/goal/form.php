@@ -102,6 +102,7 @@ echo form_open($this->uri->uri_string()); ?>
     </tr>
     <?php
         echo form_error($id[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
+        echo form_error($minute[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
         echo form_error($scorerId[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
         echo form_error($assistId[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
         echo form_error($type[$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
