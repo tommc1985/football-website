@@ -15,14 +15,14 @@ while($i < $match->h) {
 
     $minute[$i] = array(
         'name'    => "minute[{$i}]",
-        'id'      => "minute{$i}",
+        'id'      => "minute_{$i}",
         'options' => array('' => '--- Select ---') + Match_model::fetchMinutes(),
         'value'   => set_value("minute[{$i}]", isset($goals[$i]->minute) ? $goals[$i]->minute : ''),
     );
 
     $scorerId[$i] = array(
         'name'  => "scorer_id[{$i}]",
-        'id'    => "scorer_id{$i}",
+        'id'    => "scorer_id_{$i}",
         'options' => array('' => '--- Select ---',
             '0' => '-- Own Goal --') + $this->Appearance_model->fetchForDropdown($match->id),
         'value' => set_value("scorer_id[{$i}]", isset($goals[$i]->scorer_id) ? $goals[$i]->scorer_id : ''),
@@ -30,7 +30,7 @@ while($i < $match->h) {
 
     $assistId[$i] = array(
         'name'  => "assist_id[{$i}]",
-        'id'    => "assist_id{$i}",
+        'id'    => "assist_id_{$i}",
         'options' => array('' => '--- Select ---',
             '0' => '-- No Assist --') + $this->Appearance_model->fetchForDropdown($match->id),
         'value' => set_value("assist_id[{$i}]", isset($goals[$i]->assist_id) ? $goals[$i]->assist_id : ''),
@@ -38,35 +38,35 @@ while($i < $match->h) {
 
     $type[$i] = array(
         'name'  => "type[{$i}]",
-        'id'    => "type{$i}",
+        'id'    => "type_{$i}",
         'options' => array('' => '--- Select ---') + Goal_model::fetchTypes(),
         'value' => set_value("type[{$i}]", isset($goals[$i]->type) ? $goals[$i]->type : ''),
     );
 
     $bodyPart[$i] = array(
         'name'  => "body_part[{$i}]",
-        'id'    => "body_part{$i}",
+        'id'    => "body_part_{$i}",
         'options' => array('' => '--- Select ---') + Goal_model::fetchBodyParts(),
         'value' => set_value("body_part[{$i}]", isset($goals[$i]->body_part) ? $goals[$i]->body_part : ''),
     );
 
     $distance[$i] = array(
         'name'  => "distance[{$i}]",
-        'id'    => "distance{$i}",
+        'id'    => "distance_{$i}",
         'options' => array('' => '--- Select ---') + Goal_model::fetchDistances(),
         'value' => set_value("distance[{$i}]", isset($goals[$i]->distance) ? $goals[$i]->distance : ''),
     );
 
     $rating[$i] = array(
         'name'  => "rating[{$i}]",
-        'id'    => "rating{$i}",
+        'id'    => "rating_{$i}",
         'options' => array('' => '--- Select ---') + Goal_model::fetchRatings(),
         'value' => set_value("rating[{$i}]", isset($goals[$i]->rating) ? $goals[$i]->rating : ''),
     );
 
     $description[$i] = array(
         'name'  => "description[{$i}]",
-        'id'    => "description{$i}",
+        'id'    => "description_{$i}",
         'value' => set_value("description[{$i}]", isset($goals[$i]->description) ? $goals[$i]->description : ''),
     );
 
