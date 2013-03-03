@@ -23,7 +23,8 @@ while($i < $match->h) {
     $scorerId[$i] = array(
         'name'  => "scorer_id[{$i}]",
         'id'    => "scorer_id{$i}",
-        'options' => array('' => '--- Select ---') + $this->Appearance_model->fetchForDropdown($match->id),
+        'options' => array('' => '--- Select ---',
+            '0' => '-- Own Goal --') + $this->Appearance_model->fetchForDropdown($match->id),
         'value' => set_value("scorer_id[{$i}]", isset($goals[$i]->scorer_id) ? $goals[$i]->scorer_id : ''),
     );
 
