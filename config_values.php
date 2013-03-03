@@ -27,6 +27,7 @@ $configValues['red_card_points']                  = '-15';
 $configValues['per_page']                         = '25';
 
 $configValues['max_appearance_rating']            = '100';
+$configValues['max_goal_rating']                  = '100';
 
 $configValues['max_minute']                       = '120';
 

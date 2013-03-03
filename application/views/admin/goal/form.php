@@ -56,6 +56,7 @@ while($i < $match->h) {
     $rating[$i] = array(
         'name'  => "rating[{$i}]",
         'id'    => "rating{$i}",
+        'options' => array('' => '--- Select ---') + Goal_model::fetchRatings(),
         'value' => set_value("rating[{$i}]", isset($goals[$i]->rating) ? $goals[$i]->rating : ''),
     );
 
@@ -92,7 +93,7 @@ echo form_open($this->uri->uri_string()); ?>
         <td><?php echo form_dropdown($type[$i]['name'], $type[$i]['options'], $type[$i]['value']); ?></td>
         <td><?php echo form_dropdown($bodyPart[$i]['name'], $bodyPart[$i]['options'], $bodyPart[$i]['value']); ?></td>
         <td><?php echo form_dropdown($distance[$i]['name'], $distance[$i]['options'], $distance[$i]['value']); ?></td>
-        <td><?php echo form_input($rating[$i]); ?></td>
+        <td><?php echo form_dropdown($rating[$i]['name'], $rating[$i]['options'], $rating[$i]['value']); ?></td>
         <td><?php echo form_textarea($description[$i]); ?></td>
     </tr>
     <?php
