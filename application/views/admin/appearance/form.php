@@ -65,6 +65,7 @@ foreach ($playerCounts as $appearanceType => $playerCount) {
         $shirt[$appearanceType][$i] = array(
             'name'  => "shirt[{$appearanceType}][{$i}]",
             'id'    => "shirt_{$appearanceType}_{$i}",
+            'options' => array('' => '----') + Appearance_model::fetchShirtNumbers(),
             'value' => set_value("shirt[{$appearanceType}][{$i}]", isset($appearances[$appearanceType][$i]->shirt) ? $appearances[$appearanceType][$i]->shirt : ''),
             'maxlength' => 3,
         );
@@ -123,7 +124,7 @@ echo form_open($this->uri->uri_string()); ?>
         <td><?php echo form_radio($motm[$appearanceType][$i]); ?></td>
         <td><?php echo form_checkbox($injury[$appearanceType][$i]); ?></td>
         <td><?php echo form_dropdown($position[$appearanceType][$i]['name'], $position[$appearanceType][$i]['options'], $position[$appearanceType][$i]['value']); ?></td>
-        <td><?php echo form_input($shirt[$appearanceType][$i]); ?></td>
+        <td><?php echo form_dropdown($shirt[$appearanceType][$i]['name'], $shirt[$appearanceType][$i]['options'], $shirt[$appearanceType][$i]['value']); ?></td>
         <td><?php echo $appearanceType == 'starts' ? '' : form_dropdown($on[$appearanceType][$i]['name'], $on[$appearanceType][$i]['options'], $on[$appearanceType][$i]['value']); ?></td>
         <td><?php echo form_dropdown($off[$appearanceType][$i]['name'], $off[$appearanceType][$i]['options'], $off[$appearanceType][$i]['value']); ?></td>
     </tr>

@@ -154,4 +154,22 @@ class Appearance_model extends Base_Model {
         return $ratings;
     }
 
+    /**
+     * Fetch Shirt Numbers for dropdown
+     * @return array List of Shirt Numbers
+     */
+    public static function fetchShirtNumbers()
+    {
+        $i = 1;
+        $shirtNumbers = array();
+
+        while ($i <= Configuration::get('max_shirt_number')) {
+            $shirtNumbers[$i] = $i;
+
+            $i++;
+        }
+
+        return $shirtNumbers;
+    }
+
 }
