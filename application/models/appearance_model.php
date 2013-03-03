@@ -134,4 +134,24 @@ class Appearance_model extends Base_Model {
         }
     }
 
+    /**
+     * Fetch ratings for dropdown
+     * @return array List of ratings
+     */
+    public static function fetchRatings()
+    {
+        $i = 1;
+        $ratings = array();
+
+        while ($i <= Configuration::get('max_appearance_rating')) {
+            $ratings[$i] = $i;
+
+            $i++;
+        }
+
+        $ratings = array_reverse($ratings, true);
+
+        return $ratings;
+    }
+
 }
