@@ -59,22 +59,25 @@ class Card extends CI_Controller/*Backend_Controller*/
             return;
         }
 
+        $cardCount = $this->input->post('id');
+
         $data['cards'] = $this->Card_model->fetch($match->id);
 
-        $cardCount = 1; //@TODO
+        $data['cardCount'] = ($cardCount !== false ? count($cardCount) : count($data['cards']) + 1);
 
-        $this->Goal_model->formValidation($cardCount);
+        $this->Card_model->formValidation($data['cardCount']);
 
         if ($this->form_validation->run() !== false) {
             $matchId = $parameters['id'];
 
             $i = 0;
-            while($i < $cardCount) {
-                $id          = $this->form_validation->set_value("id[{$i}]", '');
-                $playerId    = $this->form_validation->set_value("player_id[{$i}]", '');
-                $type        = $this->form_validation->set_value("type[{$i}]", '');
-                $minute      = $this->form_validation->set_value("minute[{$i}]", '');
-                $offence     = $this->form_validation->set_value("offence[{$i}]", '');
+            while($i < $data['cardCount']) {
+                $id              = $this->form_validation->set_value("id[{$i}]", '');
+                $minute          = $this->form_validation->set_value("minute[{$i}]", '');
+                $playerId        = $this->form_validation->set_value("player_id[{$i}]", '');
+                $offence         = $this->form_validation->set_value("offence[{$i}]", '');
+                $selectedOffence = Card_model::fetchOffence($offence);
+                $type            = $selectedOffence['card'];
 
                 if (empty($id)) { // Insert
                     if (!empty($minute)) {
@@ -110,6 +113,44 @@ class Card extends CI_Controller/*Backend_Controller*/
         $data['match'] = $match;
 
         $this->load->view('admin/card/edit', $data);
+    }
+
+    /**
+     * Has a Player been selected (only applicable if a minute is chosen)
+     * @param  int  $value    Selected Player
+     * @param  int  $index    Indexes of Minute field
+     * @return boolean        Has a Player been selected (only applicable if a minute is chosen)
+     */
+    public function player_required($value, $index)
+    {
+        $values = array();
+        $minuteValues = $this->input->post("minute");
+
+        if ($minuteValues[$index] != '' && $value == '') {
+            $this->form_validation->set_message('player_required', 'You must select the Player the Card was issued to');
+            return FALSE;
+        }
+
+        return TRUE;
+    }
+
+    /**
+     * Has an Offence been selected (only applicable if a minute is chosen)
+     * @param  int  $value    Selected Offence
+     * @param  int  $index    Indexes of Minute field
+     * @return boolean        Has an Offence been selected (only applicable if a minute is chosen)
+     */
+    public function offence_required($value, $index)
+    {
+        $values = array();
+        $minuteValues = $this->input->post("minute");
+
+        if ($minuteValues[$index] != '' && $value == '') {
+            $this->form_validation->set_message('offence_required', 'You must select the Offence for which the Card was issued');
+            return FALSE;
+        }
+
+        return TRUE;
     }
 }
 
