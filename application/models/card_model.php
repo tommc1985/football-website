@@ -90,19 +90,19 @@ class Card_model extends Base_Model {
                 'card' => 'y'
             ),
             '4' => array(
-                'offence' => 'Delays the restart of play',
+                'offence' => 'Delayed the restart of play',
                 'card' => 'y'
             ),
             '5' => array(
-                'offence' => 'Fails to respect required distance from corner/free kick',
+                'offence' => 'Failed to respect required distance from corner/free kick',
                 'card' => 'y'
             ),
             '6' => array(
-                'offence' => "Enters field of play without Referee's permission",
+                'offence' => "Entered field of play without Referee's permission",
                 'card' => 'y'
             ),
             '7' => array(
-                'offence' => "Deliberately leaves field of play with Referee's permission",
+                'offence' => "Deliberately left field of play without Referee's permission",
                 'card' => 'y'
             ),
             '8' => array(
@@ -118,19 +118,19 @@ class Card_model extends Base_Model {
                 'card' => 'r'
             ),
             '11' => array(
-                'offence' => "Spits at an opponent or other person",
+                'offence' => "Spat at an opponent or other person",
                 'card' => 'r'
             ),
             '12' => array(
-                'offence' => "Denies obvious goalscoring opportunity due to deliberate handball",
+                'offence' => "Denied obvious goalscoring opportunity due to deliberate handball",
                 'card' => 'r'
             ),
             '13' => array(
-                'offence' => "Denies obvious goalscoring opportunity",
+                'offence' => "Denied obvious goalscoring opportunity",
                 'card' => 'r'
             ),
             '14' => array(
-                'offence' => "Using offensive, insulting or abusive language",
+                'offence' => "Used offensive, insulting or abusive language",
                 'card' => 'r'
             ),
             '15' => array(
