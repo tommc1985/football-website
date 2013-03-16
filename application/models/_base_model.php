@@ -189,4 +189,41 @@ class Base_Model extends CI_Model {
         return 'asc';
     }
 
+    /**
+     * Compare two objects (before and after it's been saved) to verify if they're different
+     * @param  object  $dataset_1  Old data (before save)
+     * @param  object  $dataset_2  New data (after save)
+     * @return boolean             Is the data the different
+     */
+    public function isDifferent($dataset_1, $dataset_2)
+    {
+        echo '<pre style="width:50%; float:left;">';
+        var_dump($dataset_1);
+        var_dump($dataset_2);
+        echo '<pre>';
+
+        if (is_array($dataset_1) && is_array($dataset_2)) {
+            foreach ($dataset_1 as $index => $object) {
+                unset($dataset_1[$index]->date_updated);
+            }
+
+            foreach ($dataset_2 as $index => $object) {
+                unset($dataset_2[$index]->date_updated);
+            }
+        } else {
+            unset($dataset_1->date_updated);
+            unset($dataset_2->date_updated);
+        }
+
+        echo '<pre style="width:50%; float:left;">';
+        var_dump($dataset_1);
+        var_dump($dataset_2);
+        echo '<pre>';
+
+        echo md5(serialize($dataset_1)) . '<br />' . md5(serialize($dataset_2));
+        die();
+
+        return md5(serialize($dataset_1)) === md5(serialize($dataset_2));
+    }
+
 }
