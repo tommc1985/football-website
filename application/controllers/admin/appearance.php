@@ -69,6 +69,8 @@ class Appearance extends CI_Controller/*Backend_Controller*/
         $this->Appearance_model->formValidation($data['playerCounts']);
 
         if ($this->form_validation->run() !== false) {
+            $oldData = $data['appearances'];
+
             $matchId = $parameters['id'];
             $selectedCaptain = $this->form_validation->set_value("captain", '');
             $selectedMotm = $this->form_validation->set_value("motm", '');
@@ -134,6 +136,9 @@ class Appearance extends CI_Controller/*Backend_Controller*/
                     $i++;
                     $j++;
                 }
+                $newData = $this->Appearance_model->fetch($match->id);
+
+                $this->Appearance_model->isDifferent($oldData, $newData);
             }
 
             $this->session->set_flashdata('message', "Appearances for Match {$match->id} have been updated");

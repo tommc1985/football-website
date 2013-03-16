@@ -157,4 +157,34 @@ class Appearance_model extends Base_Model {
         return $shirtNumbers;
     }
 
+    /**
+     * Compare two sets of appearance data (before and after it's been saved) to verify if they're different
+     * @param  object  $dataset_1  Old data (before save)
+     * @param  object  $dataset_2  New data (after save)
+     * @return boolean             Is the data the different
+     */
+    public function isDifferent($dataset_1, $dataset_2)
+    {
+        $appearances = array(
+            'starts',
+            'subs'
+        );
+
+        foreach ($appearances as $appearanceType) {
+            if (isset($dataset_1[$appearanceType])) {
+                foreach ($dataset_1[$appearanceType] as $index => $object) {
+                    unset($dataset_1[$appearanceType][$index]->date_updated);
+                }
+            }
+
+            if (isset($dataset_2[$appearanceType])) {
+                foreach ($dataset_2[$appearanceType] as $index => $object) {
+                    unset($dataset_2[$appearanceType][$index]->date_updated);
+                }
+            }
+        }
+
+        return md5(serialize($dataset_1)) === md5(serialize($dataset_2));
+    }
+
 }
