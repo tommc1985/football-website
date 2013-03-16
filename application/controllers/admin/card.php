@@ -68,6 +68,7 @@ class Card extends CI_Controller/*Backend_Controller*/
         $this->Card_model->formValidation($data['cardCount']);
 
         if ($this->form_validation->run() !== false) {
+            $oldData = $data['cards'];
             $matchId = $parameters['id'];
 
             $i = 0;
@@ -105,6 +106,10 @@ class Card extends CI_Controller/*Backend_Controller*/
 
                 $i++;
             }
+
+            $newData = $this->Card_model->fetch($match->id);
+
+            $this->Card_model->isDifferent($oldData, $newData);
 
             $this->session->set_flashdata('message', "Card info for Match {$match->id} have been updated");
             redirect('/admin/match');
