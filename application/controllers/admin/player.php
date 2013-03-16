@@ -113,9 +113,14 @@ class Player extends CI_Controller/*Backend_Controller*/
         $this->Player_model->formValidation();
 
         if ($this->form_validation->run() !== false) {
+            $oldData = $this->Player_model->fetch($parameters['id']);
             $this->Player_model->processUpdate($parameters['id']);
 
             $player = $this->Player_model->fetch($parameters['id']);
+
+            $newData = $this->Player_model->fetch($parameters['id']);
+
+            $this->Player_model->isDifferent($oldData, $newData);
 
             $this->session->set_flashdata('message', "{$player->first_name} {$player->surname} has been updated");
             redirect('/admin/player');
