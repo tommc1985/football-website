@@ -68,6 +68,7 @@ class Goal extends CI_Controller/*Backend_Controller*/
         $this->Goal_model->formValidation($match->h);
 
         if ($this->form_validation->run() !== false) {
+            $oldData = $data['goals'];
             $matchId = $parameters['id'];
 
             $i = 0;
@@ -116,6 +117,9 @@ class Goal extends CI_Controller/*Backend_Controller*/
 
                 $i++;
             }
+
+            $newData = $this->Goal_model->fetch($match->id);
+            $this->Goal_model->isDifferent($oldData, $newData);
 
             $this->session->set_flashdata('message', "Goals for Match {$match->id} have been updated");
             redirect('/admin/match');
