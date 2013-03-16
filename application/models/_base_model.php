@@ -197,11 +197,6 @@ class Base_Model extends CI_Model {
      */
     public function isDifferent($dataset_1, $dataset_2)
     {
-        echo '<pre style="width:50%; float:left;">';
-        var_dump($dataset_1);
-        var_dump($dataset_2);
-        echo '<pre>';
-
         if (is_array($dataset_1) && is_array($dataset_2)) {
             foreach ($dataset_1 as $index => $object) {
                 unset($dataset_1[$index]->date_updated);
@@ -214,14 +209,6 @@ class Base_Model extends CI_Model {
             unset($dataset_1->date_updated);
             unset($dataset_2->date_updated);
         }
-
-        echo '<pre style="width:50%; float:left;">';
-        var_dump($dataset_1);
-        var_dump($dataset_2);
-        echo '<pre>';
-
-        echo md5(serialize($dataset_1)) . '<br />' . md5(serialize($dataset_2));
-        die();
 
         return md5(serialize($dataset_1)) === md5(serialize($dataset_2));
     }
