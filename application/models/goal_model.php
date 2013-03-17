@@ -46,12 +46,12 @@ class Goal_model extends Base_Model {
         $i = 0;
         while ($i < $goalCount) {
             $this->ci->form_validation->set_rules("id[{$i}]", 'Goal', "trim|integer|xss_clean");
-            $this->ci->form_validation->set_rules("minute[{$i}]", 'Minute', "trim|integer|less_than[" . (Configuration::get('max_minute') + 1) . "]|xss_clean");
-            $this->ci->form_validation->set_rules("scorer_id[{$i}]", 'Scorer', "trim|required|integer|callback_is_same_assister[{$i}]|xss_clean");
-            $this->ci->form_validation->set_rules("assist_id[{$i}]", 'Assist', "trim|required|integer|xss_clean");
-            $this->ci->form_validation->set_rules("type[{$i}]", 'Type', "trim|required|integer|callback_is_own_goal[{$i}]|xss_clean");
-            $this->ci->form_validation->set_rules("body_part[{$i}]", 'Body Part', "trim|required|integer|xss_clean");
-            $this->ci->form_validation->set_rules("distance[{$i}]", 'Distance', "trim|required|integer|xss_clean");
+            $this->ci->form_validation->set_rules("minute[{$i}]", 'Minute', "trim|integer|callback_is_required[{$i}]|less_than[" . (Configuration::get('max_minute') + 1) . "]|xss_clean");
+            $this->ci->form_validation->set_rules("scorer_id[{$i}]", 'Scorer', "trim|integer|callback_is_same_assister[{$i}]|xss_clean");
+            $this->ci->form_validation->set_rules("assist_id[{$i}]", 'Assist', "trim|integer|xss_clean");
+            $this->ci->form_validation->set_rules("type[{$i}]", 'Type', "trim|integer|callback_is_own_goal[{$i}]|xss_clean");
+            $this->ci->form_validation->set_rules("body_part[{$i}]", 'Body Part', "trim|integer|xss_clean");
+            $this->ci->form_validation->set_rules("distance[{$i}]", 'Distance', "trim|integer|xss_clean");
             $this->ci->form_validation->set_rules("rating[{$i}]", 'Rating', "trim|integer|less_than[" . (Configuration::get('max_goal_rating') + 1) . "]|xss_clean");
             $this->ci->form_validation->set_rules("description[{$i}]", 'Distance', "trim|xss_clean");
 

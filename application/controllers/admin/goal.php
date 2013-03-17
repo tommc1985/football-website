@@ -141,7 +141,7 @@ class Goal extends CI_Controller/*Backend_Controller*/
         $values = array();
         $assisterIdValues = $this->input->post("assist_id");
 
-        if ($value == $assisterIdValues[$index] && $value != '0') {
+        if ($value == $assisterIdValues[$index] && $value != '0' && $value != '') {
             $this->form_validation->set_message('is_same_assister', 'A player cannot assist themselves');
             return FALSE;
         }
@@ -163,6 +163,54 @@ class Goal extends CI_Controller/*Backend_Controller*/
         if (($value == '0' && $scorerIdValues[$index] != '0') || ($value != '0' && $scorerIdValues[$index] == '0')) {
             $this->form_validation->set_message('is_own_goal', 'Both "Scorer and "Type" fields must be set to "Own Goal", not one or the other');
             return FALSE;
+        }
+
+        return TRUE;
+    }
+
+    /**
+     * If the Minute field is set, is the specified field field set to "Own Goal" too
+     * @param  int  $value    Selected Goal Type Value
+     * @param  int  $index    Index of Goal Type field
+     * @return boolean        If the Goal Type field is set to "Own Goal", is the Scorer field set to "Own Goal" too
+     */
+    public function is_required($value, $index)
+    {
+        $values = array();
+        $scorerIdValues = $this->input->post("scorer_id");
+        $assistIdValues = $this->input->post("assist_id");
+        $typeValues     = $this->input->post("type");
+        $bodyPartValues = $this->input->post("body_part");
+        $distanceValues = $this->input->post("distance");
+        $ratingValues   = $this->input->post("rating");
+
+        if ($value != '') {
+            switch (true) {
+                case $scorerIdValues[$index] == '':
+                    $this->form_validation->set_message('is_required', 'Who scored the goal?');
+                    return FALSE;
+                    break;
+                case $assistIdValues[$index] == '':
+                    $this->form_validation->set_message('is_required', 'Who assisted the goal (if anyone)?');
+                    return FALSE;
+                    break;
+                case $typeValues[$index] == '':
+                    $this->form_validation->set_message('is_required', 'What type of goal was scored?');
+                    return FALSE;
+                    break;
+                case $bodyPartValues[$index] == '':
+                    $this->form_validation->set_message('is_required', 'The body part the goal was scored with must be selected');
+                    return FALSE;
+                    break;
+                case $distanceValues[$index] == '':
+                    $this->form_validation->set_message('is_required', 'From what distance was the goal scored?');
+                    return FALSE;
+                    break;
+                case $ratingValues[$index] == '':
+                    $this->form_validation->set_message('is_required', 'What rating would you give the goal?');
+                    return FALSE;
+                    break;
+            }
         }
 
         return TRUE;
