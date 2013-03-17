@@ -71,7 +71,6 @@ class Cache_League_model extends CI_Model {
         $this->db->select('*')
             ->from($this->queueTableName)
             ->where('league_id', $leagueId)
-            ->where('in_progress', 0)
             ->where('completed', 0)
             ->where('deleted', 0);
 
