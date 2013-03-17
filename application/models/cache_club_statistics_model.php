@@ -101,7 +101,7 @@ class Cache_Club_Statistics_model extends CI_Model {
      */
     public function insertEntry($byType = NULL, $season = NULL, $cacheData = NULL)
     {
-        if (!$this->entryExists($byType, $season, $cacheData)) {
+        if (!$this-> ($byType, $season, $cacheData)) {
             $data = array(
                 'by_type' => $byType,
                 'season' => $season,
@@ -129,7 +129,6 @@ class Cache_Club_Statistics_model extends CI_Model {
             ->where('by_type', $byType)
             ->where('season', $season)
             ->where('cache_data', $cacheData)
-            ->where('in_progress', 0)
             ->where('completed', 0)
             ->where('deleted', 0);
 
