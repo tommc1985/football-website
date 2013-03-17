@@ -84,7 +84,6 @@ class Cache_Fantasy_Football_model extends CI_Model {
             ->from($this->queueTableName)
             ->where('by_type', $byType)
             ->where('season', $season)
-            ->where('in_progress', 0)
             ->where('completed', 0)
             ->where('deleted', 0);
 
