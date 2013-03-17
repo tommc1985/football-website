@@ -112,7 +112,6 @@ class Cache_Player_Goals_Statistics_model extends CI_Model {
             ->where('season', $season)
             ->where('cache_data', $cacheData)
             ->where('player_id', $playerId)
-            ->where('in_progress', 0)
             ->where('completed', 0)
             ->where('deleted', 0);
 
