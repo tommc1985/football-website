@@ -17,6 +17,7 @@ class Player extends CI_Controller/*Backend_Controller*/
 
         $this->load->database();
         $this->load->library('session');
+        $this->load->model('Cache_model');
         $this->load->model('Player_model');
         $this->load->config('player', true);
     }
@@ -119,8 +120,6 @@ class Player extends CI_Controller/*Backend_Controller*/
             $player = $this->Player_model->fetch($parameters['id']);
 
             $newData = $this->Player_model->fetch($parameters['id']);
-
-            $this->Player_model->isDifferent($oldData, $newData);
 
             $this->session->set_flashdata('message', "{$player->first_name} {$player->surname} has been updated");
             redirect('/admin/player');
