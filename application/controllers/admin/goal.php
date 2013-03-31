@@ -18,6 +18,7 @@ class Goal extends CI_Controller/*Backend_Controller*/
         $this->load->database();
         $this->load->library('session');
         $this->load->model('Appearance_model');
+        $this->load->model('Cache_model');
         $this->load->model('Competition_model');
         $this->load->model('Competition_Stage_model');
         $this->load->model('Goal_model');
@@ -119,7 +120,16 @@ class Goal extends CI_Controller/*Backend_Controller*/
             }
 
             $newData = $this->Goal_model->fetch($match->id);
-            $this->Goal_model->isDifferent($oldData, $newData);
+
+            if ($this->Goal_model->isDifferent($oldData, $newData)) {
+                $matchSeason = Season_model::fetchSeasonFromDateTime($match->date);
+
+                $this->Cache_Club_Statistics_model->insertEntries($matchSeason);
+                $this->Cache_Fantasy_Football_model->insertEntries($matchSeason);
+                $this->Cache_Player_Accumulated_Statistics_model->insertEntries($matchSeason);
+                $this->Cache_Player_Goals_Statistics_model->insertEntries($matchSeason);
+                $this->Cache_Player_Statistics_model->insertEntries($matchSeason);
+            }
 
             $this->session->set_flashdata('message', "Goals for Match {$match->id} have been updated");
             redirect('/admin/match');
