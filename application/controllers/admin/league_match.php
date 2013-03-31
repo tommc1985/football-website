@@ -48,7 +48,7 @@ class League_Match extends CI_Controller/*Backend_Controller*/
         }
         $data['leagueMatches'] = $this->League_Match_model->fetchAll($perPage, $offset, $parameters['order-by'], $order);
 
-        $config['base_url'] = '/admin/league-match/index/offset/';
+        $config['base_url'] = '/admin/league-match/index/';
 
         if ($parameters['order-by']) {
             $config['base_url'] .= "order-by/{$parameters['order-by']}/";
