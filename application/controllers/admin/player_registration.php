@@ -42,7 +42,7 @@ class Player_Registration extends CI_Controller/*Backend_Controller*/
 
         $data['playerRegistrations'] = $this->Player_Registration_model->fetchAll($perPage, $offset, $parameters['order-by'], $parameters['order']);
 
-        $config['base_url'] = '/admin/player-registration/index/offset/';
+        $config['base_url'] = '/admin/player-registration/index/';
 
         if ($parameters['order-by']) {
             $config['base_url'] .= "order-by/{$parameters['order-by']}/";
