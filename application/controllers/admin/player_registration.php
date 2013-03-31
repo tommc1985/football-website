@@ -17,6 +17,7 @@ class Player_Registration extends CI_Controller/*Backend_Controller*/
 
         $this->load->database();
         $this->load->library('session');
+        $this->load->model('Cache_model');
         $this->load->model('Player_model');
         $this->load->model('Player_Registration_model');
         $this->load->model('Season_model');
@@ -83,6 +84,11 @@ class Player_Registration extends CI_Controller/*Backend_Controller*/
 
             $playerRegistration = $this->Player_Registration_model->fetch($insertId);
 
+            $this->Cache_Fantasy_Football_model->insertEntries($playerRegistration->season);
+            $this->Cache_Player_Accumulated_Statistics_model->insertEntries($playerRegistration->season);
+            $this->Cache_Player_Goal_Statistics_model->insertEntries($playerRegistration->season);
+            $this->Cache_Player_Statistics_model->insertEntries($playerRegistration->season);
+
             $this->session->set_flashdata('message', "Player Registration has been added");
             redirect('/admin/player-registration');
         }
@@ -105,6 +111,7 @@ class Player_Registration extends CI_Controller/*Backend_Controller*/
         $playerRegistration = false;
         if ($parameters['id'] !== false) {
             $playerRegistration = $this->Player_Registration_model->fetch($parameters['id']);
+            $oldData = clone $playerRegistration;
         }
 
         if (empty($playerRegistration)) {
@@ -118,6 +125,18 @@ class Player_Registration extends CI_Controller/*Backend_Controller*/
             $this->Player_Registration_model->processUpdate($parameters['id']);
 
             $playerRegistration = $this->Player_Registration_model->fetch($parameters['id']);
+
+            $this->Cache_Fantasy_Football_model->insertEntries($playerRegistration->season);
+            $this->Cache_Player_Accumulated_Statistics_model->insertEntries($playerRegistration->season);
+            $this->Cache_Player_Goal_Statistics_model->insertEntries($playerRegistration->season);
+            $this->Cache_Player_Statistics_model->insertEntries($playerRegistration->season);
+
+            if ($playerRegistration->season != $oldData->season) {
+                $this->Cache_Fantasy_Football_model->insertEntries($oldData->season);
+                $this->Cache_Player_Accumulated_Statistics_model->insertEntries($oldData->season);
+                $this->Cache_Player_Goal_Statistics_model->insertEntries($oldData->season);
+                $this->Cache_Player_Statistics_model->insertEntries($oldData->season);
+            }
 
             $this->session->set_flashdata('message', "Player Registration has been updated");
             redirect('/admin/player-registration');
@@ -157,6 +176,12 @@ class Player_Registration extends CI_Controller/*Backend_Controller*/
 
         if ($this->input->post('confirm_delete') !== false) {
             $this->Player_Registration_model->deleteEntry($parameters['id']);
+
+            $this->Cache_Fantasy_Football_model->insertEntries($playerRegistration->season);
+            $this->Cache_Player_Accumulated_Statistics_model->insertEntries($playerRegistration->season);
+            $this->Cache_Player_Goal_Statistics_model->insertEntries($playerRegistration->season);
+            $this->Cache_Player_Statistics_model->insertEntries($playerRegistration->season);
+
             $this->session->set_flashdata('message', "Player Registration has been deleted");
             redirect('/admin/player-registration');
         }
