@@ -8,14 +8,14 @@ $lang['league_cannot_delete'] = "Cannot delete the '%s' League there are League 
 $lang['league_add']  = 'Add League';
 $lang['league_save'] = 'Save League Info';
 
-$lang['league_competition']         = 'Competition';
-$lang['league_season']   = 'Season';
-$lang['league_name'] = 'Name';
-$lang['league_short_name']         = 'Short Name';
-$lang['league_abbreviation']       = 'Abbreviation';
-$lang['league_points_for_win']         = 'Points for a win';
-$lang['league_points_for_draw']         = 'Points for a draw';
-$lang['league_competitive']  = 'Competitive';
+$lang['league_competition']     = 'Competition';
+$lang['league_season']          = 'Season';
+$lang['league_name']            = 'Name';
+$lang['league_short_name']      = 'Short Name';
+$lang['league_abbreviation']    = 'Abbreviation';
+$lang['league_points_for_win']  = 'Points for a win';
+$lang['league_points_for_draw'] = 'Points for a draw';
+$lang['league_competitive']     = 'Competitive';
 
 // Validation Errors
 
