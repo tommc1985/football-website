@@ -17,6 +17,7 @@ class Official extends CI_Controller/*Backend_Controller*/
 
         $this->load->database();
         $this->load->library('session');
+        $this->load->model('Cache_model');
         $this->load->model('Official_model');
         $this->load->config('official', true);
     }
