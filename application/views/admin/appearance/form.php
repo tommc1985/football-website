@@ -103,15 +103,15 @@ echo form_open($this->uri->uri_string()); ?>
     echo form_error('captain', '<tr class="error"><td colspan="9">', '</td></tr>');
     echo form_error('match_id', '<tr class="error"><td colspan="9">', '</td></tr>'); ?>
     <tr>
-        <td><?php echo form_label('Player', ''); ?></td>
-        <td><?php echo form_label('Captain', ''); ?></td>
-        <td><?php echo form_label('Rating', ''); ?></td>
-        <td><?php echo form_label('MOTM', ''); ?></td>
-        <td><?php echo form_label('Injury', ''); ?></td>
-        <td><?php echo form_label('Position', ''); ?></td>
-        <td><?php echo form_label('Shirt', ''); ?></td>
-        <td><?php echo form_label('On', ''); ?></td>
-        <td><?php echo form_label('Off', ''); ?></td>
+        <td><?php echo form_label($this->lang->line('appearance_player'), ''); ?></td>
+        <td><?php echo form_label($this->lang->line('appearance_captain'), ''); ?></td>
+        <td><?php echo form_label($this->lang->line('appearance_rating'), ''); ?></td>
+        <td><?php echo form_label($this->lang->line('appearance_motm'), ''); ?></td>
+        <td><?php echo form_label($this->lang->line('appearance_injury'), ''); ?></td>
+        <td><?php echo form_label($this->lang->line('appearance_position'), ''); ?></td>
+        <td><?php echo form_label($this->lang->line('appearance_shirt'), ''); ?></td>
+        <td><?php echo form_label($this->lang->line('appearance_subbed_on'), ''); ?></td>
+        <td><?php echo form_label($this->lang->line('appearance_subbed_off'), ''); ?></td>
     </tr>
     <?php
     foreach ($playerCounts as $appearanceType => $playerCount) {
@@ -144,7 +144,7 @@ echo form_open($this->uri->uri_string()); ?>
 
 <table>
     <tr>
-        <td><?php echo form_label('No Man of the Match', $motm['no_motm']['id']); ?></td>
+        <td><?php echo form_label($this->lang->line('appearance_no_motm'), $motm['no_motm']['id']); ?></td>
         <td><?php echo form_radio($motm['no_motm']); ?></td>
     </tr>
 <?php

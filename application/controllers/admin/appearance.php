@@ -29,6 +29,8 @@ class Appearance extends CI_Controller/*Backend_Controller*/
         $this->load->model('Position_model');
         $this->load->model('Season_model');
         $this->load->config('match', true);
+
+        $this->lang->load('appearance');
     }
 
     /**
@@ -41,7 +43,7 @@ class Appearance extends CI_Controller/*Backend_Controller*/
 
         $parameters = $this->uri->uri_to_assoc(4, array('id'));
 
-        $data['submitButtonText'] = 'Save';
+        $data['submitButtonText'] = $this->lang->line('appearance_save');
 
         $match = false;
         if ($parameters['id'] !== false) {
@@ -149,7 +151,7 @@ class Appearance extends CI_Controller/*Backend_Controller*/
                 }
             }
 
-            $this->session->set_flashdata('message', "Appearances for Match {$match->id} have been updated");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('appearance_data_updated'), $match->id));
             redirect('/admin/match');
         }
 
@@ -185,7 +187,7 @@ class Appearance extends CI_Controller/*Backend_Controller*/
 
         if (isset($valuesCounted[$playerId]) && $valuesCounted[$playerId] > 1)
         {
-            $this->form_validation->set_message('is_unique_player_id', 'This Player has been selected more than once for the same match');
+            $this->form_validation->set_message('is_unique_player_id', $this->lang->line('appearance_player_selected_more_than_once'));
             return FALSE;
         }
         else
@@ -217,7 +219,7 @@ class Appearance extends CI_Controller/*Backend_Controller*/
 
         if ($index == '') {
             if ($appearanceCount > 0) {
-                $this->form_validation->set_message('is_valid_captain', 'A Captain must be selected for this Match');
+                $this->form_validation->set_message('is_valid_captain', $this->lang->line('appearance_no_captain_selected'));
                 return FALSE;
             } else {
                 return TRUE;
@@ -230,7 +232,7 @@ class Appearance extends CI_Controller/*Backend_Controller*/
             }
         }
 
-        $this->form_validation->set_message('is_valid_captain', 'The chosen Captain is not linked to a Player');
+        $this->form_validation->set_message('is_valid_captain', $this->lang->line('appearance_captain_not_linked_to_starting_player'));
         return FALSE;
     }
 
@@ -249,7 +251,7 @@ class Appearance extends CI_Controller/*Backend_Controller*/
         list($appearanceType, $index) = explode("_", $indexes);
 
         if ($value == '' &&  $playerIdValues[$appearanceType][$index] != '' && ($appearanceType == 'starts' || ($appearanceType == 'subs' && isset($onValues[$appearanceType][$index]) && $onValues[$appearanceType][$index] != ''))) {
-            $this->form_validation->set_message('is_rating_set', 'No Rating has been entered for this Player');
+            $this->form_validation->set_message('is_rating_set', $this->lang->line('appearance_player_rating_missing'));
             return FALSE;
         }
 
@@ -271,7 +273,7 @@ class Appearance extends CI_Controller/*Backend_Controller*/
         list($appearanceType, $index) = explode("_", $indexes);
 
         if ($value == '' &&  $playerIdValues[$appearanceType][$index] != '' && ($appearanceType == 'starts' || ($appearanceType == 'subs' && isset($onValues[$appearanceType][$index]) && $onValues[$appearanceType][$index] != ''))) {
-            $this->form_validation->set_message('is_position_set', 'A Position has not been selected for this Player');
+            $this->form_validation->set_message('is_position_set', $this->lang->line('appearance_player_position_missing'));
             return FALSE;
         }
 
