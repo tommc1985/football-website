@@ -4,10 +4,10 @@ if (count($leagueMatches) > 0) { ?>
     <table>
         <thead>
             <tr>
-                <td>Date</td>
-                <td>Home Team</td>
-                <td>Score</td>
-                <td>Away Team</td>
+                <td><?php echo $this->lang->line('league_match_date'); ?></td>
+                <td><?php echo $this->lang->line('league_match_home_team'); ?></td>
+                <td><?php echo $this->lang->line('league_match_score'); ?></td>
+                <td><?php echo $this->lang->line('league_match_away_team'); ?></td>
                 <td></td>
                 <td></td>
             </tr>
@@ -20,8 +20,8 @@ if (count($leagueMatches) > 0) { ?>
                 <td><?php echo $leagueMatch->h_opposition_id; ?></td>
                 <td><?php echo $leagueMatch->h_score; ?> - <?php echo $leagueMatch->a_score; ?></td>
                 <td><?php echo $leagueMatch->a_opposition_id; ?></td>
-                <td><a href="/admin/league-match/edit/id/<?php echo $leagueMatch->id;?>">Edit</a></td>
-                <td><a href="/admin/league-match/delete/id/<?php echo $leagueMatch->id;?>">Delete</a></td>
+                <td><a href="/admin/league-match/edit/id/<?php echo $leagueMatch->id;?>"><?php echo $this->lang->line('league_match_edit'); ?></a></td>
+                <td><a href="/admin/league-match/delete/id/<?php echo $leagueMatch->id;?>"><?php echo $this->lang->line('league_match_delete'); ?></a></td>
             </tr>
     <?php
     } ?>

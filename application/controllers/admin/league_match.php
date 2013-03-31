@@ -22,6 +22,8 @@ class League_Match extends CI_Controller/*Backend_Controller*/
         $this->load->model('League_Match_model');
         $this->load->model('League_Registration_model');
         $this->load->config('league_match', true);
+
+        $this->lang->load('league_match');
     }
 
     /**
@@ -81,7 +83,7 @@ class League_Match extends CI_Controller/*Backend_Controller*/
 
         $parameters = $this->uri->uri_to_assoc(4, array('league-id'));
 
-        $data['submitButtonText'] = 'Save';
+        $data['submitButtonText'] = $this->lang->line('league_match_add');
 
         $league = false;
         if ($parameters['league-id'] !== false) {
@@ -105,7 +107,7 @@ class League_Match extends CI_Controller/*Backend_Controller*/
             $this->Cache_League_model->insertEntry($league->id);
             $this->Cache_League_Statistics_model->insertEntries($league->id);
 
-            $this->session->set_flashdata('message', "League Match has been added");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('league_match_added'), $leagueMatch->id));
             redirect('/admin/league-match');
         }
 
@@ -122,7 +124,7 @@ class League_Match extends CI_Controller/*Backend_Controller*/
 
         $parameters = $this->uri->uri_to_assoc(4, array('id'));
 
-        $data['submitButtonText'] = 'Save';
+        $data['submitButtonText'] = $this->lang->line('league_match_save');
 
         $leagueMatch = false;
         if ($parameters['id'] !== false) {
@@ -146,7 +148,7 @@ class League_Match extends CI_Controller/*Backend_Controller*/
             $this->Cache_League_model->insertEntry($leagueMatch->league_id);
             $this->Cache_League_Statistics_model->insertEntries($leagueMatch->league_id);
 
-            $this->session->set_flashdata('message', "League Match has been updated");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('league_match_updated'), $leagueMatch->id));
             redirect('/admin/league-match');
         }
 
@@ -188,7 +190,7 @@ class League_Match extends CI_Controller/*Backend_Controller*/
             $this->Cache_League_model->insertEntry($leagueMatch->league_id);
             $this->Cache_League_Statistics_model->insertEntries($leagueMatch->league_id);
 
-            $this->session->set_flashdata('message', "League Match has been deleted");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('league_match_deleted'), $leagueMatch->id));
             redirect('/admin/league-match');
         }
 
