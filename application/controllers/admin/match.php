@@ -115,6 +115,7 @@ class Match extends CI_Controller/*Backend_Controller*/
         $match = false;
         if ($parameters['id'] !== false) {
             $match = $this->Match_model->fetch($parameters['id']);
+            $oldData = clone $match;
         }
 
         if (empty($match)) {
@@ -128,9 +129,13 @@ class Match extends CI_Controller/*Backend_Controller*/
             $this->Match_model->processUpdate($parameters['id']);
 
             $match = $this->Match_model->fetch($parameters['id']);
+            $newData = clone $match;
 
-            $matchSeason = Season_model::fetchSeasonFromDateTime($match->date);
-            $this->Cache_Club_Statistics_model->insertEntries($matchSeason);
+            if ($this->Match_model->isDifferent($oldData, $newData)) {
+                $matchSeason = Season_model::fetchSeasonFromDateTime($match->date);
+
+                $this->Cache_Club_Statistics_model->insertEntries($matchSeason);
+            }
 
             $this->session->set_flashdata('message', "Match has been updated");
             redirect('/admin/match');
