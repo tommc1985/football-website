@@ -17,6 +17,7 @@ class Match extends CI_Controller/*Backend_Controller*/
 
         $this->load->database();
         $this->load->library('session');
+        $this->load->model('Cache_model');
         $this->load->model('Competition_model');
         $this->load->model('Competition_Stage_model');
         $this->load->model('Match_model');
@@ -89,6 +90,9 @@ class Match extends CI_Controller/*Backend_Controller*/
 
             $match = $this->Match_model->fetch($insertId);
 
+            $matchSeason = Season_model::fetchSeasonFromDateTime($match->date);
+            $this->Cache_Club_Statistics_model->insertEntries($matchSeason);
+
             $this->session->set_flashdata('message', "Match has been added");
             redirect('/admin/match');
         }
@@ -124,6 +128,9 @@ class Match extends CI_Controller/*Backend_Controller*/
             $this->Match_model->processUpdate($parameters['id']);
 
             $match = $this->Match_model->fetch($parameters['id']);
+
+            $matchSeason = Season_model::fetchSeasonFromDateTime($match->date);
+            $this->Cache_Club_Statistics_model->insertEntries($matchSeason);
 
             $this->session->set_flashdata('message', "Match has been updated");
             redirect('/admin/match');
@@ -163,6 +170,10 @@ class Match extends CI_Controller/*Backend_Controller*/
 
         if ($this->input->post('confirm_delete') !== false) {
             $this->Match_model->deleteEntry($parameters['id']);
+
+            $matchSeason = Season_model::fetchSeasonFromDateTime($match->date);
+            $this->Cache_Club_Statistics_model->insertEntries($matchSeason);
+
             $this->session->set_flashdata('message', "Match has been deleted");
             redirect('/admin/match');
         }
