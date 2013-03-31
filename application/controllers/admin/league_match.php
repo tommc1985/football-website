@@ -17,6 +17,7 @@ class League_Match extends CI_Controller/*Backend_Controller*/
 
         $this->load->database();
         $this->load->library('session');
+        $this->load->model('Cache_model');
         $this->load->model('League_model');
         $this->load->model('League_Match_model');
         $this->load->model('League_Registration_model');
@@ -101,6 +102,9 @@ class League_Match extends CI_Controller/*Backend_Controller*/
 
             $leagueMatch = $this->League_Match_model->fetch($insertId);
 
+            $this->Cache_League_model->insertEntry($league->id);
+            $this->Cache_League_Statistics_model->insertEntries($league->id);
+
             $this->session->set_flashdata('message', "League Match has been added");
             redirect('/admin/league-match');
         }
@@ -138,6 +142,9 @@ class League_Match extends CI_Controller/*Backend_Controller*/
             $this->League_Match_model->processUpdate($parameters['id']);
 
             $leagueMatch = $this->League_Match_model->fetch($parameters['id']);
+
+            $this->Cache_League_model->insertEntry($leagueMatch->league_id);
+            $this->Cache_League_Statistics_model->insertEntries($leagueMatch->league_id);
 
             $this->session->set_flashdata('message', "League Match has been updated");
             redirect('/admin/league-match');
@@ -177,6 +184,10 @@ class League_Match extends CI_Controller/*Backend_Controller*/
 
         if ($this->input->post('confirm_delete') !== false) {
             $this->League_Match_model->deleteEntry($parameters['id']);
+
+            $this->Cache_League_model->insertEntry($leagueMatch->league_id);
+            $this->Cache_League_Statistics_model->insertEntries($leagueMatch->league_id);
+
             $this->session->set_flashdata('message', "League Match has been deleted");
             redirect('/admin/league-match');
         }
