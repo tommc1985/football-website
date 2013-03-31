@@ -48,7 +48,7 @@ class Match extends CI_Controller/*Backend_Controller*/
         }
         $data['matches'] = $this->Match_model->fetchAll($perPage, $offset, $parameters['order-by'], $order);
 
-        $config['base_url'] = '/admin/match/index/offset/';
+        $config['base_url'] = '/admin/match/index/';
 
         if ($parameters['order-by']) {
             $config['base_url'] .= "order-by/{$parameters['order-by']}/";
