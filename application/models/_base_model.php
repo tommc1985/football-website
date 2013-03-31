@@ -210,7 +210,7 @@ class Base_Model extends CI_Model {
             unset($dataset_2->date_updated);
         }
 
-        return md5(serialize($dataset_1)) === md5(serialize($dataset_2));
+        return md5(serialize($dataset_1)) != md5(serialize($dataset_2));
     }
 
 }
