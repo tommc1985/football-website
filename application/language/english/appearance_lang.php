@@ -1,7 +1,7 @@
 <?php
 
 // Errors
-$lang['appearance_no_result']  = 'Cannot edit appearance details until the match result is entered.';
+$lang['appearance_no_result']  = 'Cannot edit Appearance details until the Match result is entered.';
 $lang['appearance_not_found']  = 'The specified Match cannot be found.';
 
 // Form Labels
