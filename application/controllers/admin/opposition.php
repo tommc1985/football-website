@@ -39,7 +39,7 @@ class Opposition extends CI_Controller/*Backend_Controller*/
 
         $data['oppositions'] = $this->Opposition_model->fetchAll($perPage, $offset, $parameters['order-by'], $parameters['order']);
 
-        $config['base_url'] = '/admin/opposition/index/offset/';
+        $config['base_url'] = '/admin/opposition/index/';
 
         if ($parameters['order-by']) {
             $config['base_url'] .= "order-by/{$parameters['order-by']}/";
