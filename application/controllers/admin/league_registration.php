@@ -41,7 +41,7 @@ class League_Registration extends CI_Controller/*Backend_Controller*/
 
         $data['leagueRegistrations'] = $this->League_Registration_model->fetchAll($perPage, $offset, $parameters['order-by'], $parameters['order']);
 
-        $config['base_url'] = '/admin/league-registration/index/offset/';
+        $config['base_url'] = '/admin/league-registration/index/';
 
         if ($parameters['order-by']) {
             $config['base_url'] .= "order-by/{$parameters['order-by']}/";
