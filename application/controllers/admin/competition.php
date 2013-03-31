@@ -41,7 +41,7 @@ class Competition extends CI_Controller/*Backend_Controller*/
 
         $data['competitions'] = $this->Competition_model->fetchAll($perPage, $offset, $parameters['order-by'], $parameters['order']);
 
-        $config['base_url'] = '/admin/competition/index/offset/';
+        $config['base_url'] = '/admin/competition/index/';
 
         if ($parameters['order-by']) {
             $config['base_url'] .= "order-by/{$parameters['order-by']}/";
