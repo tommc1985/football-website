@@ -1,5 +1,5 @@
 <?php
 $this->load->view('admin/header'); ?>
-<p>Cannot delete this Competition Stage, there are Matches still linked to it.</p>
+<p><?php echo sprintf($this->lang->line('competition_stage_cannot_delete'), $competitionStage->name); ?></p>
 <?php
 $this->load->view('admin/footer');

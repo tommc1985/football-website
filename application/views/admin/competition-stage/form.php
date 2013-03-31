@@ -23,12 +23,12 @@ echo form_open($this->uri->uri_string()); ?>
 <table>
     <?php echo form_hidden('id', set_value('id', isset($competitionStage->id) ? $competitionStage->id : '')); ?>
     <tr>
-        <td><?php echo form_label('Name', $name['name']); ?></td>
+        <td><?php echo form_label($this->lang->line('competition_stage_name'), $name['name']); ?></td>
         <td><?php echo form_input($name['name'], set_value($name['name'], isset($competitionStage->name) ? $competitionStage->name : '')); ?></td>
         <td class="error"><?php echo form_error($name['name']); ?><?php echo isset($errors[$name['name']]) ? $errors[$name['name']] : ''; ?></td>
     </tr>
     <tr>
-        <td><?php echo form_label('Abbreviation', $abbreviation['name']); ?></td>
+        <td><?php echo form_label($this->lang->line('competition_stage_abbreviation'), $abbreviation['name']); ?></td>
         <td><?php echo form_input($abbreviation['name'], set_value($abbreviation['name'], isset($competitionStage->abbreviation) ? $competitionStage->abbreviation : '')); ?></td>
         <td class="error"><?php echo form_error($abbreviation['name']); ?><?php echo isset($errors[$abbreviation['name']]) ? $errors[$abbreviation['name']] : ''; ?></td>
     </tr>

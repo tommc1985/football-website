@@ -19,6 +19,8 @@ class Competition_Stage extends CI_Controller/*Backend_Controller*/
         $this->load->library('session');
         $this->load->model('Competition_Stage_model');
         $this->load->config('competition_stage', true);
+
+        $this->lang->load('competition_stage');
     }
 
     /**
@@ -72,7 +74,7 @@ class Competition_Stage extends CI_Controller/*Backend_Controller*/
     {
         $this->load->helper(array('form', 'url', 'html5_form_fields'));
 
-        $data['submitButtonText'] = 'Save';
+        $data['submitButtonText'] = $this->lang->line('competition_stage_add');
 
         $this->Competition_Stage_model->formValidation();
 
@@ -81,7 +83,7 @@ class Competition_Stage extends CI_Controller/*Backend_Controller*/
 
             $competitionStage = $this->Competition_Stage_model->fetch($insertId);
 
-            $this->session->set_flashdata('message', "Competition Stage has been added");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('competition_stage_added'), $competitionStage->name));
             redirect('/admin/competition-stage');
         }
 
@@ -98,7 +100,7 @@ class Competition_Stage extends CI_Controller/*Backend_Controller*/
 
         $parameters = $this->uri->uri_to_assoc(4, array('id'));
 
-        $data['submitButtonText'] = 'Save';
+        $data['submitButtonText'] = $this->lang->line('competition_stage_save');
 
         $competitionStage = false;
         if ($parameters['id'] !== false) {
@@ -117,7 +119,7 @@ class Competition_Stage extends CI_Controller/*Backend_Controller*/
 
             $competitionStage = $this->Competition_Stage_model->fetch($parameters['id']);
 
-            $this->session->set_flashdata('message', "Competition Stage has been updated");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('competition_stage_updated'), $competitionStage->name));
             redirect('/admin/competition-stage');
         }
 
@@ -155,7 +157,7 @@ class Competition_Stage extends CI_Controller/*Backend_Controller*/
 
         if ($this->input->post('confirm_delete') !== false) {
             $this->Competition_Stage_model->deleteEntry($parameters['id']);
-            $this->session->set_flashdata('message', "Competition Stage has been deleted");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('competition_stage_deleted'), $competitionStage->name));
             redirect('/admin/competition-stage');
         }
 
