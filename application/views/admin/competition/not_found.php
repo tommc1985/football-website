@@ -1,7 +1,7 @@
 <?php
 $this->load->view('admin/header'); ?>
 
-<p>The specified Competition cannot be found</p>
+<p><?php echo $this->lang->line('competition_not_found'); ?></p>
 
 <?php
 $this->load->view('admin/footer');
