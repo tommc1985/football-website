@@ -18,6 +18,7 @@ $lang['competition_competitive']  = 'Competitive';
 
 // Validation Errors
 
+
 // Messages
 $lang['competition_added']   = "Competition '%s' has been added";
 $lang['competition_updated'] = "Competition '%s' has been updated";
