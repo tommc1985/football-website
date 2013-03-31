@@ -40,7 +40,7 @@ class Official extends CI_Controller/*Backend_Controller*/
 
         $data['officials'] = $this->Official_model->fetchAll($perPage, $offset, $parameters['order-by'], $parameters['order']);
 
-        $config['base_url'] = '/admin/official/index/offset/';
+        $config['base_url'] = '/admin/official/index/';
 
         if ($parameters['order-by']) {
             $config['base_url'] .= "order-by/{$parameters['order-by']}/";
