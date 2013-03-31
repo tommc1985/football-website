@@ -24,7 +24,7 @@ while($i < $match->h) {
         'name'  => "scorer_id[{$i}]",
         'id'    => "scorer_id_{$i}",
         'options' => array('' => '--- Select ---',
-            '0' => '-- Own Goal --') + $this->Appearance_model->fetchForDropdown($match->id),
+            '0' => '-- ' . $this->lang->line('goal_own_goal') . ' --') + $this->Appearance_model->fetchForDropdown($match->id),
         'value' => set_value("scorer_id[{$i}]", isset($goals[$i]->scorer_id) ? $goals[$i]->scorer_id : ''),
     );
 
@@ -32,7 +32,7 @@ while($i < $match->h) {
         'name'  => "assist_id[{$i}]",
         'id'    => "assist_id_{$i}",
         'options' => array('' => '--- Select ---',
-            '0' => '-- No Assist --') + $this->Appearance_model->fetchForDropdown($match->id),
+            '0' => '-- ' . $this->lang->line('goal_no_assist') . ' --') + $this->Appearance_model->fetchForDropdown($match->id),
         'value' => set_value("assist_id[{$i}]", isset($goals[$i]->assist_id) ? $goals[$i]->assist_id : ''),
     );
 
@@ -78,14 +78,14 @@ echo form_open($this->uri->uri_string()); ?>
     <?php echo form_hidden($match_id['name'], $match_id['value']);
     echo form_error('match_id', '<tr class="error"><td colspan="8">', '</td></tr>'); ?>
     <tr>
-        <td><?php echo form_label('Minute', ''); ?></td>
-        <td><?php echo form_label('Scorer', ''); ?></td>
-        <td><?php echo form_label('Assister', ''); ?></td>
-        <td><?php echo form_label('Type', ''); ?></td>
-        <td><?php echo form_label('Body Part', ''); ?></td>
-        <td><?php echo form_label('Distance', ''); ?></td>
-        <td><?php echo form_label('Rating', ''); ?></td>
-        <td><?php echo form_label('Description', ''); ?></td>
+        <td><?php echo form_label($this->lang->line('goal_minute'), ''); ?></td>
+        <td><?php echo form_label($this->lang->line('goal_scorer'), ''); ?></td>
+        <td><?php echo form_label($this->lang->line('goal_assister'), ''); ?></td>
+        <td><?php echo form_label($this->lang->line('goal_type'), ''); ?></td>
+        <td><?php echo form_label($this->lang->line('goal_body_part'), ''); ?></td>
+        <td><?php echo form_label($this->lang->line('goal_distance'), ''); ?></td>
+        <td><?php echo form_label($this->lang->line('goal_rating'), ''); ?></td>
+        <td><?php echo form_label($this->lang->line('goal_description'), ''); ?></td>
     </tr>
     <?php
     $i = 0;

@@ -30,6 +30,8 @@ class Goal extends CI_Controller/*Backend_Controller*/
         $this->load->model('Position_model');
         $this->load->model('Season_model');
         $this->load->config('match', true);
+
+        $this->lang->load('goal');
     }
 
     /**
@@ -42,7 +44,7 @@ class Goal extends CI_Controller/*Backend_Controller*/
 
         $parameters = $this->uri->uri_to_assoc(4, array('id'));
 
-        $data['submitButtonText'] = 'Save';
+        $data['submitButtonText'] = $this->lang->line('goal_save');
 
         $match = false;
         if ($parameters['id'] !== false) {
@@ -131,7 +133,7 @@ class Goal extends CI_Controller/*Backend_Controller*/
                 $this->Cache_Player_Statistics_model->insertEntries($matchSeason);
             }
 
-            $this->session->set_flashdata('message', "Goals for Match {$match->id} have been updated");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('goal_data_updated'), $match->id));
             redirect('/admin/match');
         }
 
@@ -152,7 +154,7 @@ class Goal extends CI_Controller/*Backend_Controller*/
         $assisterIdValues = $this->input->post("assist_id");
 
         if ($value == $assisterIdValues[$index] && $value != '0' && $value != '') {
-            $this->form_validation->set_message('is_same_assister', 'A player cannot assist themselves');
+            $this->form_validation->set_message('is_same_assister', $this->lang->line('goal_same_assister'));
             return FALSE;
         }
 
@@ -171,7 +173,7 @@ class Goal extends CI_Controller/*Backend_Controller*/
         $scorerIdValues = $this->input->post("scorer_id");
 
         if (($value == '0' && $scorerIdValues[$index] != '0') || ($value != '0' && $scorerIdValues[$index] == '0')) {
-            $this->form_validation->set_message('is_own_goal', 'Both "Scorer and "Type" fields must be set to "Own Goal", not one or the other');
+            $this->form_validation->set_message('is_own_goal', $this->lang->line('goal_is_own_goal'));
             return FALSE;
         }
 
@@ -197,27 +199,27 @@ class Goal extends CI_Controller/*Backend_Controller*/
         if ($value != '') {
             switch (true) {
                 case $scorerIdValues[$index] == '':
-                    $this->form_validation->set_message('is_required', 'Who scored the goal?');
+                    $this->form_validation->set_message('is_required', $this->lang->line('goal_scorer_required'));
                     return FALSE;
                     break;
                 case $assistIdValues[$index] == '':
-                    $this->form_validation->set_message('is_required', 'Who assisted the goal (if anyone)?');
+                    $this->form_validation->set_message('is_required', $this->lang->line('goal_assister_required'));
                     return FALSE;
                     break;
                 case $typeValues[$index] == '':
-                    $this->form_validation->set_message('is_required', 'What type of goal was scored?');
+                    $this->form_validation->set_message('is_required', $this->lang->line('goal_type_required'));
                     return FALSE;
                     break;
                 case $bodyPartValues[$index] == '':
-                    $this->form_validation->set_message('is_required', 'The body part the goal was scored with must be selected');
+                    $this->form_validation->set_message('is_required', $this->lang->line('goal_body_part_required'));
                     return FALSE;
                     break;
                 case $distanceValues[$index] == '':
-                    $this->form_validation->set_message('is_required', 'From what distance was the goal scored?');
+                    $this->form_validation->set_message('is_required', $this->lang->line('goal_distance_required'));
                     return FALSE;
                     break;
                 case $ratingValues[$index] == '':
-                    $this->form_validation->set_message('is_required', 'What rating would you give the goal?');
+                    $this->form_validation->set_message('is_required', $this->lang->line('goal_rating_required'));
                     return FALSE;
                     break;
             }

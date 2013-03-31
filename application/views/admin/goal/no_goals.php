@@ -1,7 +1,7 @@
 <?php
 $this->load->view('admin/header'); ?>
 
-<p>No goals were scored in this game.</p>
+<p><?php echo $this->lang->line('goal_no_goals'); ?></p>
 
 <?php
 $this->load->view('admin/footer');
