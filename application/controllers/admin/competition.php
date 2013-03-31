@@ -100,7 +100,7 @@ class Competition extends CI_Controller/*Backend_Controller*/
 
         $parameters = $this->uri->uri_to_assoc(4, array('id'));
 
-        $data['submitButtonText'] = $this->lang->line('competition_edit');
+        $data['submitButtonText'] = $this->lang->line('competition_save');
 
         $competition = false;
         if ($parameters['id'] !== false) {
