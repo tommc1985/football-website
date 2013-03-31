@@ -42,9 +42,9 @@ echo form_open($this->uri->uri_string()); ?>
     <?php echo form_hidden($match_id['name'], $match_id['value']);
     echo form_error('match_id', '<tr class="error"><td colspan="3">', '</td></tr>'); ?>
     <tr>
-        <td><?php echo form_label('Minute', ''); ?></td>
-        <td><?php echo form_label('Player', ''); ?></td>
-        <td><?php echo form_label('Offence', ''); ?></td>
+        <td><?php echo form_label($this->lang->line('card_minute'), ''); ?></td>
+        <td><?php echo form_label($this->lang->line('card_player'), ''); ?></td>
+        <td><?php echo form_label($this->lang->line('card_offence'), ''); ?></td>
     </tr>
     <?php
     $i = 0;

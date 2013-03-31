@@ -31,6 +31,8 @@ class Card extends CI_Controller/*Backend_Controller*/
         $this->load->model('Position_model');
         $this->load->model('Season_model');
         $this->load->config('match', true);
+
+        $this->lang->load('card');
     }
 
     /**
@@ -43,7 +45,7 @@ class Card extends CI_Controller/*Backend_Controller*/
 
         $parameters = $this->uri->uri_to_assoc(4, array('id'));
 
-        $data['submitButtonText'] = 'Save';
+        $data['submitButtonText'] = $this->lang->line('card_save');
 
         $match = false;
         if ($parameters['id'] !== false) {
@@ -118,7 +120,7 @@ class Card extends CI_Controller/*Backend_Controller*/
                 $this->Cache_Player_Statistics_model->insertEntries($matchSeason);
             }
 
-            $this->session->set_flashdata('message', "Card info for Match {$match->id} have been updated");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('card_data_updated'), $match->id));
             redirect('/admin/match');
         }
 
@@ -139,7 +141,7 @@ class Card extends CI_Controller/*Backend_Controller*/
         $minuteValues = $this->input->post("minute");
 
         if ($minuteValues[$index] != '' && $value == '') {
-            $this->form_validation->set_message('player_required', 'You must select the Player the Card was issued to');
+            $this->form_validation->set_message('player_required', $this->lang->line('card_player_required'));
             return FALSE;
         }
 
@@ -158,7 +160,7 @@ class Card extends CI_Controller/*Backend_Controller*/
         $minuteValues = $this->input->post("minute");
 
         if ($minuteValues[$index] != '' && $value == '') {
-            $this->form_validation->set_message('offence_required', 'You must select the Offence for which the Card was issued');
+            $this->form_validation->set_message('offence_required', $this->lang->line('card_offence_required'));
             return FALSE;
         }
 

@@ -1,7 +1,7 @@
 <?php
 $this->load->view('admin/header'); ?>
 
-<p>Cannot edit card details until the match result is entered.</p>
+<p><?php echo $this->lang->line('card_no_result'); ?></p>
 
 <?php
 $this->load->view('admin/footer');
