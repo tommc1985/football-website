@@ -184,7 +184,7 @@ class Appearance_model extends Base_Model {
             }
         }
 
-        return md5(serialize($dataset_1)) === md5(serialize($dataset_2));
+        return md5(serialize($dataset_1)) != md5(serialize($dataset_2));
     }
 
 }
