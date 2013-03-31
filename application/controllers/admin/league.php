@@ -22,6 +22,8 @@ class League extends CI_Controller/*Backend_Controller*/
         $this->load->model('League_model');
         $this->load->model('Season_model');
         $this->load->config('league', true);
+
+        $this->lang->load('league');
     }
 
     /**
@@ -79,7 +81,7 @@ class League extends CI_Controller/*Backend_Controller*/
     {
         $this->load->helper(array('form', 'url', 'html5_form_fields'));
 
-        $data['submitButtonText'] = 'Save';
+        $data['submitButtonText'] = $this->lang->line('league_add');
 
         $this->League_model->formValidation();
 
@@ -91,7 +93,7 @@ class League extends CI_Controller/*Backend_Controller*/
             $this->Cache_League_model->insertEntry($league->id);
             $this->Cache_League_Statistics_model->insertEntries($league->id);
 
-            $this->session->set_flashdata('message', "League has been added");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('league_added'), $league->name));
             redirect('/admin/league');
         }
 
@@ -108,7 +110,7 @@ class League extends CI_Controller/*Backend_Controller*/
 
         $parameters = $this->uri->uri_to_assoc(4, array('id'));
 
-        $data['submitButtonText'] = 'Save';
+        $data['submitButtonText'] = $this->lang->line('league_save');
 
         $league = false;
         if ($parameters['id'] !== false) {
@@ -130,7 +132,7 @@ class League extends CI_Controller/*Backend_Controller*/
             $this->Cache_League_model->insertEntry($league->id);
             $this->Cache_League_Statistics_model->insertEntries($league->id);
 
-            $this->session->set_flashdata('message', "League has been updated");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('league_updated'), $league->name));
             redirect('/admin/league');
         }
 
@@ -172,7 +174,7 @@ class League extends CI_Controller/*Backend_Controller*/
             $this->Cache_League_model->insertEntry($parameters['id']);
             $this->Cache_League_Statistics_model->insertEntries($parameters['id']);
 
-            $this->session->set_flashdata('message', "League has been deleted");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('league_deleted'), $league->name));
             redirect('/admin/league');
         }
 

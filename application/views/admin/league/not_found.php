@@ -1,7 +1,7 @@
 <?php
 $this->load->view('admin/header'); ?>
 
-<p>The specified League cannot be found</p>
+<p><?php echo $this->lang->line('league_not_found'); ?></p>
 
 <?php
 $this->load->view('admin/footer');
