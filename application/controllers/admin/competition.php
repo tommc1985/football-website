@@ -19,6 +19,8 @@ class Competition extends CI_Controller/*Backend_Controller*/
         $this->load->library('session');
         $this->load->model('Competition_model');
         $this->load->config('competition', true);
+
+        $this->lang->load('competition');
     }
 
     /**
@@ -72,7 +74,7 @@ class Competition extends CI_Controller/*Backend_Controller*/
     {
         $this->load->helper(array('form', 'url', 'html5_form_fields'));
 
-        $data['submitButtonText'] = 'Save';
+        $data['submitButtonText'] = $this->lang->line('competition_add');
 
         $this->Competition_model->formValidation();
 
@@ -81,7 +83,7 @@ class Competition extends CI_Controller/*Backend_Controller*/
 
             $competition = $this->Competition_model->fetch($insertId);
 
-            $this->session->set_flashdata('message', "Competition has been added");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('competition_added'), $competition->name));
             redirect('/admin/competition');
         }
 
@@ -98,7 +100,7 @@ class Competition extends CI_Controller/*Backend_Controller*/
 
         $parameters = $this->uri->uri_to_assoc(4, array('id'));
 
-        $data['submitButtonText'] = 'Save';
+        $data['submitButtonText'] = $this->lang->line('competition_edit');
 
         $competition = false;
         if ($parameters['id'] !== false) {
@@ -117,7 +119,7 @@ class Competition extends CI_Controller/*Backend_Controller*/
 
             $competition = $this->Competition_model->fetch($parameters['id']);
 
-            $this->session->set_flashdata('message', "Competition has been updated");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('competition_updated'), $competition->name));
             redirect('/admin/competition');
         }
 
@@ -155,7 +157,7 @@ class Competition extends CI_Controller/*Backend_Controller*/
 
         if ($this->input->post('confirm_delete') !== false) {
             $this->Competition_model->deleteEntry($parameters['id']);
-            $this->session->set_flashdata('message', "Competition has been deleted");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('competition_deleted'), $competition->name));
             redirect('/admin/competition');
         }
 
