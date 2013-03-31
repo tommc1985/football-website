@@ -18,6 +18,7 @@ class Card extends CI_Controller/*Backend_Controller*/
         $this->load->database();
         $this->load->library('session');
         $this->load->model('Appearance_model');
+        $this->load->model('Cache_model');
         $this->load->model('Card_model');
         $this->load->model('Competition_model');
         $this->load->model('Competition_Stage_model');
@@ -109,7 +110,13 @@ class Card extends CI_Controller/*Backend_Controller*/
 
             $newData = $this->Card_model->fetch($match->id);
 
-            $this->Card_model->isDifferent($oldData, $newData);
+            if ($this->Card_model->isDifferent($oldData, $newData)) {
+                $matchSeason = Season_model::fetchSeasonFromDateTime($match->date);
+
+                $this->Cache_Fantasy_Football_model->insertEntries($matchSeason);
+                $this->Cache_Player_Accumulated_Statistics_model->insertEntries($matchSeason);
+                $this->Cache_Player_Statistics_model->insertEntries($matchSeason);
+            }
 
             $this->session->set_flashdata('message', "Card info for Match {$match->id} have been updated");
             redirect('/admin/match');
