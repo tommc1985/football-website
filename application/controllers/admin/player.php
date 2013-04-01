@@ -20,6 +20,8 @@ class Player extends CI_Controller/*Backend_Controller*/
         $this->load->model('Cache_model');
         $this->load->model('Player_model');
         $this->load->config('player', true);
+
+        $this->lang->load('player');
     }
 
     /**
@@ -73,7 +75,7 @@ class Player extends CI_Controller/*Backend_Controller*/
     {
         $this->load->helper(array('form', 'url', 'html5_form_fields'));
 
-        $data['submitButtonText'] = 'Save';
+        $data['submitButtonText'] = $this->lang->line('player_add');
 
         $this->Player_model->formValidation();
 
@@ -82,7 +84,7 @@ class Player extends CI_Controller/*Backend_Controller*/
 
             $player = $this->Player_model->fetch($insertId);
 
-            $this->session->set_flashdata('message', "{$player->first_name} {$player->surname} has been added");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('player_added'), $player->id));
             redirect('/admin/player');
         }
 
@@ -99,7 +101,7 @@ class Player extends CI_Controller/*Backend_Controller*/
 
         $parameters = $this->uri->uri_to_assoc(4, array('id'));
 
-        $data['submitButtonText'] = 'Save';
+        $data['submitButtonText'] = $this->lang->line('player_save');
 
         $player = false;
         if ($parameters['id'] !== false) {
@@ -121,7 +123,7 @@ class Player extends CI_Controller/*Backend_Controller*/
 
             $newData = $this->Player_model->fetch($parameters['id']);
 
-            $this->session->set_flashdata('message', "{$player->first_name} {$player->surname} has been updated");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('player_updated'), $player->id));
             redirect('/admin/player');
         }
 
@@ -159,7 +161,7 @@ class Player extends CI_Controller/*Backend_Controller*/
 
         if ($this->input->post('confirm_delete') !== false) {
             $this->Player_model->deleteEntry($parameters['id']);
-            $this->session->set_flashdata('message', "{$data['player']->first_name} {$data['player']->surname} has been deleted");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('player_deleted'), $player->id));
             redirect('/admin/player');
         }
 
