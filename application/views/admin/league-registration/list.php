@@ -4,8 +4,8 @@ if (count($leagueRegistrations) > 0) { ?>
     <table>
         <thead>
             <tr>
-                <td>League ID</td>
-                <td>Team</td>
+                <td><?php echo $this->lang->line('league_registration_league'); ?></td>
+                <td><?php echo $this->lang->line('league_registration_team'); ?></td>
                 <td></td>
                 <td></td>
             </tr>
@@ -16,8 +16,8 @@ if (count($leagueRegistrations) > 0) { ?>
             <tr>
                 <td><?php echo $leagueRegistration->league_id; ?></td>
                 <td><?php echo $leagueRegistration->opposition_id; ?></td>
-                <td><a href="/admin/league-registration/edit/id/<?php echo $leagueRegistration->id;?>">Edit</a></td>
-                <td><a href="/admin/league-registration/delete/id/<?php echo $leagueRegistration->id;?>">Delete</a></td>
+                <td><a href="/admin/league-registration/edit/id/<?php echo $leagueRegistration->id;?>"><?php echo $this->lang->line('league_registration_edit'); ?></a></td>
+                <td><a href="/admin/league-registration/delete/id/<?php echo $leagueRegistration->id;?>"><?php echo $this->lang->line('league_registration_delete'); ?></a></td>
             </tr>
     <?php
     } ?>

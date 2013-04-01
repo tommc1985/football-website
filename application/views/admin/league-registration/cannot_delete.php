@@ -1,5 +1,5 @@
 <?php
 $this->load->view('admin/header'); ?>
-<p>Cannot delete this League Registration, there are League Matches still linked to it.</p>
+<p><?php echo $this->lang->line('league_registration_cannot_delete'); ?></p>
 <?php
 $this->load->view('admin/footer');

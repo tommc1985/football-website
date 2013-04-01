@@ -21,6 +21,8 @@ class League_Registration extends CI_Controller/*Backend_Controller*/
         $this->load->model('League_Registration_model');
         $this->load->model('Opposition_model');
         $this->load->config('league_registration', true);
+
+        $this->lang->load('league_registration');
     }
 
     /**
@@ -74,7 +76,7 @@ class League_Registration extends CI_Controller/*Backend_Controller*/
     {
         $this->load->helper(array('form', 'url', 'html5_form_fields'));
 
-        $data['submitButtonText'] = 'Save';
+        $data['submitButtonText'] = $this->lang->line('league_registration_add');
 
         $this->League_Registration_model->formValidation();
 
@@ -86,7 +88,7 @@ class League_Registration extends CI_Controller/*Backend_Controller*/
             $this->Cache_League_model->insertEntry($leagueRegistration->league_id);
             $this->Cache_League_Statistics_model->insertEntries($leagueRegistration->league_id);
 
-            $this->session->set_flashdata('message', "League Registration has been added");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('league_registration_added'), $leagueRegistration->id));
             redirect('/admin/league-registration');
         }
 
@@ -103,7 +105,7 @@ class League_Registration extends CI_Controller/*Backend_Controller*/
 
         $parameters = $this->uri->uri_to_assoc(4, array('id'));
 
-        $data['submitButtonText'] = 'Save';
+        $data['submitButtonText'] = $this->lang->line('league_registration_save');
 
         $leagueRegistration = false;
         if ($parameters['id'] !== false) {
@@ -125,7 +127,7 @@ class League_Registration extends CI_Controller/*Backend_Controller*/
             $this->Cache_League_model->insertEntry($leagueRegistration->league_id);
             $this->Cache_League_Statistics_model->insertEntries($leagueRegistration->league_id);
 
-            $this->session->set_flashdata('message', "League Registration has been updated");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('league_registration_updated'), $leagueRegistration->id));
             redirect('/admin/league-registration');
         }
 
@@ -167,7 +169,7 @@ class League_Registration extends CI_Controller/*Backend_Controller*/
             $this->Cache_League_model->insertEntry($leagueRegistration->league_id);
             $this->Cache_League_Statistics_model->insertEntries($leagueRegistration->league_id);
 
-            $this->session->set_flashdata('message', "League Registration has been deleted");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('league_registration_deleted'), $leagueRegistration->id));
             redirect('/admin/league-registration');
         }
 
