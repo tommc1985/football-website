@@ -1,5 +1,5 @@
 <?php
 $this->load->view('admin/header'); ?>
-<p>Cannot delete this Match, there are Appearances, Cards and/or Goals still linked to it.</p>
+<p><?php echo sprintf($this->lang->line('match_cannot_delete'), $match->id); ?></p>
 <?php
 $this->load->view('admin/footer');

@@ -111,82 +111,82 @@ echo form_open($this->uri->uri_string()); ?>
 <table>
     <?php echo form_hidden('id', set_value('id', isset($match->id) ? $match->id : '')); ?>
     <tr>
-        <td><?php echo form_label('Date', $date['name']); ?></td>
+        <td><?php echo form_label($this->lang->line('match_date'), $date['name']); ?></td>
         <td><?php echo form_date($date['name'], set_value($date['name'], isset($match->date) ? substr($match->date, 0, 10) : '')); ?></td>
         <td class="error"><?php echo form_error($date['name']); ?><?php echo isset($errors[$date['name']]) ? $errors[$date['name']] : ''; ?></td>
     </tr>
     <tr>
-        <td><?php echo form_label('Time', $time['name']); ?></td>
+        <td><?php echo form_label($this->lang->line('match_time'), $time['name']); ?></td>
         <td><?php echo form_time($time['name'], set_value($time['name'], isset($match->date) ? substr($match->date, 11, 5) : Configuration::get('usual_match_ko_time'))); ?></td>
         <td class="error"><?php echo form_error($time['name']); ?><?php echo isset($errors[$time['name']]) ? $errors[$time['name']] : ''; ?></td>
     </tr>
     <tr>
-        <td><?php echo form_label('Opposition', $opposition_id['name']); ?></td>
+        <td><?php echo form_label($this->lang->line('match_opposition'), $opposition_id['name']); ?></td>
         <td><?php echo form_dropdown($opposition_id['name'], $opposition_id['options'], set_value($opposition_id['name'], isset($match->opposition_id) ? $match->opposition_id : '')); ?></td>
         <td class="error"><?php echo form_error($opposition_id['name']); ?><?php echo isset($errors[$opposition_id['name']]) ? $errors[$opposition_id['name']] : ''; ?></td>
     </tr>
     <tr>
-        <td><?php echo form_label('Competition', $competition_id['name']); ?></td>
+        <td><?php echo form_label($this->lang->line('match_competition'), $competition_id['name']); ?></td>
         <td><?php echo form_dropdown($competition_id['name'], $competition_id['options'], set_value($competition_id['name'], isset($match->competition_id) ? $match->competition_id : '')); ?></td>
         <td class="error"><?php echo form_error($competition_id['name']); ?><?php echo isset($errors[$competition_id['name']]) ? $errors[$competition_id['name']] : ''; ?></td>
     </tr>
     <tr>
-        <td><?php echo form_label('Stage', $competition_stage_id['name']); ?></td>
+        <td><?php echo form_label($this->lang->line('match_stage'), $competition_stage_id['name']); ?></td>
         <td><?php echo form_dropdown($competition_stage_id['name'], $competition_stage_id['options'], set_value($competition_stage_id['name'], isset($match->competition_stage_id) ? $match->competition_stage_id : '')); ?></td>
         <td class="error"><?php echo form_error($competition_stage_id['name']); ?><?php echo isset($errors[$competition_stage_id['name']]) ? $errors[$competition_stage_id['name']] : ''; ?></td>
     </tr>
     <tr>
-        <td><?php echo form_label('Venue', $venue['name']); ?></td>
+        <td><?php echo form_label($this->lang->line('match_venue'), $venue['name']); ?></td>
         <td><?php echo form_dropdown($venue['name'], $venue['options'], set_value($venue['name'], isset($match->venue) ? $match->venue : '')); ?></td>
         <td class="error"><?php echo form_error($venue['name']); ?><?php echo isset($errors[$venue['name']]) ? $errors[$venue['name']] : ''; ?></td>
     </tr>
     <tr>
-        <td><?php echo form_label('Location', $location['name']); ?></td>
+        <td><?php echo form_label($this->lang->line('match_location'), $location['name']); ?></td>
         <td><?php echo form_input($location['name'], set_value($location['name'], isset($match->location) ? $match->location : '')); ?></td>
         <td class="error"><?php echo form_error($location['name']); ?><?php echo isset($errors[$location['name']]) ? $errors[$location['name']] : ''; ?></td>
     </tr>
     <tr>
-        <td><?php echo form_label('Official', $official_id['name']); ?></td>
+        <td><?php echo form_label($this->lang->line('match_official'), $official_id['name']); ?></td>
         <td><?php echo form_dropdown($official_id['name'], $official_id['options'], set_value($official_id['name'], isset($match->official_id) ? $match->official_id : '')); ?></td>
         <td class="error"><?php echo form_error($official_id['name']); ?><?php echo isset($errors[$official_id['name']]) ? $errors[$official_id['name']] : ''; ?></td>
     </tr>
     <tr>
-        <td><?php echo form_label('Your Score', $h['name']); ?></td>
+        <td><?php echo form_label($this->lang->line('match_your_score'), $h['name']); ?></td>
         <td><?php echo form_input($h['name'], set_value($h['name'], isset($match->h) ? $match->h : '')); ?></td>
         <td class="error"><?php echo form_error($h['name']); ?><?php echo isset($errors[$h['name']]) ? $errors[$h['name']] : ''; ?></td>
     </tr>
     <tr>
-        <td><?php echo form_label('Opposition Score', $a['name']); ?></td>
+        <td><?php echo form_label($this->lang->line('match_opposition_score'), $a['name']); ?></td>
         <td><?php echo form_input($a['name'], set_value($a['name'], isset($match->a) ? $match->a : '')); ?></td>
         <td class="error"><?php echo form_error($a['name']); ?><?php echo isset($errors[$a['name']]) ? $errors[$a['name']] : ''; ?></td>
     </tr>
     <tr>
-        <td><?php echo form_label('Report', $report['name']); ?></td>
+        <td><?php echo form_label($this->lang->line('match_report'), $report['name']); ?></td>
         <td><?php echo form_textarea($report['name'], set_value($report['name'], isset($match->report) ? $match->report : '')); ?></td>
         <td class="error"><?php echo form_error($report['name']); ?><?php echo isset($errors[$report['name']]) ? $errors[$report['name']] : ''; ?></td>
     </tr>
     <tr>
-        <td><?php echo form_label('Your Score', $h_et['name']); ?></td>
+        <td><?php echo form_label($this->lang->line('match_your_score_et'), $h_et['name']); ?></td>
         <td><?php echo form_input($h_et['name'], set_value($h_et['name'], isset($match->h_et) ? $match->h_et : '')); ?></td>
         <td class="error"><?php echo form_error($h_et['name']); ?><?php echo isset($errors[$h_et['name']]) ? $errors[$h_et['name']] : ''; ?></td>
     </tr>
     <tr>
-        <td><?php echo form_label('Opposition Score', $a_et['name']); ?></td>
+        <td><?php echo form_label($this->lang->line('match_opposition_score_et'), $a_et['name']); ?></td>
         <td><?php echo form_input($a_et['name'], set_value($a_et['name'], isset($match->a_et) ? $match->a_et : '')); ?></td>
         <td class="error"><?php echo form_error($a_et['name']); ?><?php echo isset($errors[$a_et['name']]) ? $errors[$a_et['name']] : ''; ?></td>
     </tr>
     <tr>
-        <td><?php echo form_label('Your Penalty Score', $h_pen['name']); ?></td>
+        <td><?php echo form_label($this->lang->line('match_your_score_penalties'), $h_pen['name']); ?></td>
         <td><?php echo form_input($h_pen['name'], set_value($h_pen['name'], isset($match->h_pen) ? $match->h_pen : '')); ?></td>
         <td class="error"><?php echo form_error($h_pen['name']); ?><?php echo isset($errors[$h_pen['name']]) ? $errors[$h_pen['name']] : ''; ?></td>
     </tr>
     <tr>
-        <td><?php echo form_label('Opposition Penalty Score', $a_pen['name']); ?></td>
+        <td><?php echo form_label($this->lang->line('match_opposition_score_penalties'), $a_pen['name']); ?></td>
         <td><?php echo form_input($a_pen['name'], set_value($a_pen['name'], isset($match->a_pen) ? $match->a_pen : '')); ?></td>
         <td class="error"><?php echo form_error($a_pen['name']); ?><?php echo isset($errors[$a_pen['name']]) ? $errors[$a_pen['name']] : ''; ?></td>
     </tr>
     <tr>
-        <td><?php echo form_label('Status', $status['name']); ?></td>
+        <td><?php echo form_label($this->lang->line('match_status'), $status['name']); ?></td>
         <td><?php echo form_dropdown($status['name'], $status['options'], set_value($status['name'], isset($match->status) ? $match->status : '')); ?></td>
         <td class="error"><?php echo form_error($status['name']); ?><?php echo isset($errors[$status['name']]) ? $errors[$status['name']] : ''; ?></td>
     </tr>

@@ -24,6 +24,8 @@ class Match extends CI_Controller/*Backend_Controller*/
         $this->load->model('Official_model');
         $this->load->model('Opposition_model');
         $this->load->config('match', true);
+
+        $this->lang->load('match');
     }
 
     /**
@@ -81,7 +83,7 @@ class Match extends CI_Controller/*Backend_Controller*/
     {
         $this->load->helper(array('form', 'url', 'html5_form_fields'));
 
-        $data['submitButtonText'] = 'Save';
+        $data['submitButtonText'] = $this->lang->line('match_add');
 
         $this->Match_model->formValidation();
 
@@ -93,7 +95,7 @@ class Match extends CI_Controller/*Backend_Controller*/
             $matchSeason = Season_model::fetchSeasonFromDateTime($match->date);
             $this->Cache_Club_Statistics_model->insertEntries($matchSeason);
 
-            $this->session->set_flashdata('message', "Match has been added");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('match_added'), $match->id));
             redirect('/admin/match');
         }
 
@@ -110,18 +112,19 @@ class Match extends CI_Controller/*Backend_Controller*/
 
         $parameters = $this->uri->uri_to_assoc(4, array('id'));
 
-        $data['submitButtonText'] = 'Save';
+        $data['submitButtonText'] = $this->lang->line('match_save');
 
         $match = false;
         if ($parameters['id'] !== false) {
             $match = $this->Match_model->fetch($parameters['id']);
-            $oldData = clone $match;
         }
 
         if (empty($match)) {
             $this->load->view('admin/match/not_found', $data);
             return;
         }
+
+        $oldData = clone $match;
 
         $this->Match_model->formValidation();
 
@@ -137,7 +140,7 @@ class Match extends CI_Controller/*Backend_Controller*/
                 $this->Cache_Club_Statistics_model->insertEntries($matchSeason);
             }
 
-            $this->session->set_flashdata('message', "Match has been updated");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('match_updated'), $match->id));
             redirect('/admin/match');
         }
 
@@ -179,7 +182,7 @@ class Match extends CI_Controller/*Backend_Controller*/
             $matchSeason = Season_model::fetchSeasonFromDateTime($match->date);
             $this->Cache_Club_Statistics_model->insertEntries($matchSeason);
 
-            $this->session->set_flashdata('message', "Match has been deleted");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('match_deleted'), $match->id));
             redirect('/admin/match');
         }
 
