@@ -21,6 +21,8 @@ class Competition extends CI_Controller/*Backend_Controller*/
         $this->load->config('competition', true);
 
         $this->lang->load('competition');
+
+        $this->load->helper(array('competition'));
     }
 
     /**

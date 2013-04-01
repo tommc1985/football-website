@@ -15,7 +15,7 @@ if (count($competitions) > 0) { ?>
     foreach ($competitions as $competition) { ?>
             <tr>
                 <td><?php echo $competition->short_name; ?></td>
-                <td><?php echo $competition->type; ?></td>
+                <td><?php echo Competition_helper::type($competition); ?></td>
                 <td><a href="/admin/competition/edit/id/<?php echo $competition->id;?>"><?php echo $this->lang->line('competition_edit'); ?></a></td>
                 <td><a href="/admin/competition/delete/id/<?php echo $competition->id;?>"><?php echo $this->lang->line('competition_delete'); ?></a></td>
             </tr>
