@@ -26,8 +26,6 @@ $lang['league_registration_confirm_delete_no']       = "No thanks";
 $lang['league_registration_edit']                    = 'Edit';
 $lang['league_registration_delete']                  = 'Delete';
 
-$lang['league_registration_score']     = 'Score';
-
 
 /* End of file league_registration.php */
 /* Location: ./application/language/english/league_registration.php */
