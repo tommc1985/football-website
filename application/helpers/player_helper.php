@@ -10,27 +10,27 @@ class Player_helper
      */
     public function __construct() { }
 
-    protected static function _fetchPlayerObject($playerId)
+    protected static function _fetchObject($id)
     {
         $ci =& get_instance();
 
         $ci->load->database();
         $ci->load->model('Player_model');
 
-        return $ci->Player_model->fetch($playerId);
+        return $ci->Player_model->fetch($id);
     }
 
-    protected static function _convertPlayerObject($player)
+    protected static function _convertObject($object)
     {
-        if (!is_object($player)) {
-            if (is_array($player)) {
-                $player = (object) $player;
+        if (!is_object($object)) {
+            if (is_array($object)) {
+                $object = (object) $object;
             } else {
-                $player = self::_fetchPlayerObject($player);
+                $object = self::_fetchObject($object);
             }
         }
 
-        return $player;
+        return $object;
     }
 
     /**
@@ -40,7 +40,7 @@ class Player_helper
      */
     public static function fullName($player)
     {
-        $player = self::_convertPlayerObject($player);
+        $player = self::_convertObject($player);
 
         return "{$player->first_name} {$player->surname}";
     }
@@ -52,7 +52,7 @@ class Player_helper
      */
     public static function fullNameReverse($player)
     {
-        $player = self::_convertPlayerObject($player);
+        $player = self::_convertObject($player);
 
         return "{$player->surname}, {$player->first_name}";
     }
@@ -64,7 +64,7 @@ class Player_helper
      */
     public static function initialSurname($player)
     {
-        $player = self::_convertPlayerObject($player);
+        $player = self::_convertObject($player);
 
         return substr($player->first_name, 0, 1) . '. ' . $player->surname;
     }
