@@ -3,7 +3,7 @@
 /**
  * Competition Stage Helper
  */
-class Competition_stage_helper
+class Competition_Stage_helper
 {
     /**
      * Constructor
