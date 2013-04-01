@@ -22,6 +22,8 @@ class Player_Registration extends CI_Controller/*Backend_Controller*/
         $this->load->model('Player_Registration_model');
         $this->load->model('Season_model');
         $this->load->config('player_registration', true);
+
+        $this->lang->load('player_registration');
     }
 
     /**
@@ -75,7 +77,7 @@ class Player_Registration extends CI_Controller/*Backend_Controller*/
     {
         $this->load->helper(array('form', 'url', 'html5_form_fields'));
 
-        $data['submitButtonText'] = 'Save';
+        $data['submitButtonText'] = $this->lang->line('player_registration_add');
 
         $this->Player_Registration_model->formValidation();
 
@@ -89,7 +91,7 @@ class Player_Registration extends CI_Controller/*Backend_Controller*/
             $this->Cache_Player_Goal_Statistics_model->insertEntries($playerRegistration->season);
             $this->Cache_Player_Statistics_model->insertEntries($playerRegistration->season);
 
-            $this->session->set_flashdata('message', "Player Registration has been added");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('player_registration_added'), $playerRegistration->id));
             redirect('/admin/player-registration');
         }
 
@@ -106,7 +108,7 @@ class Player_Registration extends CI_Controller/*Backend_Controller*/
 
         $parameters = $this->uri->uri_to_assoc(4, array('id'));
 
-        $data['submitButtonText'] = 'Save';
+        $data['submitButtonText'] = $this->lang->line('player_registration_save');
 
         $playerRegistration = false;
         if ($parameters['id'] !== false) {
@@ -138,7 +140,7 @@ class Player_Registration extends CI_Controller/*Backend_Controller*/
                 $this->Cache_Player_Statistics_model->insertEntries($oldData->season);
             }
 
-            $this->session->set_flashdata('message', "Player Registration has been updated");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('player_registration_updated'), $playerRegistration->id));
             redirect('/admin/player-registration');
         }
 
@@ -182,7 +184,7 @@ class Player_Registration extends CI_Controller/*Backend_Controller*/
             $this->Cache_Player_Goal_Statistics_model->insertEntries($playerRegistration->season);
             $this->Cache_Player_Statistics_model->insertEntries($playerRegistration->season);
 
-            $this->session->set_flashdata('message', "Player Registration has been deleted");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('player_registration_deleted'), $playerRegistration->id));
             redirect('/admin/player-registration');
         }
 

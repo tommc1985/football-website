@@ -1,5 +1,5 @@
 <?php
 $this->load->view('admin/header'); ?>
-<p>Cannot delete this Player Registration.</p>
+<p><?php echo $this->lang->line('player_registration_cannot_delete'); ?></p>
 <?php
 $this->load->view('admin/footer');
