@@ -19,6 +19,8 @@ class Opposition extends CI_Controller/*Backend_Controller*/
         $this->load->library('session');
         $this->load->model('Opposition_model');
         $this->load->config('opposition', true);
+
+        $this->lang->load('opposition');
     }
 
     /**
@@ -72,7 +74,7 @@ class Opposition extends CI_Controller/*Backend_Controller*/
     {
         $this->load->helper(array('form', 'url', 'html5_form_fields'));
 
-        $data['submitButtonText'] = 'Save';
+        $data['submitButtonText'] = $this->lang->line('opposition_add');
 
         $this->Opposition_model->formValidation();
 
@@ -81,7 +83,7 @@ class Opposition extends CI_Controller/*Backend_Controller*/
 
             $opposition = $this->Opposition_model->fetch($insertId);
 
-            $this->session->set_flashdata('message', "{$opposition->name} has been added");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('opposition_added'), $opposition->name));
             redirect('/admin/opposition');
         }
 
@@ -98,7 +100,7 @@ class Opposition extends CI_Controller/*Backend_Controller*/
 
         $parameters = $this->uri->uri_to_assoc(4, array('id'));
 
-        $data['submitButtonText'] = 'Save';
+        $data['submitButtonText'] = $this->lang->line('opposition_save');
 
         $opposition = false;
         if ($parameters['id'] !== false) {
@@ -117,7 +119,7 @@ class Opposition extends CI_Controller/*Backend_Controller*/
 
             $opposition = $this->Opposition_model->fetch($parameters['id']);
 
-            $this->session->set_flashdata('message', "{$opposition->name} has been updated");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('opposition_updated'), $opposition->name));
             redirect('/admin/opposition');
         }
 
@@ -155,7 +157,7 @@ class Opposition extends CI_Controller/*Backend_Controller*/
 
         if ($this->input->post('confirm_delete') !== false) {
             $this->Opposition_model->deleteEntry($parameters['id']);
-            $this->session->set_flashdata('message', "{$data['opposition']->name} has been deleted");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('opposition_deleted'), $opposition->name));
             redirect('/admin/opposition');
         }
 

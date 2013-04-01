@@ -4,7 +4,7 @@ if (count($oppositions) > 0) { ?>
     <table>
         <thead>
             <tr>
-                <td>Name</td>
+                <td><?php echo $this->lang->line('opposition_name'); ?></td>
                 <td></td>
                 <td></td>
             </tr>
@@ -14,8 +14,8 @@ if (count($oppositions) > 0) { ?>
     foreach ($oppositions as $opposition) { ?>
             <tr>
                 <td><?php echo $opposition->name; ?></td>
-                <td><a href="/admin/opposition/edit/id/<?php echo $opposition->id;?>">Edit</a></td>
-                <td><a href="/admin/opposition/delete/id/<?php echo $opposition->id;?>">Delete</a></td>
+                <td><a href="/admin/opposition/edit/id/<?php echo $opposition->id;?>"><?php echo $this->lang->line('opposition_edit'); ?></a></td>
+                <td><a href="/admin/opposition/delete/id/<?php echo $opposition->id;?>"><?php echo $this->lang->line('opposition_delete'); ?></a></td>
             </tr>
     <?php
     } ?>

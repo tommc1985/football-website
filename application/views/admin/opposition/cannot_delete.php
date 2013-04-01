@@ -1,5 +1,5 @@
 <?php
 $this->load->view('admin/header'); ?>
-<p>Cannot delete this Opposition, there are League Matches and/or League Registrations still linked to them.</p>
+<p>C<?php echo sprintf($this->lang->line('opposition_cannot_delete'), $opposition->name); ?></p>
 <?php
 $this->load->view('admin/footer');
