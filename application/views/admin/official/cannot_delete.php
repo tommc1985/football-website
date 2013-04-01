@@ -1,5 +1,5 @@
 <?php
 $this->load->view('admin/header'); ?>
-<p>Cannot delete this Official, there are Matches still linked to them.</p>
+<p><?php echo sprintf($this->lang->line('official_cannot_delete'), $official->id); ?></p>
 <?php
 $this->load->view('admin/footer');

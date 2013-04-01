@@ -20,6 +20,8 @@ class Official extends CI_Controller/*Backend_Controller*/
         $this->load->model('Cache_model');
         $this->load->model('Official_model');
         $this->load->config('official', true);
+
+        $this->lang->load('official');
     }
 
     /**
@@ -73,7 +75,7 @@ class Official extends CI_Controller/*Backend_Controller*/
     {
         $this->load->helper(array('form', 'url', 'html5_form_fields'));
 
-        $data['submitButtonText'] = 'Save';
+        $data['submitButtonText'] = $this->lang->line('official_add');
 
         $this->Official_model->formValidation();
 
@@ -82,7 +84,7 @@ class Official extends CI_Controller/*Backend_Controller*/
 
             $official = $this->Official_model->fetch($insertId);
 
-            $this->session->set_flashdata('message', "{$official->first_name} {$official->surname} has been added");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('official_added'), $official->id));
             redirect('/admin/official');
         }
 
@@ -99,7 +101,7 @@ class Official extends CI_Controller/*Backend_Controller*/
 
         $parameters = $this->uri->uri_to_assoc(4, array('id'));
 
-        $data['submitButtonText'] = 'Save';
+        $data['submitButtonText'] = $this->lang->line('official_save');
 
         $official = false;
         if ($parameters['id'] !== false) {
@@ -118,7 +120,7 @@ class Official extends CI_Controller/*Backend_Controller*/
 
             $official = $this->Official_model->fetch($parameters['id']);
 
-            $this->session->set_flashdata('message', "{$official->first_name} {$official->surname} has been updated");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('official_updated'), $official->id));
             redirect('/admin/official');
         }
 
@@ -156,7 +158,7 @@ class Official extends CI_Controller/*Backend_Controller*/
 
         if ($this->input->post('confirm_delete') !== false) {
             $this->Official_model->deleteEntry($parameters['id']);
-            $this->session->set_flashdata('message', "{$data['official']->first_name} {$data['official']->surname} has been deleted");
+            $this->session->set_flashdata('message', sprintf($this->lang->line('official_deleted'), $official->id));
             redirect('/admin/official');
         }
 
