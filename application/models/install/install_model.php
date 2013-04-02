@@ -2519,5 +2519,91 @@ class Install_Model extends CI_Model {
         return false;
     }
 
+    /**
+     * Create 'users' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of table creation attempt
+     */
+    public function createUsersTable($tableName)
+    {
+        $fields = array(
+            'id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'auto_increment' => TRUE,
+            ),
+            'username' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 50,
+            ),
+            'password' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 255,
+            ),
+            'email' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 100,
+            ),
+            'activated' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'default'        => 1,
+            ),
+            'banned' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'default'        => 0,
+            ),
+            'ban_reason' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 255,
+                'null'           => true,
+            ),
+            'new_password_key' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 50,
+                'null'           => true,
+            ),
+            'new_password_requested' => array(
+                'type'           => 'DATETIME',
+                'null'           => true,
+            ),
+            'new_email' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 100,
+                'null'           => true,
+            ),
+            'new_email_key' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 50,
+                'null'           => true,
+            ),
+            'last_ip' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 40,
+            ),
+            'last_login' => array(
+                'type'           => 'DATETIME',
+                'default'        => '0000-00-00 00:00:00',
+            ),
+            'created' => array(
+                'type'           => 'DATETIME',
+                'default'        => '0000-00-00 00:00:00',
+            ),
+            'modified' => array(
+                'type'           => 'timestamp',
+            ),
+        );
+
+        $this->ci->dbforge->add_field($fields);
+        $this->ci->dbforge->add_key('id', TRUE);
+
+        if ($this->ci->dbforge->create_table($tableName, TRUE)) {
+            return true;
+        }
+
+        return false;
+    }
+
 
 }
