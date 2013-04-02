@@ -84,13 +84,13 @@ class Install_Model extends CI_Model {
             'view_competitive_matches',
             'view_featured_stories',
             'view_league_tables',
-            'view_match_affected_results',
             'view_match_assists',
             'view_match_discipline',
             'view_match_goals',
             'view_matches',
             'view_yellow_count',
             'view_appearances_matches_combined',
+            'view_match_affected_results',
         );
     }
 
@@ -2751,6 +2751,17 @@ class Install_Model extends CI_Model {
     public function createViewMatchesView()
     {
         $sql = "CREATE OR REPLACE VIEW `view_matches` AS select `m`.`id` AS `id`,`m`.`opposition_id` AS `opposition_id`,`m`.`competition_id` AS `competition_id`,`m`.`competition_stage_id` AS `competition_stage_id`,`m`.`venue` AS `venue`,`m`.`location` AS `location`,`m`.`official_id` AS `official_id`,`m`.`h` AS `h`,`m`.`a` AS `a`,`m`.`report` AS `report`,`m`.`date` AS `date`,`m`.`h_et` AS `h_et`,`m`.`a_et` AS `a_et`,`m`.`h_pen` AS `h_pen`,`m`.`a_pen` AS `a_pen`,`m`.`status` AS `status`,`m`.`date_added` AS `date_added`,`m`.`date_updated` AS `date_updated`,`m`.`deleted` AS `deleted`,`o`.`name` AS `opposition_name`,`c`.`name` AS `competition_name`,`c`.`short_name` AS `competition_short_name`,`c`.`abbreviation` AS `competition_abbreviation`,`c`.`competitive` AS `competitive`,`c`.`type` AS `type`,`cs`.`name` AS `competition_stage_name`,`cs`.`abbreviation` AS `competition_stage_abbreviation` from (((`matches` `m` left join `opposition` `o` on((`o`.`id` = `m`.`opposition_id`))) left join `competition` `c` on((`c`.`id` = `m`.`competition_id`))) left join `competition_stage` `cs` on((`cs`.`id` = `m`.`competition_stage_id`))) where ((`m`.`deleted` = 0) and (`o`.`deleted` = 0) and (`c`.`deleted` = 0) and ((`cs`.`deleted` = 0) or isnull(`m`.`competition_stage_id`))) order by `m`.`date` desc ;";
+
+        $this->db->query($sql);
+    }
+
+    /**
+     * Create 'view_match_affected_results' view
+     * @return boolean           Result of view creation attempt
+     */
+    public function createViewMatchAffectedResultsView()
+    {
+        $sql = "CREATE OR REPLACE VIEW `view_match_affected_results` AS select `vmg`.`id` AS `id`,`vmg`.`match_id` AS `match_id`,`vmg`.`player_id` AS `player_id`,`vmg`.`motm` AS `motm`,`vmg`.`position` AS `position`,`vmg`.`status` AS `status`,`vmg`.`opposition_id` AS `opposition_id`,`vmg`.`competition_id` AS `competition_id`,`vmg`.`competition_stage_id` AS `competition_stage_id`,`vmg`.`competition_type` AS `competition_type`,`vmg`.`venue` AS `venue`,`vmg`.`h` AS `h`,`vmg`.`a` AS `a`,`vmg`.`date` AS `date`,`vmg`.`competitive` AS `competitive`,`vmg`.`first_name` AS `first_name`,`vmg`.`surname` AS `surname`,`vmg`.`dob` AS `dob`,`vmg`.`goals` AS `goals`,`vmg`.`assists` AS `assists`,((`vmg`.`h` - `vmg`.`goals`) - `vmg`.`assists`) AS `adjusted_h`,if((`vmg`.`h` > `vmg`.`a`),3,if((`vmg`.`h` = `vmg`.`a`),1,0)) AS `points`,if((((`vmg`.`h` - `vmg`.`goals`) - `vmg`.`assists`) > `vmg`.`a`),3,if((((`vmg`.`h` - `vmg`.`goals`) - `vmg`.`assists`) = `vmg`.`a`),1,0)) AS `adjusted_points` from `view_appearances_matches_combined` `vmg` ;";
 
         $this->db->query($sql);
     }
