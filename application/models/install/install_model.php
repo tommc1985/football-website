@@ -1429,5 +1429,72 @@ class Install_Model extends CI_Model {
         return false;
     }
 
+    /**
+     * Create 'content' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of table creation attempt
+     */
+    public function createContentTable($tableName)
+    {
+        $fields = array(
+            'id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+                'auto_increment' => TRUE,
+            ),
+            'title' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 255,
+            ),
+            'image_id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+            ),
+            'content' => array(
+                'type'           => 'TEXT',
+            ),
+            'type' => array(
+                'type' => 'ENUM',
+                'constraint' => "'article','news','page'",
+            ),
+            'author_id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+            ),
+            'menu_order' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'publish_date' => array(
+                'type'           => 'DATETIME',
+            ),
+            'date_added' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'date_updated' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'deleted' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'default'        => 0,
+            ),
+        );
+
+        $this->ci->dbforge->add_field($fields);
+        $this->ci->dbforge->add_key('id', TRUE);
+
+        if ($this->ci->dbforge->create_table($tableName, TRUE)) {
+            return true;
+        }
+
+        return false;
+    }
+
 
 }
