@@ -887,5 +887,80 @@ class Install_Model extends CI_Model {
         return false;
     }
 
+    /**
+     * Create 'cache_queue_player_accumulated_statistics' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of table creation attempt
+     */
+    public function createCacheQueuePlayerAccumulatedStatisticsTable($tableName)
+    {
+        $fields = array(
+            'id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+                'auto_increment' => TRUE,
+            ),
+            'by_type' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'null'           => true,
+            ),
+            'season' => array(
+                'type'           => 'INT',
+                'constraint'     => 4,
+                'null'           => true,
+            ),
+            'player_id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'null'           => true,
+            ),
+            'in_progress' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'null'           => true,
+                'default'        => 0,
+            ),
+            'completed' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'default'        => 0,
+            ),
+            'process_duration' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+                'null'           => true,
+            ),
+            'peak_memory_usage' => array(
+                'type'           => 'decimal',
+                'constraint'     => array(5, 2),
+                'null'           => true,
+            ),
+            'date_added' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'date_updated' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'deleted' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'default'        => 0,
+            ),
+        );
+
+        $this->ci->dbforge->add_field($fields);
+        $this->ci->dbforge->add_key('id', TRUE);
+
+        if ($this->ci->dbforge->create_table($tableName, TRUE)) {
+            return true;
+        }
+
+        return false;
+    }
+
 
 }
