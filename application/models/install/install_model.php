@@ -2088,5 +2088,82 @@ class Install_Model extends CI_Model {
         return false;
     }
 
+    /**
+     * Create 'player' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of table creation attempt
+     */
+    public function createPlayerTable($tableName)
+    {
+        $fields = array(
+            'id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+                'auto_increment' => TRUE,
+            ),
+            'first_name' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 50,
+            ),
+            'surname' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 50,
+            ),
+            'dob' => array(
+                'type'           => 'DATE',
+                'null'           => true,
+            ),
+            'nationality' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+                'null'           => true,
+            ),
+            'profile' => array(
+                'type'           => 'TEXT',
+                'null'           => true,
+            ),
+            'current' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'null'           => true,
+            ),
+            'image_id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+                'null'           => true,
+            ),
+            'gender' => array(
+                'type' => 'ENUM',
+                'constraint' => "'m','f'",
+                'null'           => true,
+            ),
+            'date_added' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'date_updated' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'deleted' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'default'        => 0,
+            ),
+        );
+
+        $this->ci->dbforge->add_field($fields);
+        $this->ci->dbforge->add_key('id', TRUE);
+
+        if ($this->ci->dbforge->create_table($tableName, TRUE)) {
+            return true;
+        }
+
+        return false;
+    }
+
 
 }
