@@ -2767,6 +2767,17 @@ class Install_Model extends CI_Model {
     }
 
     /**
+     * Create 'view_match_assists' view
+     * @return boolean           Result of view creation attempt
+     */
+    public function createViewMatchAssistsView()
+    {
+        $sql = "CREATE OR REPLACE VIEW `view_match_assists` AS select `a`.`id` AS `id`,`a`.`match_id` AS `match_id`,`a`.`player_id` AS `player_id`,`a`.`motm` AS `motm`,`a`.`position` AS `position`,`a`.`status` AS `status`,`m`.`opposition_id` AS `opposition_id`,`m`.`competition_id` AS `competition_id`,`m`.`competition_stage_id` AS `competition_stage_id`,`c`.`type` AS `competition_type`,`m`.`venue` AS `venue`,`m`.`h` AS `h`,`m`.`a` AS `a`,`m`.`date` AS `date`,`c`.`competitive` AS `competitive`,`p`.`first_name` AS `first_name`,`p`.`surname` AS `surname`,`p`.`dob` AS `dob`,(select count(`g`.`id`) AS `COUNT(g.id)` from `goal` `g` where ((`g`.`match_id` = `a`.`match_id`) and (`g`.`assist_id` = `a`.`player_id`) and (`g`.`deleted` = 0))) AS `assists` from ((((`appearance` `a` left join `matches` `m` on((`a`.`match_id` = `m`.`id`))) left join `competition` `c` on((`m`.`competition_id` = `c`.`id`))) left join `player` `p` on((`a`.`player_id` = `p`.`id`))) left join `opposition` `o` on((`m`.`opposition_id` = `o`.`id`))) where ((`a`.`deleted` = 0) and (`m`.`deleted` = 0) and (`c`.`deleted` = 0) and (`p`.`deleted` = 0) and (`o`.`deleted` = 0)) ;";
+
+        $this->db->query($sql);
+    }
+
+    /**
      * Insert 'position' table
      * @param  string $tableName Database table name
      * @return boolean           Result of table creation attempt
