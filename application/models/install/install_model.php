@@ -2313,5 +2313,48 @@ class Install_Model extends CI_Model {
         return false;
     }
 
+    /**
+     * Create 'tag' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of table creation attempt
+     */
+    public function createTagTable($tableName)
+    {
+        $fields = array(
+            'id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+                'auto_increment' => TRUE,
+            ),
+            'tag' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 255,
+            ),
+            'date_added' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'date_updated' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'deleted' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'default'        => 0,
+            ),
+        );
+
+        $this->ci->dbforge->add_field($fields);
+        $this->ci->dbforge->add_key('id', TRUE);
+
+        if ($this->ci->dbforge->create_table($tableName, TRUE)) {
+            return true;
+        }
+
+        return false;
+    }
+
 
 }
