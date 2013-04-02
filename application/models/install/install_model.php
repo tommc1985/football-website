@@ -2439,5 +2439,46 @@ class Install_Model extends CI_Model {
         return false;
     }
 
+    /**
+     * Create 'user_autologin' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of table creation attempt
+     */
+    public function createUserAutologinTable($tableName)
+    {
+        $fields = array(
+            'key_id' => array(
+                'type'           => 'CHAR',
+                'constraint'     => 32,
+            ),
+            'user_id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'default'        => 0,
+            ),
+            'user_agent' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 150,
+            ),
+            'last_ip' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 40,
+            ),
+            'last_login' => array(
+                'type'           => 'timestamp',
+            ),
+        );
+
+        $this->ci->dbforge->add_field($fields);
+        $this->ci->dbforge->add_key('key_id', TRUE);
+        $this->ci->dbforge->add_key('user_id', TRUE);
+
+        if ($this->ci->dbforge->create_table($tableName, TRUE)) {
+            return true;
+        }
+
+        return false;
+    }
+
 
 }
