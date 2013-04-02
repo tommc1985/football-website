@@ -104,5 +104,98 @@ class Install_Model extends CI_Model {
         return $methodName;
     }
 
+    /**
+     * Create 'appearance' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of table creation attempt
+     */
+    public function createAppearanceTable($tableName)
+    {
+        $fields = array(
+            'id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+                'auto_increment' => TRUE,
+            ),
+            'match_id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+            ),
+            'player_id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+            ),
+            'captain' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'default'        => 0,
+            ),
+            'rating' => array(
+                'type'           => 'INT',
+                'constraint'     => 2,
+            ),
+            'motm' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'default'        => 0,
+            ),
+            'injury' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+            ),
+            'position' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'order' => array(
+                'type'           => 'INT',
+                'constraint'     => 3,
+            ),
+            'shirt' => array(
+                'type'           => 'INT',
+                'constraint'     => 3,
+            ),
+            'status' => array(
+                'type' => 'ENUM',
+                'constraint' => "'starter','substitute','unused'",
+            ),
+            'on' => array(
+                'type'           => 'INT',
+                'constraint'     => 3,
+                'NULL' => true,
+            ),
+            'off' => array(
+                'type'           => 'INT',
+                'constraint'     => 3,
+                'NULL' => true,
+            ),
+            'date_added' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'date_updated' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'deleted' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'default'        => 0,
+            ),
+        );
+
+        $this->ci->dbforge->add_field($fields);
+        $this->ci->dbforge->add_key('id', TRUE);
+
+        if ($this->ci->dbforge->create_table($tableName, TRUE)) {
+            return true;
+        }
+
+        return false;
+    }
+
 
 }
