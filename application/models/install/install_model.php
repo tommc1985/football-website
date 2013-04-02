@@ -769,6 +769,7 @@ class Install_Model extends CI_Model {
             'league_id' => array(
                 'type'           => 'INT',
                 'constraint'     => 11,
+                'unsigned'       => TRUE,
             ),
             'in_progress' => array(
                 'type'           => 'TINYINT',
