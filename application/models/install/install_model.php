@@ -17,6 +17,12 @@ class Install_Model extends CI_Model {
     public $databaseTables;
 
     /**
+     * Database Views
+     * @var array
+     */
+    public $databaseViews;
+
+    /**
      * Constructor
      * @return NULL
      */
@@ -71,6 +77,21 @@ class Install_Model extends CI_Model {
             'user_profiles',
             'users',
         );
+
+        $this->databaseViews = array(
+            'view_appearances_ages',
+            'view_appearances_matches',
+            'view_appearances_matches_combined',
+            'view_competitive_matches',
+            'view_featured_stories',
+            'view_league_tables',
+            'view_match_affected_results',
+            'view_match_assists',
+            'view_match_discipline',
+            'view_match_goals',
+            'view_matches',
+            'view_yellow_count',
+        );
     }
 
     /**
@@ -84,6 +105,21 @@ class Install_Model extends CI_Model {
 
             if (method_exists($this, $methodName)) {
                 $this->$methodName($tableName);
+            }
+        }
+    }
+
+    /**
+     * Create Database Views
+     * @return boolean    Was the creation successful?
+     */
+    public function createDatabaseViews()
+    {
+        foreach ($this->databaseViews as $viewName) {
+            $methodName = $this->_generateCreateViewMethodName($viewName);
+
+            if (method_exists($this, $methodName)) {
+                $this->$methodName();
             }
         }
     }
@@ -104,7 +140,7 @@ class Install_Model extends CI_Model {
     }
 
     /**
-     * Generate the name of the Create method based on passed argument
+     * Generate the name of the Create Table method based on passed argument
      * @return string    Method Name
      */
     protected function _generateCreateTableMethodName($tableName)
@@ -113,6 +149,20 @@ class Install_Model extends CI_Model {
         $methodName = ucwords($methodName); // Convert first letter of each word to upper case
         $methodName = str_replace(" ", "", $methodName); // Remove spaces
         $methodName = "create{$methodName}Table";
+
+        return $methodName;
+    }
+
+    /**
+     * Generate the name of the Create View method based on passed argument
+     * @return string    Method Name
+     */
+    protected function _generateCreateViewMethodName($viewName)
+    {
+        $methodName = str_replace("_", " ", $viewName); // Change underscores to spaces
+        $methodName = ucwords($methodName); // Convert first letter of each word to upper case
+        $methodName = str_replace(" ", "", $methodName); // Remove spaces
+        $methodName = "create{$methodName}View";
 
         return $methodName;
     }
