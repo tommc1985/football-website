@@ -165,12 +165,12 @@ class Install_Model extends CI_Model {
             'on' => array(
                 'type'           => 'INT',
                 'constraint'     => 3,
-                'NULL' => true,
+                'NULL'           => true,
             ),
             'off' => array(
                 'type'           => 'INT',
                 'constraint'     => 3,
-                'NULL' => true,
+                'NULL'           => true,
             ),
             'date_added' => array(
                 'type'           => 'INT',
@@ -338,6 +338,79 @@ class Install_Model extends CI_Model {
         $this->ci->dbforge->add_key('player_id', TRUE);
         $this->ci->dbforge->add_key('type', TRUE);
         $this->ci->dbforge->add_key('season', TRUE);
+
+        if ($this->ci->dbforge->create_table($tableName, TRUE)) {
+            return true;
+        }
+
+        return false;
+    }
+    /**
+     * Create 'cache_league_results_collated' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of table creation attempt
+     */
+    public function createCacheLeagueResultsCollatedTable($tableName)
+    {
+        $fields = array(
+            'league_id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+            ),
+            'opposition_id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+            ),
+            'type' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 10,
+            ),
+            'played' => array(
+                'type'           => 'INT',
+                'constraint'     => 3,
+            ),
+            'won' => array(
+                'type'           => 'INT',
+                'constraint'     => 3,
+            ),
+            'drawn' => array(
+                'type'           => 'INT',
+                'constraint'     => 3,
+            ),
+            'lost' => array(
+                'type'           => 'INT',
+                'constraint'     => 3,
+            ),
+            'gf' => array(
+                'type'           => 'INT',
+                'constraint'     => 3,
+            ),
+            'ga' => array(
+                'type'           => 'INT',
+                'constraint'     => 3,
+            ),
+            'gd' => array(
+                'type'           => 'INT',
+                'constraint'     => 3,
+            ),
+            'points' => array(
+                'type'           => 'INT',
+                'constraint'     => 3,
+            ),
+            'form' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 255,
+            ),
+            'date_until' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 10,
+                'NULL'           => true,
+            ),
+        );
+
+        $this->ci->dbforge->add_field($fields);
 
         if ($this->ci->dbforge->create_table($tableName, TRUE)) {
             return true;
