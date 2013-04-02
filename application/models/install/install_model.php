@@ -197,5 +197,43 @@ class Install_Model extends CI_Model {
         return false;
     }
 
+    /**
+     * Create 'cache_club_statistics' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of table creation attempt
+     */
+    public function createCacheClubStatisticsTable($tableName)
+    {
+        $fields = array(
+            'type' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 15,
+            ),
+            'season' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 7,
+            ),
+            'statistic_group' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 100,
+            ),
+            'statistic_key' => array(
+                'type'           => 'TEXT',
+            ),
+            'statistic_value' => array(
+                'type'           => 'TEXT',
+                'constraint'     => 7,
+            ),
+        );
+
+        $this->ci->dbforge->add_field($fields);
+
+        if ($this->ci->dbforge->create_table($tableName, TRUE)) {
+            return true;
+        }
+
+        return false;
+    }
+
 
 }
