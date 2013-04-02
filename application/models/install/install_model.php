@@ -89,6 +89,21 @@ class Install_Model extends CI_Model {
     }
 
     /**
+     * Insert Data
+     * @return boolean    Was the insert successful?
+     */
+    public function insertData()
+    {
+        foreach ($this->databaseTables as $tableName) {
+            $methodName = $this->_generateInsertDataMethodName($tableName);
+
+            if (method_exists($this, $methodName)) {
+                $this->$methodName($tableName);
+            }
+        }
+    }
+
+    /**
      * Generate the name of the Create method based on passed argument
      * @return string    Method Name
      */
@@ -98,6 +113,20 @@ class Install_Model extends CI_Model {
         $methodName = ucwords($methodName); // Convert first letter of each word to upper case
         $methodName = str_replace(" ", "", $methodName); // Remove spaces
         $methodName = "create{$methodName}Table";
+
+        return $methodName;
+    }
+
+    /**
+     * Generate the name of the Insert Data method based on passed argument
+     * @return string    Method Name
+     */
+    protected function _generateInsertDataMethodName($tableName)
+    {
+        $methodName = str_replace("_", " ", $tableName); // Change underscores to spaces
+        $methodName = ucwords($methodName); // Convert first letter of each word to upper case
+        $methodName = str_replace(" ", "", $methodName); // Remove spaces
+        $methodName = "insert{$methodName}Data";
 
         return $methodName;
     }
@@ -2598,6 +2627,4 @@ class Install_Model extends CI_Model {
 
         return false;
     }
-
-
 }
