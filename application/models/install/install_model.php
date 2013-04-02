@@ -2262,5 +2262,56 @@ class Install_Model extends CI_Model {
         return false;
     }
 
+    /**
+     * Create 'position' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of table creation attempt
+     */
+    public function createPositionTable($tableName)
+    {
+        $fields = array(
+            'id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+                'auto_increment' => TRUE,
+            ),
+            'abbreviation' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 5,
+            ),
+            'long_name' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 30,
+            ),
+            'sort_order' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'date_added' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'date_updated' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'deleted' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'default'        => 0,
+            ),
+        );
+
+        $this->ci->dbforge->add_field($fields);
+        $this->ci->dbforge->add_key('id', TRUE);
+
+        if ($this->ci->dbforge->create_table($tableName, TRUE)) {
+            return true;
+        }
+
+        return false;
+    }
+
 
 }
