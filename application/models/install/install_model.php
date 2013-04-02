@@ -2745,6 +2745,17 @@ class Install_Model extends CI_Model {
     }
 
     /**
+     * Create 'view_matches' view
+     * @return boolean           Result of view creation attempt
+     */
+    public function createViewMatchesView()
+    {
+        $sql = "CREATE OR REPLACE VIEW `view_matches` AS select `m`.`id` AS `id`,`m`.`opposition_id` AS `opposition_id`,`m`.`competition_id` AS `competition_id`,`m`.`competition_stage_id` AS `competition_stage_id`,`m`.`venue` AS `venue`,`m`.`location` AS `location`,`m`.`official_id` AS `official_id`,`m`.`h` AS `h`,`m`.`a` AS `a`,`m`.`report` AS `report`,`m`.`date` AS `date`,`m`.`h_et` AS `h_et`,`m`.`a_et` AS `a_et`,`m`.`h_pen` AS `h_pen`,`m`.`a_pen` AS `a_pen`,`m`.`status` AS `status`,`m`.`date_added` AS `date_added`,`m`.`date_updated` AS `date_updated`,`m`.`deleted` AS `deleted`,`o`.`name` AS `opposition_name`,`c`.`name` AS `competition_name`,`c`.`short_name` AS `competition_short_name`,`c`.`abbreviation` AS `competition_abbreviation`,`c`.`competitive` AS `competitive`,`c`.`type` AS `type`,`cs`.`name` AS `competition_stage_name`,`cs`.`abbreviation` AS `competition_stage_abbreviation` from (((`matches` `m` left join `opposition` `o` on((`o`.`id` = `m`.`opposition_id`))) left join `competition` `c` on((`c`.`id` = `m`.`competition_id`))) left join `competition_stage` `cs` on((`cs`.`id` = `m`.`competition_stage_id`))) where ((`m`.`deleted` = 0) and (`o`.`deleted` = 0) and (`c`.`deleted` = 0) and ((`cs`.`deleted` = 0) or isnull(`m`.`competition_stage_id`))) order by `m`.`date` desc ;";
+
+        $this->db->query($sql);
+    }
+
+    /**
      * Insert 'position' table
      * @param  string $tableName Database table name
      * @return boolean           Result of table creation attempt
