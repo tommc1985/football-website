@@ -3052,6 +3052,61 @@ class Install_Model extends CI_Model {
     }
 
     /**
+     * Insert 'configuration_group' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of data insert attempt
+     */
+    public function insertConfigurationGroupData($tableName)
+    {
+        $this->db->truncate($tableName);
+
+        $data = array(
+            array(
+                'id' => 1,
+                'title' => 'Your Team',
+                'level_access' => 1,
+                'sort_order' => 1,
+                'visible' => 1,
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'id' => 2,
+                'title' => 'General',
+                'level_access' => 1,
+                'sort_order' => 2,
+                'visible' => 1,
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'id' => 3,
+                'title' => 'Data Protection',
+                'level_access' => 1,
+                'sort_order' => 3,
+                'visible' => 1,
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'id' => 4,
+                'title' => 'Fantasy Football',
+                'level_access' => 1,
+                'sort_order' => 4,
+                'visible' => 1,
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+        );
+
+        if ($this->db->insert_batch($tableName, $data)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Insert 'position' table
      * @param  string $tableName Database table name
      * @return boolean           Result of data insert attempt
