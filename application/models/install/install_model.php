@@ -1884,5 +1884,119 @@ class Install_Model extends CI_Model {
         return false;
     }
 
+    /**
+     * Create 'matches' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of table creation attempt
+     */
+    public function createMatchesTable($tableName)
+    {
+        $fields = array(
+            'id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+                'auto_increment' => TRUE,
+            ),
+            'opposition_id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+            ),
+            'competition_id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+            ),
+            'competition_stage_id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+                'null'           => true,
+            ),
+            'venue' => array(
+                'type' => 'ENUM',
+                'constraint' => "'h','a','n'",
+                'null'           => true,
+            ),
+            'location' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 255,
+                'null'           => true,
+            ),
+            'official_id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+                'default'        => 0,
+            ),
+            'h' => array(
+                'type'           => 'INT',
+                'constraint'     => 3,
+                'null'           => true,
+            ),
+            'a' => array(
+                'type'           => 'INT',
+                'constraint'     => 3,
+                'null'           => true,
+            ),
+            'report' => array(
+                'type'           => 'TEXT',
+                'null'           => true,
+            ),
+            'date' => array(
+                'type'           => 'DATETIME',
+                'null'           => true,
+            ),
+            'h_et' => array(
+                'type'           => 'INT',
+                'constraint'     => 3,
+                'null'           => true,
+            ),
+            'a_et' => array(
+                'type'           => 'INT',
+                'constraint'     => 3,
+                'null'           => true,
+            ),
+            'h_pen' => array(
+                'type'           => 'INT',
+                'constraint'     => 3,
+                'null'           => true,
+            ),
+            'a_pen' => array(
+                'type'           => 'INT',
+                'constraint'     => 3,
+                'null'           => true,
+            ),
+            'status' => array(
+                'type' => 'ENUM',
+                'constraint' => "'hw','aw','p','a'",
+                'null'           => true,
+            ),
+            'date_added' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'date_updated' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'deleted' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'default'        => 0,
+            ),
+        );
+
+        $this->ci->dbforge->add_field($fields);
+        $this->ci->dbforge->add_key('id', TRUE);
+
+        if ($this->ci->dbforge->create_table($tableName, TRUE)) {
+            return true;
+        }
+
+        return false;
+    }
+
 
 }
