@@ -2811,9 +2811,37 @@ class Install_Model extends CI_Model {
     }
 
     /**
+     * Insert 'competition' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of data insert attempt
+     */
+    public function insertCompetitionData($tableName)
+    {
+        $data = array(
+            array(
+                'name' => 'Friendly' ,
+                'short_name' => 'Friendly',
+                'abbreviation' => 'FR',
+                'type' => 'friendly',
+                'starts' => 11,
+                'subs' => 9,
+                'competitive' => 0,
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+        );
+
+        if ($this->db->insert_batch($tableName, $data)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Insert 'position' table
      * @param  string $tableName Database table name
-     * @return boolean           Result of table creation attempt
+     * @return boolean           Result of data insert attempt
      */
     public function insertPositionData($tableName)
     {
