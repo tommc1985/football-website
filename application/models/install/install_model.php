@@ -2800,6 +2800,17 @@ class Install_Model extends CI_Model {
     }
 
     /**
+     * Create 'view_yellow_count' view
+     * @return boolean           Result of view creation attempt
+     */
+    public function createViewYellowCountView()
+    {
+        $sql = "CREATE OR REPLACE VIEW `view_yellow_count` AS select `c`.`player_id` AS `player_id`,`c`.`match_id` AS `match_id`,count(distinct `c`.`id`) AS `yellows` from `card` `c` where ((`c`.`type` = 'y') and (`c`.`deleted` = 0)) group by `c`.`player_id`,`c`.`match_id` ;";
+
+        $this->db->query($sql);
+    }
+
+    /**
      * Insert 'position' table
      * @param  string $tableName Database table name
      * @return boolean           Result of table creation attempt
