@@ -1496,5 +1496,83 @@ class Install_Model extends CI_Model {
         return false;
     }
 
+    /**
+     * Create 'goal' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of table creation attempt
+     */
+    public function createGoalTable($tableName)
+    {
+        $fields = array(
+            'id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+                'auto_increment' => TRUE,
+            ),
+            'match_id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+            ),
+            'scorer_id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+            ),
+            'assist_id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+            ),
+            'minute' => array(
+                'type'           => 'INT',
+                'constraint'     => 3,
+            ),
+            'type' => array(
+                'type'           => 'INT',
+                'constraint'     => 2,
+            ),
+            'body_part' => array(
+                'type'           => 'INT',
+                'constraint'     => 1,
+            ),
+            'distance' => array(
+                'type'           => 'INT',
+                'constraint'     => 1,
+            ),
+            'rating' => array(
+                'type'           => 'INT',
+                'constraint'     => 2,
+            ),
+            'description' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 1000,
+            ),
+            'date_added' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'date_updated' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'deleted' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'default'        => 0,
+            ),
+        );
+
+        $this->ci->dbforge->add_field($fields);
+        $this->ci->dbforge->add_key('id', TRUE);
+
+        if ($this->ci->dbforge->create_table($tableName, TRUE)) {
+            return true;
+        }
+
+        return false;
+    }
+
 
 }
