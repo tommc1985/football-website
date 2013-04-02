@@ -2734,6 +2734,17 @@ class Install_Model extends CI_Model {
     }
 
     /**
+     * Create 'view_league_tables' view
+     * @return boolean           Result of view creation attempt
+     */
+    public function createViewLeagueTablesView()
+    {
+        $sql = "CREATE OR REPLACE VIEW `view_league_tables` AS select `lr`.`league_id` AS `league_id`,`lr`.`opposition_id` AS `opposition_id`,`clrc1`.`played` AS `overall_played`,`clrc1`.`won` AS `overall_won`,`clrc1`.`drawn` AS `overall_drawn`,`clrc1`.`lost` AS `overall_lost`,`clrc1`.`gf` AS `overall_gf`,`clrc1`.`ga` AS `overall_ga`,`clrc1`.`gd` AS `overall_gd`,`clrc1`.`points` AS `overall_points`,`clrc1`.`form` AS `overall_form`,`clrc2`.`played` AS `home_played`,`clrc2`.`won` AS `home_won`,`clrc2`.`drawn` AS `home_drawn`,`clrc2`.`lost` AS `home_lost`,`clrc2`.`gf` AS `home_gf`,`clrc2`.`ga` AS `home_ga`,`clrc2`.`gd` AS `home_gd`,`clrc2`.`points` AS `home_points`,`clrc2`.`form` AS `home_form`,`clrc3`.`played` AS `away_played`,`clrc3`.`won` AS `away_won`,`clrc3`.`drawn` AS `away_drawn`,`clrc3`.`lost` AS `away_lost`,`clrc3`.`gf` AS `away_gf`,`clrc3`.`ga` AS `away_ga`,`clrc3`.`gd` AS `away_gd`,`clrc3`.`points` AS `away_points`,`clrc3`.`form` AS `away_form` from (((`league_registration` `lr` left join `cache_league_results_collated` `clrc1` on((`lr`.`opposition_id` = `clrc1`.`opposition_id`))) left join `cache_league_results_collated` `clrc2` on((`lr`.`opposition_id` = `clrc2`.`opposition_id`))) left join `cache_league_results_collated` `clrc3` on((`lr`.`opposition_id` = `clrc3`.`opposition_id`))) where ((`lr`.`league_id` = `clrc1`.`league_id`) and (`lr`.`league_id` = `clrc2`.`league_id`) and (`lr`.`league_id` = `clrc3`.`league_id`) and (`clrc1`.`type` = 'overall') and (`clrc2`.`type` = 'home') and (`clrc3`.`type` = 'away') and (`lr`.`deleted` = 0)) ;";
+
+        $this->db->query($sql);
+    }
+
+    /**
      * Insert 'position' table
      * @param  string $tableName Database table name
      * @return boolean           Result of table creation attempt
