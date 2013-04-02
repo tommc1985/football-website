@@ -2839,6 +2839,215 @@ class Install_Model extends CI_Model {
     }
 
     /**
+     * Insert 'competition_stage' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of data insert attempt
+     */
+    public function insertCompetitionStageData($tableName)
+    {
+        $data = array(
+            array(
+                'name' => 'Final' ,
+                'abbreviation' => 'F',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => 'Semi Final' ,
+                'abbreviation' => 'SF',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => 'Semi Final 1st Leg' ,
+                'abbreviation' => 'SF1',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => 'Semi Final 2nd Leg' ,
+                'abbreviation' => 'SF2',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => 'Quarter Final' ,
+                'abbreviation' => 'QF',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => 'Quarter Final 1st Leg' ,
+                'abbreviation' => 'QF1',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => 'Quarter Final Final 2nd Leg' ,
+                'abbreviation' => 'QF2',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => 'Last 16' ,
+                'abbreviation' => 'L16',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => '6th Round' ,
+                'abbreviation' => '6R',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => '6th Round Replay' ,
+                'abbreviation' => '6RR',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => '6th Round 1st Leg' ,
+                'abbreviation' => '6R1L',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => '6th Round 2nd Leg' ,
+                'abbreviation' => '6R2L',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => '5th Round' ,
+                'abbreviation' => '5R',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => '5th Round Replay' ,
+                'abbreviation' => '5RR',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => '5th Round 1st Leg' ,
+                'abbreviation' => '5R1L',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => '5th Round 2nd Leg' ,
+                'abbreviation' => '5R2L',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => '4th Round' ,
+                'abbreviation' => '4R',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => '4th Round Replay' ,
+                'abbreviation' => '4RR',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => '4th Round 1st Leg' ,
+                'abbreviation' => '4R1L',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => '4th Round 2nd Leg' ,
+                'abbreviation' => '4R2L',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => '3rd Round' ,
+                'abbreviation' => '3R',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => '3rd Round Replay' ,
+                'abbreviation' => '3RR',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => '3rd Round 1st Leg' ,
+                'abbreviation' => '3R1L',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => '3rd Round 2nd Leg' ,
+                'abbreviation' => '3R2L',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => '2nd Round' ,
+                'abbreviation' => '2R',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => '2nd Round Replay' ,
+                'abbreviation' => '2RR',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => '2nd Round 1st Leg' ,
+                'abbreviation' => '2R1L',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => '2nd Round 2nd Leg' ,
+                'abbreviation' => '2R2L',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => '1st Round' ,
+                'abbreviation' => '1R',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => '1st Round Replay' ,
+                'abbreviation' => '1RR',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => '1st Round 1st Leg' ,
+                'abbreviation' => '1R1L',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'name' => '1st Round 2nd Leg' ,
+                'abbreviation' => '1R2L',
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+        );
+
+        if ($this->db->insert_batch($tableName, $data)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Insert 'position' table
      * @param  string $tableName Database table name
      * @return boolean           Result of data insert attempt
