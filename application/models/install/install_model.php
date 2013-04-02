@@ -79,19 +79,13 @@ class Install_Model extends CI_Model {
      */
     public function createDatabaseTables()
     {
-        echo '<pre>';
         foreach ($this->databaseTables as $tableName) {
             $methodName = $this->_generateCreateTableMethodName($tableName);
 
-            print_r($methodName);
             if (method_exists($this, $methodName)) {
                 $this->$methodName($tableName);
-                echo "\tExists\n";
-            } else{
-                echo "\tDoes not exist\n";
             }
         }
-        echo '</pre>';
     }
 
     /**
