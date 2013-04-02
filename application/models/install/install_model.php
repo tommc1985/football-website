@@ -46,6 +46,7 @@ class Install_Model extends CI_Model {
             'cache_queue_player_goal_statistics',
             'cache_queue_player_statistics',
             'card',
+            'ci_sessions',
             'competition',
             'competition_stage',
             'configuration',
@@ -57,6 +58,7 @@ class Install_Model extends CI_Model {
             'league',
             'league_match',
             'league_registration',
+            'login_attempts',
             'matches',
             'official',
             'opposition',
@@ -65,7 +67,9 @@ class Install_Model extends CI_Model {
             'player_to_position',
             'position',
             'tag',
-            'user',
+            'user_autologin',
+            'user_profiles',
+            'users',
         );
     }
 
@@ -1170,6 +1174,49 @@ class Install_Model extends CI_Model {
 
         $this->ci->dbforge->add_field($fields);
         $this->ci->dbforge->add_key('id', TRUE);
+
+        if ($this->ci->dbforge->create_table($tableName, TRUE)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Create 'ci_sessions' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of table creation attempt
+     */
+    public function createCiSessionsTable($tableName)
+    {
+        $fields = array(
+            'session_id' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 40,
+                'default'        => 0,
+            ),
+            'ip_address' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 16,
+                'default'        => 0,
+            ),
+            'user_agent' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 150,
+            ),
+            'last_activity' => array(
+                'type'           => 'INT',
+                'constraint'     => 10,
+                'unsigned'       => TRUE,
+                'default'        => 0,
+            ),
+            'user_data' => array(
+                'type'           => 'TEXT',
+            ),
+        );
+
+        $this->ci->dbforge->add_field($fields);
+        $this->ci->dbforge->add_key('session_id', TRUE);
 
         if ($this->ci->dbforge->create_table($tableName, TRUE)) {
             return true;
