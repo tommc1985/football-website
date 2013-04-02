@@ -2480,5 +2480,44 @@ class Install_Model extends CI_Model {
         return false;
     }
 
+    /**
+     * Create 'user_profiles' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of table creation attempt
+     */
+    public function createUserProfilesTable($tableName)
+    {
+        $fields = array(
+            'id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'auto_increment' => TRUE,
+            ),
+            'user_id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'country' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 20,
+                'null'           => true,
+            ),
+            'website' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 255,
+                'null'           => true,
+            ),
+        );
+
+        $this->ci->dbforge->add_field($fields);
+        $this->ci->dbforge->add_key('id', TRUE);
+
+        if ($this->ci->dbforge->create_table($tableName, TRUE)) {
+            return true;
+        }
+
+        return false;
+    }
+
 
 }
