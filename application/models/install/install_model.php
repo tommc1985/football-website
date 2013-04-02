@@ -222,7 +222,6 @@ class Install_Model extends CI_Model {
             ),
             'statistic_value' => array(
                 'type'           => 'TEXT',
-                'constraint'     => 7,
             ),
         );
 
@@ -345,6 +344,7 @@ class Install_Model extends CI_Model {
 
         return false;
     }
+
     /**
      * Create 'cache_league_results_collated' table
      * @param  string $tableName Database table name
@@ -441,7 +441,74 @@ class Install_Model extends CI_Model {
             ),
             'statistic_value' => array(
                 'type'           => 'TEXT',
+            ),
+        );
+
+        $this->ci->dbforge->add_field($fields);
+
+        if ($this->ci->dbforge->create_table($tableName, TRUE)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Create 'cache_player_accumulated_statistics' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of table creation attempt
+     */
+    public function createCachePlayerAccumulatedStatisticsTable($tableName)
+    {
+        $fields = array(
+            'player_id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+            ),
+            'type' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 15,
+            ),
+            'season' => array(
+                'type'           => 'VARCHAR',
                 'constraint'     => 7,
+            ),
+            'appearances' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'starter_appearances' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'substitute_appearances' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'goals' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'assists' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'motms' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'yellows' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'reds' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'average_rating' => array(
+                'type'           => 'decimal',
+                'constraint'     =>  array(7, 4),
             ),
         );
 
