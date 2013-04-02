@@ -235,5 +235,116 @@ class Install_Model extends CI_Model {
         return false;
     }
 
+    /**
+     * Create 'cache_fantasy_football_statistics' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of table creation attempt
+     */
+    public function createCacheFantasyFootballStatisticsTable($tableName)
+    {
+        $fields = array(
+            'player_id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+            ),
+            'type' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 15,
+            ),
+            'season' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 7,
+            ),
+            'starter_appearances_points' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'substitute_appearances_points' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'clean_sheets_by_goalkeeper_points' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'clean_sheets_by_defender_points' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'clean_sheets_by_midfielder_points' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'assists_by_goalkeeper_points' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'assists_by_defender_points' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'assists_by_midfielder_points' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'assists_by_striker_points' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'goals_by_goalkeeper_points' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'goals_by_defender_points' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'goals_by_midfielder_points' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'goals_by_striker_points' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'man_of_the_match_points' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'yellow_card_points' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'red_card_points' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'appearances' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'total_points' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+            ),
+            'points_per_game' => array(
+                'type'           => 'decimal',
+                'constraint'     =>  array(10, 3),
+            ),
+        );
+
+        $this->ci->dbforge->add_field($fields);
+        $this->ci->dbforge->add_key('player_id', TRUE);
+        $this->ci->dbforge->add_key('type', TRUE);
+        $this->ci->dbforge->add_key('season', TRUE);
+
+        if ($this->ci->dbforge->create_table($tableName, TRUE)) {
+            return true;
+        }
+
+        return false;
+    }
+
 
 }
