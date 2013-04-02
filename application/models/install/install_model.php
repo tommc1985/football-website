@@ -2627,4 +2627,149 @@ class Install_Model extends CI_Model {
 
         return false;
     }
+
+    /**
+     * Insert 'position' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of table creation attempt
+     */
+    public function insertPositionData($tableName)
+    {
+        $data = array(
+            array(
+                'id' => 1,
+                'abbreviation' => 'GK' ,
+                'long_name' => 'Goalkeeper',
+                'sort_order' => 1,
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'id' => 2,
+                'abbreviation' => 'RB' ,
+                'long_name' => 'Right Back',
+                'sort_order' => 2,
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'id' => 3,
+                'abbreviation' => 'LB' ,
+                'long_name' => 'Left Back',
+                'sort_order' => 3,
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'id' => 4,
+                'abbreviation' => 'CB' ,
+                'long_name' => 'Centre Back',
+                'sort_order' => 4,
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'id' => 5,
+                'abbreviation' => 'SW' ,
+                'long_name' => 'Sweeper',
+                'sort_order' => 5,
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'id' => 6,
+                'abbreviation' => 'RWB' ,
+                'long_name' => 'Right Wing Back',
+                'sort_order' => 6,
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'id' => 7,
+                'abbreviation' => 'LWB' ,
+                'long_name' => 'Left Wing Back',
+                'sort_order' => 7,
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'id' => 8,
+                'abbreviation' => 'DM' ,
+                'long_name' => 'Defensive Midfielder',
+                'sort_order' => 8,
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'id' => 9,
+                'abbreviation' => 'RM' ,
+                'long_name' => 'Right Midfielder',
+                'sort_order' => 9,
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'id' => 10,
+                'abbreviation' => 'LM' ,
+                'long_name' => 'Left Midfielder',
+                'sort_order' => 10,
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'id' => 11,
+                'abbreviation' => 'CM' ,
+                'long_name' => 'Central Midfielder',
+                'sort_order' => 11,
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'id' => 12,
+                'abbreviation' => 'AM' ,
+                'long_name' => 'Attacking Midfielder',
+                'sort_order' => 12,
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'id' => 13,
+                'abbreviation' => 'RW' ,
+                'long_name' => 'Right Winger',
+                'sort_order' => 13,
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'id' => 14,
+                'abbreviation' => 'LW' ,
+                'long_name' => 'Left Winger',
+                'sort_order' => 14,
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'id' => 15,
+                'abbreviation' => 'SS' ,
+                'long_name' => 'Support Striker',
+                'sort_order' => 15,
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'id' => 16,
+                'abbreviation' => 'ST' ,
+                'long_name' => 'Striker',
+                'sort_order' => 16,
+                'date_added' => time(),
+                'date_updated' => time(),
+            ),
+        );
+
+        if ($this->db->insert_batch($tableName, $data)) {
+            return true;
+        }
+
+        return false;
+    }
 }
