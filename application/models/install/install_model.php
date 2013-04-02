@@ -2723,6 +2723,17 @@ class Install_Model extends CI_Model {
     }
 
     /**
+     * Create 'view_featured_stories' view
+     * @return boolean           Result of view creation attempt
+     */
+    public function createViewFeaturedStoriesView()
+    {
+        $sql = "CREATE OR REPLACE VIEW `view_featured_stories` AS (select `c`.`id` AS `id`,`c`.`title` AS `title`,`c`.`image_id` AS `image_id`,`c`.`content` AS `content`,`c`.`type` AS `type`,`c`.`publish_date` AS `date`,'' AS `opposition_id`,'' AS `competition_id`,'' AS `competition_stage_id`,'' AS `venue`,'' AS `location`,'' AS `official_id`,'' AS `h`,'' AS `a`,'' AS `h_et`,'' AS `a_et`,'' AS `h_pen`,'' AS `a_pen`,'' AS `status` from `content` `c` where ((`c`.`type` in ('article','news')) and (`c`.`deleted` = 0))) union (select `m`.`id` AS `id`,'' AS `title`,'0' AS `image_id`,`m`.`report` AS `content`,'match' AS `type`,`m`.`date` AS `date`,`m`.`opposition_id` AS `opposition_id`,`m`.`competition_id` AS `competition_id`,`m`.`competition_stage_id` AS `competition_stage_id`,`m`.`venue` AS `venue`,`m`.`location` AS `location`,`m`.`official_id` AS `official_id`,`m`.`h` AS `h`,`m`.`a` AS `a`,`m`.`h_et` AS `h_et`,`m`.`a_et` AS `a_et`,`m`.`h_pen` AS `h_pen`,`m`.`a_pen` AS `a_pen`,`m`.`status` AS `status` from `matches` `m` where (((`m`.`h` is not null) or (`m`.`status` is not null)) and (`m`.`date` < now()) and (`m`.`deleted` = 0))) ;";
+
+        $this->db->query($sql);
+    }
+
+    /**
      * Insert 'position' table
      * @param  string $tableName Database table name
      * @return boolean           Result of table creation attempt
