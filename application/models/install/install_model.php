@@ -1932,6 +1932,42 @@ class Install_Model extends CI_Model {
     }
 
     /**
+     * Create 'login_attempts' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of table creation attempt
+     */
+    public function createLoginAttemptsTable($tableName)
+    {
+        $fields = array(
+            'id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'auto_increment' => TRUE,
+            ),
+            'ip_address' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 40,
+            ),
+            'login' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 50,
+            ),
+            'time' => array(
+                'type'           => 'timestamp',
+            ),
+        );
+
+        $this->ci->dbforge->add_field($fields);
+        $this->ci->dbforge->add_key('id', TRUE);
+
+        if ($this->ci->dbforge->create_table($tableName, TRUE)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Create 'matches' table
      * @param  string $tableName Database table name
      * @return boolean           Result of table creation attempt
