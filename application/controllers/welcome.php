@@ -1,6 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+require_once('frontend_controller.php');
+
+class Welcome extends Frontend_Controller {
 
     /**
      * Index Page for this controller.

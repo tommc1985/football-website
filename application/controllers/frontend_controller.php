@@ -8,5 +8,5 @@ class Frontend_Controller extends CI_Controller
     }
 }
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
+/* End of file frontend_controller.php */
+/* Location: ./application/controllers/frontend_controller.php */
