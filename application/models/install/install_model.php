@@ -2817,6 +2817,8 @@ class Install_Model extends CI_Model {
      */
     public function insertCompetitionData($tableName)
     {
+        $this->db->truncate($tableName);
+
         $data = array(
             array(
                 'name' => 'Friendly' ,
@@ -2845,6 +2847,8 @@ class Install_Model extends CI_Model {
      */
     public function insertCompetitionStageData($tableName)
     {
+        $this->db->truncate($tableName);
+
         $data = array(
             array(
                 'name' => 'Final' ,
@@ -3054,6 +3058,8 @@ class Install_Model extends CI_Model {
      */
     public function insertPositionData($tableName)
     {
+        $this->db->truncate($tableName);
+
         $data = array(
             array(
                 'id' => 1,
