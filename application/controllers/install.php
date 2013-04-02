@@ -11,6 +11,8 @@ class Install extends Frontend_Controller {
         $this->load->model('install/Install_model');
 
         $this->Install_model->createDatabaseTables();
+        $this->Install_model->createDatabaseViews();
+        $this->Install_model->insertData();
 
         $data = array();
         $this->load->view('install', $data);
