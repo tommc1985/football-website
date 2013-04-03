@@ -10,7 +10,7 @@ class Backend_Controller extends CI_Controller
         $this->load->library('tank_auth');
 
         if (!$this->tank_auth->is_logged_in()) {
-            redirect('/auth/login?url=' . uri_string());
+            redirect('/admin/auth/login?url=' . uri_string());
         } else {
             $data['user_id']    = $this->tank_auth->get_user_id();
             $data['username']   = $this->tank_auth->get_username();
