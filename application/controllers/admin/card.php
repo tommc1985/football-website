@@ -5,7 +5,7 @@ require_once('backend_controller.php');
 /**
  * The Backend Controller for managing Red & Yellow Cards
  */
-class Card extends CI_Controller/*Backend_Controller*/
+class Card extends Backend_Controller
 {
     /**
      * Constructor

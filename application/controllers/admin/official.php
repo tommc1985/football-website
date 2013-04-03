@@ -5,7 +5,7 @@ require_once('backend_controller.php');
 /**
  * The Backend Controller for managing Officials
  */
-class Official extends CI_Controller/*Backend_Controller*/
+class Official extends Backend_Controller
 {
     /**
      * Constructor

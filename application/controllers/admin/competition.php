@@ -5,7 +5,7 @@ require_once('backend_controller.php');
 /**
  * The Backend Controller for managing Competitions
  */
-class Competition extends CI_Controller/*Backend_Controller*/
+class Competition extends Backend_Controller
 {
     /**
      * Constructor

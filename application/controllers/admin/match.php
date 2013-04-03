@@ -5,7 +5,7 @@ require_once('backend_controller.php');
 /**
  * The Backend Controller for managing Matches
  */
-class Match extends CI_Controller/*Backend_Controller*/
+class Match extends Backend_Controller
 {
     /**
      * Constructor

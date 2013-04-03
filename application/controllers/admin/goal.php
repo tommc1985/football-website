@@ -5,7 +5,7 @@ require_once('backend_controller.php');
 /**
  * The Backend Controller for managing Goals
  */
-class Goal extends CI_Controller/*Backend_Controller*/
+class Goal extends Backend_Controller
 {
     /**
      * Constructor

@@ -5,7 +5,7 @@ require_once('backend_controller.php');
 /**
  * The Backend Controller for managing Appearances
  */
-class Appearance extends CI_Controller/*Backend_Controller*/
+class Appearance extends Backend_Controller
 {
     /**
      * Constructor

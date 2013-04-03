@@ -5,7 +5,7 @@ require_once('backend_controller.php');
 /**
  * The Backend Controller for managing League Matches
  */
-class League_Match extends CI_Controller/*Backend_Controller*/
+class League_Match extends Backend_Controller
 {
     /**
      * Constructor

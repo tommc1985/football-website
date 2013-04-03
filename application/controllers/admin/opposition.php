@@ -5,7 +5,7 @@ require_once('backend_controller.php');
 /**
  * The Backend Controller for managing Oppositions
  */
-class Opposition extends CI_Controller/*Backend_Controller*/
+class Opposition extends Backend_Controller
 {
     /**
      * Constructor

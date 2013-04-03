@@ -5,7 +5,7 @@ require_once('backend_controller.php');
 /**
  * The Backend Controller for managing Players
  */
-class Player extends CI_Controller/*Backend_Controller*/
+class Player extends Backend_Controller
 {
     /**
      * Constructor
