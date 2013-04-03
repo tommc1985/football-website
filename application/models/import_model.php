@@ -170,6 +170,27 @@ class Import_Model extends CI_Model {
     }
 
     /**
+     * Insert Image Data
+     * @return NULL
+     */
+    public function importImageData()
+    {
+        $objects = $this->fetchAll('_image');
+
+        $data = array();
+
+        foreach ($objects as $object) {
+            $object = $object;
+            $object->date_added = time();
+            $object->date_updated = time();
+
+            $data[] = (array) $object;
+        }
+
+        $this->db->insert_batch('image', $data);
+    }
+
+    /**
      * Insert Matches Data
      * @return NULL
      */
