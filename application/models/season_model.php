@@ -76,19 +76,19 @@ class Season_model extends CI_Model {
      */
     public function fetchEarliestYear()
     {
-        $configEarliestYear = 2001;
+        $currentSeason = self::fetchCurrentSeason();
 
         $match = $this->ci->Match_model->fetchEarliest();
 
         if ($match === false) {
-            return $configEarliestYear;
+            return $currentSeason;
         }
 
         $matchTimestamp = strtotime($match->date);
 
         $databaseEarliestYear = self::fetchSeason(self::$startMonth, self::$startDay, $matchTimestamp);
 
-        return $databaseEarliestYear > $configEarliestYear ? $databaseEarliestYear : $configEarliestYear;
+        return $databaseEarliestYear < $currentSeason ? $databaseEarliestYear : $currentSeason;
     }
 
     /**
