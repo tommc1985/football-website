@@ -37,7 +37,7 @@ class Import_Model extends CI_Model {
      */
     public function importData()
     {
-        $this->importAppearanceData();
+
     }
 
     /**
@@ -59,6 +59,28 @@ class Import_Model extends CI_Model {
         }
 
         $this->db->insert_batch('appearance', $data);
+    }
+
+    /**
+     * Insert Card Data
+     * @return NULL
+     */
+    public function importCardData()
+    {
+        $objects = $this->fetchAll('_card');
+
+        $data = array();
+
+        foreach ($objects as $object) {
+            $object = $object;
+            $object->offence = $object->type == 'y' ? 8 : 15;
+            $object->date_added = time();
+            $object->date_updated = time();
+
+            $data[] = (array) $object;
+        }
+
+        $this->db->insert_batch('card', $data);
     }
 
     /**
