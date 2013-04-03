@@ -37,7 +37,20 @@ class Import_Model extends CI_Model {
      */
     public function importData()
     {
-
+        $this->importAppearanceData();
+        $this->importCardData();
+        $this->importCompetitionData();
+        $this->importCompetitionStageData();
+        $this->importContentData();
+        $this->importGoalData();
+        $this->importImageData();
+        $this->importMatchesData();
+        $this->importOfficialData();
+        $this->importOppositionData();
+        $this->importPlayerData();
+        $this->importPlayerRegistrationData();
+        $this->importPlayerToPositionData();
+        $this->importPositionData();
     }
 
     /**
