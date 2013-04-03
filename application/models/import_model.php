@@ -281,6 +281,29 @@ class Import_Model extends CI_Model {
     }
 
     /**
+     * Insert Position Data
+     * @return NULL
+     */
+    public function importPositionData()
+    {
+        $objects = $this->fetchAll('_position');
+
+        $data = array();
+
+        foreach ($objects as $object) {
+            $object = $object;
+            $object->abbreviation = $object->short_name;
+            unset($object->short_name);
+            $object->date_added = time();
+            $object->date_updated = time();
+
+            $data[] = (array) $object;
+        }
+
+        $this->db->insert_batch('position', $data);
+    }
+
+    /**
      * Fetch all rows for specified table
      * @param  string $tableName     Database Table
      * @param  string $orderBy       Which fields to order results by
