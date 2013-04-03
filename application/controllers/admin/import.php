@@ -22,7 +22,9 @@ class Import extends CI_Controller/*Backend_Controller*/
      */
     public function index()
     {
-        die('Import');
+        $this->load->model('Import_model');
+
+        $this->Import_model->importData();
     }
 }
 
