@@ -260,6 +260,43 @@ class Import_Model extends CI_Model {
     }
 
     /**
+     * Insert Player Registration Data
+     * @return NULL
+     */
+    public function importPlayerRegistrationData()
+    {
+        $this->ci->load->model('Season_model');
+        $currentSeason = Season_model::fetchCurrentSeason();
+        $season = Season_model::fetchEarliestYear();
+
+        $data = array();
+
+        while ($season <= $currentSeason) {
+            $dates = Season_model::generateStartEndDates($season);
+
+            $this->db->select('DISTINCT(player_id) as id')
+                ->from('view_appearances_matches')
+                ->where("(date {$dates['startDate']} AND date {$dates['endDate']})")
+                ->order_by('id', 'asc');
+
+            $players = $this->db->get()->result();
+
+            foreach ($players as $player) {
+                $data[] = array(
+                    'player_id'    => $player->id,
+                    'season'       => $season,
+                    'date_added'   => time(),
+                    'date_updated' => time(),
+                );
+            }
+
+            $season++;
+        }
+
+        $this->db->insert_batch('player_registration', $data);
+    }
+
+    /**
      * Insert Player To Position Data
      * @return NULL
      */
