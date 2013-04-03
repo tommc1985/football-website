@@ -163,6 +163,7 @@ class Match_model extends Base_Model {
         $this->db->select('*')
             ->from($this->tableName)
             ->where('deleted', 0)
+            ->where('date IS NOT NULL')
             ->order_by('date', 'asc')
             ->limit(1, 0);
 
