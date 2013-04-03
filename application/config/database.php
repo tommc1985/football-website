@@ -51,10 +51,10 @@ $active_record = TRUE;
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
 $db['default']['password'] = '';
-$db['default']['database'] = 'hardy_codeigniter';
+$db['default']['database'] = 'hardy_codeigniter_install_test';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
-$db['default']['pconnect'] = TRUE;
+$db['default']['pconnect'] = FALSE;
 $db['default']['db_debug'] = TRUE;
 $db['default']['cache_on'] = FALSE;
 $db['default']['cachedir'] = '';
@@ -63,6 +63,22 @@ $db['default']['dbcollat'] = 'utf8_general_ci';
 $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
+
+$db['old']['hostname'] = 'localhost';
+$db['old']['username'] = 'root';
+$db['old']['password'] = '';
+$db['old']['database'] = 'hardy_live';
+$db['old']['dbdriver'] = 'mysql';
+$db['old']['dbprefix'] = '';
+$db['old']['pconnect'] = FALSE;
+$db['old']['db_debug'] = TRUE;
+$db['old']['cache_on'] = FALSE;
+$db['old']['cachedir'] = '';
+$db['old']['char_set'] = 'utf8';
+$db['old']['dbcollat'] = 'utf8_general_ci';
+$db['old']['swap_pre'] = '';
+$db['old']['autoinit'] = TRUE;
+$db['old']['stricton'] = FALSE;
 
 
 /* End of file database.php */
