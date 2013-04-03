@@ -84,6 +84,27 @@ class Import_Model extends CI_Model {
     }
 
     /**
+     * Insert Competition Data
+     * @return NULL
+     */
+    public function importCompetitionData()
+    {
+        $objects = $this->fetchAll('_competition');
+
+        $data = array();
+
+        foreach ($objects as $object) {
+            $object = $object;
+            $object->date_added = time();
+            $object->date_updated = time();
+
+            $data[] = (array) $object;
+        }
+
+        $this->db->insert_batch('competition', $data);
+    }
+
+    /**
      * Fetch all rows for specified table
      * @param  string $tableName     Database Table
      * @param  string $orderBy       Which fields to order results by
