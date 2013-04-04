@@ -4,6 +4,16 @@ require_once('frontend_controller.php');
 
 class Player extends Frontend_Controller {
 
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->load->database();
+        $this->load->model('frontend/Player_model');
+        $this->load->model('Season_model');
+        $this->load->helper(array('player', 'url', 'utility'));
+    }
+
     /**
      * Index Page for this controller.
      *
@@ -21,11 +31,6 @@ class Player extends Frontend_Controller {
      */
     public function index()
     {
-        $this->load->database();
-        $this->load->model('frontend/Player_model');
-        $this->load->model('Season_model');
-        $this->load->helper(array('player', 'utility'));
-
         $parameters = $this->uri->uri_to_assoc(3, array('season', 'type', 'order-by', 'order'));
 
         $season = (int) $parameters['season'];
@@ -47,11 +52,30 @@ class Player extends Frontend_Controller {
 
         $data = array(
             'players' => $players,
-            'season'  => $season
+            'season'  => $season,
         );
 
         $this->load->view("themes/{$this->theme}/header", $data);
         $this->load->view("themes/{$this->theme}/player/welcome_message", $data);
+        $this->load->view("themes/{$this->theme}/footer", $data);
+    }
+
+    public function view()
+    {
+        $parameters = $this->uri->uri_to_assoc(3, array('id'));
+
+        $player = $this->Player_model->fetchPlayerDetails($parameters['id']);
+
+        if ($player === false) {
+            show_error('Player cannot be found', 404);
+        }
+
+        $data = array(
+            'player' => $player,
+        );
+
+        $this->load->view("themes/{$this->theme}/header", $data);
+        $this->load->view("themes/{$this->theme}/player/view", $data);
         $this->load->view("themes/{$this->theme}/footer", $data);
     }
 }

@@ -21,7 +21,7 @@ if ($players) { ?>
 <?php
     foreach ($players as $player) { ?>
         <tr>
-            <td><?php echo Player_helper::fullNameReverse($player); ?></td>
+            <td><?php echo anchor('/player/view/id/' . $player->id, Player_helper::fullNameReverse($player)); ?></td>
             <td><?php echo Utility_helper::shortDate($player->dob); ?></td>
             <td><?php echo $player->appearances; ?> (<?php echo $player->substitute_appearances; ?>)</td>
             <td><?php echo $player->goals; ?></td>

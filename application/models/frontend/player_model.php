@@ -14,8 +14,18 @@ class Player_model extends Base_Frontend_Model {
     {
         // Call the Model constructor
         parent::__construct();
+
+        $this->tableName = 'player';
     }
 
+    /**
+     * Fetch list of players based on season, competition type, and ordered by a particular field in asc or desc order
+     * @param  mixed $season   Four digit season or 'career'
+     * @param  string $type    Competition type
+     * @param  string $orderBy Field to order data by
+     * @param  string $order   Sort Order of data ('asc' or 'desc')
+     * @return array           List of Players
+     */
     public function fetchPlayerList($season, $type, $orderBy, $order)
     {
         $this->db->select('p.*, cpas.*')
@@ -27,6 +37,106 @@ class Player_model extends Base_Frontend_Model {
             ->order_by($orderBy, $order);
 
         return $this->db->get()->result();
+    }
+
+    /**
+     * Fetch data on a particular player for Player Profile Page
+     * @param  int $id         Player ID
+     * @return object          Player Details
+     */
+    public function fetchPlayerDetails($id)
+    {
+        // Basic Player details
+        $player = $this->fetch($id);
+
+        if ($player === false) {
+            return false;
+        }
+
+        // Player's Debuts across all competition types
+        $player->debut = $this->fetchPlayerDebuts($id);
+
+        // Player's First Goals across all competition types
+        $player->firstGoal = $this->fetchPlayerFirstGoals($id);
+
+        // Player's Accumulated Season Statistics
+        $player->accumulatedStatistics = $this->fetchPlayerAccumulatedStatistics($id);
+
+        return $player;
+    }
+
+    /**
+     * Fetch a particular Player's debuts for the Club in different competition types
+     * @param  int $id         Player ID
+     * @return array           Debuts
+     */
+    public function fetchPlayerDebuts($id)
+    {
+        $this->db->select('cps.*')
+            ->from('cache_player_statistics cps')
+            ->join('player p', 'p.id = cps.player_id')
+            ->where('cps.season', 'career')
+            ->where('cps.statistic_group', 'debut')
+            ->where('cps.player_id', $id)
+            ->where('p.deleted', 0);
+
+        $result = $this->db->get()->result();
+
+        $debuts = array();
+        foreach ($result as $debut) {
+            $debuts[$debut->type] = unserialize($debut->statistic_value);
+        }
+
+        return $debuts;
+    }
+
+    /**
+     * Fetch a particular Player's first goals for the Club
+     * @param  int $id         Player ID
+     * @return array           First Goals
+     */
+    public function fetchPlayerFirstGoals($id)
+    {
+        $this->db->select('cps.*')
+            ->from('cache_player_statistics cps')
+            ->join('player p', 'p.id = cps.player_id')
+            ->where('cps.season', 'career')
+            ->where('cps.statistic_group', 'first_goal')
+            ->where('cps.player_id', $id)
+            ->where('p.deleted', 0);
+
+        $result = $this->db->get()->result();
+
+        $firstGoals = array();
+        foreach ($result as $firstGoal) {
+            $firstGoals[$firstGoal->type] = unserialize($firstGoal->statistic_value);
+        }
+
+        return $firstGoals;
+    }
+
+    /**
+     * Fetch a particular Player's accumulated statistics for the Club
+     * @param  int $id         Player ID
+     * @return array           First Goals
+     */
+    public function fetchPlayerAccumulatedStatistics($id)
+    {
+        $this->db->select('cpas.*')
+            ->from('cache_player_accumulated_statistics cpas')
+            ->join('player p', 'p.id = cpas.player_id')
+            ->where('cpas.player_id', $id)
+            ->where('p.deleted', 0)
+            ->order_by('season', 'desc');
+
+        $result = $this->db->get()->result();
+
+        $statistics = array();
+        foreach ($result as $statistic) {
+            $statistics[$statistic->season][$statistic->type] = $statistic;
+        }
+
+        return $statistics;
     }
 
     /**
