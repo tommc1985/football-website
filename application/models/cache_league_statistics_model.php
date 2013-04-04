@@ -114,6 +114,7 @@ class Cache_League_Statistics_model extends CI_Model {
             ->from($this->queueTableName)
             ->where('league_id', $leagueId)
             ->where('cache_data', $cacheData)
+            ->where('in_progress', 0)
             ->where('completed', 0)
             ->where('deleted', 0);
 
