@@ -195,23 +195,30 @@ class Cache_Player_Accumulated_Statistics_model extends CI_Model {
     {
         return "INSERT INTO cache_player_accumulated_statistics (player_id, type, season, appearances, starter_appearances, substitute_appearances, goals, assists, motms, yellows, reds, average_rating)
 SELECT
-    vamc.player_id,
+    DISTINCT(pr.player_id),
     {competition_type} as type,
     {season} as season,
     COUNT(IF(vamc.status != 'unused', 1, NULL)) as appearances,
     COUNT(IF(vamc.status = 'starter', 1, NULL)) as starter_appearances,
     COUNT(IF(vamc.status = 'substitute', 1, NULL)) as substitute_appearances,
-    SUM(vamc.goals) as goals,
-    SUM(vamc.assists) as assists,
+    IFNULL(SUM(vamc.goals), 0) as goals,
+    IFNULL(SUM(vamc.assists), 0) as assists,
     COUNT(IF(vamc.motm = 1, 1, NULL)) as motms,
-    SUM(vamc.yellows) as yellows,
-    SUM(vamc.reds) as reds,
+    IFNULL(SUM(vamc.yellows), 0) as yellows,
+    IFNULL(SUM(vamc.reds), 0) as reds,
     AVG(IF(vamc.rating > 0 AND vamc.status != 'unused', vamc.rating, NULL)) as average_rating
-FROM view_appearances_matches_combined vamc
-WHERE vamc.competitive = 1
+FROM player_registration pr
+LEFT JOIN
+    (SELECT vamc.*
+    FROM view_appearances_matches_combined vamc
+    WHERE vamc.competitive = 1
+        AND vamc.status != 'unused'
+        {where_conditions_2}
+    ) vamc ON vamc.player_id = pr.player_id
+WHERE
     {where_conditions}
 GROUP BY {group_by}
-ORDER BY player_id ASC";
+ORDER BY pr.player_id ASC";
     }
 
     /**
@@ -232,6 +239,9 @@ ORDER BY player_id ASC";
                     $value = !$value ? "'career'" : $value;
                     break;
                 case 'where_conditions':
+                    $value = !$value ? '' : "{$value}";
+                    break;
+                case 'where_conditions_2':
                     $value = !$value ? '' : "AND {$value}";
                     break;
                 case 'group_by':
@@ -256,17 +266,21 @@ ORDER BY player_id ASC";
         self::deleteSingleOverallStatistics($playerId, $season);
 
         $whereConditions   = array();
-        $whereConditions[] = "vamc.player_id = {$playerId}";
-        $groupBy           = 'vamc.player_id';
+        $whereConditions2  = array();
+        $whereConditions[] = "pr.player_id = {$playerId}";
+        $whereConditions[] = "pr.deleted = 0";
+        $groupBy           = 'pr.player_id, pr.season';
 
         if (!is_null($season)) {
             $dates = Season_model::generateStartEndDates($season);
-            $whereConditions[] = "(vamc.date {$dates['startDate']} AND vamc.date {$dates['endDate']})";
+            $whereConditions2[] = "(vamc.date {$dates['startDate']} AND vamc.date {$dates['endDate']})";
+            $whereConditions[]  = "pr.season = {$season}";
         }
 
         $data = array('competition_type' => "'overall'",
             'season' => $season,
-            'where_conditions' => implode(" \r\nAND ", $whereConditions),
+            'where_conditions' => implode(" \r\n\tAND ", $whereConditions),
+            'where_conditions_2' => implode(" \r\nAND ", $whereConditions2),
             'group_by' => $groupBy);
 
         $sql =  self::insertSQLValues($data);
@@ -298,17 +312,21 @@ ORDER BY player_id ASC";
     {
         self::deleteAllOverallStatistics($season);
 
-        $whereConditions = array();
-        $groupBy         = 'vamc.player_id';
+        $whereConditions   = array();
+        $whereConditions2  = array();
+        $whereConditions[] = "pr.deleted = 0";
+        $groupBy           = 'pr.player_id, pr.season';
 
         if (!is_null($season)) {
             $dates = Season_model::generateStartEndDates($season);
-            $whereConditions[] = "(vamc.date {$dates['startDate']} AND vamc.date {$dates['endDate']})";
+            $whereConditions2[] = "(vamc.date {$dates['startDate']} AND vamc.date {$dates['endDate']})";
+            $whereConditions[]  = "pr.season = {$season}";
         }
 
         $data = array('competition_type' => "'overall'",
             'season' => $season,
-            'where_conditions' => implode(" \r\nAND ", $whereConditions),
+            'where_conditions' => implode(" \r\n\tAND ", $whereConditions),
+            'where_conditions_2' => implode(" \r\nAND ", $whereConditions2),
             'group_by' => $groupBy);
 
         $sql =  self::insertSQLValues($data);
@@ -339,18 +357,22 @@ ORDER BY player_id ASC";
     {
         self::deleteSingleStatisticsByType($playerId, $season);
 
-        $whereConditions   = array();
-        $whereConditions[] = "vamc.player_id = {$playerId}";
-        $groupBy           = 'vamc.competition_type';
+        $whereConditions    = array();
+        $whereConditions2   = array();
+        $whereConditions[]  = "pr.player_id = {$playerId}";
+        $whereConditions[]  = "pr.deleted = 0";
+        $groupBy            = 'vamc.competition_type, pr.season';
 
         if (!is_null($season)) {
             $dates = Season_model::generateStartEndDates($season);
-            $whereConditions[] = "(vamc.date {$dates['startDate']} AND vamc.date {$dates['endDate']})";
+            $whereConditions2[] = "(vamc.date {$dates['startDate']} AND vamc.date {$dates['endDate']})";
+            $whereConditions[]  = "pr.season = {$season}";
         }
 
         $data = array('competition_type' => "vamc.competition_type",
             'season' => $season,
-            'where_conditions' => implode(" \r\nAND ", $whereConditions),
+            'where_conditions' => implode(" \r\n\tAND ", $whereConditions),
+            'where_conditions_2' => implode(" \r\nAND ", $whereConditions2),
             'group_by' => $groupBy);
 
         $sql =  self::insertSQLValues($data);
@@ -383,16 +405,20 @@ ORDER BY player_id ASC";
         self::deleteAllStatisticsByType($season);
 
         $whereConditions   = array();
-        $groupBy           = 'vamc.player_id, vamc.competition_type';
+        $whereConditions2  = array();
+        $whereConditions[] = "pr.deleted = 0";
+        $groupBy           = 'pr.player_id, pr.season, vamc.competition_type';
 
         if (!is_null($season)) {
             $dates = Season_model::generateStartEndDates($season);
-            $whereConditions[] = "(vamc.date {$dates['startDate']} AND vamc.date {$dates['endDate']})";
+            $whereConditions2[] = "(vamc.date {$dates['startDate']} AND vamc.date {$dates['endDate']})";
+            $whereConditions[]  = "pr.season = {$season}";
         }
 
         $data = array('competition_type' => "vamc.competition_type",
             'season' => $season,
-            'where_conditions' => implode(" \r\nAND ", $whereConditions),
+            'where_conditions'   => implode(" \r\n\tAND ", $whereConditions),
+            'where_conditions_2' => implode(" \r\nAND ", $whereConditions2),
             'group_by' => $groupBy);
 
         $sql =  self::insertSQLValues($data);
