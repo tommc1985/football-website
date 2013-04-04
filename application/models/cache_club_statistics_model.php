@@ -1019,26 +1019,23 @@ ORDER BY m.age ASC";
         $this->deleteRows($statisticGroup, $type, $season);
 
         $sql = "SELECT m.*, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation, p.first_name, p.surname
-FROM view_appearances_matches_combined m
+FROM view_scorers_ages m
 LEFT JOIN opposition o ON o.id = m.opposition_id
 LEFT JOIN competition c ON c.id = m.competition_id
 LEFT JOIN competition_stage cs ON cs.id = m.competition_stage_id
-LEFT JOIN player p ON p.id = m.player_id
+LEFT JOIN player p ON p.id = m.scorer_id
 WHERE m.age = (
     SELECT m.age
-    FROM view_appearances_matches_combined m
+    FROM view_scorers_ages m
     LEFT JOIN competition c ON c.id = m.competition_id
     WHERE !ISNULL(m.age)
-        AND m.status != 'unused'
         AND c.competitive = 1" . (count($whereConditions) > 0 ? "
         AND " . implode(" \r\nAND ", $whereConditions) : '') . "
         AND c.deleted = 0
-        AND m.goals > 0
     ORDER BY m.age DESC, m.date DESC
     LIMIT 1)
     AND c.competitive = 1" . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
-    AND m.status != 'unused'
     AND o.deleted = 0
     AND c.deleted = 0
     AND (cs.deleted = 0 || ISNULL(m.competition_stage_id))
@@ -1076,30 +1073,27 @@ ORDER BY m.date DESC";
         $this->deleteRows($statisticGroup, $type, $season);
 
         $sql = "SELECT m.*, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation, p.first_name, p.surname
-FROM view_appearances_matches_combined m
+FROM view_scorers_ages m
 LEFT JOIN opposition o ON o.id = m.opposition_id
 LEFT JOIN competition c ON c.id = m.competition_id
 LEFT JOIN competition_stage cs ON cs.id = m.competition_stage_id
-LEFT JOIN player p ON p.id = m.player_id
+LEFT JOIN player p ON p.id = m.scorer_id
 WHERE m.age = (
     SELECT m.age
-    FROM view_appearances_matches_combined m
+    FROM view_scorers_ages m
     LEFT JOIN competition c ON c.id = m.competition_id
     WHERE !ISNULL(m.age)
-        AND m.status != 'unused'
         AND c.competitive = 1" . (count($whereConditions) > 0 ? "
         AND " . implode(" \r\nAND ", $whereConditions) : '') . "
         AND c.deleted = 0
-        AND m.goals > 0
     ORDER BY m.age ASC, m.date DESC
     LIMIT 1)
     AND c.competitive = 1" . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
-    AND m.status != 'unused'
     AND o.deleted = 0
     AND c.deleted = 0
     AND (cs.deleted = 0 || ISNULL(m.competition_stage_id))
-ORDER BY m.date DESC";
+ORDER BY m.date ASC";
 
         $query = $this->db->query($sql);
         $rows = $query->result();
