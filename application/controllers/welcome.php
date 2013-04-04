@@ -24,7 +24,9 @@ class Welcome extends Frontend_Controller {
         $this->load->database();
 
         $data = array();
-        $this->load->view('welcome_message', $data);
+        $this->load->view("themes/{$this->theme}/header", $data);
+        $this->load->view("themes/{$this->theme}/index/welcome_message", $data);
+        $this->load->view("themes/{$this->theme}/footer", $data);
     }
 }
 
