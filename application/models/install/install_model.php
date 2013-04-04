@@ -88,6 +88,7 @@ class Install_Model extends CI_Model {
             'view_match_discipline',
             'view_match_goals',
             'view_matches',
+            'view_scorers_ages',
             'view_yellow_count',
             'view_appearances_matches_combined',
             'view_match_affected_results',
@@ -2806,6 +2807,17 @@ class Install_Model extends CI_Model {
     public function createViewYellowCountView()
     {
         $sql = "CREATE OR REPLACE VIEW `view_yellow_count` AS select `c`.`player_id` AS `player_id`,`c`.`match_id` AS `match_id`,count(distinct `c`.`id`) AS `yellows` from `card` `c` where ((`c`.`type` = 'y') and (`c`.`deleted` = 0)) group by `c`.`player_id`,`c`.`match_id` ;";
+
+        $this->db->query($sql);
+    }
+
+    /**
+     * Create 'view_scorers_ages' view
+     * @return boolean           Result of view creation attempt
+     */
+    public function createViewScorersAgesView()
+    {
+        $sql = "CREATE OR REPLACE VIEW `view_appearances_ages` AS select `g`.`id` AS `id`,`g`.`match_id` AS `match_id`,`g`.`scorer_id` AS `scorer_id`,`m`.`opposition_id` AS `opposition_id`,`m`.`competition_id` AS `competition_id`,`m`.`competition_stage_id` AS `competition_stage_id`,`c`.`type` AS `competition_type`,`m`.`venue` AS `venue`,`m`.`h` AS `h`,`m`.`a` AS `a`,`m`.`date` AS `date`,`c`.`competitive` AS `competitive`,`p`.`first_name` AS `first_name`,`p`.`surname` AS `surname`,`p`.`dob` AS `dob`,(to_days(`m`.`date`) - to_days(`p`.`dob`)) AS `age` from ((((`goal` `g` left join `matches` `m` on((`g`.`match_id` = `m`.`id`))) left join `competition` `c` on((`m`.`competition_id` = `c`.`id`))) left join `opposition` `o` on((`m`.`opposition_id` = `o`.`id`))) left join `player` `p` on((`g`.`scorer_id` = `p`.`id`))) where ((`g`.`deleted` = 0) and (`m`.`deleted` = 0) and (`c`.`deleted` = 0) and (`p`.`deleted` = 0) and (`o`.`deleted` = 0)) ;";
 
         $this->db->query($sql);
     }
