@@ -11,6 +11,12 @@ class Base_Frontend_Model extends CI_Model {
     public $ci;
 
     /**
+     * Name of database table
+     * @var string
+     */
+    public $tableName;
+
+    /**
      * Constructor
      * @return NULL
      */
@@ -20,6 +26,27 @@ class Base_Frontend_Model extends CI_Model {
         parent::__construct();
 
         $this->ci =& get_instance();
+    }
+
+    /**
+     * Fetch single row from table based on passed ID
+     * @param  int $id       Unique ID for existing instance
+     * @return object|false  The object (or false if not found)
+     */
+    public function fetch($id)
+    {
+        $this->db->select('*');
+        $this->db->from($this->tableName);
+        $this->db->where('id', $id);
+        $this->db->where('deleted', 0);
+
+        $result = $this->db->get()->result();
+
+        if (count($result) == 1) {
+            return $result[0];
+        }
+
+        return false;
     }
 
     /**
@@ -45,5 +72,7 @@ class Base_Frontend_Model extends CI_Model {
 
         return 'asc';
     }
+
+
 
 }
