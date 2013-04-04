@@ -4,6 +4,7 @@ class Cache extends CI_Controller {
 
     public function execute()
     {
+        set_time_limit(300);
         if ($this->input->is_cli_request()) {
             $this->load->database();
             $this->load->model('Cache_model');
@@ -16,5 +17,5 @@ class Cache extends CI_Controller {
     }
 }
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
+/* End of file cache.php */
+/* Location: ./application/controllers/cache.php */
