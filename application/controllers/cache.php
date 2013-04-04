@@ -19,6 +19,17 @@ class Cache extends CI_Controller {
             redirect('/', 'location', 301);
         }
     }
+
+    /**
+     * Insert all possible rows into queues
+     * @return NULL
+     */
+    public function queue_all()
+    {
+        $this->load->database();
+        $this->load->model('Cache_model');
+        $this->Cache_model->insertEntries();
+    }
 }
 
 /* End of file cache.php */
