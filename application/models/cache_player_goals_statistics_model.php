@@ -235,7 +235,7 @@ SELECT
     {extra_fields}
 FROM goal g
 LEFT JOIN matches m ON g.match_id = m.id
-LEFT JOIN competition c ON m.competition = c.id
+LEFT JOIN competition c ON m.competition_id = c.id
 {extra_joins}
 WHERE c.competitive = 1
     AND m.deleted = 0

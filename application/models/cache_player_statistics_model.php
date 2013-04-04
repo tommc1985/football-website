@@ -313,7 +313,7 @@ class Cache_Player_Statistics_model extends CI_Model {
         $sql = "SELECT m.*, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation,
     (SELECT COUNT(m2.id)
     FROM view_appearances_ages m2
-    LEFT JOIN competition c ON c.id = m2.competition
+    LEFT JOIN competition c ON c.id = m2.competition_id
     WHERE m.status != 'unused'
         AND c.competitive = 1" . (count($whereConditions2) > 0 ? "
         AND " . implode(" \r\nAND ", $whereConditions2) : '') . "
@@ -321,15 +321,15 @@ class Cache_Player_Statistics_model extends CI_Model {
         AND m2.date < m.date
         AND m2.player_id = m.player_id) as game_number
 FROM view_appearances_ages m
-LEFT JOIN opposition o ON o.id = m.opposition
-LEFT JOIN competition c ON c.id = m.competition
-LEFT JOIN competition_stage cs ON cs.id = m.stage
+LEFT JOIN opposition o ON o.id = m.opposition_id
+LEFT JOIN competition c ON c.id = m.competition_id
+LEFT JOIN competition_stage cs ON cs.id = m.competition_stage_id
 WHERE c.competitive = 1" . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
     AND m.status != 'unused'
     AND o.deleted = 0
     AND c.deleted = 0
-    AND (cs.deleted = 0 || ISNULL(m.stage))
+    AND (cs.deleted = 0 || ISNULL(m.competition_stage_id))
 HAVING game_number = 0
 ORDER BY m.date ASC";
 
@@ -368,7 +368,7 @@ ORDER BY m.date ASC";
         $sql = "SELECT m.*, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation,
     (SELECT COUNT(m2.id)
     FROM view_match_goals m2
-    LEFT JOIN competition c ON c.id = m2.competition
+    LEFT JOIN competition c ON c.id = m2.competition_id
     WHERE m.status != 'unused'
         AND m2.goals > 0
         AND c.competitive = 1" . (count($whereConditions2) > 0 ? "
@@ -377,16 +377,16 @@ ORDER BY m.date ASC";
         AND m2.date < m.date
         AND m2.player_id = m.player_id) as game_number
 FROM view_match_goals m
-LEFT JOIN opposition o ON o.id = m.opposition
-LEFT JOIN competition c ON c.id = m.competition
-LEFT JOIN competition_stage cs ON cs.id = m.stage
+LEFT JOIN opposition o ON o.id = m.opposition_id
+LEFT JOIN competition c ON c.id = m.competition_id
+LEFT JOIN competition_stage cs ON cs.id = m.competition_stage_id
 WHERE c.competitive = 1" . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
     AND m.goals > 0
     AND m.status != 'unused'
     AND o.deleted = 0
     AND c.deleted = 0
-    AND (cs.deleted = 0 || ISNULL(m.stage))
+    AND (cs.deleted = 0 || ISNULL(m.competition_stage_id))
 HAVING game_number = 0
 ORDER BY m.date ASC";
 
@@ -425,7 +425,7 @@ ORDER BY m.date ASC";
         $sql = "SELECT m.*, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation,
     (SELECT COUNT(m2.id)
     FROM view_appearances_matches_combined m2
-    LEFT JOIN competition c ON c.id = m2.competition
+    LEFT JOIN competition c ON c.id = m2.competition_id
     WHERE m.status != 'unused'
         AND c.competitive = 1" . (count($whereConditions2) > 0 ? "
         AND " . implode(" \r\nAND ", $whereConditions2) : '') . "
@@ -434,16 +434,16 @@ ORDER BY m.date ASC";
         AND m2.date < m.date
         AND m2.player_id = m.player_id) as game_number
 FROM view_appearances_matches_combined m
-LEFT JOIN opposition o ON o.id = m.opposition
-LEFT JOIN competition c ON c.id = m.competition
-LEFT JOIN competition_stage cs ON cs.id = m.stage
+LEFT JOIN opposition o ON o.id = m.opposition_id
+LEFT JOIN competition c ON c.id = m.competition_id
+LEFT JOIN competition_stage cs ON cs.id = m.competition_stage_id
 WHERE c.competitive = 1" . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
     AND m.goals > 0
     AND m.status != 'unused'
     AND o.deleted = 0
     AND c.deleted = 0
-    AND (cs.deleted = 0 || ISNULL(m.stage))
+    AND (cs.deleted = 0 || ISNULL(m.competition_stage_id))
 HAVING game_number = 0
 ORDER BY m.date ASC";
 
@@ -481,16 +481,16 @@ ORDER BY m.date ASC";
 
         $sql = "SELECT m.*, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation
 FROM view_match_goals m
-LEFT JOIN opposition o ON o.id = m.opposition
-LEFT JOIN competition c ON c.id = m.competition
-LEFT JOIN competition_stage cs ON cs.id = m.stage
+LEFT JOIN opposition o ON o.id = m.opposition_id
+LEFT JOIN competition c ON c.id = m.competition_id
+LEFT JOIN competition_stage cs ON cs.id = m.competition_stage_id
 WHERE c.competitive = 1" . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
     AND m.goals >= 3
     AND m.status != 'unused'
     AND o.deleted = 0
     AND c.deleted = 0
-    AND (cs.deleted = 0 || ISNULL(m.stage))
+    AND (cs.deleted = 0 || ISNULL(m.competition_stage_id))
 ORDER BY m.goals DESC";
 
         $query = $this->db->query($sql);
@@ -553,7 +553,7 @@ ORDER BY days_elapsed DESC";
     SELECT m.*, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation,
         (SELECT COUNT(m2.id)
         FROM view_match_goals m2
-        LEFT JOIN competition c ON c.id = m2.competition
+        LEFT JOIN competition c ON c.id = m2.competition_id
         WHERE m.status != 'unused'
             AND c.competitive = 1
             AND c.deleted = 0
@@ -561,21 +561,21 @@ ORDER BY days_elapsed DESC";
             AND m2.player_id = m.player_id) as games_elapsed,
           (SELECT COUNT(m3.id)
         FROM view_match_goals m3
-        LEFT JOIN competition c ON c.id = m3.competition
+        LEFT JOIN competition c ON c.id = m3.competition_id
         WHERE m3.goals > 0
             AND c.competitive = 1
             AND c.deleted = 0
             AND m3.date <= m.date
             AND m3.player_id = m.player_id) as goal_number
     FROM view_match_goals m
-    LEFT JOIN opposition o ON o.id = m.opposition
-    LEFT JOIN competition c ON c.id = m.competition
-    LEFT JOIN competition_stage cs ON cs.id = m.stage
+    LEFT JOIN opposition o ON o.id = m.opposition_id
+    LEFT JOIN competition c ON c.id = m.competition_id
+    LEFT JOIN competition_stage cs ON cs.id = m.competition_stage_id
     WHERE c.competitive = 1
         AND m.status != 'unused'
         AND o.deleted = 0
         AND c.deleted = 0
-        AND (cs.deleted = 0 || ISNULL(m.stage))
+        AND (cs.deleted = 0 || ISNULL(m.competition_stage_id))
     HAVING goal_number = 1
     ORDER BY m.date ASC) as accumulated_data
 GROUP BY player_id
@@ -1200,7 +1200,7 @@ LEFT JOIN player p{d} ON a{d}.player_id = p{d}.id");
             } else {
                 $fromSection[] = "FROM appearance a1
 LEFT JOIN matches m ON m.id = a1.match_id
-LEFT JOIN competition c ON m.competition = c.id
+LEFT JOIN competition c ON m.competition_id = c.id
 LEFT JOIN player p1 ON a1.player_id = p1.id";
             }
 

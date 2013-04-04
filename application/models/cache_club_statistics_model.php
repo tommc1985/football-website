@@ -765,14 +765,14 @@ ORDER BY m.date DESC";
 
         $sql = "SELECT m.*, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation, p.first_name, p.surname
 FROM view_appearances_ages m
-LEFT JOIN opposition o ON o.id = m.opposition
-LEFT JOIN competition c ON c.id = m.competition
-LEFT JOIN competition_stage cs ON cs.id = m.stage
+LEFT JOIN opposition o ON o.id = m.opposition_id
+LEFT JOIN competition c ON c.id = m.competition_id
+LEFT JOIN competition_stage cs ON cs.id = m.competition_stage_id
 LEFT JOIN player p ON p.id = m.player_id
 WHERE m.age = (
     SELECT m.age
     FROM view_appearances_ages m
-    LEFT JOIN competition c ON c.id = m.competition
+    LEFT JOIN competition c ON c.id = m.competition_id
     WHERE !ISNULL(m.age)
         AND m.status != 'unused'
         AND c.competitive = 1" . (count($whereConditions) > 0 ? "
@@ -785,7 +785,7 @@ WHERE m.age = (
     AND m.status != 'unused'
     AND o.deleted = 0
     AND c.deleted = 0
-    AND (cs.deleted = 0 || ISNULL(m.stage))
+    AND (cs.deleted = 0 || ISNULL(m.competition_stage_id))
 ORDER BY m.date DESC";
 
         $query = $this->db->query($sql);
@@ -821,14 +821,14 @@ ORDER BY m.date DESC";
 
         $sql = "SELECT m.*, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation, p.first_name, p.surname
 FROM view_appearances_ages m
-LEFT JOIN opposition o ON o.id = m.opposition
-LEFT JOIN competition c ON c.id = m.competition
-LEFT JOIN competition_stage cs ON cs.id = m.stage
+LEFT JOIN opposition o ON o.id = m.opposition_id
+LEFT JOIN competition c ON c.id = m.competition_id
+LEFT JOIN competition_stage cs ON cs.id = m.competition_stage_id
 LEFT JOIN player p ON p.id = m.player_id
 WHERE m.age = (
     SELECT m.age
     FROM view_appearances_ages m
-    LEFT JOIN competition c ON c.id = m.competition
+    LEFT JOIN competition c ON c.id = m.competition_id
     WHERE !ISNULL(m.age)
         AND m.status != 'unused'
         AND c.competitive = 1" . (count($whereConditions) > 0 ? "
@@ -841,7 +841,7 @@ WHERE m.age = (
     AND m.status != 'unused'
     AND o.deleted = 0
     AND c.deleted = 0
-    AND (cs.deleted = 0 || ISNULL(m.stage))
+    AND (cs.deleted = 0 || ISNULL(m.competition_stage_id))
 ORDER BY m.date DESC";
 
         $query = $this->db->query($sql);
@@ -880,7 +880,7 @@ ORDER BY m.date DESC";
         $sql = "SELECT m.*, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation,
     (SELECT COUNT(m2.id)
     FROM view_appearances_ages m2
-    LEFT JOIN competition c ON c.id = m2.competition
+    LEFT JOIN competition c ON c.id = m2.competition_id
     WHERE !ISNULL(m2.age)
         AND m.status != 'unused'
         AND c.competitive = 1" . (count($whereConditions2) > 0 ? "
@@ -889,16 +889,16 @@ ORDER BY m.date DESC";
         AND m2.date < m.date
         AND m2.player_id = m.player_id) as game_number
 FROM view_appearances_ages m
-LEFT JOIN opposition o ON o.id = m.opposition
-LEFT JOIN competition c ON c.id = m.competition
-LEFT JOIN competition_stage cs ON cs.id = m.stage
+LEFT JOIN opposition o ON o.id = m.opposition_id
+LEFT JOIN competition c ON c.id = m.competition_id
+LEFT JOIN competition_stage cs ON cs.id = m.competition_stage_id
 WHERE !ISNULL(m.age)
     AND c.competitive = 1" . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
     AND m.status != 'unused'
     AND o.deleted = 0
     AND c.deleted = 0
-    AND (cs.deleted = 0 || ISNULL(m.stage))
+    AND (cs.deleted = 0 || ISNULL(m.competition_stage_id))
 HAVING game_number = 0
 ORDER BY m.age DESC";
 
@@ -945,7 +945,7 @@ ORDER BY m.age DESC";
         $sql = "SELECT m.*, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation,
     (SELECT COUNT(m2.id)
     FROM view_appearances_ages m2
-    LEFT JOIN competition c ON c.id = m2.competition
+    LEFT JOIN competition c ON c.id = m2.competition_id
     WHERE !ISNULL(m2.age)
         AND m.status != 'unused'
         AND c.competitive = 1" . (count($whereConditions2) > 0 ? "
@@ -954,16 +954,16 @@ ORDER BY m.age DESC";
         AND m2.date < m.date
         AND m2.player_id = m.player_id) as game_number
 FROM view_appearances_ages m
-LEFT JOIN opposition o ON o.id = m.opposition
-LEFT JOIN competition c ON c.id = m.competition
-LEFT JOIN competition_stage cs ON cs.id = m.stage
+LEFT JOIN opposition o ON o.id = m.opposition_id
+LEFT JOIN competition c ON c.id = m.competition_id
+LEFT JOIN competition_stage cs ON cs.id = m.competition_stage_id
 WHERE !ISNULL(m.age)
     AND c.competitive = 1" . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
     AND m.status != 'unused'
     AND o.deleted = 0
     AND c.deleted = 0
-    AND (cs.deleted = 0 || ISNULL(m.stage))
+    AND (cs.deleted = 0 || ISNULL(m.competition_stage_id))
 HAVING game_number = 0
 ORDER BY m.age ASC";
 
@@ -1007,14 +1007,14 @@ ORDER BY m.age ASC";
 
         $sql = "SELECT m.*, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation, p.first_name, p.surname
 FROM view_appearances_matches_combined m
-LEFT JOIN opposition o ON o.id = m.opposition
-LEFT JOIN competition c ON c.id = m.competition
-LEFT JOIN competition_stage cs ON cs.id = m.stage
+LEFT JOIN opposition o ON o.id = m.opposition_id
+LEFT JOIN competition c ON c.id = m.competition_id
+LEFT JOIN competition_stage cs ON cs.id = m.competition_stage_id
 LEFT JOIN player p ON p.id = m.player_id
 WHERE m.age = (
     SELECT m.age
     FROM view_appearances_matches_combined m
-    LEFT JOIN competition c ON c.id = m.competition
+    LEFT JOIN competition c ON c.id = m.competition_id
     WHERE !ISNULL(m.age)
         AND m.status != 'unused'
         AND c.competitive = 1" . (count($whereConditions) > 0 ? "
@@ -1028,7 +1028,7 @@ WHERE m.age = (
     AND m.status != 'unused'
     AND o.deleted = 0
     AND c.deleted = 0
-    AND (cs.deleted = 0 || ISNULL(m.stage))
+    AND (cs.deleted = 0 || ISNULL(m.competition_stage_id))
 ORDER BY m.date DESC";
 
         $query = $this->db->query($sql);
@@ -1064,14 +1064,14 @@ ORDER BY m.date DESC";
 
         $sql = "SELECT m.*, o.name as opposition_name, c.name as competition_name, c.short_name as competition_short_name, c.abbreviation as competition_abbreviation, cs.name as competition_stage_name, cs.abbreviation as competition_stage_abbreviation, p.first_name, p.surname
 FROM view_appearances_matches_combined m
-LEFT JOIN opposition o ON o.id = m.opposition
-LEFT JOIN competition c ON c.id = m.competition
-LEFT JOIN competition_stage cs ON cs.id = m.stage
+LEFT JOIN opposition o ON o.id = m.opposition_id
+LEFT JOIN competition c ON c.id = m.competition_id
+LEFT JOIN competition_stage cs ON cs.id = m.competition_stage_id
 LEFT JOIN player p ON p.id = m.player_id
 WHERE m.age = (
     SELECT m.age
     FROM view_appearances_matches_combined m
-    LEFT JOIN competition c ON c.id = m.competition
+    LEFT JOIN competition c ON c.id = m.competition_id
     WHERE !ISNULL(m.age)
         AND m.status != 'unused'
         AND c.competitive = 1" . (count($whereConditions) > 0 ? "
@@ -1085,7 +1085,7 @@ WHERE m.age = (
     AND m.status != 'unused'
     AND o.deleted = 0
     AND c.deleted = 0
-    AND (cs.deleted = 0 || ISNULL(m.stage))
+    AND (cs.deleted = 0 || ISNULL(m.competition_stage_id))
 ORDER BY m.date DESC";
 
         $query = $this->db->query($sql);
@@ -1127,7 +1127,7 @@ ORDER BY m.date DESC";
 
         $sql = "SELECT COUNT(m.id) as games
 FROM view_competitive_matches m
-LEFT JOIN competition c ON c.id = m.competition
+LEFT JOIN competition c ON c.id = m.competition_id
 WHERE c.competitive = 1" . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
     AND m.a = 0";
@@ -1171,7 +1171,7 @@ WHERE c.competitive = 1" . (count($whereConditions) > 0 ? "
 
         $sql = "SELECT COUNT(m.id) as games
 FROM view_competitive_matches m
-LEFT JOIN competition c ON c.id = m.competition
+LEFT JOIN competition c ON c.id = m.competition_id
 WHERE c.competitive = 1" . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
     AND m.h = 0";
@@ -1194,10 +1194,10 @@ WHERE c.competitive = 1" . (count($whereConditions) > 0 ? "
 
         foreach ($this->venues as $venue) {
             foreach ($this->methodMap as $method) {
-                $this->$method();
+                $this->$method(false, NULL, $venue);
 
                 foreach ($competitionTypes as $competitionType) {
-                    $this->$method($competitionType);
+                    $this->$method($competitionType, NULL, $venue);
                 }
             }
 
@@ -1205,10 +1205,10 @@ WHERE c.competitive = 1" . (count($whereConditions) > 0 ? "
             while($season <= Season_model::fetchCurrentSeason()){
 
                 foreach ($this->methodMap as $method) {
-                    $this->$method(false, $season);
+                    $this->$method(false, $season, $venue);
 
                     foreach ($competitionTypes as $competitionType) {
-                        $this->$method($competitionType, $season);
+                        $this->$method($competitionType, $season, $venue);
                     }
                 }
 
