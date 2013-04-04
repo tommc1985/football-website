@@ -2,6 +2,10 @@
 
 class Cache extends CI_Controller {
 
+    /**
+     * Execute any queued cache calls
+     * @return NULL
+     */
     public function execute()
     {
         set_time_limit(300);
