@@ -75,6 +75,18 @@ class Cache_Club_Statistics_model extends CI_Model {
     {
         $this->insertEntry();
 
+        if (is_null($season)) {
+            $i = $this->ci->Season_model->fetchEarliestYear();
+            while($i <= Season_model::fetchCurrentSeason()){
+
+                $this->insertEntry(NULL, $i);
+
+                $i++;
+            }
+        } else {
+            $this->insertEntry(NULL, $season);
+        }
+
         foreach ($this->hungryMethodMap as $cacheData => $method) {
             $this->insertEntry(1, NULL, $cacheData);
 
@@ -227,7 +239,7 @@ class Cache_Club_Statistics_model extends CI_Model {
             }
 
         } else {
-            $this->generateAllStatistics();
+            $this->generateStatisticsBySeason($row->season);
         }
 
         $row->in_progress = 0;
@@ -1182,6 +1194,28 @@ WHERE c.competitive = 1" . (count($whereConditions) > 0 ? "
         foreach ($rows as $row) {
             $this->insertCache($statisticGroup, $type, $season, $row->games, '');
         }
+    }
+
+    /**
+     * Generate all statistics for a particular season
+     * @param  $season      Season of stats to generate
+     * @return boolean      Whether query was executed correctly
+     */
+    public function generateStatisticsBySeason($season)
+    {
+        $competitionTypes = $this->ci->Season_model->fetchCompetitionTypes();
+
+        foreach ($this->venues as $venue) {
+            foreach ($this->methodMap as $method) {
+                $this->$method(false, $season, $venue);
+
+                foreach ($competitionTypes as $competitionType) {
+                    $this->$method($competitionType, $season, $venue);
+                }
+            }
+        }
+
+        return true;
     }
 
     /**
