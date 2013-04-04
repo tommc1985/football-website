@@ -151,7 +151,7 @@ class Cache_League_Statistics_model extends CI_Model {
             ->where('in_progress', 0)
             ->where('completed', 0)
             ->where('deleted', 0)
-            ->order_by('date_added', 'asc')
+            ->order_by('date_added, id', 'asc')
             ->limit($limit, 0);
 
         return $this->db->get()->result();

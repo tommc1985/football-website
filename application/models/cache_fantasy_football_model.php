@@ -113,7 +113,7 @@ class Cache_Fantasy_Football_model extends CI_Model {
      * @param  int     $limit  Number of rows to return
      * @return results         Query Object
      */
-    public function fetchLatest($limit = 2)
+    public function fetchLatest($limit = 1)
     {
         $this->db->select('*')
             ->from($this->queueTableName)
