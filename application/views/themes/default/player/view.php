@@ -23,13 +23,13 @@
   <dd><?php echo isset($player->gamesBetweenDebutAndFirstGoal['overall']) ? Player_helper::gamesBetweenDebutAndFirstGoal($player->gamesBetweenDebutAndFirstGoal['overall']) : $this->lang->line('global_n_a'); ?></dd>
 </dl>
 
-<h3><?php echo $this->lang->line('player_season_statistics'); ?></h3>
+<h3><?php echo $this->lang->line('player_profile'); ?></h3>
 
 <div id="profile">
 <?php echo $player->profile; ?>
 </div>
 
-<h3><?php echo $this->lang->line('player_player_details'); ?></h3>
+<h3><?php echo $this->lang->line('player_season_statistics'); ?></h3>
 
 <div id="career-stats">
     <table id="career-data" cellpadding="2" cellspacing="2">
