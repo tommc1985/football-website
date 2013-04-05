@@ -113,7 +113,7 @@
                 }
             } else { ?>
                 <tr class="">
-                    <td colspan="9"><?php echo sprintf($this->lang->line('player_no_career_cata_found'), Player_helper::fullName($player)); ?></td>
+                    <td colspan="9"><?php echo sprintf($this->lang->line('player_no_career_data_found'), Player_helper::fullName($player)); ?></td>
                 </tr>
             <?php
             } ?>

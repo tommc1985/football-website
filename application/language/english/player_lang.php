@@ -45,7 +45,14 @@ $lang['player_debut']                   = 'Debut';
 $lang['player_first_goal']              = 'First Goal';
 $lang['player_profile']                 = 'Profile';
 $lang['player_season_statistics']       = 'Season Statistics';
-$lang['player_no_career_cata_found']    = "No Career data can be found for %s";
+$lang['player_no_career_data_found']    = "No Career data can be found for %s";
+
+$lang['player_squad_list']              = 'Squad List';
+$lang['player_player']                  = 'Player';
+$lang['player_apps']                    = 'Apps';
+$lang['player_d_o_b']                   = 'D. o. B.';
+$lang['player_rating']                  = 'Rating';
+$lang['player_no_players_found']        = "No players found for the season %s";
 
 $lang['player_appearances']             = 'Appearances';
 $lang['player_goals']                   = 'Goals';

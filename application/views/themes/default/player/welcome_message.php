@@ -1,18 +1,17 @@
-<h2>Squad List</h2>
-
+<h2><?php echo $this->lang->line('player_squad_list'); ?></h2>
 
 <table>
     <thead>
         <tr>
-            <td>Player</td>
-            <td>D.o.B.</td>
-            <td>Apps</td>
-            <td>Goals</td>
-            <td>Assists</td>
-            <td>MotM</td>
-            <td>Yellows</td>
-            <td>Reds</td>
-            <td>Rating</td>
+            <td><?php echo $this->lang->line('player_player'); ?></td>
+            <td><?php echo $this->lang->line('player_d_o_b'); ?></td>
+            <td><?php echo $this->lang->line('player_apps'); ?></td>
+            <td><?php echo $this->lang->line('player_goals'); ?></td>
+            <td><?php echo $this->lang->line('player_assists'); ?></td>
+            <td><?php echo $this->lang->line('player_motms'); ?></td>
+            <td><?php echo $this->lang->line('player_yellows'); ?></td>
+            <td><?php echo $this->lang->line('player_reds'); ?></td>
+            <td><?php echo $this->lang->line('player_rating'); ?></td>
         </tr>
     </thead>
 <?php
@@ -35,7 +34,7 @@ if ($players) { ?>
     }
 } else { ?>
         <tr>
-            <td colspan="9">No players found for the season <?php echo $season; ?></td>
+            <td colspan="9"><?php echo sprintf($this->lang->line('player_no_players_found'), Utility_helper::formattedSeason($season)); ?></td>
         </td>
 <?php
 } ?>
