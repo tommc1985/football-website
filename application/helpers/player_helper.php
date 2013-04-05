@@ -120,4 +120,18 @@ class Player_helper
 
         return Utility_helper::daysElapsed($time->days_elapsed);
     }
+
+    /**
+     * Return a Player's Games between Debut & First Goal
+     * @param  object $debut      Debut Object/Array
+     * @return string             Time between Debut & First Goal
+     */
+    public static function gamesBetweenDebutAndFirstGoal($game)
+    {
+        $ci =& get_instance();
+        $ci->lang->load('global');
+        $ci->load->helper(array('competition', 'competition_stage', 'match', 'opposition', 'player', 'utility'));
+
+        return Utility_helper::gamesElapsed($game->games_elapsed);
+    }
 }
