@@ -62,4 +62,44 @@ class Utility_helper
 
         return $date == '' ? '' : date($format, $timestamp);
     }
+
+    /**
+     * Return the days elapsed from days passed
+     * @param  mixed $days    Days
+     * @return string         Days Elapsed
+     */
+    public static function daysElapsed($days)
+    {
+        $ci =& get_instance();
+        $ci->lang->load('global');
+
+        $years = 0;
+
+        if ($days >= 365) {
+            $years = floor($days / 365);
+        }
+
+        $remainderDays = $days % 365;
+
+        $string = "";
+
+        if ($years > 0) {
+            $string .= "{$years} ";
+            if ($years == 1) {
+                $string .= $ci->lang->line('global_year');
+            } else {
+                $string .= $ci->lang->line('global_years');
+            }
+            $string .= ", ";
+        }
+
+        $string .= "{$remainderDays} ";
+        if ($remainderDays == 1) {
+            $string .= $ci->lang->line('global_day');
+        } else {
+            $string .= $ci->lang->line('global_days');
+        }
+
+        return $string;
+    }
 }
