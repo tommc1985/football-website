@@ -39,4 +39,17 @@ class Utility_helper
 
         return $date == '' ? '' : date("d/m/y", $timestamp);
     }
+
+    /**
+     * Return a formatted date based on the parsed value
+     * @param  mixed $date     Date value
+     * @param  string $format  Date format
+     * @return string          The formatted short date
+     */
+    public static function formattedDate($date, $format)
+    {
+        $timestamp = self::_convertDate($date);
+
+        return $date == '' ? '' : date($format, $timestamp);
+    }
 }
