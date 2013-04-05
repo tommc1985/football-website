@@ -44,7 +44,7 @@ class Match extends Frontend_Controller {
         $matches = $this->Match_model->fetchMatchList($season, $type, $orderBy, $order);
 
         $data = array(
-            'matches' => $players,
+            'matches' => $matches,
             'season'  => $season,
         );
 
