@@ -17,8 +17,8 @@
   <dd><?php echo isset($player->debut['overall']) ? Player_helper::debut($player->debut['overall']) : $this->lang->line('global_n_a'); ?></dd>
   <dt><?php echo $this->lang->line('player_first_goal'); ?>:</dt>
   <dd><?php echo isset($player->firstGoal['overall']) ? Player_helper::debut($player->firstGoal['overall']) : $this->lang->line('global_n_a'); ?></dd>
-  <dt><?php echo $this->lang->line('player_first_goal'); ?>:</dt>
-  <dd><?php echo Utility_helper::daysElapsed(731); ?></dd>
+  <dt><?php echo $this->lang->line('player_time_between_debut_and_first_goal'); ?>:</dt>
+  <dd><?php echo isset($player->timeBetweenDebutAndFirstGoal['overall']) ? Utility_helper::daysElapsed($player->timeBetweenDebutAndFirstGoal['overall']->days_elapsed) : $this->lang->line('global_n_a'); ?></dd>
 </dl>
 
 <h3><?php echo $this->lang->line('player_season_statistics'); ?></h3>
