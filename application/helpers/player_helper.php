@@ -78,4 +78,30 @@ class Player_helper
     {
         return number_format($rating, 2);
     }
+
+    /**
+     * Return a Player's Debut
+     * @param  object $debut      Debut Object/Array
+     * @return string             Formatted Player's Debut Details
+     */
+    public static function debut($debut)
+    {
+        $ci =& get_instance();
+        $ci->load->helper(array('competition', 'competition_stage', 'match', 'opposition', 'player', 'utility'));
+
+        return Match_helper::score($debut->match_id) . " vs " .  Opposition_helper::name($debut->opposition_id) . " - " . Match_helper::fullCompetitionNameCombined($debut) . " (" . Utility_helper::formattedDate($debut->date, "jS M 'y") . ")";
+    }
+
+    /**
+     * Return a Player's First Goal
+     * @param  object $firstGoal    First Goal Object/Array
+     * @return string               Formatted Player's First Goal Details
+     */
+    public static function firstGoal($firstGoal)
+    {
+        $ci =& get_instance();
+        $ci->load->helper(array('competition', 'competition_stage', 'match', 'opposition', 'player', 'utility'));
+
+        return Match_helper::score($firstGoal->match_id) . " vs " .  Opposition_helper::name($firstGoal->opposition_id) . " - " . Match_helper::fullCompetitionNameCombined($firstGoal) . " (" . Utility_helper::formattedDate($firstGoal->date, "jS M 'y") . ")";
+    }
 }
