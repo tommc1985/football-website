@@ -9,6 +9,8 @@ class Frontend_Controller extends CI_Controller
         parent::__construct();
 
         $this->theme = 'default';
+
+        $this->lang->load('global');
     }
 }
 
