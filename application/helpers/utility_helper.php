@@ -17,6 +17,10 @@ class Utility_helper
      */
     public static function formattedSeason($season)
     {
+        if ($season == 'all-time') {
+            return 'All Time';
+        }
+
         return $season . '/' . ($season + 1);
     }
 
