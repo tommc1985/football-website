@@ -62,5 +62,7 @@ $lang['player_yellows']                 = 'Yellows';
 $lang['player_reds']                    = 'Reds';
 $lang['player_average_rating']          = 'Average Rating';
 
+$lang['player_n_a']                     = 'N/A';
+
 /* End of file player.php */
 /* Location: ./application/language/english/player.php */
