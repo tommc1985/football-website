@@ -77,6 +77,30 @@ class Match_helper
 
         $match = self::_convertObject($match);
 
-        return Competition_helper::shortName($match->competition_id) . (is_null($match->competition_stage_id) ? '' : ', ' . Competition_Stage_helper::shortName($match->competition_stage_id));
+        return Competition_helper::shortName($match->competition_id) . (is_null($match->competition_stage_id) ? '' : ', ' . Competition_Stage_helper::abbreviation($match->competition_stage_id));
+    }
+
+    /**
+     * Return a Match's Venue
+     * @param  mixed $match        Match Object/Array
+     * @return string              The Match's Vnue
+     */
+    public static function venue($match)
+    {
+        $match = self::_convertObject($match);
+
+        switch ($match->venue) {
+            case 'h':
+                return 'H';
+                break;
+            case 'a':
+                return 'A';
+                break;
+            case 'n':
+                return 'N';
+                break;
+        }
+
+        return '';
     }
 }

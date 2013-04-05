@@ -28,15 +28,16 @@ class Match_model extends Base_Frontend_Model {
      */
     public function fetchMatchList($season, $type, $orderBy, $order)
     {
-        $this->ci->load->model('Season_model');
-
-        $startEndDates = Season_model::generateStartEndDates($season, NULL, NULL, false);
-
         $this->db->select('*')
             ->from($this->tableName)
-            ->where($startEndDates)
             ->where('deleted', 0)
             ->order_by($orderBy, $order);
+
+        if ($season != 'all-time') {
+            $this->ci->load->model('Season_model');
+            $startEndDates = Season_model::generateStartEndDates($season, NULL, NULL, false);
+            $this->db->where($startEndDates);
+        }
 
         return $this->db->get()->result();
     }

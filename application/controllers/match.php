@@ -15,7 +15,7 @@ class Match extends Frontend_Controller {
         $this->load->model('frontend/Match_model');
         $this->load->model('Season_model');
         $this->lang->load('match');
-        $this->load->helper(array('competition', 'competition_stage', 'match', 'url', 'utility'));
+        $this->load->helper(array('competition', 'competition_stage', 'match', 'opposition', 'url', 'utility'));
     }
 
     /**
@@ -29,8 +29,8 @@ class Match extends Frontend_Controller {
         $season = (int) $parameters['season'];
         if ($parameters['season'] === false) {
             $season = Season_model::fetchCurrentSeason();
-        } elseif ($parameters['season'] == 'career') {
-            $season = 'career';
+        } elseif ($parameters['season'] == 'all-time') {
+            $season = 'all-time';
         }
 
         $type = $parameters['type'];
