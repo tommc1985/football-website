@@ -34,18 +34,20 @@ $lang['player_delete']                  = 'Delete';
 
 
 // Frontend Text
-$lang['player_player_profile']          = 'Player Profile - %s';
-$lang['player_player_details']          = 'Player Details';
-$lang['player_full_name']               = 'Full Name';
-$lang['player_date_of_birth']           = 'Date of Birth';
-$lang['player_nationality']             = 'Nationality';
-$lang['player_gender']                  = 'Gender';
-$lang['player_position_s']              = 'Position(s)';
-$lang['player_debut']                   = 'Debut';
-$lang['player_first_goal']              = 'First Goal';
-$lang['player_profile']                 = 'Profile';
-$lang['player_season_statistics']       = 'Season Statistics';
-$lang['player_no_career_data_found']    = "No Career data can be found for %s";
+$lang['player_player_profile']                     = 'Player Profile - %s';
+$lang['player_player_details']                     = 'Player Details';
+$lang['player_full_name']                          = 'Full Name';
+$lang['player_date_of_birth']                      = 'Date of Birth';
+$lang['player_nationality']                        = 'Nationality';
+$lang['player_gender']                             = 'Gender';
+$lang['player_position_s']                         = 'Position(s)';
+$lang['player_debut']                              = 'Debut';
+$lang['player_first_goal']                         = 'First Goal';
+$lang['player_time_between_debut_and_first_goal']  = 'Time between Debut and First Goal';
+$lang['player_games_between_debut_and_first_goal'] = 'Games between Debut and First Goal';
+$lang['player_profile']                            = 'Profile';
+$lang['player_season_statistics']                  = 'Season Statistics';
+$lang['player_no_career_data_found']               = "No Career data can be found for %s";
 
 $lang['player_squad_list']              = 'Squad List';
 $lang['player_player']                  = 'Player';
@@ -61,8 +63,6 @@ $lang['player_motms']                   = 'MotMs';
 $lang['player_yellows']                 = 'Yellows';
 $lang['player_reds']                    = 'Reds';
 $lang['player_average_rating']          = 'Average Rating';
-
-$lang['player_n_a']                     = 'N/A';
 
 /* End of file player.php */
 /* Location: ./application/language/english/player.php */
