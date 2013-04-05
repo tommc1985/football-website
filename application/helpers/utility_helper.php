@@ -73,6 +73,8 @@ class Utility_helper
         $ci =& get_instance();
         $ci->lang->load('global');
 
+        $days = (int) $days;
+
         $years = 0;
 
         if ($days >= 365) {
