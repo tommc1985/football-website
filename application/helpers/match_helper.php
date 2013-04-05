@@ -49,4 +49,34 @@ class Match_helper
 
         return "{$match->h} - {$match->a}";
     }
+
+    /**
+     * Return Competition Name (and Stage if set)
+     * @param  mixed $competition  Competition Object/Array
+     * @return string              The Competition's Description
+     */
+    public static function fullCompetitionNameCombined($match)
+    {
+        $ci =& get_instance();
+        $ci->load->helper(array('competition', 'competition_stage'));
+
+        $match = self::_convertObject($match);
+
+        return Competition_helper::name($match->competition_id) . (is_null($match->competition_stage_id) ? '' : ', ' . Competition_Stage_helper::name($match->competition_stage_id));
+    }
+
+    /**
+     * Return shortened Competition Name (and Stage if set)
+     * @param  mixed $competition  Competition Object/Array
+     * @return string              The Competition's Description
+     */
+    public static function shortCompetitionNameCombined($match)
+    {
+        $ci =& get_instance();
+        $ci->load->helper(array('competition', 'competition_stage'));
+
+        $match = self::_convertObject($match);
+
+        return Competition_helper::shortName($match->competition_id) . (is_null($match->competition_stage_id) ? '' : ', ' . Competition_Stage_helper::shortName($match->competition_stage_id));
+    }
 }
