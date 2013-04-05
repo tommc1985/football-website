@@ -14,9 +14,9 @@
   <dt><?php echo $this->lang->line('player_position_s'); ?>:</dt>
   <dd>?</dd>
   <dt><?php echo $this->lang->line('player_debut'); ?>:</dt>
-  <dd><?php print_r($player->debut['overall']); ?></dd>
+  <dd><?php echo isset($player->debut['overall']) ? Player_helper::debut($player->debut['overall']) : $this->lang->line('player_n_a'); ?></dd>
   <dt><?php echo $this->lang->line('player_first_goal'); ?>:</dt>
-  <dd><?php print_r($player->firstGoal['overall']); ?></dd>
+  <dd><?php echo isset($player->firstGoal['overall']) ? Player_helper::debut($player->firstGoal['overall']) : $this->lang->line('player_n_a'); ?></dd>
 </dl>
 
 <h3><?php echo $this->lang->line('player_season_statistics'); ?></h3>
