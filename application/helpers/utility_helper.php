@@ -104,4 +104,26 @@ class Utility_helper
 
         return $string;
     }
+
+    /**
+     * Return the games elapsed
+     * @param  mixed $games   Games
+     * @return string         Games Elapsed
+     */
+    public static function gamesElapsed($games)
+    {
+        $ci =& get_instance();
+        $ci->lang->load('global');
+
+        $games = (int) $games;
+
+        $string = "{$games} ";
+        if ($games == 1) {
+            $string .= $ci->lang->line('global_game');
+        } else {
+            $string .= $ci->lang->line('global_games');
+        }
+
+        return $string;
+    }
 }

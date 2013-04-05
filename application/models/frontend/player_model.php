@@ -65,6 +65,9 @@ class Player_model extends Base_Frontend_Model {
         // Player's Time between Debut & First Goal
         $player->timeBetweenDebutAndFirstGoal = $this->fetchPlayerTimeBetweenDebutAndFirstGoal($id);
 
+        // Player's Games between Debut & First Goal
+        $player->gamesBetweenDebutAndFirstGoal = $this->fetchPlayerGamesBetweenDebutAndFirstGoal($id);
+
         return $player;
     }
 
@@ -165,6 +168,31 @@ class Player_model extends Base_Frontend_Model {
         }
 
         return $times;
+    }
+
+    /**
+     * Fetch a particular Player's Number of Games between Debut & First Goal
+     * @param  int $id         Player ID
+     * @return array           Games between Debut & First Goal
+     */
+    public function fetchPlayerGamesBetweenDebutAndFirstGoal($id)
+    {
+        $this->db->select('cps.*')
+            ->from('cache_player_statistics cps')
+            ->join('player p', 'p.id = cps.player_id')
+            ->where('cps.season', 'career')
+            ->where('cps.statistic_group', 'debut_and_first_goal_game_difference')
+            ->where('cps.player_id', $id)
+            ->where('p.deleted', 0);
+
+        $result = $this->db->get()->result();
+
+        $games = array();
+        foreach ($result as $game) {
+            $games[$game->type] = unserialize($game->statistic_value);
+        }
+
+        return $games;
     }
 
     /**
