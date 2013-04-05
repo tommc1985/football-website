@@ -11,6 +11,16 @@ class Utility_helper
     public function __construct() { }
 
     /**
+     * Return a formatted season
+     * @param  int $season     Season
+     * @return string          The formatted Season
+     */
+    public static function formattedSeason($season)
+    {
+        return $season . '/' . ($season + 1);
+    }
+
+    /**
      * Return a formatted date based on the parsed value
      * @param  mixed $date    Date value
      * @return mixed          The Converted Date
