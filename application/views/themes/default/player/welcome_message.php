@@ -29,7 +29,7 @@ if ($players) { ?>
             <td><?php echo $player->motms; ?></td>
             <td><?php echo $player->yellows; ?></td>
             <td><?php echo $player->reds; ?></td>
-            <td><?php echo number_format($player->average_rating, 2); ?></td>
+            <td><?php echo Player_helper::rating($player->average_rating); ?></td>
         </tr>
 <?php
     }

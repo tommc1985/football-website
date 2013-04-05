@@ -68,4 +68,14 @@ class Player_helper
 
         return substr($player->first_name, 0, 1) . '. ' . $player->surname;
     }
+
+    /**
+     * Return a Player's Average Rating
+     * @param  decimal $rating  Player Object/Array
+     * @return float            Formatted Player average rating
+     */
+    public static function rating($rating)
+    {
+        return number_format($rating, 2);
+    }
 }
