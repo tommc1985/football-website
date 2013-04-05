@@ -53,6 +53,9 @@ class Player_model extends Base_Frontend_Model {
             return false;
         }
 
+        // Player's Positions
+        $player->positions = $this->fetchPlayerPositions($id);
+
         // Player's Debuts across all competition types
         $player->debut = $this->fetchPlayerDebuts($id);
 
@@ -69,6 +72,33 @@ class Player_model extends Base_Frontend_Model {
         $player->gamesBetweenDebutAndFirstGoal = $this->fetchPlayerGamesBetweenDebutAndFirstGoal($id);
 
         return $player;
+    }
+
+    /**
+     * Fetch a particular Player's Positions
+     * @param  int $id         Player ID
+     * @return array           Positions
+     */
+    public function fetchPlayerPositions($id)
+    {
+        $this->db->select('ptp.*')
+            ->from('player_to_position ptp')
+            ->join('player p', 'p.id = ptp.player_id')
+            ->join('position pos', 'pos.id = ptp.position_id')
+            ->where('ptp.player_id', $id)
+            ->where('p.deleted', 0)
+            ->where('ptp.deleted', 0)
+            ->where('pos.deleted', 0)
+            ->order_by('pos.sort_order', 'asc');
+
+        $result = $this->db->get()->result();
+
+        $positions = array();
+        foreach ($result as $position) {
+            $positions[] = $position;
+        }
+
+        return $positions;
     }
 
     /**

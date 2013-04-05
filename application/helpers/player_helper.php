@@ -94,6 +94,26 @@ class Player_helper
     }
 
     /**
+     * Return a Player's Abbreviated Positions
+     * @param  object $debut      Debut Object/Array
+     * @return string             Formatted Player's Abbreviated Positions
+     */
+    public static function positionsAbbreviated($positions)
+    {
+        $ci =& get_instance();
+        $ci->lang->load('global');
+        $ci->load->helper(array('position'));
+
+        $formattedPositions = array();
+
+        foreach ($positions as $position) {
+            $formattedPositions[] = Position_helper::abbreviation($position->position_id);
+        }
+
+        return count($formattedPositions) > 0 ? implode(", ", $formattedPositions) : $ci->lang->line('global_none');
+    }
+
+    /**
      * Return a Player's First Goal
      * @param  object $firstGoal    First Goal Object/Array
      * @return string               Formatted Player's First Goal Details

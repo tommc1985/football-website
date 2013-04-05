@@ -12,7 +12,7 @@
   <dt><?php echo $this->lang->line('player_gender'); ?>:</dt>
   <dd><?php echo $player->gender; ?></dd>
   <dt><?php echo $this->lang->line('player_position_s'); ?>:</dt>
-  <dd>?</dd>
+  <dd><?php echo Player_helper::positionsAbbreviated($player->positions); ?></dd>
   <dt><?php echo $this->lang->line('player_debut'); ?>:</dt>
   <dd><?php echo isset($player->debut['overall']) ? Player_helper::debut($player->debut['overall']) : $this->lang->line('global_n_a'); ?></dd>
   <dt><?php echo $this->lang->line('player_first_goal'); ?>:</dt>
