@@ -40,7 +40,15 @@ $lang['match_confirm_delete_no']       = "No thanks";
 $lang['match_edit']                    = 'Edit';
 $lang['match_delete']                  = 'Delete';
 
+
+
+
+
+
+// Frontend Text
 $lang['match_score']                  = 'Score';
+
+$lang['match_vs']                  = 'vs';
 
 /* End of file match.php */
 /* Location: ./application/language/english/match.php */
