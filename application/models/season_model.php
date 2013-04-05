@@ -113,18 +113,26 @@ class Season_model extends CI_Model {
 
     /**
      * Generate Start/End dates for SQL statements
-     * @param  int $season      Four digit integer for the season
-     * @param  int $startMonth  Month season starts
-     * @param  int $startDay    May season starts
-     * @return int              Four digit integer
+     * @param  int $season           Four digit integer for the season
+     * @param  int $startMonth       Month season starts
+     * @param  int $startDay         May season starts
+     * @param  boolean $directUse    To use dates directly (i.e. in raw SQL) rather than via Active Record
+     * @return int                   Four digit integer
      */
-    public static function generateStartEndDates($season, $startMonth = NULL, $startDay = NULL)
+    public static function generateStartEndDates($season, $startMonth = NULL, $startDay = NULL, $directUse = true)
     {
+        $season = (int) $season;
+
         $startMonth = (int) (is_null($startMonth) ? self::$startMonth : $startMonth);
         $startDay   = (int) (is_null($startDay) ? self::$startDay : $startDay);
 
         $startMonth = str_pad($startMonth, 2, 0, STR_PAD_LEFT);
         $startDay   = str_pad($startDay, 2, 0, STR_PAD_LEFT);
+
+        if (!$directUse) {
+            return array('date >=' => "{$season}-{$startMonth}-{$startDay} 00:00:00",
+                'date <' => ($season + 1) . "-{$startMonth}-{$startDay} 00:00:00");
+        }
 
         return array('startDate' => ">= '{$season}-{$startMonth}-{$startDay} 00:00:00'",
             'endDate' => "< '" . ($season + 1) . "-{$startMonth}-{$startDay} 00:00:00'");
