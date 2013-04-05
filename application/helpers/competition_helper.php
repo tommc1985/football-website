@@ -22,6 +22,12 @@ class Competition_helper
 
     protected static function _convertObject($object)
     {
+        if (is_string($object)) {
+            $dummyObject = new stdClass();
+            $dummyObject->type = $object;
+            return $dummyObject;
+        }
+
         if (!is_object($object)) {
             if (is_array($object)) {
                 $object = (object) $object;
@@ -76,6 +82,11 @@ class Competition_helper
      */
     public static function type($competition)
     {
+        $ci =& get_instance();
+
+        $ci->load->database();
+        $ci->load->model('Competition_model');
+
         $competition = self::_convertObject($competition);
 
         $types = Competition_model::fetchTypes();
