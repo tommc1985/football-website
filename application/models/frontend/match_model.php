@@ -126,21 +126,7 @@ class Match_model extends Base_Frontend_Model {
      */
     public function fetchMilestones($id)
     {
-        $this->db->select('cpas.*')
-            ->from('cache_player_accumulated_statistics cpas')
-            ->join('player p', 'p.id = cpas.player_id')
-            ->where('cpas.player_id', $id)
-            ->where('p.deleted', 0)
-            ->order_by('season', 'desc');
-
-        $result = $this->db->get()->result();
-
-        $statistics = array();
-        foreach ($result as $statistic) {
-            $statistics[$statistic->season][$statistic->type] = $statistic;
-        }
-
-        return $statistics;
+        return array();
     }
 
     /**
