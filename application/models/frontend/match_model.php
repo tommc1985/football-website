@@ -110,22 +110,13 @@ class Match_model extends Base_Frontend_Model {
      */
     public function fetchCards($id)
     {
-        $this->db->select('cps.*')
-            ->from('cache_player_statistics cps')
-            ->join('player p', 'p.id = cps.player_id')
-            ->where('cps.season', 'career')
-            ->where('cps.statistic_group', 'first_goal')
-            ->where('cps.player_id', $id)
-            ->where('p.deleted', 0);
+        $this->db->select('c.*')
+            ->from('card c')
+            ->where('c.match_id', $id)
+            ->where('c.deleted', 0)
+            ->order_by('c.minute', 'asc');
 
-        $result = $this->db->get()->result();
-
-        $firstGoals = array();
-        foreach ($result as $firstGoal) {
-            $firstGoals[$firstGoal->type] = unserialize($firstGoal->statistic_value);
-        }
-
-        return $firstGoals;
+        return $this->db->get()->result();
     }
 
     /**
