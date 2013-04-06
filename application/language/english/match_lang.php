@@ -46,10 +46,15 @@ $lang['match_delete']                  = 'Delete';
 
 
 // Frontend Text
+$lang['match_cards']                           = 'Cards';
+$lang['match_fixtures_and_results_for_season'] = 'Fixtures &amp; Results - %s';
+$lang['match_goals']                           = 'Goals';
+$lang['match_lineup']                          = 'Lineup';
+$lang['match_milestones']                      = 'Milestones';
+$lang['match_no_matches_found']                = 'No matches can be found for the season %s';
+$lang['match_result_details']                  = 'Result details';
 $lang['match_score']                           = 'Score';
 $lang['match_vs']                              = 'vs';
-$lang['match_fixtures_and_results_for_season'] = 'Fixtures &amp; Results - %s';
-$lang['match_no_matches_found']                = 'No matches can be found for the season %s';
 
 /* End of file match.php */
 /* Location: ./application/language/english/match.php */
