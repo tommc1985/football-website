@@ -78,24 +78,13 @@ class Match_model extends Base_Frontend_Model {
      */
     public function fetchAppearances($id)
     {
-        $this->db->select('ptp.*')
-            ->from('player_to_position ptp')
-            ->join('player p', 'p.id = ptp.player_id')
-            ->join('position pos', 'pos.id = ptp.position_id')
-            ->where('ptp.player_id', $id)
-            ->where('p.deleted', 0)
-            ->where('ptp.deleted', 0)
-            ->where('pos.deleted', 0)
-            ->order_by('pos.sort_order', 'asc');
+        $this->db->select('a.*')
+            ->from('appearances a')
+            ->where('a.match_id', $id)
+            ->where('a.deleted', 0)
+            ->order_by('a.order', 'asc');
 
-        $result = $this->db->get()->result();
-
-        $positions = array();
-        foreach ($result as $position) {
-            $positions[] = $position;
-        }
-
-        return $positions;
+        return $this->db->get()->result();
     }
 
     /**
@@ -170,56 +159,6 @@ class Match_model extends Base_Frontend_Model {
         }
 
         return $statistics;
-    }
-
-    /**
-     * Fetch a particular Player's Time between Debut & First Goal
-     * @param  int $id         Player ID
-     * @return array           Time between Debut & First Goal
-     */
-    public function fetchPlayerTimeBetweenDebutAndFirstGoal($id)
-    {
-        $this->db->select('cps.*')
-            ->from('cache_player_statistics cps')
-            ->join('player p', 'p.id = cps.player_id')
-            ->where('cps.season', 'career')
-            ->where('cps.statistic_group', 'debut_and_first_goal_time_difference')
-            ->where('cps.player_id', $id)
-            ->where('p.deleted', 0);
-
-        $result = $this->db->get()->result();
-
-        $times = array();
-        foreach ($result as $time) {
-            $times[$time->type] = unserialize($time->statistic_value);
-        }
-
-        return $times;
-    }
-
-    /**
-     * Fetch a particular Player's Number of Games between Debut & First Goal
-     * @param  int $id         Player ID
-     * @return array           Games between Debut & First Goal
-     */
-    public function fetchPlayerGamesBetweenDebutAndFirstGoal($id)
-    {
-        $this->db->select('cps.*')
-            ->from('cache_player_statistics cps')
-            ->join('player p', 'p.id = cps.player_id')
-            ->where('cps.season', 'career')
-            ->where('cps.statistic_group', 'debut_and_first_goal_game_difference')
-            ->where('cps.player_id', $id)
-            ->where('p.deleted', 0);
-
-        $result = $this->db->get()->result();
-
-        $games = array();
-        foreach ($result as $game) {
-            $games[$game->type] = unserialize($game->statistic_value);
-        }
-
-        return $games;
     }
 
     /**
