@@ -64,7 +64,7 @@ class Match extends Frontend_Controller {
         $match = $this->Match_model->fetchMatchDetails($parameters['id']);
 
         if ($match === false) {
-            show_error('Player cannot be found', 404);
+            show_error('Match cannot be found', 404);
         }
 
         $data = array(
@@ -73,11 +73,12 @@ class Match extends Frontend_Controller {
 
         $this->load->view("themes/{$this->theme}/header", $data);
 
-        if (is_null($match->h) && is_null($match->status)) {
+        if (!is_null($match->h) || !is_null($match->status)) {
+            $this->load->view("themes/{$this->theme}/match/result", $data);
+        } else if(!is_null($match->date)) {
             $this->load->view("themes/{$this->theme}/match/preview", $data);
         } else {
-
-            $this->load->view("themes/{$this->theme}/match/result", $data);
+            $this->load->view("themes/{$this->theme}/match/tbc", $data);
         }
 
         $this->load->view("themes/{$this->theme}/footer", $data);
