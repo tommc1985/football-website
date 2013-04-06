@@ -15,7 +15,7 @@ class Match extends Frontend_Controller {
         $this->load->model('frontend/Match_model');
         $this->load->model('Season_model');
         $this->lang->load('match');
-        $this->load->helper(array('competition', 'competition_stage', 'match', 'opposition', 'url', 'utility'));
+        $this->load->helper(array('competition', 'competition_stage', 'goal', 'match', 'opposition', 'url', 'utility'));
     }
 
     /**
@@ -67,14 +67,19 @@ class Match extends Frontend_Controller {
             show_error('Player cannot be found', 404);
         }
 
-        var_dump($match);die();
-
         $data = array(
             'match' => $match,
         );
 
         $this->load->view("themes/{$this->theme}/header", $data);
-        $this->load->view("themes/{$this->theme}/match/view", $data);
+
+        if (is_null($match->h) && is_null($match->status)) {
+            $this->load->view("themes/{$this->theme}/match/preview", $data);
+        } else {
+
+            $this->load->view("themes/{$this->theme}/match/result", $data);
+        }
+
         $this->load->view("themes/{$this->theme}/footer", $data);
     }
 }
