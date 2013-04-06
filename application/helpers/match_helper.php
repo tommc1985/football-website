@@ -82,11 +82,11 @@ class Match_helper
 
         if (!is_null($match->h_et)) {
             $resultFullTime .= ' ' . $ci->lang->line('match_a_e_t');
-            $resultAET = " ({$match->h_et} - {$match->a_et} " . $ci->lang->line('match_f_t') . ")";
+            $resultAET = ", {$match->h_et} - {$match->a_et} " . $ci->lang->line('match_f_t');
         }
 
         if (!is_null($match->h_pen)) {
-            $resultPens = " ({$match->h_pen} - {$match->a_pen} " . $ci->lang->line('match_pens') . ")";
+            $resultPens = ", {$match->h_pen} - {$match->a_pen} " . $ci->lang->line('match_pens');
         }
 
         return $resultFullTime . $resultPens . $resultAET;

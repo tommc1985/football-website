@@ -47,14 +47,14 @@ $lang['match_delete']                  = 'Delete';
 
 // Frontend Text
 $lang['match_a_a']                             = 'A - A';
-$lang['match_a_e_t']                           = 'A.E.T.';
+$lang['match_a_e_t']                           = 'AET';
 $lang['match_a_w']                             = 'A - W';
 $lang['match_abandoned']                       = 'Abandoned';
 $lang['match_after_extra_time']                = 'After Extra Time';
 $lang['match_away_walkover']                   = 'Away Walkover';
 $lang['match_cards']                           = 'Cards';
 $lang['match_fixtures_and_results_for_season'] = 'Fixtures &amp; Results - %s';
-$lang['match_f_t']                             = 'F.T.';
+$lang['match_f_t']                             = 'FT';
 $lang['match_full_time']                       = 'Full Time';
 $lang['match_goals']                           = 'Goals';
 $lang['match_h_w']                             = 'H - W';
