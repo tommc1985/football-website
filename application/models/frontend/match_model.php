@@ -79,7 +79,7 @@ class Match_model extends Base_Frontend_Model {
     public function fetchAppearances($id)
     {
         $this->db->select('a.*')
-            ->from('appearances a')
+            ->from('appearance a')
             ->where('a.match_id', $id)
             ->where('a.deleted', 0)
             ->order_by('a.order', 'asc');

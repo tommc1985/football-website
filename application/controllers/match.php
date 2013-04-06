@@ -67,6 +67,8 @@ class Match extends Frontend_Controller {
             show_error('Player cannot be found', 404);
         }
 
+        var_dump($match);die();
+
         $data = array(
             'match' => $match,
         );
