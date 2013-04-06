@@ -20,6 +20,11 @@ class Player_helper
         return $ci->Player_model->fetch($id);
     }
 
+    /**
+     * Convert Object
+     * @param  object $object Passed Object
+     * @return object         Returned Object
+     */
     protected static function _convertObject($object)
     {
         if (!is_object($object)) {
