@@ -80,20 +80,6 @@ class Player_helper
     }
 
     /**
-     * Return a Player's Debut
-     * @param  object $debut      Debut Object/Array
-     * @return string             Formatted Player's Debut Details
-     */
-    public static function debut($debut)
-    {
-        $ci =& get_instance();
-        $ci->lang->load('match');
-        $ci->load->helper(array('competition', 'competition_stage', 'match', 'opposition', 'player', 'utility'));
-
-        return Match_helper::score($debut->match_id) . " " . $ci->lang->line('match_vs') . " " .  Opposition_helper::name($debut->opposition_id) . " - " . Match_helper::fullCompetitionNameCombined($debut) . " (" . Utility_helper::formattedDate($debut->date, "jS M 'y") . ")";
-    }
-
-    /**
      * Return a Player's Abbreviated Positions
      * @param  object $debut      Debut Object/Array
      * @return string             Formatted Player's Abbreviated Positions
@@ -114,6 +100,20 @@ class Player_helper
     }
 
     /**
+     * Return a Player's Debut
+     * @param  object $debut      Debut Object/Array
+     * @return string             Formatted Player's Debut Details
+     */
+    public static function debut($debut)
+    {
+        $ci =& get_instance();
+        $ci->lang->load('match');
+        $ci->load->helper(array('competition', 'competition_stage', 'match', 'opposition', 'player', 'utility'));
+
+        return anchor('/match/view/id/' . $debut->match_id, Match_helper::score($debut->match_id) . " " . $ci->lang->line('match_vs') . " " .  Opposition_helper::name($debut->opposition_id) . " - " . Match_helper::fullCompetitionNameCombined($debut) . " (" . Utility_helper::formattedDate($debut->date, "jS M 'y") . ")");
+    }
+
+    /**
      * Return a Player's First Goal
      * @param  object $firstGoal    First Goal Object/Array
      * @return string               Formatted Player's First Goal Details
@@ -124,7 +124,7 @@ class Player_helper
         $ci->lang->load('match');
         $ci->load->helper(array('competition', 'competition_stage', 'match', 'opposition', 'player', 'utility'));
 
-        return Match_helper::score($firstGoal->match_id) . " " . $ci->lang->line('match_vs') . " " .  Opposition_helper::name($firstGoal->opposition_id) . " - " . Match_helper::fullCompetitionNameCombined($firstGoal) . " (" . Utility_helper::formattedDate($firstGoal->date, "jS M 'y") . ")";
+        return anchor('/match/view/id/' . $firstGoal->match_id, Match_helper::score($firstGoal->match_id) . " " . $ci->lang->line('match_vs') . " " .  Opposition_helper::name($firstGoal->opposition_id) . " - " . Match_helper::fullCompetitionNameCombined($firstGoal) . " (" . Utility_helper::formattedDate($firstGoal->date, "jS M 'y") . ")");
     }
 
     /**
