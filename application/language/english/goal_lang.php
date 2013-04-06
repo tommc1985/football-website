@@ -34,5 +34,13 @@ $lang['goal_rating_required']    = 'What rating would you give the goal?';
 // Messages
 $lang['goal_data_updated'] = "Goals for Match %s have been updated";
 
+
+
+
+
+// Frontend Text
+$lang['goal_own_goal']                     = 'Own Goal';
+$lang['goal_no_assist']                    = 'No Assist';
+
 /* End of file goal.php */
 /* Location: ./application/language/english/goal.php */
