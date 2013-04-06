@@ -20,7 +20,7 @@ if ($matches) { ?>
             <td><?php echo Opposition_helper::name($match->opposition_id); ?></td>
             <td><?php echo Match_helper::fullCompetitionNameCombined($match); ?></td>
             <td><?php echo Match_helper::venue($match); ?></td>
-            <td><?php echo anchor('/match/view/id/' . $match->id, Match_helper::score($match)); ?></td>
+            <td><?php echo anchor('/match/view/id/' . $match->id, Match_helper::longScore($match)); ?></td>
         </tr>
 <?php
     }
