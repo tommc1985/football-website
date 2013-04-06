@@ -16,6 +16,7 @@ class Match_helper
 
         $ci->load->database();
         $ci->load->model('Match_model');
+        $ci->lang->load('match');
 
         return $ci->Match_model->fetch($id);
     }
@@ -45,9 +46,99 @@ class Match_helper
      */
     public static function score($match)
     {
+        $ci =& get_instance();
+
         $match = self::_convertObject($match);
 
-        return "{$match->h} - {$match->a}";
+        switch($match->status) {
+            case 'hw': // Home walkeover
+                return $ci->lang->line('match_h_w');
+                break;
+            case 'aw': // Away Walkover
+                return $ci->lang->line('match_a_w');
+                break;
+            case 'p': // Postponed
+                return $ci->lang->line('match_p_p');
+                break;
+            case 'a': // Abandoned
+                return $ci->lang->line('match_a_a');
+                break;
+        }
+        $resultFullTime = '';
+        $resultAET = '';
+        $resultPens = '';
+
+        if (is_null($match->status) && is_null($match->h) && is_null($match->date)) {
+            return $ci->lang->line('match_t_b_c');
+        }
+
+        if (is_null($match->status) && is_null($match->h) && !is_null($match->date)) {
+            return date('g:i', strtotime($match->date)) . ' ' . $ci->lang->line('match_k_o');
+        }
+
+        if (!is_null($match->h)) {
+            $resultFullTime = "{$match->h} - {$match->a}";
+        }
+
+        if (!is_null($match->h_et)) {
+            $resultFullTime .= ' ' . $ci->lang->line('match_a_e_t');
+            $resultAET = " ({$match->h_et} - {$match->a_et} " . $ci->lang->line('match_f_t') . ")";
+        }
+
+        if (!is_null($match->h_pen)) {
+            $resultPens = " ({$match->h_pen} - {$match->a_pen} " . $ci->lang->line('match_pens') . ")";
+        }
+
+        return $resultFullTime . $resultPens . $resultAET;
+    }
+
+    public function longScore($match)
+    {
+        $ci =& get_instance();
+
+        $match = self::_convertObject($match);
+
+        switch($match->status) {
+            case 'hw': // Home walkeover
+                return $ci->lang->line('match_home_walkover');
+                break;
+            case 'aw': // Away Walkover
+                return $ci->lang->line('match_away_walkover');
+                break;
+            case 'p': // Postponed
+                return $ci->lang->line('match_postponed');
+                break;
+            case 'a': // Abandoned
+                return $ci->lang->line('match_abandoned');
+                break;
+        }
+
+        $resultFullTime = '';
+        $resultAET = '';
+        $resultPens = '';
+
+        if (is_null($match->status) && is_null($match->h) && is_null($match->date)) {
+            return $ci->lang->line('match_to_be_confirmed');
+        }
+
+        if (is_null($match->status) && is_null($match->h) && !is_null($match->date)) {
+            return date('g:i', strtotime($match->date)) . ' ' . $ci->lang->line('match_kick_off');
+        }
+
+        if (!is_null($match->h)) {
+            $resultFullTime = "{$match->h} - {$match->a}";
+        }
+
+        if (!is_null($match->h_et)) {
+            $resultFullTime .= ' ' . $ci->lang->line('match_after_extra_time');
+            $resultAET = ", {$match->h_et} - {$match->a_et} " . $ci->lang->line('match_full_time');
+        }
+
+        if (!is_null($match->h_pen)) {
+            $resultPens = ", {$match->h_pen} - {$match->a_pen} " . $ci->lang->line('match_on_penalties');
+        }
+
+        return $resultFullTime . $resultPens . $resultAET;
     }
 
     /**

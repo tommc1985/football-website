@@ -46,14 +46,32 @@ $lang['match_delete']                  = 'Delete';
 
 
 // Frontend Text
+$lang['match_a_a']                             = 'A - A';
+$lang['match_a_e_t']                           = 'A.E.T.';
+$lang['match_a_w']                             = 'A - W';
+$lang['match_abandoned']                       = 'Abandoned';
+$lang['match_after_extra_time']                = 'After Extra Time';
+$lang['match_away_walkover']                   = 'Away Walkover';
 $lang['match_cards']                           = 'Cards';
 $lang['match_fixtures_and_results_for_season'] = 'Fixtures &amp; Results - %s';
+$lang['match_f_t']                             = 'F.T.';
+$lang['match_full_time']                       = 'Full Time';
 $lang['match_goals']                           = 'Goals';
+$lang['match_h_w']                             = 'H - W';
+$lang['match_home_walkover']                   = 'Home Walkover';
+$lang['match_k_o']                             = 'k.o.';
+$lang['match_kick_off']                        = 'kick off';
 $lang['match_lineup']                          = 'Lineup';
 $lang['match_milestones']                      = 'Milestones';
 $lang['match_no_matches_found']                = 'No matches can be found for the season %s';
+$lang['match_on_penalties']                    = 'on penalties';
+$lang['match_p_p']                             = 'P - P';
+$lang['match_postponed']                       = 'Postponed';
+$lang['match_pens']                            = 'pens';
 $lang['match_result_details']                  = 'Result details';
 $lang['match_score']                           = 'Score';
+$lang['match_t_b_c']                           = 'T.B.C.';
+$lang['match_to_be_confirmed']                 = 'To be confirmed';
 $lang['match_vs']                              = 'vs';
 
 /* End of file match.php */
