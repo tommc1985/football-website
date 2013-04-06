@@ -43,46 +43,40 @@ class Match_model extends Base_Frontend_Model {
     }
 
     /**
-     * Fetch data on a particular player for Player Profile Page
-     * @param  int $id         Player ID
-     * @return object          Player Details
+     * Fetch data on a particular match for Match Details Page
+     * @param  int $id         Match ID
+     * @return object          Match Details
      */
-    public function fetchPlayerDetails($id)
+    public function fetchMatchDetails($id)
     {
-        // Basic Player details
-        $player = $this->fetch($id);
+        // Basic Match details
+        $match = $this->fetch($id);
 
-        if ($player === false) {
+        if ($match === false) {
             return false;
         }
 
-        // Player's Positions
-        $player->positions = $this->fetchPlayerPositions($id);
+        // Match's Appearances
+        $match->appearances = $this->fetchAppearances($id);
 
-        // Player's Debuts across all competition types
-        $player->debut = $this->fetchPlayerDebuts($id);
+        // Match's Scorers
+        $match->scorers = $this->fetchScorers($id);
 
-        // Player's First Goals across all competition types
-        $player->firstGoal = $this->fetchPlayerFirstGoals($id);
+        // Match's Cards
+        $match->cards = $this->fetchCards($id);
 
-        // Player's Accumulated Season Statistics
-        $player->accumulatedStatistics = $this->fetchPlayerAccumulatedStatistics($id);
+        // Match's Milestones
+        $match->milestones = $this->fetchMilestones($id);
 
-        // Player's Time between Debut & First Goal
-        $player->timeBetweenDebutAndFirstGoal = $this->fetchPlayerTimeBetweenDebutAndFirstGoal($id);
-
-        // Player's Games between Debut & First Goal
-        $player->gamesBetweenDebutAndFirstGoal = $this->fetchPlayerGamesBetweenDebutAndFirstGoal($id);
-
-        return $player;
+        return $match;
     }
 
     /**
-     * Fetch a particular Player's Positions
-     * @param  int $id         Player ID
-     * @return array           Positions
+     * Fetch a particular Match's Appearances
+     * @param  int $id         Match ID
+     * @return array           Appearances
      */
-    public function fetchPlayerPositions($id)
+    public function fetchAppearances($id)
     {
         $this->db->select('ptp.*')
             ->from('player_to_position ptp')
@@ -105,11 +99,11 @@ class Match_model extends Base_Frontend_Model {
     }
 
     /**
-     * Fetch a particular Player's debuts for the Club in different competition types
-     * @param  int $id         Player ID
-     * @return array           Debuts
+     * Fetch a particular Match's Scorers
+     * @param  int $id         Matches ID
+     * @return array           Scorers
      */
-    public function fetchPlayerDebuts($id)
+    public function fetchScorers($id)
     {
         $this->db->select('cps.*')
             ->from('cache_player_statistics cps')
@@ -130,11 +124,11 @@ class Match_model extends Base_Frontend_Model {
     }
 
     /**
-     * Fetch a particular Player's first goals for the Club
-     * @param  int $id         Player ID
-     * @return array           First Goals
+     * Fetch a particular Match's Cards
+     * @param  int $id         Match ID
+     * @return array           Cards
      */
-    public function fetchPlayerFirstGoals($id)
+    public function fetchCards($id)
     {
         $this->db->select('cps.*')
             ->from('cache_player_statistics cps')
@@ -155,11 +149,11 @@ class Match_model extends Base_Frontend_Model {
     }
 
     /**
-     * Fetch a particular Player's accumulated statistics for the Club
-     * @param  int $id         Player ID
-     * @return array           First Goals
+     * Fetch a particular Match's milestones
+     * @param  int $id         Match ID
+     * @return array           Milestones
      */
-    public function fetchPlayerAccumulatedStatistics($id)
+    public function fetchMilestones($id)
     {
         $this->db->select('cpas.*')
             ->from('cache_player_accumulated_statistics cpas')
