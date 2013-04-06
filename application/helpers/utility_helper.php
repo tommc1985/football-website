@@ -55,6 +55,18 @@ class Utility_helper
     }
 
     /**
+     * Return a formatted long date/time based on the parsed value
+     * @param  mixed $date    Date value
+     * @return string         The formatted long date/time
+     */
+    public static function longDateTime($date)
+    {
+        $timestamp = self::_convertDate($date);
+
+        return $date == '' ? '' : date("l jS F Y, g.ia", $timestamp);
+    }
+
+    /**
      * Return a formatted date based on the parsed value
      * @param  mixed $date     Date value
      * @param  string $format  Date format
