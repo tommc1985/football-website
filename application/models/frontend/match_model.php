@@ -94,22 +94,13 @@ class Match_model extends Base_Frontend_Model {
      */
     public function fetchScorers($id)
     {
-        $this->db->select('cps.*')
-            ->from('cache_player_statistics cps')
-            ->join('player p', 'p.id = cps.player_id')
-            ->where('cps.season', 'career')
-            ->where('cps.statistic_group', 'debut')
-            ->where('cps.player_id', $id)
-            ->where('p.deleted', 0);
+        $this->db->select('g.*')
+            ->from('goal g')
+            ->where('g.match_id', $id)
+            ->where('g.deleted', 0)
+            ->order_by('g.minute', 'asc');
 
-        $result = $this->db->get()->result();
-
-        $debuts = array();
-        foreach ($result as $debut) {
-            $debuts[$debut->type] = unserialize($debut->statistic_value);
-        }
-
-        return $debuts;
+        return $this->db->get()->result();
     }
 
     /**
