@@ -74,10 +74,13 @@ class Match_model extends Base_Model {
      */
     public static function fetchVenues()
     {
+        $ci =& get_instance();
+        $ci->lang->load('match');
+
         return array(
-            'h' => 'Home',
-            'a' => 'Away',
-            'n'  => 'Neutral',
+            'h' => $ci->lang->line('match_home'),
+            'a' => $ci->lang->line('match_away'),
+            'n' => $ci->lang->line('match_neutral'),
         );
     }
 
@@ -87,11 +90,14 @@ class Match_model extends Base_Model {
      */
     public static function fetchStatuses()
     {
+        $ci =& get_instance();
+        $ci->lang->load('match');
+
         return array(
-            'hw' => 'Home Win',
-            'aw' => 'Away Win',
-            'p'  => 'Postponed',
-            'a'  => 'Abandoned',
+            'hw' => $ci->lang->line('match_home_walkover'),
+            'aw' => $ci->lang->line('match_away_walkover'),
+            'p'  => $ci->lang->line('match_postponed'),
+            'a'  => $ci->lang->line('match_abandoned'),
         );
     }
 
