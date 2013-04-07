@@ -60,7 +60,7 @@ class Match_model extends Base_Frontend_Model {
         $match->appearances = $this->fetchAppearances($id);
 
         // Match's Scorers
-        $match->scorers = $this->fetchScorers($id);
+        $match->goals = $this->fetchGoals($id);
 
         // Match's Cards
         $match->cards = $this->fetchCards($id);
@@ -88,11 +88,11 @@ class Match_model extends Base_Frontend_Model {
     }
 
     /**
-     * Fetch a particular Match's Scorers
+     * Fetch a particular Match's Goals
      * @param  int $id         Matches ID
-     * @return array           Scorers
+     * @return array           Goals
      */
-    public function fetchScorers($id)
+    public function fetchGoals($id)
     {
         $this->db->select('g.*')
             ->from('goal g')
