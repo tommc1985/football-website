@@ -47,6 +47,7 @@ class Goal_helper
     {
         $ci =& get_instance();
         $ci->load->helper(array('player', 'url', 'utility'));
+        $ci->lang->load('goal');
 
         if ($goal->scorer_id == 0) {
             return $ci->lang->line('goal_own_goal');
@@ -80,6 +81,7 @@ class Goal_helper
     public static function type($goal)
     {
         $ci =& get_instance();
+        $ci->load->model('Goal_model');
 
         $types = Goal_model::fetchTypes();
 
@@ -98,8 +100,9 @@ class Goal_helper
     public static function bodyPart($goal)
     {
         $ci =& get_instance();
+        $ci->load->model('Goal_model');
 
-        $bodyParts = Goal_model::fetchDistances();
+        $bodyParts = Goal_model::fetchBodyParts();
 
         if (isset($bodyParts[$goal->body_part])) {
             return $bodyParts[$goal->body_part];
@@ -116,6 +119,7 @@ class Goal_helper
     public static function distance($goal)
     {
         $ci =& get_instance();
+        $ci->load->model('Goal_model');
 
         $distances = Goal_model::fetchDistances();
 

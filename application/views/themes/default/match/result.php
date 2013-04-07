@@ -9,7 +9,29 @@
 <?php echo $this->lang->line('match_location'); ?> <?php echo $match->location; ?><br />
 <?php echo $this->lang->line('match_official'); ?> <?php echo $match->official_id == 0 ? $this->lang->line('global_unknown') : Official_helper::initialSurname($match->official_id); ?></p>
 
+<?php
+if ($match->h > 0) { ?>
 <h3><?php echo $this->lang->line('match_goals'); ?></h3>
+
+<?php
+    if (count($match->goals) > 0) {
+        foreach ($match->goals as $goal) { ?>
+        <div class="goal">
+            <p><?php echo "'{$goal->minute}"; ?><br />
+                <?php echo $this->lang->line('match_scorer'); ?> <?php echo Goal_helper::scorer($goal); ?><br />
+                <?php echo $this->lang->line('match_assister'); ?> <?php echo Goal_helper::assister($goal); ?><br />
+                <?php echo $this->lang->line('match_type'); ?> <?php echo Goal_helper::type($goal); ?><br />
+                <?php echo $this->lang->line('match_body_part'); ?> <?php echo Goal_helper::bodyPart($goal); ?><br />
+                <?php echo $this->lang->line('match_distance'); ?> <?php echo Goal_helper::distance($goal); ?><br />
+                <?php echo $this->lang->line('match_rating'); ?> <?php echo Goal_helper::rating($goal); ?><br />
+                <?php echo $this->lang->line('match_description'); ?> <?php echo $goal->description; ?><br /></p>
+        </div>
+        <?php }
+
+    } else {
+        echo $this->lang->line('match_awaiting_goal_data');
+    }
+} ?>
 
 <h3><?php echo $this->lang->line('match_lineup'); ?></h3>
 
