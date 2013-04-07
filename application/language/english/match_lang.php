@@ -52,6 +52,7 @@ $lang['match_a_e_t']                           = 'AET';
 $lang['match_a_w']                             = 'A - W';
 $lang['match_abandoned']                       = 'Abandoned';
 $lang['match_after_extra_time']                = 'After Extra Time';
+$lang['match_awaiting_goal_data']              = 'Currently awaiting goal information for this match';
 $lang['match_away']                            = 'Away';
 $lang['match_away_walkover']                   = 'Away Walkover';
 $lang['match_cards']                           = 'Cards';
