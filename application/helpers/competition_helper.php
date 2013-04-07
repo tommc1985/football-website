@@ -100,6 +100,6 @@ class Competition_helper
             return $types[$competition];
         }
 
-        return 'Unknown';
+        return $ci->lang->line('global_unknown');
     }
 }

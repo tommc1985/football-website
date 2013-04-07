@@ -40,6 +40,8 @@ class Card_helper
      */
     public static function offence($card)
     {
+        $ci =& get_instance();
+        $ci->load->model('Card_model');
         $card = self::_convertObject($card);
 
         $offences = Card_model::fetchOffences();
@@ -48,6 +50,6 @@ class Card_helper
             return $offences[$card->offence]['offence'];
         }
 
-        return 'Unknown';
+        return $ci->lang->line('global_unknown');
     }
 }

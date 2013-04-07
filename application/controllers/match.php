@@ -15,7 +15,7 @@ class Match extends Frontend_Controller {
         $this->load->model('frontend/Match_model');
         $this->load->model('Season_model');
         $this->lang->load('match');
-        $this->load->helper(array('competition', 'competition_stage', 'goal', 'match', 'official', 'opposition', 'position', 'url', 'utility'));
+        $this->load->helper(array('card', 'competition', 'competition_stage', 'goal', 'match', 'official', 'opposition', 'position', 'url', 'utility'));
     }
 
     /**
