@@ -178,17 +178,47 @@ class Match_helper
      */
     public static function venue($match)
     {
+        $ci =& get_instance();
+        $ci->lang->load('match');
+
         $match = self::_convertObject($match);
 
         switch ($match->venue) {
             case 'h':
-                return 'H';
+                return $ci->lang->line('match_h');
                 break;
             case 'a':
-                return 'A';
+                return $ci->lang->line('match_a');
                 break;
             case 'n':
-                return 'N';
+                return $ci->lang->line('match_n');
+                break;
+        }
+
+        return '';
+    }
+
+    /**
+     * Return a Match's Long Venue
+     * @param  mixed $match        Match Object/Array
+     * @return string              The Match's Long Venue
+     */
+    public static function longVenue($match)
+    {
+        $ci =& get_instance();
+        $ci->lang->load('match');
+
+        $match = self::_convertObject($match);
+
+        switch ($match->venue) {
+            case 'h':
+                return $ci->lang->line('match_home');
+                break;
+            case 'a':
+                return $ci->lang->line('match_away');
+                break;
+            case 'n':
+                return $ci->lang->line('match_neutral');
                 break;
         }
 
