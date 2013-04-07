@@ -80,6 +80,7 @@ $lang['match_neutral']                         = 'Neutral';
 $lang['match_no_matches_found']                = 'No matches can be found for the season %s';
 $lang['match_on_penalties']                    = 'on penalties';
 $lang['match_p_p']                             = 'P - P';
+$lang['match_possible_milestones']             = 'Possible Milestones';
 $lang['match_postponed']                       = 'Postponed';
 $lang['match_pens']                            = 'pens';
 $lang['match_match_preview']                   = 'Match Preview';
