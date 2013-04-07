@@ -16,7 +16,6 @@ if ($match->h > 0) { ?>
 <?php
     if (count($match->goals) > 0) {
         foreach ($match->goals as $goal) { ?>
-        <div class="goal">
             <p><?php echo "'{$goal->minute}"; ?><br />
                 <?php echo $this->lang->line('match_scorer'); ?> <?php echo Goal_helper::scorer($goal); ?><br />
                 <?php echo $this->lang->line('match_assister'); ?> <?php echo Goal_helper::assister($goal); ?><br />
@@ -25,7 +24,6 @@ if ($match->h > 0) { ?>
                 <?php echo $this->lang->line('match_distance'); ?> <?php echo Goal_helper::distance($goal); ?><br />
                 <?php echo $this->lang->line('match_rating'); ?> <?php echo Goal_helper::rating($goal); ?><br />
                 <?php echo $this->lang->line('match_description'); ?> <?php echo $goal->description; ?><br /></p>
-        </div>
         <?php }
 
     } else {
@@ -34,6 +32,25 @@ if ($match->h > 0) { ?>
 } ?>
 
 <h3><?php echo $this->lang->line('match_lineup'); ?></h3>
+
+<?php
+if (count($match->appearances) > 0) {
+    foreach ($match->appearances  as $appearance) {
+        if ($appearance->status == 'starter') { ?>
+            <p><?php echo $appearance->shirt; ?> <?php echo Player_helper::fullName($appearance->player_id); ?> <?php echo Position_helper::abbreviation($appearance->position); ?> <?php echo !is_null($appearance->off) ? '\'' . $appearance->off : ''; ?></p>
+    <?php
+        }
+    }
+
+    foreach ($match->appearances  as $appearance) {
+        if ($appearance->status != 'starter') { ?>
+            <p><?php echo $appearance->shirt; ?> <?php echo Player_helper::fullName($appearance->player_id); ?> <?php echo $appearance->status != 'unused' ? Position_helper::abbreviation($appearance->position) : ''; ?> <?php echo !is_null($appearance->on) ? '\'' . $appearance->on : ''; ?> <?php echo !is_null($appearance->off) ? '\'' . $appearance->off : ''; ?></p>
+    <?php
+        }
+    }
+} else {
+    echo $this->lang->line('match_awaiting_appearance_data');
+} ?>
 
 <h3><?php echo $this->lang->line('match_cards'); ?></h3>
 
