@@ -173,4 +173,34 @@ class Utility_helper
 
         return 'th';
     }
+
+    /**
+     * Return if a number is close to a particular milestone
+     * @param  mixed $number   Number
+     * @param  mixed $withins  How close the number must be to a milestone to be deemed possible
+     * @return mixed           What milestone is that number near, if any?
+     */
+    public static function withinMilestone($number, $withins = array(1, 2, 3))
+    {
+        $milestones = array(2, 3, 5, 10, 15, 20, 25, 30, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 500, 1000);
+
+        if ($number == 0) {
+            return false;
+        }
+
+        foreach ($withins as $within) {
+            foreach ($milestones as $milestone) {
+                switch (true) {
+                    case $milestone == ($number + $within):
+                        return array(
+                            'milestone' => $milestone,
+                            'within' => $within,
+                            );
+                        break;
+                }
+            }
+        }
+
+        return false;
+    }
 }
