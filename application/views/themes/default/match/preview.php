@@ -12,5 +12,3 @@
 
 <h3><?php echo $this->lang->line('match_factfile'); ?></h3>
 
-<?php
-var_dump(Utility_helper::closeToMilestone(148)); ?>
