@@ -61,6 +61,7 @@ $lang['match_body_part']                       = 'Body Part';
 $lang['match_cards']                           = 'Cards';
 $lang['match_details']                         = 'Details';
 $lang['match_distance']                        = 'Distance';
+$lang['match_factfile']                        = 'Factfile';
 $lang['match_fixtures_and_results_for_season'] = 'Fixtures &amp; Results - %s';
 $lang['match_f_t']                             = 'FT';
 $lang['match_full_time']                       = 'Full Time';
