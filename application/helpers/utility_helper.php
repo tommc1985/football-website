@@ -142,4 +142,35 @@ class Utility_helper
 
         return $string;
     }
+
+    /**
+     * Return number with it's Ordinal Suffix
+     * @param  mixed $number   Games
+     * @return string         Games Elapsed
+     */
+    public static function ordinalWithSuffix($number)
+    {
+        return $number . self::ordinalSuffix($number);
+    }
+
+    /**
+     * Return the Ordinal Suffix of the passed number
+     * @param  mixed $number   Games
+     * @return string         Games Elapsed
+     */
+    public static function ordinalSuffix($number)
+    {
+        if (!in_array(($number % 100),array(11,12,13))) {
+            switch ($number % 10) {
+                case 1:
+                    return 'st';
+                case 2:
+                    return 'nd';
+                case 3:
+                    return 'rd';
+            }
+        }
+
+        return 'th';
+    }
 }
