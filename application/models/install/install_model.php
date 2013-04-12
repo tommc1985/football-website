@@ -85,13 +85,13 @@ class Install_Model extends CI_Model {
             'view_featured_stories',
             'view_league_tables',
             'view_match_assists',
-            'view_match_discipline',
             'view_match_goals',
             'view_matches',
             'view_scorers_ages',
             'view_yellow_count',
             'view_appearances_matches_combined',
             'view_match_affected_results',
+            'view_match_discipline',
         );
     }
 
@@ -227,6 +227,8 @@ class Install_Model extends CI_Model {
             'position' => array(
                 'type'           => 'INT',
                 'constraint'     => 11,
+                'unsigned'       => TRUE,
+                'NULL'           => true,
             ),
             'order' => array(
                 'type'           => 'INT',
@@ -267,6 +269,12 @@ class Install_Model extends CI_Model {
 
         $this->ci->dbforge->add_field($fields);
         $this->ci->dbforge->add_key('id', TRUE);
+        $this->ci->dbforge->add_key(array(
+            'match_id',
+            'position',
+            'player_id',
+            )
+        );
 
         if ($this->ci->dbforge->create_table($tableName, TRUE)) {
             return true;
@@ -489,6 +497,11 @@ class Install_Model extends CI_Model {
         );
 
         $this->ci->dbforge->add_field($fields);
+        $this->ci->dbforge->add_key(array(
+            'league_id',
+            'opposition_id',
+            )
+        );
 
         if ($this->ci->dbforge->create_table($tableName, TRUE)) {
             return true;
@@ -523,6 +536,10 @@ class Install_Model extends CI_Model {
         );
 
         $this->ci->dbforge->add_field($fields);
+        $this->ci->dbforge->add_key(array(
+            'league_id',
+            )
+        );
 
         if ($this->ci->dbforge->create_table($tableName, TRUE)) {
             return true;
@@ -591,6 +608,10 @@ class Install_Model extends CI_Model {
         );
 
         $this->ci->dbforge->add_field($fields);
+        $this->ci->dbforge->add_key(array(
+            'player_id',
+            )
+        );
 
         if ($this->ci->dbforge->create_table($tableName, TRUE)) {
             return true;
@@ -635,6 +656,10 @@ class Install_Model extends CI_Model {
         );
 
         $this->ci->dbforge->add_field($fields);
+        $this->ci->dbforge->add_key(array(
+            'player_id',
+            )
+        );
 
         if ($this->ci->dbforge->create_table($tableName, TRUE)) {
             return true;
@@ -677,6 +702,10 @@ class Install_Model extends CI_Model {
         );
 
         $this->ci->dbforge->add_field($fields);
+        $this->ci->dbforge->add_key(array(
+            'player_id',
+            )
+        );
 
         if ($this->ci->dbforge->create_table($tableName, TRUE)) {
             return true;
@@ -1248,6 +1277,11 @@ class Install_Model extends CI_Model {
 
         $this->ci->dbforge->add_field($fields);
         $this->ci->dbforge->add_key('id', TRUE);
+        $this->ci->dbforge->add_key(array(
+            'player_id',
+            'match_id',
+            )
+        );
 
         if ($this->ci->dbforge->create_table($tableName, TRUE)) {
             return true;
@@ -1486,6 +1520,10 @@ class Install_Model extends CI_Model {
 
         $this->ci->dbforge->add_field($fields);
         $this->ci->dbforge->add_key('id', TRUE);
+        $this->ci->dbforge->add_key(array(
+            'group_id',
+            )
+        );
 
         if ($this->ci->dbforge->create_table($tableName, TRUE)) {
             return true;
@@ -1687,6 +1725,12 @@ class Install_Model extends CI_Model {
 
         $this->ci->dbforge->add_field($fields);
         $this->ci->dbforge->add_key('id', TRUE);
+        $this->ci->dbforge->add_key(array(
+            'scorer_id',
+            'assist_id',
+            'match_id',
+            )
+        );
 
         if ($this->ci->dbforge->create_table($tableName, TRUE)) {
             return true;
@@ -1875,6 +1919,10 @@ class Install_Model extends CI_Model {
 
         $this->ci->dbforge->add_field($fields);
         $this->ci->dbforge->add_key('id', TRUE);
+        $this->ci->dbforge->add_key(array(
+            'competition_id',
+            )
+        );
 
         if ($this->ci->dbforge->create_table($tableName, TRUE)) {
             return true;
@@ -1948,6 +1996,12 @@ class Install_Model extends CI_Model {
 
         $this->ci->dbforge->add_field($fields);
         $this->ci->dbforge->add_key('id', TRUE);
+        $this->ci->dbforge->add_key(array(
+            'league_id',
+            'h_opposition_id',
+            'a_opposition_id',
+            )
+        );
 
         if ($this->ci->dbforge->create_table($tableName, TRUE)) {
             return true;
@@ -1997,6 +2051,11 @@ class Install_Model extends CI_Model {
 
         $this->ci->dbforge->add_field($fields);
         $this->ci->dbforge->add_key('id', TRUE);
+        $this->ci->dbforge->add_key(array(
+            'league_id',
+            'opposition_id',
+            )
+        );
 
         if ($this->ci->dbforge->create_table($tableName, TRUE)) {
             return true;
@@ -2147,6 +2206,13 @@ class Install_Model extends CI_Model {
 
         $this->ci->dbforge->add_field($fields);
         $this->ci->dbforge->add_key('id', TRUE);
+        $this->ci->dbforge->add_key(array(
+            'opposition_id',
+            'competition_id',
+            'competition_stage_id',
+            'official_id',
+            )
+        );
 
         if ($this->ci->dbforge->create_table($tableName, TRUE)) {
             return true;
@@ -2362,6 +2428,10 @@ class Install_Model extends CI_Model {
 
         $this->ci->dbforge->add_field($fields);
         $this->ci->dbforge->add_key('id', TRUE);
+        $this->ci->dbforge->add_key(array(
+            'player_id',
+            )
+        );
 
         if ($this->ci->dbforge->create_table($tableName, TRUE)) {
             return true;
@@ -2411,6 +2481,11 @@ class Install_Model extends CI_Model {
 
         $this->ci->dbforge->add_field($fields);
         $this->ci->dbforge->add_key('id', TRUE);
+        $this->ci->dbforge->add_key(array(
+            'player_id',
+            'position_id',
+            )
+        );
 
         if ($this->ci->dbforge->create_table($tableName, TRUE)) {
             return true;
@@ -2817,7 +2892,7 @@ class Install_Model extends CI_Model {
      */
     public function createViewScorersAgesView()
     {
-        $sql = "CREATE OR REPLACE VIEW `view_appearances_ages` AS select `g`.`id` AS `id`,`g`.`match_id` AS `match_id`,`g`.`scorer_id` AS `scorer_id`,`m`.`opposition_id` AS `opposition_id`,`m`.`competition_id` AS `competition_id`,`m`.`competition_stage_id` AS `competition_stage_id`,`c`.`type` AS `competition_type`,`m`.`venue` AS `venue`,`m`.`h` AS `h`,`m`.`a` AS `a`,`m`.`date` AS `date`,`c`.`competitive` AS `competitive`,`p`.`first_name` AS `first_name`,`p`.`surname` AS `surname`,`p`.`dob` AS `dob`,(to_days(`m`.`date`) - to_days(`p`.`dob`)) AS `age` from ((((`goal` `g` left join `matches` `m` on((`g`.`match_id` = `m`.`id`))) left join `competition` `c` on((`m`.`competition_id` = `c`.`id`))) left join `opposition` `o` on((`m`.`opposition_id` = `o`.`id`))) left join `player` `p` on((`g`.`scorer_id` = `p`.`id`))) where ((`g`.`deleted` = 0) and (`m`.`deleted` = 0) and (`c`.`deleted` = 0) and (`p`.`deleted` = 0) and (`o`.`deleted` = 0)) ;";
+        $sql = "CREATE OR REPLACE VIEW `view_scorers_ages` AS select `g`.`id` AS `id`,`g`.`match_id` AS `match_id`,`g`.`scorer_id` AS `scorer_id`,`m`.`opposition_id` AS `opposition_id`,`m`.`competition_id` AS `competition_id`,`m`.`competition_stage_id` AS `competition_stage_id`,`c`.`type` AS `competition_type`,`m`.`venue` AS `venue`,`m`.`h` AS `h`,`m`.`a` AS `a`,`m`.`date` AS `date`,`c`.`competitive` AS `competitive`,`p`.`first_name` AS `first_name`,`p`.`surname` AS `surname`,`p`.`dob` AS `dob`,(to_days(`m`.`date`) - to_days(`p`.`dob`)) AS `age` from ((((`goal` `g` left join `matches` `m` on((`g`.`match_id` = `m`.`id`))) left join `competition` `c` on((`m`.`competition_id` = `c`.`id`))) left join `opposition` `o` on((`m`.`opposition_id` = `o`.`id`))) left join `player` `p` on((`g`.`scorer_id` = `p`.`id`))) where ((`g`.`deleted` = 0) and (`m`.`deleted` = 0) and (`c`.`deleted` = 0) and (`p`.`deleted` = 0) and (`o`.`deleted` = 0)) ;";
 
         $this->db->query($sql);
     }
