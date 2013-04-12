@@ -5,7 +5,7 @@ require_once('backend_controller.php');
 /**
  * The Backend Controller for Import of data
  */
-class Import extends Backend_Controller
+class Import extends CI_Controller
 {
     /**
      * Constructor
