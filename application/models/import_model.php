@@ -64,7 +64,11 @@ class Import_Model extends CI_Model {
         $data = array();
 
         foreach ($objects as $object) {
+            if ($object->position == 0 && $object->status != 'unused') {
+                die('Problem with appearance data');
+            }
             $object = $object;
+            $object->position =  $object->position == 0 ? NULL : $object->position;
             $object->date_added = time();
             $object->date_updated = time();
 
