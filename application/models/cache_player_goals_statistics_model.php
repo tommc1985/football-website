@@ -146,7 +146,6 @@ class Cache_Player_Goals_Statistics_model extends CI_Model {
     {
         $this->db->select('*')
             ->from($this->queueTableName)
-            ->where('in_progress', 0)
             ->where('completed', 0)
             ->where('deleted', 0)
             ->order_by('date_added, id', 'asc')
@@ -165,6 +164,10 @@ class Cache_Player_Goals_Statistics_model extends CI_Model {
         $rows = $this->fetchLatest();
 
         foreach($rows as $row) {
+            if ($row->in_progress == 1) {
+                break;
+            }
+
             $this->processQueuedRow($row);
             $rowCount++;
         }
