@@ -62,7 +62,7 @@ if (count($match->cards) > 0) {
     <?php
     }
 } else {
-    echo $this->lang->line('match_awaiting_appearance_data');
+    echo $this->lang->line('match_no_cards_for_this_match');
 } ?>
 
 <h3><?php echo $this->lang->line('match_milestones'); ?></h3>
