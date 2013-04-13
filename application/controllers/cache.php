@@ -8,7 +8,7 @@ class Cache extends CI_Controller {
      */
     public function execute()
     {
-        set_time_limit(300);
+        set_time_limit(1200);
         if ($this->input->is_cli_request()) {
             $this->load->database();
             $this->load->model('Cache_model');
