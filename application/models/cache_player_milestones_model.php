@@ -37,7 +37,8 @@ class Cache_Player_Milestones_model extends CI_Model {
             'nth_goal'                 => 'nthGoal',
             'nth_assist'               => 'nthAssist',
             'nth_yellow_card'          => 'nthYellowCard',
-            'nth_red_card'          => 'nthRedCard',
+            'nth_red_card'             => 'nthRedCard',
+            'nth_motm'                 => 'nthMotm',
         );
     }
 
@@ -574,6 +575,68 @@ WHERE c.competitive = 1" . (count($whereConditions) > 0 ? "
     AND c.deleted = 0
     AND (cs.deleted = 0 || ISNULL(m.competition_stage_id))
 ORDER BY m.date ASC, g.minute ASC";
+
+        $query = $this->db->query($sql);
+    }
+
+    /**
+     * Generate and cache nth MotM Milestone Statistics by season or type
+     * @param  boolean $type        Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season     Season to generate, set to null for entire career
+     * @return boolean              Whether query was executed correctly
+     */
+    public function nthMotm($type = false, $season = NULL)
+    {
+        $statisticGroup = 'nth_motm';
+
+        $this->deleteRows($statisticGroup, $type, $season);
+
+        $whereConditions = array();
+        $whereConditions2 = array();
+        $seasonValue = "career";
+        if (!is_null($season)) {
+            $dates = Season_model::generateStartEndDates($season);
+            $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
+            $seasonValue = $season;
+        }
+
+        $competitionType = "overall";
+        if (is_string($type)) {
+            $whereConditions[] = "(m.competition_type = '{$type}')";
+            $whereConditions2[] = "(m2.competition_type = '{$type}')";
+            $competitionType = $type;
+        }
+
+        $sql = "INSERT INTO {$this->tableName} (type, season, player_id, match_id, date, statistic_group, statistic_key)
+SELECT
+    '{$competitionType}' as type,
+    '{$seasonValue}' as season,
+    m.player_id,
+    m.match_id,
+    m.date,
+    '{$statisticGroup}',
+    (SELECT COUNT(m2.id)
+    FROM view_appearances_ages m2
+    LEFT JOIN competition c ON c.id = m2.competition_id
+    WHERE m.status != 'unused'
+        AND c.competitive = 1" . (count($whereConditions2) > 0 ? "
+        AND " . implode(" \r\nAND ", $whereConditions2) : '') . "
+        AND c.deleted = 0
+        AND m2.date < m.date
+        AND m2.motm = 1
+        AND m2.player_id = m.player_id) + 1 as game_number
+FROM view_appearances_ages m
+LEFT JOIN opposition o ON o.id = m.opposition_id
+LEFT JOIN competition c ON c.id = m.competition_id
+LEFT JOIN competition_stage cs ON cs.id = m.competition_stage_id
+WHERE c.competitive = 1" . (count($whereConditions) > 0 ? "
+    AND " . implode(" \r\nAND ", $whereConditions) : '') . "
+    AND m.motm = 1
+    AND m.status != 'unused'
+    AND o.deleted = 0
+    AND c.deleted = 0
+    AND (cs.deleted = 0 || ISNULL(m.competition_stage_id))
+ORDER BY m.date ASC";
 
         $query = $this->db->query($sql);
     }
