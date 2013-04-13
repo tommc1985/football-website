@@ -708,9 +708,6 @@ class Install_Model extends CI_Model {
                 'type'           => 'VARCHAR',
                 'constraint'     => 255,
             ),
-            'statistic_value' => array(
-                'type'           => 'TEXT',
-            ),
         );
 
         $this->ci->dbforge->add_field($fields);
