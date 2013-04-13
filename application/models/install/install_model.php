@@ -43,6 +43,7 @@ class Install_Model extends CI_Model {
             'cache_league_statistics',
             'cache_player_accumulated_statistics',
             'cache_player_goal_statistics',
+            'cache_player_milestones',
             'cache_player_statistics',
             'cache_queue_club_statistics',
             'cache_queue_fantasy_football_statistics',
@@ -50,6 +51,7 @@ class Install_Model extends CI_Model {
             'cache_queue_league_statistics',
             'cache_queue_player_accumulated_statistics',
             'cache_queue_player_goal_statistics',
+            'cache_queue_player_milestones',
             'cache_queue_player_statistics',
             'card',
             'ci_sessions',
@@ -669,6 +671,63 @@ class Install_Model extends CI_Model {
     }
 
     /**
+     * Create 'cache_player_milestones' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of table creation attempt
+     */
+    public function createCachePlayerMilestonesTable($tableName)
+    {
+        $fields = array(
+            'type' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 15,
+            ),
+            'season' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 7,
+            ),
+            'player_id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+            ),
+            'match_id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+            ),
+            'date' => array(
+                'type'           => 'DATETIME',
+                'null'           => true,
+            ),
+            'statistic_group' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 100,
+            ),
+            'statistic_key' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 255,
+            ),
+            'statistic_value' => array(
+                'type'           => 'TEXT',
+            ),
+        );
+
+        $this->ci->dbforge->add_field($fields);
+        $this->ci->dbforge->add_key(array(
+            'player_id',
+            'match_id',
+            )
+        );
+
+        if ($this->ci->dbforge->create_table($tableName, TRUE)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Create 'cache_player_statistics' table
      * @param  string $tableName Database table name
      * @return boolean           Result of table creation attempt
@@ -1096,6 +1155,81 @@ class Install_Model extends CI_Model {
             'player_id' => array(
                 'type'           => 'INT',
                 'constraint'     => 11,
+                'null'           => true,
+            ),
+            'cache_data' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 100,
+                'null'           => TRUE,
+                'default'        => '',
+            ),
+            'in_progress' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'default'        => 0,
+            ),
+            'completed' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'default'        => 0,
+            ),
+            'process_duration' => array(
+                'type'           => 'INT',
+                'constraint'     => 5,
+                'null'           => true,
+            ),
+            'peak_memory_usage' => array(
+                'type'           => 'decimal',
+                'constraint'     => array(5, 2),
+                'null'           => true,
+            ),
+            'date_added' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'date_updated' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'deleted' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'default'        => 0,
+            ),
+        );
+
+        $this->ci->dbforge->add_field($fields);
+        $this->ci->dbforge->add_key('id', TRUE);
+
+        if ($this->ci->dbforge->create_table($tableName, TRUE)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Create 'cache_queue_player_milestones' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of table creation attempt
+     */
+    public function createCacheQueuePlayerMilestonesTable($tableName)
+    {
+        $fields = array(
+            'id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+                'auto_increment' => TRUE,
+            ),
+            'by_type' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'null'           => true,
+            ),
+            'season' => array(
+                'type'           => 'INT',
+                'constraint'     => 4,
                 'null'           => true,
             ),
             'cache_data' => array(

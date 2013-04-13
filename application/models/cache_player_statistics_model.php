@@ -245,7 +245,6 @@ class Cache_Player_Statistics_model extends CI_Model {
 
     /**
      * Insert Statistic into cache table
-     * Insert Statistic into cache table
      * @param  string $statisticGroup   Unique identifier for statistic
      * @param  string|boolean $type     Competition Type - false, "league", "cup", etc
      * @param  int|boolean $season      Season relating to the statistic - false or integer

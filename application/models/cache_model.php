@@ -26,6 +26,7 @@ class Cache_model extends CI_Model {
             'Cache_League_Statistics_model',
             'Cache_Player_Accumulated_Statistics_model',
             'Cache_Player_Goals_Statistics_model',
+            'Cache_Player_Milestones_model',
             'Cache_Player_Statistics_model',
         );
 
