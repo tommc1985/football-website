@@ -42,6 +42,27 @@ class Milestone_model extends Base_Frontend_Model {
     }
 
     /**
+     * Fetch list of possible debuts
+     * @param  string $matchSeason   Season the match is in
+     * @param  mixed $season         Four digit season or 'career'
+     * @param  string $type          Competition type
+     * @return array                 List of possible debuts
+     */
+    public function fetchDebutFuture($matchSeason, $season = 'career', $type = 'overall')
+    {
+        $this->db->select("*, 'nth_appearance' as statistic_group, cpas.appearances as statistic_key", false)
+            ->from('player_registration pr')
+            ->join('cache_player_accumulated_statistics cpas', 'pr.player_id = cpas.player_id')
+            ->where('pr.season', $matchSeason)
+            ->where('cpas.season', $season)
+            ->where('cpas.type', $type)
+            ->where('cpas.appearances', 0)
+            ->where('pr.deleted', 0);
+
+        return $this->db->get()->result();
+    }
+
+    /**
      * Fetch list of Appearance milestones made
      * @param  string $conditions    Other Conditions to include in query (i.e. match/player id)
      * @param  mixed $season         Four digit season or 'career'
@@ -70,7 +91,33 @@ class Milestone_model extends Base_Frontend_Model {
     }
 
     /**
-     * Fetch list of gGoal milestones made
+     * Fetch list of possible Appearance milestones
+     * @param  string $matchSeason   Season the match is in
+     * @param  mixed $season         Four digit season or 'career'
+     * @param  string $type          Competition type
+     * @return array                 List of possible Appearance milestones
+     */
+    public function fetchAppearanceFuture($matchSeason, $season = 'career', $type = 'overall')
+    {
+        $milestones = array(4, 9, 14, 19, 24, 29, 34, 39, 44, 49, 54, 59, 64, 69, 70, 79);
+        if ($season == 'career') {
+            $milestones = array(24, 49, 74, 99, 124, 149, 174, 199, 224, 249, 274, 299, 324, 349, 374, 399, 449, 499, 549, 599, 649, 699, 749, 799, 849, 899, 949, 999);
+        }
+
+        $this->db->select("*, 'nth_appearance' as statistic_group, cpas.appearances as statistic_key", false)
+            ->from('player_registration pr')
+            ->join('cache_player_accumulated_statistics cpas', 'pr.player_id = cpas.player_id')
+            ->where('pr.season', $matchSeason)
+            ->where('cpas.season', $season)
+            ->where('cpas.type', $type)
+            ->where_in('cpas.appearances', $milestones)
+            ->where('pr.deleted', 0);
+
+        return $this->db->get()->result();
+    }
+
+    /**
+     * Fetch list of Goal milestones made
      * @param  string $conditions    Other Conditions to include in query (i.e. match/player id)
      * @param  mixed $season         Four digit season or 'career'
      * @param  string $type          Competition type
@@ -93,6 +140,32 @@ class Milestone_model extends Base_Frontend_Model {
         if (count($conditions) > 0) {
             $this->db->where($conditions);
         }
+
+        return $this->db->get()->result();
+    }
+
+    /**
+     * Fetch list of possible Goal milestones
+     * @param  string $matchSeason   Season the match is in
+     * @param  mixed $season         Four digit season or 'career'
+     * @param  string $type          Competition type
+     * @return array                 List of possible Goal milestones
+     */
+    public function fetchGoalFuture($matchSeason, $season = 'career', $type = 'overall')
+    {
+        $milestones = array(0, 1, 2, 4, 9, 14, 19, 24, 29, 34, 39, 44, 49, 54, 59, 64, 69, 74, 79, 84, 89, 94, 99);
+        if ($season == 'career') {
+            $milestones = array(0, 9, 24, 49, 74, 99, 124, 149, 174, 199, 224, 249, 274, 299, 324, 349, 374, 399, 449, 499, 549, 599, 649, 699, 749, 799, 849, 899, 949, 999);
+        }
+
+        $this->db->select("*, 'nth_goal' as statistic_group, cpas.goals as statistic_key", false)
+            ->from('player_registration pr')
+            ->join('cache_player_accumulated_statistics cpas', 'pr.player_id = cpas.player_id')
+            ->where('pr.season', $matchSeason)
+            ->where('cpas.season', $season)
+            ->where('cpas.type', $type)
+            ->where_in('cpas.goals', $milestones)
+            ->where('pr.deleted', 0);
 
         return $this->db->get()->result();
     }
@@ -127,6 +200,32 @@ class Milestone_model extends Base_Frontend_Model {
     }
 
     /**
+     * Fetch list of possible Assist milestones
+     * @param  string $matchSeason   Season the match is in
+     * @param  mixed $season         Four digit season or 'career'
+     * @param  string $type          Competition type
+     * @return array                 List of possible Assist milestones
+     */
+    public function fetchAssistFuture($matchSeason, $season = 'career', $type = 'overall')
+    {
+        $milestones = array(0, 1, 2, 4, 9, 14, 19, 24, 29, 34, 39, 44, 49, 54, 59, 64, 69, 74, 79, 84, 89, 94, 99);
+        if ($season == 'career') {
+            $milestones = array(0, 9, 24, 49, 74, 99, 124, 149, 174, 199, 224, 249, 274, 299, 324, 349, 374, 399, 449, 499, 549, 599, 649, 699, 749, 799, 849, 899, 949, 999);
+        }
+
+        $this->db->select("*, 'nth_assist' as statistic_group, cpas.assists as statistic_key", false)
+            ->from('player_registration pr')
+            ->join('cache_player_accumulated_statistics cpas', 'pr.player_id = cpas.player_id')
+            ->where('pr.season', $matchSeason)
+            ->where('cpas.season', $season)
+            ->where('cpas.type', $type)
+            ->where_in('cpas.assists', $milestones)
+            ->where('pr.deleted', 0);
+
+        return $this->db->get()->result();
+    }
+
+    /**
      * Fetch list of Yellow Card milestones made
      * @param  string $conditions    Other Conditions to include in query (i.e. match/player id)
      * @param  mixed $season         Four digit season or 'career'
@@ -150,6 +249,32 @@ class Milestone_model extends Base_Frontend_Model {
         if (count($conditions) > 0) {
             $this->db->where($conditions);
         }
+
+        return $this->db->get()->result();
+    }
+
+    /**
+     * Fetch list of possible Yellow Card milestones
+     * @param  string $matchSeason   Season the match is in
+     * @param  mixed $season         Four digit season or 'career'
+     * @param  string $type          Competition type
+     * @return array                 List of possible Yellow Card milestones
+     */
+    public function fetchYellowCardFuture($matchSeason, $season = 'career', $type = 'overall')
+    {
+        $milestones = array(0, 1, 2, 4, 9, 14, 19, 24, 29);
+        if ($season == 'career') {
+            $milestones = array(0, 4, 9, 24, 49, 74, 99, 124, 149, 174, 199, 224, 249);
+        }
+
+        $this->db->select("*, 'nth_yellow_card' as statistic_group, cpas.yellows as statistic_key", false)
+            ->from('player_registration pr')
+            ->join('cache_player_accumulated_statistics cpas', 'pr.player_id = cpas.player_id')
+            ->where('pr.season', $matchSeason)
+            ->where('cpas.season', $season)
+            ->where('cpas.type', $type)
+            ->where_in('cpas.yellows', $milestones)
+            ->where('pr.deleted', 0);
 
         return $this->db->get()->result();
     }
@@ -183,6 +308,32 @@ class Milestone_model extends Base_Frontend_Model {
     }
 
     /**
+     * Fetch list of possible Red Card milestones
+     * @param  string $matchSeason   Season the match is in
+     * @param  mixed $season         Four digit season or 'career'
+     * @param  string $type          Competition type
+     * @return array                 List of possible Red Card milestones
+     */
+    public function fetchRedCardFuture($matchSeason, $season = 'career', $type = 'overall')
+    {
+        $milestones = array(0, 1, 2, 4, 9, 14);
+        if ($season == 'career') {
+            $milestones = array(0, 1, 2, 4, 9, 24, 49, 74, 99);
+        }
+
+        $this->db->select("*, 'nth_red_card' as statistic_group, cpas.reds as statistic_key", false)
+            ->from('player_registration pr')
+            ->join('cache_player_accumulated_statistics cpas', 'pr.player_id = cpas.player_id')
+            ->where('pr.season', $matchSeason)
+            ->where('cpas.season', $season)
+            ->where('cpas.type', $type)
+            ->where_in('cpas.reds', $milestones)
+            ->where('pr.deleted', 0);
+
+        return $this->db->get()->result();
+    }
+
+    /**
      * Fetch list of MotM milestones made
      * @param  string $conditions    Other Conditions to include in query (i.e. match/player id)
      * @param  mixed $season         Four digit season or 'career'
@@ -206,6 +357,32 @@ class Milestone_model extends Base_Frontend_Model {
         if (count($conditions) > 0) {
             $this->db->where($conditions);
         }
+
+        return $this->db->get()->result();
+    }
+
+    /**
+     * Fetch list of possible Man of the Match milestones
+     * @param  string $matchSeason   Season the match is in
+     * @param  mixed $season         Four digit season or 'career'
+     * @param  string $type          Competition type
+     * @return array                 List of possible Red Card milestones
+     */
+    public function fetchMotmFuture($matchSeason, $season = 'career', $type = 'overall')
+    {
+        $milestones = array(0, 1, 2, 4, 9, 14, 19, 24, 29);
+        if ($season == 'career') {
+            $milestones = array(0, 4, 9, 24, 49, 74, 99, 124, 149, 174, 199, 224, 249);
+        }
+
+        $this->db->select("*, 'nth_motm' as statistic_group, cpas.motms as statistic_key", false)
+            ->from('player_registration pr')
+            ->join('cache_player_accumulated_statistics cpas', 'pr.player_id = cpas.player_id')
+            ->where('pr.season', $matchSeason)
+            ->where('cpas.season', $season)
+            ->where('cpas.type', $type)
+            ->where_in('cpas.motms', $milestones)
+            ->where('pr.deleted', 0);
 
         return $this->db->get()->result();
     }

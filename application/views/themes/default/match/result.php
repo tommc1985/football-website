@@ -74,5 +74,5 @@ if (count($match->milestones) > 0) {
     <?php
     }
 } else {
-    echo $this->lang->line('match_no_milestones_for_this_match');
+    echo $this->lang->line('match_past_no_milestones_for_this_match');
 } ?>

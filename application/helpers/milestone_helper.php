@@ -15,14 +15,21 @@ class Milestone_helper
      * @param  mixed $milestone    Milestone Object/Array
      * @return string              The Milestone Text
      */
-    public static function player($milestone)
+    public static function player($milestone, $historial = true)
     {
         $ci =& get_instance();
         $ci->load->helper(array('competition', 'player', 'utility'));
         $ci->lang->load('milestone');
 
+        if ($historial) {
+            $tense = 'past';
+        } else {
+            $tense = 'future';
+            $milestone->statistic_key++;
+        }
+
         if ($milestone->type == 'overall' && $milestone->season == 'career' && $milestone->statistic_key == '1' && $milestone->statistic_group == 'nth_appearance') {
-            return sprintf($ci->lang->line('milestone_made_debut'), Player_helper::fullName($milestone->player_id));
+            return sprintf($ci->lang->line("milestone_{$tense}_debut"), Player_helper::fullName($milestone->player_id));
         }
 
         $type = 'overall';
@@ -39,7 +46,7 @@ class Milestone_helper
 
         $playerName = $milestone->player_id == 0 ? 'Own Goal' : Player_helper::fullName($milestone->player_id);
 
-        $languageVariable = "milestone_made_{$milestone->statistic_group}_{$type}_{$season}";
+        $languageVariable = "milestone_{$tense}_{$milestone->statistic_group}_{$type}_{$season}";
 
         return sprintf($ci->lang->line($languageVariable), $playerName, Utility_helper::ordinalWithSuffix($milestone->statistic_key), $competition);
     }

@@ -10,5 +10,15 @@
 
 <h3><?php echo $this->lang->line('match_possible_milestones'); ?></h3>
 
+<?php
+if (count($match->milestones) > 0) {
+    foreach ($match->milestones  as $milestone) { ?>
+        <p><?php echo Milestone_helper::player($milestone, false); ?></p>
+    <?php
+    }
+} else {
+    echo $this->lang->line('match_future_no_milestones_for_this_match');
+} ?>
+
 <h3><?php echo $this->lang->line('match_factfile'); ?></h3>
 

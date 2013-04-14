@@ -66,7 +66,7 @@ class Match_model extends Base_Frontend_Model {
         $match->cards = $this->fetchCards($id);
 
         // Match's Milestones
-        $match->milestones = $this->fetchMilestones($id);
+        $match->milestones = $this->fetchMilestones($match);
 
         return $match;
     }
@@ -121,12 +121,16 @@ class Match_model extends Base_Frontend_Model {
 
     /**
      * Fetch a particular Match's milestones
-     * @param  int $id         Match ID
+     * @param  object $id      Match Object
      * @return array           Milestones
      */
-    public function fetchMilestones($id)
+    public function fetchMilestones($match)
     {
-        return $this->fetchAchievedMilestones($id);
+        if (is_null($match->status) && is_null($match->h) && !is_null($match->date)) {
+            return $this->fetchPossibleMilestones($match->id);
+        }
+
+        return $this->fetchAchievedMilestones($match->id);
     }
 
     /**
@@ -171,6 +175,51 @@ class Match_model extends Base_Frontend_Model {
                 $milestones = array_merge($milestones, $this->ci->Milestone_model->fetchYellowCardPast($conditions, $season, $type));
                 $milestones = array_merge($milestones, $this->ci->Milestone_model->fetchRedCardPast($conditions, $season, $type));
                 $milestones = array_merge($milestones, $this->ci->Milestone_model->fetchMotmPast($conditions, $season, $type));
+            }
+        }
+
+        return $milestones;
+    }
+
+    /**
+     * Fetch a particular Match's Possible milestones
+     * @param  int $id         Match ID
+     * @return array           Possible Milestones
+     */
+    public function fetchPossibleMilestones($id)
+    {
+        $this->ci->load->model('frontend/Milestone_model');
+        $this->ci->load->model('Competition_model');
+        $this->ci->load->model('Season_model');
+        $conditions['match_id'] = $id;
+
+        // Basic Match details
+        $match = $this->fetch($id);
+
+        if ($match === false) {
+            return array();
+        }
+
+        $competition = $this->ci->Competition_model->fetch($match->competition_id);
+
+        $matchSeason = Season_model::fetchSeasonFromDateTime($match->date);
+        $seasons = array(
+            'career',
+            $matchSeason
+        );
+
+        $types = array(
+            'overall',
+            $competition->type
+        );
+
+        $milestones = $this->ci->Milestone_model->fetchDebutFuture($matchSeason);
+
+        foreach ($seasons as $season) {
+            foreach ($types as $type) {
+                $milestones = array_merge($milestones, $this->ci->Milestone_model->fetchAppearanceFuture($matchSeason, $season, $type));
+                $milestones = array_merge($milestones, $this->ci->Milestone_model->fetchGoalFuture($matchSeason, $season, $type));
+                $milestones = array_merge($milestones, $this->ci->Milestone_model->fetchAssistFuture($matchSeason, $season, $type));
             }
         }
 
