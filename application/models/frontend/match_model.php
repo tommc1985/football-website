@@ -126,7 +126,55 @@ class Match_model extends Base_Frontend_Model {
      */
     public function fetchMilestones($id)
     {
-        return array();
+        return $this->fetchAchievedMilestones($id);
+    }
+
+    /**
+     * Fetch a particular Match's Achieved milestones
+     * @param  int $id         Match ID
+     * @return array           Achieved Milestones
+     */
+    public function fetchAchievedMilestones($id)
+    {
+        $this->ci->load->model('frontend/Milestone_model');
+        $this->ci->load->model('Competition_model');
+        $this->ci->load->model('Season_model');
+        $conditions['match_id'] = $id;
+
+        // Basic Match details
+        $match = $this->fetch($id);
+
+        if ($match === false) {
+            return array();
+        }
+
+        $competition = $this->ci->Competition_model->fetch($match->competition_id);
+
+        $matchSeason = Season_model::fetchSeasonFromDateTime($match->date);
+        $seasons = array(
+            'career',
+            $matchSeason
+        );
+
+        $types = array(
+            'overall',
+            $competition->type
+        );
+
+        $milestones = $this->ci->Milestone_model->fetchDebutPast($conditions);
+
+        foreach ($seasons as $season) {
+            foreach ($types as $type) {
+                $milestones = array_merge($milestones, $this->ci->Milestone_model->fetchAppearancePast($conditions, $season, $type));
+                $milestones = array_merge($milestones, $this->ci->Milestone_model->fetchGoalPast($conditions, $season, $type));
+                $milestones = array_merge($milestones, $this->ci->Milestone_model->fetchAssistPast($conditions, $season, $type));
+                $milestones = array_merge($milestones, $this->ci->Milestone_model->fetchYellowCardPast($conditions, $season, $type));
+                $milestones = array_merge($milestones, $this->ci->Milestone_model->fetchRedCardPast($conditions, $season, $type));
+                $milestones = array_merge($milestones, $this->ci->Milestone_model->fetchMotmPast($conditions, $season, $type));
+            }
+        }
+
+        return $milestones;
     }
 
     /**

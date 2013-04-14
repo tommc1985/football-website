@@ -57,7 +57,7 @@ if (count($match->appearances) > 0) {
 <?php
 if (count($match->cards) > 0) {
     foreach ($match->cards  as $card) { ?>
-        <p><?php echo "'{$goal->minute}"; ?><br />
+        <p><?php echo "'{$card->minute}"; ?><br />
             <?php echo Player_helper::fullName($card->player_id); ?><br /><?php echo $card->type; ?><br /><?php echo Card_helper::offence($card); ?></p>
     <?php
     }
@@ -67,3 +67,12 @@ if (count($match->cards) > 0) {
 
 <h3><?php echo $this->lang->line('match_milestones'); ?></h3>
 
+<?php
+if (count($match->milestones) > 0) {
+    foreach ($match->milestones  as $milestone) { ?>
+        <p><?php echo Milestone_helper::player($milestone); ?></p>
+    <?php
+    }
+} else {
+    echo $this->lang->line('match_no_milestones_for_this_match');
+} ?>

@@ -130,6 +130,7 @@ class Goal extends Backend_Controller
                 $this->Cache_Fantasy_Football_model->insertEntries($matchSeason);
                 $this->Cache_Player_Accumulated_Statistics_model->insertEntries($matchSeason);
                 $this->Cache_Player_Goals_Statistics_model->insertEntries($matchSeason);
+                $this->Cache_Player_Milestones_model->insertEntries($matchSeason);
                 $this->Cache_Player_Statistics_model->insertEntries($matchSeason);
             }
 

@@ -139,7 +139,7 @@ class Cache_Player_Milestones_model extends CI_Model {
      * @param  int     $limit   Number of rows to return
      * @return results          Query Object
      */
-    public function fetchLatest($limit = 5)
+    public function fetchLatest($limit = 10)
     {
         $this->db->select('*')
             ->from($this->queueTableName)
@@ -269,6 +269,7 @@ class Cache_Player_Milestones_model extends CI_Model {
         if (!is_null($season)) {
             $dates = Season_model::generateStartEndDates($season);
             $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
+            $whereConditions2[] = "(m2.date {$dates['startDate']} AND m2.date {$dates['endDate']})";
             $seasonValue = $season;
         }
 
@@ -329,6 +330,7 @@ ORDER BY m.date ASC";
         if (!is_null($season)) {
             $dates = Season_model::generateStartEndDates($season);
             $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
+            $whereConditions2[] = "(m2.date {$dates['startDate']} AND m2.date {$dates['endDate']})";
             $seasonValue = $season;
         }
 
@@ -395,6 +397,7 @@ ORDER BY m.date ASC, g.minute ASC";
         if (!is_null($season)) {
             $dates = Season_model::generateStartEndDates($season);
             $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
+            $whereConditions2[] = "(m2.date {$dates['startDate']} AND m2.date {$dates['endDate']})";
             $seasonValue = $season;
         }
 
@@ -461,6 +464,7 @@ ORDER BY m.date ASC, g.minute ASC";
         if (!is_null($season)) {
             $dates = Season_model::generateStartEndDates($season);
             $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
+            $whereConditions2[] = "(m2.date {$dates['startDate']} AND m2.date {$dates['endDate']})";
             $seasonValue = $season;
         }
 
@@ -529,6 +533,7 @@ ORDER BY m.date ASC, g.minute ASC";
         if (!is_null($season)) {
             $dates = Season_model::generateStartEndDates($season);
             $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
+            $whereConditions2[] = "(m2.date {$dates['startDate']} AND m2.date {$dates['endDate']})";
             $seasonValue = $season;
         }
 
@@ -597,6 +602,7 @@ ORDER BY m.date ASC, g.minute ASC";
         if (!is_null($season)) {
             $dates = Season_model::generateStartEndDates($season);
             $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
+            $whereConditions2[] = "(m2.date {$dates['startDate']} AND m2.date {$dates['endDate']})";
             $seasonValue = $season;
         }
 
