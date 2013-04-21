@@ -24,6 +24,7 @@ class Player_Registration extends Backend_Controller
         $this->load->config('player_registration', true);
 
         $this->lang->load('player_registration');
+        $this->load->helper(array('player', 'utility'));
     }
 
     /**
