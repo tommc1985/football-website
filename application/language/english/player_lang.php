@@ -29,6 +29,7 @@ $lang['player_confirm_delete_no']       = "No thanks";
 $lang['player_edit']                    = 'Edit';
 $lang['player_delete']                  = 'Delete';
 
+$lang['player_no_players']              = 'No Players exist';
 
 
 

@@ -1,6 +1,5 @@
 <?php
-echo $pagination;
-if (count($players) > 0) { ?>
+echo $pagination; ?>
     <table>
         <thead>
             <tr>
@@ -12,7 +11,8 @@ if (count($players) > 0) { ?>
         </thead>
         <tbody>
     <?php
-    foreach ($players as $player) { ?>
+    if (count($players) > 0) {
+        foreach ($players as $player) { ?>
             <tr>
                 <td><?php echo $player->first_name; ?></td>
                 <td><?php echo $player->surname; ?></td>
@@ -20,9 +20,14 @@ if (count($players) > 0) { ?>
                 <td><a href="/admin/player/delete/id/<?php echo $player->id;?>"><?php echo $this->lang->line('player_delete'); ?></a></td>
             </tr>
     <?php
+        }
+    } else { ?>
+            <tr>
+                <td colspan="4"><?php echo $this->lang->line('player_no_players'); ?></td>
+            </tr>
+    <?php
     } ?>
         </tbody>
     </table>
 <?php
-}
 echo $pagination; ?>
