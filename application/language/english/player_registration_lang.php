@@ -27,5 +27,6 @@ $lang['player_registration_edit']                    = 'Edit';
 $lang['player_registration_delete']                  = 'Delete';
 
 
+$lang['player_registration_no_player_registrations'] = 'No Player Registrations exist';
 /* End of file player_registration.php */
 /* Location: ./application/language/english/player_registration.php */

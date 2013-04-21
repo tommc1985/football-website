@@ -1,6 +1,5 @@
 <?php
-echo $pagination;
-if (count($playerRegistrations) > 0) { ?>
+echo $pagination; ?>
     <table>
         <thead>
             <tr>
@@ -12,7 +11,8 @@ if (count($playerRegistrations) > 0) { ?>
         </thead>
         <tbody>
     <?php
-    foreach ($playerRegistrations as $playerRegistration) { ?>
+    if (count($playerRegistrations) > 0) {
+        foreach ($playerRegistrations as $playerRegistration) { ?>
             <tr>
                 <td><?php echo $playerRegistration->player_id; ?></td>
                 <td><?php echo $playerRegistration->season; ?></td>
@@ -20,9 +20,14 @@ if (count($playerRegistrations) > 0) { ?>
                 <td><a href="/admin/player-registration/delete/id/<?php echo $playerRegistration->id;?>"><?php echo $this->lang->line('player_registration_delete'); ?></a></td>
             </tr>
     <?php
+        }
+    } else { ?>
+            <tr>
+                <td colspan="4"><?php echo $this->lang->line('player_registration_no_player_registrations'); ?></td>
+            </tr>
+    <?php
     } ?>
         </tbody>
     </table>
 <?php
-}
 echo $pagination; ?>
