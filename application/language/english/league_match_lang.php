@@ -33,6 +33,6 @@ $lang['league_match_delete']                  = 'Delete';
 
 $lang['league_match_score']     = 'Score';
 
-
+$lang['league_match_no_league_matches']     = 'No League Matches exist';
 /* End of file league_match.php */
 /* Location: ./application/language/english/league_match.php */

@@ -1,6 +1,5 @@
 <?php
-echo $pagination;
-if (count($leagueMatches) > 0) { ?>
+echo $pagination; ?>
     <table>
         <thead>
             <tr>
@@ -14,7 +13,8 @@ if (count($leagueMatches) > 0) { ?>
         </thead>
         <tbody>
     <?php
-    foreach ($leagueMatches as $leagueMatch) { ?>
+    if (count($leagueMatches) > 0) {
+        foreach ($leagueMatches as $leagueMatch) { ?>
             <tr>
                 <td><?php echo $leagueMatch->date; ?></td>
                 <td><?php echo $leagueMatch->h_opposition_id; ?></td>
@@ -24,9 +24,14 @@ if (count($leagueMatches) > 0) { ?>
                 <td><a href="/admin/league-match/delete/id/<?php echo $leagueMatch->id;?>"><?php echo $this->lang->line('league_match_delete'); ?></a></td>
             </tr>
     <?php
+        }
+    } else { ?>
+            <tr>
+                <td colspan="6"><?php echo $this->lang->line('league_match_no_league_matches'); ?></td>
+            </tr>
+    <?php
     } ?>
         </tbody>
     </table>
 <?php
-}
 echo $pagination; ?>
