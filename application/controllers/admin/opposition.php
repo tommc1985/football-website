@@ -21,6 +21,7 @@ class Opposition extends Backend_Controller
         $this->load->config('opposition', true);
 
         $this->lang->load('opposition');
+        $this->load->helper('opposition');
     }
 
     /**
