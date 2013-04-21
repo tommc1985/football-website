@@ -40,6 +40,8 @@ $lang['match_confirm_delete_no']       = "No thanks";
 $lang['match_edit']                    = 'Edit';
 $lang['match_delete']                  = 'Delete';
 
+$lang['match_no_matches']              = 'No Matches exist';
+
 
 
 

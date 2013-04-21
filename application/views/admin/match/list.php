@@ -1,6 +1,5 @@
 <?php
-echo $pagination;
-if (count($matches) > 0) { ?>
+echo $pagination; ?>
     <table>
         <thead>
             <tr>
@@ -14,7 +13,8 @@ if (count($matches) > 0) { ?>
         </thead>
         <tbody>
     <?php
-    foreach ($matches as $match) { ?>
+    if (count($matches) > 0) {
+        foreach ($matches as $match) { ?>
             <tr>
                 <td><?php echo Utility_helper::shortDate($match->date); ?></td>
                 <td><?php echo Opposition_helper::name($match->opposition_id); ?> (<?php echo Match_helper::venue($match); ?>)</td>
@@ -24,9 +24,14 @@ if (count($matches) > 0) { ?>
                 <td><a href="/admin/match/delete/id/<?php echo $match->id;?>"><?php echo $this->lang->line('match_delete'); ?></a></td>
             </tr>
     <?php
+        }
+    } else { ?>
+            <tr>
+                <td colspan="6"><?php echo $this->lang->line('match_no_matches'); ?></td>
+            </tr>
+    <?php
     } ?>
         </tbody>
     </table>
 <?php
-}
 echo $pagination; ?>
