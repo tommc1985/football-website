@@ -10,6 +10,7 @@ $lang['official_save'] = 'Save Official Info';
 
 $lang['official_first_name'] = 'First Name';
 $lang['official_surname']    = 'Surname';
+$lang['official_name']       = 'Name';
 
 // Validation Errors
 

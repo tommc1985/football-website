@@ -3,8 +3,7 @@ echo $pagination; ?>
     <table>
         <thead>
             <tr>
-                <td><?php echo $this->lang->line('official_first_name'); ?></td>
-                <td><?php echo $this->lang->line('official_surname'); ?></td>
+                <td><?php echo $this->lang->line('official_name'); ?></td>
                 <td></td>
                 <td></td>
             </tr>
@@ -14,8 +13,7 @@ echo $pagination; ?>
     if (count($officials) > 0) {
         foreach ($officials as $official) { ?>
             <tr>
-                <td><?php echo $official->first_name; ?></td>
-                <td><?php echo $official->surname; ?></td>
+                <td><?php echo Official_helper::fullNameReverse($official); ?></td>
                 <td><a href="/admin/official/edit/id/<?php echo $official->id;?>"><?php echo $this->lang->line('official_edit'); ?></a></td>
                 <td><a href="/admin/official/delete/id/<?php echo $official->id;?>"><?php echo $this->lang->line('official_delete'); ?></a></td>
             </tr>
@@ -23,7 +21,7 @@ echo $pagination; ?>
         }
     } else { ?>
             <tr>
-                <td colspan="4"><?php echo $this->lang->line('official_no_officials'); ?></td>
+                <td colspan="3"><?php echo $this->lang->line('official_no_officials'); ?></td>
             </tr>
     <?php
     } ?>

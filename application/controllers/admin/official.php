@@ -22,6 +22,7 @@ class Official extends Backend_Controller
         $this->load->config('official', true);
 
         $this->lang->load('official');
+        $this->load->helper('official');
     }
 
     /**
