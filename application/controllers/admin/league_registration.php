@@ -17,12 +17,14 @@ class League_Registration extends Backend_Controller
 
         $this->load->database();
         $this->load->library('session');
+        $this->load->model('Cache_model');
         $this->load->model('League_model');
         $this->load->model('League_Registration_model');
         $this->load->model('Opposition_model');
         $this->load->config('league_registration', true);
 
         $this->lang->load('league_registration');
+        $this->load->helper(array('league', 'opposition', 'utility'));
     }
 
     /**
