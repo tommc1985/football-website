@@ -10,6 +10,7 @@ $lang['player_save'] = 'Save Player Info';
 
 $lang['player_first_name'] = 'First Name';
 $lang['player_surname']    = 'Surname';
+$lang['player_name']       = 'Name';
 $lang['player_dob']        = 'Date of Birth';
 $lang['player_gender']     = 'Gender';
 $lang['player_profile']    = 'Profile';

@@ -3,8 +3,8 @@ echo $pagination; ?>
     <table>
         <thead>
             <tr>
-                <td><?php echo $this->lang->line('player_first_name'); ?></td>
-                <td><?php echo $this->lang->line('player_surname'); ?></td>
+                <td><?php echo $this->lang->line('player_name'); ?></td>
+                <td><?php echo $this->lang->line('player_dob'); ?></td>
                 <td></td>
                 <td></td>
             </tr>
@@ -14,8 +14,8 @@ echo $pagination; ?>
     if (count($players) > 0) {
         foreach ($players as $player) { ?>
             <tr>
-                <td><?php echo $player->first_name; ?></td>
-                <td><?php echo $player->surname; ?></td>
+                <td><?php echo Player_helper::fullNameReverse($player); ?></td>
+                <td><?php echo Utility_helper::shortDate($player->dob); ?></td>
                 <td><a href="/admin/player/edit/id/<?php echo $player->id;?>"><?php echo $this->lang->line('player_edit'); ?></a></td>
                 <td><a href="/admin/player/delete/id/<?php echo $player->id;?>"><?php echo $this->lang->line('player_delete'); ?></a></td>
             </tr>

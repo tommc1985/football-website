@@ -22,6 +22,7 @@ class Player extends Backend_Controller
         $this->load->config('player', true);
 
         $this->lang->load('player');
+        $this->load->helper(array('player', 'utility'));
     }
 
     /**
