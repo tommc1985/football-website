@@ -14,8 +14,8 @@ if (count($competitionStages) > 0) { ?>
     <?php
     foreach ($competitionStages as $competitionStage) { ?>
             <tr>
-                <td><?php echo $competitionStage->name; ?></td>
-                <td><?php echo $competitionStage->abbreviation; ?></td>
+                <td><?php echo Competition_Stage_helper::name($competitionStage); ?></td>
+                <td><?php echo Competition_Stage_helper::abbreviation($competitionStage); ?></td>
                 <td><a href="/admin/competition-stage/edit/id/<?php echo $competitionStage->id;?>">Edit</a></td>
                 <td><a href="/admin/competition-stage/delete/id/<?php echo $competitionStage->id;?>">Delete</a></td>
             </tr>

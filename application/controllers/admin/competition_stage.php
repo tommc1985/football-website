@@ -21,6 +21,7 @@ class Competition_Stage extends Backend_Controller
         $this->load->config('competition_stage', true);
 
         $this->lang->load('competition_stage');
+        $this->load->helper('competition_stage');
     }
 
     /**
