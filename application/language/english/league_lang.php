@@ -32,5 +32,6 @@ $lang['league_confirm_delete_no']       = "No thanks";
 $lang['league_edit']                    = 'Edit';
 $lang['league_delete']                  = 'Delete';
 
+$lang['league_no_leagues']         = 'No Leagues  exist';
 /* End of file league.php */
 /* Location: ./application/language/english/league.php */
