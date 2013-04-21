@@ -31,5 +31,6 @@ $lang['competition_confirm_delete_no']       = "No thanks";
 $lang['competition_edit']                    = 'Edit';
 $lang['competition_delete']                  = 'Delete';
 
+$lang['competition_no_competitions']         = 'No Competitions exist';
 /* End of file competition.php */
 /* Location: ./application/language/english/competition.php */
