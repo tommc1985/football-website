@@ -25,5 +25,6 @@ $lang['opposition_confirm_delete_no']       = "No thanks";
 $lang['opposition_edit']                    = 'Edit';
 $lang['opposition_delete']                  = 'Delete';
 
+$lang['opposition_no_oppositions']           = 'No Officials exist';
 /* End of file opposition.php */
 /* Location: ./application/language/english/opposition.php */
