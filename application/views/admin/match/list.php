@@ -16,10 +16,10 @@ if (count($matches) > 0) { ?>
     <?php
     foreach ($matches as $match) { ?>
             <tr>
-                <td><?php echo $match->date; ?></td>
-                <td><?php echo $match->opposition_id; ?></td>
-                <td><?php echo $match->competition_id; ?></td>
-                <td><?php echo $match->h; ?> <?php echo $match->a; ?></td>
+                <td><?php echo Utility_helper::shortDate($match->date); ?></td>
+                <td><?php echo Opposition_helper::name($match->opposition_id); ?> (<?php echo Match_helper::venue($match); ?>)</td>
+                <td><?php echo Competition_helper::shortName($match->competition_id); ?></td>
+                <td><?php echo Match_helper::score($match); ?></td>
                 <td><a href="/admin/match/edit/id/<?php echo $match->id;?>"><?php echo $this->lang->line('match_edit'); ?></a></td>
                 <td><a href="/admin/match/delete/id/<?php echo $match->id;?>"><?php echo $this->lang->line('match_delete'); ?></a></td>
             </tr>

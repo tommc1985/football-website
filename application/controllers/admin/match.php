@@ -26,6 +26,7 @@ class Match extends Backend_Controller
         $this->load->config('match', true);
 
         $this->lang->load('match');
+        $this->load->helper(array('competition', 'opposition', 'match', 'utility'));
     }
 
     /**
