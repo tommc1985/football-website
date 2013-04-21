@@ -24,6 +24,7 @@ class League extends Backend_Controller
         $this->load->config('league', true);
 
         $this->lang->load('league');
+        $this->load->helper(array('league', 'utility'));
     }
 
     /**

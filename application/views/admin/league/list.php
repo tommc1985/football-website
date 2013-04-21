@@ -4,6 +4,7 @@ echo $pagination; ?>
         <thead>
             <tr>
                 <td><?php echo $this->lang->line('league_name'); ?></td>
+                <td><?php echo $this->lang->line('league_season'); ?></td>
                 <td></td>
                 <td></td>
             </tr>
@@ -13,7 +14,8 @@ echo $pagination; ?>
     if (count($leagues) > 0) {
         foreach ($leagues as $league) { ?>
             <tr>
-                <td><?php echo $league->short_name; ?></td>
+                <td><?php echo League_helper::shortName($league); ?></td>
+                <td><?php echo Utility_helper::formattedSeason($league->season); ?></td>
                 <td><a href="/admin/league/edit/id/<?php echo $league->id;?>"><?php echo $this->lang->line('league_edit'); ?></a></td>
                 <td><a href="/admin/league/delete/id/<?php echo $league->id;?>"><?php echo $this->lang->line('league_delete'); ?></a></td>
             </tr>
@@ -21,7 +23,7 @@ echo $pagination; ?>
         }
     } else { ?>
             <tr>
-                <td colspan="3"><?php echo $this->lang->line('league_no_leagues'); ?></td>
+                <td colspan="4"><?php echo $this->lang->line('league_no_leagues'); ?></td>
             </tr>
     <?php
     } ?>
