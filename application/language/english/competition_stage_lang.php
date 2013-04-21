@@ -25,5 +25,6 @@ $lang['competition_stage_confirm_delete_no']       = "No thanks";
 $lang['competition_stage_edit']                    = 'Edit';
 $lang['competition_stage_delete']                  = 'Delete';
 
+$lang['competition_stage_no_competition_stages']   = 'No Competition Stages exist';
 /* End of file competition_stage.php */
 /* Location: ./application/language/english/competition_stage.php */

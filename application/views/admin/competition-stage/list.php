@@ -1,6 +1,5 @@
 <?php
-echo $pagination;
-if (count($competitionStages) > 0) { ?>
+echo $pagination; ?>
     <table>
         <thead>
             <tr>
@@ -12,7 +11,8 @@ if (count($competitionStages) > 0) { ?>
         </thead>
         <tbody>
     <?php
-    foreach ($competitionStages as $competitionStage) { ?>
+    if (count($competitionStages) > 0) {
+        foreach ($competitionStages as $competitionStage) { ?>
             <tr>
                 <td><?php echo Competition_Stage_helper::name($competitionStage); ?></td>
                 <td><?php echo Competition_Stage_helper::abbreviation($competitionStage); ?></td>
@@ -20,9 +20,14 @@ if (count($competitionStages) > 0) { ?>
                 <td><a href="/admin/competition-stage/delete/id/<?php echo $competitionStage->id;?>">Delete</a></td>
             </tr>
     <?php
+        }
+    } else { ?>
+            <tr>
+                <td colspan="4"><?php echo $this->lang->line('competition_stage_no_competition_stages'); ?></td>
+            </tr>
+    <?php
     } ?>
         </tbody>
     </table>
 <?php
-}
 echo $pagination; ?>
