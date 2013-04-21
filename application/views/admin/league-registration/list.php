@@ -1,6 +1,5 @@
 <?php
-echo $pagination;
-if (count($leagueRegistrations) > 0) { ?>
+echo $pagination; ?>
     <table>
         <thead>
             <tr>
@@ -12,7 +11,8 @@ if (count($leagueRegistrations) > 0) { ?>
         </thead>
         <tbody>
     <?php
-    foreach ($leagueRegistrations as $leagueRegistration) { ?>
+    if (count($leagueRegistrations) > 0) {
+        foreach ($leagueRegistrations as $leagueRegistration) { ?>
             <tr>
                 <td><?php echo $leagueRegistration->league_id; ?></td>
                 <td><?php echo $leagueRegistration->opposition_id; ?></td>
@@ -20,9 +20,14 @@ if (count($leagueRegistrations) > 0) { ?>
                 <td><a href="/admin/league-registration/delete/id/<?php echo $leagueRegistration->id;?>"><?php echo $this->lang->line('league_registration_delete'); ?></a></td>
             </tr>
     <?php
+        }
+    } else { ?>
+            <tr>
+                <td colspan="4"><?php echo $this->lang->line('league_registration_no_league_registrations'); ?></td>
+            </tr>
+    <?php
     } ?>
         </tbody>
     </table>
 <?php
-}
 echo $pagination; ?>
