@@ -1,6 +1,5 @@
 <?php
-echo $pagination;
-if (count($officials) > 0) { ?>
+echo $pagination; ?>
     <table>
         <thead>
             <tr>
@@ -12,7 +11,8 @@ if (count($officials) > 0) { ?>
         </thead>
         <tbody>
     <?php
-    foreach ($officials as $official) { ?>
+    if (count($officials) > 0) {
+        foreach ($officials as $official) { ?>
             <tr>
                 <td><?php echo $official->first_name; ?></td>
                 <td><?php echo $official->surname; ?></td>
@@ -20,9 +20,14 @@ if (count($officials) > 0) { ?>
                 <td><a href="/admin/official/delete/id/<?php echo $official->id;?>"><?php echo $this->lang->line('official_delete'); ?></a></td>
             </tr>
     <?php
+        }
+    } else { ?>
+            <tr>
+                <td colspan="4"><?php echo $this->lang->line('official_no_officials'); ?></td>
+            </tr>
+    <?php
     } ?>
         </tbody>
     </table>
 <?php
-}
 echo $pagination; ?>

@@ -26,5 +26,6 @@ $lang['official_confirm_delete_no']       = "No thanks";
 $lang['official_edit']                    = 'Edit';
 $lang['official_delete']                  = 'Delete';
 
+$lang['official_no_officials']            = 'No Officials exist';
 /* End of file official.php */
 /* Location: ./application/language/english/official.php */
