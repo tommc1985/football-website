@@ -619,6 +619,7 @@ FROM view_match_affected_results m
 LEFT JOIN player p ON p.id = m.player_id
 WHERE m.competitive = 1" . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
+    AND m.status != 'unused'
     AND p.deleted = 0
 GROUP BY m.player_id
 ORDER BY points_gained DESC";
@@ -658,6 +659,7 @@ FROM view_match_affected_results m
 LEFT JOIN player p ON p.id = m.player_id
 WHERE m.competitive = 1" . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
+    AND m.status != 'unused'
     AND p.deleted = 0
 GROUP BY m.player_id
 ORDER BY points_gained DESC";
@@ -678,7 +680,7 @@ ORDER BY points_gained DESC";
      */
     public function realPoints($type = false, $season = NULL)
     {
-        $statisticGroup = 'average_points_gained';
+        $statisticGroup = 'real_points';
 
         $this->deleteRows($statisticGroup, false, $type, $season);
 
@@ -697,6 +699,7 @@ FROM view_match_affected_results m
 LEFT JOIN player p ON p.id = m.player_id
 WHERE m.competitive = 1" . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
+    AND m.status != 'unused'
     AND p.deleted = 0
 GROUP BY m.player_id
 ORDER BY points DESC";
@@ -737,6 +740,7 @@ FROM view_match_affected_results m
 LEFT JOIN player p ON p.id = m.player_id
 WHERE m.competitive = 1" . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
+    AND m.status != 'unused'
     AND p.deleted = 0
 GROUP BY m.player_id
 ORDER BY points DESC";
@@ -776,6 +780,7 @@ FROM view_match_affected_results m
 LEFT JOIN player p ON p.id = m.player_id
 WHERE m.competitive = 1" . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
+    AND m.status != 'unused'
     AND p.deleted = 0
 GROUP BY m.player_id
 ORDER BY goals_gained DESC";
@@ -815,6 +820,7 @@ FROM view_match_affected_results m
 LEFT JOIN player p ON p.id = m.player_id
 WHERE m.competitive = 1" . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
+    AND m.status != 'unused'
     AND p.deleted = 0
 GROUP BY m.player_id
 ORDER BY goals_gained DESC";
@@ -854,6 +860,7 @@ FROM view_match_affected_results m
 LEFT JOIN player p ON p.id = m.player_id
 WHERE m.competitive = 1" . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
+    AND m.status != 'unused'
     AND p.deleted = 0
 GROUP BY m.player_id
 ORDER BY goals DESC";
@@ -893,6 +900,7 @@ FROM view_match_affected_results m
 LEFT JOIN player p ON p.id = m.player_id
 WHERE m.competitive = 1" . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
+    AND m.status != 'unused'
     AND p.deleted = 0
 GROUP BY m.player_id
 ORDER BY goals DESC";
@@ -932,6 +940,7 @@ FROM view_appearances_matches m
 LEFT JOIN player p ON p.id = m.player_id
 WHERE m.competitive = 1" . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
+    AND m.status != 'unused'
     AND p.deleted = 0
 GROUP BY m.player_id
 ORDER BY goals DESC";
@@ -971,6 +980,7 @@ FROM view_appearances_matches m
 LEFT JOIN player p ON p.id = m.player_id
 WHERE m.competitive = 1" . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
+    AND m.status != 'unused'
     AND p.deleted = 0
 GROUP BY m.player_id
 ORDER BY clean_sheets DESC";
@@ -1010,6 +1020,7 @@ FROM view_appearances_matches m
 LEFT JOIN player p ON p.id = m.player_id
 WHERE m.competitive = 1" . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
+    AND m.status != 'unused'
     AND p.deleted = 0
 GROUP BY m.player_id
 ORDER BY clean_sheets DESC";
@@ -1050,6 +1061,7 @@ ORDER BY clean_sheets DESC";
 FROM view_match_goals m
 WHERE m.competitive = 1" . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
+    AND m.status != 'unused'
 ORDER BY m.date ASC";
 
         $query = $this->db->query($sql);
@@ -1088,6 +1100,7 @@ ORDER BY m.date ASC";
 FROM view_match_assists m
 WHERE m.competitive = 1" . (count($whereConditions) > 0 ? "
     AND " . implode(" \r\nAND ", $whereConditions) : '') . "
+    AND m.status != 'unused'
 ORDER BY m.date ASC";
 
         $query = $this->db->query($sql);
