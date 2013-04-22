@@ -70,7 +70,7 @@ class Appearance_model extends Base_Model {
                 $this->ci->form_validation->set_rules("id[{$appearanceType}][{$i}]", "Appearance Id", "trim|integer|xss_clean");
                 $this->ci->form_validation->set_rules("player_id[{$appearanceType}][{$i}]", "Player Id", "trim|integer|callback_is_unique_player_id|xss_clean");
 
-                if (Configuration::get('include_appearances_ratings') === true) {
+                if (Configuration::get('include_appearance_ratings') === true) {
                     $this->ci->form_validation->set_rules("rating[{$appearanceType}][{$i}]", "Rating", "trim|integer|less_than[" . (Configuration::get('max_appearance_rating') + 1) . "]|greater_than[0]|callback_is_rating_set[{$appearanceType}_{$i}]|xss_clean");
                 }
 

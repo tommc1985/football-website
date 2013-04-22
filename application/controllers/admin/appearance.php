@@ -87,7 +87,7 @@ class Appearance extends Backend_Controller
                     $playerId = $this->form_validation->set_value("player_id[{$appearanceType}][{$i}]", '');
                     $captain  = $selectedCaptain == ($j - 1) ? 1 : 0;
 
-                    if (Configuration::get('include_appearances_ratings') === true) {
+                    if (Configuration::get('include_appearance_ratings') === true) {
                         $rating = $this->form_validation->set_value("rating[{$appearanceType}][{$i}]", '');
                     } else {
                         $rating = 0;
@@ -263,7 +263,7 @@ class Appearance extends Backend_Controller
 
         list($appearanceType, $index) = explode("_", $indexes);
 
-        if (Configuration::get('include_appearances_ratings') === true) {
+        if (Configuration::get('include_appearance_ratings') === true) {
             if ($value == '' &&  $playerIdValues[$appearanceType][$index] != '' && ($appearanceType == 'starts' || ($appearanceType == 'subs' && isset($onValues[$appearanceType][$index]) && $onValues[$appearanceType][$index] != ''))) {
                 $this->form_validation->set_message('is_rating_set', $this->lang->line('appearance_player_rating_missing'));
                 return FALSE;

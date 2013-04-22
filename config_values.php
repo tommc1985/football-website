@@ -34,7 +34,7 @@ $configValues['max_shirt_number']                  = '100';
 $configValues['max_minute']                        = '120';
 
 
-$configValues['include_appearances_ratings']       = false;
+$configValues['include_appearance_ratings']        = false;
 $configValues['include_appearance_shirt_numbers']  = false;
 
 class Configuration {

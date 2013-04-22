@@ -30,7 +30,7 @@ foreach ($playerCounts as $appearanceType => $playerCount) {
             'value'   => $i,
         );
 
-        if (Configuration::get('include_appearances_ratings') === true) {
+        if (Configuration::get('include_appearance_ratings') === true) {
             $rating[$appearanceType][$i] = array(
                 'name'    => "rating[{$appearanceType}][{$i}]",
                 'id'      => "rating_{$appearanceType}_{$i}",
@@ -110,7 +110,7 @@ echo form_open($this->uri->uri_string()); ?>
         <td><?php echo form_label($this->lang->line('appearance_player'), ''); ?></td>
         <td><?php echo form_label($this->lang->line('appearance_captain'), ''); ?></td>
         <?php
-        if (Configuration::get('include_appearances_ratings') === true) { ?>
+        if (Configuration::get('include_appearance_ratings') === true) { ?>
         <td><?php echo form_label($this->lang->line('appearance_rating'), ''); ?></td>
         <?php
         } ?>
@@ -133,7 +133,7 @@ echo form_open($this->uri->uri_string()); ?>
         <td><?php echo form_hidden($id[$appearanceType][$i]['name'], $id[$appearanceType][$i]['value']); ?><?php echo form_dropdown($player_id[$appearanceType][$i]['name'], $player_id[$appearanceType][$i]['options'], $player_id[$appearanceType][$i]['value']); ?></td>
         <td><?php echo $appearanceType == 'starts' ? form_radio($captain[$appearanceType][$i]) : ''; ?></td>
         <?php
-        if (Configuration::get('include_appearances_ratings') === true) { ?>
+        if (Configuration::get('include_appearance_ratings') === true) { ?>
         <td><?php echo form_dropdown($rating[$appearanceType][$i]['name'], $rating[$appearanceType][$i]['options'], $rating[$appearanceType][$i]['value']); ?></td>
         <?php
         } ?>
@@ -152,7 +152,7 @@ echo form_open($this->uri->uri_string()); ?>
             echo form_error($id[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
             echo form_error($player_id[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
 
-            if (Configuration::get('include_appearances_ratings') === true) {
+            if (Configuration::get('include_appearance_ratings') === true) {
                 echo form_error($rating[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
             }
 
