@@ -61,5 +61,5 @@ class Club_Statistics extends Frontend_Controller {
     }
 }
 
-/* End of file club-statistics.php */
-/* Location: ./application/controllers/club-statistics.php */
+/* End of file club_statistics.php */
+/* Location: ./application/controllers/club_statistics.php */
