@@ -64,7 +64,7 @@ class Player extends Frontend_Controller {
         $player = $this->Player_model->fetchPlayerDetails($parameters['id']);
 
         if ($player === false) {
-            show_error('Player cannot be found', 404);
+            show_error($this->lang->line('player_not_found'), 404);
         }
 
         $data = array(
