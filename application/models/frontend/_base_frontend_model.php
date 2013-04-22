@@ -50,8 +50,39 @@ class Base_Frontend_Model extends CI_Model {
     }
 
     /**
+     * Fetch all rows for specified table
+     * @param  array|false $where    Where Conditions
+     * @param  int|false $limit      Number of rows to return
+     * @param  int|false $offset     The offset
+     * @param  string|false $orderBy Which fields to order results by
+     * @param  string|false $order   Order the results Ascending or Descending
+     * @return array                 Returned rows
+     */
+    public function fetchAll($where = false, $limit = false, $offset = false, $orderBy = false, $order = false)
+    {
+        $orderBy = $this->getOrderBy($orderBy);
+        $order   = self::getOrder($order);
+
+        $this->db->select('*');
+        $this->db->from($this->tableName);
+        $this->db->where('deleted', 0);
+
+        if ($limit !== false) {
+            if ($offset !== false) {
+                $this->db->limit($limit, $offset);
+            } else {
+                $this->db->limit($limit);
+            }
+        }
+
+        $this->db->order_by($orderBy, $order);
+
+        return $this->db->get()->result();
+    }
+
+    /**
      * Return string of fields to order data by
-     * @param  string $orderBy Fields passwed
+     * @param  string $orderBy Fields passed
      * @return string          Processed string of fields
      */
     public function getOrderBy($orderBy)
