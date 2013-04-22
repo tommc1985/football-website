@@ -199,4 +199,31 @@ class Utility_helper
 
         return false;
     }
+
+    /**
+     * Return partial string of supplied content
+     * @param  string $string  Original Content
+     * @param  int $limit      Number of Characters
+     * @param  string $break   Character to use to separater
+     * @param  string $pad     Characters to pad
+     * @return string          Partial String
+     */
+    public static function partialContent($string, $limit, $break = ".", $pad = "...")
+    {
+        $string = strip_tags($string);
+        // return with no change if string is shorter than $limit
+        if(strlen($string) <= $limit)
+        {
+            return $string;
+        }
+
+        // is $break present between $limit and the end of the string?
+        if(false !== ($breakpoint = strpos($string, $break, $limit))) {
+            if($breakpoint < strlen($string) - 1) {
+                $string = substr($string, 0, $breakpoint) . $pad;
+            }
+        }
+
+        return $string;
+    }
 }
