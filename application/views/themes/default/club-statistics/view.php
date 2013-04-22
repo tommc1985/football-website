@@ -1,4 +1,4 @@
-<h2><?php echo $this->lang->line('clubs_statistics_title'); ?> - <?php echo Utility_helper::formattedSeason($season); ?><?php echo ($type != 'overall' ? ' (' . Competition_helper::type($type) . ' ' . $this->lang->line("clubs_statistics_matches") . ')' : ''); ?></h2>
+<h2><?php echo $this->lang->line('club_statistics_title'); ?> - <?php echo Utility_helper::formattedSeason($season); ?><?php echo ($type != 'overall' ? ' (' . Competition_helper::type($type) . ' ' . $this->lang->line("club_statistics_matches") . ')' : ''); ?></h2>
 
 <?php
 foreach($this->Cache_Club_Statistics_model->methodMap as $statisticGroup => $method) {
