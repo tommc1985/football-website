@@ -61,11 +61,15 @@ class Base_Frontend_Model extends CI_Model {
     public function fetchAll($where = false, $limit = false, $offset = false, $orderBy = false, $order = false)
     {
         $orderBy = $this->getOrderBy($orderBy);
-        $order   = self::getOrder($order);
+        $order   = $this->getOrder($order);
 
         $this->db->select('*');
         $this->db->from($this->tableName);
         $this->db->where('deleted', 0);
+
+        if (is_array($where)) {
+            $this->db->where($where);
+        }
 
         if ($limit !== false) {
             if ($offset !== false) {
