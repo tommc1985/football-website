@@ -41,14 +41,14 @@ if ($match->h > 0) { ?>
 if (count($match->appearances) > 0) {
     foreach ($match->appearances  as $appearance) {
         if ($appearance->status == 'starter') { ?>
-            <p><?php echo $appearance->shirt; ?> <?php echo Player_helper::fullName($appearance->player_id); ?> <?php echo Position_helper::abbreviation($appearance->position); ?> <?php echo !is_null($appearance->off) ? '\'' . $appearance->off : ''; ?></p>
+            <p><?php echo Configuration::get('include_appearance_shirt_numbers') === true ? $appearance->shirt : ''; ?> <?php echo Player_helper::fullName($appearance->player_id); ?> <?php echo Position_helper::abbreviation($appearance->position); ?> <?php echo !is_null($appearance->off) ? '\'' . $appearance->off : ''; ?></p>
     <?php
         }
     }
 
     foreach ($match->appearances  as $appearance) {
         if ($appearance->status != 'starter') { ?>
-            <p><?php echo $appearance->shirt; ?> <?php echo Player_helper::fullName($appearance->player_id); ?> <?php echo $appearance->status != 'unused' ? Position_helper::abbreviation($appearance->position) : ''; ?> <?php echo !is_null($appearance->on) ? '\'' . $appearance->on : ''; ?> <?php echo !is_null($appearance->off) ? '\'' . $appearance->off : ''; ?></p>
+            <p><?php echo Configuration::get('include_appearance_shirt_numbers') === true ? $appearance->shirt : ''; ?> <?php echo Player_helper::fullName($appearance->player_id); ?> <?php echo $appearance->status != 'unused' ? Position_helper::abbreviation($appearance->position) : ''; ?> <?php echo !is_null($appearance->on) ? '\'' . $appearance->on : ''; ?> <?php echo !is_null($appearance->off) ? '\'' . $appearance->off : ''; ?></p>
     <?php
         }
     }
