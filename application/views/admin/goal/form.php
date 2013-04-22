@@ -57,12 +57,14 @@ while($i < $match->h) {
         'value' => set_value("distance[{$i}]", isset($goals[$i]->distance) ? $goals[$i]->distance : ''),
     );
 
-    $rating[$i] = array(
-        'name'  => "rating[{$i}]",
-        'id'    => "rating_{$i}",
-        'options' => array('' => '--- Select ---') + Goal_model::fetchRatings(),
-        'value' => set_value("rating[{$i}]", isset($goals[$i]->rating) ? $goals[$i]->rating : ''),
-    );
+    if (Configuration::get('include_goal_ratings') === true) {
+        $rating[$i] = array(
+            'name'  => "rating[{$i}]",
+            'id'    => "rating_{$i}",
+            'options' => array('' => '--- Select ---') + Goal_model::fetchRatings(),
+            'value' => set_value("rating[{$i}]", isset($goals[$i]->rating) ? $goals[$i]->rating : ''),
+        );
+    }
 
     $description[$i] = array(
         'name'  => "description[{$i}]",
@@ -84,7 +86,11 @@ echo form_open($this->uri->uri_string()); ?>
         <td><?php echo form_label($this->lang->line('goal_type'), ''); ?></td>
         <td><?php echo form_label($this->lang->line('goal_body_part'), ''); ?></td>
         <td><?php echo form_label($this->lang->line('goal_distance'), ''); ?></td>
+        <?php
+        if (Configuration::get('include_goal_ratings') === true) { ?>
         <td><?php echo form_label($this->lang->line('goal_rating'), ''); ?></td>
+        <?php
+        } ?>
         <td><?php echo form_label($this->lang->line('goal_description'), ''); ?></td>
     </tr>
     <?php
@@ -97,7 +103,11 @@ echo form_open($this->uri->uri_string()); ?>
         <td><?php echo form_dropdown($type[$i]['name'], $type[$i]['options'], $type[$i]['value']); ?></td>
         <td><?php echo form_dropdown($bodyPart[$i]['name'], $bodyPart[$i]['options'], $bodyPart[$i]['value']); ?></td>
         <td><?php echo form_dropdown($distance[$i]['name'], $distance[$i]['options'], $distance[$i]['value']); ?></td>
+        <?php
+        if (Configuration::get('include_goal_ratings') === true) { ?>
         <td><?php echo form_dropdown($rating[$i]['name'], $rating[$i]['options'], $rating[$i]['value']); ?></td>
+        <?php
+        } ?>
         <td><?php echo form_textarea($description[$i]); ?></td>
     </tr>
     <?php
@@ -108,7 +118,11 @@ echo form_open($this->uri->uri_string()); ?>
         echo form_error($type[$i]['name'], '<tr class="error"><td colspan="8">', '</td></tr>');
         echo form_error($bodyPart[$i]['name'], '<tr class="error"><td colspan="8">', '</td></tr>');
         echo form_error($distance[$i]['name'], '<tr class="error"><td colspan="8">', '</td></tr>');
-        echo form_error($rating[$i]['name'], '<tr class="error"><td colspan="8">', '</td></tr>');
+
+        if (Configuration::get('include_goal_ratings') === true) {
+            echo form_error($rating[$i]['name'], '<tr class="error"><td colspan="8">', '</td></tr>');
+        }
+
         echo form_error($description[$i]['name'], '<tr class="error"><td colspan="8">', '</td></tr>');
 
         $i++;

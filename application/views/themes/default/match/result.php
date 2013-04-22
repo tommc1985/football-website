@@ -22,7 +22,11 @@ if ($match->h > 0) { ?>
                 <?php echo $this->lang->line('match_type'); ?> <?php echo Goal_helper::type($goal); ?><br />
                 <?php echo $this->lang->line('match_body_part'); ?> <?php echo Goal_helper::bodyPart($goal); ?><br />
                 <?php echo $this->lang->line('match_distance'); ?> <?php echo Goal_helper::distance($goal); ?><br />
-                <?php echo $this->lang->line('match_rating'); ?> <?php echo Goal_helper::rating($goal); ?><br />
+                <?php
+                if (Configuration::get('include_goal_ratings') === true) { ?>
+                    <?php echo $this->lang->line('match_rating'); ?> <?php echo Goal_helper::rating($goal); ?><br />
+                <?php
+                } ?>
                 <?php echo $this->lang->line('match_description'); ?> <?php echo $goal->description; ?><br /></p>
         <?php }
 

@@ -36,6 +36,7 @@ $configValues['max_minute']                        = '120';
 
 $configValues['include_appearance_ratings']        = false;
 $configValues['include_appearance_shirt_numbers']  = false;
+$configValues['include_goal_ratings']              = false;
 
 class Configuration {
     public function _construct() {}

@@ -83,7 +83,14 @@ class Goal extends Backend_Controller
                 $type        = $this->form_validation->set_value("type[{$i}]", '');
                 $bodyPart    = $this->form_validation->set_value("body_part[{$i}]", '');
                 $distance    = $this->form_validation->set_value("distance[{$i}]", '');
-                $rating      = $this->form_validation->set_value("rating[{$i}]", '');
+
+                if (Configuration::get('include_goal_ratings') === true) {
+                    $rating = $this->form_validation->set_value("rating[{$i}]", '');
+                }
+                else {
+                    $rating = 0;
+                }
+
                 $description = $this->form_validation->set_value("description[{$i}]", '');
 
                 if (empty($id)) { // Insert
@@ -220,8 +227,10 @@ class Goal extends Backend_Controller
                     return FALSE;
                     break;
                 case $ratingValues[$index] == '':
-                    $this->form_validation->set_message('is_required', $this->lang->line('goal_rating_required'));
-                    return FALSE;
+                    if (Configuration::get('include_goal_ratings') === true) {
+                        $this->form_validation->set_message('is_required', $this->lang->line('goal_rating_required'));
+                        return FALSE;
+                    }
                     break;
             }
         }
