@@ -32,7 +32,7 @@
 <h3><?php echo $this->lang->line('player_season_statistics'); ?></h3>
 
 <div id="career-stats">
-    <table id="career-data" cellpadding="2" cellspacing="2">
+    <table id="career-data">
             <thead>
                 <tr>
                     <td class="expand">&nbsp;</td>
@@ -43,7 +43,11 @@
                     <td class="motms"><?php echo $this->lang->line('player_motms'); ?></td>
                     <td class="yellows"><?php echo $this->lang->line('player_yellows'); ?></td>
                     <td class="reds"><?php echo $this->lang->line('player_reds'); ?></td>
+                    <?php
+                    if (Configuration::get('include_appearances_ratings') === true) { ?>
                     <td class="ratings"><?php echo $this->lang->line('player_average_rating'); ?></td>
+                    <?php
+                    } ?>
                 </tr>
             </thead>
             <tbody>
@@ -60,7 +64,11 @@
                     <td class="motms"><?php echo $seasonStatistics['overall']->motms; ?></td>
                     <td class="yellows"><?php echo $seasonStatistics['overall']->yellows; ?></td>
                     <td class="reds"><?php echo $seasonStatistics['overall']->reds; ?></td>
+                    <?php
+                    if (Configuration::get('include_appearances_ratings') === true) { ?>
                     <td class="ratings"><?php echo Player_helper::rating($seasonStatistics['overall']->average_rating); ?></td>
+                    <?php
+                    } ?>
                 </tr>
                     <?php
                     }
@@ -77,7 +85,11 @@
                     <td class="motms"><?php echo $statistics->motms; ?></td>
                     <td class="yellows"><?php echo $statistics->yellows; ?></td>
                     <td class="reds"><?php echo $statistics->reds; ?></td>
+                    <?php
+                    if (Configuration::get('include_appearances_ratings') === true) { ?>
                     <td class="ratings"><?php echo Player_helper::rating($statistics->average_rating); ?></td>
+                    <?php
+                    } ?>
                 </tr>
             <?php
                             }
@@ -95,7 +107,11 @@
                     <td class="motms"><?php echo $player->accumulatedStatistics['career']['overall']->motms; ?></td>
                     <td class="yellows"><?php echo $player->accumulatedStatistics['career']['overall']->yellows; ?></td>
                     <td class="reds"><?php echo $player->accumulatedStatistics['career']['overall']->reds; ?></td>
+                    <?php
+                    if (Configuration::get('include_appearances_ratings') === true) { ?>
                     <td class="ratings"><?php echo Player_helper::rating($player->accumulatedStatistics['career']['overall']->average_rating); ?></td>
+                    <?php
+                    } ?>
                 </tr>
                     <?php
                     foreach ($player->accumulatedStatistics['career'] as $competitionType => $statistics) {
@@ -109,7 +125,11 @@
                     <td class="motms"><?php echo $statistics->motms; ?></td>
                     <td class="yellows"><?php echo $statistics->yellows; ?></td>
                     <td class="reds"><?php echo $statistics->reds; ?></td>
+                    <?php
+                    if (Configuration::get('include_appearances_ratings') === true) { ?>
                     <td class="ratings"><?php echo Player_helper::rating($statistics->average_rating); ?></td>
+                    <?php
+                    } ?>
                 </tr>
             <?php
                             }
@@ -117,7 +137,7 @@
                 }
             } else { ?>
                 <tr class="">
-                    <td colspan="9"><?php echo sprintf($this->lang->line('player_no_career_data_found'), Player_helper::fullName($player)); ?></td>
+                    <td colspan="<?php echo Configuration::get('include_appearances_ratings') === true ? 9 : 8; ?>"><?php echo sprintf($this->lang->line('player_no_career_data_found'), Player_helper::fullName($player)); ?></td>
                 </tr>
             <?php
             } ?>

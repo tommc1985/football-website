@@ -86,7 +86,11 @@ class Appearance extends Backend_Controller
                     $id       = $this->form_validation->set_value("id[{$appearanceType}][{$i}]", '');
                     $playerId = $this->form_validation->set_value("player_id[{$appearanceType}][{$i}]", '');
                     $captain  = $selectedCaptain == ($j - 1) ? 1 : 0;
-                    $rating   = $this->form_validation->set_value("rating[{$appearanceType}][{$i}]", '');
+                    if (Configuration::get('include_appearances_ratings') === true) {
+                        $rating = $this->form_validation->set_value("rating[{$appearanceType}][{$i}]", '');
+                    } else {
+                        $rating = 0;
+                    }
                     $motm     = $selectedMotm == "{$appearanceType}_{$i}" ? 1 : 0;
                     $injury   = isset($injuries[$appearanceType]) && in_array($i, $injuries[$appearanceType]) ? 1 : 0;
                     $position = $this->form_validation->set_value("position[{$appearanceType}][{$i}]", '');
@@ -251,9 +255,11 @@ class Appearance extends Backend_Controller
 
         list($appearanceType, $index) = explode("_", $indexes);
 
-        if ($value == '' &&  $playerIdValues[$appearanceType][$index] != '' && ($appearanceType == 'starts' || ($appearanceType == 'subs' && isset($onValues[$appearanceType][$index]) && $onValues[$appearanceType][$index] != ''))) {
-            $this->form_validation->set_message('is_rating_set', $this->lang->line('appearance_player_rating_missing'));
-            return FALSE;
+        if (Configuration::get('include_appearances_ratings') === true) {
+            if ($value == '' &&  $playerIdValues[$appearanceType][$index] != '' && ($appearanceType == 'starts' || ($appearanceType == 'subs' && isset($onValues[$appearanceType][$index]) && $onValues[$appearanceType][$index] != ''))) {
+                $this->form_validation->set_message('is_rating_set', $this->lang->line('appearance_player_rating_missing'));
+                return FALSE;
+            }
         }
 
         return TRUE;

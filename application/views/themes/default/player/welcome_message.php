@@ -11,7 +11,11 @@
             <td><?php echo $this->lang->line('player_motms'); ?></td>
             <td><?php echo $this->lang->line('player_yellows'); ?></td>
             <td><?php echo $this->lang->line('player_reds'); ?></td>
+            <?php
+            if (Configuration::get('include_appearances_ratings') === true) { ?>
             <td><?php echo $this->lang->line('player_rating'); ?></td>
+            <?php
+            } ?>
         </tr>
     </thead>
 <?php
@@ -28,13 +32,17 @@ if ($players) { ?>
             <td><?php echo $player->motms; ?></td>
             <td><?php echo $player->yellows; ?></td>
             <td><?php echo $player->reds; ?></td>
+            <?php
+            if (Configuration::get('include_appearances_ratings') === true) { ?>
             <td><?php echo Player_helper::rating($player->average_rating); ?></td>
+            <?php
+            } ?>
         </tr>
 <?php
     }
 } else { ?>
         <tr>
-            <td colspan="9"><?php echo sprintf($this->lang->line('player_no_players_found'), Utility_helper::formattedSeason($season)); ?></td>
+            <td colspan="<?php echo Configuration::get('include_appearances_ratings') === true ? 9 : 8; ?>"><?php echo sprintf($this->lang->line('player_no_players_found'), Utility_helper::formattedSeason($season)); ?></td>
         </td>
 <?php
 } ?>

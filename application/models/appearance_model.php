@@ -69,7 +69,11 @@ class Appearance_model extends Base_Model {
             while($i < $playerCount) {
                 $this->ci->form_validation->set_rules("id[{$appearanceType}][{$i}]", "Appearance Id", "trim|integer|xss_clean");
                 $this->ci->form_validation->set_rules("player_id[{$appearanceType}][{$i}]", "Player Id", "trim|integer|callback_is_unique_player_id|xss_clean");
-                $this->ci->form_validation->set_rules("rating[{$appearanceType}][{$i}]", "Rating", "trim|integer|less_than[" . (Configuration::get('max_appearance_rating') + 1) . "]|greater_than[0]|callback_is_rating_set[{$appearanceType}_{$i}]|xss_clean");
+
+                if (Configuration::get('include_appearances_ratings') === true) {
+                    $this->ci->form_validation->set_rules("rating[{$appearanceType}][{$i}]", "Rating", "trim|integer|less_than[" . (Configuration::get('max_appearance_rating') + 1) . "]|greater_than[0]|callback_is_rating_set[{$appearanceType}_{$i}]|xss_clean");
+                }
+
                 $this->ci->form_validation->set_rules("injury[{$appearanceType}][]", "Injury", "trim|integer|xss_clean");
                 $this->ci->form_validation->set_rules("position[{$appearanceType}][{$i}]", "Position", "trim|greater_than[0]|integer|callback_is_position_set[{$appearanceType}_{$i}]|xss_clean");
                 $this->ci->form_validation->set_rules("order[{$appearanceType}][{$i}]", "Order", "trim|integer|xss_clean");

@@ -30,12 +30,14 @@ foreach ($playerCounts as $appearanceType => $playerCount) {
             'value'   => $i,
         );
 
-        $rating[$appearanceType][$i] = array(
-            'name'    => "rating[{$appearanceType}][{$i}]",
-            'id'      => "rating_{$appearanceType}_{$i}",
-            'options' => array('' => '----') + Appearance_model::fetchRatings(),
-            'value'   => set_value("rating[{$appearanceType}][{$i}]", isset($appearances[$appearanceType][$i]->rating) ? $appearances[$appearanceType][$i]->rating : ''),
-        );
+        if (Configuration::get('include_appearances_ratings') === true) {
+            $rating[$appearanceType][$i] = array(
+                'name'    => "rating[{$appearanceType}][{$i}]",
+                'id'      => "rating_{$appearanceType}_{$i}",
+                'options' => array('' => '----') + Appearance_model::fetchRatings(),
+                'value'   => set_value("rating[{$appearanceType}][{$i}]", isset($appearances[$appearanceType][$i]->rating) ? $appearances[$appearanceType][$i]->rating : ''),
+            );
+        }
 
         $motm[$appearanceType][$i] = array(
             'name'    => "motm",
@@ -105,7 +107,11 @@ echo form_open($this->uri->uri_string()); ?>
     <tr>
         <td><?php echo form_label($this->lang->line('appearance_player'), ''); ?></td>
         <td><?php echo form_label($this->lang->line('appearance_captain'), ''); ?></td>
+        <?php
+        if (Configuration::get('include_appearances_ratings') === true) { ?>
         <td><?php echo form_label($this->lang->line('appearance_rating'), ''); ?></td>
+        <?php
+        } ?>
         <td><?php echo form_label($this->lang->line('appearance_motm'), ''); ?></td>
         <td><?php echo form_label($this->lang->line('appearance_injury'), ''); ?></td>
         <td><?php echo form_label($this->lang->line('appearance_position'), ''); ?></td>
@@ -120,7 +126,11 @@ echo form_open($this->uri->uri_string()); ?>
     <tr>
         <td><?php echo form_hidden($id[$appearanceType][$i]['name'], $id[$appearanceType][$i]['value']); ?><?php echo form_dropdown($player_id[$appearanceType][$i]['name'], $player_id[$appearanceType][$i]['options'], $player_id[$appearanceType][$i]['value']); ?></td>
         <td><?php echo $appearanceType == 'starts' ? form_radio($captain[$appearanceType][$i]) : ''; ?></td>
+        <?php
+        if (Configuration::get('include_appearances_ratings') === true) { ?>
         <td><?php echo form_dropdown($rating[$appearanceType][$i]['name'], $rating[$appearanceType][$i]['options'], $rating[$appearanceType][$i]['value']); ?></td>
+        <?php
+        } ?>
         <td><?php echo form_radio($motm[$appearanceType][$i]); ?></td>
         <td><?php echo form_checkbox($injury[$appearanceType][$i]); ?></td>
         <td><?php echo form_dropdown($position[$appearanceType][$i]['name'], $position[$appearanceType][$i]['options'], $position[$appearanceType][$i]['value']); ?></td>
@@ -131,7 +141,9 @@ echo form_open($this->uri->uri_string()); ?>
     <?php
             echo form_error($id[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
             echo form_error($player_id[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
-            echo form_error($rating[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
+            if (Configuration::get('include_appearances_ratings') === true) {
+                echo form_error($rating[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
+            }
             echo form_error($injury[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
             echo form_error($position[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
             echo form_error($shirt[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
