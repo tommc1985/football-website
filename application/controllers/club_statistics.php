@@ -47,6 +47,7 @@ class Club_Statistics extends Frontend_Controller {
         $data = array(
             'statistics' => $statistics,
             'season'     => $season,
+            'type'       => $type,
             'venues'     => array(
                 '',
                 'h',
