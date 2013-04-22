@@ -86,16 +86,24 @@ class Appearance extends Backend_Controller
                     $id       = $this->form_validation->set_value("id[{$appearanceType}][{$i}]", '');
                     $playerId = $this->form_validation->set_value("player_id[{$appearanceType}][{$i}]", '');
                     $captain  = $selectedCaptain == ($j - 1) ? 1 : 0;
+
                     if (Configuration::get('include_appearances_ratings') === true) {
                         $rating = $this->form_validation->set_value("rating[{$appearanceType}][{$i}]", '');
                     } else {
                         $rating = 0;
                     }
+
                     $motm     = $selectedMotm == "{$appearanceType}_{$i}" ? 1 : 0;
                     $injury   = isset($injuries[$appearanceType]) && in_array($i, $injuries[$appearanceType]) ? 1 : 0;
                     $position = $this->form_validation->set_value("position[{$appearanceType}][{$i}]", '');
                     $order    = $j;
-                    $shirt    = $this->form_validation->set_value("shirt[{$appearanceType}][{$i}]", '');
+
+                    if (Configuration::get('include_appearance_shirt_numbers') === true) {
+                        $shirt = $this->form_validation->set_value("shirt[{$appearanceType}][{$i}]", '');
+                    } else {
+                        $shirt = 0;
+                    }
+
                     $on       = $this->form_validation->set_value("on[{$appearanceType}][{$i}]", '');
                     $on       = empty($on) ? NULL : $on;
                     $off      = $this->form_validation->set_value("off[{$appearanceType}][{$i}]", '');
@@ -282,6 +290,29 @@ class Appearance extends Backend_Controller
         if ($value == '' &&  $playerIdValues[$appearanceType][$index] != '' && ($appearanceType == 'starts' || ($appearanceType == 'subs' && isset($onValues[$appearanceType][$index]) && $onValues[$appearanceType][$index] != ''))) {
             $this->form_validation->set_message('is_position_set', $this->lang->line('appearance_player_position_missing'));
             return FALSE;
+        }
+
+        return TRUE;
+    }
+
+    /**
+     * Has a Shirt Number been set for the specified player
+     * @param  int  $value    Rating Value
+     * @param  int  $indexes  Indexes of Rating field
+     * @return boolean        Has a Shirt Number been entered (if it should be)
+     */
+    public function is_shirt_set($value, $indexes)
+    {
+        $values = array();
+        $playerIdValues = $this->input->post("player_id");
+
+        list($appearanceType, $index) = explode("_", $indexes);
+
+        if (Configuration::get('include_appearance_shirt_numbers') === true) {
+            if ($value == '' &&  $playerIdValues[$appearanceType][$index] != '') {
+                $this->form_validation->set_message('is_shirt_set', $this->lang->line('appearance_player_shirt_missing'));
+                return FALSE;
+            }
         }
 
         return TRUE;

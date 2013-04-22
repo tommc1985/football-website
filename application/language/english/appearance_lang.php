@@ -22,6 +22,7 @@ $lang['appearance_no_motm']    = 'No Man of the Match';
 $lang['appearance_player_selected_more_than_once']        = 'A Player cannot be selected more than once for the same match';
 $lang['appearance_no_captain_selected']                   = 'A Captain must be selected for this Match';
 $lang['appearance_captain_not_linked_to_starting_player'] = 'The selected Captain must be linked to a Player making a starting appearance';
+$lang['appearance_player_shirt_missing']                  = 'A shirt number must be set for this Player\'s appearance';
 $lang['appearance_player_rating_missing']                 = 'A rating must be set for this Player\'s appearance';
 $lang['appearance_player_position_missing']               = 'A position must be set for this Player\'s appearance';
 

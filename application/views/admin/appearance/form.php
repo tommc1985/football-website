@@ -64,13 +64,15 @@ foreach ($playerCounts as $appearanceType => $playerCount) {
             'value' => set_value("position[{$appearanceType}][{$i}]", isset($appearances[$appearanceType][$i]->position) ? $appearances[$appearanceType][$i]->position : ''),
         );
 
-        $shirt[$appearanceType][$i] = array(
-            'name'  => "shirt[{$appearanceType}][{$i}]",
-            'id'    => "shirt_{$appearanceType}_{$i}",
-            'options' => array('' => '----') + Appearance_model::fetchShirtNumbers(),
-            'value' => set_value("shirt[{$appearanceType}][{$i}]", isset($appearances[$appearanceType][$i]->shirt) ? $appearances[$appearanceType][$i]->shirt : ''),
-            'maxlength' => 3,
-        );
+        if (Configuration::get('include_appearance_shirt_numbers') === true) {
+            $shirt[$appearanceType][$i] = array(
+                'name'  => "shirt[{$appearanceType}][{$i}]",
+                'id'    => "shirt_{$appearanceType}_{$i}",
+                'options' => array('' => '----') + Appearance_model::fetchShirtNumbers(),
+                'value' => set_value("shirt[{$appearanceType}][{$i}]", isset($appearances[$appearanceType][$i]->shirt) ? $appearances[$appearanceType][$i]->shirt : ''),
+                'maxlength' => 3,
+            );
+        }
 
         $on[$appearanceType][$i] = array(
             'name'  => "on[{$appearanceType}][{$i}]",
@@ -115,7 +117,11 @@ echo form_open($this->uri->uri_string()); ?>
         <td><?php echo form_label($this->lang->line('appearance_motm'), ''); ?></td>
         <td><?php echo form_label($this->lang->line('appearance_injury'), ''); ?></td>
         <td><?php echo form_label($this->lang->line('appearance_position'), ''); ?></td>
+        <?php
+        if (Configuration::get('include_appearance_shirt_numbers') === true) { ?>
         <td><?php echo form_label($this->lang->line('appearance_shirt'), ''); ?></td>
+        <?php
+        } ?>
         <td><?php echo form_label($this->lang->line('appearance_subbed_on'), ''); ?></td>
         <td><?php echo form_label($this->lang->line('appearance_subbed_off'), ''); ?></td>
     </tr>
@@ -134,19 +140,29 @@ echo form_open($this->uri->uri_string()); ?>
         <td><?php echo form_radio($motm[$appearanceType][$i]); ?></td>
         <td><?php echo form_checkbox($injury[$appearanceType][$i]); ?></td>
         <td><?php echo form_dropdown($position[$appearanceType][$i]['name'], $position[$appearanceType][$i]['options'], $position[$appearanceType][$i]['value']); ?></td>
+        <?php
+        if (Configuration::get('include_appearance_shirt_numbers') === true) { ?>
         <td><?php echo form_dropdown($shirt[$appearanceType][$i]['name'], $shirt[$appearanceType][$i]['options'], $shirt[$appearanceType][$i]['value']); ?></td>
+        <?php
+        } ?>
         <td><?php echo $appearanceType == 'starts' ? '' : form_dropdown($on[$appearanceType][$i]['name'], $on[$appearanceType][$i]['options'], $on[$appearanceType][$i]['value']); ?></td>
         <td><?php echo form_dropdown($off[$appearanceType][$i]['name'], $off[$appearanceType][$i]['options'], $off[$appearanceType][$i]['value']); ?></td>
     </tr>
     <?php
             echo form_error($id[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
             echo form_error($player_id[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
+
             if (Configuration::get('include_appearances_ratings') === true) {
                 echo form_error($rating[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
             }
+
             echo form_error($injury[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
             echo form_error($position[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
-            echo form_error($shirt[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
+
+            if (Configuration::get('include_appearance_shirt_numbers') === true) {
+                echo form_error($shirt[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
+            }
+
             echo form_error($on[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
             echo form_error($off[$appearanceType][$i]['name'], '<tr class="error"><td colspan="9">', '</td></tr>');
             $i++;

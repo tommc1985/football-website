@@ -77,7 +77,10 @@ class Appearance_model extends Base_Model {
                 $this->ci->form_validation->set_rules("injury[{$appearanceType}][]", "Injury", "trim|integer|xss_clean");
                 $this->ci->form_validation->set_rules("position[{$appearanceType}][{$i}]", "Position", "trim|greater_than[0]|integer|callback_is_position_set[{$appearanceType}_{$i}]|xss_clean");
                 $this->ci->form_validation->set_rules("order[{$appearanceType}][{$i}]", "Order", "trim|integer|xss_clean");
-                $this->ci->form_validation->set_rules("shirt[{$appearanceType}][{$i}]", "Shirt", "trim|integer|xss_clean");
+
+                if (Configuration::get('include_appearance_shirt_numbers') === true) {
+                    $this->ci->form_validation->set_rules("shirt[{$appearanceType}][{$i}]", "Shirt", "trim|integer|callback_is_shirt_set[{$appearanceType}_{$i}]|xss_clean");
+                }
 
                 $this->ci->form_validation->set_rules("on[{$appearanceType}][{$i}]", "Substituted On", "trim|less_than[" . (Configuration::get('max_minute') + 1) . "]|greater_than[0]|integer|xss_clean");
                 $this->ci->form_validation->set_rules("off[{$appearanceType}][{$i}]", "Substituted Off", 'trim|less_than[' . (Configuration::get('max_minute') + 1) . "]|greater_than[0]|integer|xss_clean");
