@@ -1151,6 +1151,7 @@ ORDER BY m.date ASC";
                             $record->sequence = $currentSequence;
                             $record->sequenceStart = $currentSequenceStart;
                             $record->sequenceFinish = $currentSequenceFinish;
+                            $record->playerId       = $playerId;
 
                             $records[] = $record;
                         }
@@ -1164,9 +1165,10 @@ ORDER BY m.date ASC";
 
             $record = new stdClass();
             if ($currentSequence > 1) {
-                $record->sequence = $currentSequence;
-                $record->sequenceStart = $currentSequenceStart;
+                $record->sequence       = $currentSequence;
+                $record->sequenceStart  = $currentSequenceStart;
                 $record->sequenceFinish = $currentSequenceFinish;
+                $record->playerId       = $playerId;
 
                 $records[$match->id] = $record;
             }
@@ -1335,7 +1337,7 @@ ORDER BY matches DESC";
      */
     public function mostCommonLeftHandSidePairing($type = false, $season = NULL)
     {
-        $statisticGroup = 'most_common_right_hand_side_pairing';
+        $statisticGroup = 'most_common_left_hand_side_pairing';
 
         $this->deleteRows($statisticGroup, false, $type, $season);
 
