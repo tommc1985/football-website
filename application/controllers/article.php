@@ -23,6 +23,7 @@ class Article extends Frontend_Controller {
      */
     public function index()
     {
+        $this->load->library('pagination');
         $parameters = $this->uri->uri_to_assoc(3, array('offset'));
 
         $perPage = Configuration::get('articles_per_page');
@@ -37,8 +38,20 @@ class Article extends Frontend_Controller {
             ), $perPage, $offset
         );
 
+        $config['base_url'] = '/article/index/offset/';
+        $config['total_rows'] = count($this->Content_model->fetchAll(
+            array(
+                'type' => 'article'
+            )
+        ));
+        $config['per_page'] = $perPage;
+        $config['cur_page'] = $offset;
+
+        $this->pagination->initialize($config);
+
         $data = array(
             'articles' => $articles,
+            'pagination' => $this->pagination->create_links(),
         );
 
         $this->load->view("themes/{$this->theme}/header", $data);
