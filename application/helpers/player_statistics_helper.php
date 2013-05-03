@@ -109,8 +109,6 @@ class Player_Statistics_helper
                 <tr>
                     <td><?php echo $player->goals; ?></td>
                     <td><?php echo Player_helper::fullName($player->player_id); ?> <?php echo $ci->lang->line("match_vs"); ?> <?php echo Opposition_helper::name($player->opposition_id); ?> - <?php echo Match_helper::shortCompetitionNameCombined($player); ?>, <?php echo Utility_helper::shortDate($player->date); ?></td>
-
-
                 </tr>
         <?php
         } ?>
@@ -121,10 +119,11 @@ class Player_Statistics_helper
 
     /**
      * Show Real Points Gained
-     * @param  array $statistics  Full set of Statistics
+     * @param  array $statistics     Full set of Statistics
+     * @param  int $matchThreshold   Number of matches a player must have played to be included in the listed
      * @return NULL
      */
-    public static function realPointsGained($statistics)
+    public static function realPointsGained($statistics, $matchThreshold)
     {
         $statisticGroup = "real_points_gained";
         if (!isset($statistics[$statisticGroup])) {
@@ -139,10 +138,21 @@ class Player_Statistics_helper
         <table>
             <tbody>
         <?php
-        foreach ($statistics[$statisticGroup] as $player) { ?>
+        $count = 0;
+        foreach ($statistics[$statisticGroup] as $player) {
+            if ($player->matches_played > $matchThreshold) { ?>
                 <tr>
                     <td><?php echo $player->points_gained; ?> (<?php echo $player->matches_played; ?> <?php echo $ci->lang->line($player->matches_played == 1 ? "player_statistics_match" : "player_statistics_matches"); ?>)</td>
                     <td><?php echo Player_helper::fullName($player->player_id); ?></td>
+                </tr>
+        <?php
+                $count++;
+            }
+        }
+
+        if ($count == 0) { ?>
+                <tr>
+                    <td><?php echo $ci->lang->line("player_statistics_no_players_within_threshold"); ?></td>
                 </tr>
         <?php
         } ?>
@@ -153,10 +163,11 @@ class Player_Statistics_helper
 
     /**
      * Show Average Points Gained
-     * @param  array $statistics  Full set of Statistics
+     * @param  array $statistics     Full set of Statistics
+     * @param  int $matchThreshold   Number of matches a player must have played to be included in the listed
      * @return NULL
      */
-    public static function averagePointsGained($statistics)
+    public static function averagePointsGained($statistics, $matchThreshold)
     {
         $statisticGroup = "average_points_gained";
         if (!isset($statistics[$statisticGroup])) {
@@ -171,10 +182,21 @@ class Player_Statistics_helper
         <table>
             <tbody>
         <?php
-        foreach ($statistics[$statisticGroup] as $player) { ?>
+        $count = 0;
+        foreach ($statistics[$statisticGroup] as $player) {
+            if ($player->matches > $matchThreshold) { ?>
                 <tr>
                     <td><?php echo $player->points_gained; ?> (<?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?>)</td>
                     <td><?php echo Player_helper::fullName($player->player_id); ?></td>
+                </tr>
+        <?php
+                $count++;
+            }
+        }
+
+        if ($count == 0) { ?>
+                <tr>
+                    <td><?php echo $ci->lang->line("player_statistics_no_players_within_threshold"); ?></td>
                 </tr>
         <?php
         } ?>
@@ -185,10 +207,11 @@ class Player_Statistics_helper
 
     /**
      * Show Real Points
-     * @param  array $statistics  Full set of Statistics
+     * @param  array $statistics     Full set of Statistics
+     * @param  int $matchThreshold   Number of matches a player must have played to be included in the listed
      * @return NULL
      */
-    public static function realPoints($statistics)
+    public static function realPoints($statistics, $matchThreshold)
     {
         $statisticGroup = "real_points";
         if (!isset($statistics[$statisticGroup])) {
@@ -203,10 +226,21 @@ class Player_Statistics_helper
         <table>
             <tbody>
         <?php
-        foreach ($statistics[$statisticGroup] as $player) { ?>
+        $count = 0;
+        foreach ($statistics[$statisticGroup] as $player) {
+            if ($player->matches_played > $matchThreshold) { ?>
                 <tr>
                     <td><?php echo $player->points; ?> (<?php echo $player->matches_played; ?> <?php echo $ci->lang->line($player->matches_played == 1 ? "player_statistics_match" : "player_statistics_matches"); ?>)</td>
                     <td><?php echo Player_helper::fullName($player->player_id); ?></td>
+                </tr>
+        <?php
+                $count++;
+            }
+        }
+
+        if ($count == 0) { ?>
+                <tr>
+                    <td><?php echo $ci->lang->line("player_statistics_no_players_within_threshold"); ?></td>
                 </tr>
         <?php
         } ?>
@@ -217,10 +251,11 @@ class Player_Statistics_helper
 
     /**
      * Show Average Points
-     * @param  array $statistics  Full set of Statistics
+     * @param  array $statistics     Full set of Statistics
+     * @param  int $matchThreshold   Number of matches a player must have played to be included in the listed
      * @return NULL
      */
-    public static function averagePoints($statistics)
+    public static function averagePoints($statistics, $matchThreshold)
     {
         $statisticGroup = "average_points";
         if (!isset($statistics[$statisticGroup])) {
@@ -235,10 +270,21 @@ class Player_Statistics_helper
         <table>
             <tbody>
         <?php
-        foreach ($statistics[$statisticGroup] as $player) { ?>
+        $count = 0;
+        foreach ($statistics[$statisticGroup] as $player) {
+            if ($player->matches > $matchThreshold) { ?>
                 <tr>
                     <td><?php echo $player->points; ?> (<?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?>)</td>
                     <td><?php echo Player_helper::fullName($player->player_id); ?></td>
+                </tr>
+        <?php
+                $count++;
+            }
+        }
+
+        if ($count == 0) { ?>
+                <tr>
+                    <td><?php echo $ci->lang->line("player_statistics_no_players_within_threshold"); ?></td>
                 </tr>
         <?php
         } ?>
@@ -249,10 +295,11 @@ class Player_Statistics_helper
 
     /**
      * Show Real Goals Gained
-     * @param  array $statistics  Full set of Statistics
+     * @param  array $statistics     Full set of Statistics
+     * @param  int $matchThreshold   Number of matches a player must have played to be included in the listed
      * @return NULL
      */
-    public static function realGoalsGained($statistics)
+    public static function realGoalsGained($statistics, $matchThreshold)
     {
         $statisticGroup = "real_goals_gained";
         if (!isset($statistics[$statisticGroup])) {
@@ -267,10 +314,21 @@ class Player_Statistics_helper
         <table>
             <tbody>
         <?php
-        foreach ($statistics[$statisticGroup] as $player) { ?>
+        $count = 0;
+        foreach ($statistics[$statisticGroup] as $player) {
+            if ($player->matches_played > $matchThreshold) { ?>
                 <tr>
                     <td><?php echo $player->goals_gained; ?> (<?php echo $player->matches_played; ?> <?php echo $ci->lang->line($player->matches_played == 1 ? "player_statistics_match" : "player_statistics_matches"); ?>)</td>
                     <td><?php echo Player_helper::fullName($player->player_id); ?></td>
+                </tr>
+        <?php
+                $count++;
+            }
+        }
+
+        if ($count == 0) { ?>
+                <tr>
+                    <td><?php echo $ci->lang->line("player_statistics_no_players_within_threshold"); ?></td>
                 </tr>
         <?php
         } ?>
@@ -281,10 +339,11 @@ class Player_Statistics_helper
 
     /**
      * Show Average Goals Gained
-     * @param  array $statistics  Full set of Statistics
+     * @param  array $statistics     Full set of Statistics
+     * @param  int $matchThreshold   Number of matches a player must have played to be included in the listed
      * @return NULL
      */
-    public static function averageGoalsGained($statistics)
+    public static function averageGoalsGained($statistics, $matchThreshold)
     {
         $statisticGroup = "average_goals_gained";
         if (!isset($statistics[$statisticGroup])) {
@@ -299,10 +358,21 @@ class Player_Statistics_helper
         <table>
             <tbody>
         <?php
-        foreach ($statistics[$statisticGroup] as $player) { ?>
+        $count = 0;
+        foreach ($statistics[$statisticGroup] as $player) {
+            if ($player->matches > $matchThreshold) { ?>
                 <tr>
                     <td><?php echo $player->goals_gained; ?> (<?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?>)</td>
                     <td><?php echo Player_helper::fullName($player->player_id); ?></td>
+                </tr>
+        <?php
+                $count++;
+            }
+        }
+
+        if ($count == 0) { ?>
+                <tr>
+                    <td><?php echo $ci->lang->line("player_statistics_no_players_within_threshold"); ?></td>
                 </tr>
         <?php
         } ?>
@@ -313,10 +383,11 @@ class Player_Statistics_helper
 
     /**
      * Show Real Goals
-     * @param  array $statistics  Full set of Statistics
+     * @param  array $statistics     Full set of Statistics
+     * @param  int $matchThreshold   Number of matches a player must have played to be included in the listed
      * @return NULL
      */
-    public static function realGoals($statistics)
+    public static function realGoals($statistics, $matchThreshold)
     {
         $statisticGroup = "real_goals";
         if (!isset($statistics[$statisticGroup])) {
@@ -331,10 +402,21 @@ class Player_Statistics_helper
         <table>
             <tbody>
         <?php
-        foreach ($statistics[$statisticGroup] as $player) { ?>
+        $count = 0;
+        foreach ($statistics[$statisticGroup] as $player) {
+            if ($player->matches_played > $matchThreshold) { ?>
                 <tr>
                     <td><?php echo $player->goals; ?> (<?php echo $player->matches_played; ?> <?php echo $ci->lang->line($player->matches_played == 1 ? "player_statistics_match" : "player_statistics_matches"); ?>)</td>
                     <td><?php echo Player_helper::fullName($player->player_id); ?></td>
+                </tr>
+        <?php
+                $count++;
+            }
+        }
+
+        if ($count == 0) { ?>
+                <tr>
+                    <td><?php echo $ci->lang->line("player_statistics_no_players_within_threshold"); ?></td>
                 </tr>
         <?php
         } ?>
@@ -345,10 +427,11 @@ class Player_Statistics_helper
 
     /**
      * Show Average Goals For
-     * @param  array $statistics  Full set of Statistics
+     * @param  array $statistics     Full set of Statistics
+     * @param  int $matchThreshold   Number of matches a player must have played to be included in the listed
      * @return NULL
      */
-    public static function averageGoalsFor($statistics)
+    public static function averageGoalsFor($statistics, $matchThreshold)
     {
         $statisticGroup = "average_goals_for";
         if (!isset($statistics[$statisticGroup])) {
@@ -363,10 +446,21 @@ class Player_Statistics_helper
         <table>
             <tbody>
         <?php
-        foreach ($statistics[$statisticGroup] as $player) { ?>
+        $count = 0;
+        foreach ($statistics[$statisticGroup] as $player) {
+            if ($player->matches > $matchThreshold) { ?>
                 <tr>
                     <td><?php echo $player->goals; ?> (<?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?>)</td>
                     <td><?php echo Player_helper::fullName($player->player_id); ?></td>
+                </tr>
+        <?php
+                $count++;
+            }
+        }
+
+        if ($count == 0) { ?>
+                <tr>
+                    <td><?php echo $ci->lang->line("player_statistics_no_players_within_threshold"); ?></td>
                 </tr>
         <?php
         } ?>
@@ -377,10 +471,11 @@ class Player_Statistics_helper
 
     /**
      * Show Average Goals Against
-     * @param  array $statistics  Full set of Statistics
+     * @param  array $statistics     Full set of Statistics
+     * @param  int $matchThreshold   Number of matches a player must have played to be included in the listed
      * @return NULL
      */
-    public static function averageGoalsAgainst($statistics)
+    public static function averageGoalsAgainst($statistics, $matchThreshold)
     {
         $statisticGroup = "average_goals_against";
         if (!isset($statistics[$statisticGroup])) {
@@ -395,11 +490,22 @@ class Player_Statistics_helper
         <table>
             <tbody>
         <?php
+        $count = 0;
         $players = array_reverse($statistics[$statisticGroup]);
-        foreach ($players as $player) { ?>
+        foreach ($players as $player) {
+            if ($player->matches > $matchThreshold) { ?>
                 <tr>
                     <td><?php echo $player->goals; ?> (<?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?>)</td>
                     <td><?php echo Player_helper::fullName($player->player_id); ?></td>
+                </tr>
+        <?php
+                $count++;
+            }
+        }
+
+        if ($count == 0) { ?>
+                <tr>
+                    <td><?php echo $ci->lang->line("player_statistics_no_players_within_threshold"); ?></td>
                 </tr>
         <?php
         } ?>
@@ -410,10 +516,11 @@ class Player_Statistics_helper
 
     /**
      * Show Total Clean Sheets
-     * @param  array $statistics  Full set of Statistics
+     * @param  array $statistics     Full set of Statistics
+     * @param  int $matchThreshold   Number of matches a player must have played to be included in the listed
      * @return NULL
      */
-    public static function totalCleanSheets($statistics)
+    public static function totalCleanSheets($statistics, $matchThreshold)
     {
         $statisticGroup = "total_clean_sheets";
         if (!isset($statistics[$statisticGroup])) {
@@ -428,10 +535,21 @@ class Player_Statistics_helper
         <table>
             <tbody>
         <?php
-        foreach ($statistics[$statisticGroup] as $player) { ?>
+        $count = 0;
+        foreach ($statistics[$statisticGroup] as $player) {
+            if ($player->matches > $matchThreshold) { ?>
                 <tr>
                     <td><?php echo $player->clean_sheets; ?> (<?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?>)</td>
                     <td><?php echo Player_helper::fullName($player->player_id); ?></td>
+                </tr>
+        <?php
+                $count++;
+            }
+        }
+
+        if ($count == 0) { ?>
+                <tr>
+                    <td><?php echo $ci->lang->line("player_statistics_no_players_within_threshold"); ?></td>
                 </tr>
         <?php
         } ?>
@@ -442,10 +560,11 @@ class Player_Statistics_helper
 
     /**
      * Show Average Clean Sheets
-     * @param  array $statistics  Full set of Statistics
+     * @param  array $statistics     Full set of Statistics
+     * @param  int $matchThreshold   Number of matches a player must have played to be included in the listed
      * @return NULL
      */
-    public static function averageCleanSheets($statistics)
+    public static function averageCleanSheets($statistics, $matchThreshold)
     {
         $statisticGroup = "average_clean_sheets";
         if (!isset($statistics[$statisticGroup])) {
@@ -460,10 +579,21 @@ class Player_Statistics_helper
         <table>
             <tbody>
         <?php
-        foreach ($statistics[$statisticGroup] as $player) { ?>
+        $count = 0;
+        foreach ($statistics[$statisticGroup] as $player) {
+            if ($player->matches > $matchThreshold) { ?>
                 <tr>
                     <td><?php echo $player->clean_sheets; ?> (<?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?>)</td>
                     <td><?php echo Player_helper::fullName($player->player_id); ?></td>
+                </tr>
+        <?php
+                $count++;
+            }
+        }
+
+        if ($count == 0) { ?>
+                <tr>
+                    <td><?php echo $ci->lang->line("player_statistics_no_players_within_threshold"); ?></td>
                 </tr>
         <?php
         } ?>

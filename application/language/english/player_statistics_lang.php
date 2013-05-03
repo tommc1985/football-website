@@ -85,5 +85,8 @@ $lang['player_statistics_most_common_strike_partner']                      = 'Mo
 $lang['player_statistics_no_most_common_strike_partner']                   = 'No Most Common Strike Partnerships to display, most likely due to no matches being completed';
 $lang['player_statistics_most_common_strike_partner_explanation']          = 'The number of times two players have played together up front.';
 
+
+$lang['player_statistics_no_players_within_threshold']                     = 'No Players have appeared in the required number of matches to be included in this list';
+
 /* End of file player_statistics.php */
 /* Location: ./application/language/english/player_statistics.php */

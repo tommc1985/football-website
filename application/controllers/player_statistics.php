@@ -26,7 +26,29 @@ class Player_Statistics extends Frontend_Controller {
      */
     public function view()
     {
-        $parameters = $this->uri->uri_to_assoc(3, array('season', 'type', 'player_id', 'threshold'));
+        $parameters = $this->uri->uri_to_assoc(3, array('season', 'type', 'threshold', 'unit'));
+
+        if ($this->input->post()) {
+            $redirectString = '/player-statistics/view';
+
+            if ($this->input->post('season')) {
+                $redirectString .= '/season/' . $this->input->post('season');
+            }
+
+            if ($this->input->post('type')) {
+                $redirectString .= '/type/' . $this->input->post('type');
+            }
+
+            if ($this->input->post('threshold')) {
+                $redirectString .= '/threshold/' . (int) $this->input->post('threshold');
+            }
+
+            if ($this->input->post('unit')) {
+                $redirectString .= '/unit/' . $this->input->post('unit');
+            }
+
+            redirect($redirectString);
+        }
 
         $season = Season_model::fetchCurrentSeason();
         if ($parameters['season'] !== false) {
@@ -37,19 +59,34 @@ class Player_Statistics extends Frontend_Controller {
             }
         }
 
-        //@TODO Add threshold of percentage of games played
-
         $type = 'overall';
         if ($parameters['type'] !== false) {
             $type = $parameters['type'];
         }
 
+        $thresholdPercentage = 0;
+        $thresholdMatches = 0;
+        $matchCount = count($this->Season_model->fetchMatches($type == 'overall' ? NULL : $type, $season == 'all-time' ? NULL : $season, NULL, true));
+        if ($parameters['threshold'] !== false) {
+            if ($parameters['unit'] == 'percent') {
+                $thresholdPercentage = (int) $parameters['threshold'];
+
+                if ($matchCount > 0) {
+                    $thresholdMatches = (int) ($matchCount * $thresholdPercentage / 100);
+                }
+            } else {
+                $thresholdMatches = (int) $parameters['threshold'];
+            }
+        }
+
         $statistics = $this->Player_Statistics_model->fetchAll($season == 'all-time' ? 'career' : $season, $type);
 
         $data = array(
-            'statistics' => $statistics,
-            'season'     => $season,
-            'type'       => $type,
+            'statistics'          => $statistics,
+            'season'              => $season,
+            'type'                => $type,
+            'thresholdPercentage' => $thresholdPercentage,
+            'thresholdMatches'    => $thresholdMatches,
         );
 
         $this->load->view("themes/{$this->theme}/header", $data);
