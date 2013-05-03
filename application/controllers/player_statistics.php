@@ -14,10 +14,11 @@ class Player_Statistics extends Frontend_Controller {
         $this->load->database();
         $this->load->model('frontend/Player_Statistics_model');
         $this->load->model('Cache_Player_Statistics_model');
+        $this->load->model('Competition_model');
         $this->load->model('Season_model');
         $this->lang->load('player_statistics');
         $this->lang->load('match');
-        $this->load->helper(array('player_statistics', 'competition', 'competition_stage', 'goal', 'match', 'opposition', 'player', 'url', 'utility'));
+        $this->load->helper(array('player_statistics', 'competition', 'competition_stage', 'form', 'goal', 'match', 'opposition', 'player', 'url', 'utility'));
     }
 
     /**
@@ -91,6 +92,7 @@ class Player_Statistics extends Frontend_Controller {
             'season'              => $season,
             'type'                => $type,
             'unit'                => $unit,
+            'matchCount'          => $matchCount,
             'thresholdPercentage' => $thresholdPercentage,
             'thresholdMatches'    => $thresholdMatches,
         );

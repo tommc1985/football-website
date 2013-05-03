@@ -3,6 +3,12 @@
 // Frontend Text
 $lang['player_statistics_title']                                           = 'Player Statistics';
 
+$lang['player_statistics_competition_type']                                = 'Competition Type';
+$lang['player_statistics_season']                                          = 'Season';
+$lang['player_statistics_threshold']                                       = 'Threshold';
+$lang['player_statistics_unit']                                            = 'Unit';
+$lang['player_statistics_show']                                            = 'Show';
+
 $lang['player_statistics_matches']                                         = 'matches';
 $lang['player_statistics_match']                                           = 'match';
 
@@ -92,6 +98,9 @@ $lang['player_statistics_no_players_within_threshold']                     = 'No
 $lang['player_statistics_threshold_current']                               = 'Current Threshold: ';
 $lang['player_statistics_threshold_matches']                               = 'Players that have appeared in at least %d matches';
 $lang['player_statistics_threshold_percentage']                            = 'Players that have appeared in at least %d percent of matches';
+
+$lang['player_statistics_percent']                                         = 'Percent';
+$lang['player_statistics_matche_s']                                        = 'Match(es)';
 
 /* End of file player_statistics.php */
 /* Location: ./application/language/english/player_statistics.php */

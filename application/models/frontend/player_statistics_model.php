@@ -50,4 +50,39 @@ class Player_Statistics_model extends Base_Frontend_Model {
         return $statistics;
     }
 
+    /**
+     * Fetch Threshold values for dropdown
+     * @return array List of threshold values
+     */
+    public static function fetchThresholdsForDropdown($matches)
+    {
+        $i = 1;
+        $options = array();
+
+        $maxValue = $matches > 100 ? $matches : 100;
+        while ($i <= $maxValue) {
+            $options[$i] = $i;
+
+            $i++;
+        }
+
+        $options = array_reverse($options, true);
+
+        return $options;
+    }
+
+    /**
+     * Fetch Unit values for dropdown
+     * @return array List of Units
+     */
+    public static function fetchUnitsForDropdown()
+    {
+        $ci =& get_instance();
+
+        return array(
+            'percentage' => $ci->lang->line('player_statistics_percent'),
+            'matches'    => $ci->lang->line('player_statistics_matche_s'),
+        );
+    }
+
 }
