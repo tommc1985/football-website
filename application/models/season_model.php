@@ -143,9 +143,10 @@ class Season_model extends CI_Model {
      * @param  boolean $byType      Generate by competition type, set to false for "overall"
      * @param  int|NULL $season     Season to generate, set to null for entire career
      * @param  string|NULL $venue   Whether to include all, home, away or neutral venues
-     * @return array|object   Earliest match/matches
+     * @param  boolean $completed   Have the matches been completed?
+     * @return array|object         Earliest match/matches
      */
-    public function fetchMatches($type = false, $season = NULL, $venue = NULL)
+    public function fetchMatches($type = false, $season = NULL, $venue = NULL, $completed = false)
     {
         $whereConditions = array();
 
@@ -160,6 +161,10 @@ class Season_model extends CI_Model {
 
         if (!is_null($venue)) {
             $whereConditions[] = "(m.venue = '{$venue}')";
+        }
+
+        if ($completed) {
+            $whereConditions[] = "(m.h IS NOT NULL)";
         }
 
         $whereConditions[] = "(m.competitive = 1)";

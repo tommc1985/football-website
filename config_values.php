@@ -41,6 +41,8 @@ $configValues['include_goal_ratings']              = false;
 
 $configValues['articles_per_page']                 = 5;
 
+$configValues['default_threshold']                 = 60;
+
 class Configuration {
     public function _construct() {}
 

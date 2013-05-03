@@ -140,7 +140,7 @@ class Player_Statistics_helper
         <?php
         $count = 0;
         foreach ($statistics[$statisticGroup] as $player) {
-            if ($player->matches_played > $matchThreshold) { ?>
+            if ($player->matches_played >= $matchThreshold) { ?>
                 <tr>
                     <td><?php echo $player->points_gained; ?> (<?php echo $player->matches_played; ?> <?php echo $ci->lang->line($player->matches_played == 1 ? "player_statistics_match" : "player_statistics_matches"); ?>)</td>
                     <td><?php echo Player_helper::fullName($player->player_id); ?></td>
@@ -184,7 +184,7 @@ class Player_Statistics_helper
         <?php
         $count = 0;
         foreach ($statistics[$statisticGroup] as $player) {
-            if ($player->matches > $matchThreshold) { ?>
+            if ($player->matches >= $matchThreshold) { ?>
                 <tr>
                     <td><?php echo $player->points_gained; ?> (<?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?>)</td>
                     <td><?php echo Player_helper::fullName($player->player_id); ?></td>
@@ -228,7 +228,7 @@ class Player_Statistics_helper
         <?php
         $count = 0;
         foreach ($statistics[$statisticGroup] as $player) {
-            if ($player->matches_played > $matchThreshold) { ?>
+            if ($player->matches_played >= $matchThreshold) { ?>
                 <tr>
                     <td><?php echo $player->points; ?> (<?php echo $player->matches_played; ?> <?php echo $ci->lang->line($player->matches_played == 1 ? "player_statistics_match" : "player_statistics_matches"); ?>)</td>
                     <td><?php echo Player_helper::fullName($player->player_id); ?></td>
@@ -272,7 +272,7 @@ class Player_Statistics_helper
         <?php
         $count = 0;
         foreach ($statistics[$statisticGroup] as $player) {
-            if ($player->matches > $matchThreshold) { ?>
+            if ($player->matches >= $matchThreshold) { ?>
                 <tr>
                     <td><?php echo $player->points; ?> (<?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?>)</td>
                     <td><?php echo Player_helper::fullName($player->player_id); ?></td>
@@ -316,7 +316,7 @@ class Player_Statistics_helper
         <?php
         $count = 0;
         foreach ($statistics[$statisticGroup] as $player) {
-            if ($player->matches_played > $matchThreshold) { ?>
+            if ($player->matches_played >= $matchThreshold) { ?>
                 <tr>
                     <td><?php echo $player->goals_gained; ?> (<?php echo $player->matches_played; ?> <?php echo $ci->lang->line($player->matches_played == 1 ? "player_statistics_match" : "player_statistics_matches"); ?>)</td>
                     <td><?php echo Player_helper::fullName($player->player_id); ?></td>
@@ -360,7 +360,7 @@ class Player_Statistics_helper
         <?php
         $count = 0;
         foreach ($statistics[$statisticGroup] as $player) {
-            if ($player->matches > $matchThreshold) { ?>
+            if ($player->matches >= $matchThreshold) { ?>
                 <tr>
                     <td><?php echo $player->goals_gained; ?> (<?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?>)</td>
                     <td><?php echo Player_helper::fullName($player->player_id); ?></td>
@@ -404,7 +404,7 @@ class Player_Statistics_helper
         <?php
         $count = 0;
         foreach ($statistics[$statisticGroup] as $player) {
-            if ($player->matches_played > $matchThreshold) { ?>
+            if ($player->matches_played >= $matchThreshold) { ?>
                 <tr>
                     <td><?php echo $player->goals; ?> (<?php echo $player->matches_played; ?> <?php echo $ci->lang->line($player->matches_played == 1 ? "player_statistics_match" : "player_statistics_matches"); ?>)</td>
                     <td><?php echo Player_helper::fullName($player->player_id); ?></td>
@@ -448,7 +448,7 @@ class Player_Statistics_helper
         <?php
         $count = 0;
         foreach ($statistics[$statisticGroup] as $player) {
-            if ($player->matches > $matchThreshold) { ?>
+            if ($player->matches >= $matchThreshold) { ?>
                 <tr>
                     <td><?php echo $player->goals; ?> (<?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?>)</td>
                     <td><?php echo Player_helper::fullName($player->player_id); ?></td>
@@ -493,7 +493,7 @@ class Player_Statistics_helper
         $count = 0;
         $players = array_reverse($statistics[$statisticGroup]);
         foreach ($players as $player) {
-            if ($player->matches > $matchThreshold) { ?>
+            if ($player->matches >= $matchThreshold) { ?>
                 <tr>
                     <td><?php echo $player->goals; ?> (<?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?>)</td>
                     <td><?php echo Player_helper::fullName($player->player_id); ?></td>
@@ -537,7 +537,7 @@ class Player_Statistics_helper
         <?php
         $count = 0;
         foreach ($statistics[$statisticGroup] as $player) {
-            if ($player->matches > $matchThreshold) { ?>
+            if ($player->matches >= $matchThreshold) { ?>
                 <tr>
                     <td><?php echo $player->clean_sheets; ?> (<?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?>)</td>
                     <td><?php echo Player_helper::fullName($player->player_id); ?></td>
@@ -581,7 +581,7 @@ class Player_Statistics_helper
         <?php
         $count = 0;
         foreach ($statistics[$statisticGroup] as $player) {
-            if ($player->matches > $matchThreshold) { ?>
+            if ($player->matches >= $matchThreshold) { ?>
                 <tr>
                     <td><?php echo $player->clean_sheets; ?> (<?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?>)</td>
                     <td><?php echo Player_helper::fullName($player->player_id); ?></td>

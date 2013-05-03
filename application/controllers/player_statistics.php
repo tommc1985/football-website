@@ -64,19 +64,25 @@ class Player_Statistics extends Frontend_Controller {
             $type = $parameters['type'];
         }
 
-        $thresholdPercentage = 0;
+        $unit = 'percentage';
+        $thresholdPercentage = Configuration::get('default_threshold');
         $thresholdMatches = 0;
         $matchCount = count($this->Season_model->fetchMatches($type == 'overall' ? NULL : $type, $season == 'all-time' ? NULL : $season, NULL, true));
-        if ($parameters['threshold'] !== false) {
-            if ($parameters['unit'] == 'percent') {
-                $thresholdPercentage = (int) $parameters['threshold'];
 
+        if ($parameters['unit'] == 'matches') {
+            $unit = 'matches';
+        }
+
+        if ($parameters['threshold'] !== false) {
+            $thresholdMatches = (int) $parameters['threshold'];
+            $thresholdPercentage = (int) $parameters['threshold'];
+        }
+
+
+        if ($unit == 'percentage') {
                 if ($matchCount > 0) {
                     $thresholdMatches = (int) ($matchCount * $thresholdPercentage / 100);
                 }
-            } else {
-                $thresholdMatches = (int) $parameters['threshold'];
-            }
         }
 
         $statistics = $this->Player_Statistics_model->fetchAll($season == 'all-time' ? 'career' : $season, $type);
@@ -85,6 +91,7 @@ class Player_Statistics extends Frontend_Controller {
             'statistics'          => $statistics,
             'season'              => $season,
             'type'                => $type,
+            'unit'                => $unit,
             'thresholdPercentage' => $thresholdPercentage,
             'thresholdMatches'    => $thresholdMatches,
         );
