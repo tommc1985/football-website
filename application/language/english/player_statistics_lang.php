@@ -88,5 +88,10 @@ $lang['player_statistics_most_common_strike_partner_explanation']          = 'Th
 
 $lang['player_statistics_no_players_within_threshold']                     = 'No Players have appeared in the required number of matches to be included in this list';
 
+
+$lang['player_statistics_threshold_current']                               = 'Current Threshold: ';
+$lang['player_statistics_threshold_matches']                               = 'Players that have appeared in at least %d matches';
+$lang['player_statistics_threshold_percentage']                            = 'Players that have appeared in at least %d percent of matches';
+
 /* End of file player_statistics.php */
 /* Location: ./application/language/english/player_statistics.php */

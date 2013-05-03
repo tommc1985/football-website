@@ -78,11 +78,10 @@ class Player_Statistics extends Frontend_Controller {
             $thresholdPercentage = (int) $parameters['threshold'];
         }
 
-
         if ($unit == 'percentage') {
-                if ($matchCount > 0) {
-                    $thresholdMatches = (int) ($matchCount * $thresholdPercentage / 100);
-                }
+            if ($matchCount > 0) {
+                $thresholdMatches = (int) ($matchCount * $thresholdPercentage / 100);
+            }
         }
 
         $statistics = $this->Player_Statistics_model->fetchAll($season == 'all-time' ? 'career' : $season, $type);
