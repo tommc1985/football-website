@@ -29,6 +29,16 @@ class Head_To_Head extends Frontend_Controller {
         $this->load->library('pagination');
         $parameters = $this->uri->uri_to_assoc(3, array('opposition'));
 
+        if ($this->input->post()) {
+            $redirectString = '/head-to-head/index';
+
+            if ($this->input->post('opposition')) {
+                $redirectString .= '/opposition/' . $this->input->post('opposition');
+            }
+
+            redirect($redirectString);
+        }
+
         $opposition = false;
         if ($parameters['opposition'] !== false && $parameters['opposition'] > 0) {
             if ($this->Opposition_model->fetch($parameters['opposition'])) {
