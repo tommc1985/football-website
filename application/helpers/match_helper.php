@@ -193,6 +193,9 @@ class Match_helper
             case 'n':
                 return $ci->lang->line('match_n');
                 break;
+            case 'o':
+                return $ci->lang->line('match_o');
+                break;
         }
 
         return '';
@@ -219,6 +222,9 @@ class Match_helper
                 break;
             case 'n':
                 return $ci->lang->line('match_neutral');
+                break;
+            case 'overall':
+                return $ci->lang->line('match_overall');
                 break;
         }
 

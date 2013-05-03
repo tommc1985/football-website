@@ -227,6 +227,25 @@ class Match_model extends Base_Frontend_Model {
     }
 
     /**
+     * Fetch list of players based on season, competition type, and ordered by a particular field in asc or desc order
+     * @param  mixed $season   Four digit season or 'career'
+     * @param  string $type    Competition type
+     * @param  string $orderBy Field to order data by
+     * @param  string $order   Sort Order of data ('asc' or 'desc')
+     * @return array           List of Players
+     */
+    public function fetchMatchesByOpposition($oppositionId)
+    {
+        $this->db->select('*')
+            ->from($this->tableName)
+            ->where('opposition_id', $oppositionId)
+            ->where('deleted', 0)
+            ->order_by($this->getOrderBy(''), $this->getOrder('desc'));
+
+        return $this->db->get()->result();
+    }
+
+    /**
      * Return string of fields to order data by
      * @param  string $orderBy Fields passwed
      * @return string          Processed string of fields
