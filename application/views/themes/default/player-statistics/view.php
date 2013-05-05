@@ -40,7 +40,6 @@ echo form_dropdown($inputSeason['name'], $inputSeason['options'], $inputSeason['
 echo form_label($this->lang->line('player_statistics_threshold'), $inputThreshold['name']);
 echo form_dropdown($inputThreshold['name'], $inputThreshold['options'], $inputThreshold['value']);
 
-echo form_label($this->lang->line('player_statistics_unit'), $inputUnit['name']);
 echo form_dropdown($inputUnit['name'], $inputUnit['options'], $inputUnit['value']); ?>
 
 <?php
