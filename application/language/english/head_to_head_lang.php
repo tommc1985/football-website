@@ -1,6 +1,9 @@
 <?php
 // Frontend Text
 $lang['head_to_head_title']                  = 'Head to Head';
+
+$lang['head_to_head_show']                   = 'Show';
+
 $lang['head_to_head_accumulated_statistics'] = 'Accumulated Statistics';
 $lang['head_to_head_matches']                = 'Matches';
 $lang['head_to_head_top_scorers']            = 'Top Scorers';

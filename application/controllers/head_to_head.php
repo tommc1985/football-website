@@ -17,7 +17,7 @@ class Head_To_Head extends Frontend_Controller {
         $this->load->model('Opposition_model');
         $this->lang->load('head_to_head');
         $this->lang->load('match');
-        $this->load->helper(array('match', 'opposition', 'player', 'url', 'utility'));
+        $this->load->helper(array('form', 'match', 'opposition', 'player', 'url', 'utility'));
     }
 
     /**

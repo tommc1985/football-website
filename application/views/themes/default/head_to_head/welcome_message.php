@@ -2,6 +2,23 @@
 echo $opposition ? ' - ' . Opposition_helper::name($opposition) : ''; ?></h2>
 
 <?php
+echo form_open($this->uri->uri_string());
+
+$inputOpposition = array(
+    'name'    => 'opposition',
+    'id'      => 'opposition',
+    'options' => array('' => '--- Select ---') + $this->Opposition_model->fetchForDropdown(),
+    'value'   => set_value('opposition', $opposition),
+);
+
+echo form_label($this->lang->line('head_to_head_competition_type'), $inputOpposition['name']);
+echo form_dropdown($inputOpposition['name'], $inputOpposition['options'], $inputOpposition['value']); ?>
+
+<?php
+echo form_submit('submit', $this->lang->line('head_to_head_show'));
+echo form_close(); ?>
+
+<?php
 if ($opposition) { ?>
 <h3><?php echo $this->lang->line('head_to_head_accumulated_statistics'); ?></h3>
 <table>
