@@ -237,8 +237,9 @@ class Match_model extends Base_Frontend_Model {
     public function fetchMatchesByOpposition($oppositionId)
     {
         $this->db->select('*')
-            ->from($this->tableName)
+            ->from('view_matches')
             ->where('opposition_id', $oppositionId)
+            ->where('competitive', 1)
             ->where('deleted', 0)
             ->order_by($this->getOrderBy(''), $this->getOrder('desc'));
 
