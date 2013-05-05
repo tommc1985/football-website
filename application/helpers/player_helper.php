@@ -47,7 +47,7 @@ class Player_helper
     {
         $player = self::_convertObject($player);
 
-        return "{$player->first_name} {$player->surname}";
+        return "<a href='/player/view/id/{$player->id}'>{$player->first_name} {$player->surname}</a>";
     }
 
     /**
@@ -59,7 +59,7 @@ class Player_helper
     {
         $player = self::_convertObject($player);
 
-        return "{$player->surname}, {$player->first_name}";
+        return "<a href='/player/view/id/{$player->id}'>{$player->surname}, {$player->first_name}</a>";
     }
 
     /**
@@ -71,7 +71,7 @@ class Player_helper
     {
         $player = self::_convertObject($player);
 
-        return substr($player->first_name, 0, 1) . '. ' . $player->surname;
+        return "<a href='/player/view/id/{$player->id}'>" . substr($player->first_name, 0, 1) . '. ' . $player->surname . "</a>";
     }
 
     /**
