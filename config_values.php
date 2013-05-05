@@ -43,6 +43,8 @@ $configValues['articles_per_page']                 = 5;
 
 $configValues['default_threshold']                 = 60;
 
+$configValues['team_name']                         = 'Hardy Athletic';
+
 class Configuration {
     public function _construct() {}
 
