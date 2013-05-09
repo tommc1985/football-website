@@ -343,6 +343,11 @@ class Install_Model extends CI_Model {
                 'type'           => 'VARCHAR',
                 'constraint'     => 7,
             ),
+            'position' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 3,
+                'default'        => 'all',
+            ),
             'starter_appearances_points' => array(
                 'type'           => 'INT',
                 'constraint'     => 5,
@@ -425,6 +430,7 @@ class Install_Model extends CI_Model {
         $this->ci->dbforge->add_key('player_id', TRUE);
         $this->ci->dbforge->add_key('type', TRUE);
         $this->ci->dbforge->add_key('season', TRUE);
+        $this->ci->dbforge->add_key('position', TRUE);
 
         if ($this->ci->dbforge->create_table($tableName, TRUE)) {
             return true;
