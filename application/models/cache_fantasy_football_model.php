@@ -10,6 +10,8 @@ class Cache_Fantasy_Football_model extends CI_Model {
     public $tableName;
     public $queueTableName;
 
+    public $positions;
+
     /**
      * Constructor
      * @return NULL
@@ -24,6 +26,29 @@ class Cache_Fantasy_Football_model extends CI_Model {
 
         $this->tableName = 'cache_fantasy_football_statistics';
         $this->queueTableName = 'cache_queue_fantasy_football_statistics';
+
+        $this->positions = array(
+            'all',
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            'gk',
+            'def',
+            'mid',
+            'att');
     }
 
     /**
@@ -33,21 +58,27 @@ class Cache_Fantasy_Football_model extends CI_Model {
      */
     public function insertEntries($season = NULL)
     {
-        $this->insertEntry();
-        $this->insertEntry(1);
+        foreach ($this->positions as $position) {
+            //$this->insertEntry(NULL, NULL, $position);
+            $this->insertEntry(1, NULL, $position);
+        }
 
         if (is_null($season)) {
             $i = $this->ci->Season_model->fetchEarliestYear();
             while($i <= Season_model::fetchCurrentSeason()){
 
-                $this->insertEntry(NULL, $i);
-                $this->insertEntry(1, $i);
+                foreach ($this->positions as $position) {
+                    //$this->insertEntry(NULL, $i, $position);
+                    $this->insertEntry(1, $i, $position);
+                }
 
                 $i++;
             }
         } else {
-            $this->insertEntry(NULL, $season);
-            $this->insertEntry(1, $season);
+            foreach ($this->positions as $position) {
+                //$this->insertEntry(NULL, $season, $position);
+                $this->insertEntry(1, $season, $position);
+            }
         }
     }
 
@@ -55,16 +86,19 @@ class Cache_Fantasy_Football_model extends CI_Model {
      * Insert row into process queue table to be processed
      * @param  int|NULL $byType   Generate by "type" or "overall"
      * @param  int|NULL $season   The stats to insert for a specific season, or NULL for "career"
+     * @param  string $position   Position
      * @return boolean            Whether the row was inserted successfully
      */
-    public function insertEntry($byType = NULL, $season = NULL)
+    public function insertEntry($byType = NULL, $season = NULL, $position = 'all')
     {
-        if (!$this->entryExists($byType, $season)) {
+        if (!$this->entryExists($byType, $season, $position)) {
             $data = array(
-                'by_type' => $byType,
-                'season' => $season,
-                'date_added' => time(),
-                'date_updated' => time());
+                'by_type'      => $byType,
+                'season'       => $season,
+                'position'     => $position,
+                'date_added'   => time(),
+                'date_updated' => time()
+            );
 
             return $this->db->insert($this->queueTableName, $data);
         }
@@ -76,14 +110,16 @@ class Cache_Fantasy_Football_model extends CI_Model {
      * Does an entry with the specified parameters already exist in the queue
      * @param  int|NULL $byType         Group by "type" or "overall"
      * @param  int|NULL $season         Season "career"
+     * @param  string $position         Position
      * @return boolean                  Does the queue entry already exist?
      */
-    public function entryExists($byType = NULL, $season = NULL)
+    public function entryExists($byType = NULL, $season = NULL, $position = 'all')
     {
         $this->db->select('*')
             ->from($this->queueTableName)
             ->where('by_type', $byType)
             ->where('season', $season)
+            ->where('position', $position)
             ->where('completed', 0)
             ->where('deleted', 0);
 
@@ -159,13 +195,13 @@ class Cache_Fantasy_Football_model extends CI_Model {
         $row->in_progress = 1;
         $this->updateEntry($row);
 
-        $this->generateStatistics(false, $row->season);
+        $this->generateStatistics(false, $row->season, $row->position);
 
         if (!is_null($row->by_type)) { // Generate all statistics
             $competitionTypes = $this->ci->Season_model->fetchCompetitionTypes();
 
             foreach ($competitionTypes as $competitionType) {
-                $this->generateStatistics($competitionType, $row->season);
+                $this->generateStatistics($competitionType, $row->season, $row->position);
             }
         }
 
@@ -185,14 +221,23 @@ class Cache_Fantasy_Football_model extends CI_Model {
      * Fetch matches
      * @param  string|boolean $type     Group by "competition_type" or "overall"
      * @param  int|NULL $season         Season "career"
+     * @param  mixed $positions         Positions
      * @return array                    List of matches
      */
-    public function fetchMatches($type = false, $season = NULL)
+    public function fetchMatches($type = false, $season = NULL, $positions = false)
     {
         $whereConditions = array();
 
         $whereConditions[] = "(vamc.competitive = '1')";
         $whereConditions[] = "(vamc.status != 'unused')";
+
+        if ($positions !== false) {
+            if (is_array($positions)) {
+                $whereConditions[] = "(vamc.position IN ('" . implode("','", $positions) . "'))";
+            } else {
+                $whereConditions[] = "(vamc.position = '" . $positions . "')";
+            }
+        }
 
         if (!is_null($season)) {
             $dates = Season_model::generateStartEndDates($season);
@@ -212,19 +257,49 @@ WHERE " . implode(" \r\nAND ", $whereConditions) : '');
     }
 
     /**
+     * Fetch positions
+     * @param  mixed $position          Position
+     * @return mixed                    Positions
+     */
+    public function fetchPositions($position)
+    {
+        switch (true) {
+            case is_numeric($position):
+                return (int) $position;
+                break;
+            case $position == 'gk':
+                return '1';
+                break;
+            case $position == 'def':
+                return array(2, 3, 4, 5, 6, 7);
+                break;
+            case $position == 'mid':
+                return array(6, 7, 8, 9, 10, 11, 12, 13, 14);
+                break;
+            case $position == 'att':
+                return array(13, 14, 15, 16);
+                break;
+        }
+
+        return false;
+    }
+
+    /**
      * Create Fantasy Football Statistics object
-     * @param  int  $playerId         Unique Player Id
-     * @param  string|boolean  $type  Competition Type
+     * @param  int $playerId          Unique Player Id
+     * @param  string|boolean $type   Competition Type
      * @param  int|NULL $season       Season or Career
+     * @param  string $position       Position
      * @return object                 Fantasy Football Statistics object
      */
-    public function createObject($playerId, $type = false, $season = NULL)
+    public function createObject($playerId, $type = false, $season = NULL, $position = 'all')
     {
         $player = new stdClass();
 
         $player->player_id = $playerId;
         $player->type      = 'overall';
         $player->season    = 'career';
+        $player->position  = $position;
 
         if (is_string($type)) {
             $player->type = $type;
@@ -364,19 +439,21 @@ WHERE " . implode(" \r\nAND ", $whereConditions) : '');
      * Generate statistics
      * @param  boolean|string $type    Generate by competition type, set to false for "overall"
      * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @param  string $position        Playing Position
      * @return boolean Whether query was executed correctly
      */
-    public function generateStatistics($type = false, $season = NULL)
+    public function generateStatistics($type = false, $season = NULL, $position = 'all')
     {
-        $this->deleteStatistics($type, $season);
+        $this->deleteStatistics($type, $season, $position);
 
-        $appearances = $this->fetchMatches($type, $season);
+        $positions = $this->fetchPositions($position);
+        $appearances = $this->fetchMatches($type, $season, $positions);
 
         $players = array();
 
         foreach ($appearances as $appearance) {
             if (!isset($players[$appearance->player_id])) {
-                $players[$appearance->player_id] = $this->createObject($appearance->player_id, $type, $season);
+                $players[$appearance->player_id] = $this->createObject($appearance->player_id, $type, $season, $position);
             }
 
             $players[$appearance->player_id] = $this->calculatePointsFromAppearance($players[$appearance->player_id], $appearance);
@@ -391,25 +468,28 @@ WHERE " . implode(" \r\nAND ", $whereConditions) : '');
      * Delete statistics
      * @param  boolean|string $type    Generate by competition type, set to false for "overall"
      * @param  int|NULL $season        Season to generate, set to null for entire career
-     * @return boolean            Were rows deleted
+     * @param  string $position        Playing Position
+     * @return boolean                 Were rows deleted
      */
-    public function deleteStatistics($type = false, $season = NULL)
+    public function deleteStatistics($type = false, $season = NULL, $position = 'all')
     {
-        return $this->deleteRows($type, $season);
+        return $this->deleteRows($type, $season, $position);
     }
 
     /**
      * Particular Player Statistics, based on Season and/or Competition Type
      * @param  boolean  $byType     Generate by competition type, set to false for "overall"
      * @param  int|NULL $season     Season to generate, set to null for entire career
+     * @param  string $position        Playing Position
      * @return boolean              Whether query was executed correctly
      */
-    public function deleteRows($type = false, $season = NULL)
+    public function deleteRows($type = false, $season = NULL, $position = 'all')
     {
         $whereConditions = array();
 
-        $whereConditions['type']   = $type ? $type : 'overall';
-        $whereConditions['season'] = $season ? $season : 'career';
+        $whereConditions['type']     = $type ? $type : 'overall';
+        $whereConditions['season']   = $season ? $season : 'career';
+        $whereConditions['position'] = $position;
 
         return $this->db->delete($this->tableName, $whereConditions);
     }

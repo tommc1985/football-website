@@ -875,6 +875,11 @@ class Install_Model extends CI_Model {
                 'constraint'     => 4,
                 'null'           => true,
             ),
+            'position' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 3,
+                'default'        => 'all',
+            ),
             'in_progress' => array(
                 'type'           => 'TINYINT',
                 'constraint'     => 1,
