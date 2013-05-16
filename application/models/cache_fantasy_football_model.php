@@ -59,7 +59,6 @@ class Cache_Fantasy_Football_model extends CI_Model {
     public function insertEntries($season = NULL)
     {
         foreach ($this->positions as $position) {
-            //$this->insertEntry(NULL, NULL, $position);
             $this->insertEntry(1, NULL, $position);
         }
 
@@ -68,7 +67,6 @@ class Cache_Fantasy_Football_model extends CI_Model {
             while($i <= Season_model::fetchCurrentSeason()){
 
                 foreach ($this->positions as $position) {
-                    //$this->insertEntry(NULL, $i, $position);
                     $this->insertEntry(1, $i, $position);
                 }
 
@@ -76,7 +74,6 @@ class Cache_Fantasy_Football_model extends CI_Model {
             }
         } else {
             foreach ($this->positions as $position) {
-                //$this->insertEntry(NULL, $season, $position);
                 $this->insertEntry(1, $season, $position);
             }
         }
