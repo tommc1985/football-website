@@ -34,7 +34,7 @@ class Player_model extends Base_Frontend_Model {
             ->where('cpas.type', $type)
             ->where('cpas.season', $season)
             ->where('p.deleted', 0)
-            ->order_by($orderBy, $order);
+            ->order_by($this->getOrderBy($orderBy), $this->getOrder($order));
 
         return $this->db->get()->result();
     }
