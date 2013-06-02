@@ -1,0 +1,79 @@
+@media only screen and (max-width: 767px) {
+    table.flip-scroll .cf:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+    table.flip-scroll * html .cf { zoom: 1; }
+    table.flip-scroll *:first-child+html .cf { zoom: 1; }
+
+    table.flip-scroll { width: 100%; border-collapse: collapse; border-spacing: 0; }
+
+    table.flip-scroll th,
+    table.flip-scroll td { margin: 0; vertical-align: top; }
+    table.flip-scroll th { text-align: left; }
+
+    table.flip-scroll { display: block; position: relative; width: 100%; }
+    table.flip-scroll thead { display: block; float: left; }
+    table.flip-scroll tbody { display: block; width: auto; position: relative; overflow-x: auto; white-space: nowrap; }
+    table.flip-scroll thead tr { display: block; }
+    table.flip-scroll th { display: block; text-align: right; }
+    table.flip-scroll tbody tr { display: inline-block; vertical-align: top; }
+    table.flip-scroll td { display: block; min-height: 1.25em; text-align: left; }
+    table.flip-scroll th { min-height: 1.25em; }
+
+    /* sort out borders */
+
+    table.flip-scroll th { border-bottom: 0; border-left: 0; }
+    table.flip-scroll td { border-left: 0; border-right: 0; border-bottom: 0; }
+    table.flip-scroll tbody tr { border-left: 1px solid #babcbf; }
+    table.flip-scroll th:last-child,
+    table.flip-scroll td:last-child { border-bottom: 1px solid #babcbf; }
+}
+
+
+@media only screen and (max-width: 767px) {
+
+    /* Force table to not be like tables anymore */
+    table.no-more-tables,
+    table.no-more-tables thead,
+    table.no-more-tables tbody,
+    table.no-more-tables th,
+    table.no-more-tables td,
+    table.no-more-tables tr {
+        display: block;
+    }
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+    table.no-more-tables thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    table.no-more-tables tr { border: 1px solid #ccc; }
+
+    table.no-more-tables td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+        white-space: normal;
+        text-align:left;
+    }
+
+    table.no-more-tables td:before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align:left;
+        font-weight: bold;
+    }
+
+    /*
+    Label the data
+    */
+    table.no-more-tables td:before { content: attr(data-title); }
+}
