@@ -69,7 +69,7 @@ class Match_helper
         $resultPens = '';
 
         if (is_null($match->status) && is_null($match->h) && is_null($match->date)) {
-            return $ci->lang->line('match_t_b_c');
+            return '-';
         }
 
         if (is_null($match->status) && is_null($match->h) && !is_null($match->date)) {

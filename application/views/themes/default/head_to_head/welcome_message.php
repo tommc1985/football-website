@@ -67,7 +67,7 @@ if ($opposition) { ?>
     if ($matches) {
         foreach ($matches as $match) { ?>
             <tr>
-                <td data-title="<?php echo $this->lang->line("match_date"); ?>"><?php echo Utility_helper::formattedDate($match->date, "jS M 'y"); ?>&nbsp;</td>
+                <td data-title="<?php echo $this->lang->line("match_date"); ?>"><?php echo $match->date ? Utility_helper::formattedDate($match->date, "jS M 'y") : $this->lang->line('match_t_b_c'); ?></td>
                 <td data-title="<?php echo $this->lang->line("match_competition"); ?>"><?php echo Match_helper::fullCompetitionNameCombined($match); ?></td>
                 <td data-title="<?php echo $this->lang->line("match_venue"); ?>"><?php echo Match_helper::venue($match); ?></td>
                 <td data-title="<?php echo $this->lang->line("match_score"); ?>"><a href="/match/view/id/<?php echo $match->id; ?>" title=""><?php echo Match_helper::score($match); ?></a></td>

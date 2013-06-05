@@ -20,13 +20,14 @@ class Match_model extends Base_Frontend_Model {
 
     /**
      * Fetch list of players based on season, competition type, and ordered by a particular field in asc or desc order
-     * @param  mixed $season   Four digit season or 'career'
-     * @param  string $type    Competition type
-     * @param  string $orderBy Field to order data by
-     * @param  string $order   Sort Order of data ('asc' or 'desc')
-     * @return array           List of Players
+     * @param  mixed $season        Four digit season or 'career'
+     * @param  string $type         Competition type
+     * @param  string $orderBy      Field to order data by
+     * @param  string $order        Sort Order of data ('asc' or 'desc')
+     * @param  string $includeTBC   Include matches that are not yet set
+     * @return array                List of Players
      */
-    public function fetchMatchList($season, $type, $orderBy, $order)
+    public function fetchMatchList($season, $type, $orderBy, $order, $includeTBC = false)
     {
         $this->db->select('*')
             ->from($this->tableName)
@@ -37,6 +38,10 @@ class Match_model extends Base_Frontend_Model {
             $this->ci->load->model('Season_model');
             $startEndDates = Season_model::generateStartEndDates($season, NULL, NULL, false);
             $this->db->where($startEndDates);
+        }
+
+        if ($includeTBC) {
+            $this->db->or_where('date', NULL);
         }
 
         return $this->db->get()->result();

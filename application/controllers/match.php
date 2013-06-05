@@ -41,7 +41,7 @@ class Match extends Frontend_Controller {
         $orderBy = $this->Match_model->getOrderBy($parameters['order-by']);
         $order = $this->Match_model->getOrder($parameters['order']);
 
-        $matches = $this->Match_model->fetchMatchList($season, $type, $orderBy, $order);
+        $matches = $this->Match_model->fetchMatchList($season, $type, $orderBy, $order, Season_model::fetchCurrentSeason() == $season);
 
         $data = array(
             'matches' => $matches,
