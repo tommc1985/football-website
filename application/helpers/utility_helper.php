@@ -51,7 +51,7 @@ class Utility_helper
     {
         $timestamp = self::_convertDate($date);
 
-        return $date == '' ? '' : date("d/m/y", $timestamp);
+        return $date == '' ? '&nbsp;' : date("d/m/y", $timestamp);
     }
 
     /**
@@ -63,7 +63,7 @@ class Utility_helper
     {
         $timestamp = self::_convertDate($date);
 
-        return $date == '' ? '' : date("l jS F Y, g.ia", $timestamp);
+        return $date == '' ? '&nbsp;' : date("l jS F Y, g.ia", $timestamp);
     }
 
     /**
@@ -76,7 +76,7 @@ class Utility_helper
     {
         $timestamp = self::_convertDate($date);
 
-        return $date == '' ? '' : date($format, $timestamp);
+        return $date == '' ? '&nbsp;' : date($format, $timestamp);
     }
 
     /**
