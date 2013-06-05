@@ -21,31 +21,31 @@ echo form_close(); ?>
 <?php
 if ($opposition) { ?>
 <h3><?php echo $this->lang->line('head_to_head_accumulated_statistics'); ?></h3>
-<table>
+<table class="no-more-tables">
     <thead>
         <tr>
             <td></td>
-            <td>P</td>
-            <td>W</td>
-            <td>D</td>
-            <td>L</td>
-            <td>F</td>
-            <td>A</td>
-            <td>GD</td>
+            <td><?php echo $this->lang->line("head_to_head_p"); ?></td>
+            <td><?php echo $this->lang->line("head_to_head_w"); ?></td>
+            <td><?php echo $this->lang->line("head_to_head_d"); ?></td>
+            <td><?php echo $this->lang->line("head_to_head_l"); ?></td>
+            <td><?php echo $this->lang->line("head_to_head_f"); ?></td>
+            <td><?php echo $this->lang->line("head_to_head_a"); ?></td>
+            <td><?php echo $this->lang->line("head_to_head_gd"); ?></td>
         </tr>
     </thead>
     <tbody>
     <?php
     foreach ($accumulatedData as $venue => $data) { ?>
         <tr>
-            <td><?php echo $this->lang->line("head_to_head_{$venue}"); ?></td>
-            <td><?php echo $data->p; ?></td>
-            <td><?php echo $data->w; ?></td>
-            <td><?php echo $data->d; ?></td>
-            <td><?php echo $data->l; ?></td>
-            <td><?php echo $data->f; ?></td>
-            <td><?php echo $data->a; ?></td>
-            <td><?php echo $data->gd; ?></td>
+            <td><?php echo $this->lang->line("head_to_head_venue_{$venue}"); ?></td>
+            <td data-title="<?php echo $this->lang->line('head_to_head_played'); ?>"><?php echo $data->p; ?></td>
+            <td data-title="<?php echo $this->lang->line('head_to_head_won'); ?>"><?php echo $data->w; ?></td>
+            <td data-title="<?php echo $this->lang->line('head_to_head_drawn'); ?>"><?php echo $data->d; ?></td>
+            <td data-title="<?php echo $this->lang->line('head_to_head_lost'); ?>"><?php echo $data->l; ?></td>
+            <td data-title="<?php echo $this->lang->line('head_to_head_for'); ?>"><?php echo $data->f; ?></td>
+            <td data-title="<?php echo $this->lang->line('head_to_head_against'); ?>"><?php echo $data->a; ?></td>
+            <td data-title="<?php echo $this->lang->line('head_to_head_goal_difference'); ?>"><?php echo $data->gd; ?></td>
         </tr>
     <?php
     } ?>
@@ -53,7 +53,7 @@ if ($opposition) { ?>
 </table>
 
 <h3><?php echo $this->lang->line('head_to_head_matches'); ?></h3>
-<table>
+<table class="no-more-tables">
     <thead>
         <tr>
             <td><?php echo $this->lang->line("match_date"); ?></td>
@@ -67,10 +67,10 @@ if ($opposition) { ?>
     if ($matches) {
         foreach ($matches as $match) { ?>
             <tr>
-                <td><?php echo Utility_helper::formattedDate($match->date, "jS M 'y"); ?></td>
-                <td><?php echo Match_helper::fullCompetitionNameCombined($match); ?></td>
-                <td><?php echo Match_helper::venue($match); ?></td>
-                <td><a href="/match/view/id/<?php echo $match->id; ?>" title=""><?php echo Match_helper::score($match); ?></a></td>
+                <td data-title="<?php echo $this->lang->line("match_date"); ?>"><?php echo Utility_helper::formattedDate($match->date, "jS M 'y"); ?>&nbsp;</td>
+                <td data-title="<?php echo $this->lang->line("match_competition"); ?>"><?php echo Match_helper::fullCompetitionNameCombined($match); ?></td>
+                <td data-title="<?php echo $this->lang->line("match_venue"); ?>"><?php echo Match_helper::venue($match); ?></td>
+                <td data-title="<?php echo $this->lang->line("match_score"); ?>"><a href="/match/view/id/<?php echo $match->id; ?>" title=""><?php echo Match_helper::score($match); ?></a></td>
             </tr>
         <?php
         }
@@ -82,7 +82,7 @@ if ($opposition) { ?>
     } ?>
 </table>
 <h3><?php echo $this->lang->line('head_to_head_top_scorers'); ?></h3>
-<table>
+<table class="">
     <thead>
         <tr>
             <td><?php echo $this->lang->line("head_to_head_player"); ?></td>
@@ -94,8 +94,8 @@ if ($opposition) { ?>
     if ($scorers) {
         foreach ($scorers as $scorer) { ?>
             <tr>
-                <td><?php echo Player_helper::fullNameReverse($scorer->player_id); ?></td>
-                <td><?php echo $scorer->goals; ?></td>
+                <td data-title="<?php echo $this->lang->line("head_to_head_player"); ?>"><?php echo Player_helper::fullNameReverse($scorer->player_id); ?></td>
+                <td data-title="<?php echo $this->lang->line("head_to_head_goals"); ?>"><?php echo $scorer->goals; ?></td>
             </tr>
         <?php
         }
@@ -108,7 +108,7 @@ if ($opposition) { ?>
 </table>
 
 <h3><?php echo $this->lang->line('head_to_head_top_assisters'); ?></h3>
-<table>
+<table class="">
     <thead>
         <tr>
             <td><?php echo $this->lang->line("head_to_head_player"); ?></td>
@@ -120,8 +120,8 @@ if ($opposition) { ?>
     if ($assisters) {
         foreach ($assisters as $assister) { ?>
             <tr>
-                <td><?php echo Player_helper::fullNameReverse($assister->player_id); ?></td>
-                <td><?php echo $assister->assists; ?></td>
+                <td data-title="<?php echo $this->lang->line("head_to_head_player"); ?>"><?php echo Player_helper::fullNameReverse($assister->player_id); ?></td>
+                <td data-title="<?php echo $this->lang->line("head_to_head_assists"); ?>"><?php echo $assister->assists; ?></td>
             </tr>
         <?php
         }
