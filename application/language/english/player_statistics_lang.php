@@ -26,11 +26,11 @@ $lang['player_statistics_average_points_gained_explanation']               = 'Th
 
 $lang['player_statistics_real_points']                                     = 'Real Points';
 $lang['player_statistics_no_real_points']                                  = 'No "Real Points" statistics to display, most likely due to no matches being completed';
-$lang['player_statistics_real_points_explanation']                         = 'The total number of points that have been gained when a player has appeared in matches.';
+$lang['player_statistics_real_points_explanation']                         = 'The total number of points that have been earned when a player has appeared in matches.';
 
 $lang['player_statistics_average_points']                                  = 'Average Points';
 $lang['player_statistics_no_average_points']                               = 'No "Average Points" statistics to display, most likely due to no matches being completed';
-$lang['player_statistics_average_points_explanation']                      = 'The average points per game that have been gained when a player has appeared in matches.';
+$lang['player_statistics_average_points_explanation']                      = 'The average points per game that have been earned when a player has appeared in matches.';
 
 $lang['player_statistics_real_goals_gained']                               = 'Real Goals Gained';
 $lang['player_statistics_no_real_goals_gained']                            = 'No "Real Goals Gained" statistics to display, most likely due to no matches being completed';
