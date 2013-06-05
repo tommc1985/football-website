@@ -1,41 +1,41 @@
 <h2><?php echo $this->lang->line('fantasy_football_title'); ?> - <?php echo Utility_helper::formattedSeason($season); ?><?php echo ($type != 'overall' ? ' (' . Competition_helper::type($type) . ' ' . $this->lang->line("club_statistics_matches") . ')' : ''); ?></h2>
 
-<table>
+<table class="no-more-tables">
     <thead>
         <tr>
             <td><?php echo $this->lang->line('fantasy_football_player'); ?></td>
             <td><?php echo $this->lang->line('fantasy_football_appearances'); ?></td>
-            <td><?php echo $this->lang->line('fantasy_football_points'); ?></td>
             <td><?php echo $this->lang->line('fantasy_football_points_per_game'); ?></td>
+            <td><?php echo $this->lang->line('fantasy_football_points'); ?></td>
         </tr>
     </thead>
     <tbody>
         <?php
         foreach ($fantasyFootballData as $player) { ?>
         <tr>
-            <td><?php echo Player_helper::fullNameReverse($player->player_id); ?></td>
-            <td><?php echo $player->appearances; ?></td>
-            <td><?php echo $player->total_points; ?></td>
-            <td><?php echo $player->points_per_game; ?></td>
+            <td data-title="<?php echo $this->lang->line('fantasy_football_player'); ?>"><?php echo Player_helper::fullNameReverse($player->player_id); ?></td>
+            <td data-title="<?php echo $this->lang->line('fantasy_football_appearances'); ?>"><?php echo $player->appearances; ?></td>
+            <td data-title="<?php echo $this->lang->line('fantasy_football_points_per_game'); ?>"><?php echo $player->points_per_game; ?></td>
+            <td data-title="<?php echo $this->lang->line('fantasy_football_points'); ?>"><?php echo $player->total_points; ?></td>
         </tr>
         <?php
         } ?>
     </tbody>
 </table>
 
-<table>
+<table class="no-more-tables">
     <thead>
         <tr>
             <td><?php echo $this->lang->line('fantasy_football_player'); ?></td>
-            <td></td>
+            <td><?php echo $this->lang->line('fantasy_football_position'); ?></td>
         </tr>
     </thead>
     <tbody>
         <?php
         foreach ($bestLineup as $position => $playerId) { ?>
         <tr>
-            <td><?php echo Player_helper::fullNameReverse($playerId); ?></td>
-            <td><?php echo $position; ?></td>
+            <td data-title="<?php echo $this->lang->line('fantasy_football_player'); ?>"><?php echo Player_helper::fullNameReverse($playerId); ?></td>
+            <td data-title="<?php echo $this->lang->line('fantasy_football_position'); ?>"><?php echo $position; ?></td>
         </tr>
         <?php
         } ?>
