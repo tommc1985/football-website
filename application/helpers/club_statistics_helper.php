@@ -55,8 +55,13 @@ class Club_Statistics_helper
         echo '<h3>' . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>';
         echo $sequences[0]->sequence; ?> <?php echo $sequences[0]->sequence == 1 ? $ci->lang->line("club_statistics_match") : $ci->lang->line("club_statistics_matches"); ?><br /><?php
         foreach ($sequences as $sequence) {
-            echo Utility_helper::shortDate($sequence->sequenceStart); ?> - <?php echo Utility_helper::shortDate($sequence->sequenceFinish); ?><br />
-        <?php
+            if ($sequence->sequence == 1) {
+                echo Utility_helper::shortDate($sequence->sequenceStart); ?><br />
+            <?php
+            } else {
+                echo Utility_helper::shortDate($sequence->sequenceStart); ?> - <?php echo Utility_helper::shortDate($sequence->sequenceFinish); ?><br />
+            <?php
+            }
         }
     }
 

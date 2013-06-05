@@ -51,7 +51,7 @@ class Utility_helper
     {
         $timestamp = self::_convertDate($date);
 
-        return $date == '' ? '&nbsp;' : date("d/m/y", $timestamp);
+        return $date == '' ? '&nbsp;' : date("jS M Y", $timestamp);
     }
 
     /**
