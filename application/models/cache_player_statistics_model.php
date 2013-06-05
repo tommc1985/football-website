@@ -47,12 +47,12 @@ class Cache_Player_Statistics_model extends CI_Model {
             'average_clean_sheets'                 => 'averageCleanSheets',
             'consecutive_games_scored'             => 'consecutiveGamesScored',
             'consecutive_games_assisted'           => 'consecutiveGamesAssisted',
-            'most_common_two_player_combination'   => 'mostCommonTwoPlayerCombination',
             'most_common_centre_back_pairing'      => 'mostCommonCentreBackPairing',
             'most_common_centre_midfield_pairing'  => 'mostCommonCentreMidfieldPairing',
             'most_common_right_hand_side_pairing'  => 'mostCommonRightHandSidePairing',
             'most_common_left_hand_side_pairing'   => 'mostCommonLeftHandSidePairing',
             'most_common_strike_partner'           => 'mostCommonStrikePartner',
+            'most_common_two_player_combination'   => 'mostCommonTwoPlayerCombination',
         );
 
         $this->otherMethodMap = array(
