@@ -1,5 +1,9 @@
-<h2><?php echo $this->lang->line('player_statistics_title'); ?> - <?php echo Utility_helper::formattedSeason($season); ?><?php echo ($type != 'overall' ? ' (' . Competition_helper::type($type) . ' ' . $this->lang->line("player_statistics_matches") . ')' : ''); ?></h2>
+<div class="row-fluid">
+    <div class="span12">
+        <h2><?php echo $this->lang->line('player_statistics_title'); ?> - <?php echo Utility_helper::formattedSeason($season); ?><?php echo ($type != 'overall' ? ' (' . Competition_helper::type($type) . ' ' . $this->lang->line("player_statistics_matches") . ')' : ''); ?></h2>
 
+        <div class="row-fluid">
+            <div class="span12">
 <?php
 echo form_open($this->uri->uri_string());
 
@@ -46,8 +50,6 @@ echo form_dropdown($inputUnit['name'], $inputUnit['options'], $inputUnit['value'
 echo form_submit('submit', $this->lang->line('player_statistics_show'));
 echo form_close(); ?>
 
-
-
 <p><?php
 echo $this->lang->line('player_statistics_threshold_current');
 if ($unit == 'percentage') {
@@ -56,14 +58,59 @@ if ($unit == 'percentage') {
     echo sprintf($this->lang->line('player_statistics_threshold_matches'), $thresholdMatches);
 } ?></p>
 
+            </div>
+        </div>
+
 <?php
+$i = 0;
 foreach($this->Cache_Player_Statistics_model->methodMap as $statisticGroup => $method) {
     foreach ($venues as $venue) {
-        Player_Statistics_helper::$method($statistics, $venue, $thresholdMatches);
+        if (0 == $i % 2) { ?>
+        <div class="row-fluid">
+        <?php
+        } ?>
+            <div class="span6">
+                <?php
+        Player_Statistics_helper::$method($statistics, $venue, $thresholdMatches); ?>
+            </div>
+        <?php
+        if (1 == $i % 2) { ?>
+        </div>
+        <?php
+        }
+
+        $i++;
     }
+}
+
+if (1 == $i % 2) { ?>
+</div>
+<?php
 } ?>
 
 <?php
+$i = 0;
 foreach($this->Cache_Player_Statistics_model->hungryMethodMap as $statisticGroup => $method) {
-    Player_Statistics_helper::$method($statistics, $thresholdMatches);
+    if (0 == $i % 2) { ?>
+        <div class="row-fluid">
+    <?php
+    } ?>
+            <div class="span6">
+                        <?php
+    Player_Statistics_helper::$method($statistics, $thresholdMatches); ?>
+            </div>
+        <?php
+    if (1 == $i % 2) { ?>
+        </div>
+    <?php
+    }
+
+    $i++;
+}
+
+if (1 == $i % 2) { ?>
+        </div>
+<?php
 } ?>
+    </div>
+</div>

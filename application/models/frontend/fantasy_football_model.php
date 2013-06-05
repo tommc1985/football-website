@@ -212,9 +212,6 @@ class Fantasy_Football_model extends Base_Frontend_Model {
 
             // Find Best Formation
             $FantasyFootballStable = new FantasyFootballStable($listOfPlayers, $positions, $preferredPositions, $preferredPlayers);
-            echo '<pre>';
-            $FantasyFootballStable->checkMatches();
-            echo '</pre>';
 
             return $FantasyFootballStable->matches;
         }

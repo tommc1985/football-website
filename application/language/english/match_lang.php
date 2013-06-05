@@ -81,6 +81,7 @@ $lang['match_milestones']                        = 'Milestones';
 $lang['match_n']                                 = 'N';
 $lang['match_neutral']                           = 'Neutral';
 $lang['match_no_cards_for_this_match']           = 'No Cards were issued in this match';
+$lang['match_no_goals_for_this_match']           = 'No Goals were scored in this match';
 $lang['match_no_matches_found']                  = 'No matches can be found for the season %s';
 $lang['match_o']                                 = 'O';
 $lang['match_on_penalties']                      = 'on penalties';
