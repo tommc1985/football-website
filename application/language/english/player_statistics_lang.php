@@ -34,7 +34,7 @@ $lang['player_statistics_average_points_explanation']                      = 'Th
 
 $lang['player_statistics_real_goals_gained']                               = 'Real Goals Gained';
 $lang['player_statistics_no_real_goals_gained']                            = 'No "Real Goals Gained" statistics to display, most likely due to no matches being completed';
-$lang['player_statistics_real_goals_gained_explanation']                   = 'The number of goals (scored or asssisted) a player has been involved in.';
+$lang['player_statistics_real_goals_gained_explanation']                   = 'The number of goals (scored or assisted) a player has been involved in.';
 $lang['player_statistics_average_goals_gained']                            = 'Average Goals Gained';
 $lang['player_statistics_no_average_goals_gained']                         = 'No "Average Goals Gained" statistics to display, most likely due to no matches being completed';
 $lang['player_statistics_average_goals_gained_explanation']                = 'The average number of goals and assists a player has made per game.';
