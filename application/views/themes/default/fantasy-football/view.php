@@ -39,12 +39,14 @@
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($bestLineup as $position => $playerId) { ?>
+                        if ($bestLineup !== false) {
+                            foreach ($bestLineup as $position => $playerId) { ?>
                         <tr>
                             <td data-title="<?php echo $this->lang->line('fantasy_football_player'); ?>"><?php echo Player_helper::fullNameReverse($playerId); ?></td>
                             <td data-title="<?php echo $this->lang->line('fantasy_football_position'); ?>"><?php echo $position; ?></td>
                         </tr>
                         <?php
+                            }
                         } ?>
                     </tbody>
                 </table>

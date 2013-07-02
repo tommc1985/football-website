@@ -24,7 +24,7 @@ class Fantasy_Football extends Frontend_Controller {
      */
     public function view()
     {
-        $parameters = $this->uri->uri_to_assoc(3, array('season', 'type', 'order-by', 'position'));
+        $parameters = $this->uri->uri_to_assoc(3, array('season', 'type', 'order-by', 'position', 'formation'));
 
         $season = Season_model::fetchCurrentSeason();
         if ($parameters['season'] !== false) {
@@ -45,6 +45,11 @@ class Fantasy_Football extends Frontend_Controller {
             $position = $parameters['position'];
         }
 
+        $formation = '4-4-2';
+        if ($parameters['formation'] !== false) {
+            $formation = $parameters['formation'];
+        }
+
         $orderBy = '';
         if ($parameters['order-by'] !== false) {
             $orderBy = $parameters['order-by'];
@@ -52,7 +57,7 @@ class Fantasy_Football extends Frontend_Controller {
 
         $fantasyFootballData = $this->Fantasy_Football_model->fetchAll($season == 'all-time' ? 'career' : $season, $type, $position, $orderBy);
 
-        $bestLineup = $this->Fantasy_Football_model->fetchBestLineup('3_4_3', $season == 'all-time' ? 'career' : $season, $type, $orderBy);
+        $bestLineup = $this->Fantasy_Football_model->fetchBestLineup($formation, $season == 'all-time' ? 'career' : $season, $type, $orderBy);
 
         $data = array(
             'fantasyFootballData' => $fantasyFootballData,
