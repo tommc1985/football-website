@@ -191,7 +191,7 @@ class Fantasy_Football_model extends Base_Frontend_Model {
             ),
             '4-2-3-1' => array(
                 'name' => '4-2-3-1',
-                'positions' => array("gk", "rb", "lb", "cb1", "cb2", "dm1", "dm2", "rm", "lm", "am1", "st1", "sub2", "sub3", "sub4", "sub5"),
+                'positions' => array("gk", "rb", "lb", "cb1", "cb2", "dm1", "dm2", "rm", "lm", "am", "st1", "sub2", "sub3", "sub4", "sub5"),
             ),
             '5-4-1' => array(
                 'name' => '5-4-1',
