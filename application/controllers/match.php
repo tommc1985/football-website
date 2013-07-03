@@ -64,7 +64,7 @@ class Match extends Frontend_Controller {
         $match = $this->Match_model->fetchMatchDetails($parameters['id']);
 
         if ($match === false) {
-            show_error('Match cannot be found', 404);
+            show_error($this->lang->line('match_not_found'), 404);
         }
 
         $data = array(
