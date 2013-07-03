@@ -109,7 +109,7 @@
     bottom: 110px;
 }
 
-.position.cb1, .position.cb2, .position.cb3, .formation-4-4-2 .position.cb1, .formation-4-4-2 .position.cb2, .formation-4-3-3-wide .position.cb1, .formation-4-3-3-wide .position.cb2, .formation-4-3-3-narrow .position.cb1, .formation-4-3-3-narrow .position.cb2, .formation-4-2-4 .position.cb1, .formation-4-2-4 .position.cb2, .formation-4-5-1 .position.cb1, .formation-4-5-1 .position.cb2 {
+.position.cb1, .position.cb2, .position.cb3, .formation-4-4-2 .position.cb1, .formation-4-4-2 .position.cb2, .formation-4-3-3-wide .position.cb1, .formation-4-3-3-wide .position.cb2, .formation-4-3-3-narrow .position.cb1, .formation-4-3-3-narrow .position.cb2, .formation-4-2-4 .position.cb1, .formation-4-2-4 .position.cb2, .formation-4-5-1 .position.cb1, .formation-4-5-1 .position.cb2, .formation-4-2-3-1 .position.cb1, .formation-4-2-3-1 .position.cb2 {
     bottom: 100px;
 }
 
@@ -150,6 +150,10 @@
     left: 120px;
 }
 
+.formation-4-2-3-1 .position.cb1, .formation-4-2-3-1 .position.cb2 {
+    bottom: 90px;
+}
+
 
 
 .position.rwb, .formation-5-3-2 .position.rwb, .position.lwb, .formation-5-3-2 .position.lwb, .formation-5-3-2-sweeper .position.lwb {
@@ -165,7 +169,7 @@
 }
 
 
-.position.dm1, .position.dm2, .formation-4-4-2-diamond .position.dm, .formation-3-5-2 .position.dm, .formation-3-6-1 .position.dm1, .formation-3-6-1 .position.dm2 {
+.position.dm1, .position.dm2, .formation-4-4-2-diamond .position.dm, .formation-3-5-2 .position.dm, .formation-3-6-1 .position.dm1, .formation-3-6-1 .position.dm2, .formation-4-2-3-1 .position.dm1, .formation-4-2-3-1 .position.dm2 {
     bottom: 160px;
 }
 
@@ -173,11 +177,11 @@
     left: 120px;
 }
 
-.formation-3-6-1 .position.dm1 {
+.formation-3-6-1 .position.dm1, .formation-4-2-3-1 .position.dm1 {
     left: 80px;
 }
 
-.formation-3-6-1 .position.dm2 {
+.formation-3-6-1 .position.dm2, .formation-4-2-3-1 .position.dm2 {
     left: 160px;
 }
 
@@ -196,12 +200,12 @@
 }
 
 
-.position.rm, .formation-4-4-2 .position.rm, .formation-3-4-3 .position.rm, .formation-4-5-1 .position.rm, .formation-5-4-1 .position.rm {
+.position.rm, .formation-4-4-2 .position.rm, .formation-3-4-3 .position.rm, .formation-4-5-1 .position.rm, .formation-5-4-1 .position.rm, .formation-4-2-3-1 .position.rm {
     left: 240px;
     bottom: 240px;
 }
 
-.position.lm, .formation-4-4-2 .position.lm, .formation-3-4-3 .position.lm, .formation-4-5-1 .position.lm, .formation-5-4-1 .position.lm {
+.position.lm, .formation-4-4-2 .position.lm, .formation-3-4-3 .position.lm, .formation-4-5-1 .position.lm, .formation-5-4-1 .position.lm, .formation-4-2-3-1 .position.lm {
     left: 0;
     bottom: 240px;
 }
@@ -275,11 +279,11 @@
 
 
 
-.formation-4-4-2-diamond .position.am {
+.formation-4-4-2-diamond .position.am, .formation-4-2-3-1 .position.am {
     left: 120px;
 }
 
-.formation-4-4-2-diamond .position.am {
+.formation-4-4-2-diamond .position.am, .formation-4-2-3-1 .position.am {
     bottom: 280px;
 }
 
@@ -307,7 +311,7 @@
 
 
 
-.position.st1, .position.st2, .position.st3, .formation-4-4-2 .position.st1, .formation-4-4-2 .position.st2, .formation-4-2-4 .position.st1, .formation-4-2-4 .position.st2, .formation-5-3-2 .position.st1, .formation-5-3-2 .position.st2, .formation-4-4-1-1 .position.st1, .formation-4-3-2-1 .position.st1, .formation-5-3-2-sweeper .position.st1 {
+.position.st1, .position.st2, .position.st3, .formation-4-4-2 .position.st1, .formation-4-4-2 .position.st2, .formation-4-2-4 .position.st1, .formation-4-2-4 .position.st2, .formation-5-3-2 .position.st1, .formation-5-3-2 .position.st2, .formation-4-4-1-1 .position.st1, .formation-4-3-2-1 .position.st1, .formation-5-3-2-sweeper .position.st1, .formation-4-2-3-1 .position.st1 {
     bottom: 350px;
 }
 
@@ -319,7 +323,7 @@
     left: 160px;
 }
 
-.formation-3-4-3 .position.st1, .formation-4-3-3-wide .position.st1, .formation-4-3-3-narrow .position.st1, .formation-4-5-1 .position.st1, .formation-5-4-1 .position.st1, .formation-4-3-2-1 .position.st1, .formation-3-6-1 .position.st1 {
+.formation-3-4-3 .position.st1, .formation-4-3-3-wide .position.st1, .formation-4-3-3-narrow .position.st1, .formation-4-5-1 .position.st1, .formation-5-4-1 .position.st1, .formation-4-3-2-1 .position.st1, .formation-3-6-1 .position.st1, .formation-4-2-3-1 .position.st1 {
     left: 120px;
 }
 
