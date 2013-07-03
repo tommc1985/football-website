@@ -206,7 +206,19 @@
     bottom: 240px;
 }
 
-.position.cm1, .position.cm2, .position.cm3, .formation-4-4-2 .position.cm1, .formation-4-4-2 .position.cm2, .formation-3-4-3 .position.cm1, .formation-3-4-3 .position.cm2, .formation-4-2-4 .position.cm1, .formation-4-2-4 .position.cm2, .formation-4-5-1 .position.cm1, .formation-4-5-1 .position.cm2 {
+.formation-4-5-1 .position.rm {
+    left: 240px;
+    bottom: 260px;
+}
+
+.formation-4-5-1 .position.lm {
+    left: 0;
+    bottom: 260px;
+}
+
+
+
+.position.cm1, .position.cm2, .position.cm3, .formation-4-4-2 .position.cm1, .formation-4-4-2 .position.cm2, .formation-3-4-3 .position.cm1, .formation-3-4-3 .position.cm2, .formation-4-2-4 .position.cm1, .formation-4-2-4 .position.cm2, .formation-4-5-1 .position.cm1, .formation-4-5-1 .position.cm2, .formation-4-5-1 .position.cm3 {
     bottom: 210px;
 }
 
@@ -235,15 +247,15 @@
 }
 
 
-.position.cm3, .formation-4-3-3-wide .position.cm1, .formation-4-3-3-narrow .position.cm1, .formation-5-3-2 .position.cm1, .formation-4-3-2-1 .position.cm1, .formation-5-3-2-sweeper .position.cm1 {
+.position.cm3, .formation-4-3-3-wide .position.cm1, .formation-4-3-3-narrow .position.cm1, .formation-5-3-2 .position.cm1, .formation-4-3-2-1 .position.cm1, .formation-5-3-2-sweeper .position.cm1, .formation-4-5-1 .position.cm1 {
     left: 120px;
 }
 
-.formation-4-3-3-wide .position.cm2, .formation-4-3-3-narrow .position.cm2, .formation-5-3-2 .position.cm2, .formation-4-3-2-1 .position.cm2, .formation-5-3-2-sweeper .position.cm2 {
+.formation-4-3-3-wide .position.cm2, .formation-4-3-3-narrow .position.cm2, .formation-5-3-2 .position.cm2, .formation-4-3-2-1 .position.cm2, .formation-5-3-2-sweeper .position.cm2, .formation-4-5-1 .position.cm2 {
     left: 40px;
 }
 
-.formation-4-3-3-wide .position.cm3, .formation-4-3-3-narrow .position.cm3, .formation-5-3-2 .position.cm3, .formation-4-3-2-1 .position.cm3, .formation-5-3-2-sweeper .position.cm3 {
+.formation-4-3-3-wide .position.cm3, .formation-4-3-3-narrow .position.cm3, .formation-5-3-2 .position.cm3, .formation-4-3-2-1 .position.cm3, .formation-5-3-2-sweeper .position.cm3, .formation-4-5-1 .position.cm3 {
     left: 200px;
 }
 
