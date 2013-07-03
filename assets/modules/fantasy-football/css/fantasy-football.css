@@ -71,7 +71,7 @@
 
 
 
-.formation-5-a-side .position.def1, .formation-7-a-side .position.def1, .formation-7-a-side .position.def2 {
+.formation-5-a-side .position.def1, .formation-7-a-side .position.def1, .formation-6-a-side .position.def1, .formation-6-a-side .position.def2, .formation-7-a-side .position.def2 {
     bottom: 100px;
 }
 
@@ -79,11 +79,11 @@
     left: 120px;
 }
 
-.formation-7-a-side .position.def1 {
+.formation-6-a-side .position.def1, .formation-7-a-side .position.def1 {
     left: 60px;
 }
 
-.formation-7-a-side .position.def2 {
+.formation-6-a-side .position.def2, .formation-7-a-side .position.def2 {
     left: 180px;
 }
 
@@ -187,15 +187,15 @@
 
 
 
-.formation-5-a-side .position.mid1, .formation-5-a-side .position.mid2, .formation-7-a-side .position.mid1, .formation-7-a-side .position.mid2 {
+.formation-5-a-side .position.mid1, .formation-5-a-side .position.mid2, .formation-6-a-side .position.mid1, .formation-6-a-side .position.mid2, .formation-7-a-side .position.mid1, .formation-7-a-side .position.mid2 {
     bottom: 210px;
 }
 
-.formation-5-a-side .position.mid1, .formation-7-a-side .position.mid1 {
+.formation-5-a-side .position.mid1, .formation-6-a-side .position.mid1, .formation-7-a-side .position.mid1 {
     left: 60px;
 }
 
-.formation-5-a-side .position.mid2, .formation-7-a-side .position.mid2 {
+.formation-5-a-side .position.mid2, .formation-6-a-side .position.mid2, .formation-7-a-side .position.mid2 {
     left: 180px;
 }
 
@@ -347,19 +347,21 @@
     left: 160px;
 }
 
-.formation-5-a-side .position.st1, .formation-7-a-side .position.st1, .formation-7-a-side .position.st2 {
+
+
+.formation-5-a-side .position.att1, .formation-6-a-side .position.att1, .formation-7-a-side .position.att1, .formation-7-a-side .position.att2 {
     bottom: 340px;
 }
 
-.formation-5-a-side .position.st1 {
+.formation-5-a-side .position.att1, .formation-6-a-side .position.att1 {
     left: 120px;
 }
 
-.formation-7-a-side .position.st1 {
+.formation-7-a-side .position.att1 {
     left: 60px;
 }
 
-.formation-7-a-side .position.st2 {
+.formation-7-a-side .position.att2 {
     left: 180px;
 }
 
