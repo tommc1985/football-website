@@ -145,6 +145,14 @@ class Fantasy_Football_model extends Base_Frontend_Model {
                 'name' => '4-4-2',
                 'positions' => array("gk", "rb", "lb", "cb1", "cb2", "rm", "lm", "cm1", "cm2", "st1", "st2", "sub1", "sub2", "sub3", "sub4", "sub5"),
             ),
+            '4-4-2-diamond' => array(
+                'name' => '4-4-2 Diamond',
+                'positions' => array("gk", "rb", "lb", "cb1", "cb2", "dm", "rm", "lm", "am", "st1", "st2", "sub1", "sub2", "sub3", "sub4", "sub5"),
+            ),
+            '4-4-1-1' => array(
+                'name' => '4-4-2',
+                'positions' => array("gk", "rb", "lb", "cb1", "cb2", "rm", "lm", "cm1", "cm2", "ss", "st1", "sub1", "sub2", "sub3", "sub4", "sub5"),
+            ),
             '4-3-3-narrow' => array(
                 'name' => '4-3-3 Narrow',
                 'positions' => array("gk", "rb", "lb", "cb1", "cb2", "cm1", "cm2", "cm3", "st1", "st2", "st3", "sub2", "sub3", "sub4", "sub5"),
@@ -152,14 +160,6 @@ class Fantasy_Football_model extends Base_Frontend_Model {
             '4-3-3-wide' => array(
                 'name' => '4-3-3 Wide',
                 'positions' => array("gk", "rb", "lb", "cb1", "cb2", "cm1", "cm2", "cm3", "rw", "lw", "st1", "sub2", "sub3", "sub4", "sub5"),
-            ),
-            '4-4-2-diamond' => array(
-                'name' => '4-4-2 Diamond',
-                'positions' => array("gk", "rb", "lb", "cb1", "cb2", "dm", "rm", "lm", "am", "st1", "st2", "sub1", "sub2", "sub3", "sub4", "sub5"),
-            ),
-            '4-4-1-1' => array(
-                'name' => '4-4-2',
-                'positions' => array("gk", "rb", "lb", "cb1", "cb2", "rm", "lm", "cm1", "cm2", "ss", "st", "sub1", "sub2", "sub3", "sub4", "sub5"),
             ),
             '4-3-2-1' => array(
                 'name' => '4-3-2-1',
@@ -183,7 +183,7 @@ class Fantasy_Football_model extends Base_Frontend_Model {
             ),
             '3-6-1' => array(
                 'name' => '3-6-1',
-                'positions' => array("gk", "cb1", "cb2", "cb3", "dm1", "dm2", "rm", "lm", "am2", "am2", "st1", "sub1", "sub2", "sub3", "sub4", "sub5"),
+                'positions' => array("gk", "cb1", "cb2", "cb3", "dm1", "dm2", "rm", "lm", "am1", "am2", "st1", "sub1", "sub2", "sub3", "sub4", "sub5"),
             ),
             '4-5-1' => array(
                 'name' => '4-5-1',
