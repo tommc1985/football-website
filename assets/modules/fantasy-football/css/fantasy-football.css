@@ -125,15 +125,15 @@
     left: 120px;
 }
 
-.formation-3-4-3 .position.cb2, .formation-3-5-2 .position.cb2 {
+.formation-3-4-3 .position.cb2, .formation-3-5-2 .position.cb2, .formation-3-6-1 .position.cb2 {
     left: 40px;
 }
 
-.formation-3-4-3 .position.cb3, .formation-3-5-2 .position.cb3 {
+.formation-3-4-3 .position.cb3, .formation-3-5-2 .position.cb3, .formation-3-6-1 .position.cb3 {
     left: 200px;
 }
 
-.formation-5-4-1 .position.cb1, .formation-5-3-2 .position.cb1, .formation-3-5-2 .position.cb1 {
+.formation-5-4-1 .position.cb1, .formation-5-3-2 .position.cb1, .formation-3-5-2 .position.cb1, .formation-3-6-1 .position.cb1 {
     left: 120px;
     bottom: 90px;
 }
@@ -165,12 +165,20 @@
 }
 
 
-.position.dm1, .position.dm2, .formation-4-4-2-diamond .position.dm, .formation-3-5-2 .position.dm {
+.position.dm1, .position.dm2, .formation-4-4-2-diamond .position.dm, .formation-3-5-2 .position.dm, .formation-3-6-1 .position.dm1, .formation-3-6-1 .position.dm2 {
     bottom: 160px;
 }
 
 .formation-4-5-1 .position.dm1, .formation-4-4-2-diamond .position.dm, .formation-3-5-2 .position.dm {
     left: 120px;
+}
+
+.formation-3-6-1 .position.dm1 {
+    left: 80px;
+}
+
+.formation-3-6-1 .position.dm2 {
+    left: 160px;
 }
 
 
@@ -263,15 +271,15 @@
     bottom: 280px;
 }
 
-.formation-4-3-2-1 .position.am1 {
+.formation-4-3-2-1 .position.am1, .formation-3-6-1 .position.am1 {
     left: 80px;
 }
 
-.formation-4-3-2-1 .position.am2 {
+.formation-4-3-2-1 .position.am2, .formation-3-6-1 .position.am2 {
     left: 160px;
 }
 
-.formation-4-4-2-diamond .position.am, .formation-4-3-2-1 .position.am1, .formation-4-3-2-1 .position.am2 {
+.formation-4-4-2-diamond .position.am, .formation-4-3-2-1 .position.am1, .formation-4-3-2-1 .position.am2, .formation-3-6-1 .position.am1, .formation-3-6-1 .position.am2 {
     bottom: 280px;
 }
 
@@ -299,7 +307,7 @@
     left: 160px;
 }
 
-.formation-3-4-3 .position.st1, .formation-4-3-3-wide .position.st1, .formation-4-3-3-narrow .position.st1, .formation-4-5-1 .position.st1, .formation-5-4-1 .position.st1, .formation-4-3-2-1 .position.st1 {
+.formation-3-4-3 .position.st1, .formation-4-3-3-wide .position.st1, .formation-4-3-3-narrow .position.st1, .formation-4-5-1 .position.st1, .formation-5-4-1 .position.st1, .formation-4-3-2-1 .position.st1, .formation-3-6-1 .position.st1 {
     left: 120px;
 }
 
