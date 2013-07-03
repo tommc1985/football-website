@@ -99,25 +99,25 @@
 
 
 
-.position.rb, .formation-4-4-2 .position.rb, .formation-4-3-3-wide .position.rb, .formation-4-3-3-narrow .position.rb, .formation-4-2-4 .position.rb, .formation-4-5-1 .position.rb, .formation-5-4-1 .position.rb, .formation-5-3-2 .position.rb, .formation-5-3-2-sweeper .position.rb {
+.position.rb, .formation-4-4-2 .position.rb, .formation-4-3-3-wide .position.rb, .formation-4-3-3-narrow .position.rb, .formation-4-2-4 .position.rb, .formation-4-5-1 .position.rb, .formation-5-4-1 .position.rb, .formation-5-3-2 .position.rb, .formation-5-3-2-sweeper .position.rb, .formation-4-2-2-2 .position.rb {
     left: 240px;
     bottom: 110px;
 }
 
-.position.lb, .formation-4-4-2 .position.lb, .formation-4-3-3-wide .position.lb, .formation-4-3-3-narrow .position.lb, .formation-4-2-4 .position.lb, .formation-4-5-1 .position.lb, .formation-5-4-1 .position.lb, .formation-5-3-2 .position.lb, .formation-5-3-2-sweeper .position.lb {
+.position.lb, .formation-4-4-2 .position.lb, .formation-4-3-3-wide .position.lb, .formation-4-3-3-narrow .position.lb, .formation-4-2-4 .position.lb, .formation-4-5-1 .position.lb, .formation-5-4-1 .position.lb, .formation-5-3-2 .position.lb, .formation-5-3-2-sweeper .position.lb, .formation-4-2-2-2 .position.lb {
     left: 0;
     bottom: 110px;
 }
 
-.position.cb1, .position.cb2, .position.cb3, .formation-4-4-2 .position.cb1, .formation-4-4-2 .position.cb2, .formation-4-3-3-wide .position.cb1, .formation-4-3-3-wide .position.cb2, .formation-4-3-3-narrow .position.cb1, .formation-4-3-3-narrow .position.cb2, .formation-4-2-4 .position.cb1, .formation-4-2-4 .position.cb2, .formation-4-5-1 .position.cb1, .formation-4-5-1 .position.cb2, .formation-4-2-3-1 .position.cb1, .formation-4-2-3-1 .position.cb2 {
+.position.cb1, .position.cb2, .position.cb3, .formation-4-4-2 .position.cb1, .formation-4-4-2 .position.cb2, .formation-4-3-3-wide .position.cb1, .formation-4-3-3-wide .position.cb2, .formation-4-3-3-narrow .position.cb1, .formation-4-3-3-narrow .position.cb2, .formation-4-2-4 .position.cb1, .formation-4-2-4 .position.cb2, .formation-4-5-1 .position.cb1, .formation-4-5-1 .position.cb2, .formation-4-2-3-1 .position.cb1, .formation-4-2-3-1 .position.cb2, .formation-4-2-2-2 .position.cb1, .formation-4-2-2-2 .position.cb2 {
     bottom: 100px;
 }
 
-.position.cb1, .formation-4-4-2 .position.cb1, .formation-4-3-3-wide .position.cb1, .formation-4-3-3-narrow .position.cb1 {
+.position.cb1, .formation-4-4-2 .position.cb1, .formation-4-3-3-wide .position.cb1, .formation-4-3-3-narrow .position.cb1, .formation-4-2-2-2 .position.cb1 {
     left: 80px;
 }
 
-.position.cb2, .formation-4-4-2 .position.cb2, .formation-4-3-3-wide .position.cb2, .formation-4-3-3-narrow .position.cb2 {
+.position.cb2, .formation-4-4-2 .position.cb2, .formation-4-3-3-wide .position.cb2, .formation-4-3-3-narrow .position.cb2, .formation-4-2-2-2 .position.cb2 {
     left: 160px;
 }
 
@@ -226,6 +226,10 @@
     bottom: 210px;
 }
 
+.formation-4-2-2-2 .position.cm1, .formation-4-2-2-2 .position.cm2 {
+    bottom: 200px;
+}
+
 .position.cm1, .formation-4-4-2 .position.cm1, .formation-3-4-3 .position.cm1, .formation-5-4-1 .position.cm1 {
     left: 80px;
 }
@@ -234,11 +238,11 @@
     left: 160px;
 }
 
-.formation-4-2-4 .position.cm1 {
+.formation-4-2-4 .position.cm1, .formation-4-2-2-2 .position.cm1 {
     left: 70px;
 }
 
-.formation-4-2-4 .position.cm2 {
+.formation-4-2-4 .position.cm2, .formation-4-2-2-2 .position.cm2 {
     left: 170px;
 }
 
@@ -295,8 +299,16 @@
     left: 160px;
 }
 
-.formation-4-4-2-diamond .position.am, .formation-4-3-2-1 .position.am1, .formation-4-3-2-1 .position.am2, .formation-3-6-1 .position.am1, .formation-3-6-1 .position.am2 {
+.formation-4-4-2-diamond .position.am, .formation-4-3-2-1 .position.am1, .formation-4-3-2-1 .position.am2, .formation-3-6-1 .position.am1, .formation-3-6-1 .position.am2, .formation-4-2-2-2 .position.am1, .formation-4-2-2-2 .position.am2 {
     bottom: 280px;
+}
+
+.formation-4-2-2-2 .position.am1 {
+    left: 170px;
+}
+
+.formation-4-2-2-2 .position.am2 {
+    left: 70px;
 }
 
 
@@ -317,6 +329,14 @@
 
 .position.st1, .formation-4-4-2 .position.st1, .formation-4-2-4 .position.st1, .formation-5-3-2 .position.st1, .formation-5-3-2-sweeper .position.st1 {
     left: 80px;
+}
+
+ .formation-4-2-2-2 .position.st1 {
+    left: 70px;
+}
+
+ .formation-4-2-2-2 .position.st2 {
+    left: 170px;
 }
 
 .position.st2, .formation-4-4-2 .position.st2, .formation-4-2-4 .position.st2, .formation-5-3-2 .position.st2, .formation-5-3-2-sweeper .position.st2 {
