@@ -155,15 +155,15 @@ class Fantasy_Football_model extends Base_Frontend_Model {
             ),
             '4-3-3-narrow' => array(
                 'name' => '4-3-3 Narrow',
-                'positions' => array("gk", "rb", "lb", "cb1", "cb2", "cm1", "cm2", "cm3", "st1", "st2", "st3", "sub2", "sub3", "sub4", "sub5"),
+                'positions' => array("gk", "rb", "lb", "cb1", "cb2", "cm1", "cm2", "cm3", "st1", "st2", "st3", "sub1", "sub2", "sub3", "sub4", "sub5"),
             ),
             '4-3-3-wide' => array(
                 'name' => '4-3-3 Wide',
-                'positions' => array("gk", "rb", "lb", "cb1", "cb2", "cm1", "cm2", "cm3", "rw", "lw", "st1", "sub2", "sub3", "sub4", "sub5"),
+                'positions' => array("gk", "rb", "lb", "cb1", "cb2", "cm1", "cm2", "cm3", "rw", "lw", "st1", "sub1", "sub2", "sub3", "sub4", "sub5"),
             ),
             '4-3-2-1' => array(
                 'name' => '4-3-2-1',
-                'positions' => array("gk", "rb", "lb", "cb1", "cb2", "cm1", "cm2", "cm3", "am1", "am2", "st1", "sub2", "sub3", "sub4", "sub5"),
+                'positions' => array("gk", "rb", "lb", "cb1", "cb2", "cm1", "cm2", "cm3", "am1", "am2", "st1", "sub1", "sub2", "sub3", "sub4", "sub5"),
             ),
             '5-3-2' => array(
                 'name' => '5-3-2',
@@ -191,7 +191,7 @@ class Fantasy_Football_model extends Base_Frontend_Model {
             ),
             '4-2-3-1' => array(
                 'name' => '4-2-3-1',
-                'positions' => array("gk", "rb", "lb", "cb1", "cb2", "dm1", "dm2", "rm", "lm", "am", "st1", "sub2", "sub3", "sub4", "sub5"),
+                'positions' => array("gk", "rb", "lb", "cb1", "cb2", "dm1", "dm2", "rm", "lm", "am", "st1", "sub1", "sub2", "sub3", "sub4", "sub5"),
             ),
             '5-4-1' => array(
                 'name' => '5-4-1',
