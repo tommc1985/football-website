@@ -8,6 +8,7 @@
     <link href="/bootstrap/docs/assets/css/bootstrap.css" rel="stylesheet">
     <link href="/bootstrap/docs/assets/css/bootstrap-responsive.css" rel="stylesheet">
     <link href="/assets/css/responsive-tables.css" rel="stylesheet">
+    <link href="/assets/modules/fantasy-football/css/fantasy-football.css" rel="stylesheet">
 
 
     <link href="/bootstrap/docs/assets/css/docs.css" rel="stylesheet">

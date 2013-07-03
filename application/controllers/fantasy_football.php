@@ -55,13 +55,24 @@ class Fantasy_Football extends Frontend_Controller {
             $orderBy = $parameters['order-by'];
         }
 
+        // Fetch Formation Info
+        $formationInfo = $this->Fantasy_Football_model->fetchFormationInfo($formation);
+
+        if ($formationInfo === false) {
+            show_error($this->lang->line('fantasy_football_formation_not_exist'), 404);
+        }
+
+        // Fetch Data for talble
         $fantasyFootballData = $this->Fantasy_Football_model->fetchAll($season == 'all-time' ? 'career' : $season, $type, $position, $orderBy);
 
+        // Fetch Best Lineup for specified formation
         $bestLineup = $this->Fantasy_Football_model->fetchBestLineup($formation, $season == 'all-time' ? 'career' : $season, $type, $orderBy);
 
         $data = array(
             'fantasyFootballData' => $fantasyFootballData,
             'bestLineup'          => $bestLineup,
+            'formationInfo'       => $formationInfo,
+            'formation'           => $formation,
             'season'              => $season,
             'type'                => $type,
             'position'            => $position,

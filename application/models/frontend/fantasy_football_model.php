@@ -145,8 +145,12 @@ class Fantasy_Football_model extends Base_Frontend_Model {
                 'name' => '4-4-2',
                 'positions' => array("gk", "rb", "lb", "cb1", "cb2", "rm", "lm", "cm1", "cm2", "st1", "st2", "sub1", "sub2", "sub3", "sub4", "sub5"),
             ),
-            '4-3-3' => array(
-                'name' => '4-3-3',
+            '4-3-3-narrow' => array(
+                'name' => '4-3-3 Narrow',
+                'positions' => array("gk", "rb", "lb", "cb1", "cb2", "cm1", "cm2", "cm3", "st1", "st2", "st3", "sub2", "sub3", "sub4", "sub5"),
+            ),
+            '4-3-3-wide' => array(
+                'name' => '4-3-3 Wide',
                 'positions' => array("gk", "rb", "lb", "cb1", "cb2", "cm1", "cm2", "cm3", "rw", "lw", "st1", "sub2", "sub3", "sub4", "sub5"),
             ),
             '4-4-2-diamond' => array(
@@ -248,7 +252,7 @@ class Fantasy_Football_model extends Base_Frontend_Model {
                 $preferredPlayers = array();
                 $preferredPlayersRaw = array();
                 foreach ($positions as $position) {
-                    $simplePosition = self::fetchSimplePosition($position);
+                    $simplePosition = Fantasy_Football_helper::fetchSimplePosition($position);
 
                     if (!isset($preferredPlayersRaw[$simplePosition])) {
                         $players = $this->fetchPreferredPlayersInParticularPosition($simplePosition, $season, $type, $measure);
@@ -387,7 +391,7 @@ ORDER BY {$orderBy} DESC";
         $playerPoints = $this->fetchPreferredPositionsForParticularPlayer($playerId, $season, $type, '');
 
         foreach ($player as $position => $points) {
-            $simplePosition = self::fetchSimplePosition($position);
+            $simplePosition = Fantasy_Football_helper::fetchSimplePosition($position);
 
             if (isset($playerPoints[$simplePosition])) {
                 $player[$position] = $points + (int) $playerPoints[$simplePosition];
@@ -399,7 +403,7 @@ ORDER BY {$orderBy} DESC";
         $appearances = $this->fetchPlayerPositionPreference($playerId);
 
         foreach ($player as $position => $points) {
-            $simplePosition = self::fetchSimplePosition($position);
+            $simplePosition = Fantasy_Football_helper::fetchSimplePosition($position);
 
             if (isset($appearances[$simplePosition])) {
                 $player[$position] = $points + $appearances[$simplePosition];
@@ -410,7 +414,7 @@ ORDER BY {$orderBy} DESC";
         // Order substitute positions - Begin
         $subCount = count($player);
         foreach ($player as $position => $points) {
-            $simplePosition = self::fetchSimplePosition($position);
+            $simplePosition = Fantasy_Football_helper::fetchSimplePosition($position);
 
             if ($simplePosition == 'sub') {
                 $player[$position] = (float) ("-0.{$subCount}");
@@ -449,16 +453,6 @@ WHERE
         }
 
         return $appearances;
-    }
-
-    /**
-     * Return string with number suffix removed from position string
-     * @param  string $position    Position with number suffix
-     * @return string              Position without number suffix
-     */
-    public static function fetchSimplePosition($position)
-    {
-        return rtrim($position, '0123456789');
     }
 
     /**
@@ -504,6 +498,20 @@ WHERE
         }
 
         return $data;
+    }
+
+    /**
+     * Fetch info on specified formation
+     * @param  string $formation   Specified Formation
+     * @return array               Formation Information
+     */
+    public function fetchFormationInfo($formation)
+    {
+        if (isset($this->formations[$formation])) {
+            return $this->formations[$formation];
+        }
+
+        return false;
     }
 
     /**
