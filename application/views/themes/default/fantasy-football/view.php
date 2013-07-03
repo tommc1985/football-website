@@ -84,7 +84,7 @@
                     <?php
                         foreach ($formationInfo['positions'] as $position) {
                             if (strpos($position, 'sub') !== false) { ?>
-                        <div class="position <?php echo $position; ?>">
+                        <div class="position <?php echo Fantasy_Football_helper::fetchSimplePosition($position); ?>">
                             <span class="marker"><?php echo Fantasy_Football_helper::fetchSimplePosition($position, true); ?></span>
                             <span class="player"><?php echo Player_helper::initialSurname($bestLineup[$position]); ?></span>
                             <span class="points">(<?php echo rand(5, 200); ?> pts)</span>
