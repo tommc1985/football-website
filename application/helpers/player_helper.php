@@ -40,38 +40,53 @@ class Player_helper
 
     /**
      * Return a Player's Full Name
-     * @param  mixed $player  Player Object/Array
-     * @return string         The Player's Full Name
+     * @param  mixed $player    Player Object/Array
+     * @param  mixed $withLink  Wrap text in a href link
+     * @return string           The Player's Full Name
      */
-    public static function fullName($player)
+    public static function fullName($player, $withLink = true)
     {
         $player = self::_convertObject($player);
 
-        return "<a href='/player/view/id/{$player->id}'>{$player->first_name} {$player->surname}</a>";
+        if ($withLink) {
+            return "<a href='/player/view/id/{$player->id}'>{$player->first_name} {$player->surname}</a>";
+        }
+
+        return "{$player->first_name} {$player->surname}";
     }
 
     /**
      * Return a Player's Full Name (in reverse)
-     * @param  mixed $player  Player Object/Array
-     * @return string         The Player's Full Name
+     * @param  mixed $player    Player Object/Array
+     * @param  mixed $withLink  Wrap text in a href link
+     * @return string           The Player's Full Name
      */
-    public static function fullNameReverse($player)
+    public static function fullNameReverse($player, $withLink = true)
     {
         $player = self::_convertObject($player);
 
-        return "<a href='/player/view/id/{$player->id}'>{$player->surname}, {$player->first_name}</a>";
+        if ($withLink) {
+            return "<a href='/player/view/id/{$player->id}'>{$player->surname}, {$player->first_name}</a>";
+        }
+
+        return "{$player->surname}, {$player->first_name}";
     }
 
     /**
      * Return a Player's Initial and Surname
      * @param  mixed $player  Player Object/Array
+     * @param  mixed $withLink  Wrap text in a href link
      * @return string         The Player's Full Name
      */
-    public static function initialSurname($player)
+    public static function initialSurname($player, $withLink = true)
     {
         $player = self::_convertObject($player);
 
-        return "<a href='/player/view/id/{$player->id}'>" . substr($player->first_name, 0, 1) . '. ' . $player->surname . "</a>";
+        if ($withLink) {
+            return "<a href='/player/view/id/{$player->id}'>" . substr($player->first_name, 0, 1) . '. ' . $player->surname . "</a>";
+        }
+
+        return substr($player->first_name, 0, 1) . '. ' . $player->surname;
     }
 
     /**
