@@ -4,6 +4,9 @@
 $lang['fantasy_football_title']               = 'Fantasy Football';
 $lang['fantasy_football_matches']             = 'Matches';
 
+$lang['fantasy_football_leaderboard']         = 'Leaderboard';
+$lang['fantasy_football_best_lineup']         = 'Best Lineup';
+
 $lang['fantasy_football_player']              = 'Player';
 $lang['fantasy_football_appearances']         = 'Appearances';
 $lang['fantasy_football_points']              = 'Points';

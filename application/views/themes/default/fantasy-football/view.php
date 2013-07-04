@@ -1,7 +1,13 @@
 <div class="row-fluid">
     <div class="span12">
 
-    <h2><?php echo $this->lang->line('fantasy_football_title'); ?> - <?php echo Utility_helper::formattedSeason($season); ?><?php echo ($type != 'overall' ? ' (' . Competition_helper::type($type) . ' ' . $this->lang->line("fantasy_football_matches") . ')' : ''); ?></h2>
+        <h2><?php echo $this->lang->line('fantasy_football_title'); ?> - <?php echo Utility_helper::formattedSeason($season); ?><?php echo ($type != 'overall' ? ' (' . Competition_helper::type($type) . ' ' . $this->lang->line("fantasy_football_matches") . ')' : ''); ?></h2>
+
+        <div class="row-fluid">
+            <div class="span12">
+                <h3><?php echo $this->lang->line("fantasy_football_leaderboard"); ?></h3>
+            </div>
+        </div>
 
         <div class="row-fluid">
             <div class="span4">
@@ -38,6 +44,12 @@
                         } ?>
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+                <h3><?php echo $this->lang->line("fantasy_football_best_lineup"); ?></h3>
             </div>
         </div>
 
