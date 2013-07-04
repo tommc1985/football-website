@@ -18,7 +18,7 @@
 #dugout {
     position: relative;
     width: 320px;
-    background-color: #000;
+    background-color: #333;
     padding-top: 20px;
 }
 
@@ -40,7 +40,12 @@
     background-color: #fff;
     border: 3px #c00 solid;
     color: #c00;
-    font-size: 12px;
+    font-size: 10px;
+    line-height: 15px;
+}
+
+.position.rwb .marker, .position.lwb .marker, .position.sub .marker {
+    font-size: 7px;
 }
 
 .position .player {
@@ -51,7 +56,8 @@
     width: 100%;
     font-size: 12px;
     font-weight: bold;
-    color: #eee;
+    color: #333;
+    line-height: 17px;
 }
 
 .position .points {
@@ -62,6 +68,7 @@
     width: 100%;
     font-size: 10px;
     color: #eee;
+    line-height: 12px;
 }
 
 .position.gk {
@@ -200,12 +207,12 @@
 }
 
 
-.position.rm, .formation-4-4-2 .position.rm, .formation-3-4-3 .position.rm, .formation-4-5-1 .position.rm, .formation-5-4-1 .position.rm, .formation-4-2-3-1 .position.rm {
+.position.rm, .formation-4-4-2 .position.rm, .formation-3-4-3 .position.rm, .formation-4-5-1 .position.rm, .formation-5-4-1 .position.rm {
     left: 240px;
     bottom: 240px;
 }
 
-.position.lm, .formation-4-4-2 .position.lm, .formation-3-4-3 .position.lm, .formation-4-5-1 .position.lm, .formation-5-4-1 .position.lm, .formation-4-2-3-1 .position.lm {
+.position.lm, .formation-4-4-2 .position.lm, .formation-3-4-3 .position.lm, .formation-4-5-1 .position.lm, .formation-5-4-1 .position.lm {
     left: 0;
     bottom: 240px;
 }
@@ -223,7 +230,7 @@
 
 
 .position.cm1, .position.cm2, .position.cm3, .formation-4-4-2 .position.cm1, .formation-4-4-2 .position.cm2, .formation-3-4-3 .position.cm1, .formation-3-4-3 .position.cm2, .formation-4-2-4 .position.cm1, .formation-4-2-4 .position.cm2, .formation-4-5-1 .position.cm1, .formation-4-5-1 .position.cm2, .formation-4-5-1 .position.cm3 {
-    bottom: 210px;
+    bottom: 215px;
 }
 
 .formation-4-2-2-2 .position.cm1, .formation-4-2-2-2 .position.cm2 {
@@ -283,11 +290,11 @@
 
 
 
-.formation-4-4-2-diamond .position.am, .formation-4-2-3-1 .position.am {
+.formation-4-4-2-diamond .position.am, .formation-4-2-3-1 .position.am1 {
     left: 120px;
 }
 
-.formation-4-4-2-diamond .position.am, .formation-4-2-3-1 .position.am {
+.formation-4-4-2-diamond .position.am, .formation-4-2-3-1 .position.am1, .formation-4-2-3-1 .position.am2, .formation-4-2-3-1 .position.am3 {
     bottom: 280px;
 }
 
@@ -309,6 +316,14 @@
 
 .formation-4-2-2-2 .position.am2 {
     left: 70px;
+}
+
+.formation-4-2-3-1 .position.am2 {
+    left: 40px;
+}
+
+.formation-4-2-3-1 .position.am3 {
+    left: 200px;
 }
 
 
