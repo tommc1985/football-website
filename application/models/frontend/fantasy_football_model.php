@@ -89,7 +89,7 @@ class Fantasy_Football_model extends Base_Frontend_Model {
             'am' => array(
                 'ids' => array(12),
                 'preferredPositions' => array(
-                    12, 15, 11,
+                    12, 15, 16, 11,
                 ),
             ),
             'rw' => array(
@@ -164,6 +164,10 @@ class Fantasy_Football_model extends Base_Frontend_Model {
             '4-3-2-1' => array(
                 'name' => '4-3-2-1',
                 'positions' => array("gk", "rb", "lb", "cb1", "cb2", "cm1", "cm2", "cm3", "am1", "am2", "st1", "sub1", "sub2", "sub3", "sub4", "sub5"),
+            ),
+            '4-2-4' => array(
+                'name' => '4-2-4',
+                'positions' => array("gk", "rb", "lb", "cb1", "cb2", "cm1", "cm2", "rw", "lw", "st1", "st2", "sub1", "sub2", "sub3", "sub4", "sub5"),
             ),
             '4-2-2-2' => array(
                 'name' => '4-2-2-2',
