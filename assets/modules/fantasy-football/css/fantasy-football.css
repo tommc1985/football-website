@@ -11,7 +11,7 @@
 #pitch {
     position: relative;
     width: 320px;
-    height: 482px;
+    height: 480px;
     background: url(../img/football-pitch.png) #41c433 top center no-repeat;
 }
 
@@ -230,7 +230,7 @@
 
 
 .position.cm1, .position.cm2, .position.cm3, .formation-4-4-2 .position.cm1, .formation-4-4-2 .position.cm2, .formation-3-4-3 .position.cm1, .formation-3-4-3 .position.cm2, .formation-4-2-4 .position.cm1, .formation-4-2-4 .position.cm2, .formation-4-5-1 .position.cm1, .formation-4-5-1 .position.cm2, .formation-4-5-1 .position.cm3 {
-    bottom: 215px;
+    bottom: 212px;
 }
 
 .formation-4-2-2-2 .position.cm1, .formation-4-2-2-2 .position.cm2 {
