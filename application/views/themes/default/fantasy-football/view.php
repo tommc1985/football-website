@@ -4,8 +4,12 @@
     <h2><?php echo $this->lang->line('fantasy_football_title'); ?> - <?php echo Utility_helper::formattedSeason($season); ?><?php echo ($type != 'overall' ? ' (' . Competition_helper::type($type) . ' ' . $this->lang->line("fantasy_football_matches") . ')' : ''); ?></h2>
 
         <div class="row-fluid">
+            <div class="span4">
+
+            </div>
+
             <div class="span8">
-                <table class="no-more-tables">
+                <table class="no-more-tables width-100-percent">
                     <thead>
                         <tr>
                             <td><?php echo $this->lang->line('fantasy_football_player'); ?></td>
@@ -35,9 +39,15 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span4">
+
+            </div>
 
             <div class="span4">
-                <table class="">
+                <table class="width-100-percent">
                     <thead>
                         <tr>
                             <td><?php echo $this->lang->line('fantasy_football_player'); ?></td>
