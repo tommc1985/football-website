@@ -12,10 +12,10 @@
                 <table class="no-more-tables width-100-percent">
                     <thead>
                         <tr>
-                            <td><?php echo $this->lang->line('fantasy_football_player'); ?></td>
-                            <td><?php echo $this->lang->line('fantasy_football_appearances'); ?></td>
-                            <td><?php echo $this->lang->line('fantasy_football_points_per_game'); ?></td>
-                            <td><?php echo $this->lang->line('fantasy_football_points'); ?></td>
+                            <td class="width-40-percent"><?php echo $this->lang->line('fantasy_football_player'); ?></td>
+                            <td class="width-15-percent"><?php echo $this->lang->line('fantasy_football_appearances'); ?></td>
+                            <td class="width-15-percent"><?php echo $this->lang->line('fantasy_football_average'); ?></td>
+                            <td class="width-15-percent"><?php echo $this->lang->line('fantasy_football_points'); ?></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -25,7 +25,7 @@
                         <tr>
                             <td data-title="<?php echo $this->lang->line('fantasy_football_player'); ?>"><?php echo Player_helper::fullNameReverse($player->player_id); ?></td>
                             <td data-title="<?php echo $this->lang->line('fantasy_football_appearances'); ?>"><?php echo $player->appearances; ?></td>
-                            <td data-title="<?php echo $this->lang->line('fantasy_football_points_per_game'); ?>"><?php echo $player->points_per_game; ?></td>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_average'); ?>"><?php echo $player->points_per_game; ?></td>
                             <td data-title="<?php echo $this->lang->line('fantasy_football_points'); ?>"><?php echo $player->total_points; ?></td>
                         </tr>
                         <?php
