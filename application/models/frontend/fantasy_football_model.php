@@ -219,6 +219,7 @@ class Fantasy_Football_model extends Base_Frontend_Model {
             )
         );
     }
+
     /**
      * Fetch all Fantasy Football data
      * @param  string  $season          Season of Statistics
@@ -236,7 +237,43 @@ class Fantasy_Football_model extends Base_Frontend_Model {
             ->where('position', $position)
             ->order_by($this->getOrderBy($orderBy), 'desc');
 
-        return $this->db->get()->result();
+        $result = $this->db->get()->result();
+
+        $data = array();
+
+        foreach ($result as $player) {
+            $data[$player->player_id] = $player;
+        }
+
+        return $data;
+    }
+
+    /**
+     * Fetch all Fantasy Football data
+     * @param  string  $playerId        Unique Player ID
+     * @param  string  $season          Season of Statistics
+     * @param  string  $type            Type of Statistics
+     * @param  string  $position        Playing Position
+     * @param  string  $orderBy         Order Data by...
+     * @return mixee                    List of Players
+     */
+    public function fetch($playerId, $season, $type, $position, $orderBy)
+    {
+        $this->db->select('*')
+            ->from($this->tableName)
+            ->where('player_id', $playerId)
+            ->where('season', $season)
+            ->where('type', $type)
+            ->where('position', $position)
+            ->order_by($this->getOrderBy($orderBy), 'desc');
+
+        $result = $this->db->get()->result();
+
+        if (count($result) == 1) {
+            return $result[0];
+        }
+
+        return false;
     }
 
     /**
@@ -286,11 +323,38 @@ class Fantasy_Football_model extends Base_Frontend_Model {
                 // Find Best Lineup
                 $FantasyFootballStable = new FantasyFootballStable($listOfPlayers, $positions, $preferredPositions, $preferredPlayers);
 
-                return $FantasyFootballStable->matches;
+                return $this->processBestLineupValues($FantasyFootballStable->matches, $season, $type, $measure);
             }
         }
 
         return false;
+    }
+
+    public function processBestLineupValues($players, $season, $type, $measure) {
+        $allData = $this->fetchAll($season, $type, 'all', 'total_points');
+
+        $data = array();
+
+        foreach ($players as $position => $playerId) {
+            switch ($measure) {
+                case 'appearances':
+                    $value = $allData[$playerId]->appearances . ' ' . ($allData[$playerId]->appearances == 1 ? $this->lang->line('fantasy_football_app') : $this->lang->line('fantasy_football_apps'));
+                    break;
+                case 'average-points':
+                    $value = $allData[$playerId]->points_per_game . ' ' . $this->lang->line('fantasy_football_pts');
+                    break;
+                default:
+                    $value = $allData[$playerId]->total_points . ' ' . ($allData[$playerId]->total_points == 1 ? $this->lang->line('fantasy_football_pt') : $this->lang->line('fantasy_football_pts'));
+            }
+
+
+            $data[$position] = (object) array(
+                'player_id' => $playerId,
+                'value'     => $value,
+            );
+        }
+
+        return $data;
     }
 
     /**

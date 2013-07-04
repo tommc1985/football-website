@@ -27,7 +27,13 @@ $lang['fantasy_football_total_points']              = 'Total Points';
 $lang['fantasy_football_average_points']            = 'Average Points';
 $lang['fantasy_football_appearances']               = 'Appearances';
 
-$lang['fantasy_football_criteria']               = 'Criteria';
+$lang['fantasy_football_criteria']                  = 'Criteria';
+
+
+$lang['fantasy_football_pt']                        = 'pt';
+$lang['fantasy_football_pts']                       = 'pts';
+$lang['fantasy_football_app']                       = 'app';
+$lang['fantasy_football_apps']                      = 'apps';
 
 
 

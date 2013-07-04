@@ -77,8 +77,8 @@ class Fantasy_Football extends Frontend_Controller {
                 $position = $this->input->post('position');
             }
 
-            if ($this->input->post('order-by')) {
-                $orderBy = $this->input->post('order-by');
+            if ($this->input->post('order_by')) {
+                $orderBy = $this->input->post('order_by');
             }
 
             if ($this->input->post('formation')) {
@@ -110,7 +110,7 @@ class Fantasy_Football extends Frontend_Controller {
         $fantasyFootballData = $this->Fantasy_Football_model->fetchAll($season == 'all-time' ? 'career' : $season, $type, $position, $orderBy);
 
         // Fetch Best Lineup for specified formation
-        $bestLineup = $this->Fantasy_Football_model->fetchBestLineup($formation, $season == 'all-time' ? 'career' : $season, $type, $orderBy);
+        $bestLineup = $this->Fantasy_Football_model->fetchBestLineup($formation, $season == 'all-time' ? 'career' : $season, $type, $measurement);
 
         $data = array(
             'fantasyFootballData' => $fantasyFootballData,

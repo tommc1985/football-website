@@ -121,8 +121,8 @@ echo form_submit('submit', $this->lang->line('fantasy_football_show')); ?>
                 <table class="width-100-percent">
                     <thead>
                         <tr>
-                            <td class="width-75-percent"><?php echo $this->lang->line('fantasy_football_criteria'); ?></td>
-                            <td class="width-25-percent"><?php echo $this->lang->line('fantasy_football_points'); ?></td>
+                            <td class="width-85-percent"><?php echo $this->lang->line('fantasy_football_criteria'); ?></td>
+                            <td class="width-15-percent"><?php echo $this->lang->line('fantasy_football_points'); ?></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -242,8 +242,8 @@ echo form_submit('submit', $this->lang->line('fantasy_football_show')); ?>
                             if (strpos($position, 'sub') === false) { ?>
                         <div class="position <?php echo $position; ?>">
                             <span class="marker"><?php echo Fantasy_Football_helper::fetchSimplePosition($position, true); ?></span>
-                            <span class="player"><?php echo Player_helper::initialSurname($bestLineup[$position], false); ?></span>
-                            <span class="points">(<?php echo rand(5, 200); ?> pts)</span>
+                            <span class="player"><?php echo Player_helper::initialSurname($bestLineup[$position]->player_id, false); ?></span>
+                            <span class="points"><?php echo $bestLineup[$position]->value; ?></span>
                         </div>
                     <?php
                             }
@@ -255,8 +255,8 @@ echo form_submit('submit', $this->lang->line('fantasy_football_show')); ?>
                             if (strpos($position, 'sub') !== false) { ?>
                         <div class="position <?php echo Fantasy_Football_helper::fetchSimplePosition($position); ?>">
                             <span class="marker"><?php echo Fantasy_Football_helper::fetchSimplePosition($position, true); ?></span>
-                            <span class="player"><?php echo Player_helper::initialSurname($bestLineup[$position], false); ?></span>
-                            <span class="points">(<?php echo rand(5, 200); ?> pts)</span>
+                            <span class="player"><?php echo Player_helper::initialSurname($bestLineup[$position]->player_id, false); ?></span>
+                            <span class="points"><?php echo $bestLineup[$position]->value; ?></span>
                         </div>
                     <?php
                             }
@@ -280,7 +280,7 @@ echo form_submit('submit', $this->lang->line('fantasy_football_show')); ?>
                         if ($bestLineup !== false) {
                             foreach ($formationInfo['positions'] as $position) { ?>
                         <tr>
-                            <td data-title="<?php echo $this->lang->line('fantasy_football_player'); ?>"><?php echo Player_helper::fullNameReverse($bestLineup[$position]); ?></td>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_player'); ?>"><?php echo Player_helper::fullNameReverse($bestLineup[$position]->player_id); ?></td>
                             <td data-title="<?php echo $this->lang->line('fantasy_football_position'); ?>"><?php echo Fantasy_Football_helper::fetchSimplePosition($position, true); ?></td>
                         </tr>
                         <?php
