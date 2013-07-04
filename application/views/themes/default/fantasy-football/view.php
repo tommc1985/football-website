@@ -83,7 +83,8 @@ echo form_submit('submit', $this->lang->line('fantasy_football_show')); ?>
         </div>
 
         <div class="row-fluid">
-            <div class="span12">
+            <div class="span7">
+                <h4><?php echo $this->lang->line('fantasy_football_leaderboard'); ?></h4>
                 <table class="no-more-tables width-100-percent">
                     <thead>
                         <tr>
@@ -111,6 +112,80 @@ echo form_submit('submit', $this->lang->line('fantasy_football_show')); ?>
                         </tr>
                         <?php
                         } ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="span5">
+                <h4><?php echo $this->lang->line('fantasy_football_scoring_system'); ?></h4>
+                <table class="width-100-percent">
+                    <thead>
+                        <tr>
+                            <td class="width-75-percent"><?php echo $this->lang->line('fantasy_football_criteria'); ?></td>
+                            <td class="width-25-percent"><?php echo $this->lang->line('fantasy_football_points'); ?></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_criteria'); ?>"><?php echo $this->lang->line('fantasy_football_starting_appearance'); ?></td>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_points'); ?>"><?php echo Configuration::get('starting_appearance_points'); ?></td>
+                        </tr>
+                        <tr>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_criteria'); ?>"><?php echo $this->lang->line('fantasy_football_substitute_appearance'); ?></td>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_points'); ?>"><?php echo Configuration::get('substitute_appearance_points'); ?></td>
+                        </tr>
+                        <tr>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_criteria'); ?>"><?php echo $this->lang->line('fantasy_football_clean_sheet_by_defender'); ?></td>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_points'); ?>"><?php echo Configuration::get('clean_sheet_by_defender_points'); ?></td>
+                        </tr>
+                        <tr>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_criteria'); ?>"><?php echo $this->lang->line('fantasy_football_clean_sheet_by_midfielder'); ?></td>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_points'); ?>"><?php echo Configuration::get('clean_sheet_by_midfielder_points'); ?></td>
+                        </tr>
+                        <tr>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_criteria'); ?>"><?php echo $this->lang->line('fantasy_football_assist_by_goalkeeper'); ?></td>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_points'); ?>"><?php echo Configuration::get('assist_by_goalkeeper_points'); ?></td>
+                        </tr>
+                        <tr>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_criteria'); ?>"><?php echo $this->lang->line('fantasy_football_assist_by_defender'); ?></td>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_points'); ?>"><?php echo Configuration::get('assist_by_defender_points'); ?></td>
+                        </tr>
+                        <tr>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_criteria'); ?>"><?php echo $this->lang->line('fantasy_football_assist_by_midfielder'); ?></td>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_points'); ?>"><?php echo Configuration::get('assist_by_midfielder_points'); ?></td>
+                        </tr>
+                        <tr>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_criteria'); ?>"><?php echo $this->lang->line('fantasy_football_assist_by_striker'); ?></td>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_points'); ?>"><?php echo Configuration::get('assist_by_striker_points'); ?></td>
+                        </tr>
+                        <tr>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_criteria'); ?>"><?php echo $this->lang->line('fantasy_football_goal_by_goalkeeper'); ?></td>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_points'); ?>"><?php echo Configuration::get('goal_by_goalkeeper_points'); ?></td>
+                        </tr>
+                        <tr>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_criteria'); ?>"><?php echo $this->lang->line('fantasy_football_goal_by_defender'); ?></td>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_points'); ?>"><?php echo Configuration::get('goal_by_defender_points'); ?></td>
+                        </tr>
+                        <tr>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_criteria'); ?>"><?php echo $this->lang->line('fantasy_football_goal_by_midfielder'); ?></td>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_points'); ?>"><?php echo Configuration::get('goal_by_midfielder_points'); ?></td>
+                        </tr>
+                        <tr>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_criteria'); ?>"><?php echo $this->lang->line('fantasy_football_goal_by_striker'); ?></td>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_points'); ?>"><?php echo Configuration::get('goal_by_striker_points'); ?></td>
+                        </tr>
+                        <tr>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_criteria'); ?>"><?php echo $this->lang->line('fantasy_football_man_of_the_match'); ?></td>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_points'); ?>"><?php echo Configuration::get('man_of_the_match_points'); ?></td>
+                        </tr>
+                        <tr>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_criteria'); ?>"><?php echo $this->lang->line('fantasy_football_yellow_card'); ?></td>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_points'); ?>"><?php echo Configuration::get('yellow_card_points'); ?></td>
+                        </tr>
+                        <tr>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_criteria'); ?>"><?php echo $this->lang->line('fantasy_football_red_card'); ?></td>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_points'); ?>"><?php echo Configuration::get('red_card_points'); ?></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
