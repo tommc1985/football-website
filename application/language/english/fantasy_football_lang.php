@@ -7,6 +7,7 @@ $lang['fantasy_football_matches']                   = 'Matches';
 $lang['fantasy_football_leaderboard']               = 'Leaderboard';
 $lang['fantasy_football_best_lineup']               = 'Best Lineup';
 $lang['fantasy_football_scoring_system']            = 'Scoring System';
+$lang['fantasy_football_lineup']                    = 'Lineup';
 
 $lang['fantasy_football_show']                      = 'Show';
 

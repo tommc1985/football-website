@@ -233,7 +233,37 @@ echo form_submit('submit', $this->lang->line('fantasy_football_show')); ?>
         </div>
 
         <div class="row-fluid">
+            <div class="span5">
+                <h4><?php echo $this->lang->line('fantasy_football_lineup'); ?></h4>
+                <table class="width-100-percent">
+                    <thead>
+                        <tr>
+                            <td><?php echo $this->lang->line('fantasy_football_player'); ?></td>
+                            <td><?php echo $this->lang->line('fantasy_football_position'); ?></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if ($bestLineup !== false) {
+                            foreach ($formationInfo['positions'] as $position) { ?>
+                        <tr>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_player'); ?>"><?php echo Player_helper::fullNameReverse($bestLineup[$position]->player_id); ?></td>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_position'); ?>"><?php echo Fantasy_Football_helper::fetchSimplePosition($position, true); ?></td>
+                        </tr>
+                        <?php
+                            }
+                        } else { ?>
+                        <tr>
+                            <td colspan="2"><?php echo $this->lang->line('fantasy_football_no_data'); ?></td>
+                        </tr>
+                        <?php
+                        }  ?>
+                    </tbody>
+                </table>
+            </div>
+
             <div class="span7">
+                <h4><?php echo $this->lang->line('fantasy_football_formation'); ?></h4>
                 <div id="stadium">
                     <div id="pitch" class="formation-<?php echo $formation; ?>">
                     <?php
@@ -265,34 +295,6 @@ echo form_submit('submit', $this->lang->line('fantasy_football_show')); ?>
                         <div class="clear"></div>
                     </div>
                 </div>
-            </div>
-
-            <div class="span5">
-                <table class="width-100-percent">
-                    <thead>
-                        <tr>
-                            <td><?php echo $this->lang->line('fantasy_football_player'); ?></td>
-                            <td><?php echo $this->lang->line('fantasy_football_position'); ?></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        if ($bestLineup !== false) {
-                            foreach ($formationInfo['positions'] as $position) { ?>
-                        <tr>
-                            <td data-title="<?php echo $this->lang->line('fantasy_football_player'); ?>"><?php echo Player_helper::fullNameReverse($bestLineup[$position]->player_id); ?></td>
-                            <td data-title="<?php echo $this->lang->line('fantasy_football_position'); ?>"><?php echo Fantasy_Football_helper::fetchSimplePosition($position, true); ?></td>
-                        </tr>
-                        <?php
-                            }
-                        } else { ?>
-                        <tr>
-                            <td colspan="2"><?php echo $this->lang->line('fantasy_football_no_data'); ?></td>
-                        </tr>
-                        <?php
-                        }  ?>
-                    </tbody>
-                </table>
             </div>
         </div>
 
