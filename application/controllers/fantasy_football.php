@@ -106,7 +106,7 @@ class Fantasy_Football extends Frontend_Controller {
             show_error($this->lang->line('fantasy_football_formation_not_exist'), 404);
         }
 
-        // Fetch Data for talble
+        // Fetch Data for table
         $fantasyFootballData = $this->Fantasy_Football_model->fetchAll($season == 'all-time' ? 'career' : $season, $type, $position, $orderBy);
 
         // Fetch Best Lineup for specified formation
