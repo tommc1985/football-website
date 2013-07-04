@@ -75,5 +75,8 @@
     /*
     Label the data
     */
-    table.no-more-tables td:before { content: attr(data-title); }
+    table.no-more-tables td:before {
+        content: attr(data-title);
+        line-height: 11px;
+    }
 }
