@@ -12,6 +12,7 @@
 
 
     <link href="/bootstrap/docs/assets/css/docs.css" rel="stylesheet">
+    <link href="/assets/themes/default/css/style.css" rel="stylesheet">
 </head>
 <body>
 

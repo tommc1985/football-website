@@ -1,0 +1,8 @@
+body {
+    background: #FFF url(../img/background.png) repeat top left;
+}
+
+thead td {
+    text-align: center;
+    font-weight: bold;
+}
