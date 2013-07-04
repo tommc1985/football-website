@@ -44,7 +44,7 @@
     line-height: 15px;
 }
 
-.position.def1 .marker, .position.def2 .marker, .position.mid1 .marker, .position.mid2 .marker, .position.att1 .marker, .position.att2 .marker .position.sub .marker {
+.position.def1 .marker, .position.def2 .marker, .position.mid1 .marker, .position.mid2 .marker, .position.att1 .marker, .position.att2 .marker, .position.sub .marker {
     font-size: 8px;
 }
 
