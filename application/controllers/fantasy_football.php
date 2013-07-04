@@ -13,9 +13,11 @@ class Fantasy_Football extends Frontend_Controller {
 
         $this->load->database();
         $this->load->model('frontend/Fantasy_Football_model');
+        $this->load->model('frontend/Position_model');
+        $this->load->model('Competition_model');
         $this->load->model('Season_model');
         $this->lang->load('fantasy_football');
-        $this->load->helper(array('club_statistics', 'competition', 'competition_stage', 'fantasy_football', 'goal', 'match', 'opposition', 'player', 'url', 'utility'));
+        $this->load->helper(array('club_statistics', 'competition', 'competition_stage', 'fantasy_football', 'form', 'goal', 'match', 'opposition', 'player', 'position', 'url', 'utility'));
     }
 
     /**
@@ -24,7 +26,7 @@ class Fantasy_Football extends Frontend_Controller {
      */
     public function view()
     {
-        $parameters = $this->uri->uri_to_assoc(3, array('season', 'type', 'order-by', 'position', 'formation'));
+        $parameters = $this->uri->uri_to_assoc(3, array('season', 'type', 'order-by', 'position', 'formation', 'measurement'));
 
         $season = Season_model::fetchCurrentSeason();
         if ($parameters['season'] !== false) {
@@ -45,14 +47,56 @@ class Fantasy_Football extends Frontend_Controller {
             $position = $parameters['position'];
         }
 
+        $orderBy = '';
+        if ($parameters['order-by'] !== false) {
+            $orderBy = $parameters['order-by'];
+        }
+
         $formation = '4-4-2';
         if ($parameters['formation'] !== false) {
             $formation = $parameters['formation'];
         }
 
-        $orderBy = '';
-        if ($parameters['order-by'] !== false) {
-            $orderBy = $parameters['order-by'];
+        $measurement = '';
+        if ($parameters['measurement'] !== false) {
+            $measurement = $parameters['measurement'];
+        }
+
+        if ($this->input->post()) {
+            $redirectString = '/fantasy-football/view';
+
+            if ($this->input->post('season')) {
+                $season = $this->input->post('season');
+            }
+
+            if ($this->input->post('type')) {
+                $type = $this->input->post('type');
+            }
+
+            if ($this->input->post('position')) {
+                $position = $this->input->post('position');
+            }
+
+            if ($this->input->post('order-by')) {
+                $orderBy = $this->input->post('order-by');
+            }
+
+            if ($this->input->post('formation')) {
+                $formation = $this->input->post('formation');
+            }
+
+            if ($this->input->post('measurement')) {
+                $measurement = $this->input->post('measurement');
+            }
+
+            $redirectString .= '/season/' . $season;
+            $redirectString .= '/type/' . $type;
+            $redirectString .= '/position/' . $position;
+            $redirectString .= '/order-by/' . $orderBy;
+            $redirectString .= '/formation/' . $formation;
+            $redirectString .= '/measurement/' . $measurement;
+
+            redirect($redirectString);
         }
 
         // Fetch Formation Info
@@ -76,6 +120,8 @@ class Fantasy_Football extends Frontend_Controller {
             'season'              => $season,
             'type'                => $type,
             'position'            => $position,
+            'orderBy'             => $orderBy,
+            'measurement'         => $measurement,
         );
 
         $this->load->view("themes/{$this->theme}/header", $data);

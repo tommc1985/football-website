@@ -1,7 +1,45 @@
 <div class="row-fluid">
     <div class="span12">
 
+    <?php
+    echo form_open($this->uri->uri_string()); ?>
+
         <h2><?php echo $this->lang->line('fantasy_football_title'); ?> - <?php echo Utility_helper::formattedSeason($season); ?><?php echo ($type != 'overall' ? ' (' . Competition_helper::type($type) . ' ' . $this->lang->line("fantasy_football_matches") . ')' : ''); ?></h2>
+
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="row-fluid">
+<?php
+$inputType = array(
+    'name'    => 'type',
+    'id'      => 'type',
+    'options' => array('overall' => 'Overall') + Competition_model::fetchTypes(),
+    'value'   => set_value('type', $type),
+);
+
+$inputSeason = array(
+    'name'    => 'season',
+    'id'      => 'season',
+    'options' => array('all-time' => 'All Time') + $this->Season_model->fetchForDropdown(),
+    'value'   => set_value('season', $season),
+); ?>
+                    <div class="span4">
+<?php
+echo form_label($this->lang->line('fantasy_football_competition_type'), $inputType['name']);
+echo form_dropdown($inputType['name'], $inputType['options'], $inputType['value']); ?>
+                    </div>
+                    <div class="span4">
+<?php
+echo form_label($this->lang->line('fantasy_football_season'), $inputSeason['name']);
+echo form_dropdown($inputSeason['name'], $inputSeason['options'], $inputSeason['value']); ?>
+                    </div>
+                    <div class="span4">
+<?php
+echo form_submit('submit', $this->lang->line('fantasy_football_show')); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="row-fluid">
             <div class="span12">
@@ -10,11 +48,42 @@
         </div>
 
         <div class="row-fluid">
-            <div class="span4">
+            <div class="span12">
+                <div class="row-fluid">
+<?php
+$inputPosition = array(
+    'name'    => 'position',
+    'id'      => 'position',
+    'options' => array('all' => $this->lang->line('fantasy_football_all')) + $this->Position_model->fetchForDropdown(),
+    'value'   => set_value('position', $position),
+);
 
+$inputOrderBy = array(
+    'name'    => 'order_by',
+    'id'      => 'order_by',
+    'options' => $this->Fantasy_Football_model->fetchOrderByForDropdown(),
+    'value'   => set_value('order_by', $orderBy),
+); ?>
+                    <div class="span4">
+<?php
+echo form_label($this->lang->line('fantasy_football_position'), $inputPosition['name']);
+echo form_dropdown($inputPosition['name'], $inputPosition['options'], $inputPosition['value']); ?>
+                    </div>
+                    <div class="span4">
+<?php
+echo form_label($this->lang->line('fantasy_football_order_by'), $inputOrderBy['name']);
+echo form_dropdown($inputOrderBy['name'], $inputOrderBy['options'], $inputOrderBy['value']); ?>
+                    </div>
+                    <div class="span4">
+<?php
+echo form_submit('submit', $this->lang->line('fantasy_football_show')); ?>
+                    </div>
+                </div>
             </div>
+        </div>
 
-            <div class="span8">
+        <div class="row-fluid">
+            <div class="span12">
                 <table class="no-more-tables width-100-percent">
                     <thead>
                         <tr>
@@ -54,11 +123,76 @@
         </div>
 
         <div class="row-fluid">
-            <div class="span4">
+            <div class="span12">
+                <div class="row-fluid">
+<?php
+$inputMeasurement = array(
+    'name'    => 'measurement',
+    'id'      => 'measurement',
+    'options' => $this->Fantasy_Football_model->fetchMeasurementForDropdown(),
+    'value'   => set_value('measurement', $measurement),
+);
 
+$inputFormation = array(
+    'name'    => 'formation',
+    'id'      => 'formation',
+    'options' => $this->Fantasy_Football_model->fetchFormationsForDropdown(),
+    'value'   => set_value('formation', $formation),
+); ?>
+                    <div class="span4">
+<?php
+echo form_label($this->lang->line('fantasy_football_measurement'), $inputMeasurement['name']);
+echo form_dropdown($inputMeasurement['name'], $inputMeasurement['options'], $inputMeasurement['value']); ?>
+                    </div>
+                    <div class="span4">
+<?php
+echo form_label($this->lang->line('fantasy_football_formation'), $inputFormation['name']);
+echo form_dropdown($inputFormation['name'], $inputFormation['options'], $inputFormation['value']); ?>
+                    </div>
+                    <div class="span4">
+<?php
+echo form_submit('submit', $this->lang->line('fantasy_football_show')); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span7">
+                <div id="stadium">
+                    <div id="pitch" class="formation-<?php echo $formation; ?>">
+                    <?php
+                    if ($bestLineup !== false) {
+                        foreach ($formationInfo['positions'] as $position) {
+                            if (strpos($position, 'sub') === false) { ?>
+                        <div class="position <?php echo $position; ?>">
+                            <span class="marker"><?php echo Fantasy_Football_helper::fetchSimplePosition($position, true); ?></span>
+                            <span class="player"><?php echo Player_helper::initialSurname($bestLineup[$position], false); ?></span>
+                            <span class="points">(<?php echo rand(5, 200); ?> pts)</span>
+                        </div>
+                    <?php
+                            }
+                        } ?>
+                    </div>
+                    <div id="dugout">
+                    <?php
+                        foreach ($formationInfo['positions'] as $position) {
+                            if (strpos($position, 'sub') !== false) { ?>
+                        <div class="position <?php echo Fantasy_Football_helper::fetchSimplePosition($position); ?>">
+                            <span class="marker"><?php echo Fantasy_Football_helper::fetchSimplePosition($position, true); ?></span>
+                            <span class="player"><?php echo Player_helper::initialSurname($bestLineup[$position], false); ?></span>
+                            <span class="points">(<?php echo rand(5, 200); ?> pts)</span>
+                        </div>
+                    <?php
+                            }
+                        }
+                    } ?>
+                        <div class="clear"></div>
+                    </div>
+                </div>
             </div>
 
-            <div class="span4">
+            <div class="span5">
                 <table class="width-100-percent">
                     <thead>
                         <tr>
@@ -85,41 +219,9 @@
                     </tbody>
                 </table>
             </div>
-
-            <div class="span4">
-                <div id="stadium">
-                    <div id="pitch" class="formation-<?php echo $formation; ?>">
-                    <?php
-                    if ($bestLineup !== false) {
-                        foreach ($formationInfo['positions'] as $position) {
-                            if (strpos($position, 'sub') === false) { ?>
-                        <div class="position <?php echo $position; ?>">
-                            <span class="marker"><?php echo Fantasy_Football_helper::fetchSimplePosition($position, true); ?></span>
-                            <span class="player"><?php echo Player_helper::initialSurname($bestLineup[$position], false); ?></span>
-                            <span class="points">(<?php echo rand(5, 200); ?> pts)</span>
-                        </div>
-                    <?php
-                            }
-                        } ?>
-                    </div>
-                    <div id="dugout">
-                    <?php
-                        foreach ($formationInfo['positions'] as $position) {
-                            if (strpos($position, 'sub') !== false) { ?>
-                        <div class="position <?php echo Fantasy_Football_helper::fetchSimplePosition($position); ?>">
-                            <span class="marker"><?php echo Fantasy_Football_helper::fetchSimplePosition($position, true); ?></span>
-                            <span class="player"><?php echo Player_helper::initialSurname($bestLineup[$position]); ?></span>
-                            <span class="points">(<?php echo rand(5, 200); ?> pts)</span>
-                        </div>
-                    <?php
-                            }
-                        }
-                    } ?>
-                        <div class="clear"></div>
-                    </div>
-                </div>
-            </div>
         </div>
 
     </div>
+    <?php
+    echo form_close(); ?>
 </div>

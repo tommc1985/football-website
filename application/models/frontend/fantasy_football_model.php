@@ -541,6 +541,50 @@ WHERE
         return 'total_points';
     }
 
+    /**
+     * Fetch Order By for dropdown
+     * @return array List of Order options
+     */
+    public function fetchOrderByForDropdown()
+    {
+        $dropdownOptions = array(
+            'total-points' => $this->lang->line("fantasy_football_total_points"),
+            'average-points' => $this->lang->line("fantasy_football_average_points"),
+        );
+
+        return $dropdownOptions;
+    }
+
+    /**
+     * Fetch Measurement for dropdown
+     * @return array List of Measurements
+     */
+    public function fetchMeasurementForDropdown()
+    {
+        $dropdownOptions = array(
+            'total-points' => $this->lang->line("fantasy_football_total_points"),
+            'average-points' => $this->lang->line("fantasy_football_average_points"),
+            'appearances' => $this->lang->line("fantasy_football_appearances"),
+        );
+
+        return $dropdownOptions;
+    }
+
+    /**
+     * Fetch Formations for dropdown
+     * @return array List of Formations
+     */
+    public function fetchFormationsForDropdown()
+    {
+        $dropdownOptions = array();
+
+        foreach ($this->formations as $key => $formation) {
+            $dropdownOptions[$key] = $formation['name'];
+        }
+
+        return $dropdownOptions;
+    }
+
 }
 
 

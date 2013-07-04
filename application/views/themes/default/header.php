@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Football Website</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <link href="/bootstrap/docs/assets/css/bootstrap.css" rel="stylesheet">
     <link href="/bootstrap/docs/assets/css/bootstrap-responsive.css" rel="stylesheet">
     <link href="/assets/css/tables.css" rel="stylesheet">
