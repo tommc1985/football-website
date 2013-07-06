@@ -29,11 +29,20 @@ class Player_Statistics extends Frontend_Controller {
     {
         $parameters = $this->uri->uri_to_assoc(3, array('season', 'type', 'threshold', 'unit'));
 
+        $season = Season_model::fetchCurrentSeason();
+        if ($parameters['season'] !== false) {
+            if ($parameters['season'] == 'all-time') {
+                $season = 'all-time';
+            } else {
+                $season = (int) $parameters['season'];
+            }
+        }
+
         if ($this->input->post()) {
             $redirectString = '/player-statistics/view';
 
-            if ($this->input->post('season')) {
-                $redirectString .= '/season/' . $this->input->post('season');
+            if ($season != Season_model::fetchCurrentSeason()) {
+                $redirectString .= '/season/' . $season;
             }
 
             if ($this->input->post('type')) {
@@ -49,15 +58,6 @@ class Player_Statistics extends Frontend_Controller {
             }
 
             redirect($redirectString);
-        }
-
-        $season = Season_model::fetchCurrentSeason();
-        if ($parameters['season'] !== false) {
-            if ($parameters['season'] == 'all-time') {
-                $season = 'all-time';
-            } else {
-                $season = (int) $parameters['season'];
-            }
         }
 
         $type = 'overall';

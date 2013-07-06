@@ -14,13 +14,6 @@ $inputType = array(
     'value'   => set_value('type', $type),
 );
 
-$inputSeason = array(
-    'name'    => 'season',
-    'id'      => 'season',
-    'options' => array('all-time' => 'All Time') + $this->Season_model->fetchForDropdown(),
-    'value'   => set_value('season', $season),
-);
-
 $inputThreshold = array(
     'name'    => 'threshold',
     'id'      => 'threshold',
@@ -37,9 +30,6 @@ $inputUnit = array(
 
 echo form_label($this->lang->line('player_statistics_competition_type'), $inputType['name']);
 echo form_dropdown($inputType['name'], $inputType['options'], $inputType['value']);
-
-echo form_label($this->lang->line('player_statistics_season'), $inputSeason['name']);
-echo form_dropdown($inputSeason['name'], $inputSeason['options'], $inputSeason['value']);
 
 echo form_label($this->lang->line('player_statistics_threshold'), $inputThreshold['name']);
 echo form_dropdown($inputThreshold['name'], $inputThreshold['options'], $inputThreshold['value']);
