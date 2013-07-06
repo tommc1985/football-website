@@ -15,25 +15,13 @@ $inputType = array(
     'id'      => 'type',
     'options' => array('overall' => 'Overall') + Competition_model::fetchTypes(),
     'value'   => set_value('type', $type),
-);
-
-$inputSeason = array(
-    'name'    => 'season',
-    'id'      => 'season',
-    'options' => array('all-time' => 'All Time') + $this->Season_model->fetchForDropdown(),
-    'value'   => set_value('season', $season),
 ); ?>
                     <div class="span4">
 <?php
 echo form_label($this->lang->line('fantasy_football_competition_type'), $inputType['name']);
 echo form_dropdown($inputType['name'], $inputType['options'], $inputType['value']); ?>
                     </div>
-                    <div class="span4">
-<?php
-echo form_label($this->lang->line('fantasy_football_season'), $inputSeason['name']);
-echo form_dropdown($inputSeason['name'], $inputSeason['options'], $inputSeason['value']); ?>
-                    </div>
-                    <div class="span4">
+                    <div class="span8">
 <?php
 echo form_submit('submit', $this->lang->line('fantasy_football_show')); ?>
                     </div>

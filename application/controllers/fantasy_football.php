@@ -65,8 +65,8 @@ class Fantasy_Football extends Frontend_Controller {
         if ($this->input->post()) {
             $redirectString = '/fantasy-football/view';
 
-            if ($this->input->post('season')) {
-                $season = $this->input->post('season');
+            if ($season != Season_model::fetchCurrentSeason()) {
+                $redirectString .= '/season/' . $season;
             }
 
             if ($this->input->post('type')) {
@@ -89,7 +89,6 @@ class Fantasy_Football extends Frontend_Controller {
                 $measurement = $this->input->post('measurement');
             }
 
-            $redirectString .= '/season/' . $season;
             $redirectString .= '/type/' . $type;
             $redirectString .= '/position/' . $position;
             $redirectString .= '/order-by/' . $orderBy;
