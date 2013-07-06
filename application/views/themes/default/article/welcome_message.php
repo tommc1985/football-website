@@ -7,7 +7,8 @@
         <?php
         if ($articles) {
             foreach ($articles as $article) { ?>
-            <h3><?php echo $article->title; ?> (<?php echo Utility_helper::shortDate($article->publish_date); ?>)</h3>
+            <h3><?php echo $article->title; ?></h3>
+            <p><?php echo Utility_helper::shortDate($article->publish_date); ?></p>
             <p><?php echo Utility_helper::partialContent($article->content, 250, " "); ?> (<a href="/article/view/id/<?php echo $article->id; ?>">read more</a>)</p>
         <?php
             }
