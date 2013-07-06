@@ -44,8 +44,23 @@ class Article extends Frontend_Controller {
                 'type' => 'article'
             )
         ));
+        $config['num_links'] = 1;
         $config['per_page'] = $perPage;
         $config['cur_page'] = $offset;
+        $config['full_tag_open'] = '<ul>';
+        $config['full_tag_closed'] = '</ul>';
+        $config['first_tag_open'] = '<li>';
+        $config['first_tag_closed'] = '</li>';
+        $config['last_tag_open'] = '<li>';
+        $config['last_tag_closed'] = '</li>';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_closed'] = '</li>';
+        $config['prev_tag_open'] = '<li>';
+        $config['prev_tag_closed'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active"><a href="#">';
+        $config['cur_tag_closed'] = '</a></li>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_closed'] = '</li>';
 
         $this->pagination->initialize($config);
 

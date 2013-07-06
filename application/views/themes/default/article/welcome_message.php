@@ -2,8 +2,11 @@
     <div class="span12">
         <h2><?php echo $this->lang->line('article_title'); ?></h2>
 
+        <div class="pagination">
         <?php
         echo $pagination; ?>
+        </div>
+
         <?php
         if ($articles) {
             foreach ($articles as $article) { ?>
@@ -16,7 +19,10 @@
             <?php echo $this->lang->line('article_no_article_found'); ?></td>
         <?php
         } ?>
+
+        <div class="pagination">
         <?php
         echo $pagination; ?>
+        </div>
     </div>
 </div>
