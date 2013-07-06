@@ -6,6 +6,9 @@ $lang['club_statistics_title']                                  = 'Club Statisti
 $lang['club_statistics_match']                                  = 'match';
 $lang['club_statistics_matches']                                = 'matches';
 
+$lang['club_statistics_competition_type']                       = 'Competition Type';
+$lang['club_statistics_show']                                   = 'Show';
+
 $lang['club_statistics_biggest_win']                            = 'Biggest Win';
 $lang['club_statistics_biggest_win_h']                          = 'Biggest Home Win';
 $lang['club_statistics_biggest_win_a']                          = 'Biggest Away Win';

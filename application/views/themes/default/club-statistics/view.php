@@ -3,6 +3,28 @@
 
         <h2><?php echo $this->lang->line('club_statistics_title'); ?> - <?php echo Utility_helper::formattedSeason($season); ?><?php echo ($type != 'overall' ? ' (' . Competition_helper::type($type) . ' ' . $this->lang->line("club_statistics_matches") . ')' : ''); ?></h2>
 
+        <div class="row-fluid">
+            <div class="span12">
+<?php
+echo form_open($this->uri->uri_string());
+
+$inputType = array(
+    'name'    => 'type',
+    'id'      => 'type',
+    'options' => array('overall' => 'Overall') + Competition_model::fetchTypes(),
+    'value'   => set_value('type', $type),
+);
+
+echo form_label($this->lang->line('club_statistics_competition_type'), $inputType['name']);
+echo form_dropdown($inputType['name'], $inputType['options'], $inputType['value']); ?>
+
+<?php
+echo form_submit('submit', $this->lang->line('club_statistics_show'));
+echo form_close(); ?>
+
+            </div>
+        </div>
+
 <?php
 $i = 0;
 foreach ($this->Cache_Club_Statistics_model->methodMap as $statisticGroup => $method) {
