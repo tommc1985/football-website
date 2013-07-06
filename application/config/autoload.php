@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |    $autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('assets');
+$autoload['libraries'] = array();
 
 
 /*
@@ -64,7 +64,7 @@ $autoload['libraries'] = array('assets');
 |    $autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url', 'file', 'directory', 'string', 'html', 'assets');
+$autoload['helper'] = array();
 
 
 /*
@@ -80,7 +80,7 @@ $autoload['helper'] = array('url', 'file', 'directory', 'string', 'html', 'asset
 |
 */
 
-$autoload['config'] = array('assets', 'assets_cssmin', 'assets_cdn');
+$autoload['config'] = array();
 
 
 /*
