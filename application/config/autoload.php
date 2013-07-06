@@ -111,9 +111,6 @@ $autoload['language'] = array();
 
 $autoload['model'] = array();
 
-//Sparks
-$autoload['sparks'] = array('assets/1.5.1');
-
 
 /* End of file autoload.php */
 /* Location: ./application/config/autoload.php */
