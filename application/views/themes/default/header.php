@@ -5,14 +5,14 @@
     <title>Football Website</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <link href="/bootstrap/docs/assets/css/bootstrap.css" rel="stylesheet">
-    <link href="/bootstrap/docs/assets/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="/assets/css/tables.css" rel="stylesheet">
-    <link href="/assets/modules/fantasy-football/css/fantasy-football.css" rel="stylesheet">
+    <link href="<?php echo site_url("bootstrap/docs/assets/css/bootstrap.css"); ?>" rel="stylesheet">
+    <link href="<?php echo site_url("bootstrap/docs/assets/css/bootstrap-responsive.css"); ?>" rel="stylesheet">
+    <link href="<?php echo site_url("assets/css/tables.css"); ?>" rel="stylesheet">
+    <link href="<?php echo site_url("assets/modules/fantasy-football/css/fantasy-football.css"); ?>" rel="stylesheet">
 
 
-    <link href="/bootstrap/docs/assets/css/docs.css" rel="stylesheet">
-    <link href="/assets/themes/default/css/style.css" rel="stylesheet">
+    <link href="<?php echo site_url("bootstrap/docs/assets/css/docs.css"); ?>" rel="stylesheet">
+    <link href="<?php echo site_url("assets/themes/default/css/style.css"); ?>" rel="stylesheet">
 </head>
 <body>
 
@@ -80,6 +80,7 @@
                         <li class="dropdown-submenu">
                             <a tabindex="-1" href="#"><?php echo $menuSeasonFriendly; ?></a>
                             <ul class="dropdown-menu">
+                                <li><a href="<?php echo site_url("match/index/season/{$menuSeason}"); ?>">Fixtures &amp; Results</a></li>
                                 <li><a href="<?php echo site_url("club-statistics/view/season/{$menuSeason}"); ?>">Club Statistics</a></li>
                                 <li><a href="<?php echo site_url("player-statistics/view/season/{$menuSeason}"); ?>">Player Statistics</a></li>
                                 <li><a href="<?php echo site_url("fantasy-football/view/season/{$menuSeason}"); ?>">Fantasy Football</a></li>

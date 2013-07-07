@@ -12,7 +12,7 @@ class Match extends Frontend_Controller {
         parent::__construct();
 
         $this->load->database();
-        $this->load->model('frontend/Match_model');
+        $this->load->model('frontend/Frontend_Match_model');
         $this->load->model('Season_model');
         $this->lang->load('match');
         $this->load->helper(array('card', 'competition', 'competition_stage', 'goal', 'match', 'milestone', 'official', 'opposition', 'player', 'position', 'url', 'utility'));
@@ -38,10 +38,10 @@ class Match extends Frontend_Controller {
             $type = 'overall';
         }
 
-        $orderBy = $this->Match_model->getOrderBy($parameters['order-by']);
-        $order = $this->Match_model->getOrder($parameters['order']);
+        $orderBy = $this->Frontend_Match_model->getOrderBy($parameters['order-by']);
+        $order = $this->Frontend_Match_model->getOrder($parameters['order']);
 
-        $matches = $this->Match_model->fetchMatchList($season, $type, $orderBy, $order, Season_model::fetchCurrentSeason() == $season);
+        $matches = $this->Frontend_Match_model->fetchMatchList($season, $type, $orderBy, $order, Season_model::fetchCurrentSeason() == $season);
 
         $data = array(
             'matches' => $matches,
@@ -61,7 +61,7 @@ class Match extends Frontend_Controller {
     {
         $parameters = $this->uri->uri_to_assoc(3, array('id'));
 
-        $match = $this->Match_model->fetchMatchDetails($parameters['id']);
+        $match = $this->Frontend_Match_model->fetchMatchDetails($parameters['id']);
 
         if ($match === false) {
             show_error($this->lang->line('match_not_found'), 404);
