@@ -23,6 +23,8 @@ class League_Match extends Backend_Controller
         $this->load->model('League_Registration_model');
         $this->load->config('league_match', true);
 
+        $this->load->helper(array('opposition'));
+
         $this->lang->load('league_match');
     }
 

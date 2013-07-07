@@ -17,9 +17,9 @@ echo $pagination; ?>
         foreach ($leagueMatches as $leagueMatch) { ?>
             <tr>
                 <td><?php echo $leagueMatch->date; ?></td>
-                <td><?php echo $leagueMatch->h_opposition_id; ?></td>
+                <td><?php echo Opposition_helper::name($leagueMatch->h_opposition_id); ?></td>
                 <td><?php echo $leagueMatch->h_score; ?> - <?php echo $leagueMatch->a_score; ?></td>
-                <td><?php echo $leagueMatch->a_opposition_id; ?></td>
+                <td><?php echo Opposition_helper::name($leagueMatch->a_opposition_id); ?></td>
                 <td><a href="/admin/league-match/edit/id/<?php echo $leagueMatch->id;?>"><?php echo $this->lang->line('league_match_edit'); ?></a></td>
                 <td><a href="/admin/league-match/delete/id/<?php echo $leagueMatch->id;?>"><?php echo $this->lang->line('league_match_delete'); ?></a></td>
             </tr>
