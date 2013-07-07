@@ -36,7 +36,7 @@ class Club_Statistics_helper
 
         echo '<h3>' . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>';
         foreach ($matches as $match) { ?>
-            <?php echo Match_helper::score($match); ?><br />
+            <a href="<?php echo site_url("match/view/id/{$match->id}"); ?>"><?php echo Match_helper::score($match); ?></a><br />
             <?php echo Utility_helper::shortDate($match->date); ?> <?php echo $ci->lang->line("match_vs"); ?> <?php echo Opposition_helper::name($match->opposition_id); ?> - <?php echo Match_helper::shortCompetitionNameCombined($match); ?><br />
         <?php
         }

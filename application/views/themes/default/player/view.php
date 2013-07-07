@@ -1,12 +1,12 @@
 <div class="row-fluid">
     <div class="span12">
-        <h2><?php echo sprintf($this->lang->line('player_player_profile'), Player_helper::fullName($player)); ?></h2>
+        <h2><?php echo sprintf($this->lang->line('player_player_profile'), Player_helper::fullName($player, false)); ?></h2>
 
         <h3><?php echo $this->lang->line('player_player_details'); ?></h3>
 
         <dl>
           <dt><?php echo $this->lang->line('player_full_name'); ?>:</dt>
-          <dd><?php echo Player_helper::fullNameReverse($player); ?></dd>
+          <dd><?php echo Player_helper::fullNameReverse($player, false); ?></dd>
           <dt><?php echo $this->lang->line('player_date_of_birth'); ?>:</dt>
           <dd><?php echo Utility_helper::formattedDate($player->dob, "jS F Y"); ?></dd>
           <dt><?php echo $this->lang->line('player_nationality'); ?>:</dt>

@@ -12,7 +12,7 @@
             foreach ($articles as $article) { ?>
             <h3><?php echo $article->title; ?></h3>
             <p><?php echo Utility_helper::shortDate($article->publish_date); ?></p>
-            <p><?php echo Utility_helper::partialContent($article->content, 250, " "); ?> (<a href="/news/view/id/<?php echo $article->id; ?>">read more</a>)</p>
+            <p><?php echo Utility_helper::partialContent($article->content, 250, " "); ?> (<a href="<?php echo site_url("/news/view/id/{$article->id}"); ?>">read more</a>)</p>
         <?php
             }
         } else { ?>

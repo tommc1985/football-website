@@ -49,7 +49,7 @@ class Player_helper
         $player = self::_convertObject($player);
 
         if ($withLink) {
-            return "<a href='/player/view/id/{$player->id}'>{$player->first_name} {$player->surname}</a>";
+            return "<a href='" . site_url("player/view/id/{$player->id}") . "'>{$player->first_name} {$player->surname}</a>";
         }
 
         return "{$player->first_name} {$player->surname}";
@@ -66,7 +66,7 @@ class Player_helper
         $player = self::_convertObject($player);
 
         if ($withLink) {
-            return "<a href='/player/view/id/{$player->id}'>{$player->surname}, {$player->first_name}</a>";
+            return "<a href='" . site_url("player/view/id/{$player->id}") . "'>{$player->surname}, {$player->first_name}</a>";
         }
 
         return "{$player->surname}, {$player->first_name}";
@@ -83,7 +83,7 @@ class Player_helper
         $player = self::_convertObject($player);
 
         if ($withLink) {
-            return "<a href='/player/view/id/{$player->id}'>" . substr($player->first_name, 0, 1) . '. ' . $player->surname . "</a>";
+            return "<a href='" . site_url("player/view/id/{$player->id}") . "'>" . substr($player->first_name, 0, 1) . '. ' . $player->surname . "</a>";
         }
 
         return substr($player->first_name, 0, 1) . '. ' . $player->surname;
@@ -130,7 +130,7 @@ class Player_helper
         $ci->lang->load('match');
         $ci->load->helper(array('competition', 'competition_stage', 'match', 'opposition', 'player', 'utility'));
 
-        return anchor('/match/view/id/' . $debut->match_id, Match_helper::score($debut->match_id) . " " . $ci->lang->line('match_vs') . " " .  Opposition_helper::name($debut->opposition_id) . " - " . Match_helper::fullCompetitionNameCombined($debut) . " (" . Utility_helper::formattedDate($debut->date, "jS M 'y") . ")");
+        return "<a href='" . site_url("/match/view/id/{$debut->match_id}") . "'>"  . Match_helper::score($debut->match_id) . "</a> " . $ci->lang->line('match_vs') . " " .  Opposition_helper::name($debut->opposition_id) . " - " . Match_helper::fullCompetitionNameCombined($debut) . " (" . Utility_helper::formattedDate($debut->date, "jS M 'y") . ")";
     }
 
     /**
@@ -144,7 +144,7 @@ class Player_helper
         $ci->lang->load('match');
         $ci->load->helper(array('competition', 'competition_stage', 'match', 'opposition', 'player', 'utility'));
 
-        return anchor('/match/view/id/' . $firstGoal->match_id, Match_helper::score($firstGoal->match_id) . " " . $ci->lang->line('match_vs') . " " .  Opposition_helper::name($firstGoal->opposition_id) . " - " . Match_helper::fullCompetitionNameCombined($firstGoal) . " (" . Utility_helper::formattedDate($firstGoal->date, "jS M 'y") . ")");
+        return "<a href='" . site_url("/match/view/id/{$firstGoal->match_id}") . "'>" . Match_helper::score($firstGoal->match_id) . "</a> " . $ci->lang->line('match_vs') . " " .  Opposition_helper::name($firstGoal->opposition_id) . " - " . Match_helper::fullCompetitionNameCombined($firstGoal) . " (" . Utility_helper::formattedDate($firstGoal->date, "jS M 'y") . ")";
     }
 
     /**

@@ -13,6 +13,8 @@ class Frontend_Controller extends CI_Controller
 
         $this->lang->load('global');
 
+        $this->load->helper(array('url'));
+
         $this->load->model('frontend/League_model');
         $this->load->model('Season_model');
     }
