@@ -7,11 +7,13 @@ class Frontend_Controller extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->database();
 
         $this->theme = 'default';
 
         $this->lang->load('global');
 
+        $this->load->model('frontend/League_model');
         $this->load->model('Season_model');
     }
 }
