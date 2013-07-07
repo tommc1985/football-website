@@ -688,7 +688,10 @@ class Cache_League_Statistics_model extends CI_Model {
                 }
             }
 
-            $records[$cleanSheets][$clubId] = $clubId;
+            $records[$cleanSheets][$clubId] = (object) array(
+                'opposition_id' => $clubId,
+                'number'        => $cleanSheets,
+            );
         }
 
         krsort($records);
@@ -730,7 +733,10 @@ class Cache_League_Statistics_model extends CI_Model {
                 }
             }
 
-            $records[$cleanSheets][$clubId] = $clubId;
+            $records[$cleanSheets][$clubId] = (object) array(
+                'opposition_id' => $clubId,
+                'number'        => $cleanSheets,
+            );
         }
 
         ksort($records);
@@ -772,7 +778,10 @@ class Cache_League_Statistics_model extends CI_Model {
                 }
             }
 
-            $records[$failedToScore][$clubId] = $clubId;
+            $records[$failedToScore][$clubId] = (object) array(
+                'opposition_id' => $clubId,
+                'number'        => $failedToScore,
+            );
         }
 
         krsort($records);
@@ -814,7 +823,10 @@ class Cache_League_Statistics_model extends CI_Model {
                 }
             }
 
-            $records[$failedToScore][$clubId] = $clubId;
+            $records[$failedToScore][$clubId] = (object) array(
+                'opposition_id' => $clubId,
+                'number'        => $failedToScore,
+            );
         }
 
         ksort($records);
