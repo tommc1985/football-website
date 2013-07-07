@@ -16,4 +16,74 @@
 </head>
 <body>
 
+<div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="#">Club Info<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/club-history">History</a></li>
+                        <li><a href="/club-officials">Officials</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="#">News &amp; Articles<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/news">News</a></li>
+                        <li><a href="/article">Articles</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="#">Matchday<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/player">Squad List</a></li>
+                        <li><a href="/match">Fixtures &amp; Results</a></li>
+                        <li><a href="/league/view">League Table</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="#">Statistics<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/club-statistics/view">Club Statistics</a></li>
+                        <li><a href="/player-statistics/view">Player Statistics</a></li>
+                        <li><a href="/fantasy-football/view">Fantasy Football</a></li>
+                        <li><a href="/head-to-head">Head to Head</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="#">Archive<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    <?php
+                    foreach ((array('all-time' => 'All Time') + $this->Season_model->fetchForDropdown())  as $menuSeason => $menuSeasonFriendly) { ?>
+                        <li class="dropdown-submenu">
+                            <a tabindex="-1" href="#"><?php echo $menuSeasonFriendly; ?></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/club-statistics/view/season/<?php echo $menuSeason; ?>">Club Statistics</a></li>
+                                <li><a href="/player-statistics/view/season/<?php echo $menuSeason; ?>">Player Statistics</a></li>
+                                <li><a href="/fantasy-football/view/season/<?php echo $menuSeason; ?>">Fantasy Football</a></li>
+                                <li><a href="/league-statistics/view/season/<?php echo $menuSeason; ?>">League Statistics</a></li>
+                            </ul>
+                        </li>
+                    <?php
+                    } ?>
+                    </ul>
+                </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
 <div class="container">
+    <div class="page-header">
+        <h1><?php echo Configuration::get('team_name'); ?> <small>Players</small></h1>
+    </div>

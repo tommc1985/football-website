@@ -11,6 +11,8 @@ class Frontend_Controller extends CI_Controller
         $this->theme = 'default';
 
         $this->lang->load('global');
+
+        $this->load->model('Season_model');
     }
 }
 
