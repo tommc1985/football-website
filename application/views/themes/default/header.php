@@ -56,6 +56,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="/club-statistics/view">Club Statistics</a></li>
                         <li><a href="/player-statistics/view">Player Statistics</a></li>
+                        <li><a href="/league-statistics/view">League Statistics</a></li>
                         <li><a href="/fantasy-football/view">Fantasy Football</a></li>
                         <li><a href="/head-to-head">Head to Head</a></li>
                     </ul>
