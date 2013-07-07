@@ -26,7 +26,7 @@ class League_Match_model extends Base_Model {
     {
         return $this->insertEntry(array(
             'league_id' => $this->ci->form_validation->set_value('league_id', NULL),
-            'date' => $this->ci->form_validation->set_value('date', NULL),
+            'date' => $this->ci->form_validation->set_value('date', NULL) . ' ' . $this->ci->form_validation->set_value('time', NULL) . ':00',
             'h_opposition_id' => $this->ci->form_validation->set_value('h_opposition_id', NULL),
             'a_opposition_id' => $this->ci->form_validation->set_value('a_opposition_id', NULL),
             'h_score' => $this->ci->form_validation->set_value('h_score', NULL),
@@ -44,7 +44,7 @@ class League_Match_model extends Base_Model {
     {
         return $this->updateEntry($id, array(
             'league_id' => $this->ci->form_validation->set_value('league_id', NULL),
-            'date' => $this->ci->form_validation->set_value('date', NULL),
+            'date' => $this->ci->form_validation->set_value('date', NULL) . ' ' . $this->ci->form_validation->set_value('time', NULL) . ':00',
             'h_opposition_id' => $this->ci->form_validation->set_value('h_opposition_id', NULL),
             'a_opposition_id' => $this->ci->form_validation->set_value('a_opposition_id', NULL),
             'h_score' => $this->ci->form_validation->set_value('h_score', NULL),
@@ -87,6 +87,7 @@ class League_Match_model extends Base_Model {
 
         $this->ci->form_validation->set_rules('league_id', 'League', 'trim|required|integer|xss_clean');
         $this->ci->form_validation->set_rules('date', 'Date', 'trim|required|regex_match[/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/]|xss_clean');
+        $this->ci->form_validation->set_rules('time', 'Time', 'trim|required|regex_match[/^[0-9]{2}:[0-9]{2}$/]|xss_clean');
         $this->ci->form_validation->set_rules('h_opposition_id', 'Home Team', 'trim|required|xss_clean');
         $this->ci->form_validation->set_rules('a_opposition_id', 'Away Team', 'trim|required|xss_clean');
         $this->ci->form_validation->set_rules('h_score', 'Home Score', 'trim|is_natural|xss_clean');

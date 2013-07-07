@@ -23,6 +23,12 @@ $date = array(
     'value' => set_value('date'),
 );
 
+$time = array(
+    'name'  => 'time',
+    'id'    => 'time',
+    'value' => set_value('time'),
+);
+
 $h_opposition_id = array(
     'name'    => 'h_opposition_id',
     'id'      => 'h_opposition_id',
@@ -67,8 +73,13 @@ echo form_open($this->uri->uri_string()); ?>
     </tr>
     <tr>
         <td><?php echo form_label($this->lang->line('league_match_date'), $date['name']); ?></td>
-        <td><?php echo form_date($date['name'], set_value($date['name'], isset($leagueMatch->date) ? $leagueMatch->date : '')); ?></td>
+        <td><?php echo form_date($date['name'], set_value($date['name'], isset($leagueMatch->date) ? substr($leagueMatch->date, 0, 10) : '')); ?></td>
         <td class="error"><?php echo form_error($date['name']); ?><?php echo isset($errors[$date['name']]) ? $errors[$date['name']] : ''; ?></td>
+    </tr>
+    <tr>
+        <td><?php echo form_label($this->lang->line('league_match_time'), $time['name']); ?></td>
+        <td><?php echo form_time($time['name'], set_value($time['name'], isset($leagueMatch->date) ? substr($leagueMatch->date, 11, 5) : Configuration::get('usual_match_ko_time'))); ?></td>
+        <td class="error"><?php echo form_error($time['name']); ?><?php echo isset($errors[$time['name']]) ? $errors[$time['name']] : ''; ?></td>
     </tr>
     <tr>
         <td><?php echo form_label($this->lang->line('league_match_home_team'), $h_opposition_id['name']); ?></td>

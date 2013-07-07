@@ -2093,7 +2093,7 @@ class Install_Model extends CI_Model {
                 'unsigned'       => TRUE,
             ),
             'date' => array(
-                'type'           => 'DATE',
+                'type'           => 'DATETIME',
                 'null'           => true,
             ),
             'h_opposition_id' => array(
