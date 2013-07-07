@@ -41,8 +41,10 @@ class Cache_League_Statistics_model extends CI_Model {
             'longest_sequence_without_clean_sheet' => 'longestSequenceWithoutCleanSheet',
             'longest_scoring_sequence'             => 'longestScoringSequence',
             'longest_sequence_without_scoring'     => 'longestSequenceWithoutScoring',
-            'clean_sheets_in_a_season'             => 'cleanSheetsInASeason',
-            'fail_to_score_in_a_season'            => 'failToScoreInASeason',
+            'most_clean_sheets_in_a_season'        => 'mostCleanSheetsInASeason',
+            'least_clean_sheets_in_a_season'       => 'leastCleanSheetsInASeason',
+            'most_fail_to_score_in_a_season'       => 'mostFailToScoreInASeason',
+            'least_fail_to_score_in_a_season'      => 'leastFailToScoreInASeason',
         );
 
         $this->hungryMethodMap = array(
@@ -659,14 +661,14 @@ class Cache_League_Statistics_model extends CI_Model {
     }
 
     /**
-     * Generate and cache Clean Sheets in a Season Statistics for the specified league
+     * Generate and cache Most "Clean Sheets in a Season" Statistics for the specified league
      * @param  int $leagueId          League ID
      * @param  string|NULL $venue     Whether to include all, home, away or neutral venues
      * @return boolean                Whether query was executed correctly
      */
-    public function cleanSheetsInASeason($leagueId, $venue = NULL)
+    public function mostCleanSheetsInASeason($leagueId, $venue = NULL)
     {
-        $statisticGroup = 'clean_sheets_in_a_season';
+        $statisticGroup = 'most_clean_sheets_in_a_season';
 
         if (!is_null($venue)) {
             $statisticGroup .= "_{$venue}";
@@ -701,14 +703,56 @@ class Cache_League_Statistics_model extends CI_Model {
     }
 
     /**
-     * Generate and cache Failed to Score in a Season Statistics for the specified league
+     * Generate and cache Least "Clean Sheets in a Season" Statistics for the specified league
      * @param  int $leagueId          League ID
      * @param  string|NULL $venue     Whether to include all, home, away or neutral venues
      * @return boolean                Whether query was executed correctly
      */
-    public function failToScoreInASeason($leagueId, $venue = NULL)
+    public function leastCleanSheetsInASeason($leagueId, $venue = NULL)
     {
-        $statisticGroup = 'fail_to_score_in_a_season';
+        $statisticGroup = 'least_clean_sheets_in_a_season';
+
+        if (!is_null($venue)) {
+            $statisticGroup .= "_{$venue}";
+        }
+
+        $this->deleteRows($statisticGroup, $leagueId);
+
+        $clubMatches = $this->matchesByClub($leagueId, $venue);
+
+        $records = array();
+
+        foreach ($clubMatches as $clubId => $matches) {
+            $cleanSheets = 0;
+            foreach ($matches as $match) {
+                if ($match->oppositionScore == 0) {
+                    $cleanSheets++;
+                }
+            }
+
+            $records[$cleanSheets][$clubId] = $clubId;
+        }
+
+        ksort($records);
+
+        $cleanSheets = key($records);
+
+        if (count($records) > 0) {
+            foreach (reset($records) as $record) {
+                $this->insertCache($statisticGroup, $leagueId, $cleanSheets, serialize($record));
+            }
+        }
+    }
+
+    /**
+     * Generate and cache Most "Failed to Score" in a Season Statistics for the specified league
+     * @param  int $leagueId          League ID
+     * @param  string|NULL $venue     Whether to include all, home, away or neutral venues
+     * @return boolean                Whether query was executed correctly
+     */
+    public function mostFailToScoreInASeason($leagueId, $venue = NULL)
+    {
+        $statisticGroup = 'most_fail_to_score_in_a_season';
 
         if (!is_null($venue)) {
             $statisticGroup .= "_{$venue}";
@@ -732,6 +776,48 @@ class Cache_League_Statistics_model extends CI_Model {
         }
 
         krsort($records);
+
+        $failedToScore = key($records);
+
+        if (count($records) > 0) {
+            foreach (reset($records) as $record) {
+                $this->insertCache($statisticGroup, $leagueId, $failedToScore, serialize($record));
+            }
+        }
+    }
+
+    /**
+     * Generate and cache Least "Failed to Score" in a Season Statistics for the specified league
+     * @param  int $leagueId          League ID
+     * @param  string|NULL $venue     Whether to include all, home, away or neutral venues
+     * @return boolean                Whether query was executed correctly
+     */
+    public function leastFailToScoreInASeason($leagueId, $venue = NULL)
+    {
+        $statisticGroup = 'least_fail_to_score_in_a_season';
+
+        if (!is_null($venue)) {
+            $statisticGroup .= "_{$venue}";
+        }
+
+        $this->deleteRows($statisticGroup, $leagueId);
+
+        $clubMatches = $this->matchesByClub($leagueId, $venue);
+
+        $records = array();
+
+        foreach ($clubMatches as $clubId => $matches) {
+            $failedToScore = 0;
+            foreach ($matches as $match) {
+                if ($match->clubScore == 0) {
+                    $failedToScore++;
+                }
+            }
+
+            $records[$failedToScore][$clubId] = $clubId;
+        }
+
+        ksort($records);
 
         $failedToScore = key($records);
 
