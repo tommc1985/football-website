@@ -20,7 +20,7 @@ class League_model extends Base_Frontend_Model {
 
     /**
      * Return string of fields to order data by
-     * @param  string $orderBy Fields passwed
+     * @param  string $orderBy Fields passed
      * @return string          Processed string of fields
      */
     public function getOrderBy($orderBy)
