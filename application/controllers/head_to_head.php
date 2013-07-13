@@ -13,7 +13,7 @@ class Head_To_Head extends Frontend_Controller {
 
         $this->load->database();
         $this->load->model('frontend/Head_To_Head_model');
-        $this->load->model('frontend/Match_model');
+        $this->load->model('frontend/Frontend_Match_model');
         $this->load->model('Opposition_model');
         $this->lang->load('head_to_head');
         $this->lang->load('match');
@@ -53,7 +53,7 @@ class Head_To_Head extends Frontend_Controller {
         $offenders = array();
         $pointsGainers = array();
         if ($opposition !== false) {
-            $matches         = $this->Match_model->fetchMatchesByOpposition($opposition);
+            $matches         = $this->Frontend_Match_model->fetchMatchesByOpposition($opposition);
             $accumulatedData = $this->Head_To_Head_model->calculateHeadToHeadAccumulatedData($matches);
             $scorers         = $this->Head_To_Head_model->fetchTopScorers($opposition);
             $assisters       = $this->Head_To_Head_model->fetchTopAssisters($opposition);

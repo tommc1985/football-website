@@ -25,9 +25,9 @@
             <tbody>
         <?php
             foreach ($players as $player) { ?>
-                <tr>
-                    <td data-title="<?php echo $this->lang->line('player_player'); ?>"><?php echo anchor('/player/view/id/' . $player->id, Player_helper::fullNameReverse($player)); ?></td>
-                    <td data-title="<?php echo $this->lang->line('player_d_o_b'); ?>"><?php echo Utility_helper::formattedDate($player->dob, "jS M Y"); ?></td>
+                <tr itemscope itemtype="http://schema.org/Person">
+                    <td itemprop="name" data-title="<?php echo $this->lang->line('player_player'); ?>"><?php echo Player_helper::fullNameReverse($player); ?></td>
+                    <td data-title="<?php echo $this->lang->line('player_d_o_b'); ?>"><time itemprop="birthDate" datetime="<?php echo Utility_helper::formattedDate($player->dob, "c"); ?>"><?php echo Utility_helper::formattedDate($player->dob, "jS M Y"); ?></time></td>
                     <td data-title="<?php echo $this->lang->line('player_apps'); ?>"><?php echo $player->appearances; ?> (<?php echo $player->substitute_appearances; ?>)</td>
                     <td data-title="<?php echo $this->lang->line('player_goals'); ?>"><?php echo $player->goals; ?></td>
                     <td data-title="<?php echo $this->lang->line('player_assists'); ?>"><?php echo $player->assists; ?></td>

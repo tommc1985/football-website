@@ -17,7 +17,7 @@ $inputOpposition = array(
 );
 
 echo form_label($this->lang->line('head_to_head_competition_type'), $inputOpposition['name']);
-echo form_dropdown($inputOpposition['name'], $inputOpposition['options'], $inputOpposition['value']); ?>
+echo form_dropdown($inputOpposition['name'], $inputOpposition['options'], $inputOpposition['value'], "id='{$inputOpposition['id']}'"); ?>
 
 <?php
 echo form_submit('submit', $this->lang->line('head_to_head_show'));
@@ -76,8 +76,8 @@ if ($opposition) { ?>
                     <?php
                     if ($matches) {
                         foreach ($matches as $match) { ?>
-                            <tr>
-                                <td data-title="<?php echo $this->lang->line("match_date"); ?>"><?php echo $match->date ? Utility_helper::formattedDate($match->date, "jS M 'y") : $this->lang->line('match_t_b_c'); ?></td>
+                            <tr itemscope itemtype="http://schema.org/SportsEvent">
+                                <td data-title="<?php echo $this->lang->line("match_date"); ?>"><time itemprop="startDate" datetime="<?php echo Utility_helper::formattedDate($match->date, "c"); ?>"><?php echo $match->date ? Utility_helper::formattedDate($match->date, "jS M 'y") : $this->lang->line('match_t_b_c'); ?></time></td>
                                 <td data-title="<?php echo $this->lang->line("match_competition"); ?>"><?php echo Match_helper::fullCompetitionNameCombined($match); ?></td>
                                 <td data-title="<?php echo $this->lang->line("match_venue"); ?>"><?php echo Match_helper::venue($match); ?></td>
                                 <td data-title="<?php echo $this->lang->line("match_score"); ?>"><a href="<?php echo site_url("match/view/id/{$match->id}"); ?>" title=""><?php echo Match_helper::score($match); ?></a></td>
@@ -108,8 +108,8 @@ if ($opposition) { ?>
                     <?php
                     if ($scorers) {
                         foreach ($scorers as $scorer) { ?>
-                            <tr>
-                                <td data-title="<?php echo $this->lang->line("head_to_head_player"); ?>"><?php echo Player_helper::fullNameReverse($scorer->player_id); ?></td>
+                            <tr itemscope itemtype="http://schema.org/Person">
+                                <td itemprop="name" data-title="<?php echo $this->lang->line("head_to_head_player"); ?>"><?php echo Player_helper::fullNameReverse($scorer->player_id); ?></td>
                                 <td data-title="<?php echo $this->lang->line("head_to_head_goals"); ?>"><?php echo $scorer->goals; ?></td>
                             </tr>
                         <?php
@@ -136,8 +136,8 @@ if ($opposition) { ?>
                     <?php
                     if ($assisters) {
                         foreach ($assisters as $assister) { ?>
-                            <tr>
-                                <td data-title="<?php echo $this->lang->line("head_to_head_player"); ?>"><?php echo Player_helper::fullNameReverse($assister->player_id); ?></td>
+                            <tr itemscope itemtype="http://schema.org/Person">
+                                <td itemprop="name" data-title="<?php echo $this->lang->line("head_to_head_player"); ?>"><?php echo Player_helper::fullNameReverse($assister->player_id); ?></td>
                                 <td data-title="<?php echo $this->lang->line("head_to_head_assists"); ?>"><?php echo $assister->assists; ?></td>
                             </tr>
                         <?php
@@ -166,8 +166,8 @@ if ($opposition) { ?>
                     <?php
                     if ($pointsGainers) {
                         foreach ($pointsGainers as $pointsGainer) { ?>
-                            <tr>
-                                <td><?php echo Player_helper::fullNameReverse($pointsGainer->player_id); ?></td>
+                            <tr itemscope itemtype="http://schema.org/Person">
+                                <td itemprop="name"><?php echo Player_helper::fullNameReverse($pointsGainer->player_id); ?></td>
                                 <td><?php echo $pointsGainer->points; ?></td>
                             </tr>
                         <?php
@@ -195,8 +195,8 @@ if ($opposition) { ?>
                     <?php
                     if ($offenders) {
                         foreach ($offenders as $offender) { ?>
-                            <tr>
-                                <td><?php echo Player_helper::fullNameReverse($offender->player_id); ?></td>
+                            <tr itemscope itemtype="http://schema.org/Person">
+                                <td itemprop="name"><?php echo Player_helper::fullNameReverse($offender->player_id); ?></td>
                                 <td><?php echo $offender->reds; ?></td>
                                 <td><?php echo $offender->yellows; ?></td>
                             </tr>

@@ -25,8 +25,8 @@
                     <tbody>
                     <?php
                     foreach ($standings as $standing) { ?>
-                        <tr>
-                            <td data-title="<?php echo $this->lang->line('league_team'); ?>"><?php echo Opposition_helper::name($standing->opposition_id); ?></td>
+                        <tr itemscope itemtype="http://schema.org/SportsTeam">
+                            <td itemprop="name" data-title="<?php echo $this->lang->line('league_team'); ?>"><?php echo Opposition_helper::name($standing->opposition_id); ?></td>
                             <td data-title="<?php echo $this->lang->line('league_played'); ?>"><?php echo $standing->played; ?></td>
                             <td data-title="<?php echo $this->lang->line('league_won'); ?>"><?php echo $standing->won; ?></td>
                             <td data-title="<?php echo $this->lang->line('league_drawn'); ?>"><?php echo $standing->drawn; ?></td>
@@ -56,8 +56,8 @@
                     <tbody>
                     <?php
                     foreach ($formTeams as $opposition_id => $formTeam) { ?>
-                        <tr>
-                            <td data-title="<?php echo $this->lang->line('league_team'); ?>"><?php echo Opposition_helper::name($standings[$opposition_id]->opposition_id); ?></td>
+                        <tr itemscope itemtype="http://schema.org/SportsTeam">
+                            <td itemprop="name" data-title="<?php echo $this->lang->line('league_team'); ?>"><?php echo Opposition_helper::name($standings[$opposition_id]->opposition_id); ?></td>
                             <td data-title="<?php echo $this->lang->line('league_form'); ?>"><?php echo League_helper::formattedForm($standings[$opposition_id]->form, Configuration::get('form_match_count')); ?></td>
                         </tr>
                     <?php

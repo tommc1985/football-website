@@ -1,7 +1,7 @@
 <div class="row-fluid">
-    <div class="span12">
-        <h2><?php echo $article->title; ?></h2>
+    <div class="span12" itemscope itemtype="http://schema.org/Article">
+        <h2 itemprop="headline"><?php echo $article->title; ?></h2>
 
-        <p><?php echo nl2br($article->content); ?></p>
+        <p itemprop="articleBody"><?php echo nl2br($article->content); ?></p>
     </div>
 </div>

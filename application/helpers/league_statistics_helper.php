@@ -37,7 +37,7 @@ class League_Statistics_helper
         echo '<h3>' . $ci->lang->line("league_statistics_{$statisticGroup}") . '</h3>';
         echo '<h4>' . League_Match_helper::score($matches[0]) . '</h4>';
         foreach ($matches as $match) { ?>
-            <?php echo Utility_helper::shortDate($match->date); ?>, <?php echo Opposition_helper::name($match->h_opposition_id) . ' ' . $ci->lang->line("match_vs") . ' ' . Opposition_helper::name($match->a_opposition_id); ?><br />
+            <span itemscope itemtype="http://schema.org/SportsEvent"><time itemprop="startDate" datetime="<?php echo Utility_helper::formattedDate($match->date, "c"); ?>"><?php echo Utility_helper::shortDate($match->date); ?></time>, <span itemprop="name"><?php echo Opposition_helper::name($match->h_opposition_id) . ' ' . $ci->lang->line("match_vs") . ' ' . Opposition_helper::name($match->a_opposition_id); ?></span></span><br />
         <?php
         }
     }
@@ -54,8 +54,9 @@ class League_Statistics_helper
 
         echo '<h3>' . $ci->lang->line("league_statistics_{$statisticGroup}") . '</h3>';
         echo '<h4>' . $sequences[0]->sequence; ?> <?php echo $sequences[0]->sequence == 1 ? $ci->lang->line("league_statistics_match") : $ci->lang->line("league_statistics_matches"); ?><?php echo '</h4>'; ?><?php
-        foreach ($sequences as $sequence) {
-            echo Opposition_helper::name($sequence->clubId) . ', ';
+        foreach ($sequences as $sequence) { ?>
+            <span itemscope itemtype="http://schema.org/SportsTeam"><span itemprop="name"><?php echo Opposition_helper::name($sequence->clubId); ?></span></span>,
+            <?php
             if ($sequence->sequence == 1) {
                 echo Utility_helper::shortDate($sequence->sequenceStart); ?><br />
             <?php
@@ -78,8 +79,8 @@ class League_Statistics_helper
 
         echo '<h3>' . $ci->lang->line("league_statistics_{$statisticGroup}") . '</h3>';
         echo '<h4>' . $numbers[0]->number; ?> <?php echo $numbers[0]->number == 1 ? $ci->lang->line("league_statistics_match") : $ci->lang->line("league_statistics_matches"); ?><?php echo '</h4>'; ?><?php
-        foreach ($numbers as $number) {
-            echo Opposition_helper::name($number->opposition_id); ?><br /><?php
+        foreach ($numbers as $number) { ?>
+            <span itemscope itemtype="http://schema.org/SportsTeam"><span itemprop="name"><?php echo Opposition_helper::name($number->opposition_id); ?></span></span><br /><?php
         }
     }
 

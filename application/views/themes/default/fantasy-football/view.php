@@ -86,8 +86,8 @@ echo form_submit('submit', $this->lang->line('fantasy_football_show')); ?>
                         <?php
                         if ($fantasyFootballData) {
                             foreach ($fantasyFootballData as $player) { ?>
-                        <tr>
-                            <td data-title="<?php echo $this->lang->line('fantasy_football_player'); ?>"><?php echo Player_helper::fullNameReverse($player->player_id); ?></td>
+                        <tr itemscope itemtype="http://schema.org/Person">
+                            <td itemprop="name" data-title="<?php echo $this->lang->line('fantasy_football_player'); ?>"><?php echo Player_helper::fullNameReverse($player->player_id); ?></td>
                             <td data-title="<?php echo $this->lang->line('fantasy_football_appearances'); ?>"><?php echo $player->appearances; ?></td>
                             <td data-title="<?php echo $this->lang->line('fantasy_football_average'); ?>"><?php echo $player->points_per_game; ?></td>
                             <td data-title="<?php echo $this->lang->line('fantasy_football_points'); ?>"><?php echo $player->total_points; ?></td>
@@ -234,8 +234,8 @@ echo form_submit('submit', $this->lang->line('fantasy_football_show')); ?>
                         <?php
                         if ($bestLineup !== false) {
                             foreach ($formationInfo['positions'] as $position) { ?>
-                        <tr>
-                            <td data-title="<?php echo $this->lang->line('fantasy_football_player'); ?>"><?php echo Player_helper::fullNameReverse($bestLineup[$position]->player_id); ?></td>
+                        <tr itemscope itemtype="http://schema.org/Person">
+                            <td itemprop="name" data-title="<?php echo $this->lang->line('fantasy_football_player'); ?>"><?php echo Player_helper::fullNameReverse($bestLineup[$position]->player_id); ?></td>
                             <td data-title="<?php echo $this->lang->line('fantasy_football_position'); ?>"><?php echo Fantasy_Football_helper::fetchSimplePosition($position, true); ?></td>
                         </tr>
                         <?php
@@ -258,9 +258,9 @@ echo form_submit('submit', $this->lang->line('fantasy_football_show')); ?>
                     if ($bestLineup !== false) {
                         foreach ($formationInfo['positions'] as $position) {
                             if (strpos($position, 'sub') === false) { ?>
-                        <div class="position <?php echo $position; ?>">
+                        <div itemscope itemtype="http://schema.org/Person" class="position <?php echo $position; ?>">
                             <span class="marker"><?php echo Fantasy_Football_helper::fetchSimplePosition($position, true); ?></span>
-                            <span class="player"><?php echo Player_helper::initialSurname($bestLineup[$position]->player_id, false); ?></span>
+                            <span itemprop="name" class="player"><?php echo Player_helper::initialSurname($bestLineup[$position]->player_id, false); ?></span>
                             <span class="points"><?php echo $bestLineup[$position]->value; ?></span>
                         </div>
                     <?php
@@ -271,9 +271,9 @@ echo form_submit('submit', $this->lang->line('fantasy_football_show')); ?>
                     <?php
                         foreach ($formationInfo['positions'] as $position) {
                             if (strpos($position, 'sub') !== false) { ?>
-                        <div class="position <?php echo Fantasy_Football_helper::fetchSimplePosition($position); ?>">
+                        <div itemscope itemtype="http://schema.org/Person" class="position <?php echo Fantasy_Football_helper::fetchSimplePosition($position); ?>">
                             <span class="marker"><?php echo Fantasy_Football_helper::fetchSimplePosition($position, true); ?></span>
-                            <span class="player"><?php echo Player_helper::initialSurname($bestLineup[$position]->player_id, false); ?></span>
+                            <span itemprop="name" class="player"><?php echo Player_helper::initialSurname($bestLineup[$position]->player_id, false); ?></span>
                             <span class="points"><?php echo $bestLineup[$position]->value; ?></span>
                         </div>
                     <?php

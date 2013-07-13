@@ -29,10 +29,10 @@ $inputUnit = array(
 );
 
 echo form_label($this->lang->line('player_statistics_competition_type'), $inputType['name']);
-echo form_dropdown($inputType['name'], $inputType['options'], $inputType['value']);
+echo form_dropdown($inputType['name'], $inputType['options'], $inputType['value'], "id='{$inputType['id']}'");
 
 echo form_label($this->lang->line('player_statistics_threshold'), $inputThreshold['name']);
-echo form_dropdown($inputThreshold['name'], $inputThreshold['options'], $inputThreshold['value']);
+echo form_dropdown($inputThreshold['name'], $inputThreshold['options'], $inputThreshold['value'], "id='{$inputThreshold['id']}'");
 
 echo form_dropdown($inputUnit['name'], $inputUnit['options'], $inputUnit['value']); ?>
 

@@ -17,12 +17,12 @@
             <tbody>
         <?php
             foreach ($matches as $match) { ?>
-                <tr>
-                    <td data-title="<?php echo $this->lang->line('match_date'); ?>"><?php echo $match->date ? Utility_helper::formattedDate($match->date, "jS M 'y") : $this->lang->line('match_t_b_c'); ?></td>
-                    <td data-title="<?php echo $this->lang->line('match_opposition'); ?>"><?php echo Opposition_helper::name($match->opposition_id); ?></td>
+                <tr itemscope itemtype="http://schema.org/SportsEvent">
+                    <td data-title="<?php echo $this->lang->line('match_date'); ?>"><time itemprop="startDate" datetime="<?php echo Utility_helper::formattedDate($match->date, "c"); ?>"><?php echo $match->date ? Utility_helper::formattedDate($match->date, "jS M 'y") : $this->lang->line('match_t_b_c'); ?></time></td>
+                    <td itemprop="name" itemscope itemtype="http://schema.org/SportsTeam" data-title="<?php echo $this->lang->line('match_opposition'); ?>"><span itemprop="name" itemprop="legalName"><?php echo Opposition_helper::name($match->opposition_id); ?></span></td>
                     <td data-title="<?php echo $this->lang->line('match_competition'); ?>"><?php echo Match_helper::fullCompetitionNameCombined($match); ?></td>
                     <td data-title="<?php echo $this->lang->line('match_venue'); ?>"><?php echo Match_helper::longVenue($match); ?></td>
-                    <td data-title="<?php echo $this->lang->line('match_score'); ?>"><?php echo anchor('/match/view/id/' . $match->id, Match_helper::score($match)); ?></td>
+                    <td data-title="<?php echo $this->lang->line('match_score'); ?>"><a itemprop="url" href="<?php echo site_url('/match/view/id/' . $match->id); ?>"><?php echo Match_helper::score($match); ?></a></td>
                 </tr>
         <?php
             }

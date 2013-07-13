@@ -39,11 +39,9 @@ class Player_Statistics_helper
             <tbody>
         <?php
         foreach ($players as $player) { ?>
-                <tr>
+                <tr itemscope itemtype="http://schema.org/Person">
                     <td><?php echo $player->$fieldValue; ?></td>
-                    <td><?php echo Player_helper::fullName($player->player_id); ?> <?php echo $ci->lang->line("match_vs"); ?> <?php echo Opposition_helper::name($player->opposition_id); ?> - <?php echo Match_helper::shortCompetitionNameCombined($player); ?>, <?php echo Utility_helper::shortDate($player->date); ?></td>
-
-
+                    <td><span itemprop="name"><?php echo Player_helper::fullName($player->player_id); ?></span> <?php echo $ci->lang->line("match_vs"); ?> <span itemscope itemtype="http://schema.org/SportsTeam"><span itemprop="name" itemprop="legalName"><?php echo Opposition_helper::name($player->opposition_id); ?></span></span> - <?php echo Match_helper::shortCompetitionNameCombined($player); ?>, <?php echo Utility_helper::shortDate($player->date); ?></td>
                 </tr>
         <?php
         } ?>
@@ -72,8 +70,8 @@ class Player_Statistics_helper
             if (!in_array("{$player->player_1_id}_{$player->player_2_id}", $combinations)) { ?>
                 <tr>
                     <td><?php echo $player->$fieldValue; ?></td>
-                    <td><?php echo Player_helper::fullName($player->player_1_id); ?></td>
-                    <td><?php echo Player_helper::fullName($player->player_2_id); ?></td>
+                    <td itemscope itemtype="http://schema.org/Person"><span itemprop="name"><?php echo Player_helper::fullName($player->player_1_id); ?></span></td>
+                    <td itemscope itemtype="http://schema.org/Person"><span itemprop="name"><?php echo Player_helper::fullName($player->player_2_id); ?></span></td>
                 </tr>
         <?php
                 $combinations[] = "{$player->player_1_id}_{$player->player_2_id}";
@@ -108,7 +106,7 @@ class Player_Statistics_helper
         foreach ($statistics[$statisticGroup] as $player) { ?>
                 <tr>
                     <td><?php echo $player->goals; ?></td>
-                    <td><?php echo Player_helper::fullName($player->player_id); ?> <?php echo $ci->lang->line("match_vs"); ?> <?php echo Opposition_helper::name($player->opposition_id); ?> - <?php echo Match_helper::shortCompetitionNameCombined($player); ?>, <?php echo Utility_helper::shortDate($player->date); ?></td>
+                    <td itemscope itemtype="http://schema.org/Person"><span itemprop="name"><?php echo Player_helper::fullName($player->player_id); ?></span> <?php echo $ci->lang->line("match_vs"); ?> <?php echo Opposition_helper::name($player->opposition_id); ?> - <?php echo Match_helper::shortCompetitionNameCombined($player); ?>, <?php echo Utility_helper::shortDate($player->date); ?></td>
                 </tr>
         <?php
         } ?>

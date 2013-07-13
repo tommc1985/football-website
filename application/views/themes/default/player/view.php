@@ -4,15 +4,15 @@
 
         <h3><?php echo $this->lang->line('player_player_details'); ?></h3>
 
-        <dl>
+        <dl itemscope itemtype="http://schema.org/Person">
           <dt><?php echo $this->lang->line('player_full_name'); ?>:</dt>
-          <dd><?php echo Player_helper::fullNameReverse($player, false); ?></dd>
+          <dd itemprop="name"><?php echo Player_helper::fullNameReverse($player, false); ?></dd>
           <dt><?php echo $this->lang->line('player_date_of_birth'); ?>:</dt>
-          <dd><?php echo Utility_helper::formattedDate($player->dob, "jS F Y"); ?></dd>
+          <dd><time itemprop="birthDate" datetime="<?php echo Utility_helper::formattedDate($player->dob, "c"); ?>"><?php echo Utility_helper::formattedDate($player->dob, "jS F Y"); ?></time></dd>
           <dt><?php echo $this->lang->line('player_nationality'); ?>:</dt>
-          <dd><?php echo $player->nationality; ?></dd>
+          <dd itemprop="nationality"><?php echo $player->nationality; ?></dd>
           <dt><?php echo $this->lang->line('player_gender'); ?>:</dt>
-          <dd><?php echo $player->gender; ?></dd>
+          <dd itemprop="gender"><?php echo $player->gender; ?></dd>
           <dt><?php echo $this->lang->line('player_position_s'); ?>:</dt>
           <dd><?php echo Player_helper::positionsAbbreviated($player->positions); ?></dd>
           <dt><?php echo $this->lang->line('player_debut'); ?>:</dt>
