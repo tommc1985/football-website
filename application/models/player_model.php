@@ -137,14 +137,16 @@ class Player_model extends Base_Model {
         $ci->load->model('Card_model');
         $ci->load->model('Goal_model');
         $ci->load->model('Player_Registration_model');
+        $ci->load->model('Player_To_Award_model');
 
         $appearances = $ci->Appearance_model->fetchAllByField('player_id', $id);
         $cards = $ci->Card_model->fetchAllByField('player_id', $id);
         $goals = $ci->Goal_model->fetchAllByField('scorer_id', $id);
         $assists = $ci->Goal_model->fetchAllByField('assist_id', $id);
         $playerRegistrations = $ci->Player_Registration_model->fetchAllByField('player_id', $id);
+        $playerAwards = $ci->Player_To_Award_model->fetchAllByField('player_id', $id);
 
-        if ($appearances || $cards || $goals || $assists || $playerRegistrations) {
+        if ($appearances || $cards || $goals || $assists || $playerRegistrations || $playerAwards) {
             return false;
         }
 

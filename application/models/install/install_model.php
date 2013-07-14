@@ -37,6 +37,7 @@ class Install_Model extends CI_Model {
 
         $this->databaseTables = array(
             'appearance',
+            'award',
             'cache_club_statistics',
             'cache_fantasy_football_statistics',
             'cache_league_results_collated',
@@ -72,6 +73,7 @@ class Install_Model extends CI_Model {
             'opposition',
             'player',
             'player_registration',
+            'player_to_award',
             'player_to_position',
             'position',
             'tag',
@@ -277,6 +279,57 @@ class Install_Model extends CI_Model {
             'player_id',
             )
         );
+
+        if ($this->ci->dbforge->create_table($tableName, TRUE)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Create 'award' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of table creation attempt
+     */
+    public function createAwardTable($tableName)
+    {
+        $fields = array(
+            'id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+                'auto_increment' => TRUE,
+            ),
+            'long_name' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 255,
+            ),
+            'short_name' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 255,
+            ),
+            'importance' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'date_added' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'date_updated' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'deleted' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'default'        => 0,
+            ),
+        );
+
+        $this->ci->dbforge->add_field($fields);
+        $this->ci->dbforge->add_key('id', TRUE);
 
         if ($this->ci->dbforge->create_table($tableName, TRUE)) {
             return true;
@@ -2572,6 +2625,68 @@ class Install_Model extends CI_Model {
         $this->ci->dbforge->add_key('id', TRUE);
         $this->ci->dbforge->add_key(array(
             'player_id',
+            )
+        );
+
+        if ($this->ci->dbforge->create_table($tableName, TRUE)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Create player_to_award' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of table creation attempt
+     */
+    public function createPlayerToAwardTable($tableName)
+    {
+        $fields = array(
+            'id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+                'auto_increment' => TRUE,
+            ),
+            'player_id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+            ),
+            'award_id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+            ),
+            'season' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'placing' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'date_added' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'date_updated' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'deleted' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'default'        => 0,
+            ),
+        );
+
+        $this->ci->dbforge->add_field($fields);
+        $this->ci->dbforge->add_key('id', TRUE);
+        $this->ci->dbforge->add_key(array(
+            'player_id',
+            'award_id',
             )
         );
 
