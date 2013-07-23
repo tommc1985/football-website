@@ -174,7 +174,7 @@ class Match_helper
     /**
      * Return a Match's Venue
      * @param  mixed $match        Match Object/Array
-     * @return string              The Match's Vnue
+     * @return string              The Match's Venue
      */
     public static function venue($match)
     {
@@ -229,5 +229,29 @@ class Match_helper
         }
 
         return '';
+    }
+
+    /**
+     * Return a string of the two teams (in order) for a particular match
+     * @param  mixed $match        Match Object/Array
+     * @return string              The Match's Vnue
+     */
+    public static function competingTeamsString($match)
+    {
+        $ci =& get_instance();
+        $ci->lang->load('match');
+        $ci->load->helper('opposition');
+
+        $match = self::_convertObject($match);
+
+        switch ($match->venue) {
+            case 'h':
+                $string = Configuration::get('team_name') . ' ' . $ci->lang->line('match_vs') . ' ' . Opposition_helper::name($match->opposition_id);
+                break;
+            default:
+                $string = Opposition_helper::name($match->opposition_id) . ' ' . $ci->lang->line('match_vs') . ' ' . Configuration::get('team_name');
+        }
+
+        return $string;
     }
 }

@@ -42,7 +42,7 @@ $location = array(
 $official_id = array(
     'name'    => 'official_id',
     'id'      => 'official_id',
-    'options' => array('' => '--- Select ---') + $this->Official_model->fetchForDropdown(),
+    'options' => array('0' => '--- Select ---') + $this->Official_model->fetchForDropdown(),
     'value'   => set_value('official_id'),
 );
 

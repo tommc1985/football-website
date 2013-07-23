@@ -104,28 +104,12 @@ class Calendar_model extends Base_Frontend_Model {
 
                 $birthdayTimeStamp = mktime(0, 0, 0, date("n", $dateOfBirthTimestamp), date("j", $dateOfBirthTimestamp), $birthdayYear);
 
-                $eventStart = array(
-                    "year"  => $birthdayYear,
-                    "month" => date("n", $dateOfBirthTimestamp),
-                    "day"   => date("j", $dateOfBirthTimestamp),
-                    "hour"  => 0,
-                    "min"   => 0,
-                    "sec"   => 0,
-                );
-                $event->setProperty("dtstart", $eventStart);
+                $event->setProperty( "dtstart", date("Ymd", $birthdayTimeStamp), array("VALUE" => "DATE"));
+                $event->setProperty( "TRANSP", "TRANSPARENT" );
 
-                $eventEnd = array(
-                    "year"  => $birthdayYear,
-                    "month" => date("n", $dateOfBirthTimestamp + 86400),
-                    "day"   => date("j", $dateOfBirthTimestamp + 86400),
-                    "hour"  => 0,
-                    "min"   => 0,
-                    "sec"   => 0,
-                );
-                $event->setProperty("dtend", $eventEnd);
+                $playerAge = Utility_helper::getAge($dateOfBirthTimestamp, 'years', $birthdayTimeStamp);
 
-                $event->setProperty("summary", Player_helper::fullName($player, false) . $this->lang->line('calendar_players_birthday'));
-                $event->setProperty("description", Player_helper::fullName($player, false) . ' ' . sprintf($this->lang->line('calendar_player_is_age_on_this_day'), Utility_helper::getAge($dateOfBirthTimestamp, 'years', $birthdayTimeStamp)));
+                $event->setProperty("summary", Player_helper::fullName($player, false) . sprintf($this->lang->line('calendar_players_nth_birthday'), Utility_helper::ordinalWithSuffix($playerAge)));
                 $event->setProperty("uid","player-{$player->id}@" . md5(site_url()));
             }
         }
