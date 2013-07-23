@@ -103,14 +103,13 @@ class Calendar_model extends Base_Frontend_Model {
                 }
 
                 $birthdayTimeStamp = mktime(0, 0, 0, date("n", $dateOfBirthTimestamp), date("j", $dateOfBirthTimestamp), $birthdayYear);
-
-                $event->setProperty( "dtstart", date("Ymd", $birthdayTimeStamp), array("VALUE" => "DATE"));
-                $event->setProperty( "TRANSP", "TRANSPARENT" );
-
                 $playerAge = Utility_helper::getAge($dateOfBirthTimestamp, 'years', $birthdayTimeStamp);
 
-                $event->setProperty("summary", Player_helper::fullName($player, false) . sprintf($this->lang->line('calendar_players_nth_birthday'), Utility_helper::ordinalWithSuffix($playerAge)));
                 $event->setProperty("uid","player-{$player->id}@" . md5(site_url()));
+                $event->setProperty( "dtstart", date("Ymd", $birthdayTimeStamp), array("VALUE" => "DATE"));
+                $event->setProperty("summary", Player_helper::fullName($player, false) . sprintf($this->lang->line('calendar_players_nth_birthday'), Utility_helper::ordinalWithSuffix($playerAge)));
+                $event->setProperty("description", Player_helper::fullName($player, false) . ' ' . sprintf($this->lang->line('calendar_player_is_age_on_this_day'), $playerAge, site_url('/player/view/id/' . $player->id)));
+                $event->setProperty( "TRANSP", "TRANSPARENT" );
             }
         }
     }
