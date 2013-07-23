@@ -122,7 +122,48 @@ class Calendar_model extends Base_Frontend_Model {
      */
     protected function _generateMatchEvents($calendar, $matches)
     {
+        $this->ci->lang->load('match');
+        $this->ci->load->helper('match');
 
+        $events = array();
+
+        foreach ($matches as $match) {
+            if ($match->date) {
+                $event =& $calendar->newComponent("vevent");
+
+                $dateTimestamp = strtotime($match->date);
+
+                $matchStartTimestamp = $dateTimestamp;
+                $eventStart = array(
+                    "year"  => date("Y", $matchStartTimestamp),
+                    "month" => date("n", $matchStartTimestamp),
+                    "day"   => date("j", $matchStartTimestamp),
+                    "hour"  => date("H", $matchStartTimestamp),
+                    "min"   => date("i", $matchStartTimestamp),
+                    "sec"   => date("s", $matchStartTimestamp),
+                );
+
+                $matchEndTimestamp = $matchStartTimestamp + 6300; // Add an hour and 45 minutes to start time
+                $eventEnd = array(
+                    "year"  => date("Y", $matchEndTimestamp),
+                    "month" => date("n", $matchEndTimestamp),
+                    "day"   => date("j", $matchEndTimestamp),
+                    "hour"  => date("H", $matchEndTimestamp),
+                    "min"   => date("i", $matchEndTimestamp),
+                    "sec"   => date("s", $matchEndTimestamp),
+                );
+
+                $event->setProperty("uid","match-{$match->id}@" . md5(site_url()));
+                $event->setProperty("dtstart", $eventStart);
+                $event->setProperty("dtend", $eventEnd);
+                $event->setProperty("summary", Match_helper::competingTeamsString($match));
+                $event->setProperty("description", sprintf($this->lang->line('calendar_match_details'), site_url('/match/view/id/' . $match->id)));
+
+                if ($match->location) {
+                    $event->setProperty("LOCATION", $match->location);
+                }
+            }
+        }
     }
 
     /**
