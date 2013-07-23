@@ -14,16 +14,18 @@ class Calendar extends Frontend_Controller {
         $this->load->database();
         $this->load->model('frontend/Calendar_model');
         $this->lang->load('calendar');
-        $this->load->helper(array('calendar', 'url', 'utility'));
+        $this->load->helper(array('calendar', 'player', 'url', 'utility'));
     }
 
     /**
-     * View Action
+     * Subscribe Action
      * @return NULL
      */
-    public function feed()
+    public function subscribe()
     {
         $calendarData = $this->Calendar_model->fetchData();
+
+        $this->Calendar_model->generateCalendar($calendarData);
     }
 }
 

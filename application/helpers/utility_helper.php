@@ -121,6 +121,37 @@ class Utility_helper
         return $string;
     }
 
+    public static function getAge($date, $units='years', $timestampFrom = false)
+    {
+        if (!is_numeric($timestampFrom)) {
+            $timestampFrom = time();
+        }
+
+        return date("Y", $timestampFrom) - date("Y", $date);
+
+        $modifier = date('n', $timestampFrom) - date('n', strtotime($date)) ? 1 : (date('j', $timestampFrom) - date('j', strtotime($date)) ? 1 : 0);
+        $seconds = ($timestampFrom - strtotime($date));
+        $years = (date('Y')-date('Y', strtotime($date))-$modifier);
+        switch($units) {
+            case 'seconds':
+                return $seconds;
+            case 'minutes':
+                return round($seconds/60);
+            case 'hours':
+                return round($seconds/60/60);
+            case 'days':
+                return round($seconds/60/60/24);
+            case 'months':
+                return ($years*12+date('n'));
+            case 'decades':
+                return ($years/10);
+            case 'centuries':
+                return ($years/100);
+            default:
+                return $years;
+        }
+    }
+
     /**
      * Return the games elapsed
      * @param  mixed $games   Games

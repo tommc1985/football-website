@@ -8,3 +8,4 @@
 |--------------------------------------------------------------------------
 */
 $config['show_player_birthdays'] = true;
+$config['calendar_timezone']     = 'Europe/London';
