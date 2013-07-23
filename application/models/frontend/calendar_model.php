@@ -126,7 +126,7 @@ class Calendar_model extends Base_Frontend_Model {
 
                 $event->setProperty("summary", Player_helper::fullName($player, false) . $this->lang->line('calendar_players_birthday'));
                 $event->setProperty("description", Player_helper::fullName($player, false) . ' ' . sprintf($this->lang->line('calendar_player_is_age_on_this_day'), Utility_helper::getAge($dateOfBirthTimestamp, 'years', $birthdayTimeStamp)));
-                $event->setProperty("uid","player-{$player->id}@" . site_url());
+                $event->setProperty("uid","player-{$player->id}@" . md5(site_url()));
             }
         }
     }
