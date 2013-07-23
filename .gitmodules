@@ -1,3 +1,6 @@
 [submodule "bootstrap"]
 	path = bootstrap
 	url = https://github.com/twitter/bootstrap.git
+[submodule "application/libraries/icalcreator"]
+	path = application/libraries/icalcreator
+	url = git://github.com/iCalcreator/iCalcreator.git
