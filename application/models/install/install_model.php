@@ -55,6 +55,7 @@ class Install_Model extends CI_Model {
             'cache_queue_player_milestones',
             'cache_queue_player_statistics',
             'card',
+            'calendar_event',
             'ci_sessions',
             'competition',
             'competition_stage',
@@ -1392,6 +1393,70 @@ class Install_Model extends CI_Model {
             'peak_memory_usage' => array(
                 'type'           => 'decimal',
                 'constraint'     => array(5, 2),
+                'null'           => true,
+            ),
+            'date_added' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'date_updated' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'deleted' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'default'        => 0,
+            ),
+        );
+
+        $this->ci->dbforge->add_field($fields);
+        $this->ci->dbforge->add_key('id', TRUE);
+
+        if ($this->ci->dbforge->create_table($tableName, TRUE)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Create 'calendar_event' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of table creation attempt
+     */
+    public function createCalendarEventTable($tableName)
+    {
+        $fields = array(
+            'id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+                'auto_increment' => TRUE,
+            ),
+            'name' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 255,
+            ),
+            'description' => array(
+                'type'           => 'MEDIUMTEXT',
+                'null'           => true,
+            ),
+            'start_datetime' => array(
+                'type'           => 'DATETIME',
+            ),
+            'end_datetime' => array(
+                'type'           => 'DATETIME',
+                'null'           => true,
+            ),
+            'all_day' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'default'        => 0,
+            ),
+            'location' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 255,
                 'null'           => true,
             ),
             'date_added' => array(
