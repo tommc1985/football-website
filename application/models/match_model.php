@@ -30,6 +30,7 @@ class Match_model extends Base_Model {
             'venue' => $this->ci->form_validation->set_value('venue', NULL),
             'location' => $this->ci->form_validation->set_value('location', NULL),
             'official_id' => $this->ci->form_validation->set_value('official_id', NULL),
+            'attendance' => $this->ci->form_validation->set_value('attendance', NULL),
             'h' => $this->ci->form_validation->set_value('h', NULL),
             'a' => $this->ci->form_validation->set_value('a', NULL),
             'report' => $this->ci->form_validation->set_value('report', NULL),
@@ -56,6 +57,7 @@ class Match_model extends Base_Model {
             'venue' => $this->ci->form_validation->set_value('venue', NULL),
             'location' => $this->ci->form_validation->set_value('location', NULL),
             'official_id' => $this->ci->form_validation->set_value('official_id', NULL),
+            'attendance' => $this->ci->form_validation->set_value('attendance', NULL),
             'h' => $this->ci->form_validation->set_value('h', NULL),
             'a' => $this->ci->form_validation->set_value('a', NULL),
             'report' => $this->ci->form_validation->set_value('report', NULL),
@@ -125,6 +127,7 @@ class Match_model extends Base_Model {
         $this->ci->form_validation->set_rules('venue', 'Venue', "trim|required|regex_match[/^(h)|(a)|(n)$/|xss_clean");
         $this->ci->form_validation->set_rules('location', 'Location', "trim|max_length[" . $this->config->item('location_max_length', 'match') . "]|xss_clean");
         $this->ci->form_validation->set_rules('official_id', 'Official', 'trim|integer|xss_clean');
+        $this->ci->form_validation->set_rules('attendance', 'Attendance', 'trim|is_natural|xss_clean');
         $this->ci->form_validation->set_rules('h', 'Your Score', 'trim|is_natural|xss_clean');
         $this->ci->form_validation->set_rules('a', 'Opposition Score', 'trim|is_natural|xss_clean');
         $this->ci->form_validation->set_rules('report', 'Report', 'trim|xss_clean');

@@ -46,6 +46,12 @@ $official_id = array(
     'value'   => set_value('official_id'),
 );
 
+$attendance = array(
+    'name'  => 'attendance',
+    'id'    => 'attendance',
+    'value' => set_value('attendance'),
+);
+
 $h = array(
     'name'  => 'h',
     'id'    => 'h',
@@ -149,7 +155,14 @@ echo form_open($this->uri->uri_string()); ?>
         <td><?php echo form_label($this->lang->line('match_official'), $official_id['name']); ?></td>
         <td><?php echo form_dropdown($official_id['name'], $official_id['options'], set_value($official_id['name'], isset($match->official_id) ? $match->official_id : '')); ?></td>
         <td class="error"><?php echo form_error($official_id['name']); ?><?php echo isset($errors[$official_id['name']]) ? $errors[$official_id['name']] : ''; ?></td>
-    </tr>
+    </tr><?php
+    if (Configuration::get('include_match_attendances') === true) { ?>
+    <tr>
+        <td><?php echo form_label($this->lang->line('match_attendance'), $attendance['name']); ?></td>
+        <td><?php echo form_input($attendance['name'], set_value($attendance['name'], isset($match->attendance) ? $match->attendance : '')); ?></td>
+        <td class="error"><?php echo form_error($attendance['name']); ?><?php echo isset($errors[$attendance['name']]) ? $errors[$attendance['name']] : ''; ?></td>
+    </tr><?php
+    } ?>
     <tr>
         <td><?php echo form_label($this->lang->line('match_your_score'), $h['name']); ?></td>
         <td><?php echo form_input($h['name'], set_value($h['name'], isset($match->h) ? $match->h : '')); ?></td>

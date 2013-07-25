@@ -67,6 +67,25 @@ class Club_Statistics_helper
     }
 
     /**
+     * Display statistics involving attendances
+     * @param  array $matches          Matches linked to Statistic
+     * @param  string $statisticGroup  The Statistic Group string
+     * @return NULL
+     */
+    protected static function _displayAttendances($matches, $statisticGroup)
+    {
+        $ci =& get_instance();
+
+        echo '<h3>' . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>';
+        foreach ($matches as $match) { ?>
+            <span itemscope itemtype="http://schema.org/SportsEvent">
+            <a href="<?php echo site_url("match/view/id/{$match->id}"); ?>"><?php echo Match_helper::attendance($match); ?></a><br />
+            <time itemprop="startDate" datetime="<?php echo Utility_helper::formattedDate($match->date, "c"); ?>"><?php echo Utility_helper::shortDate($match->date); ?></time> <span itemprop="name" itemscope itemtype="http://schema.org/SportsTeam"><?php echo $ci->lang->line("match_vs"); ?> <span itemprop="name" itemprop="legalName"><?php echo Opposition_helper::name($match->opposition_id); ?></span> - <?php echo Match_helper::shortCompetitionNameCombined($match); ?></span><br />
+        <?php
+        }
+    }
+
+    /**
      * Show Biggest Wins
      * @param  array $statistics  Full set of Statistics
      * @param  string $venue      Venue Variant of Statistic
@@ -497,5 +516,39 @@ class Club_Statistics_helper
             <span itemscope itemtype="http://schema.org/Person"><span itemprop="name"><?php echo Player_helper::fullName($appearance->scorer_id); ?></span> <?php echo $ci->lang->line("match_vs"); ?> <?php echo Opposition_helper::name($appearance->opposition_id); ?> - <?php echo Match_helper::shortCompetitionNameCombined($appearance); ?>, <?php echo Utility_helper::shortDate($appearance->date); ?></span><br />
         <?php
         }
+    }
+
+    /**
+     * Show Highest Attendances
+     * @param  array $statistics  Full set of Statistics
+     * @param  string $venue      Venue Variant of Statistic
+     * @return NULL
+     */
+    public static function highestAttendance($statistics, $venue = '')
+    {
+        $statisticGroup = "highest_attendance" . (strlen($venue) > 0 ? "_{$venue}" : '');
+        if (!isset($statistics[$statisticGroup])) {
+            self::_displayNoData($statisticGroup);
+            return false;
+        }
+
+        self::_displayAttendances($statistics[$statisticGroup], $statisticGroup);
+    }
+
+    /**
+     * Show Lowest Attendances
+     * @param  array $statistics  Full set of Statistics
+     * @param  string $venue      Venue Variant of Statistic
+     * @return NULL
+     */
+    public static function lowestAttendance($statistics, $venue = '')
+    {
+        $statisticGroup = "lowest_attendance" . (strlen($venue) > 0 ? "_{$venue}" : '');
+        if (!isset($statistics[$statisticGroup])) {
+            self::_displayNoData($statisticGroup);
+            return false;
+        }
+
+        self::_displayAttendances($statistics[$statisticGroup], $statisticGroup);
     }
 }

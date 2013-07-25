@@ -63,6 +63,12 @@ $lang['club_statistics_oldest_debutant']                        = 'Oldest Debuta
 $lang['club_statistics_youngest_debutant']                      = 'Youngest Debutant';
 $lang['club_statistics_oldest_scorer']                          = 'Oldest Scorer';
 $lang['club_statistics_youngest_scorer']                        = 'Youngest Scorer';
+$lang['club_statistics_highest_attendance']                     = 'Highest Attendance';
+$lang['club_statistics_highest_attendance_h']                   = 'Highest Home Attendance';
+$lang['club_statistics_highest_attendance_a']                   = 'Highest Away Attendance';
+$lang['club_statistics_lowest_attendance']                     =  'Lowest Attendance';
+$lang['club_statistics_lowest_attendance_h']                    = 'Lowest Home Attendance';
+$lang['club_statistics_lowest_attendance_a']                    = 'Lowest Away Attendance';
 
 $lang['club_statistics_no_biggest_win']                            = 'No wins recorded';
 $lang['club_statistics_no_biggest_win_h']                          = 'No home wins recorded';
@@ -118,6 +124,12 @@ $lang['club_statistics_no_oldest_debutant']                        = 'No appeara
 $lang['club_statistics_no_youngest_debutant']                      = 'No appearances have been made or no players with a recorded Date of Birth have appeared';
 $lang['club_statistics_no_oldest_scorer']                          = 'No goals have been scored or no players with a recorded Date of Birth have scored';
 $lang['club_statistics_no_youngest_scorer']                        = 'No goals have been scored or no players with a recorded Date of Birth have scored';
+$lang['club_statistics_no_highest_attendance']                     = 'No Attendances have been recorded';
+$lang['club_statistics_no_highest_attendance_h']                   = 'No Attendances for Home matches have been recorded';
+$lang['club_statistics_no_highest_attendance_a']                   = 'No Attendances for Away matches have been recorded';
+$lang['club_statistics_no_lowest_attendance']                      = 'No Attendances have been recorded';
+$lang['club_statistics_no_lowest_attendance_h']                    = 'No Attendances for Home matches have been recorded';
+$lang['club_statistics_no_lowest_attendance_a']                    = 'No Attendances for Away matches have been recorded';
 
 /* End of file clubs_statistics.php */
 /* Location: ./application/language/english/clubs_statistics.php */

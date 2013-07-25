@@ -47,6 +47,8 @@ class Cache_Club_Statistics_model extends CI_Model {
             'quickest_goal'                        => 'quickestGoal',
             'clean_sheets_in_a_season'             => 'cleanSheetsInASeason',
             'fail_to_score_in_a_season'            => 'failToScoreInASeason',
+            'highest_attendance'                   => 'highestAttendance',
+            'lowest_attendance'                    => 'lowestAttendance',
         );
 
         $this->hungryMethodMap = array(
@@ -1191,6 +1193,104 @@ WHERE c.competitive = 1" . (count($whereConditions) > 0 ? "
 
         foreach ($rows as $row) {
             $this->insertCache($statisticGroup, $type, $season, $row->games, '');
+        }
+    }
+
+    /**
+     * Generate and cache Highest Attendance Statistics by competition type, season or venue
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @param  string|NULL $venue      Whether to include all, home, away or neutral venues
+     * @return NULL
+     */
+    public function highestAttendance($type = false, $season = NULL, $venue = NULL)
+    {
+        $statisticGroup = 'highest_attendance';
+
+        $whereConditions = array();
+
+        if (is_string($type)) {
+            $whereConditions[] = "(m.type = '{$type}')";
+        }
+
+        if (!is_null($season)) {
+            $dates = Season_model::generateStartEndDates($season);
+            $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
+        }
+
+        if (!is_null($venue)) {
+            $statisticGroup .= "_{$venue}";
+            $whereConditions[] = "(m.venue = '{$venue}')";
+        }
+
+        $this->deleteRows($statisticGroup, $type, $season);
+
+        $sql = "SELECT m.*
+FROM view_competitive_matches m
+WHERE (m.attendance) = (
+    SELECT (m.attendance) as attendance
+    FROM view_competitive_matches m
+    WHERE !ISNULL(m.attendance)" . (count($whereConditions) > 0 ? "
+        AND " . implode(" \r\nAND ", $whereConditions) : '') . "
+    ORDER BY m.attendance DESC
+    LIMIT 1)" . (count($whereConditions) > 0 ? "
+    AND " . implode(" \r\nAND ", $whereConditions) : '') . "
+ORDER BY m.attendance DESC";
+
+        $query = $this->db->query($sql);
+        $rows = $query->result();
+
+        foreach ($rows as $row) {
+            $this->insertCache($statisticGroup, $type, $season, $row->attendance, serialize($row));
+        }
+    }
+
+    /**
+     * Generate and cache Lowest Attendance Statistics by competition type, season or venue
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @param  string|NULL $venue      Whether to include all, home, away or neutral venues
+     * @return NULL
+     */
+    public function lowestAttendance($type = false, $season = NULL, $venue = NULL)
+    {
+        $statisticGroup = 'lowest_attendance';
+
+        $whereConditions = array();
+
+        if (is_string($type)) {
+            $whereConditions[] = "(m.type = '{$type}')";
+        }
+
+        if (!is_null($season)) {
+            $dates = Season_model::generateStartEndDates($season);
+            $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
+        }
+
+        if (!is_null($venue)) {
+            $statisticGroup .= "_{$venue}";
+            $whereConditions[] = "(m.venue = '{$venue}')";
+        }
+
+        $this->deleteRows($statisticGroup, $type, $season);
+
+        $sql = "SELECT m.*
+FROM view_competitive_matches m
+WHERE (m.attendance) = (
+    SELECT (m.attendance) as attendance
+    FROM view_competitive_matches m
+    WHERE !ISNULL(m.attendance)" . (count($whereConditions) > 0 ? "
+        AND " . implode(" \r\nAND ", $whereConditions) : '') . "
+    ORDER BY m.attendance ASC
+    LIMIT 1)" . (count($whereConditions) > 0 ? "
+    AND " . implode(" \r\nAND ", $whereConditions) : '') . "
+ORDER BY m.attendance ASC";
+
+        $query = $this->db->query($sql);
+        $rows = $query->result();
+
+        foreach ($rows as $row) {
+            $this->insertCache($statisticGroup, $type, $season, $row->attendance, serialize($row));
         }
     }
 

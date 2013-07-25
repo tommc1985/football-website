@@ -232,6 +232,18 @@ class Match_helper
     }
 
     /**
+     * Return attendance
+     * @param  mixed $match  Competition Object/Array
+     * @return string              The Competition's Description
+     */
+    public static function attendance($match)
+    {
+        $match = self::_convertObject($match);
+
+        return is_numeric($match->attendance) ? $match->attendance : '&nbsp;';
+    }
+
+    /**
      * Return a string of the two teams (in order) for a particular match
      * @param  mixed $match        Match Object/Array
      * @return string              The Match's Vnue
