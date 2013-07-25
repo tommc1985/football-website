@@ -149,7 +149,7 @@ class Player_helper
 
     /**
      * Return a Player's Time between Debut & First Goal
-     * @param  object $debut      Debut Object/Array
+     * @param  object $time      Debut Object/Array
      * @return string             Time between Debut & First Goal
      */
     public static function timeBetweenDebutAndFirstGoal($time)
@@ -163,8 +163,8 @@ class Player_helper
 
     /**
      * Return a Player's Games between Debut & First Goal
-     * @param  object $debut      Debut Object/Array
-     * @return string             Time between Debut & First Goal
+     * @param  object $game       Game Object/Array
+     * @return string             Games between Debut & First Goal
      */
     public static function gamesBetweenDebutAndFirstGoal($game)
     {
@@ -173,5 +173,37 @@ class Player_helper
         $ci->load->helper(array('competition', 'competition_stage', 'match', 'opposition', 'player', 'utility'));
 
         return Utility_helper::gamesElapsed($game->games_elapsed);
+    }
+
+    /**
+     * Return a Player's Awards
+     * @param  object $awards     Awards Array
+     * @return string             Awards
+     */
+    public static function awards($awards)
+    {
+        $ci =& get_instance();
+        $ci->lang->load('global');
+        $ci->lang->load('award');
+        $ci->load->helper(array('award', 'utility'));
+
+        $formattedAwardStrings = array();
+
+        foreach ($awards as $award) {
+            switch ($award->placing) {
+                case '1':
+                    $placing = $ci->lang->line('award_winner');
+                    break;
+                case '2':
+                    $placing = $ci->lang->line('award_runner_up');
+                    break;
+                default:
+                    $placing = sprintf($ci->lang->line('award_nth_place'), Utility_helper::ordinalWithSuffix($award->placing));
+            }
+
+            $formattedAwardStrings[] = Award_helper::longName($award->id) . ' ' . Utility_helper::formattedSeason($award->season) . ' - ' . $placing;
+        }
+
+        return implode("<br />", $formattedAwardStrings);
     }
 }

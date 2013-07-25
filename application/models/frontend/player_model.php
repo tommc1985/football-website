@@ -71,6 +71,9 @@ class Player_model extends Base_Frontend_Model {
         // Player's Games between Debut & First Goal
         $player->gamesBetweenDebutAndFirstGoal = $this->fetchPlayerGamesBetweenDebutAndFirstGoal($id);
 
+        // Player's Awards
+        $player->awards = $this->fetchPlayerAwards($id);
+
         return $player;
     }
 
@@ -223,6 +226,26 @@ class Player_model extends Base_Frontend_Model {
         }
 
         return $games;
+    }
+
+    /**
+     * Fetch a particular Player's Awards
+     * @param  int $id         Player ID
+     * @return array           Awards
+     */
+    public function fetchPlayerAwards($id)
+    {
+        $this->db->select('a.*, pta.season, pta.placing')
+            ->from('player_to_award pta')
+            ->join('player p', 'p.id = pta.player_id')
+            ->join('award a', 'a.id = pta.award_id')
+            ->where('pta.player_id', $id)
+            ->where('p.deleted', 0)
+            ->where('pta.deleted', 0)
+            ->where('a.deleted', 0)
+            ->order_by('pta.placing ASC, pta.season DESC, a.importance ASC');
+
+        return $this->db->get()->result();
     }
 
     /**

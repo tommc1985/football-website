@@ -28,5 +28,11 @@ $lang['award_edit']                    = 'Edit';
 $lang['award_delete']                  = 'Delete';
 
 $lang['award_no_awards']               = 'No Awards exist';
+
+// Frontend Text
+$lang['award_winner']                 = 'Winner';
+$lang['award_runner_up']              = 'Runner Up';
+$lang['award_nth_place']              = '%s place';
+
 /* End of file award.php */
 /* Location: ./application/language/english/award.php */

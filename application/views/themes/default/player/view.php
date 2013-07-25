@@ -23,6 +23,8 @@
           <dd><?php echo isset($player->timeBetweenDebutAndFirstGoal['overall']) ? Player_helper::timeBetweenDebutAndFirstGoal($player->timeBetweenDebutAndFirstGoal['overall']) : $this->lang->line('global_n_a'); ?></dd>
           <dt><?php echo $this->lang->line('player_games_between_debut_and_first_goal'); ?>:</dt>
           <dd><?php echo isset($player->gamesBetweenDebutAndFirstGoal['overall']) ? Player_helper::gamesBetweenDebutAndFirstGoal($player->gamesBetweenDebutAndFirstGoal['overall']) : $this->lang->line('global_n_a'); ?></dd>
+          <dt><?php echo $this->lang->line('player_awards'); ?>:</dt>
+          <dd><?php echo $player->awards ? Player_helper::awards($player->awards) : $this->lang->line('global_none'); ?></dd>
         </dl>
     </div>
 </div>
