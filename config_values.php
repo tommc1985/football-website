@@ -38,6 +38,8 @@ $configValues['include_appearance_ratings']        = false;
 $configValues['include_appearance_shirt_numbers']  = false;
 $configValues['include_goal_ratings']              = false;
 
+$configValues['include_match_attendances']         = true;
+
 
 $configValues['articles_per_page']                 = 5;
 

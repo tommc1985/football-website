@@ -2406,6 +2406,11 @@ class Install_Model extends CI_Model {
                 'unsigned'       => TRUE,
                 'default'        => 0,
             ),
+            'attendance' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'null'           => true,
+            ),
             'h' => array(
                 'type'           => 'INT',
                 'constraint'     => 3,

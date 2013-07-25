@@ -16,6 +16,7 @@ $lang['match_stage']                      = 'Stage';
 $lang['match_venue']                      = 'Venue';
 $lang['match_location']                   = 'Location';
 $lang['match_official']                   = 'Official';
+$lang['match_attendance']                 = 'Attendance';
 $lang['match_your_score']                 = 'Your Score';
 $lang['match_opposition_score']           = 'Opposition Score';
 $lang['match_report']                     = 'Report';

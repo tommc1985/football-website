@@ -8,7 +8,10 @@
                     <td><?php echo $this->lang->line('match_date'); ?></td>
                     <td><?php echo $this->lang->line('match_opposition'); ?></td>
                     <td><?php echo $this->lang->line('match_competition'); ?></td>
-                    <td><?php echo $this->lang->line('match_venue'); ?></td>
+                    <td><?php echo $this->lang->line('match_venue'); ?></td><?php
+                    if (Configuration::get('include_match_attendances') === true) { ?>
+                    <td><?php echo $this->lang->line('match_attendance'); ?></td><?php
+                    } ?>
                     <td><?php echo $this->lang->line('match_score'); ?></td>
                 </tr>
             </thead>
@@ -21,7 +24,10 @@
                     <td data-title="<?php echo $this->lang->line('match_date'); ?>"><time itemprop="startDate" datetime="<?php echo Utility_helper::formattedDate($match->date, "c"); ?>"><?php echo $match->date ? Utility_helper::formattedDate($match->date, "jS M 'y") : $this->lang->line('match_t_b_c'); ?></time></td>
                     <td itemprop="name" itemscope itemtype="http://schema.org/SportsTeam" data-title="<?php echo $this->lang->line('match_opposition'); ?>"><span itemprop="name" itemprop="legalName"><?php echo Opposition_helper::name($match->opposition_id); ?></span></td>
                     <td data-title="<?php echo $this->lang->line('match_competition'); ?>"><?php echo Match_helper::fullCompetitionNameCombined($match); ?></td>
-                    <td data-title="<?php echo $this->lang->line('match_venue'); ?>"><?php echo Match_helper::longVenue($match); ?></td>
+                    <td data-title="<?php echo $this->lang->line('match_venue'); ?>"><?php echo Match_helper::longVenue($match); ?></td><?php
+                    if (Configuration::get('include_match_attendances') === true) { ?>
+                    <td data-title="<?php echo $this->lang->line('match_attendance'); ?>"><?php echo Match_helper::attendance($match) ; ?></td><?php
+                    } ?>
                     <td data-title="<?php echo $this->lang->line('match_score'); ?>"><a itemprop="url" href="<?php echo site_url('/match/view/id/' . $match->id); ?>"><?php echo Match_helper::score($match); ?></a></td>
                 </tr>
         <?php

@@ -11,7 +11,10 @@
                 <?php echo $this->lang->line('match_venue'); ?> <span itemprop="name" itemscope itemtype="http://schema.org/SportsTeam"><?php echo Match_helper::longVenue($match) . ' ' . $this->lang->line('match_versus'); ?> <span itemprop="name"><?php echo Opposition_helper::name($match->opposition_id); ?></span></span><br />
                 <?php echo $this->lang->line('match_competition'); ?> <?php echo Match_helper::fullCompetitionNameCombined($match); ?><br />
                 <?php echo $this->lang->line('match_location'); ?> <span itemprop="location"><?php echo $match->location ? $match->location : $this->lang->line('global_unknown'); ?></span><br />
-                <?php echo $this->lang->line('match_official'); ?> <?php echo $match->official_id == 0 ? $this->lang->line('global_unknown') : Official_helper::initialSurname($match->official_id); ?></p>
+                <?php echo $this->lang->line('match_official'); ?> <?php echo $match->official_id == 0 ? $this->lang->line('global_unknown') : Official_helper::initialSurname($match->official_id); ?><?php
+                if (Configuration::get('include_match_attendances') === true) { ?><br />
+                <?php echo $this->lang->line('match_attendance'); ?> <?php echo is_null($match->attendance) ? $this->lang->line('global_unknown') : $match->attendance; ?><?php
+                } ?></p>
             </div>
         </div>
 
