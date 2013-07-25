@@ -16,6 +16,8 @@ class Calendar_model extends Base_Frontend_Model {
         // Call the Model constructor
         parent::__construct();
 
+        $this->tableName = 'calendar_event';
+
         $this->ci =& get_instance();
         $this->ci->load->model('frontend/Player_model');
         $this->ci->load->model('Player_Registration_model');
@@ -24,32 +26,36 @@ class Calendar_model extends Base_Frontend_Model {
 
     /**
      * Return data for Calendar from Player's Birthdays, Upcoming Matches, Previous Results and One-Off Events (not yet implemented)
-     * @return array          Multidimensional array of aggregated Calendar Data
+     * @param  array $dataToInclude   Which data to included
+     * @return array                  Multidimensional array of aggregated Calendar Data
      */
-    public function fetchData()
+    public function fetchData($dataToInclude = array())
     {
         $currentSeason = Season_model::fetchCurrentSeason();
 
-        $players = $this->ci->Player_Registration_model->fetchBySeason($currentSeason);
+        $data = array();
+        if (in_array('players', $dataToInclude)) {
+            $data['players'] = $this->ci->Player_Registration_model->fetchBySeason($currentSeason);
+        }
 
-        $matches = $this->ci->Season_model->fetchMatches(false, $currentSeason);
+        if (in_array('matches', $dataToInclude)) {
+            $data['matches'] = $this->ci->Season_model->fetchMatches(false, $currentSeason);
+        }
 
-        $events = array(); // One-off Events not yet implemented
-
-        $data = array(
-            'players' => $players,
-            'matches' => $matches,
-            'events' => $events,
-        );
+        if (in_array('events', $dataToInclude)) {
+            $data['events'] = $this->fetchAll();
+        }
 
         return $data;
     }
 
     /**
      * Generate the Calendar for the passed data
+     * @param  array $calendarData    Calendar data
+     * @param  string $calendarName   Name of Calendar
      * @return NULL
      */
-    public function generateCalendar($calendarData)
+    public function generateCalendar($calendarData, $calendarName)
     {
         $this->load->config('calendar', true);
         $timezone = $this->config->item('calendar_timezone', 'calendar');
@@ -61,18 +67,24 @@ class Calendar_model extends Base_Frontend_Model {
 
         $calendar = new vcalendar($configSettings);
         $calendar->setProperty("method", "PUBLISH"); // required of some calendar software
-        $calendar->setProperty("x-wr-calname", Configuration::get('team_name') . " Calendar"); // required of some calendar software
-        $calendar->setProperty("X-WR-CALDESC", Configuration::get('team_name') . " Calendar"); // required of some calendar software
+        $calendar->setProperty("x-wr-calname", $calendarName); // required of some calendar software
+        $calendar->setProperty("X-WR-CALDESC", $calendarName); // required of some calendar software
         $calendar->setProperty("X-WR-TIMEZONE", $timezone); // required of some calendar software
 
         $extraProperties = array("X-LIC-LOCATION" => $timezone); // required of some calendar software
         iCalUtilityFunctions::createTimezone($calendar, $timezone, $extraProperties); // create timezone component(-s) opt. 1, based on present date
 
-        $players = $this->_generatePlayerEvents($calendar, $calendarData['players']);
+        if (isset($calendarData['players'])) {
+            $this->_generatePlayerEvents($calendar, $calendarData['players']);
+        }
 
-        $match = $this->_generateMatchEvents($calendar, $calendarData['matches']);
+        if (isset($calendarData['matches'])) {
+            $this->_generateMatchEvents($calendar, $calendarData['matches']);
+        }
 
-        $events = $this->_generateOneOffEvents($calendar, $calendarData['events']);
+        if (isset($calendarData['events'])) {
+            $this->_generateOneOffEvents($calendar, $calendarData['events']);
+        }
 
         $calendar->returnCalendar();
     }
@@ -120,12 +132,10 @@ class Calendar_model extends Base_Frontend_Model {
      * @param  array  $matches   Match data
      * @return NULL
      */
-    protected function _generateMatchEvents($calendar, $matches)
+    protected function _generateMatchEvents(&$calendar, $matches)
     {
         $this->ci->lang->load('match');
         $this->ci->load->helper('match');
-
-        $events = array();
 
         foreach ($matches as $match) {
             if ($match->date) {
@@ -168,13 +178,49 @@ class Calendar_model extends Base_Frontend_Model {
 
     /**
      * Generate Events from passed One Off Event data
-     * @param  object $calendar  Calendar object
-     * @param  array  $events   Event data
+     * @param  object $calendar          Calendar object
+     * @param  array  $calendarEvents    Event data
      * @return NULL
      */
-    protected function _generateOneOffEvents($calendar, $events)
+    protected function _generateOneOffEvents(&$calendar, $calendarEvents)
     {
+        foreach ($calendarEvents as $calendarEvent) {
+            $event =& $calendar->newComponent("vevent");
 
+            if ($calendarEvent->all_day) {
+                $event->setProperty( "dtstart", Utility_helper::formattedDate($calendarEvent->start_datetime, "Ymd"), array("VALUE" => "DATE"));
+            } else {
+                $eventStartTimestamp = strtotime($calendarEvent->start_datetime);
+                $eventStart = array(
+                    "year"  => date("Y", $eventStartTimestamp),
+                    "month" => date("n", $eventStartTimestamp),
+                    "day"   => date("j", $eventStartTimestamp),
+                    "hour"  => date("H", $eventStartTimestamp),
+                    "min"   => date("i", $eventStartTimestamp),
+                    "sec"   => date("s", $eventStartTimestamp),
+                );
+                $event->setProperty("dtstart", $eventStart);
+
+                $eventEndTimestamp = strtotime($calendarEvent->end_datetime);
+                $eventEnd = array(
+                    "year"  => date("Y", $eventEndTimestamp),
+                    "month" => date("n", $eventEndTimestamp),
+                    "day"   => date("j", $eventEndTimestamp),
+                    "hour"  => date("H", $eventEndTimestamp),
+                    "min"   => date("i", $eventEndTimestamp),
+                    "sec"   => date("s", $eventEndTimestamp),
+                );
+                $event->setProperty("dtend", $eventEnd);
+            }
+
+            $event->setProperty("uid","event-{$calendarEvent->id}@" . md5(site_url()));
+            $event->setProperty("summary", $calendarEvent->name);
+            $event->setProperty("description", $calendarEvent->description);
+
+            if ($calendarEvent->location) {
+                $event->setProperty("LOCATION", $calendarEvent->location);
+            }
+        }
     }
 
 }

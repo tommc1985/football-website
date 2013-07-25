@@ -18,14 +18,65 @@ class Calendar extends Frontend_Controller {
     }
 
     /**
-     * Subscribe Action
+     * Subscribe to Combined Calendars Action
      * @return NULL
      */
-    public function subscribe()
+    public function combined()
     {
-        $calendarData = $this->Calendar_model->fetchData();
+        $calendarData = $this->Calendar_model->fetchData(array(
+            'players',
+            'matches',
+            'events',
+        ));
 
-        $this->Calendar_model->generateCalendar($calendarData);
+        $calendarName = sprintf($this->lang->line('calendar_combined_calendar'), Configuration::get('team_name'));
+
+        $this->Calendar_model->generateCalendar($calendarData, $calendarName);
+    }
+
+    /**
+     * Subscribe to Players' Birthdays Calendar Action
+     * @return NULL
+     */
+    public function players_birthdays()
+    {
+        $calendarData = $this->Calendar_model->fetchData(array(
+            'players',
+        ));
+
+        $calendarName = sprintf($this->lang->line('calendar_players_birthday_calendar'), Configuration::get('team_name'));
+
+        $this->Calendar_model->generateCalendar($calendarData, $calendarName);
+    }
+
+    /**
+     * Subscribe to Fixtures & Results Calendar Action
+     * @return NULL
+     */
+    public function fixtures_and_results()
+    {
+        $calendarData = $this->Calendar_model->fetchData(array(
+            'matches',
+        ));
+
+        $calendarName = sprintf($this->lang->line('calendar_fixtures_and_results_calendar'), Configuration::get('team_name'));
+
+        $this->Calendar_model->generateCalendar($calendarData, $calendarName);
+    }
+
+    /**
+     * Subscribe to Events Calendar Action
+     * @return NULL
+     */
+    public function events()
+    {
+        $calendarData = $this->Calendar_model->fetchData(array(
+            'events',
+        ));
+
+        $calendarName = sprintf($this->lang->line('calendar_event_calendar'), Configuration::get('team_name'));
+
+        $this->Calendar_model->generateCalendar($calendarData, $calendarName);
     }
 }
 
