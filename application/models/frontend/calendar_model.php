@@ -115,7 +115,7 @@ class Calendar_model extends Base_Frontend_Model {
                 }
 
                 $birthdayTimeStamp = mktime(0, 0, 0, date("n", $dateOfBirthTimestamp), date("j", $dateOfBirthTimestamp), $birthdayYear);
-                $playerAge = Utility_helper::getAge($dateOfBirthTimestamp, 'years', $birthdayTimeStamp);
+                $playerAge = Utility_helper::getAge($dateOfBirthTimestamp, $birthdayTimeStamp);
 
                 $event->setProperty("uid","player-{$player->id}@" . md5(site_url()));
                 $event->setProperty( "dtstart", date("Ymd", $birthdayTimeStamp), array("VALUE" => "DATE"));

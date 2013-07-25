@@ -121,35 +121,25 @@ class Utility_helper
         return $string;
     }
 
-    public static function getAge($date, $units='years', $timestampFrom = false)
+    /**
+     * Get age (in years) based on two dates
+     * @param  int    $date             Timestamp for date of birth
+     * @param  mixed  $timestampFrom    The timestamp to work out the age from
+     * @return int                      Age in years
+     */
+    public static function getAge($date, $timestampFrom = false)
     {
-        if (!is_numeric($timestampFrom)) {
+        if ($timestampFrom === false) {
             $timestampFrom = time();
         }
 
-        return date("Y", $timestampFrom) - date("Y", $date);
+        $elapsed = date("Y", $timestampFrom) - date("Y", $date);
 
-        $modifier = date('n', $timestampFrom) - date('n', strtotime($date)) ? 1 : (date('j', $timestampFrom) - date('j', strtotime($date)) ? 1 : 0);
-        $seconds = ($timestampFrom - strtotime($date));
-        $years = (date('Y')-date('Y', strtotime($date))-$modifier);
-        switch($units) {
-            case 'seconds':
-                return $seconds;
-            case 'minutes':
-                return round($seconds/60);
-            case 'hours':
-                return round($seconds/60/60);
-            case 'days':
-                return round($seconds/60/60/24);
-            case 'months':
-                return ($years*12+date('n'));
-            case 'decades':
-                return ($years/10);
-            case 'centuries':
-                return ($years/100);
-            default:
-                return $years;
+        if ($timestampFrom < mktime(0, 0, 0, date("n", $date), date("j", $date), date("Y", $date))) {
+            $elapsed--;
         }
+
+        return $elapsed;
     }
 
     /**

@@ -38,7 +38,7 @@ class Calendar extends Frontend_Controller {
      * Subscribe to Players' Birthdays Calendar Action
      * @return NULL
      */
-    public function players_birthdays()
+    public function player_birthdays()
     {
         $calendarData = $this->Calendar_model->fetchData(array(
             'players',
