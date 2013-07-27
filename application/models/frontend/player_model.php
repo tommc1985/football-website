@@ -165,6 +165,7 @@ class Player_model extends Base_Frontend_Model {
             ->from('cache_player_accumulated_statistics cpas')
             ->join('player p', 'p.id = cpas.player_id')
             ->where('cpas.player_id', $id)
+            ->where('cpas.type !=', '')
             ->where('p.deleted', 0)
             ->order_by('season', 'desc');
 
