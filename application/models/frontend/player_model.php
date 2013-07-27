@@ -256,7 +256,7 @@ class Player_model extends Base_Frontend_Model {
     public static function fetchGenders()
     {
         $ci =& get_instance();
-        $ci->load->config('player');
+        $ci->load->config('player', true);
 
         return $ci->config->item('genders', 'player');
     }
