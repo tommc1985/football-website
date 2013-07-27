@@ -18,6 +18,7 @@ class Player extends Backend_Controller
         $this->load->database();
         $this->load->library('session');
         $this->load->model('Cache_model');
+        $this->load->model('Nationality_model');
         $this->load->model('Player_model');
         $this->load->config('player', true);
 

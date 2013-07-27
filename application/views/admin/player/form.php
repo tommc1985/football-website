@@ -1,5 +1,6 @@
 <?php
 $this->load->model('Player_model');
+$this->load->model('Nationality_model');
 
 $id = array(
     'name'  => 'id',
@@ -27,10 +28,11 @@ $dob = array(
     'value' => set_value('dob'),
 );
 
-$nationality = array(
-    'name'  => 'nationality',
-    'id'    => 'nationality',
-    'value' => set_value('nationality'),
+$nationalityId = array(
+    'name'  => 'nationality_id',
+    'id'    => 'nationality-id',
+    'options' => array('' => '--- Select ---') + $this->Nationality_model->fetchForDropdown(),
+    'value' => set_value('nationality_id'),
 );
 
 $profile = array(
@@ -61,7 +63,6 @@ $gender = array(
 echo form_open($this->uri->uri_string()); ?>
 <table>
     <?php echo form_hidden('id', set_value('id', isset($player->id) ? $player->id : '')); ?>
-    <?php echo form_hidden($nationality['name'], set_value($nationality['name'], isset($player->nationality) ? $player->nationality : '')); ?>
     <?php echo form_hidden($current['name'], set_value($current['name'], isset($player->current) ? $player->current : '')); ?>
     <?php echo form_hidden($image_id['name'], set_value($image_id['name'], isset($player->image_id) ? $player->image_id : '')); ?>
     <tr>
@@ -83,7 +84,15 @@ echo form_open($this->uri->uri_string()); ?>
         <td><?php echo form_label($this->lang->line('player_gender'), $gender['name']); ?></td>
         <td><?php echo form_dropdown($gender['name'], $gender['options'], set_value($gender['name'], isset($player->gender) ? $player->gender : '')); ?></td>
         <td class="error"><?php echo form_error($gender['name']); ?><?php echo isset($errors[$gender['name']]) ? $errors[$gender['name']] : ''; ?></td>
+    </tr><?php
+    if (Configuration::get('include_nationalities') === true) { ?>
+    <tr>
+        <td><?php echo form_label($this->lang->line('player_nationality'), $nationalityId['name']); ?></td>
+        <td><?php echo form_dropdown($nationalityId['name'], $nationalityId['options'], set_value($nationalityId['name'], isset($player->nationality_id) ? $player->nationality_id : '')); ?></td>
+        <td class="error"><?php echo form_error($nationalityId['name']); ?><?php echo isset($errors[$nationalityId['name']]) ? $errors[$nationalityId['name']] : ''; ?></td>
     </tr>
+    <?php
+    } ?>
     <tr>
         <td><?php echo form_label($this->lang->line('player_profile'), $profile['name']); ?></td>
         <td><?php echo form_textarea($profile['name'], set_value($profile['name'], isset($player->profile) ? $player->profile : '')); ?></td>

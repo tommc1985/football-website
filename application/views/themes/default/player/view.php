@@ -8,9 +8,12 @@
           <dt><?php echo $this->lang->line('player_full_name'); ?>:</dt>
           <dd itemprop="name"><?php echo Player_helper::fullNameReverse($player, false); ?></dd>
           <dt><?php echo $this->lang->line('player_date_of_birth'); ?>:</dt>
-          <dd><time itemprop="birthDate" datetime="<?php echo Utility_helper::formattedDate($player->dob, "c"); ?>"><?php echo Utility_helper::formattedDate($player->dob, "jS F Y"); ?></time></dd>
+          <dd><time itemprop="birthDate" datetime="<?php echo Utility_helper::formattedDate($player->dob, "c"); ?>"><?php echo Utility_helper::formattedDate($player->dob, "jS F Y"); ?></time></dd><?php
+          if (Configuration::get('include_nationalities') === true) { ?>
           <dt><?php echo $this->lang->line('player_nationality'); ?>:</dt>
-          <dd itemprop="nationality"><?php echo $player->nationality; ?></dd>
+          <dd itemprop="nationality"><?php echo Nationality_helper::nationality($player->nationality_id); ?></dd>
+          <?php
+          } ?>
           <dt><?php echo $this->lang->line('player_gender'); ?>:</dt>
           <dd itemprop="gender"><?php echo Player_helper::gender($player); ?></dd>
           <dt><?php echo $this->lang->line('player_position_s'); ?>:</dt>

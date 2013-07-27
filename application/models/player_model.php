@@ -25,14 +25,14 @@ class Player_model extends Base_Model {
     public function processInsert()
     {
         return $this->insertEntry(array(
-            'first_name' => $this->ci->form_validation->set_value('first_name', NULL),
-            'surname' => $this->ci->form_validation->set_value('surname', NULL),
-            'dob' => $this->ci->form_validation->set_value('dob', NULL),
-            'nationality' => $this->ci->form_validation->set_value('nationality', NULL),
-            'profile' => $this->ci->form_validation->set_value('profile', NULL),
-            'current' => $this->ci->form_validation->set_value('current', NULL),
-            'image_id' => $this->ci->form_validation->set_value('image_id', NULL),
-            'gender' => $this->ci->form_validation->set_value('gender', NULL),
+            'first_name'     => $this->ci->form_validation->set_value('first_name', NULL),
+            'surname'        => $this->ci->form_validation->set_value('surname', NULL),
+            'dob'            => $this->ci->form_validation->set_value('dob', NULL),
+            'nationality_id' => $this->ci->form_validation->set_value('nationality_id', NULL),
+            'profile'        => $this->ci->form_validation->set_value('profile', NULL),
+            'current'        => $this->ci->form_validation->set_value('current', NULL),
+            'image_id'       => $this->ci->form_validation->set_value('image_id', NULL),
+            'gender'         => $this->ci->form_validation->set_value('gender', NULL),
         ));
     }
 
@@ -44,14 +44,14 @@ class Player_model extends Base_Model {
     public function processUpdate($id)
     {
         return $this->updateEntry($id, array(
-            'first_name' => $this->ci->form_validation->set_value('first_name', NULL),
-            'surname' => $this->ci->form_validation->set_value('surname', NULL),
-            'dob' => $this->ci->form_validation->set_value('dob', NULL),
-            'nationality' => $this->ci->form_validation->set_value('nationality', NULL),
-            'profile' => $this->ci->form_validation->set_value('profile', NULL),
-            'current' => $this->ci->form_validation->set_value('current', NULL),
-            'image_id' => $this->ci->form_validation->set_value('image_id', NULL),
-            'gender' => $this->ci->form_validation->set_value('gender', NULL),
+            'first_name'     => $this->ci->form_validation->set_value('first_name', NULL),
+            'surname'        => $this->ci->form_validation->set_value('surname', NULL),
+            'dob'            => $this->ci->form_validation->set_value('dob', NULL),
+            'nationality_id' => $this->ci->form_validation->set_value('nationality_id', NULL),
+            'profile'        => $this->ci->form_validation->set_value('profile', NULL),
+            'current'        => $this->ci->form_validation->set_value('current', NULL),
+            'image_id'       => $this->ci->form_validation->set_value('image_id', NULL),
+            'gender'         => $this->ci->form_validation->set_value('gender', NULL),
         ));
     }
 
@@ -81,8 +81,8 @@ class Player_model extends Base_Model {
             case 'dob':
                 return 'dob';
                 break;
-            case 'nationality':
-                return 'nationality';
+            case 'nationality_id':
+                return 'nationality_id';
                 break;
         }
 
@@ -101,7 +101,7 @@ class Player_model extends Base_Model {
         $this->ci->form_validation->set_rules('first_name', 'First Name', "trim|required|regex_match[/^[A-Za-z -']+$/]|max_length[" . $this->config->item('first_name_max_length', 'player') . "]|xss_clean");
         $this->ci->form_validation->set_rules('surname', 'Surname', "trim|regex_match[/^[A-Za-z -']+$/]|max_length[" . $this->config->item('surname_max_length', 'player') . "]|xss_clean");
         $this->ci->form_validation->set_rules('dob', 'Date of Birth', 'trim|regex_match[/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/]|xss_clean');
-        $this->ci->form_validation->set_rules('nationality', 'Nationality', 'trim|xss_clean');
+        $this->ci->form_validation->set_rules('nationality_id', 'Nationality', 'trim|xss_clean');
         $this->ci->form_validation->set_rules('profile', 'Profile', 'trim|xss_clean');
         $this->ci->form_validation->set_rules('current', 'Current', 'trim|xss_clean');
         $this->ci->form_validation->set_rules('image_id', 'Image', 'trim|xss_clean');

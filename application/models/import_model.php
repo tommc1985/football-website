@@ -288,6 +288,8 @@ class Import_Model extends CI_Model {
 
         foreach ($objects as $object) {
             $object = $object;
+            unset($object->nationality);
+            $object->nationality_id = 1; // All Players imported as English
             $object->date_added = time();
             $object->date_updated = time();
 

@@ -70,6 +70,7 @@ class Install_Model extends CI_Model {
             'league_registration',
             'login_attempts',
             'matches',
+            'nationality',
             'official',
             'opposition',
             'player',
@@ -2487,6 +2488,63 @@ class Install_Model extends CI_Model {
     }
 
     /**
+     * Create 'nationality' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of table creation attempt
+     */
+    public function createNationalityTable($tableName)
+    {
+        $fields = array(
+            'id' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+                'auto_increment' => TRUE,
+            ),
+            'nationality' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 255,
+            ),
+            'country' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 255,
+            ),
+            'alpha_code_3' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 3,
+                'null'           => true,
+            ),
+            'alpha_code_2' => array(
+                'type'           => 'VARCHAR',
+                'constraint'     => 2,
+                'null'           => true,
+            ),
+            'date_added' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'date_updated' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+            ),
+            'deleted' => array(
+                'type'           => 'TINYINT',
+                'constraint'     => 1,
+                'default'        => 0,
+            ),
+        );
+
+        $this->ci->dbforge->add_field($fields);
+        $this->ci->dbforge->add_key('id', TRUE);
+
+        if ($this->ci->dbforge->create_table($tableName, TRUE)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Create 'official' table
      * @param  string $tableName Database table name
      * @return boolean           Result of table creation attempt
@@ -2602,7 +2660,7 @@ class Install_Model extends CI_Model {
                 'type'           => 'DATE',
                 'null'           => true,
             ),
-            'nationality' => array(
+            'nationality_id' => array(
                 'type'           => 'INT',
                 'constraint'     => 11,
                 'unsigned'       => TRUE,
@@ -3980,6 +4038,990 @@ class Install_Model extends CI_Model {
                 'sort_order' => 5,
                 'visible' => 1,
                 'date_added' => time(),
+                'date_updated' => time(),
+            ),
+        );
+
+        if ($this->db->insert_batch($tableName, $data)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Insert 'nationality' table
+     * @param  string $tableName Database table name
+     * @return boolean           Result of data insert attempt
+     */
+    public function insertNationalityData($tableName)
+    {
+        $this->db->truncate($tableName);
+
+        $data = array(
+            array(
+                'nationality'  => 'English',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Irish',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Northern Irish',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Scottish',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Welsh',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Afghan',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Albanian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+                ),
+            array(
+                'nationality'  => 'Algerian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'American',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Andorran',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Angolan',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Antiguans',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Argentinean',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Armenian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Australian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Austrian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Azerbaijani',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Bahamian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Bahraini',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Bangladeshi',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Barbadian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Barbudans',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Batswana',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Belarusian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Belgian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Belizean',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Beninese',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Bhutanese',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Bolivian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Bosnian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Brazilian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Bruneian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Bulgarian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Burkinabe',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Burmese',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Burundian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Cambodian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Cameroonian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Canadian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Cape Verdean',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Central African',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Chadian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Chilean',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Chinese',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Colombian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Comoran',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Congolese',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Costa Rican',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Croatian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Cuban',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Cypriot',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Czech',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Danish',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Djibouti',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Dominican',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Dutch',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'East Timorese',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Ecuadorean',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Egyptian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Emirian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Equatorial Guinean',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Eritrean',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Estonian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Ethiopian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Fijian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Filipino',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Finnish',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'French',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Gabonese',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Gambian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Georgian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'German',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Ghanaian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Greek',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Grenadian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Guatemalan',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Guinea-Bissauan',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Guinean',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Guyanese',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Haitian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Herzegovinian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Honduran',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Hungarian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'I-Kiribati',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Icelander',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Indian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Indonesian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Iranian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Iraqi',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Israeli',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Italian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Ivorian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Jamaican',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Japanese',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Jordanian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Kazakhstani',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Kenyan',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Kittian and Nevisian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Kuwaiti',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Kyrgyz',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Laotian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Latvian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Lebanese',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Liberian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Libyan',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Liechtensteiner',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Lithuanian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Luxembourger',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Macedonian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Malagasy',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Malawian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Malaysian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Maldivan',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Malian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Maltese',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Marshallese',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Mauritanian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Mauritian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Mexican',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Micronesian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Moldovan',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Monacan',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Mongolian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Moroccan',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Mosotho',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Motswana',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Mozambican',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Namibian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Nauruan',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Nepalese',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'New Zealander',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Nicaraguan',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Nigerian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Nigerien',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'North Korean',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Norwegian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Omani',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Pakistani',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Palauan',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Panamanian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Papua New Guinean',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Paraguayan',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Peruvian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Polish',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Portuguese',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Qatari',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Romanian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Russian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Rwandan',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Saint Lucian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Salvadoran',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Samoan',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'San Marinese',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Sao Tomean',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Saudi',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Senegalese',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Serbian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Seychellois',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Sierra Leonean',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Singaporean',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Slovakian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Slovenian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Solomon Islander',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Somali',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'South African',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'South Korean',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Spanish',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Sri Lankan',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Sudanese',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Surinamer',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Swazi',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Swedish',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Swiss',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Syrian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Taiwanese',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Tajik',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Tanzanian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Thai',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Togolese',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Tongan',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Trinidadian/Tobagonian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Tunisian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Turkish',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Tuvaluan',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Ugandan',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Ukrainian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Uruguayan',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Uzbekistani',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Venezuelan',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Vietnamese',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Yemenite',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Zambian',
+                'date_added'   => time(),
+                'date_updated' => time(),
+            ),
+            array(
+                'nationality'  => 'Zimbabwean',
+                'date_added'   => time(),
                 'date_updated' => time(),
             ),
         );
