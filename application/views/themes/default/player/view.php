@@ -12,7 +12,7 @@
           <dt><?php echo $this->lang->line('player_nationality'); ?>:</dt>
           <dd itemprop="nationality"><?php echo $player->nationality; ?></dd>
           <dt><?php echo $this->lang->line('player_gender'); ?>:</dt>
-          <dd itemprop="gender"><?php echo $player->gender; ?></dd>
+          <dd itemprop="gender"><?php echo Player_helper::gender($player); ?></dd>
           <dt><?php echo $this->lang->line('player_position_s'); ?>:</dt>
           <dd><?php echo Player_helper::positionsAbbreviated($player->positions); ?></dd>
           <dt><?php echo $this->lang->line('player_debut'); ?>:</dt>

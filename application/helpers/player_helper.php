@@ -90,6 +90,26 @@ class Player_helper
     }
 
     /**
+     * Return a Player's Gender
+     * @param  mixed $player    Player Object/Array
+     * @return string           The Player's Gender
+     */
+    public static function gender($player)
+    {
+        $player = self::_convertObject($player);
+
+        $ci =& get_instance();
+        $ci->lang->load('global');
+        $genders = Player_model::fetchGenders();
+
+        if (isset($genders[$player->gender])) {
+            return $genders[$player->gender];
+        }
+
+        return $ci->lang->line('global_unknown');
+    }
+
+    /**
      * Return a Player's Average Rating
      * @param  decimal $rating  Player Object/Array
      * @return float            Formatted Player average rating

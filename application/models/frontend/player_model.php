@@ -250,6 +250,18 @@ class Player_model extends Base_Frontend_Model {
     }
 
     /**
+     * Fetch list of genders
+     * @return array List of genders
+     */
+    public static function fetchGenders()
+    {
+        $ci =& get_instance();
+        $ci->load->config('player');
+
+        return $ci->config->item('genders', 'player');
+    }
+
+    /**
      * Return string of fields to order data by
      * @param  string $orderBy Fields passwed
      * @return string          Processed string of fields

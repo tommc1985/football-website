@@ -61,10 +61,10 @@ class Player_model extends Base_Model {
      */
     public static function fetchGenders()
     {
-        return array(
-            'm' => 'Male',
-            'f' => 'Female'
-        );
+        $ci =& get_instance();
+        $ci->load->config('player');
+
+        return $ci->config->item('genders', 'player');
     }
 
     /**
