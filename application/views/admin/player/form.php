@@ -79,12 +79,15 @@ echo form_open($this->uri->uri_string()); ?>
         <td><?php echo form_label($this->lang->line('player_dob'), $dob['name']); ?></td>
         <td><?php echo form_date($dob['name'], set_value($dob['name'], isset($player->dob) ? $player->dob : '')); ?></td>
         <td class="error"><?php echo form_error($dob['name']); ?><?php echo isset($errors[$dob['name']]) ? $errors[$dob['name']] : ''; ?></td>
-    </tr>
+    </tr><?php
+    if (Configuration::get('include_genders') === true) { ?>
     <tr>
         <td><?php echo form_label($this->lang->line('player_gender'), $gender['name']); ?></td>
         <td><?php echo form_dropdown($gender['name'], $gender['options'], set_value($gender['name'], isset($player->gender) ? $player->gender : '')); ?></td>
         <td class="error"><?php echo form_error($gender['name']); ?><?php echo isset($errors[$gender['name']]) ? $errors[$gender['name']] : ''; ?></td>
-    </tr><?php
+    </tr>
+    <?php
+    } ?><?php
     if (Configuration::get('include_nationalities') === true) { ?>
     <tr>
         <td><?php echo form_label($this->lang->line('player_nationality'), $nationalityId['name']); ?></td>

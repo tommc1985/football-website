@@ -13,9 +13,12 @@
           <dt><?php echo $this->lang->line('player_nationality'); ?>:</dt>
           <dd itemprop="nationality"><?php echo Nationality_helper::nationality($player->nationality_id); ?></dd>
           <?php
-          } ?>
+          } ?><?php
+          if (Configuration::get('include_genders') === true) { ?>
           <dt><?php echo $this->lang->line('player_gender'); ?>:</dt>
           <dd itemprop="gender"><?php echo Player_helper::gender($player); ?></dd>
+          <?php
+          } ?>
           <dt><?php echo $this->lang->line('player_position_s'); ?>:</dt>
           <dd><?php echo Player_helper::positionsAbbreviated($player->positions); ?></dd>
           <dt><?php echo $this->lang->line('player_debut'); ?>:</dt>
