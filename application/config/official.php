@@ -9,9 +9,3 @@
 */
 $config['first_name_max_length'] = 30;
 $config['surname_max_length'] = 30;
-
-$config['gender_options'] = array(
-    '' => '--- Select ---',
-    'm' => 'Male',
-    'f' => 'Female'
-);

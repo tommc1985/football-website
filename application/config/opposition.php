@@ -7,11 +7,4 @@
 | These details are used in emails sent by authentication library.
 |--------------------------------------------------------------------------
 */
-$config['first_name_max_length'] = 30;
-$config['surname_max_length'] = 30;
-
-$config['gender_options'] = array(
-    '' => '--- Select ---',
-    'm' => 'Male',
-    'f' => 'Female'
-);
+$config[''] = false;
