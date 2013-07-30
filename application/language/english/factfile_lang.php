@@ -44,8 +44,8 @@ $lang['factfile_opposition_venue_matches_no_matches']                           
 $lang['factfile_opposition_competition_matches_n_matches_all_wins']                  = '%1$s have played against %2$s in %16$s %3$s %18$s before and have a 100%% record against them.';
 $lang['factfile_opposition_competition_matches_n_matches_no_losses']                 = '%1$s have played against %2$s in %16$s %3$s %18$s and have never lost.';
 $lang['factfile_opposition_competition_matches_n_matches_n_wins']                    = '%1$s have been involved in %16$s %3$s %18$s with %2$s, winning %7$d of them.';
-$lang['factfile_opposition_competition_matches_n_matches_all_draws']                 = '%1$s have drawn all %16$s %3$s %18$s against %2$s.';
-$lang['factfile_opposition_competition_matches_n_matches_no_wins']                   = '%1$s have played in %16$s %3$s %18$s against %2$s before but are yet to beat them.';
+$lang['factfile_opposition_competition_matches_n_matches_all_draws']                 = '%1$s have drawn all %6$s %3$s %18$s against %2$s.';
+$lang['factfile_opposition_competition_matches_n_matches_no_wins']                   = '%1$s have played in %6$s %3$s %18$s against %2$s before but are yet to beat them.';
 $lang['factfile_opposition_competition_matches_n_goals_for_n_goals_against']         = 'They have scored %22$d %23$s against %2$s in %3$s matches, conceding %12$d.';
 $lang['factfile_opposition_competition_matches_n_goals_for_no_goals_against']        = 'They are yet to concede a goal against %2$s in %3$s matches, while scoring %11$d.';
 $lang['factfile_opposition_competition_matches_no_goals_for_n_goals_against']        = 'They are yet to score a goal against %2$s in %3$s matches, while conceding %12$d.';
@@ -56,8 +56,8 @@ $lang['factfile_opposition_competition_matches_no_matches']                     
 $lang['factfile_opposition_competition_venue_matches_n_matches_all_wins']            = '%1$s have played against %2$s in %16$s %3$s %18$s %5$s before and have a 100%% record against them.';
 $lang['factfile_opposition_competition_venue_matches_n_matches_no_losses']           = '%1$s have played against %2$s in %16$s %3$s %18$s %5$s and have never lost.';
 $lang['factfile_opposition_competition_venue_matches_n_matches_n_wins']              = '%1$s have been involved in %16$s %3$s %18$s %5$s with %2$s, winning %7$d of them.';
-$lang['factfile_opposition_competition_venue_matches_n_matches_all_draws']           = '%1$s have drawn all %16$s %3$s %18$s %5$s against %2$s.';
-$lang['factfile_opposition_competition_venue_matches_n_matches_no_wins']             = '%1$s have played in %16$s %3$s %18$s %5$s against %2$s before but are yet to beat them.';
+$lang['factfile_opposition_competition_venue_matches_n_matches_all_draws']           = '%1$s have drawn all %6$s %3$s %18$s %5$s against %2$s.';
+$lang['factfile_opposition_competition_venue_matches_n_matches_no_wins']             = '%1$s have played in %6$s %3$s %18$s %5$s against %2$s before but are yet to beat them.';
 $lang['factfile_opposition_competition_venue_matches_n_goals_for_n_goals_against']   = 'They have scored %22$s %23$s against %2$s in %3$s matches %5$s, conceding %12$d.';
 $lang['factfile_opposition_competition_venue_matches_n_goals_for_no_goals_against']  = 'They are yet to concede a goal against %2$s in %3$s matches %5$s, while scoring %11$d.';
 $lang['factfile_opposition_competition_venue_matches_no_goals_for_n_goals_against']  = 'They are yet to score a goal against %2$s in %3$s matches, while conceding %12$d.';
