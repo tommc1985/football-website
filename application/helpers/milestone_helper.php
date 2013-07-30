@@ -48,6 +48,17 @@ class Milestone_helper
 
         $languageVariable = "milestone_{$tense}_{$milestone->statistic_group}_{$type}_{$season}";
 
+        // Don't show certain millestones on preview page
+        if (!$historial) {
+
+            switch (true) {
+                case $milestone->statistic_key == '1' && $milestone->statistic_group != 'nth_appearance' :
+                case in_array($milestone->statistic_key, array(2,3,4,6,7,8,9)) :
+                case in_array($milestone->statistic_key, array(5)) && $season == 'career':
+                    return '';
+            }
+        }
+
         return sprintf($ci->lang->line($languageVariable), $playerName, Utility_helper::ordinalWithSuffix($milestone->statistic_key), $competition);
     }
 }

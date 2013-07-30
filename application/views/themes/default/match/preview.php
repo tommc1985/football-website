@@ -37,8 +37,13 @@
 
                 <?php
                 if (count($match->milestones) > 0) {
-                    foreach ($match->milestones  as $milestone) { ?>
-                        <p><?php echo Milestone_helper::player($milestone, false); ?></p>
+                    foreach ($match->milestones  as $milestone) {
+                        $formattedMilestone = Milestone_helper::player($milestone, false);
+
+                        if ($formattedMilestone) { ?>
+                            <p><?php echo $formattedMilestone; ?></p>
+                        <?php
+                        } ?>
                     <?php
                     }
                 } else {
