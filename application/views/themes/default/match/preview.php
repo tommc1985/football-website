@@ -17,6 +17,9 @@
             </div>
         </div>
 
+        <?php
+        if (Match_helper::isNextMatch($match->id)) { ?>
+
         <div class="row-fluid">
             <div class="span6">
                 <h3><?php echo $this->lang->line('match_factfile'); ?></h3>
@@ -43,6 +46,9 @@
                 } ?>
             </div>
         </div>
+
+        <?php
+        } ?>
 
     </div>
 </div>

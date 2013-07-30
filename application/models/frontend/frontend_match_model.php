@@ -267,6 +267,32 @@ class Frontend_Match_model extends Base_Frontend_Model {
     }
 
     /**
+     * Fetch next match
+     * @return mixed       Next match, or false if there is none
+     */
+    public function fetchNextMatch()
+    {
+        $this->db->select('*');
+        $this->db->from($this->tableName);
+        $this->db->where('deleted', 0);
+
+        $this->db->where('h', NULL);
+        $this->db->where('status', NULL);
+        $this->db->where('!ISNULL(date)', NULL, false);
+
+        $this->db->order_by('date', 'asc');
+        $this->db->limit(1, 0);
+
+        $result = $this->db->get()->result();
+
+        if ($result) {
+            return $result[0];
+        }
+
+        return false;
+    }
+
+    /**
      * Return string of fields to order data by
      * @param  string $orderBy Fields passwed
      * @return string          Processed string of fields

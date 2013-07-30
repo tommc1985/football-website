@@ -266,4 +266,23 @@ class Match_helper
 
         return $string;
     }
+
+    /**
+     * Is the specified Match ID the next scheduled match
+     * @param  int $matchId      The Match ID
+     * @return boolean           Is the specified Match the next scheduled match?
+     */
+    public static function isNextMatch($matchId)
+    {
+        $ci =& get_instance();
+        $ci->load->model('frontend/Frontend_Match_model');
+
+        $match = $ci->Frontend_Match_model->fetchNextMatch();
+
+        if ($match === false) {
+            return false;
+        }
+
+        return $matchId == $match->id;
+    }
 }
