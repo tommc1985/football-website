@@ -29,6 +29,7 @@ class Factfile_helper
     public static function generateAndDisplay($match, $data)
     {
         $ci =& get_instance();
+        $ci->load->helper('number');
 
         $lines = array();
         $paragraphs = array();
@@ -79,8 +80,6 @@ class Factfile_helper
 
         $lines = array();
 
-        var_dump($metaData);
-
         if ($metaData['played'] > 0) {
             if ($metaData['won'] > 0) {
                 if ($metaData['played'] == $metaData['won']) {
@@ -127,22 +126,66 @@ class Factfile_helper
      */
     public static function matchData($matchData)
     {
-        $ci =& get_instance();
-
         $matchData = (array) $matchData;
 
-        switch ($matchData['played']) {
+        $matchData += self::matchTextualValues($matchData, 'played');
+        $matchData += self::goalTextualValues($matchData, 'total_goals');
+        $matchData += self::goalTextualValues($matchData, 'goals_for');
+        $matchData += self::goalTextualValues($matchData, 'goals_against');
+
+        return $matchData;
+    }
+
+    /**
+     * Prepare matches textual values
+     * @param  string $key        The key for the data
+     * @param  array  $matchData  Matches Data
+     * @return array              Details about Matches
+     */
+    public static function matchTextualValues($matchData, $key)
+    {
+        $ci =& get_instance();
+
+        switch ($matchData[$key]) {
             case 1:
-                $matchData['played_unit_text'] = $ci->lang->line("factfile_once");
-                $matchData['played_times_value'] = '';
+                $matchData["{$key}_unit_text"]     = $ci->lang->line("factfile_once");
+                $matchData["{$key}_times_value"]   = '';
+                $matchData["{$key}_matches_value"] = $ci->lang->line("factfile_match");
                 break;
             case 2:
-                $matchData['played_unit_text'] = $ci->lang->line("factfile_twice");
-                $matchData['played_times_value'] = '';
+                $matchData["{$key}_unit_text"]     = $ci->lang->line("factfile_twice");
+                $matchData["{$key}_times_value"]   = '';
+                $matchData["{$key}_matches_value"] = $ci->lang->line("factfile_matches");
                 break;
             default :
-                $matchData['played_unit_text'] = $matchData['played']; // Replace number with word
-                $matchData['played_times_value'] = $ci->lang->line("factfile_times");
+                $matchData["{$key}_unit_text"]     = Number_helper::numberToText($matchData[$key]); // Replace number with word
+                $matchData["{$key}_times_value"]   = $ci->lang->line("factfile_times");
+                $matchData["{$key}_matches_value"] = $ci->lang->line("factfile_matches");
+        }
+
+        return $matchData;
+    }
+
+    /**
+     * Prepare goal textual values
+     * @param  string $key        The key for the data
+     * @param  array  $matchData  Matches Data
+     * @return array              Details about Matches
+     */
+    public static function goalTextualValues($matchData, $key)
+    {
+        $ci =& get_instance();
+
+        $matchData["{$key}_unit_text"]   = $matchData[$key]; // Replace number with word
+
+        switch ($matchData[$key]) {
+            case 1:
+                $matchData["{$key}_goals_value"] = $ci->lang->line("factfile_goal");
+                $matchData["{$key}_have_value"]  = $ci->lang->line("factfile_has");
+                break;
+            default :
+                $matchData["{$key}_goals_value"] = $ci->lang->line("factfile_goals");
+                $matchData["{$key}_have_value"]  = $ci->lang->line("factfile_have");
         }
 
         return $matchData;
