@@ -73,6 +73,9 @@ class Frontend_Match_model extends Base_Frontend_Model {
         // Match's Milestones
         $match->milestones = $this->fetchMilestones($match);
 
+        // Match's Factfile
+        $match->factfile = $this->fetchFactfile($match);
+
         return $match;
     }
 
@@ -126,7 +129,7 @@ class Frontend_Match_model extends Base_Frontend_Model {
 
     /**
      * Fetch a particular Match's milestones
-     * @param  object $id      Match Object
+     * @param  object $match      Match Object
      * @return array           Milestones
      */
     public function fetchMilestones($match)
@@ -136,6 +139,18 @@ class Frontend_Match_model extends Base_Frontend_Model {
         }
 
         return $this->fetchAchievedMilestones($match->id);
+    }
+
+    /**
+     * Fetch a particular Match's Factfile
+     * @param  int $match      Match Object
+     * @return array           Factfile Info
+     */
+    public function fetchFactfile($match)
+    {
+        $this->ci->load->model('frontend/Factfile_model');
+
+        return $this->ci->Factfile_model->fetchForMatch($match);
     }
 
     /**
