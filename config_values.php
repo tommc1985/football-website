@@ -52,6 +52,8 @@ $configValues['form_match_count']                  = 6;
 
 $configValues['team_name']                         = 'Hardy Athletic';
 
+$configValues['cache_key']                         = 'key';
+
 class Configuration {
     public function _construct() {}
 

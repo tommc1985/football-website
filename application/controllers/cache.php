@@ -9,15 +9,17 @@ class Cache extends CI_Controller {
     public function execute()
     {
         set_time_limit(1200);
-        //if ($this->input->is_cli_request()) {
+        $this->load->helper(array('form'));
+
+        if ($this->input->is_cli_request() || ($this->input->get('key') == Configuration::get('cache_key'))) {
             $this->load->database();
             $this->load->model('Cache_model');
 
             $this->Cache_model->processQueuedRows();
-        /*} else {
+        } else {
             $this->load->helper('url');
             redirect('/', 'location', 301);
-        }*/
+        }
     }
 
     /**
@@ -26,9 +28,16 @@ class Cache extends CI_Controller {
      */
     public function queue_all()
     {
-        $this->load->database();
-        $this->load->model('Cache_model');
-        $this->Cache_model->insertEntries();
+        $this->load->helper(array('form'));
+
+        if ($this->input->is_cli_request() || ($this->input->get('key') == Configuration::get('cache_key'))) {
+            $this->load->database();
+            $this->load->model('Cache_model');
+            $this->Cache_model->insertEntries();
+        } else {
+            $this->load->helper('url');
+            redirect('/', 'location', 301);
+        }
     }
 }
 
