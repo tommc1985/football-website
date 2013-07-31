@@ -67,6 +67,18 @@ $lang['player_statistics_consecutive_games_assisted']                      = 'Co
 $lang['player_statistics_no_consecutive_games_assisted']                   = 'No "Consecutive Games Assisted" statistics to display';
 $lang['player_statistics_consecutive_games_assisted_explanation']          = 'The number of consecutive games in which a player has provided an assist for a goal.';
 
+$lang['player_statistics_consecutive_appearances']                         = 'Consecutive Appearances';
+$lang['player_statistics_no_consecutive_appearances']                      = 'No "Consecutive Appearances" statistics to display';
+$lang['player_statistics_consecutive_appearances_explanation']             = 'The number of consecutive games in which a player has appeared (either starting or as a substitute).';
+
+$lang['player_statistics_consecutive_starting_appearances']                = 'Consecutive Starting Appearances';
+$lang['player_statistics_no_consecutive_starting_appearances']             = 'No "Consecutive Starting Appearances" statistics to display';
+$lang['player_statistics_consecutive_starting_appearances_explanation']    = 'The number of consecutive games in which a player has started.';
+
+$lang['player_statistics_consecutive_substitute_appearances']              = 'Consecutive Substitute Appearances';
+$lang['player_statistics_no_consecutive_substitute_appearances']           = 'No "Consecutive Substitute Appearances" statistics to display';
+$lang['player_statistics_consecutive_substitute_appearances_explanation']  = 'The number of consecutive games in which a player has appeared as a substitute.';
+
 $lang['player_statistics_most_common_two_player_combination']              = 'Most Common Two Player Combination';
 $lang['player_statistics_no_most_common_two_player_combination']           = 'No Most Common Two Player Combinations to display, most likely due to no matches being completed';
 $lang['player_statistics_most_common_two_player_combination_explanation']  = 'The number of times two players have appeared together.';

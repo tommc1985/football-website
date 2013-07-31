@@ -667,6 +667,105 @@ class Player_Statistics_helper
     }
 
     /**
+     * Show Consecutive Appearances
+     * @param  array $statistics  Full set of Statistics
+     * @return NULL
+     */
+    public static function consecutiveAppearances($statistics)
+    {
+        $statisticGroup = "consecutive_appearances";
+        if (!isset($statistics[$statisticGroup])) {
+            self::_displayNoData($statisticGroup);
+            return false;
+        }
+
+        $ci =& get_instance(); ?>
+
+        <h3><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
+        <p><?php echo $ci->lang->line("player_statistics_{$statisticGroup}_explanation"); ?></p>
+        <table>
+            <tbody>
+        <?php
+        foreach ($statistics[$statisticGroup] as $player) { ?>
+                <tr>
+                    <td><?php echo $player->sequence; ?> <?php echo $ci->lang->line($player->sequence == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
+                    <td><?php echo Player_helper::fullName($player->playerId); ?></td>
+                    <td><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo Utility_helper::shortDate($player->sequenceFinish); ?></td>
+                </tr>
+        <?php
+        } ?>
+            </tbody>
+        </table>
+    <?php
+    }
+
+    /**
+     * Show Consecutive Starting Appearances
+     * @param  array $statistics  Full set of Statistics
+     * @return NULL
+     */
+    public static function consecutiveStartingAppearances($statistics)
+    {
+        $statisticGroup = "consecutive_starting_appearances";
+        if (!isset($statistics[$statisticGroup])) {
+            self::_displayNoData($statisticGroup);
+            return false;
+        }
+
+        $ci =& get_instance(); ?>
+
+        <h3><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
+        <p><?php echo $ci->lang->line("player_statistics_{$statisticGroup}_explanation"); ?></p>
+        <table>
+            <tbody>
+        <?php
+        foreach ($statistics[$statisticGroup] as $player) { ?>
+                <tr>
+                    <td><?php echo $player->sequence; ?> <?php echo $ci->lang->line($player->sequence == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
+                    <td><?php echo Player_helper::fullName($player->playerId); ?></td>
+                    <td><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo Utility_helper::shortDate($player->sequenceFinish); ?></td>
+                </tr>
+        <?php
+        } ?>
+            </tbody>
+        </table>
+    <?php
+    }
+
+    /**
+     * Show Consecutive Substitute Appearances
+     * @param  array $statistics  Full set of Statistics
+     * @return NULL
+     */
+    public static function consecutiveSubstituteAppearances($statistics)
+    {
+        $statisticGroup = "consecutive_substitute_appearances";
+        if (!isset($statistics[$statisticGroup])) {
+            self::_displayNoData($statisticGroup);
+            return false;
+        }
+
+        $ci =& get_instance(); ?>
+
+        <h3><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
+        <p><?php echo $ci->lang->line("player_statistics_{$statisticGroup}_explanation"); ?></p>
+        <table>
+            <tbody>
+        <?php
+        foreach ($statistics[$statisticGroup] as $player) { ?>
+                <tr>
+                    <td><?php echo $player->sequence; ?> <?php echo $ci->lang->line($player->sequence == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
+                    <td><?php echo Player_helper::fullName($player->playerId); ?></td>
+                    <td><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo Utility_helper::shortDate($player->sequenceFinish); ?></td>
+                </tr>
+        <?php
+        } ?>
+            </tbody>
+        </table>
+    <?php
+    }
+
+    /**
      * Show Most Common Two Players Playing Together
      * @param  array $statistics  Full set of Statistics
      * @return NULL

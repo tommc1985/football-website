@@ -47,6 +47,9 @@ class Cache_Player_Statistics_model extends CI_Model {
             'average_clean_sheets'                 => 'averageCleanSheets',
             'consecutive_games_scored'             => 'consecutiveGamesScored',
             'consecutive_games_assisted'           => 'consecutiveGamesAssisted',
+            'consecutive_appearances'              => 'consecutiveAppearances',
+            'consecutive_starting_appearances'     => 'consecutiveStartingAppearances',
+            'consecutive_substitute_appearances'   => 'consecutiveSubstituteAppearances',
             'most_common_centre_back_pairing'      => 'mostCommonCentreBackPairing',
             'most_common_centre_midfield_pairing'  => 'mostCommonCentreMidfieldPairing',
             'most_common_right_hand_side_pairing'  => 'mostCommonRightHandSidePairing',
@@ -1108,6 +1111,138 @@ ORDER BY m.date ASC";
 
         foreach ($distinctPlayers as $player) {
             $this->sequenceBase($matches, $player->id, "\$match->assists > 0", $statisticGroup, $type, $season);
+        }
+    }
+
+    /**
+     * Generate and cache Consecutive Games a Player Appeared-In Statistics by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
+     */
+    public function consecutiveAppearances($type = false, $season = NULL)
+    {
+        $statisticGroup = 'consecutive_appearances';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
+
+        $whereConditions = array();
+        if (!is_null($season)) {
+            $dates = Season_model::generateStartEndDates($season);
+            $whereConditions[] = "(vcm.date {$dates['startDate']} AND vcm.date {$dates['endDate']})";
+        }
+
+        if (is_string($type)) {
+            $whereConditions[] = "(vcm.type = '{$type}')";
+        }
+
+        $distinctPlayers = $this->fetchDistinctPlayerIds();
+
+        foreach ($distinctPlayers as $player) {
+            $sql = "SELECT vcm.*, a.player_id, a.status as appearance_status, '{$player->id}' as player_id
+    FROM view_competitive_matches vcm
+    LEFT JOIN appearance a ON vcm.id = a.match_id
+        AND a.player_id = {$player->id}
+        AND a.deleted = 0
+    WHERE vcm.h IS NOT NULL
+        AND vcm.status IS NULL
+        AND vcm.date IS NOT NULL
+        AND vcm.deleted = 0" . (count($whereConditions) > 0 ? "
+        AND " . implode(" \r\nAND ", $whereConditions) : '') . "
+    ORDER BY vcm.date ASC";
+
+            $query = $this->db->query($sql);
+            $matches = $query->result();
+
+            $this->sequenceBase($matches, $player->id, "\$match->appearance_status == 'starter' || \$match->appearance_status == 'substitute'", $statisticGroup, $type, $season);
+        }
+    }
+
+    /**
+     * Generate and cache Consecutive Games a Player has Started-In Statistics by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
+     */
+    public function consecutiveStartingAppearances($type = false, $season = NULL)
+    {
+        $statisticGroup = 'consecutive_starting_appearances';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
+
+        $whereConditions = array();
+        if (!is_null($season)) {
+            $dates = Season_model::generateStartEndDates($season);
+            $whereConditions[] = "(vcm.date {$dates['startDate']} AND vcm.date {$dates['endDate']})";
+        }
+
+        if (is_string($type)) {
+            $whereConditions[] = "(vcm.type = '{$type}')";
+        }
+
+        $distinctPlayers = $this->fetchDistinctPlayerIds();
+
+        foreach ($distinctPlayers as $player) {
+            $sql = "SELECT vcm.*, a.player_id, a.status as appearance_status, '{$player->id}' as player_id
+    FROM view_competitive_matches vcm
+    LEFT JOIN appearance a ON vcm.id = a.match_id
+        AND a.player_id = {$player->id}
+        AND a.deleted = 0
+    WHERE vcm.h IS NOT NULL
+        AND vcm.status IS NULL
+        AND vcm.date IS NOT NULL
+        AND vcm.deleted = 0" . (count($whereConditions) > 0 ? "
+        AND " . implode(" \r\nAND ", $whereConditions) : '') . "
+    ORDER BY vcm.date ASC";
+
+            $query = $this->db->query($sql);
+            $matches = $query->result();
+
+            $this->sequenceBase($matches, $player->id, "\$match->appearance_status == 'starter'", $statisticGroup, $type, $season);
+        }
+    }
+
+    /**
+     * Generate and cache Consecutive Games a Player has Appeared as a Substitute-In Statistics by competition type or season
+     * @param  boolean|string $type    Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season        Season to generate, set to null for entire career
+     * @return NULL
+     */
+    public function consecutiveSubstituteAppearances($type = false, $season = NULL)
+    {
+        $statisticGroup = 'consecutive_substitute_appearances';
+
+        $this->deleteRows($statisticGroup, false, $type, $season);
+
+        $whereConditions = array();
+        if (!is_null($season)) {
+            $dates = Season_model::generateStartEndDates($season);
+            $whereConditions[] = "(vcm.date {$dates['startDate']} AND vcm.date {$dates['endDate']})";
+        }
+
+        if (is_string($type)) {
+            $whereConditions[] = "(vcm.type = '{$type}')";
+        }
+
+        $distinctPlayers = $this->fetchDistinctPlayerIds();
+
+        foreach ($distinctPlayers as $player) {
+            $sql = "SELECT vcm.*, a.player_id, a.status as appearance_status, '{$player->id}' as player_id
+    FROM view_competitive_matches vcm
+    LEFT JOIN appearance a ON vcm.id = a.match_id
+        AND a.player_id = {$player->id}
+        AND a.deleted = 0
+    WHERE vcm.h IS NOT NULL
+        AND vcm.status IS NULL
+        AND vcm.date IS NOT NULL
+        AND vcm.deleted = 0" . (count($whereConditions) > 0 ? "
+        AND " . implode(" \r\nAND ", $whereConditions) : '') . "
+    ORDER BY vcm.date ASC";
+
+            $query = $this->db->query($sql);
+            $matches = $query->result();
+
+            $this->sequenceBase($matches, $player->id, "\$match->appearance_status == 'substitute'", $statisticGroup, $type, $season);
         }
     }
 
