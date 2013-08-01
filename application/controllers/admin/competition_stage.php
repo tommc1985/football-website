@@ -31,6 +31,7 @@ class Competition_Stage extends Backend_Controller
     public function index()
     {
         $this->load->library('pagination');
+        $this->load->helper('pagination');
 
         $parameters = $this->uri->uri_to_assoc(4, array('offset', 'order-by', 'order'));
 
@@ -42,7 +43,7 @@ class Competition_Stage extends Backend_Controller
 
         $data['competitionStages'] = $this->Competition_Stage_model->fetchAll($perPage, $offset, $parameters['order-by'], $parameters['order']);
 
-        $config['base_url'] = '/admin/competition-stage/index/';
+        $config['base_url'] = site_url('admin/competition-stage/index') . '/';
 
         if ($parameters['order-by']) {
             $config['base_url'] .= "order-by/{$parameters['order-by']}/";
@@ -56,6 +57,7 @@ class Competition_Stage extends Backend_Controller
         $config['total_rows'] = $this->Competition_Stage_model->countAll();
         $config['per_page'] = $perPage;
         $config['cur_page'] = $offset;
+        $config + Pagination_helper::settings();
 
         $this->pagination->initialize($config);
         $data['pagination'] = $this->pagination->create_links();

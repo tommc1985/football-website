@@ -1,5 +1,8 @@
-<?php
-echo $pagination; ?>
+    <div class="pagination">
+    <?php
+    echo $pagination; ?>
+    </div>
+
     <table class="no-more-tables">
         <thead>
             <tr>
@@ -36,5 +39,8 @@ echo $pagination; ?>
     } ?>
         </tbody>
     </table>
-<?php
-echo $pagination; ?>
+
+    <div class="pagination">
+    <?php
+    echo $pagination; ?>
+    </div>
