@@ -6,3 +6,13 @@ thead td {
     text-align: center;
     font-weight: bold;
 }
+
+@media (max-width: 979px) {
+    .frontend-menu.double-nav {
+        margin-bottom: 0;
+    }
+}
+
+.admin-menu.double-nav {
+    top: 40px;
+}

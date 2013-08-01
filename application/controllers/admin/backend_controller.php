@@ -2,9 +2,13 @@
 
 class Backend_Controller extends CI_Controller
 {
+    public $templateData;
+
     public function __construct()
     {
         parent::__construct();
+
+        $this->templateData = array();
 
         $this->load->helper('url');
         $this->load->library('tank_auth');

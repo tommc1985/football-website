@@ -12,6 +12,9 @@ class Frontend_Controller extends CI_Controller
         $this->templateData = array();
 
         $this->load->database();
+        $this->load->library('tank_auth');
+
+        $this->templateData['doubleNav'] = $this->tank_auth->is_logged_in();
 
         $this->theme = 'default';
 
@@ -21,8 +24,6 @@ class Frontend_Controller extends CI_Controller
 
         $this->load->model('frontend/League_model');
         $this->load->model('Season_model');
-
-
     }
 }
 

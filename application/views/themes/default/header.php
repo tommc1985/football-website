@@ -16,17 +16,17 @@
 </head>
 <body>
 
-<div class="navbar navbar-fixed-top">
+<div class="navbar navbar-fixed-top frontend-menu <?php echo isset($doubleNav) && $doubleNav ? 'double-nav' : ''; ?>">
     <div class="navbar-inner">
         <div class="container">
             <a class="brand" href="<?php echo site_url(); ?>"><?php echo Configuration::get('team_name'); ?></a>
             <div class="container">
-                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse.frontend-menu">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <div class="nav-collapse collapse">
+                <div class="nav-collapse collapse frontend-menu">
                     <ul class="nav">
                         <li>
                             <a href="<?php echo site_url(); ?>">Home</a>
@@ -108,4 +108,9 @@
         </div>
     </div>
 </div>
+
+<?php
+if (isset($doubleNav) && $doubleNav) {
+    $this->load->view('admin/nav_bar');
+} ?>
 <div class="container">
