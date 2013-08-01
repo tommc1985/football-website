@@ -20,6 +20,7 @@ class Player extends Backend_Controller
         $this->load->model('Cache_model');
         $this->load->model('Nationality_model');
         $this->load->model('Player_model');
+        $this->load->model('Player_Registration_model');
         $this->load->config('player', true);
 
         $this->lang->load('player');
@@ -124,6 +125,14 @@ class Player extends Backend_Controller
             $player = $this->Player_model->fetch($parameters['id']);
 
             $newData = $this->Player_model->fetch($parameters['id']);
+
+            if ($this->Player_model->isDifferent($oldData, $newData)) {
+                $playerRegistrations = $this->Player_Registration_model->fetchAllByField('player_id', $player->id);
+
+                foreach ($playerRegistrations as $playerRegistration) {
+                    $this->Cache_Club_Statistics_model->insertEntries($playerRegistration->season);
+                }
+            }
 
             $this->session->set_flashdata('message', sprintf($this->lang->line('player_updated'), $player->id));
             redirect('/admin/player');
