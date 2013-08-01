@@ -87,19 +87,17 @@ class Player_Statistics extends Frontend_Controller {
 
         $statistics = $this->Player_Statistics_model->fetchAll($season == 'all-time' ? 'career' : $season, $type);
 
-        $data = array(
-            'statistics'          => $statistics,
-            'season'              => $season,
-            'type'                => $type,
-            'unit'                => $unit,
-            'matchCount'          => $matchCount,
-            'thresholdPercentage' => $thresholdPercentage,
-            'thresholdMatches'    => $thresholdMatches,
-        );
+        $this->templateData['statistics']          = $statistics;
+        $this->templateData['season']              = $season;
+        $this->templateData['type']                = $type;
+        $this->templateData['unit']                = $unit;
+        $this->templateData['matchCount']          = $matchCount;
+        $this->templateData['thresholdPercentage'] = $player;
+        $this->templateData['thresholdMatches']    = $player;
 
-        $this->load->view("themes/{$this->theme}/header", $data);
-        $this->load->view("themes/{$this->theme}/player-statistics/view", $data);
-        $this->load->view("themes/{$this->theme}/footer", $data);
+        $this->load->view("themes/{$this->theme}/header", $this->templateData);
+        $this->load->view("themes/{$this->theme}/player-statistics/view", $this->templateData);
+        $this->load->view("themes/{$this->theme}/footer", $this->templateData);
     }
 }
 

@@ -40,13 +40,11 @@ class Page extends Frontend_Controller {
             show_error($this->lang->line('page_not_found'), 404);
         }
 
-        $data = array(
-            'article' => $article,
-        );
+        $this->templateData['article'] = $article;
 
-        $this->load->view("themes/{$this->theme}/header", $data);
-        $this->load->view("themes/{$this->theme}/page/view", $data);
-        $this->load->view("themes/{$this->theme}/footer", $data);
+        $this->load->view("themes/{$this->theme}/header", $this->templateData);
+        $this->load->view("themes/{$this->theme}/page/view", $this->templateData);
+        $this->load->view("themes/{$this->theme}/footer", $this->templateData);
     }
 }
 

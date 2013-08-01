@@ -43,14 +43,12 @@ class Player extends Frontend_Controller {
 
         $players = $this->Player_model->fetchPlayerList($season, $type, $orderBy, $order);
 
-        $data = array(
-            'players' => $players,
-            'season'  => $season,
-        );
+        $this->templateData['players'] = $players;
+        $this->templateData['season']  = $season;
 
-        $this->load->view("themes/{$this->theme}/header", $data);
-        $this->load->view("themes/{$this->theme}/player/welcome_message", $data);
-        $this->load->view("themes/{$this->theme}/footer", $data);
+        $this->load->view("themes/{$this->theme}/header", $this->templateData);
+        $this->load->view("themes/{$this->theme}/player/welcome_message", $this->templateData);
+        $this->load->view("themes/{$this->theme}/footer", $this->templateData);
     }
 
     /**
@@ -67,13 +65,11 @@ class Player extends Frontend_Controller {
             show_error($this->lang->line('player_not_found'), 404);
         }
 
-        $data = array(
-            'player' => $player,
-        );
+        $this->templateData['player'] = $player;
 
-        $this->load->view("themes/{$this->theme}/header", $data);
-        $this->load->view("themes/{$this->theme}/player/view", $data);
-        $this->load->view("themes/{$this->theme}/footer", $data);
+        $this->load->view("themes/{$this->theme}/header", $this->templateData);
+        $this->load->view("themes/{$this->theme}/player/view", $this->templateData);
+        $this->load->view("themes/{$this->theme}/footer", $this->templateData);
     }
 }
 

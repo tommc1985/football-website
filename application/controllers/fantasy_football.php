@@ -111,21 +111,19 @@ class Fantasy_Football extends Frontend_Controller {
         // Fetch Best Lineup for specified formation
         $bestLineup = $this->Fantasy_Football_model->fetchBestLineup($formation, $season == 'all-time' ? 'career' : $season, $type, $measurement);
 
-        $data = array(
-            'fantasyFootballData' => $fantasyFootballData,
-            'bestLineup'          => $bestLineup,
-            'formationInfo'       => $formationInfo,
-            'formation'           => $formation,
-            'season'              => $season,
-            'type'                => $type,
-            'position'            => $position,
-            'orderBy'             => $orderBy,
-            'measurement'         => $measurement,
-        );
+        $this->templateData['fantasyFootballData'] = $fantasyFootballData;
+        $this->templateData['bestLineup']          = $bestLineup;
+        $this->templateData['formationInfo']       = $formationInfo;
+        $this->templateData['formation']           = $formation;
+        $this->templateData['season']              = $season;
+        $this->templateData['type']                = $type;
+        $this->templateData['position']            = $position;
+        $this->templateData['orderBy']             = $orderBy;
+        $this->templateData['measurement']         = $measurement;
 
-        $this->load->view("themes/{$this->theme}/header", $data);
-        $this->load->view("themes/{$this->theme}/fantasy-football/view", $data);
-        $this->load->view("themes/{$this->theme}/footer", $data);
+        $this->load->view("themes/{$this->theme}/header", $this->templateData);
+        $this->load->view("themes/{$this->theme}/fantasy-football/view", $this->templateData);
+        $this->load->view("themes/{$this->theme}/footer", $this->templateData);
     }
 }
 

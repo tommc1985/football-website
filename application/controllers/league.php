@@ -53,18 +53,16 @@ class League extends Frontend_Controller {
 
         $formTeams = $this->League_Collated_Results_model->fetchForm($standings, $formMatchCount);
 
-        $data = array(
-            'standings'      => $standings,
-            'formTeams'      => $formTeams,
-            'formMatchCount' => $formMatchCount,
-            'id'             => $parameters['id'],
-            'type'           => $type,
-            'dateUntil'      => $dateUntil,
-        );
+        $this->templateData['standings']      = $standings;
+        $this->templateData['formTeams']      = $formTeams;
+        $this->templateData['formMatchCount'] = $formMatchCount;
+        $this->templateData['id']             = $parameters['id'];
+        $this->templateData['type']           = $type;
+        $this->templateData['dateUntil']      = $dateUntil;
 
-        $this->load->view("themes/{$this->theme}/header", $data);
-        $this->load->view("themes/{$this->theme}/league/view", $data);
-        $this->load->view("themes/{$this->theme}/footer", $data);
+        $this->load->view("themes/{$this->theme}/header", $this->templateData);
+        $this->load->view("themes/{$this->theme}/league/view", $this->templateData);
+        $this->load->view("themes/{$this->theme}/footer", $this->templateData);
     }
 }
 

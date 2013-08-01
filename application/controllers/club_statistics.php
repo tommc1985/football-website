@@ -59,20 +59,18 @@ class Club_Statistics extends Frontend_Controller {
 
         $statistics = $this->Club_Statistics_model->fetchAll($season == 'all-time' ? 'career' : $season, $type);
 
-        $data = array(
-            'statistics' => $statistics,
-            'season'     => $season,
-            'type'       => $type,
-            'venues'     => array(
-                '',
-                'h',
-                'a'
-            )
+        $this->templateData['statistics'] = $statistics;
+        $this->templateData['season']     = $season;
+        $this->templateData['type']       = $type;
+        $this->templateData['venues']     = array(
+            '',
+            'h',
+            'a'
         );
 
-        $this->load->view("themes/{$this->theme}/header", $data);
-        $this->load->view("themes/{$this->theme}/club-statistics/view", $data);
-        $this->load->view("themes/{$this->theme}/footer", $data);
+        $this->load->view("themes/{$this->theme}/header", $this->templateData);
+        $this->load->view("themes/{$this->theme}/club-statistics/view", $this->templateData);
+        $this->load->view("themes/{$this->theme}/footer", $this->templateData);
     }
 }
 

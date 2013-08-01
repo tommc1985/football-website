@@ -3,10 +3,14 @@
 class Frontend_Controller extends CI_Controller
 {
     public $theme;
+    public $templateData;
 
     public function __construct()
     {
         parent::__construct();
+
+        $this->templateData = array();
+
         $this->load->database();
 
         $this->theme = 'default';
@@ -17,6 +21,8 @@ class Frontend_Controller extends CI_Controller
 
         $this->load->model('frontend/League_model');
         $this->load->model('Season_model');
+
+
     }
 }
 

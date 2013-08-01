@@ -61,19 +61,17 @@ class Head_To_Head extends Frontend_Controller {
             $pointsGainers   = $this->Head_To_Head_model->fetchPointsGained($opposition);
         }
 
-        $data = array(
-            'opposition'      => $opposition,
-            'matches'         => $matches,
-            'accumulatedData' => $accumulatedData,
-            'scorers'         => $scorers,
-            'assisters'       => $assisters,
-            'offenders'       => $offenders,
-            'pointsGainers'   => $pointsGainers,
-        );
+        $this->templateData['opposition']      = $opposition;
+        $this->templateData['matches']         = $matches;
+        $this->templateData['accumulatedData'] = $accumulatedData;
+        $this->templateData['scorers']         = $scorers;
+        $this->templateData['assisters']       = $assisters;
+        $this->templateData['offenders']       = $offenders;
+        $this->templateData['pointsGainers']   = $pointsGainers;
 
-        $this->load->view("themes/{$this->theme}/header", $data);
-        $this->load->view("themes/{$this->theme}/head_to_head/welcome_message", $data);
-        $this->load->view("themes/{$this->theme}/footer", $data);
+        $this->load->view("themes/{$this->theme}/header", $this->templateData);
+        $this->load->view("themes/{$this->theme}/head_to_head/welcome_message", $this->templateData);
+        $this->load->view("themes/{$this->theme}/footer", $this->templateData);
     }
 }
 

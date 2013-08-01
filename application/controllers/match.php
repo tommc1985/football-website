@@ -44,14 +44,12 @@ class Match extends Frontend_Controller {
 
         $matches = $this->Frontend_Match_model->fetchMatchList($season, $type, $orderBy, $order, Season_model::fetchCurrentSeason() == $season);
 
-        $data = array(
-            'matches' => $matches,
-            'season'  => $season,
-        );
+        $this->templateData['matches'] = $matches;
+        $this->templateData['season']  = $season;
 
-        $this->load->view("themes/{$this->theme}/header", $data);
-        $this->load->view("themes/{$this->theme}/match/welcome_message", $data);
-        $this->load->view("themes/{$this->theme}/footer", $data);
+        $this->load->view("themes/{$this->theme}/header", $this->templateData);
+        $this->load->view("themes/{$this->theme}/match/welcome_message", $this->templateData);
+        $this->load->view("themes/{$this->theme}/footer", $this->templateData);
     }
 
     /**
@@ -68,21 +66,19 @@ class Match extends Frontend_Controller {
             show_error($this->lang->line('match_not_found'), 404);
         }
 
-        $data = array(
-            'match' => $match,
-        );
+        $this->templateData['match'] = $match;
 
-        $this->load->view("themes/{$this->theme}/header", $data);
+        $this->load->view("themes/{$this->theme}/header", $this->templateData);
 
         if (!is_null($match->h) || !is_null($match->status)) {
-            $this->load->view("themes/{$this->theme}/match/result", $data);
+            $this->load->view("themes/{$this->theme}/match/result", $this->templateData);
         } else if(!is_null($match->date)) {
-            $this->load->view("themes/{$this->theme}/match/preview", $data);
+            $this->load->view("themes/{$this->theme}/match/preview", $this->templateData);
         } else {
-            $this->load->view("themes/{$this->theme}/match/tbc", $data);
+            $this->load->view("themes/{$this->theme}/match/tbc", $this->templateData);
         }
 
-        $this->load->view("themes/{$this->theme}/footer", $data);
+        $this->load->view("themes/{$this->theme}/footer", $this->templateData);
     }
 }
 

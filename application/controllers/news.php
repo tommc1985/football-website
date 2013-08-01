@@ -64,14 +64,12 @@ class News extends Frontend_Controller {
 
         $this->pagination->initialize($config);
 
-        $data = array(
-            'articles'   => $articles,
-            'pagination' => $this->pagination->create_links(),
-        );
+        $this->templateData['articles']   = $articles;
+        $this->templateData['pagination'] = $$this->pagination->create_links();
 
-        $this->load->view("themes/{$this->theme}/header", $data);
-        $this->load->view("themes/{$this->theme}/news/welcome_message", $data);
-        $this->load->view("themes/{$this->theme}/footer", $data);
+        $this->load->view("themes/{$this->theme}/header", $this->templateData);
+        $this->load->view("themes/{$this->theme}/news/welcome_message", $this->templateData);
+        $this->load->view("themes/{$this->theme}/footer", $this->templateData);
     }
 
     /**
@@ -88,13 +86,11 @@ class News extends Frontend_Controller {
             show_error($this->lang->line('news_not_found'), 404);
         }
 
-        $data = array(
-            'article' => $article,
-        );
+        $this->templateData['article']   = $article;
 
-        $this->load->view("themes/{$this->theme}/header", $data);
-        $this->load->view("themes/{$this->theme}/news/view", $data);
-        $this->load->view("themes/{$this->theme}/footer", $data);
+        $this->load->view("themes/{$this->theme}/header", $this->templateData);
+        $this->load->view("themes/{$this->theme}/news/view", $this->templateData);
+        $this->load->view("themes/{$this->theme}/footer", $this->templateData);
     }
 }
 
