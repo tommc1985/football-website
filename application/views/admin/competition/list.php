@@ -1,6 +1,6 @@
 <?php
 echo $pagination; ?>
-    <table>
+    <table class="no-more-tables">
         <thead>
             <tr>
                 <td><?php echo $this->lang->line('competition_short_name'); ?></td>
@@ -13,12 +13,12 @@ echo $pagination; ?>
     if (count($competitions) > 0) {
         foreach ($competitions as $competition) { ?>
             <tr>
-                <td><?php echo Competition_helper::shortName($competition); ?></td>
-                <td><?php echo Competition_helper::type($competition); ?></td>
-                <td>
+                <td data-title="<?php echo $this->lang->line('competition_short_name'); ?>"><?php echo Competition_helper::shortName($competition); ?></td>
+                <td data-title="<?php echo $this->lang->line('competition_type'); ?>"><?php echo Competition_helper::type($competition); ?></td>
+                <td class="actions">
                     <div class="btn-group">
-                        <a class="btn btn-primary btn-small" href="<?php echo site_url("admin/competition/edit/id/{$competition->id}"); ?>"><?php echo $this->lang->line('competition_edit'); ?></a>
-                        <a class="btn btn-danger btn-small" href="<?php echo site_url("admin/competition/delete/id/{$competition->id}"); ?>"><?php echo $this->lang->line('competition_delete'); ?></a>
+                        <a class="btn btn-primary btn-mini" href="<?php echo site_url("admin/competition/edit/id/{$competition->id}"); ?>"><?php echo $this->lang->line('competition_edit'); ?></a>
+                        <a class="btn btn-danger btn-mini" href="<?php echo site_url("admin/competition/delete/id/{$competition->id}"); ?>"><?php echo $this->lang->line('competition_delete'); ?></a>
                     </div>
                 </td>
             </tr>

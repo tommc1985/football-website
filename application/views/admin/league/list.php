@@ -1,6 +1,6 @@
 <?php
 echo $pagination; ?>
-    <table>
+    <table class="no-more-tables">
         <thead>
             <tr>
                 <td><?php echo $this->lang->line('league_name'); ?></td>
@@ -13,12 +13,12 @@ echo $pagination; ?>
     if (count($leagues) > 0) {
         foreach ($leagues as $league) { ?>
             <tr>
-                <td><?php echo League_helper::shortName($league); ?></td>
-                <td><?php echo Utility_helper::formattedSeason($league->season); ?></td>
-                <td>
+                <td data-title="<?php echo $this->lang->line('league_name'); ?>"><?php echo League_helper::shortName($league); ?></td>
+                <td data-title="<?php echo $this->lang->line('league_season'); ?>"><?php echo Utility_helper::formattedSeason($league->season); ?></td>
+                <td class="actions">
                     <div class="btn-group">
-                        <a class="btn btn-primary btn-small" href="<?php echo site_url("admin/league/edit/id/{$league->id}"); ?>"><?php echo $this->lang->line('league_edit'); ?></a>
-                        <a class="btn btn-danger btn-small" href="<?php echo site_url("admin/league/delete/id/{$league->id}"); ?>"><?php echo $this->lang->line('league_delete'); ?></a>
+                        <a class="btn btn-primary btn-mini" href="<?php echo site_url("admin/league/edit/id/{$league->id}"); ?>"><?php echo $this->lang->line('league_edit'); ?></a>
+                        <a class="btn btn-danger btn-mini" href="<?php echo site_url("admin/league/delete/id/{$league->id}"); ?>"><?php echo $this->lang->line('league_delete'); ?></a>
                     </div>
                 </td>
             </tr>

@@ -1,6 +1,6 @@
 <?php
 echo $pagination; ?>
-    <table>
+    <table class="no-more-tables">
         <thead>
             <tr>
                 <td><?php echo $this->lang->line('player_to_award_player'); ?></td>
@@ -15,14 +15,14 @@ echo $pagination; ?>
     if (count($playerAwards) > 0) {
         foreach ($playerAwards as $playerAward) { ?>
             <tr>
-                <td><?php echo Player_helper::fullNameReverse($playerAward->player_id, false); ?></td>
-                <td><?php echo Award_helper::shortName($playerAward->award_id); ?></td>
-                <td><?php echo Utility_helper::formattedSeason($playerAward->season); ?></td>
-                <td><?php echo Utility_helper::ordinalWithSuffix($playerAward->placing); ?></td>
-                <td>
+                <td data-title="<?php echo $this->lang->line('player_to_award_player'); ?>"><?php echo Player_helper::fullNameReverse($playerAward->player_id, false); ?></td>
+                <td data-title="<?php echo $this->lang->line('player_to_award_award'); ?>"><?php echo Award_helper::shortName($playerAward->award_id); ?></td>
+                <td data-title="<?php echo $this->lang->line('player_to_award_season'); ?>"><?php echo Utility_helper::formattedSeason($playerAward->season); ?></td>
+                <td data-title="<?php echo $this->lang->line('player_to_award_placing'); ?>"><?php echo Utility_helper::ordinalWithSuffix($playerAward->placing); ?></td>
+                <td class="actions">
                     <div class="btn-group">
-                        <a class="btn btn-primary btn-small" href="<?php echo site_url("admin/player-award/edit/id/{$playerAward->id}"); ?>"><?php echo $this->lang->line('player_to_award_edit'); ?></a>
-                        <a class="btn btn-danger btn-small" href="<?php echo site_url("admin/player-award/delete/id/{$playerAward->id}"); ?>"><?php echo $this->lang->line('player_to_award_delete'); ?></a>
+                        <a class="btn btn-primary btn-mini" href="<?php echo site_url("admin/player-award/edit/id/{$playerAward->id}"); ?>"><?php echo $this->lang->line('player_to_award_edit'); ?></a>
+                        <a class="btn btn-danger btn-mini" href="<?php echo site_url("admin/player-award/delete/id/{$playerAward->id}"); ?>"><?php echo $this->lang->line('player_to_award_delete'); ?></a>
                     </div>
                 </td>
             </tr>

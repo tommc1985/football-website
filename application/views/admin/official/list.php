@@ -1,6 +1,6 @@
 <?php
 echo $pagination; ?>
-    <table>
+    <table class="no-more-tables">
         <thead>
             <tr>
                 <td><?php echo $this->lang->line('official_name'); ?></td>
@@ -12,11 +12,11 @@ echo $pagination; ?>
     if (count($officials) > 0) {
         foreach ($officials as $official) { ?>
             <tr>
-                <td><?php echo Official_helper::fullNameReverse($official); ?></td>
-                <td>
+                <td data-title="<?php echo $this->lang->line('official_name'); ?>"><?php echo Official_helper::fullNameReverse($official); ?></td>
+                <td class="actions">
                     <div class="btn-group">
-                        <a class="btn btn-primary btn-small" href="<?php echo site_url("admin/official/edit/id/{$official->id}"); ?>"><?php echo $this->lang->line('official_edit'); ?></a>
-                        <a class="btn btn-danger btn-small" href="<?php echo site_url("admin/official/delete/id/{$official->id}"); ?>"><?php echo $this->lang->line('official_delete'); ?></a>
+                        <a class="btn btn-primary btn-mini" href="<?php echo site_url("admin/official/edit/id/{$official->id}"); ?>"><?php echo $this->lang->line('official_edit'); ?></a>
+                        <a class="btn btn-danger btn-mini" href="<?php echo site_url("admin/official/delete/id/{$official->id}"); ?>"><?php echo $this->lang->line('official_delete'); ?></a>
                     </div>
                 </td>
             </tr>

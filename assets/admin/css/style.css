@@ -3,3 +3,14 @@
         padding-top: 70px;
     }
 }
+
+@media only screen and (max-width: 767px) {
+    table.no-more-tables td.actions {
+        padding-left: 0;
+        text-align: right;
+    }
+}
+
+tr:nth-child(2n) td {
+    background-color: #fafafa;
+}
