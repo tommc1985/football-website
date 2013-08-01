@@ -14,7 +14,7 @@ class News extends Frontend_Controller {
         $this->load->database();
         $this->load->model('frontend/Content_model');
         $this->lang->load('news');
-        $this->load->helper(array('url', 'utility'));
+        $this->load->helper(array('pagination', 'url', 'utility'));
     }
 
     /**
@@ -38,7 +38,7 @@ class News extends Frontend_Controller {
             ), $perPage, $offset
         );
 
-        $config['base_url'] = '/news/index/offset/';
+        $config['base_url'] = site_url('/news/index/offset/');
         $config['total_rows'] = count($this->Content_model->fetchAll(
             array(
                 'type' => 'news'
@@ -47,20 +47,7 @@ class News extends Frontend_Controller {
         $config['num_links'] = 1;
         $config['per_page'] = $perPage;
         $config['cur_page'] = $offset;
-        $config['full_tag_open'] = '<ul>';
-        $config['full_tag_close'] = '</ul>';
-        $config['first_tag_open'] = '<li>';
-        $config['first_tag_close'] = '</li>';
-        $config['last_tag_open'] = '<li>';
-        $config['last_tag_close'] = '</li>';
-        $config['next_tag_open'] = '<li>';
-        $config['next_tag_close'] = '</li>';
-        $config['prev_tag_open'] = '<li>';
-        $config['prev_tag_close'] = '</li>';
-        $config['cur_tag_open'] = '<li class="active"><a href="#">';
-        $config['cur_tag_close'] = '</a></li>';
-        $config['num_tag_open'] = '<li>';
-        $config['num_tag_close'] = '</li>';
+        $config + Pagination_helper::settings();
 
         $this->pagination->initialize($config);
 
