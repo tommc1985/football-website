@@ -82,83 +82,85 @@
 }
 
 
-/** Table widths (percentages) **/
-table.width-5-percent, td.width-5-percent, th.width-5-percent {
-    width: 5%;
-}
+@media only screen and (min-width: 767px) {
+    /** Table widths (percentages) **/
+    table.width-5-percent, td.width-5-percent, th.width-5-percent {
+        width: 5%;
+    }
 
-table.width-10-percent, td.width-10-percent, th.width-10-percent {
-    width: 10%;
-}
+    table.width-10-percent, td.width-10-percent, th.width-10-percent {
+        width: 10%;
+    }
 
-table.width-15-percent, td.width-15-percent, th.width-15-percent {
-    width: 15%;
-}
+    table.width-15-percent, td.width-15-percent, th.width-15-percent {
+        width: 15%;
+    }
 
-table.width-20-percent, td.width-20-percent, th.width-20-percent {
-    width: 20%;
-}
+    table.width-20-percent, td.width-20-percent, th.width-20-percent {
+        width: 20%;
+    }
 
-table.width-25-percent, td.width-25-percent, th.width-25-percent {
-    width: 25%;
-}
+    table.width-25-percent, td.width-25-percent, th.width-25-percent {
+        width: 25%;
+    }
 
-table.width-30-percent, td.width-30-percent, th.width-30-percent {
-    width: 30%;
-}
+    table.width-30-percent, td.width-30-percent, th.width-30-percent {
+        width: 30%;
+    }
 
-table.width-35-percent, td.width-35-percent, th.width-35-percent {
-    width: 35%;
-}
+    table.width-35-percent, td.width-35-percent, th.width-35-percent {
+        width: 35%;
+    }
 
-table.width-40-percent, td.width-40-percent, th.width-40-percent {
-    width: 40%;
-}
+    table.width-40-percent, td.width-40-percent, th.width-40-percent {
+        width: 40%;
+    }
 
-table.width-45-percent, td.width-45-percent, th.width-45-percent {
-    width: 45%;
-}
+    table.width-45-percent, td.width-45-percent, th.width-45-percent {
+        width: 45%;
+    }
 
-table.width-50-percent, td.width-50-percent, th.width-50-percent {
-    width: 50%;
-}
+    table.width-50-percent, td.width-50-percent, th.width-50-percent {
+        width: 50%;
+    }
 
-table.width-55-percent, td.width-55-percent, th.width-55-percent {
-    width: 55%;
-}
+    table.width-55-percent, td.width-55-percent, th.width-55-percent {
+        width: 55%;
+    }
 
-table.width-60-percent, td.width-60-percent, th.width-60-percent {
-    width: 60%;
-}
+    table.width-60-percent, td.width-60-percent, th.width-60-percent {
+        width: 60%;
+    }
 
-table.width-65-percent, td.width-65-percent, th.width-65-percent {
-    width: 65%;
-}
+    table.width-65-percent, td.width-65-percent, th.width-65-percent {
+        width: 65%;
+    }
 
-table.width-70-percent, td.width-70-percent, th.width-70-percent {
-    width: 70%;
-}
+    table.width-70-percent, td.width-70-percent, th.width-70-percent {
+        width: 70%;
+    }
 
-table.width-75-percent, td.width-75-percent, th.width-75-percent {
-    width: 75%;
-}
+    table.width-75-percent, td.width-75-percent, th.width-75-percent {
+        width: 75%;
+    }
 
-table.width-80-percent, td.width-80-percent, th.width-80-percent {
-    width: 80%;
-}
+    table.width-80-percent, td.width-80-percent, th.width-80-percent {
+        width: 80%;
+    }
 
-table.width-85-percent, td.width-85-percent, th.width-85-percent {
-    width: 85%;
-}
+    table.width-85-percent, td.width-85-percent, th.width-85-percent {
+        width: 85%;
+    }
 
-table.width-90-percent, td.width-90-percent, th.width-90-percent {
-    width: 90%;
-}
+    table.width-90-percent, td.width-90-percent, th.width-90-percent {
+        width: 90%;
+    }
 
-table.width-95-percent, td.width-95-percent, th.width-95-percent {
-    width: 95%;
-}
+    table.width-95-percent, td.width-95-percent, th.width-95-percent {
+        width: 95%;
+    }
 
-table.width-100-percent, td.width-100-percent, th.width-100-percent {
-    width: 100%;
+    table.width-100-percent, td.width-100-percent, th.width-100-percent {
+        width: 100%;
+    }
 }
