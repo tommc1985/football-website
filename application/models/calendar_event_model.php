@@ -30,19 +30,23 @@ class Calendar_Event_model extends Base_Model {
             'location'    => $this->ci->form_validation->set_value('location', NULL),
         );
 
-        $allDay = $this->ci->form_validation->set_value('all_day', NULL);
-        $data['all_day'] = $allDay;
+        $allDay = $this->ci->form_validation->set_value('all_day', '0');
+
+
 
         $startDate = $this->ci->form_validation->set_value('start_date', NULL);
         $startTime = '00:00';
 
         $endDateTime = NULL;
         if (!$allDay) {
+            $allDay = 0;
             $startTime = $this->ci->form_validation->set_value('start_time', NULL);
             $endDate   = $this->ci->form_validation->set_value('end_date', NULL);
             $endTime   = $this->ci->form_validation->set_value('end_time', NULL);
             $endDateTime = "{$endDate} {$endTime}:00";
         }
+
+        $data['all_day'] = $allDay;
 
         $startDateTime = "{$startDate} {$startTime}:00";
 

@@ -85,6 +85,6 @@ class Calendar_Event_helper
             return '&nbsp;';
         }
 
-        return Utility_helper::formattedDate($calendarEvent->start_datetime, "D jS F Y, g.ia");
+        return Utility_helper::formattedDate($calendarEvent->end_datetime, "D jS F Y, g.ia");
     }
 }
