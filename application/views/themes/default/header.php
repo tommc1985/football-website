@@ -112,4 +112,4 @@ if (isset($doubleNav) && $doubleNav) {
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container <?php echo isset($doubleNav) && $doubleNav ? 'double-nav' : 'single-nav'; ?>">

@@ -7,8 +7,18 @@ thead td {
     font-weight: bold;
 }
 
+@media only screen  and (min-width: 980px) {
+    .container.single-nav {
+        margin-top: 50px;
+    }
+
+    .container.double-nav {
+        margin-top: 100px;
+    }
+}
+
 @media (max-width: 979px) {
-    .frontend-menu.double-nav {
+    .admin-menu.double-nav {
         margin-bottom: 0;
     }
 }
