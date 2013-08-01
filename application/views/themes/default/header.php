@@ -16,6 +16,10 @@
 </head>
 <body>
 
+<?php
+if (isset($doubleNav) && $doubleNav) {
+    $this->load->view('admin/nav_bar');
+} ?>
 <div class="navbar navbar-fixed-top frontend-menu <?php echo isset($doubleNav) && $doubleNav ? 'double-nav' : ''; ?>">
     <div class="navbar-inner">
         <div class="container">
@@ -108,9 +112,4 @@
         </div>
     </div>
 </div>
-
-<?php
-if (isset($doubleNav) && $doubleNav) {
-    $this->load->view('admin/nav_bar');
-} ?>
 <div class="container">
