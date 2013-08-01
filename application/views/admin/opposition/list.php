@@ -5,7 +5,6 @@ echo $pagination; ?>
             <tr>
                 <td><?php echo $this->lang->line('opposition_name'); ?></td>
                 <td></td>
-                <td></td>
             </tr>
         </thead>
         <tbody>
@@ -14,14 +13,18 @@ echo $pagination; ?>
         foreach ($oppositions as $opposition) { ?>
             <tr>
                 <td><?php echo Opposition_helper::name($opposition); ?></td>
-                <td><a href="/admin/opposition/edit/id/<?php echo $opposition->id;?>"><?php echo $this->lang->line('opposition_edit'); ?></a></td>
-                <td><a href="/admin/opposition/delete/id/<?php echo $opposition->id;?>"><?php echo $this->lang->line('opposition_delete'); ?></a></td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-primary btn-small" href="<?php echo site_url("admin/opposition/edit/id/{$opposition->id}"); ?>"><?php echo $this->lang->line('opposition_edit'); ?></a>
+                        <a class="btn btn-danger btn-small" href="<?php echo site_url("admin/opposition/delete/id/{$opposition->id}"); ?>"><?php echo $this->lang->line('opposition_delete'); ?></a>
+                    </div>
+                </td>
             </tr>
     <?php
         }
     } else { ?>
             <tr>
-                <td colspan="3"><?php echo $this->lang->line('opposition_no_oppositions'); ?></td>
+                <td colspan="2"><?php echo $this->lang->line('opposition_no_oppositions'); ?></td>
             </tr>
     <?php
     } ?>

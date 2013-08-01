@@ -6,7 +6,6 @@ echo $pagination; ?>
                 <td><?php echo $this->lang->line('league_registration_league'); ?></td>
                 <td><?php echo $this->lang->line('league_registration_team'); ?></td>
                 <td></td>
-                <td></td>
             </tr>
         </thead>
         <tbody>
@@ -16,14 +15,18 @@ echo $pagination; ?>
             <tr>
                 <td><?php echo League_helper::shortName($leagueRegistration->league_id); ?></td>
                 <td><?php echo Opposition_helper::name($leagueRegistration->opposition_id); ?></td>
-                <td><a href="/admin/league-registration/edit/id/<?php echo $leagueRegistration->id;?>"><?php echo $this->lang->line('league_registration_edit'); ?></a></td>
-                <td><a href="/admin/league-registration/delete/id/<?php echo $leagueRegistration->id;?>"><?php echo $this->lang->line('league_registration_delete'); ?></a></td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-primary btn-small" href="<?php echo site_url("admin/league-registration/edit/id/{$leagueRegistration->id}"); ?>"><?php echo $this->lang->line('league_registration_edit'); ?></a>
+                        <a class="btn btn-danger btn-small" href="<?php echo site_url("admin/league-registration/delete/id/{$leagueRegistration->id}"); ?>"><?php echo $this->lang->line('league_registration_delete'); ?></a>
+                    </div>
+                </td>
             </tr>
     <?php
         }
     } else { ?>
             <tr>
-                <td colspan="4"><?php echo $this->lang->line('league_registration_no_league_registrations'); ?></td>
+                <td colspan="3"><?php echo $this->lang->line('league_registration_no_league_registrations'); ?></td>
             </tr>
     <?php
     } ?>

@@ -6,7 +6,6 @@ echo $pagination; ?>
                 <td><?php echo $this->lang->line('player_name'); ?></td>
                 <td><?php echo $this->lang->line('player_dob'); ?></td>
                 <td></td>
-                <td></td>
             </tr>
         </thead>
         <tbody>
@@ -14,16 +13,20 @@ echo $pagination; ?>
     if (count($players) > 0) {
         foreach ($players as $player) { ?>
             <tr>
-                <td><?php echo Player_helper::fullNameReverse($player); ?></td>
+                <td><?php echo Player_helper::fullNameReverse($player, false); ?></td>
                 <td><?php echo Utility_helper::shortDate($player->dob); ?></td>
-                <td><a href="/admin/player/edit/id/<?php echo $player->id;?>"><?php echo $this->lang->line('player_edit'); ?></a></td>
-                <td><a href="/admin/player/delete/id/<?php echo $player->id;?>"><?php echo $this->lang->line('player_delete'); ?></a></td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-primary btn-small" href="<?php echo site_url("admin/player/edit/id/{$player->id}"); ?>"><?php echo $this->lang->line('player_edit'); ?></a>
+                        <a class="btn btn-danger btn-small" href="<?php echo site_url("admin/player/delete/id/{$player->id}"); ?>"><?php echo $this->lang->line('player_delete'); ?></a>
+                    </div>
+                </td>
             </tr>
     <?php
         }
     } else { ?>
             <tr>
-                <td colspan="4"><?php echo $this->lang->line('player_no_players'); ?></td>
+                <td colspan="3"><?php echo $this->lang->line('player_no_players'); ?></td>
             </tr>
     <?php
     } ?>

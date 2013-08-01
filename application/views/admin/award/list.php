@@ -6,7 +6,6 @@ echo $pagination; ?>
                 <td><?php echo $this->lang->line('award_long_name'); ?></td>
                 <td><?php echo $this->lang->line('award_short_name'); ?></td>
                 <td></td>
-                <td></td>
             </tr>
         </thead>
         <tbody>
@@ -16,8 +15,12 @@ echo $pagination; ?>
             <tr>
                 <td><?php echo Award_helper::longName($award->id); ?></td>
                 <td><?php echo Award_helper::shortName($award->id); ?></td>
-                <td><a href="/admin/award/edit/id/<?php echo $award->id;?>"><?php echo $this->lang->line('award_edit'); ?></a></td>
-                <td><a href="/admin/award/delete/id/<?php echo $award->id;?>"><?php echo $this->lang->line('award_delete'); ?></a></td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-primary btn-small" href="<?php echo site_url("admin/award/edit/id/{$award->id}"); ?>"><?php echo $this->lang->line('award_edit'); ?></a>
+                        <a class="btn btn-danger btn-small" href="<?php echo site_url("admin/award/delete/id/{$award->id}"); ?>"><?php echo $this->lang->line('award_delete'); ?></a>
+                    </div>
+                </td>
             </tr>
     <?php
         }

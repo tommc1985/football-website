@@ -6,7 +6,6 @@ echo $pagination; ?>
                 <td><?php echo $this->lang->line('league_name'); ?></td>
                 <td><?php echo $this->lang->line('league_season'); ?></td>
                 <td></td>
-                <td></td>
             </tr>
         </thead>
         <tbody>
@@ -16,14 +15,18 @@ echo $pagination; ?>
             <tr>
                 <td><?php echo League_helper::shortName($league); ?></td>
                 <td><?php echo Utility_helper::formattedSeason($league->season); ?></td>
-                <td><a href="/admin/league/edit/id/<?php echo $league->id;?>"><?php echo $this->lang->line('league_edit'); ?></a></td>
-                <td><a href="/admin/league/delete/id/<?php echo $league->id;?>"><?php echo $this->lang->line('league_delete'); ?></a></td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-primary btn-small" href="<?php echo site_url("admin/league/edit/id/{$league->id}"); ?>"><?php echo $this->lang->line('league_edit'); ?></a>
+                        <a class="btn btn-danger btn-small" href="<?php echo site_url("admin/league/delete/id/{$league->id}"); ?>"><?php echo $this->lang->line('league_delete'); ?></a>
+                    </div>
+                </td>
             </tr>
     <?php
         }
     } else { ?>
             <tr>
-                <td colspan="4"><?php echo $this->lang->line('league_no_leagues'); ?></td>
+                <td colspan="3"><?php echo $this->lang->line('league_no_leagues'); ?></td>
             </tr>
     <?php
     } ?>

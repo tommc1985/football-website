@@ -49,6 +49,7 @@ $lang['match_no_matches']              = 'No Matches exist';
 
 
 // Frontend Text
+$lang['match_appearances']                       = 'Appearances';
 $lang['match_a']                                 = 'A';
 $lang['match_a_a']                               = 'A - A';
 $lang['match_a_e_t']                             = 'AET';
