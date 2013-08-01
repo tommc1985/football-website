@@ -65,7 +65,7 @@ class News extends Frontend_Controller {
         $this->pagination->initialize($config);
 
         $this->templateData['articles']   = $articles;
-        $this->templateData['pagination'] = $$this->pagination->create_links();
+        $this->templateData['pagination'] = $this->pagination->create_links();
 
         $this->load->view("themes/{$this->theme}/header", $this->templateData);
         $this->load->view("themes/{$this->theme}/news/welcome_message", $this->templateData);
