@@ -50,7 +50,7 @@ class League extends Backend_Controller
         }
         $data['leagues'] = $this->League_model->fetchAll($perPage, $offset, $parameters['order-by'], $order);
 
-        $config['base_url'] = site_url('admin/league/index') , '/';
+        $config['base_url'] = site_url('admin/league/index') . '/';
 
         if ($parameters['order-by']) {
             $config['base_url'] .= "order-by/{$parameters['order-by']}/";
