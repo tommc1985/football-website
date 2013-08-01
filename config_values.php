@@ -44,7 +44,7 @@ $configValues['include_nationalities']             = false;
 $configValues['include_match_attendances']         = true;
 
 
-$configValues['articles_per_page']                 = 5;
+$configValues['articles_per_page']                 = 6;
 
 $configValues['default_threshold']                 = 60;
 
