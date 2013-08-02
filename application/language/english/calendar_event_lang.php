@@ -7,6 +7,8 @@ $lang['calendar_event_calendar_event_not_found'] = 'The specified Calendar Event
 $lang['calendar_event_add']                      = 'Add Calendar Event';
 $lang['calendar_event_save']                     = 'Save Calendar Event Info';
 
+$lang['calendar_event_calendar_event_details']   = 'Calendar Event Details';
+
 $lang['calendar_event_name']                     = 'Name';
 $lang['calendar_event_description']              = 'Description';
 $lang['calendar_event_start']                    = 'Start';
