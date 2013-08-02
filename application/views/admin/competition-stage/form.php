@@ -18,7 +18,7 @@ $name = array(
 $abbreviation = array(
     'name'        => 'abbreviation',
     'id'          => 'abbreviation',
-    'value'       => set_value('abbreviation', isset($competitionStage->name) ? $competitionStage->abbreviation : ''),
+    'value'       => set_value('abbreviation', isset($competitionStage->abbreviation) ? $competitionStage->abbreviation : ''),
     'placeholder' => $this->lang->line('competition_stage_abbreviation'),
     'class'       => 'input-small',
 );
