@@ -8,6 +8,8 @@ $lang['award_cannot_delete']           = "Cannot delete Award '%s', there are Pl
 $lang['award_add']                     = 'Add Award';
 $lang['award_save']                    = 'Save Award Info';
 
+$lang['award_award_details']           = 'Award Details';
+
 $lang['award_long_name']               = 'Long Name';
 $lang['award_short_name']              = 'Short Name';
 $lang['award_importance']              = 'Importance';
