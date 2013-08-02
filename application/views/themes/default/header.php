@@ -16,21 +16,17 @@
 </head>
 <body>
 
-<?php
-if (isset($doubleNav) && $doubleNav) {
-    $this->load->view('admin/nav_bar');
-} ?>
-<div class="navbar navbar-fixed-top frontend-menu <?php echo isset($doubleNav) && $doubleNav ? 'double-nav' : ''; ?>">
+<div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
             <a class="brand" href="<?php echo site_url(); ?>"><?php echo Configuration::get('team_name'); ?></a>
             <div class="container">
-                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse.frontend-menu">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <div class="nav-collapse collapse frontend-menu">
+                <div class="nav-collapse collapse">
                     <ul class="nav">
                         <li>
                             <a href="<?php echo site_url(); ?>">Home</a>
@@ -107,9 +103,22 @@ if (isset($doubleNav) && $doubleNav) {
                             </ul>
                         </li>
                     </ul>
+                    <?php
+                    if ($isLoggedIn) { ?>
+                    <ul class="nav pull-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="#">Admin<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="<?php echo site_url("admin"); ?>">Admin Section</a></li>
+                                <li><a href="<?php echo site_url('admin/auth/logout'); ?>">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <?php
+                    } ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="container <?php echo isset($doubleNav) && $doubleNav ? 'double-nav' : 'single-nav'; ?>">
+<div class="container main-container">

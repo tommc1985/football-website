@@ -7,19 +7,9 @@ thead td {
     font-weight: bold;
 }
 
-@media only screen  and (min-width: 980px) {
-    .container.single-nav {
-        margin-top: 50px;
-    }
-
-    .container.double-nav {
-        margin-top: 100px;
-    }
-}
-
-@media (max-width: 979px) {
-    .admin-menu.double-nav {
-        margin-bottom: 0;
+@media only screen and (min-width: 980px) {
+    .main-container {
+        margin-top: 60px;
     }
 }
 
@@ -37,4 +27,8 @@ thead td {
 
 .text-align-right {
     text-align: right;
+}
+
+tr:nth-child(2n) td {
+    background-color: rgba(240, 240, 240, 0.4);
 }

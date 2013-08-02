@@ -46,9 +46,6 @@
                                 <li><a href="<?php echo site_url("admin/calendar-event"); ?>">Calendar Events</a></li>
                             </ul>
                         </li>
-                        <li>
-                            <a href="<?php echo site_url('admin/auth/logout'); ?>">Logout</a>
-                        </li>
                     </ul>
                 </div>
             </div>

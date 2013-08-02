@@ -14,7 +14,7 @@
 
 <?php
 $this->load->view('admin/nav_bar'); ?>
-<div class="container single-nav">
+<div class="container main-container">
 
     <?php
     if (isset($message)) {

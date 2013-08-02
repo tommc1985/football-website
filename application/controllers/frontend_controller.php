@@ -14,7 +14,7 @@ class Frontend_Controller extends CI_Controller
         $this->load->database();
         $this->load->library('tank_auth');
 
-        $this->templateData['doubleNav'] = $this->tank_auth->is_logged_in();
+        $this->templateData['isLoggedIn'] = $this->tank_auth->is_logged_in();
 
         $this->theme = 'default';
 
