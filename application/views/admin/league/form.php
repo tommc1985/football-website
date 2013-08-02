@@ -2,90 +2,152 @@
 $id = array(
     'name'  => 'id',
     'id'    => 'id',
-    'value' => set_value('id'),
+    'value' => set_value('id', isset($league->id) ? $league->id : ''),
 );
 
-$competition_id = array(
-    'name'    => 'competition_id',
-    'id'      => 'competition_id',
-    'options' => array('' => '--- Select ---') + $this->Competition_model->fetchForDropdown(),
-    'value'   => set_value('competition_id'),
+$competitionId = array(
+    'name'       => 'competition_id',
+    'id'         => 'competition_id',
+    'options'    => array('' => '--- Select ---') + $this->Competition_model->fetchForDropdown(),
+    'value'      => set_value('competition_id', isset($league->competition_id) ? $league->competition_id : ''),
+    'attributes' => 'class="input-xlarge"',
 );
 
 $season = array(
-    'name'    => 'season',
-    'id'      => 'season',
-    'options' => array('' => '--- Select ---') + $this->Season_model->fetchForDropdown(),
-    'value'   => set_value('season'),
+    'name'       => 'season',
+    'id'         => 'season',
+    'options'    => array('' => '--- Select ---') + $this->Season_model->fetchForDropdown(),
+    'value'      => set_value('season', isset($league->season) ? $league->season : ''),
+    'attributes' => 'class="input-large"',
 );
 
 $name = array(
-    'name'    => 'name',
-    'id'      => 'name',
-    'value'   => set_value('name'),
+    'name'        => 'name',
+    'id'          => 'name',
+    'value'       => set_value('name', isset($league->name) ? $league->name : ''),
+    'placeholder' => $this->lang->line('league_name'),
+    'class'       => 'input-xlarge',
 );
 
-$short_name = array(
-    'name'    => 'short_name',
-    'id'      => 'short_name',
-    'value'   => set_value('short_name'),
+$shortName = array(
+    'name'        => 'short_name',
+    'id'          => 'short-name',
+    'value'       => set_value('short_name', isset($league->short_name) ? $league->short_name : ''),
+    'placeholder' => $this->lang->line('league_short_name'),
+    'class'       => 'input-large',
 );
 
 $abbreviation = array(
-    'name'    => 'abbreviation',
-    'id'      => 'abbreviation',
-    'value'   => set_value('abbreviation'),
+    'name'        => 'abbreviation',
+    'id'          => 'abbreviation',
+    'value'       => set_value('abbreviation', isset($league->abbreviation) ? $league->abbreviation : ''),
+    'placeholder' => $this->lang->line('league_abbreviation'),
+    'class'       => 'input-small',
 );
 
-$points_for_win = array(
-    'name'    => 'points_for_win',
-    'id'      => 'points_for_win',
-    'value'   => set_value('points_for_win'),
+$pointsForWin = array(
+    'name'        => 'points_for_win',
+    'id'          => 'points-for-win',
+    'value'       => set_value('points_for_win', isset($league->points_for_win) ? $league->points_for_win : ''),
+    'placeholder' => $this->lang->line('league_points_for_win'),
+    'class'       => 'input-mini',
 );
 
-$points_for_draw = array(
-    'name'    => 'points_for_draw',
-    'id'      => 'points_for_draw',
-    'value'   => set_value('points_for_draw'),
+$pointsForDraw = array(
+    'name'        => 'points_for_draw',
+    'id'          => 'points-for-draw',
+    'value'       => set_value('points_for_draw', isset($league->points_for_draw) ? $league->points_for_draw : ''),
+    'placeholder' => $this->lang->line('league_points_for_draw'),
+    'class'       => 'input-mini',
+);
+
+$submit = array(
+    'name'  => 'submit',
+    'class' => 'btn',
+    'value' => $submitButtonText,
 );
 
 echo form_open($this->uri->uri_string()); ?>
-<table>
-    <?php echo form_hidden('id', set_value('id', isset($league->id) ? $league->id : '')); ?>
-    <tr>
-        <td><?php echo form_label($this->lang->line('league_competition'), $competition_id['name']); ?></td>
-        <td><?php echo form_dropdown($competition_id['name'], $competition_id['options'], set_value($competition_id['name'], isset($league->competition_id) ? $league->competition_id : '')); ?></td>
-        <td class="error"><?php echo form_error($competition_id['name']); ?><?php echo isset($errors[$competition_id['name']]) ? $errors[$competition_id['name']] : ''; ?></td>
-    </tr>
-    <tr>
-        <td><?php echo form_label($this->lang->line('league_season'), $season['name']); ?></td>
-        <td><?php echo form_dropdown($season['name'], $season['options'], set_value($season['name'], isset($league->season) ? $league->season : '')); ?></td>
-        <td class="error"><?php echo form_error($season['name']); ?><?php echo isset($errors[$season['name']]) ? $errors[$season['name']] : ''; ?></td>
-    </tr>
-    <tr>
-        <td><?php echo form_label($this->lang->line('league_name'), $name['name']); ?></td>
-        <td><?php echo form_input($name['name'], set_value($name['name'], isset($league->name) ? $league->name : '')); ?></td>
-        <td class="error"><?php echo form_error($name['name']); ?><?php echo isset($errors[$name['name']]) ? $errors[$name['name']] : ''; ?></td>
-    </tr>
-    <tr>
-        <td><?php echo form_label($this->lang->line('league_short_name'), $short_name['name']); ?></td>
-        <td><?php echo form_input($short_name['name'], set_value($short_name['name'], isset($league->short_name) ? $league->short_name : '')); ?></td>
-        <td class="error"><?php echo form_error($short_name['name']); ?><?php echo isset($errors[$short_name['name']]) ? $errors[$short_name['name']] : ''; ?></td>
-    </tr>
-    <tr>
-        <td><?php echo form_label($this->lang->line('league_abbreviation'), $abbreviation['name']); ?></td>
-        <td><?php echo form_input($abbreviation['name'], set_value($abbreviation['name'], isset($league->abbreviation) ? $league->abbreviation : '')); ?></td>
-        <td class="error"><?php echo form_error($abbreviation['name']); ?><?php echo isset($errors[$abbreviation['name']]) ? $errors[$abbreviation['name']] : ''; ?></td>
-    </tr>
-    <tr>
-        <td><?php echo form_label($this->lang->line('league_points_for_win'), $points_for_win['name']); ?></td>
-        <td><?php echo form_input($points_for_win['name'], set_value($points_for_win['name'], isset($league->points_for_win) ? $league->points_for_win : '')); ?></td>
-        <td class="error"><?php echo form_error($points_for_win['name']); ?><?php echo isset($errors[$points_for_win['name']]) ? $errors[$points_for_win['name']] : ''; ?></td>
-    </tr>
-        <td><?php echo form_label($this->lang->line('league_points_for_draw'), $points_for_draw['name']); ?></td>
-        <td><?php echo form_input($points_for_draw['name'], set_value($points_for_draw['name'], isset($league->points_for_draw) ? $league->points_for_draw : '')); ?></td>
-        <td class="error"><?php echo form_error($points_for_draw['name']); ?><?php echo isset($errors[$points_for_draw['name']]) ? $errors[$points_for_draw['name']] : ''; ?></td>
-    </tr>
-</table>
-<?php echo form_submit('submit', $submitButtonText); ?>
+    <?php echo form_hidden($id['name'], $id['value']); ?>
+    <fieldset>
+        <legend><?php echo $this->lang->line('league_league_details');?></legend>
+        <div class="control-group<?php echo form_error($competitionId['name']) ? ' error' : ''; ?>">
+            <?php echo form_label($this->lang->line('league_competition'), $competitionId['id']); ?>
+            <div class="controls">
+                <?php echo form_dropdown($competitionId['name'], $competitionId['options'], $competitionId['value'], $competitionId['attributes']); ?>
+                <?php
+                if (form_error($competitionId['name'])) { ?>
+                    <span class="help-inline"><?php echo form_error($competitionId['name']); ?></span>
+                <?php
+                } ?>
+            </div>
+        </div>
+        <div class="control-group<?php echo form_error($season['name']) ? ' error' : ''; ?>">
+            <?php echo form_label($this->lang->line('league_season'), $season['id']); ?>
+            <div class="controls">
+                <?php echo form_dropdown($season['name'], $season['options'], $season['value'], $season['attributes']); ?>
+                <?php
+                if (form_error($season['name'])) { ?>
+                    <span class="help-inline"><?php echo form_error($season['name']); ?></span>
+                <?php
+                } ?>
+            </div>
+        </div>
+        <div class="control-group<?php echo form_error($name['name']) ? ' error' : ''; ?>">
+            <?php echo form_label($this->lang->line('league_name'), $name['id']); ?>
+            <div class="controls">
+                <?php echo form_input($name); ?>
+                <?php
+                if (form_error($name['name'])) { ?>
+                    <span class="help-inline"><?php echo form_error($name['name']); ?></span>
+                <?php
+                } ?>
+            </div>
+        </div>
+        <div class="control-group<?php echo form_error($shortName['name']) ? ' error' : ''; ?>">
+            <?php echo form_label($this->lang->line('league_short_name'), $shortName['id']); ?>
+            <div class="controls">
+                <?php echo form_input($shortName); ?>
+                <?php
+                if (form_error($shortName['name'])) { ?>
+                    <span class="help-inline"><?php echo form_error($shortName['name']); ?></span>
+                <?php
+                } ?>
+            </div>
+        </div>
+        <div class="control-group<?php echo form_error($abbreviation['name']) ? ' error' : ''; ?>">
+            <?php echo form_label($this->lang->line('league_abbreviation'), $abbreviation['id']); ?>
+            <div class="controls">
+                <?php echo form_input($abbreviation); ?>
+                <?php
+                if (form_error($abbreviation['name'])) { ?>
+                    <span class="help-inline"><?php echo form_error($abbreviation['name']); ?></span>
+                <?php
+                } ?>
+            </div>
+        </div>
+        <div class="control-group<?php echo form_error($pointsForWin['name']) ? ' error' : ''; ?>">
+            <?php echo form_label($this->lang->line('league_points_for_win'), $pointsForWin['id']); ?>
+            <div class="controls">
+                <?php echo form_input($pointsForWin); ?>
+                <?php
+                if (form_error($pointsForWin['name'])) { ?>
+                    <span class="help-inline"><?php echo form_error($pointsForWin['name']); ?></span>
+                <?php
+                } ?>
+            </div>
+        </div>
+        <div class="control-group<?php echo form_error($pointsForDraw['name']) ? ' error' : ''; ?>">
+            <?php echo form_label($this->lang->line('league_points_for_draw'), $pointsForDraw['id']); ?>
+            <div class="controls">
+                <?php echo form_input($pointsForDraw); ?>
+                <?php
+                if (form_error($pointsForDraw['name'])) { ?>
+                    <span class="help-inline"><?php echo form_error($pointsForDraw['name']); ?></span>
+                <?php
+                } ?>
+            </div>
+        </div>
+        <?php echo form_submit($submit); ?>
+    </fieldset>
 <?php echo form_close(); ?>

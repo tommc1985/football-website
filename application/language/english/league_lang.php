@@ -8,6 +8,8 @@ $lang['league_cannot_delete']           = "Cannot delete the '%s' League there a
 $lang['league_add']                     = 'Add League';
 $lang['league_save']                    = 'Save League Info';
 
+$lang['league_league_details']          = 'League Details';
+
 $lang['league_competition']             = 'Competition';
 $lang['league_season']                  = 'Season';
 $lang['league_name']                    = 'Name';
