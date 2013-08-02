@@ -4,34 +4,57 @@ $this->load->model('Competition_Stage_model');
 $id = array(
     'name'  => 'id',
     'id'    => 'id',
-    'value' => set_value('id'),
+    'value' => set_value('id', isset($competitionStage->id) ? $competitionStage->id : ''),
 );
 
 $name = array(
-    'name'    => 'name',
-    'id'      => 'name',
-    'value'   => set_value('name'),
+    'name'        => 'name',
+    'id'          => 'name',
+    'value'       => set_value('name', isset($competitionStage->name) ? $competitionStage->name : ''),
+    'placeholder' => $this->lang->line('competition_stage_name'),
+    'class'       => 'input-xlarge',
 );
 
 $abbreviation = array(
-    'name'    => 'abbreviation',
-    'id'      => 'abbreviation',
-    'value'   => set_value('abbreviation'),
+    'name'        => 'abbreviation',
+    'id'          => 'abbreviation',
+    'value'       => set_value('abbreviation', isset($competitionStage->name) ? $competitionStage->abbreviation : ''),
+    'placeholder' => $this->lang->line('competition_stage_abbreviation'),
+    'class'       => 'input-small',
+);
+
+$submit = array(
+    'name'  => 'submit',
+    'class' => 'btn',
+    'value' => $submitButtonText,
 );
 
 echo form_open($this->uri->uri_string()); ?>
-<table>
-    <?php echo form_hidden('id', set_value('id', isset($competitionStage->id) ? $competitionStage->id : '')); ?>
-    <tr>
-        <td><?php echo form_label($this->lang->line('competition_stage_name'), $name['name']); ?></td>
-        <td><?php echo form_input($name['name'], set_value($name['name'], isset($competitionStage->name) ? $competitionStage->name : '')); ?></td>
-        <td class="error"><?php echo form_error($name['name']); ?><?php echo isset($errors[$name['name']]) ? $errors[$name['name']] : ''; ?></td>
-    </tr>
-    <tr>
-        <td><?php echo form_label($this->lang->line('competition_stage_abbreviation'), $abbreviation['name']); ?></td>
-        <td><?php echo form_input($abbreviation['name'], set_value($abbreviation['name'], isset($competitionStage->abbreviation) ? $competitionStage->abbreviation : '')); ?></td>
-        <td class="error"><?php echo form_error($abbreviation['name']); ?><?php echo isset($errors[$abbreviation['name']]) ? $errors[$abbreviation['name']] : ''; ?></td>
-    </tr>
-</table>
-<?php echo form_submit('submit', $submitButtonText); ?>
+    <?php echo form_hidden($id['name'], $id['value']); ?>
+    <fieldset>
+        <legend><?php echo $this->lang->line('competition_stage_competition_stage_details');?></legend>
+        <div class="control-group<?php echo form_error($name['name']) ? ' error' : ''; ?>">
+            <?php echo form_label($this->lang->line('competition_stage_name'), $name['id']); ?>
+            <div class="controls">
+                <?php echo form_input($name); ?>
+                <?php
+                if (form_error($name['name'])) { ?>
+                    <span class="help-inline"><?php echo form_error($name['name']); ?></span>
+                <?php
+                } ?>
+            </div>
+        </div>
+        <div class="control-group<?php echo form_error($abbreviation['name']) ? ' error' : ''; ?>">
+            <?php echo form_label($this->lang->line('competition_stage_abbreviation'), $abbreviation['id']); ?>
+            <div class="controls">
+                <?php echo form_input($abbreviation); ?>
+                <?php
+                if (form_error($abbreviation['name'])) { ?>
+                    <span class="help-inline"><?php echo form_error($abbreviation['name']); ?></span>
+                <?php
+                } ?>
+            </div>
+        </div>
+        <?php echo form_submit($submit); ?>
+    </fieldset>
 <?php echo form_close(); ?>
