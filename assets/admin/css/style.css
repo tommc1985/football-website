@@ -4,7 +4,7 @@
     }
 }
 
-@media only screen and (min-width: 980px) {
+@media only screen and (max-width: 1200px) and (min-width: 980px) {
     .main-container {
         margin-top: 60px;
     }
@@ -27,16 +27,6 @@ table
     {
         border: 1px solid #ccc;
     }
-}
-
-thead {
-    font-weight: bold;
-    background-color: #f5f5f5;
-    text-align: center;
-}
-
-tr:nth-child(2n) td {
-    background-color: #fafafa;
 }
 
 .text-align-left {
