@@ -21,7 +21,7 @@ if (count($officials) > 0) { ?>
                 <td data-title="<?php echo $this->lang->line('official_surname'); ?>" class="width-40-percent"><?php echo $official->surname; ?></td>
                 <td class="actions width-15-percent text-align-center">
                     <div class="btn-group">
-                        <a class="btn btn-primary btn-mini" href="<?php echo site_url("admin/official/edit/id/{$official->id}"); ?>"><?php echo $this->lang->line('official_edit'); ?></a>
+                        <a class="btn btn-mini" href="<?php echo site_url("admin/official/edit/id/{$official->id}"); ?>"><?php echo $this->lang->line('official_edit'); ?></a>
                         <a class="btn btn-danger btn-mini" href="<?php echo site_url("admin/official/delete/id/{$official->id}"); ?>"><?php echo $this->lang->line('official_delete'); ?></a>
                     </div>
                 </td>

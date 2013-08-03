@@ -21,7 +21,7 @@ if (count($playerRegistrations) > 0) { ?>
                 <td data-title="<?php echo $this->lang->line('player_registration_season'); ?>" class="width-15-percent text-align-center"><?php echo Utility_helper::formattedSeason($playerRegistration->season); ?></td>
                 <td class="actions width-15-percent text-align-center">
                     <div class="btn-group">
-                        <a class="btn btn-primary btn-mini" href="<?php echo site_url("admin/player-registration/edit/id/{$playerRegistration->id}"); ?>"><?php echo $this->lang->line('player_registration_edit'); ?></a>
+                        <a class="btn btn-mini" href="<?php echo site_url("admin/player-registration/edit/id/{$playerRegistration->id}"); ?>"><?php echo $this->lang->line('player_registration_edit'); ?></a>
                         <a class="btn btn-danger btn-mini" href="<?php echo site_url("admin/player-registration/delete/id/{$playerRegistration->id}"); ?>"><?php echo $this->lang->line('player_registration_delete'); ?></a>
                     </div>
                 </td>

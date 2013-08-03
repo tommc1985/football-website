@@ -25,7 +25,7 @@ if (count($leagueMatches) > 0) { ?>
                 <td data-title="<?php echo $this->lang->line('league_match_away_team'); ?>" class="width-20-percent text-align-right"><?php echo Opposition_helper::name($leagueMatch->a_opposition_id); ?></td>
                 <td class="actions width-15-percent text-align-center">
                     <div class="btn-group">
-                        <a class="btn btn-primary btn-mini" href="<?php echo site_url("admin/league-match/edit/id/{$leagueMatch->id}"); ?>"><?php echo $this->lang->line('league_match_edit'); ?></a>
+                        <a class="btn btn-mini" href="<?php echo site_url("admin/league-match/edit/id/{$leagueMatch->id}"); ?>"><?php echo $this->lang->line('league_match_edit'); ?></a>
                         <a class="btn btn-danger btn-mini" href="<?php echo site_url("admin/league-match/delete/id/{$leagueMatch->id}"); ?>"><?php echo $this->lang->line('league_match_delete'); ?></a>
                     </div>
                 </td>

@@ -21,7 +21,7 @@ if (count($leagueRegistrations) > 0) { ?>
                 <td data-title="<?php echo $this->lang->line('league_registration_team'); ?>" class="width-40-percent text-align-center"><?php echo Opposition_helper::name($leagueRegistration->opposition_id); ?></td>
                 <td class="actions width-15-percent text-align-center">
                     <div class="btn-group">
-                        <a class="btn btn-primary btn-mini" href="<?php echo site_url("admin/league-registration/edit/id/{$leagueRegistration->id}"); ?>"><?php echo $this->lang->line('league_registration_edit'); ?></a>
+                        <a class="btn btn-mini" href="<?php echo site_url("admin/league-registration/edit/id/{$leagueRegistration->id}"); ?>"><?php echo $this->lang->line('league_registration_edit'); ?></a>
                         <a class="btn btn-danger btn-mini" href="<?php echo site_url("admin/league-registration/delete/id/{$leagueRegistration->id}"); ?>"><?php echo $this->lang->line('league_registration_delete'); ?></a>
                     </div>
                 </td>

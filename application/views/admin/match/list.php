@@ -25,24 +25,24 @@ if (count($matches) > 0) { ?>
                 <td data-title="<?php echo $this->lang->line('match_score'); ?>" class="width-10-percent text-align-center"><?php echo Match_helper::score($match); ?></td>
                 <td class="actions width-30-percent text-align-center">
                     <div class="btn-group">
-                        <a class="btn btn-primary btn-mini" href="<?php echo site_url("admin/match/edit/id/{$match->id}"); ?>"><?php echo $this->lang->line('match_edit'); ?></a>
+                        <a class="btn btn-mini" href="<?php echo site_url("admin/match/edit/id/{$match->id}"); ?>"><?php echo $this->lang->line('match_edit'); ?></a>
                         <?php
                         if (!is_null($match->h)) { ?>
-                            <a class="btn btn-primary btn-mini" href="<?php echo site_url("admin/appearance/edit/id/{$match->id}"); ?>"><?php echo $this->lang->line('match_appearances'); ?></a>
+                            <a class="btn btn-mini" href="<?php echo site_url("admin/appearance/edit/id/{$match->id}"); ?>"><?php echo $this->lang->line('match_appearances'); ?></a>
                             <?php
                             if ($match->h > 0) { ?>
-                                <a class="btn btn-primary btn-mini" href="<?php echo site_url("admin/goal/edit/id/{$match->id}"); ?>"><?php echo $this->lang->line('match_goals'); ?></a>
+                                <a class="btn btn-mini" href="<?php echo site_url("admin/goal/edit/id/{$match->id}"); ?>"><?php echo $this->lang->line('match_goals'); ?></a>
                             <?php
                             } else { ?>
-                                <a class="btn btn-mini" href="#"><s><?php echo $this->lang->line('match_goals'); ?></s></a>
+                                <a class="btn btn-mini disabled" href="#"><?php echo $this->lang->line('match_goals'); ?></a>
                             <?php
                             } ?>
-                            <a class="btn btn-primary btn-mini" href="<?php echo site_url("admin/card/edit/id/{$match->id}"); ?>"><?php echo $this->lang->line('match_cards'); ?></a>
+                            <a class="btn btn-mini" href="<?php echo site_url("admin/card/edit/id/{$match->id}"); ?>"><?php echo $this->lang->line('match_cards'); ?></a>
                         <?php
                         } else { ?>
-                            <a class="btn btn-mini" href="#"><s><?php echo $this->lang->line('match_appearances'); ?></s></a>
-                            <a class="btn btn-mini" href="#"><s><?php echo $this->lang->line('match_goals'); ?></s></a>
-                            <a class="btn btn-mini" href="#"><s><?php echo $this->lang->line('match_cards'); ?></s></a>
+                            <a class="btn btn-mini disabled" href="#"><?php echo $this->lang->line('match_appearances'); ?></a>
+                            <a class="btn btn-mini disabled" href="#"><?php echo $this->lang->line('match_goals'); ?></a>
+                            <a class="btn btn-mini disabled" href="#"><?php echo $this->lang->line('match_cards'); ?></a>
                         <?php
                         } ?>
                         <a class="btn btn-danger btn-mini" href="<?php echo site_url("admin/match/delete/id/{$match->id}"); ?>"><?php echo $this->lang->line('match_delete'); ?></a>

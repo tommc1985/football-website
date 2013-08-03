@@ -21,7 +21,7 @@ if (count($competitions) > 0) { ?>
                 <td data-title="<?php echo $this->lang->line('competition_type'); ?>" class="width-25-percent text-align-center"><?php echo Competition_helper::type($competition); ?></td>
                 <td class="actions width-15-percent text-align-center">
                     <div class="btn-group">
-                        <a class="btn btn-primary btn-mini" href="<?php echo site_url("admin/competition/edit/id/{$competition->id}"); ?>"><?php echo $this->lang->line('competition_edit'); ?></a>
+                        <a class="btn btn-mini" href="<?php echo site_url("admin/competition/edit/id/{$competition->id}"); ?>"><?php echo $this->lang->line('competition_edit'); ?></a>
                         <a class="btn btn-danger btn-mini" href="<?php echo site_url("admin/competition/delete/id/{$competition->id}"); ?>"><?php echo $this->lang->line('competition_delete'); ?></a>
                     </div>
                 </td>

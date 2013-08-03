@@ -25,7 +25,7 @@ if (count($playerAwards) > 0) { ?>
                 <td data-title="<?php echo $this->lang->line('player_to_award_placing'); ?>" class="width-10-percent text-align-center"><?php echo Utility_helper::ordinalWithSuffix($playerAward->placing); ?></td>
                 <td class="actions width-15-percent text-align-center">
                     <div class="btn-group">
-                        <a class="btn btn-primary btn-mini" href="<?php echo site_url("admin/player-award/edit/id/{$playerAward->id}"); ?>"><?php echo $this->lang->line('player_to_award_edit'); ?></a>
+                        <a class="btn btn-mini" href="<?php echo site_url("admin/player-award/edit/id/{$playerAward->id}"); ?>"><?php echo $this->lang->line('player_to_award_edit'); ?></a>
                         <a class="btn btn-danger btn-mini" href="<?php echo site_url("admin/player-award/delete/id/{$playerAward->id}"); ?>"><?php echo $this->lang->line('player_to_award_delete'); ?></a>
                     </div>
                 </td>
