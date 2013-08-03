@@ -2,24 +2,40 @@
 $id = array(
     'name'  => 'id',
     'id'    => 'id',
-    'value' => set_value('id'),
+    'value' => set_value('id', isset($opposition->id) ? $opposition->id : ''),
 );
 
 $name = array(
-    'name'  => 'name',
-    'id'    => 'name',
-    'value' => set_value('name'),
-    'maxlength' => $this->config->item('opposition_max_length', 'opposition'),
+    'name'        => 'name',
+    'id'          => 'name',
+    'value'       => set_value('name', isset($opposition->name) ? $opposition->name : ''),
+    'maxlength'   => $this->config->item('opposition_max_length', 'opposition'),
+    'placeholder' => $this->lang->line('opposition_name'),
+    'class'       => 'input-xlarge',
 );
 
+$submit = array(
+    'name'  => 'submit',
+    'class' => 'btn',
+    'value' => $submitButtonText,
+); ?>
+
+<?php
 echo form_open($this->uri->uri_string()); ?>
-<table>
-    <?php echo form_hidden('id', set_value('id', isset($opposition->id) ? $opposition->id : '')); ?>
-    <tr>
-        <td><?php echo form_label($this->lang->line('opposition_name'), $name['name']); ?></td>
-        <td><?php echo form_input($name['name'], set_value($name['name'], isset($opposition->name) ? $opposition->name : '')); ?></td>
-        <td class="error"><?php echo form_error($name['name']); ?><?php echo isset($errors[$name['name']]) ? $errors[$name['name']] : ''; ?></td>
-    </tr>
-</table>
-<?php echo form_submit('submit', $submitButtonText); ?>
+    <?php echo form_hidden($id['name'], $id['value']); ?>
+    <fieldset>
+        <legend><?php echo $this->lang->line('opposition_opposition_details');?></legend>
+        <div class="control-group<?php echo form_error($name['name']) ? ' error' : ''; ?>">
+            <?php echo form_label($this->lang->line('opposition_name'), $name['id']); ?>
+            <div class="controls">
+                <?php echo form_input($name); ?>
+                <?php
+                if (form_error($name['name'])) { ?>
+                    <span class="help-inline"><?php echo form_error($name['name']); ?></span>
+                <?php
+                } ?>
+            </div>
+        </div>
+        <?php echo form_submit($submit); ?>
+    </fieldset>
 <?php echo form_close(); ?>
