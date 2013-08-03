@@ -147,6 +147,7 @@ echo form_open($this->uri->uri_string()); ?>
                 <label class="checkbox" for="<?php echo $allDay['id']; ?>">
                 <?php echo form_checkbox($allDay); ?>
                 <?php echo $this->lang->line('calendar_event_all_day'); ?>
+                </label>
                 <?php
                 if (form_error($allDay['name'])) { ?>
                     <span class="help-inline"><?php echo form_error($allDay['name']); ?></span>
