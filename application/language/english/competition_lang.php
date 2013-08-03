@@ -8,7 +8,7 @@ $lang['competition_cannot_delete']           = "Cannot delete the '%s' Competiti
 $lang['competition_add']                     = 'Add Competition';
 $lang['competition_save']                    = 'Save Competition Info';
 
-$lang['competition_competition_details']      = 'Competition Details';
+$lang['competition_competition_details']     = 'Competition Details';
 
 $lang['competition_name']                    = 'Name';
 $lang['competition_short_name']              = 'Short Name';
