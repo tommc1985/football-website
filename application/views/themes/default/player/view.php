@@ -4,7 +4,7 @@
 
         <h3><?php echo $this->lang->line('player_player_details'); ?></h3>
 
-        <dl itemscope itemtype="http://schema.org/Person">
+        <dl itemscope itemtype="http://schema.org/Person" class="dl-horizontal">
           <dt><?php echo $this->lang->line('player_full_name'); ?>:</dt>
           <dd itemprop="name"><?php echo Player_helper::fullNameReverse($player, false); ?></dd>
           <dt><?php echo $this->lang->line('player_date_of_birth'); ?>:</dt>
@@ -49,7 +49,7 @@
     <div class="span12">
         <h3><?php echo $this->lang->line('player_season_statistics'); ?></h3>
 
-        <table class="no-more-tables">
+        <table class="no-more-tables table table-striped table-bordered table-condensed">
             <thead>
                 <tr>
                     <td class="expand">&nbsp;</td>
