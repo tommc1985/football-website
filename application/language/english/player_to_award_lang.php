@@ -8,6 +8,8 @@ $lang['player_to_award_cannot_delete']           = 'Cannot delete this Player Aw
 $lang['player_to_award_add']                     = 'Add Player Award';
 $lang['player_to_award_save']                    = 'Save Player Award Details';
 
+$lang['player_to_award_player_to_award_details'] = 'Player Award Details';
+
 $lang['player_to_award_award']                   = 'Award';
 $lang['player_to_award_placing']                 = 'Placing';
 $lang['player_to_award_player']                  = 'Player';
