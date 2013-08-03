@@ -17,26 +17,14 @@
     }
 }
 
-table
-{
-    border-collapse:collapse;
-}
-
-@media only screen and (min-width: 767px) {
-    table,th, td
-    {
-        border: 1px solid #ccc;
-    }
-}
-
-.text-align-left {
+td.text-align-left {
     text-align: left;
 }
 
-.text-align-center {
+td.text-align-center {
     text-align: center;
 }
 
-.text-align-right {
+td.text-align-right {
     text-align: right;
 }
