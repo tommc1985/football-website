@@ -95,6 +95,7 @@ class League_Match extends Backend_Controller
         }
 
         if (empty($league)) {
+            $this->lang->load('league');
             $this->load->view('admin/league/not_found', $data);
             return;
         }
