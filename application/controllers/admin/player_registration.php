@@ -91,7 +91,7 @@ class Player_Registration extends Backend_Controller
 
             $this->Cache_Fantasy_Football_model->insertEntries($playerRegistration->season);
             $this->Cache_Player_Accumulated_Statistics_model->insertEntries($playerRegistration->season);
-            $this->Cache_Player_Goal_Statistics_model->insertEntries($playerRegistration->season);
+            $this->Cache_Player_Goals_Statistics_model->insertEntries($playerRegistration->season);
             $this->Cache_Player_Statistics_model->insertEntries($playerRegistration->season);
 
             $this->session->set_flashdata('message', sprintf($this->lang->line('player_registration_added'), $playerRegistration->id));
@@ -133,13 +133,13 @@ class Player_Registration extends Backend_Controller
 
             $this->Cache_Fantasy_Football_model->insertEntries($playerRegistration->season);
             $this->Cache_Player_Accumulated_Statistics_model->insertEntries($playerRegistration->season);
-            $this->Cache_Player_Goal_Statistics_model->insertEntries($playerRegistration->season);
+            $this->Cache_Player_Goals_Statistics_model->insertEntries($playerRegistration->season);
             $this->Cache_Player_Statistics_model->insertEntries($playerRegistration->season);
 
             if ($playerRegistration->season != $oldData->season) {
                 $this->Cache_Fantasy_Football_model->insertEntries($oldData->season);
                 $this->Cache_Player_Accumulated_Statistics_model->insertEntries($oldData->season);
-                $this->Cache_Player_Goal_Statistics_model->insertEntries($oldData->season);
+                $this->Cache_Player_Goals_Statistics_model->insertEntries($oldData->season);
                 $this->Cache_Player_Statistics_model->insertEntries($oldData->season);
             }
 
