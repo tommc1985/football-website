@@ -14,6 +14,8 @@ class Cache_Player_Statistics_model extends CI_Model {
     public $hungryMethodMap;
     public $otherMethodMap;
 
+    public $cacheData;
+
     /**
      * Constructor
      * @return NULL
@@ -28,6 +30,8 @@ class Cache_Player_Statistics_model extends CI_Model {
 
         $this->tableName = 'cache_player_statistics';
         $this->queueTableName = 'cache_queue_player_statistics';
+
+        $this->resetCacheData();
 
         $this->methodMap = array(
         );
@@ -165,7 +169,7 @@ class Cache_Player_Statistics_model extends CI_Model {
      * @param  int     $limit   Number of rows to return
      * @return results          Query Object
      */
-    public function fetchLatest($limit = 1)
+    public function fetchLatest($limit = 3)
     {
         $this->db->select('*')
             ->from($this->queueTableName)
@@ -247,6 +251,28 @@ class Cache_Player_Statistics_model extends CI_Model {
     }
 
     /**
+     * Reset Cache Variable
+     * @return NULL
+     */
+    public function resetCacheData()
+    {
+        $this->cacheData = array();
+    }
+
+    /**
+     * Execute Cache Data
+     * @return NULL
+     */
+    public function executeCacheData()
+    {
+        if (count($this->cacheData) > 0) {
+            $this->db->insert_batch($this->tableName, $this->cacheData);
+        }
+
+        $this->resetCacheData();
+    }
+
+    /**
      * Insert Statistic into cache table
      * @param  string $statisticGroup   Unique identifier for statistic
      * @param  string|boolean $type     Competition Type - false, "league", "cup", etc
@@ -275,7 +301,7 @@ class Cache_Player_Statistics_model extends CI_Model {
         $object->statistic_key = $statisticKey;
         $object->statistic_value = $statisticValue;
 
-        $this->db->insert($this->tableName, $object);
+        $this->cacheData[] = (array) $object;
     }
 
     /**
@@ -345,6 +371,8 @@ ORDER BY m.date ASC";
         foreach ($rows as $row) {
             $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->match_id, serialize($row));
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -402,6 +430,8 @@ ORDER BY m.date ASC";
         foreach ($rows as $row) {
             $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->match_id, serialize($row));
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -459,6 +489,8 @@ ORDER BY m.date ASC";
         foreach ($rows as $row) {
             $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->match_id, serialize($row));
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -505,6 +537,8 @@ ORDER BY m.goals DESC";
         foreach ($rows as $row) {
             $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->goals, serialize($row));
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -541,6 +575,8 @@ ORDER BY days_elapsed DESC";
         foreach ($rows as $row) {
             $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->days_elapsed, serialize($row));
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -593,6 +629,8 @@ ORDER BY player_id ASC";
         foreach ($rows as $row) {
             $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->games_elapsed, serialize($row));
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -633,6 +671,8 @@ ORDER BY points_gained DESC";
         foreach ($rows as $row) {
             $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->points_gained, serialize($row));
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -673,6 +713,8 @@ ORDER BY points_gained DESC";
         foreach ($rows as $row) {
             $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->points_gained, serialize($row));
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -713,6 +755,8 @@ ORDER BY points DESC";
         foreach ($rows as $row) {
             $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->points, serialize($row));
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -754,6 +798,8 @@ ORDER BY points DESC";
         foreach ($rows as $row) {
             $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->points, serialize($row));
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -794,6 +840,8 @@ ORDER BY goals_gained DESC";
         foreach ($rows as $row) {
             $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->goals_gained, serialize($row));
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -834,6 +882,8 @@ ORDER BY goals_gained DESC";
         foreach ($rows as $row) {
             $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->goals_gained, serialize($row));
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -874,6 +924,8 @@ ORDER BY goals DESC";
         foreach ($rows as $row) {
             $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->goals, serialize($row));
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -914,6 +966,8 @@ ORDER BY goals DESC";
         foreach ($rows as $row) {
             $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->goals, serialize($row));
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -954,6 +1008,8 @@ ORDER BY goals DESC";
         foreach ($rows as $row) {
             $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->goals, serialize($row));
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -994,6 +1050,8 @@ ORDER BY clean_sheets DESC";
         foreach ($rows as $row) {
             $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->clean_sheets, serialize($row));
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -1034,6 +1092,8 @@ ORDER BY clean_sheets DESC";
         foreach ($rows as $row) {
             $this->insertCache($statisticGroup, $type, $season, $row->player_id, $row->clean_sheets, serialize($row));
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -1073,6 +1133,8 @@ ORDER BY m.date ASC";
         foreach ($distinctPlayers as $player) {
             $this->sequenceBase($matches, $player->id, "\$match->goals > 0", $statisticGroup, $type, $season);
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -1112,6 +1174,8 @@ ORDER BY m.date ASC";
         foreach ($distinctPlayers as $player) {
             $this->sequenceBase($matches, $player->id, "\$match->assists > 0", $statisticGroup, $type, $season);
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -1156,6 +1220,8 @@ ORDER BY m.date ASC";
 
             $this->sequenceBase($matches, $player->id, "\$match->appearance_status == 'starter' || \$match->appearance_status == 'substitute'", $statisticGroup, $type, $season);
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -1200,6 +1266,8 @@ ORDER BY m.date ASC";
 
             $this->sequenceBase($matches, $player->id, "\$match->appearance_status == 'starter'", $statisticGroup, $type, $season);
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -1244,6 +1312,8 @@ ORDER BY m.date ASC";
 
             $this->sequenceBase($matches, $player->id, "\$match->appearance_status == 'substitute'", $statisticGroup, $type, $season);
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -1312,6 +1382,8 @@ ORDER BY m.date ASC";
         foreach ($records as $record) {
             $this->insertCache($statisticGroup, $type, $season, $playerId, $record->sequence, serialize($record));
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -1405,6 +1477,8 @@ ORDER BY matches DESC";
         foreach ($records as $record) {
             $this->insertCache($statisticGroup, $type, $season, $record->player_1_id, $record->matches, serialize($record));
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -1424,6 +1498,8 @@ ORDER BY matches DESC";
         foreach ($records as $record) {
             $this->insertCache($statisticGroup, $type, $season, $record->player_1_id, $record->matches, serialize($record));
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -1443,6 +1519,8 @@ ORDER BY matches DESC";
         foreach ($records as $record) {
             $this->insertCache($statisticGroup, $type, $season, $record->player_1_id, $record->matches, serialize($record));
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -1462,6 +1540,8 @@ ORDER BY matches DESC";
         foreach ($records as $record) {
             $this->insertCache($statisticGroup, $type, $season, $record->player_1_id, $record->matches, serialize($record));
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -1481,6 +1561,8 @@ ORDER BY matches DESC";
         foreach ($records as $record) {
             $this->insertCache($statisticGroup, $type, $season, $record->player_1_id, $record->matches, serialize($record));
         }
+
+        $this->executeCacheData();
     }
 
     /**
@@ -1500,6 +1582,8 @@ ORDER BY matches DESC";
         foreach ($records as $record) {
             $this->insertCache($statisticGroup, $type, $season, $record->player_1_id, $record->matches, serialize($record));
         }
+
+        $this->executeCacheData();
     }
 
     /**
