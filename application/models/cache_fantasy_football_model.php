@@ -146,7 +146,7 @@ class Cache_Fantasy_Football_model extends CI_Model {
      * @param  int     $limit  Number of rows to return
      * @return results         Query Object
      */
-    public function fetchLatest($limit = 1)
+    public function fetchLatest($limit = 5)
     {
         $this->db->select('*')
             ->from($this->queueTableName)
@@ -154,6 +154,24 @@ class Cache_Fantasy_Football_model extends CI_Model {
             ->where('deleted', 0)
             ->order_by('date_added, id', 'asc')
             ->limit($limit, 0);
+
+        return $this->db->get()->result();
+    }
+
+    /**
+     * Fetch distinct player ids
+     * @return results          Query Object
+     */
+    public function fetchDistinctPlayerIds($season = NULL)
+    {
+        $this->db->select('DISTINCT(player_id) as id')
+            ->from('player_registration')
+            ->where('deleted', 0)
+            ->order_by('player_id', 'asc');
+
+        if (!is_null($season)) {
+            $this->db->where('season', $season);
+        }
 
         return $this->db->get()->result();
     }
@@ -456,9 +474,20 @@ WHERE " . implode(" \r\nAND ", $whereConditions) : '');
             $players[$appearance->player_id] = $this->calculatePointsFromAppearance($players[$appearance->player_id], $appearance);
         }
 
-        foreach ($players as $player) {
-            $this->db->insert($this->tableName, $player);
+        $distinctPlayers = $this->fetchDistinctPlayerIds($season);
+
+        foreach ($distinctPlayers as $distinctPlayer) {
+            if (!isset($players[$distinctPlayer->id])) {
+                $players[$distinctPlayer->id] = $this->createObject($distinctPlayer->id, $type, $season, $position);
+            }
         }
+
+        $batchData = array();
+        foreach ($players as $player) {
+            $batchData[] = (array) $player;
+        }
+
+        $this->db->insert_batch($this->tableName, $batchData);
     }
 
     /**
