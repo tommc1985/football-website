@@ -66,6 +66,9 @@
     font-weight: bold;
     color: #333;
     line-height: 17px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .position.sub .player {
