@@ -288,10 +288,11 @@ class Fantasy_Football_model extends Base_Frontend_Model {
     {
         if (isset($this->formations[$formation])) {
             $playerCount = $this->playerCount($season, $type);
+            $formationPositionCount = count($this->formations[$formation]['positions']);
 
-            if ($playerCount > 0) {
+            if ($playerCount > 0 && $playerCount >= $formationPositionCount) {
                 // Full list of formation positions
-                $positions = $this->fetchFormationPositions($this->formations[$formation]['positions'], $playerCount);
+                $positions = $this->fetchFormationPositions($this->formations[$formation], $playerCount);
 
                 // Calculate each position's list of preferred players, in order - Begin
                 $preferredPlayers = array();
@@ -393,8 +394,8 @@ FROM (SELECT *
     FROM cache_fantasy_football_statistics cffs
     WHERE cffs.season = '{$season}'
         AND cffs.type = '{$type}'
-    ORDER BY " . implode(", ", $orderByConditions) . ") a
-ORDER BY " . implode(", ", $orderByConditions2);
+    ORDER BY cffs.appearances != 0 DESC, " . implode(", ", $orderByConditions) . ") a
+ORDER BY a.appearances != 0 DESC, " . implode(", ", $orderByConditions2);
 
             $query = $this->db->query($sql);
             return $query->result();
@@ -442,11 +443,12 @@ ORDER BY {$orderBy} DESC";
      */
     public function playerCount($season, $type)
     {
-        $ci = get_instance();
+        $this->db->select('DISTINCT(cffs.player_id)')
+            ->from('cache_fantasy_football_statistics cffs')
+            ->where('cffs.type', $type)
+            ->where('cffs.season', $season);
 
-        $ci->load->model('frontend/Player_model');
-
-        return count($ci->Player_model->fetchPlayerList($season, $type, '', 'DESC'));
+        return count($this->db->get()->result());
     }
 
     /**
@@ -545,13 +547,15 @@ WHERE
 
     /**
      * Return an array of all positions to for this formation (including the correct number of substitures)
-     * @param  array $positions        List of positions for specified formation
+     * @param  array $formation        Formation Data
      * @param  int $numberOfPlayers    Number of players involved (to return the correct number of subsitutes)
      * @return array                   List of positions with correct number of subsitutes
      */
-    public function fetchFormationPositions($positions, $numberOfPlayers)
+    public function fetchFormationPositions($formation, $numberOfPlayers)
     {
         $data = array();
+
+        $positions = $formation['positions'];
 
         $positionCount = 0;
         foreach ($positions as $position) {
