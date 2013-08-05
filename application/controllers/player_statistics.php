@@ -92,8 +92,8 @@ class Player_Statistics extends Frontend_Controller {
         $this->templateData['type']                = $type;
         $this->templateData['unit']                = $unit;
         $this->templateData['matchCount']          = $matchCount;
-        $this->templateData['thresholdPercentage'] = $player;
-        $this->templateData['thresholdMatches']    = $player;
+        $this->templateData['thresholdPercentage'] = $thresholdPercentage;
+        $this->templateData['thresholdMatches']    = $thresholdMatches;
 
         $this->load->view("themes/{$this->theme}/header", $this->templateData);
         $this->load->view("themes/{$this->theme}/player-statistics/view", $this->templateData);
