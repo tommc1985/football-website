@@ -15,6 +15,8 @@ class Cache_Club_Statistics_model extends CI_Model {
 
     public $venues;
 
+    public $cacheData;
+
     /**
      * Constructor
      * @return NULL
@@ -29,6 +31,8 @@ class Cache_Club_Statistics_model extends CI_Model {
 
         $this->tableName = 'cache_club_statistics';
         $this->queueTableName = 'cache_queue_club_statistics';
+
+        $this->resetCacheData();
 
         $this->methodMap = array(
             'biggest_win'                          => 'biggestWin',
@@ -248,6 +252,8 @@ class Cache_Club_Statistics_model extends CI_Model {
             $this->generateStatisticsBySeason($row->season);
         }
 
+        $this->executeCacheData();
+
         $row->in_progress = 0;
         $row->completed = 1;
 
@@ -257,6 +263,28 @@ class Cache_Club_Statistics_model extends CI_Model {
         $row->peak_memory_usage = number_format(memory_get_peak_usage(true) / 1048576, 2);
 
         return $this->updateEntry($row);
+    }
+
+    /**
+     * Reset Cache Variable
+     * @return NULL
+     */
+    public function resetCacheData()
+    {
+        $this->cacheData = array();
+    }
+
+    /**
+     * Execute Cache Data
+     * @return NULL
+     */
+    public function executeCacheData()
+    {
+        if (count($this->cacheData) > 0) {
+            $this->db->insert_batch($this->tableName, $this->cacheData);
+        }
+
+        $this->resetCacheData();
     }
 
     /**
@@ -286,7 +314,7 @@ class Cache_Club_Statistics_model extends CI_Model {
         $object->statistic_key = $statisticKey;
         $object->statistic_value = $statisticValue;
 
-        $this->db->insert($this->tableName, $object);
+        $this->cacheData[] = (array) $object;
     }
 
     /**
