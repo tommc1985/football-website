@@ -8,7 +8,7 @@ class Cache extends CI_Controller {
      */
     public function execute()
     {
-        set_time_limit(1200);
+        set_time_limit(1800);
         $this->load->helper(array('form'));
 
         if ($this->input->is_cli_request() || ($this->input->get('key') == Configuration::get('cache_key'))) {
