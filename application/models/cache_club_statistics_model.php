@@ -48,7 +48,6 @@ class Cache_Club_Statistics_model extends CI_Model {
             'longest_sequence_without_clean_sheet' => 'longestSequenceWithoutCleanSheet',
             'longest_scoring_sequence'             => 'longestScoringSequence',
             'longest_sequence_without_scoring'     => 'longestSequenceWithoutScoring',
-            'quickest_goal'                        => 'quickestGoal',
             'clean_sheets_in_a_season'             => 'cleanSheetsInASeason',
             'fail_to_score_in_a_season'            => 'failToScoreInASeason',
             'highest_attendance'                   => 'highestAttendance',
@@ -56,6 +55,7 @@ class Cache_Club_Statistics_model extends CI_Model {
         );
 
         $this->hungryMethodMap = array(
+            'quickest_goal'                        => 'quickestGoal',
             'oldest_appearance_holder'             => 'oldestAppearanceHolder',
             'youngest_appearance_holder'           => 'youngestAppearanceHolder',
             'oldest_debutant'                      => 'oldestDebutant',
