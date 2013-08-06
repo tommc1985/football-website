@@ -36,9 +36,10 @@ class Club_Statistics_helper
 
         echo '<h3>' . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>';
         foreach ($matches as $match) { ?>
-            <span itemscope itemtype="http://schema.org/SportsEvent">
-            <a href="<?php echo site_url("match/view/id/{$match->id}"); ?>"><?php echo Match_helper::score($match); ?></a><br />
-            <time itemprop="startDate" datetime="<?php echo Utility_helper::formattedDate($match->date, "c"); ?>"><?php echo Utility_helper::shortDate($match->date); ?></time> <span itemprop="name" itemscope itemtype="http://schema.org/SportsTeam"><?php echo $ci->lang->line("match_vs"); ?> <span itemprop="name" itemprop="legalName"><?php echo Opposition_helper::name($match->opposition_id); ?></span> - <?php echo Match_helper::shortCompetitionNameCombined($match); ?></span><br />
+            <dl itemscope itemtype="http://schema.org/SportsEvent">
+                <dt><a href="<?php echo site_url("match/view/id/{$match->id}"); ?>"><?php echo Match_helper::score($match); ?></a></dt>
+                <dd><time itemprop="startDate" datetime="<?php echo Utility_helper::formattedDate($match->date, "c"); ?>"><?php echo Utility_helper::shortDate($match->date); ?></time> <span itemprop="name" itemscope itemtype="http://schema.org/SportsTeam"><?php echo $ci->lang->line("match_vs"); ?> <span itemprop="name" itemprop="legalName"><?php echo Opposition_helper::name($match->opposition_id); ?></span> - <?php echo Match_helper::shortCompetitionNameCombined($match); ?></span></dd>
+            </dl>
         <?php
         }
     }
@@ -53,8 +54,11 @@ class Club_Statistics_helper
     {
         $ci =& get_instance();
 
-        echo '<h3>' . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>';
-        echo $sequences[0]->sequence; ?> <?php echo $sequences[0]->sequence == 1 ? $ci->lang->line("club_statistics_match") : $ci->lang->line("club_statistics_matches"); ?><br /><?php
+        echo '<h3>' . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>'; ?>
+        <dl>
+            <dt>
+        <?php
+        echo $sequences[0]->sequence; ?> <?php echo $sequences[0]->sequence == 1 ? $ci->lang->line("club_statistics_match") : $ci->lang->line("club_statistics_matches"); ?></dt><dd><?php
         foreach ($sequences as $sequence) {
             if ($sequence->sequence == 1) {
                 echo Utility_helper::shortDate($sequence->sequenceStart); ?><br />
@@ -63,7 +67,10 @@ class Club_Statistics_helper
                 echo Utility_helper::shortDate($sequence->sequenceStart); ?> - <?php echo Utility_helper::shortDate($sequence->sequenceFinish); ?><br />
             <?php
             }
-        }
+        } ?>
+            </dd>
+        </dl>
+        <?php
     }
 
     /**
@@ -78,9 +85,11 @@ class Club_Statistics_helper
 
         echo '<h3>' . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>';
         foreach ($matches as $match) { ?>
-            <span itemscope itemtype="http://schema.org/SportsEvent">
-            <a href="<?php echo site_url("match/view/id/{$match->id}"); ?>"><?php echo Match_helper::attendance($match); ?></a><br />
-            <time itemprop="startDate" datetime="<?php echo Utility_helper::formattedDate($match->date, "c"); ?>"><?php echo Utility_helper::shortDate($match->date); ?></time> <span itemprop="name" itemscope itemtype="http://schema.org/SportsTeam"><?php echo $ci->lang->line("match_vs"); ?> <span itemprop="name" itemprop="legalName"><?php echo Opposition_helper::name($match->opposition_id); ?></span> - <?php echo Match_helper::shortCompetitionNameCombined($match); ?></span><br />
+        <dl itemscope itemtype="http://schema.org/SportsEvent">
+            <dt>
+            <a href="<?php echo site_url("match/view/id/{$match->id}"); ?>"><?php echo Match_helper::attendance($match); ?></a></dt>
+            <dd><time itemprop="startDate" datetime="<?php echo Utility_helper::formattedDate($match->date, "c"); ?>"><?php echo Utility_helper::shortDate($match->date); ?></time> <span itemprop="name" itemscope itemtype="http://schema.org/SportsTeam"><?php echo $ci->lang->line("match_vs"); ?> <span itemprop="name" itemprop="legalName"><?php echo Opposition_helper::name($match->opposition_id); ?></span> - <?php echo Match_helper::shortCompetitionNameCombined($match); ?></dd>
+        </dl>
         <?php
         }
     }
