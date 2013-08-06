@@ -13,15 +13,21 @@ $inputType = array(
     'id'      => 'type',
     'options' => array('overall' => 'Overall') + Competition_model::fetchTypes(),
     'value'   => set_value('type', $type),
-);
+); ?>
 
-echo form_label($this->lang->line('club_statistics_competition_type'), $inputType['name']);
-echo form_dropdown($inputType['name'], $inputType['options'], $inputType['value']); ?>
-
+<fieldset>
+        <legend><?php echo $this->lang->line('global_filters');?></legend>
+        <div class="control-group">
+            <div class="controls">
+                <?php echo form_label($this->lang->line('club_statistics_competition_type'), $inputType['name']); ?>
+                <?php echo form_dropdown($inputType['name'], $inputType['options'], $inputType['value']); ?>
+            </div>
+        </div>
+        <?php
+        echo form_submit('submit', $this->lang->line('club_statistics_show'), 'class="btn"'); ?>
+</fieldset>
 <?php
-echo form_submit('submit', $this->lang->line('club_statistics_show'));
 echo form_close(); ?>
-
             </div>
         </div>
 
