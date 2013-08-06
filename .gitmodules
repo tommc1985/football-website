@@ -4,3 +4,6 @@
 [submodule "application/libraries/icalcreator"]
 	path = application/libraries/icalcreator
 	url = git://github.com/iCalcreator/iCalcreator.git
+[submodule "assets/js/chartjs"]
+	path = assets/js/chartjs
+	url = https://github.com/nnnick/Chart.js.git
