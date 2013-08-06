@@ -7,3 +7,6 @@
 [submodule "assets/js/chartjs"]
 	path = assets/js/chartjs
 	url = https://github.com/nnnick/Chart.js.git
+[submodule "assets/js/chartjs-legend"]
+	path = assets/js/chartjs-legend
+	url = https://github.com/bebraw/Chart.js.legend.git
