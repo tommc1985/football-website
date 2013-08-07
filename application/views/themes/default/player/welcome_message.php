@@ -2,20 +2,20 @@
     <div class="span12">
         <h2><?php echo $this->lang->line('player_squad_list'); ?></h2>
 
-        <table class="no-more-tables width-100-percent">
+        <table class="no-more-tables width-100-percent table table-striped table-condensed">
             <thead>
                 <tr>
                     <td><?php echo $this->lang->line('player_player'); ?></td>
-                    <td class="width-15-percent"><?php echo $this->lang->line('player_d_o_b'); ?></td>
-                    <td class="width-10-percent"><?php echo $this->lang->line('player_apps'); ?></td>
-                    <td class="width-10-percent"><?php echo $this->lang->line('player_goals'); ?></td>
-                    <td class="width-10-percent"><?php echo $this->lang->line('player_assists'); ?></td>
-                    <td class="width-10-percent"><?php echo $this->lang->line('player_motms'); ?></td>
-                    <td class="width-10-percent"><?php echo $this->lang->line('player_yellows'); ?></td>
-                    <td class="width-10-percent"><?php echo $this->lang->line('player_reds'); ?></td>
+                    <td class="width-15-percent text-align-center"><?php echo $this->lang->line('player_d_o_b'); ?></td>
+                    <td class="width-10-percent text-align-center"><?php echo $this->lang->line('player_apps'); ?></td>
+                    <td class="width-10-percent text-align-center"><img src="<?php echo site_url('assets/themes/default/img/icons/goal-16x16.png'); ?>" alt="<?php echo $this->lang->line('player_goals'); ?>"> <img src="<?php echo site_url('assets/themes/default/img/icons/sort-none.png'); ?>" alt="<?php echo $this->lang->line('sort_none'); ?>"></td>
+                    <td class="width-10-percent text-align-center"><img src="<?php echo site_url('assets/themes/default/img/icons/assist-16x16.png'); ?>" alt="<?php echo $this->lang->line('player_assists'); ?>"> <img src="<?php echo site_url('assets/themes/default/img/icons/sort-none.png'); ?>" alt="<?php echo $this->lang->line('sort_none'); ?>"></td>
+                    <td class="width-10-percent text-align-center"><img src="<?php echo site_url('assets/themes/default/img/icons/motm-16x16.png'); ?>" alt="<?php echo $this->lang->line('player_motms'); ?>"> <img src="<?php echo site_url('assets/themes/default/img/icons/sort-none.png'); ?>" alt="<?php echo $this->lang->line('sort_none'); ?>"></td>
+                    <td class="width-10-percent text-align-center"><img src="<?php echo site_url('assets/themes/default/img/icons/yellow-16x16.png'); ?>" alt="<?php echo $this->lang->line('player_yellows'); ?>"> <img src="<?php echo site_url('assets/themes/default/img/icons/sort-none.png'); ?>" alt="<?php echo $this->lang->line('sort_none'); ?>"></td>
+                    <td class="width-10-percent text-align-center"><img src="<?php echo site_url('assets/themes/default/img/icons/red-16x16.png'); ?>" alt="<?php echo $this->lang->line('player_reds'); ?>"> <img src="<?php echo site_url('assets/themes/default/img/icons/sort-none.png'); ?>" alt="<?php echo $this->lang->line('sort_none'); ?>"></td>
                     <?php
                     if (Configuration::get('include_appearance_ratings') === true) { ?>
-                    <td class="width-10-percent"><?php echo $this->lang->line('player_rating'); ?></td>
+                    <td class="width-10-percent text-align-center"> <img src="<?php echo site_url('assets/themes/default/img/icons/sort-none.png'); ?>" alt="<?php echo $this->lang->line('sort_none'); ?>"><?php echo $this->lang->line('player_rating'); ?></td>
                     <?php
                     } ?>
                 </tr>
