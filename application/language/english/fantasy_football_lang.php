@@ -9,6 +9,9 @@ $lang['fantasy_football_best_lineup']               = 'Best Lineup';
 $lang['fantasy_football_scoring_system']            = 'Scoring System';
 $lang['fantasy_football_lineup']                    = 'Lineup';
 
+
+$lang['fantasy_football_competition_type']          = 'Competition Type';
+
 $lang['fantasy_football_show']                      = 'Show';
 
 $lang['fantasy_football_player']                    = 'Player';
