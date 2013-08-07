@@ -19,8 +19,8 @@ $inputType = array(
         <legend><?php echo $this->lang->line('global_filters');?></legend>
         <div class="control-group">
             <div class="controls">
-                <?php echo form_label($this->lang->line('club_statistics_competition_type'), $inputType['name']); ?>
-                <?php echo form_dropdown($inputType['name'], $inputType['options'], $inputType['value']); ?>
+                <?php echo form_label($this->lang->line('club_statistics_competition_type'), $inputType['id']); ?>
+                <?php echo form_dropdown($inputType['name'], $inputType['options'], $inputType['value'], "id='{$inputType['id']}'"); ?>
             </div>
         </div>
         <?php

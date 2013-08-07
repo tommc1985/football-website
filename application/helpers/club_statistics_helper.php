@@ -38,7 +38,7 @@ class Club_Statistics_helper
         foreach ($matches as $match) { ?>
             <dl itemscope itemtype="http://schema.org/SportsEvent">
                 <dt><a href="<?php echo site_url("match/view/id/{$match->id}"); ?>"><?php echo Match_helper::score($match); ?></a></dt>
-                <dd><time itemprop="startDate" datetime="<?php echo Utility_helper::formattedDate($match->date, "c"); ?>"><?php echo Utility_helper::shortDate($match->date); ?></time> <span itemprop="name" itemscope itemtype="http://schema.org/SportsTeam"><?php echo $ci->lang->line("match_vs"); ?> <span itemprop="name" itemprop="legalName"><?php echo Opposition_helper::name($match->opposition_id); ?></span> - <?php echo Match_helper::shortCompetitionNameCombined($match); ?></span></dd>
+                <dd><time itemprop="startDate" datetime="<?php echo Utility_helper::formattedDate($match->date, "c"); ?>"><?php echo Utility_helper::shortDate($match->date); ?></time> <span itemprop="name" itemscope itemtype="http://schema.org/SportsTeam"><?php echo $ci->lang->line("match_vs"); ?> <span itemprop="name"><?php echo Opposition_helper::name($match->opposition_id); ?></span> - <?php echo Match_helper::shortCompetitionNameCombined($match); ?></span></dd>
             </dl>
         <?php
         }
@@ -88,7 +88,7 @@ class Club_Statistics_helper
         <dl itemscope itemtype="http://schema.org/SportsEvent">
             <dt>
             <a href="<?php echo site_url("match/view/id/{$match->id}"); ?>"><?php echo Match_helper::attendance($match); ?></a></dt>
-            <dd><time itemprop="startDate" datetime="<?php echo Utility_helper::formattedDate($match->date, "c"); ?>"><?php echo Utility_helper::shortDate($match->date); ?></time> <span itemprop="name" itemscope itemtype="http://schema.org/SportsTeam"><?php echo $ci->lang->line("match_vs"); ?> <span itemprop="name" itemprop="legalName"><?php echo Opposition_helper::name($match->opposition_id); ?></span> - <?php echo Match_helper::shortCompetitionNameCombined($match); ?></dd>
+            <dd><time itemprop="startDate" datetime="<?php echo Utility_helper::formattedDate($match->date, "c"); ?>"><?php echo Utility_helper::shortDate($match->date); ?></time> <span itemprop="name" itemscope itemtype="http://schema.org/SportsTeam"><?php echo $ci->lang->line("match_vs"); ?> <span itemprop="name"><?php echo Opposition_helper::name($match->opposition_id); ?></span> - <?php echo Match_helper::shortCompetitionNameCombined($match); ?></span></dd>
         </dl>
         <?php
         }
