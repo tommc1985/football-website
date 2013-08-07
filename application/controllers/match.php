@@ -66,13 +66,15 @@ class Match extends Frontend_Controller {
             show_error($this->lang->line('match_not_found'), 404);
         }
 
-        $this->templateData['match'] = $match;
+        $this->templateData['match']   = $match;
+        $this->templateData['preview'] = false;
 
         $this->load->view("themes/{$this->theme}/header", $this->templateData);
 
         if (!is_null($match->h) || !is_null($match->status)) {
             $this->load->view("themes/{$this->theme}/match/result", $this->templateData);
         } else if(!is_null($match->date)) {
+            $this->templateData['preview'] = true;
             $this->load->view("themes/{$this->theme}/match/preview", $this->templateData);
         } else {
             $this->load->view("themes/{$this->theme}/match/tbc", $this->templateData);

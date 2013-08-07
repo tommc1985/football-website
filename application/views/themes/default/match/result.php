@@ -4,17 +4,7 @@
 
         <div class="row-fluid">
             <div class="span12" itemscope itemtype="http://schema.org/SportsEvent">
-                <h3><?php echo $this->lang->line('match_details'); ?></h3>
-
-                <p><?php echo $this->lang->line('match_date'); ?> <time itemprop="startDate" datetime="<?php echo Utility_helper::formattedDate($match->date, "c"); ?>"><?php echo Utility_helper::longDateTime($match->date); ?></time><br />
-                <?php echo $this->lang->line('match_score'); ?> <?php echo Match_helper::longScore($match); ?><br />
-                <?php echo $this->lang->line('match_venue'); ?> <span itemprop="name" itemscope itemtype="http://schema.org/SportsTeam"><?php echo Match_helper::longVenue($match) . ' ' . $this->lang->line('match_versus'); ?> <span itemprop="name"><?php echo Opposition_helper::name($match->opposition_id); ?></span></span><br />
-                <?php echo $this->lang->line('match_competition'); ?> <?php echo Match_helper::fullCompetitionNameCombined($match); ?><br />
-                <?php echo $this->lang->line('match_location'); ?> <span itemprop="location"><?php echo $match->location ? $match->location : $this->lang->line('global_unknown'); ?></span><br />
-                <?php echo $this->lang->line('match_official'); ?> <?php echo $match->official_id == 0 ? $this->lang->line('global_unknown') : Official_helper::initialSurname($match->official_id); ?><?php
-                if (Configuration::get('include_match_attendances') === true) { ?><br />
-                <?php echo $this->lang->line('match_attendance'); ?> <?php echo is_null($match->attendance) ? $this->lang->line('global_unknown') : $match->attendance; ?><?php
-                } ?></p>
+                <?php $this->load->view('themes/default/match/match_details.php'); ?>
             </div>
         </div>
 
@@ -23,22 +13,21 @@
                 <h3><?php echo $this->lang->line('match_goals'); ?></h3>
                 <?php
                 if ($match->h > 0) {
-                    if (count($match->goals) > 0) {
-                        foreach ($match->goals as $goal) { ?>
-                            <p><?php echo "'{$goal->minute}"; ?><br />
-                                <?php echo $this->lang->line('match_scorer'); ?> <?php echo Goal_helper::scorer($goal); ?><br />
-                                <?php echo $this->lang->line('match_assister'); ?> <?php echo Goal_helper::assister($goal); ?><br />
-                                <?php echo $this->lang->line('match_type'); ?> <?php echo Goal_helper::type($goal); ?><br />
-                                <?php echo $this->lang->line('match_body_part'); ?> <?php echo Goal_helper::bodyPart($goal); ?><br />
-                                <?php echo $this->lang->line('match_distance'); ?> <?php echo Goal_helper::distance($goal); ?><br />
-                                <?php
-                                if (Configuration::get('include_goal_ratings') === true) { ?>
-                                    <?php echo $this->lang->line('match_rating'); ?> <?php echo Goal_helper::rating($goal); ?><br />
-                                <?php
-                                } ?>
-                                <?php echo $this->lang->line('match_description'); ?> <?php echo $goal->description; ?><br /></p>
-                        <?php }
+                    if (count($match->goals) > 0) { ?>
 
+                <table class="width-100-percent table table-striped table-condensed">
+                    <tbody>
+                        <?php
+                        foreach ($match->goals as $goal) { ?>
+                        <tr>
+                            <td class="width-10-percent"><?php echo "'{$goal->minute}"; ?></td>
+                            <td><?php echo Goal_helper::scorer($goal); ?></td>
+                        </tr>
+                        <?php
+                        } ?>
+                    </tbody>
+                </table>
+                    <?php
                     } else {
                         echo $this->lang->line('match_awaiting_goal_data');
                     }
@@ -50,24 +39,50 @@
             <div class="span6">
                 <h3><?php echo $this->lang->line('match_lineup'); ?></h3>
 
+                <table class="width-100-percent table table-striped table-condensed">
+                    <tbody>
+                        <tr>
+                            <td colspan="<?php echo Configuration::get('include_appearance_shirt_numbers') === true ? 3 : 2; ?>"><h4>Starters</h4></td>
+                        </tr>
                 <?php
                 if (count($match->appearances) > 0) {
                     foreach ($match->appearances  as $appearance) {
                         if ($appearance->status == 'starter') { ?>
-                            <p><?php echo Configuration::get('include_appearance_shirt_numbers') === true ? $appearance->shirt : ''; ?> <?php echo Player_helper::fullName($appearance->player_id); ?> <?php echo Position_helper::abbreviation($appearance->position); ?> <?php echo !is_null($appearance->off) ? '\'' . $appearance->off : ''; ?></p>
+                        <tr>
+                            <?php
+                            if (Configuration::get('include_appearance_shirt_numbers') === true) { ?>
+                            <td class="width-10-percent text-align-center"><?php echo $appearance->shirt; ?></td>
+                            <?php
+                            } ?>
+                            <td><?php echo Player_helper::fullName($appearance->player_id); ?> <?php echo !is_null($appearance->off) ? '\'' . $appearance->off . '<i class="icon-arrow-left"></i>' : ''; ?></td>
+                            <td class="width-10-percent text-align-center"><?php echo Position_helper::abbreviation($appearance->position); ?></td>
+                        </tr>
                     <?php
                         }
-                    }
-
+                    } ?>
+                        <tr>
+                            <td colspan="<?php echo Configuration::get('include_appearance_shirt_numbers') === true ? 3 : 2; ?>"><h4>Substitutes</h4></td>
+                        </tr>
+                    <?php
                     foreach ($match->appearances  as $appearance) {
                         if ($appearance->status != 'starter') { ?>
-                            <p><?php echo Configuration::get('include_appearance_shirt_numbers') === true ? $appearance->shirt : ''; ?> <?php echo Player_helper::fullName($appearance->player_id); ?> <?php echo $appearance->status != 'unused' ? Position_helper::abbreviation($appearance->position) : ''; ?> <?php echo !is_null($appearance->on) ? '\'' . $appearance->on : ''; ?> <?php echo !is_null($appearance->off) ? '\'' . $appearance->off : ''; ?></p>
+                        <tr>
+                          <?php
+                            if (Configuration::get('include_appearance_shirt_numbers') === true) { ?>
+                            <td class="width-10-percent text-align-center"><?php echo $appearance->shirt; ?></td>
+                            <?php
+                            } ?>
+                            <td><?php echo Player_helper::fullName($appearance->player_id); ?> <?php echo !is_null($appearance->on) ? '\'' . $appearance->on . '<i class="icon-arrow-right"></i>' : ''; ?> <?php echo !is_null($appearance->off) ? '\'' . $appearance->off . '<i class="icon-arrow-left"></i>': ''; ?></td>
+                            <td class="width-10-percent text-align-center"><?php echo Position_helper::abbreviation($appearance->position); ?></td>
+                        </tr>
                     <?php
                         }
                     }
                 } else {
                     echo $this->lang->line('match_awaiting_appearance_data');
                 } ?>
+                    </tbody>
+                </table>
             </div>
         </div>
 
@@ -76,12 +91,24 @@
                 <h3><?php echo $this->lang->line('match_cards'); ?></h3>
 
                 <?php
-                if (count($match->cards) > 0) {
-                    foreach ($match->cards  as $card) { ?>
-                        <p><?php echo "'{$card->minute}"; ?><br />
-                            <?php echo Player_helper::fullName($card->player_id); ?><br /><?php echo $card->type; ?><br /><?php echo Card_helper::offence($card); ?></p>
+                if (count($match->cards) > 0) { ?>
+                <table class="width-100-percent table table-striped table-condensed">
+                    <tbody>
                     <?php
-                    }
+                    foreach ($match->cards  as $card) { ?>
+                        <tr>
+                            <td class="width-10-percent"><?php echo "'{$card->minute}"; ?><br />
+                                <?php echo $card->type; ?>
+                            </td>
+                            <td><?php echo Player_helper::fullName($card->player_id); ?><br />
+                                <?php echo Card_helper::offence($card); ?>
+                            </td>
+                        </tr>
+                    <?php
+                    } ?>
+                    </tbody>
+                </table>
+                <?php
                 } else {
                     echo $this->lang->line('match_no_cards_for_this_match');
                 } ?>
