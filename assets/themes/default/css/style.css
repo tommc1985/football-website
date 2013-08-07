@@ -21,18 +21,18 @@ label {
     top: 40px;
 }
 
-.text-align-left {
+table td.text-align-left {
     text-align: left;
 }
 
-.text-align-center {
+table td.text-align-center {
     text-align: center;
 }
 
-.text-align-right {
+table td.text-align-right {
     text-align: right;
 }
 
-/*tr:nth-child(2n) td {
+/*table.table-striped tbody tr:nth-child(odd) td {
     background-color: rgba(240, 240, 240, 0.4);
-/*
+}*/
