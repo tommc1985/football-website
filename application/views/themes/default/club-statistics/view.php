@@ -13,6 +13,13 @@ $inputType = array(
     'id'      => 'type',
     'options' => array('overall' => 'Overall') + Competition_model::fetchTypes(),
     'value'   => set_value('type', $type),
+);
+
+$submit = array(
+    'name'    => 'submit',
+    'id'      => 'submit',
+    'value'   => $this->lang->line('club_statistics_show'),
+    'class'   => 'btn',
 ); ?>
 
 <fieldset>
@@ -24,7 +31,7 @@ $inputType = array(
             </div>
         </div>
         <?php
-        echo form_submit('submit', $this->lang->line('club_statistics_show'), 'class="btn"'); ?>
+        echo form_submit($submit); ?>
 </fieldset>
 <?php
 echo form_close(); ?>
