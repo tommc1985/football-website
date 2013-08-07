@@ -38,6 +38,11 @@
     table.no-more-tables td,
     table.no-more-tables tr {
         display: block;
+        text-align: left;
+    }
+
+    table.no-more-tables td.text-align-left, table.no-more-tables td.text-align-center, table.no-more-tables td.text-align-right {
+        text-align: left;
     }
 
     /* Hide table headers (but not display: none;, for accessibility) */
@@ -57,6 +62,7 @@
         padding-left: 50%;
         white-space: normal;
         text-align:left;
+        line-height:15px;
     }
 
     table.no-more-tables td:before {
