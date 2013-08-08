@@ -6,13 +6,13 @@
         <div class="row-fluid">
             <div class="span12">
 <?php
-echo form_open($this->uri->uri_string());
+echo form_open($this->uri->uri_string(), array('class' => 'form-horizontal'));
 
 $inputType = array(
-    'name'    => 'type',
-    'id'      => 'type',
-    'options' => array('overall' => 'Overall') + Competition_model::fetchTypes(),
-    'value'   => set_value('type', $type),
+    'name'       => 'type',
+    'id'         => 'type',
+    'options'    => array('overall' => 'Overall') + Competition_model::fetchTypes(),
+    'value'      => set_value('type', $type),
 );
 
 $submit = array(
@@ -25,13 +25,13 @@ $submit = array(
 <fieldset>
         <legend><?php echo $this->lang->line('global_filters');?></legend>
         <div class="control-group">
+            <?php echo form_label($this->lang->line('club_statistics_competition_type'), $inputType['id'], array('class' => 'control-label')); ?>
             <div class="controls">
-                <?php echo form_label($this->lang->line('club_statistics_competition_type'), $inputType['id']); ?>
                 <?php echo form_dropdown($inputType['name'], $inputType['options'], $inputType['value'], "id='{$inputType['id']}'"); ?>
+                <?php
+                echo form_submit($submit); ?>
             </div>
         </div>
-        <?php
-        echo form_submit($submit); ?>
 </fieldset>
 <?php
 echo form_close(); ?>
