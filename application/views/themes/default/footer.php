@@ -4,13 +4,15 @@
         </div>
     </div>
 </div>
-<footer class="footer">
-  <div class="container">
-    <p>Coded by <a href="http://twitter.com/tommc1985" target="_blank">@tommc1985</a>.</p>
-    <p>Codebase available to download for free from <a href="https://github.com/tommc1985/football-website" target="_blank">GitHub</a> and licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>.</p>
-    <p>This couldn't have been possible without <a href="http://codeigniter.com" target="_blank">CodeIgniter</a>, <a href="http://getbootstrap.com/" target="_blank">Bootstrap 2.3.2</a> &amp;  <a href="http://www.chartjs.org/" target="_blank">ChartJS</a></p>
-  </div>
-</footer>
+
+
+    <footer class="footer">
+        <div class="container">
+            <p>Coded by <a href="http://twitter.com/tommc1985" target="_blank">@tommc1985</a>.</p>
+            <p>Codebase available to download for free from <a href="https://github.com/tommc1985/football-website" target="_blank">GitHub</a> and licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>.</p>
+            <p>Built with a combination of <a href="http://codeigniter.com" target="_blank">CodeIgniter</a>, <a href="http://getbootstrap.com/" target="_blank">Bootstrap 2.3.2</a> &amp;  <a href="http://www.chartjs.org/" target="_blank">ChartJS</a></p>
+        </div>
+    </footer>
 
 <!-- Le javascript
     ================================================== -->
