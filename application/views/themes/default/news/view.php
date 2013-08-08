@@ -4,6 +4,6 @@
 
         <h3 itemprop="headline"><?php echo $article->title; ?></h3>
         <p itemprop="articleBody"><?php echo nl2br($article->content); ?></p>
-        <p><?php echo $this->lang->line('news_published_on'); ?> <time itemprop="datePublished" datetime="<?php echo Utility_helper::formattedDate($article->publish_date, "c"); ?>"><?php echo Utility_helper::longDateTime($article->publish_date); ?></time></p>
+        <p class="muted"><?php echo $this->lang->line('news_published_on'); ?> <time itemprop="datePublished" datetime="<?php echo Utility_helper::formattedDate($article->publish_date, "c"); ?>"><?php echo Utility_helper::longDateTime($article->publish_date); ?></time></p>
     </div>
 </div>
