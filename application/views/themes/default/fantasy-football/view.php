@@ -2,7 +2,7 @@
     <div class="span12">
 
     <?php
-    echo form_open($this->uri->uri_string(), array('class' => 'form-inline')); ?>
+    echo form_open($this->uri->uri_string(), array('class' => 'form-horizontal')); ?>
 
         <h2><?php echo $this->lang->line('fantasy_football_title'); ?> - <?php echo Utility_helper::formattedSeason($season); ?><?php echo ($type != 'overall' ? ' (' . Competition_helper::type($type) . ' ' . $this->lang->line("fantasy_football_matches") . ')' : ''); ?></h2>
 
@@ -25,13 +25,13 @@ $submit = array(
                 <fieldset>
                     <legend><?php echo $this->lang->line('global_filters');?></legend>
                         <div class="control-group">
+                            <?php echo form_label($this->lang->line('fantasy_football_competition_type'), $inputType['id'], array('class'  => 'control-label')); ?>
                             <div class="controls">
-                                <?php echo form_label($this->lang->line('fantasy_football_competition_type'), $inputType['id']); ?>
                                 <?php echo form_dropdown($inputType['name'], $inputType['options'], $inputType['value'], "id='{$inputType['id']}'"); ?>
+                                <?php
+                                echo form_submit($submit); ?>
                             </div>
                         </div>
-                    <?php
-                    echo form_submit($submit); ?>
                 </fieldset>
             </div>
         </div>
@@ -68,19 +68,19 @@ $submit = array(
                 <fieldset>
                     <legend><?php echo $this->lang->line('global_filters');?></legend>
                         <div class="control-group">
+                            <?php echo form_label($this->lang->line('fantasy_football_position'), $inputPosition['id'], array('class'  => 'control-label')); ?>
                             <div class="controls">
-                                <?php echo form_label($this->lang->line('fantasy_football_position'), $inputPosition['id']); ?>
                                 <?php echo form_dropdown($inputPosition['name'], $inputPosition['options'], $inputPosition['value'], "id='{$inputPosition['id']}'"); ?>
                             </div>
                         </div>
                         <div class="control-group">
+                            <?php echo form_label($this->lang->line('fantasy_football_order_by'), $inputOrderBy['id'], array('class'  => 'control-label')); ?>
                             <div class="controls">
-                                <?php echo form_label($this->lang->line('fantasy_football_order_by'), $inputOrderBy['id']); ?>
                                 <?php echo form_dropdown($inputOrderBy['name'], $inputOrderBy['options'], $inputOrderBy['value'], "id='{$inputOrderBy['id']}'"); ?>
+                                <?php
+                                echo form_submit($submit); ?>
                             </div>
                         </div>
-                    <?php
-                    echo form_submit($submit); ?>
                 </fieldset>
             </div>
         </div>
@@ -226,19 +226,19 @@ $submit = array(
                 <fieldset>
                     <legend><?php echo $this->lang->line('global_filters');?></legend>
                         <div class="control-group">
+                            <?php echo form_label($this->lang->line('fantasy_football_measurement'), $inputMeasurement['id'], array('class'  => 'control-label')); ?>
                             <div class="controls">
-                                <?php echo form_label($this->lang->line('fantasy_football_measurement'), $inputMeasurement['id']); ?>
                                 <?php echo form_dropdown($inputMeasurement['name'], $inputMeasurement['options'], $inputMeasurement['value'], "id='{$inputMeasurement['id']}'"); ?>
                             </div>
                         </div>
                         <div class="control-group">
+                            <?php echo form_label($this->lang->line('fantasy_football_formation'), $inputFormation['id'], array('class'  => 'control-label')); ?>
                             <div class="controls">
-                                <?php echo form_label($this->lang->line('fantasy_football_formation'), $inputFormation['id']); ?>
                                 <?php echo form_dropdown($inputFormation['name'], $inputFormation['options'], $inputFormation['value'], "id='{$inputFormation['id']}'"); ?>
+                                <?php
+                                echo form_submit($submit); ?>
                             </div>
                         </div>
-                    <?php
-                    echo form_submit($submit); ?>
                 </fieldset>
             </div>
         </div>
