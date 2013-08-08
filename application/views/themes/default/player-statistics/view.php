@@ -5,7 +5,7 @@
         <div class="row-fluid">
             <div class="span12">
 <?php
-echo form_open($this->uri->uri_string());
+echo form_open($this->uri->uri_string(), array('class' => 'form-horizontal'));
 
 $inputType = array(
     'name'    => 'type',
@@ -28,16 +28,33 @@ $inputUnit = array(
     'value'   => set_value('unit', $unit),
 );
 
-echo form_label($this->lang->line('player_statistics_competition_type'), $inputType['name']);
-echo form_dropdown($inputType['name'], $inputType['options'], $inputType['value'], "id='{$inputType['id']}'");
+$submit = array(
+    'name'    => 'submit',
+    'id'      => 'submit',
+    'value'   => $this->lang->line('player_statistics_show'),
+    'class'   => 'btn',
+); ?>
 
-echo form_label($this->lang->line('player_statistics_threshold'), $inputThreshold['name']);
-echo form_dropdown($inputThreshold['name'], $inputThreshold['options'], $inputThreshold['value'], "id='{$inputThreshold['id']}'");
-
-echo form_dropdown($inputUnit['name'], $inputUnit['options'], $inputUnit['value']); ?>
+<fieldset>
+        <legend><?php echo $this->lang->line('global_filters');?></legend>
+        <div class="control-group">
+            <?php echo form_label($this->lang->line('player_statistics_competition_type'), $inputType['id'], array('class' => 'control-label')); ?>
+            <div class="controls">
+                <?php echo form_dropdown($inputType['name'], $inputType['options'], $inputType['value'], "id='{$inputType['id']}'"); ?>
+            </div>
+        </div>
+        <div class="control-group">
+            <?php echo form_label($this->lang->line('player_statistics_threshold'), $inputThreshold['id'], array('class' => 'control-label')); ?>
+            <div class="controls">
+                <?php echo form_dropdown($inputThreshold['name'], $inputThreshold['options'], $inputThreshold['value'], "id='{$inputThreshold['id']}'"); ?>
+                <?php echo form_dropdown($inputUnit['name'], $inputUnit['options'], $inputUnit['value']); ?>
+                <?php
+                echo form_submit($submit); ?>
+            </div>
+        </div>
+</fieldset>
 
 <?php
-echo form_submit('submit', $this->lang->line('player_statistics_show'));
 echo form_close(); ?>
 
 <p><?php
