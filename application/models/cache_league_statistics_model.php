@@ -274,7 +274,7 @@ class Cache_League_Statistics_model extends CI_Model {
             $matches = $this->ci->League_model->fetchMatches($leagueId, $club->opposition_id);
 
             foreach ($matches as $match) {
-                if (!is_null($match->h_score) && !is_null($match->h_score) && is_null($match->status)) {
+                if (!is_null($match->h_score)) {
                     switch($venue) {
                         case 'h':
                             if ($club->opposition_id == $match->h_opposition_id) {
@@ -865,6 +865,7 @@ class Cache_League_Statistics_model extends CI_Model {
         foreach ($leagues as $league) {
             foreach ($this->venues as $venue) {
                 foreach ($this->methodMap as $method) {
+                    echo "\$this->{$method}({$league->id}, {$venue});<br />";
                     $this->$method($league->id, $venue);
                 }
             }
