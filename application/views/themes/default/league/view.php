@@ -50,7 +50,11 @@ $submit = array(
         <div class="row-fluid">
             <div class="span10 offset1">
                 <h3><?php echo $this->lang->line('league_league_table'); ?><?php echo $type != 'overall' ? " (" . $this->lang->line("league_{$type}_matches_only") . ")" : ''; ?></h3>
+                <?php
+                if ($dateUntil != 'overall') { ?>
                 <h4><?php echo sprintf($this->lang->line('league_as_of'), $dateUntil != 'overall' ? Utility_helper::shortDate($dateUntil) : Utility_helper::shortDate(time())); ?></h4>
+                <?php
+                } ?>
                 <?php
                 if ($standings) { ?>
                 <table class="no-more-tables width-100-percent table table-striped table-condensed">
