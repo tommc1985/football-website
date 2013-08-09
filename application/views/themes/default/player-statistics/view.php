@@ -18,14 +18,7 @@ $inputThreshold = array(
     'name'    => 'threshold',
     'id'      => 'threshold',
     'options' => $this->Player_Statistics_model->fetchThresholdsForDropdown($matchCount),
-    'value'   => set_value('threshold', $unit == 'percentage' ? $thresholdPercentage : $thresholdMatches),
-);
-
-$inputUnit = array(
-    'name'    => 'unit',
-    'id'      => 'unit',
-    'options' => $this->Player_Statistics_model->fetchUnitsForDropdown(),
-    'value'   => set_value('unit', $unit),
+    'value'   => set_value('threshold', $threshold),
 );
 
 $submit = array(
@@ -47,7 +40,6 @@ $submit = array(
             <?php echo form_label($this->lang->line('player_statistics_threshold'), $inputThreshold['id'], array('class' => 'control-label')); ?>
             <div class="controls">
                 <?php echo form_dropdown($inputThreshold['name'], $inputThreshold['options'], $inputThreshold['value'], "id='{$inputThreshold['id']}'"); ?>
-                <?php echo form_dropdown($inputUnit['name'], $inputUnit['options'], $inputUnit['value']); ?>
                 <?php
                 echo form_submit($submit); ?>
             </div>
@@ -59,12 +51,28 @@ echo form_close(); ?>
 
 <p><?php
 echo $this->lang->line('player_statistics_threshold_current');
-if ($unit == 'percentage') {
-    echo sprintf($this->lang->line('player_statistics_threshold_percentage'), $thresholdPercentage);
-} else {
-    echo sprintf($this->lang->line('player_statistics_threshold_matches'), $thresholdMatches);
-} ?></p>
 
+echo $threshold == 1 ? sprintf($this->lang->line('player_statistics_threshold_match'), $threshold) : sprintf($this->lang->line('player_statistics_threshold_matches'), $threshold); ?></p>
+
+                <ul class="nav nav-tabs nav-stacked">
+                <?php
+                foreach ($this->Cache_Player_Statistics_model->methodMap as $statisticGroup => $method) { ?>
+                    <li><a href="#<?php echo $statisticGroup; ?>"><?php echo $this->lang->line("player_statistics_{$statisticGroup}"); ?></a></li>
+                <?php
+                } ?>
+                <?php
+                foreach ($this->Cache_Player_Statistics_model->hungryMethodMap as $statisticGroup => $method) { ?>
+                    <li><a href="#<?php echo $statisticGroup; ?>"><?php echo $this->lang->line("player_statistics_{$statisticGroup}"); ?></a></li>
+                <?php
+                } ?>
+                <?php
+                foreach ($this->Cache_Player_Statistics_model->otherMethodMap as $statisticGroup => $method) {
+                    if (method_exists('Player_Statistics_helper', $method)) { ?>
+                    <li<?php echo $season != 'all-time' ? ' class="disabled"' : ''; ?>><a href="#<?php echo $statisticGroup; ?>"><?php echo $this->lang->line("player_statistics_{$statisticGroup}"); ?><?php echo $season != 'all-time' ? ' (' . $this->lang->line("player_statistics_viewable_on_all_time_statistics") . ')' : ''; ?></a></li>
+                <?php
+                    }
+                } ?>
+                </ul>
             </div>
         </div>
 
@@ -118,6 +126,26 @@ foreach($this->Cache_Player_Statistics_model->hungryMethodMap as $statisticGroup
 if (1 == $i % 2) { ?>
         </div>
 <?php
+} ?>
+
+<?php
+if ($season == 'all-time') {
+    $i = 0; ?>
+        <div class="row-fluid">
+    <?php
+    foreach($this->Cache_Player_Statistics_model->otherMethodMap as $statisticGroup => $method) {
+        if (method_exists('Player_Statistics_helper', $method)) { ?>
+            <div class="span6">
+                <?php
+                Player_Statistics_helper::$method($statistics, $season); ?>
+            </div>
+        <?php
+        }
+
+        $i++;
+    } ?>
+        </div>
+    <?php
 } ?>
     </div>
 </div>

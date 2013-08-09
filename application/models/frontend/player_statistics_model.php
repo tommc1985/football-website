@@ -22,16 +22,18 @@ class Player_Statistics_model extends Base_Frontend_Model {
      * Fetch all Player Statistics
      * @param  string           Season of Statistics
      * @param  string           Type of Statistics
+     * @param  int              Matches Played Threshold
      * @return array            Returned Statistics
      */
-    public function fetchAll($season, $type, $player_id = false)
+    public function fetchAll($season, $type, $threshold)
     {
         $this->db->select('*');
         $this->db->from($this->tableName);
 
         $this->db->where('season', $season);
         $this->db->where('type', $type);
-        $this->db->order_by('CAST(`statistic_key` AS SIGNED)', 'desc');
+        $this->db->where("(matches_played >= {$threshold} || matches_played IS NULL)", NULL, false);
+        $this->db->order_by('CAST(`statistic_key` AS DECIMAL(5, 2)) DESC, matches_played ASC');
 
         $result = $this->db->get();
 
@@ -54,35 +56,20 @@ class Player_Statistics_model extends Base_Frontend_Model {
      * Fetch Threshold values for dropdown
      * @return array List of threshold values
      */
-    public static function fetchThresholdsForDropdown($matches)
+    public static function fetchThresholdsForDropdown($maxValue)
     {
         $i = 1;
         $options = array();
 
-        $maxValue = $matches > 100 ? $matches : 100;
-        while ($i <= $maxValue) {
+        do {
             $options[$i] = $i;
 
             $i++;
-        }
+        } while ($i <= $maxValue);
 
         $options = array_reverse($options, true);
 
         return $options;
-    }
-
-    /**
-     * Fetch Unit values for dropdown
-     * @return array List of Units
-     */
-    public static function fetchUnitsForDropdown()
-    {
-        $ci =& get_instance();
-
-        return array(
-            'percentage' => $ci->lang->line('player_statistics_percent'),
-            'matches'    => $ci->lang->line('player_statistics_matche_s'),
-        );
     }
 
 }
