@@ -3,6 +3,18 @@
 <?php
 echo form_open($this->uri->uri_string(), array('class' => 'form-horizontal')); ?>
         <h2><?php echo $this->lang->line('league_title'); ?> - <?php echo League_helper::name($id); ?></h2><?php
+$inputType = array(
+    'name'       => 'type',
+    'id'         => 'type',
+    'options'    => array(
+        'overall' => 'Home &amp; Away',
+        'home'    => 'Home',
+        'away'    => 'Away'
+    ),
+    'value'      => set_value('type', $type),
+    'attributes' => 'class="input-medium"',
+);
+
 $inputDateUntil = array(
     'name'       => 'date-until',
     'id'         => 'date-until',
@@ -20,6 +32,12 @@ $submit = array(
 <fieldset>
         <legend><?php echo $this->lang->line('global_filters');?></legend>
         <div class="control-group">
+            <?php echo form_label($this->lang->line('league_type'), $inputType['id'], array('class' => 'control-label')); ?>
+            <div class="controls">
+                <?php echo form_dropdown($inputType['name'], $inputType['options'], $inputType['value'], "id='{$inputType['id']}' {$inputType['attributes']}"); ?>
+            </div>
+        </div>
+        <div class="control-group">
             <?php echo form_label($this->lang->line('league_include_date_upto'), $inputDateUntil['id'], array('class' => 'control-label')); ?>
             <div class="controls">
                 <?php echo form_dropdown($inputDateUntil['name'], $inputDateUntil['options'], $inputDateUntil['value'], "id='{$inputDateUntil['id']}'"); ?>
@@ -31,7 +49,7 @@ $submit = array(
 
         <div class="row-fluid">
             <div class="span10 offset1">
-                <h3><?php echo $this->lang->line('league_league_table'); ?></h3>
+                <h3><?php echo $this->lang->line('league_league_table'); ?><?php echo $type != 'overall' ? " (" . $this->lang->line("league_{$type}_matches_only") . ")" : ''; ?></h3>
                 <h4><?php echo sprintf($this->lang->line('league_as_of'), $dateUntil != 'overall' ? Utility_helper::shortDate($dateUntil) : Utility_helper::shortDate(time())); ?></h4>
                 <?php
                 if ($standings) { ?>
@@ -109,10 +127,10 @@ $submit = array(
 
                 <?php
                 if ($dateUntil != 'overall') { ?>
-                    <h4><?php echo sprintf($formMatchCount == 1 ? $this->lang->line("league_last_x_match") : $this->lang->line("league_last_x_matches"), $formMatchCount) . ' ' . sprintf(strtolower($this->lang->line('league_as_of')), $dateUntil != 'overall' ? Utility_helper::shortDate($dateUntil) : Utility_helper::shortDate(time())); ?></h4>
+                    <h4><?php echo sprintf($formMatchCount == 1 ? $this->lang->line("league_last_x_match") : $this->lang->line("league_last_x_matches"), $formMatchCount, $this->lang->line("league_{$type}")) . ' ' . sprintf(strtolower($this->lang->line('league_as_of')), $dateUntil != 'overall' ? Utility_helper::shortDate($dateUntil) : Utility_helper::shortDate(time())); ?></h4>
                 <?php
                 } else { ?>
-                    <h4><?php echo sprintf($formMatchCount == 1 ? $this->lang->line("league_last_x_match") : $this->lang->line("league_last_x_matches"), $formMatchCount); ?></h4>
+                    <h4><?php echo sprintf($formMatchCount == 1 ? $this->lang->line("league_last_x_match") : $this->lang->line("league_last_x_matches"), $formMatchCount, $this->lang->line("league_{$type}")); ?></h4>
                 <?php
                 } ?>
                 <?php

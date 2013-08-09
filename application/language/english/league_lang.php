@@ -47,17 +47,25 @@ $lang['league_fixtures_and_results']    = 'Fixtures &amp; Results';
 $lang['league_form_last_x_matches']     = 'Form';
 
 
-$lang['league_include_date_upto']       = 'Include data upto';
+$lang['league_include_date_upto']       = 'Include matches upto';
 $lang['league_date_until']              = 'Date Until';
 $lang['league_date']                    = 'Date';
 $lang['league_as_of']                   = 'As of %s';
 
 $lang['league_form_over_the_last']      = 'Form over the last';
-$lang['league_last_x_match']            = 'Last %d match';
-$lang['league_last_x_matches']          = 'Last %d matches';
+$lang['league_last_x_match']            = 'Last %d %s match';
+$lang['league_last_x_matches']          = 'Last %d %s matches';
 $lang['league_matches']                 = 'matches';
 
+$lang['league_type']                    = 'Type';
+$lang['league_home']                    = 'Home';
+$lang['league_away']                    = 'Away';
+$lang['league_overall']                 = '';
+
 $lang['league_refresh']                 = 'Refresh';
+
+$lang['league_home_matches_only']       = 'Home matches only';
+$lang['league_away_matches_only']       = 'Away matches only';
 
 
 $lang['league_team']                    = 'Team';

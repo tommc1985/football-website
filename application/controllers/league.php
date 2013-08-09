@@ -44,9 +44,9 @@ class League extends Frontend_Controller {
             $redirectString = '/league/view/id/' . $parameters['id'];
 
             $postType = $this->input->post('type');
-            /*if ($postType != $type) {
+            if ($postType != $type) {
                 $redirectString .= '/type/' . $postType;
-            }*/
+            }
 
             if ($this->input->post('date-until')) {
                 $redirectString .= '/date-until/' . $this->input->post('date-until');
