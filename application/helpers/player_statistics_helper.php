@@ -140,9 +140,9 @@ class Player_Statistics_helper
         foreach ($statistics[$statisticGroup] as $player) {
             if ($player->matches_played >= $matchThreshold) { ?>
                 <tr>
-                    <td class="width-5-percent text-align-center"><?php echo $player->points_gained; ?></td>
-                    <td class="width-80-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
-                    <td class="width-15-percent text-align-center"><?php echo $player->matches_played; ?> <?php echo $ci->lang->line($player->matches_played == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
+                    <td class="width-10-percent text-align-center"><?php echo $player->points_gained; ?></td>
+                    <td class="width-65-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
+                    <td class="width-25-percent text-align-center"><?php echo $player->matches_played; ?> <?php echo $ci->lang->line($player->matches_played == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                 </tr>
         <?php
                 $count++;
@@ -185,9 +185,9 @@ class Player_Statistics_helper
         foreach ($statistics[$statisticGroup] as $player) {
             if ($player->matches >= $matchThreshold) { ?>
                 <tr>
-                    <td class="width-5-percent text-align-center"><?php echo number_format($player->points_gained, 2); ?></td>
-                    <td class="width-80-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
-                    <td class="width-15-percent text-align-left"><?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
+                    <td class="width-10-percent text-align-center"><?php echo number_format($player->points_gained, 2); ?></td>
+                    <td class="width-65-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
+                    <td class="width-25-percent text-align-left"><?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                 </tr>
         <?php
                 $count++;
@@ -230,9 +230,9 @@ class Player_Statistics_helper
         foreach ($statistics[$statisticGroup] as $player) {
             if ($player->matches_played >= $matchThreshold) { ?>
                 <tr>
-                    <td class="width-5-percent text-align-center"><?php echo $player->points; ?></td>
-                    <td class="width-80-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
-                    <td class="width-15-percent text-align-left"><?php echo $player->matches_played; ?> <?php echo $ci->lang->line($player->matches_played == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
+                    <td class="width-10-percent text-align-center"><?php echo $player->points; ?></td>
+                    <td class="width-65-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
+                    <td class="width-25-percent text-align-left"><?php echo $player->matches_played; ?> <?php echo $ci->lang->line($player->matches_played == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                 </tr>
         <?php
                 $count++;
@@ -275,9 +275,9 @@ class Player_Statistics_helper
         foreach ($statistics[$statisticGroup] as $player) {
             if ($player->matches >= $matchThreshold) { ?>
                 <tr>
-                    <td class="width-5-percent text-align-center"><?php echo number_format($player->points, 2); ?></td>
-                    <td class="width-80-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
-                    <td class="width-15-percent text-align-left"><?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
+                    <td class="width-10-percent text-align-center"><?php echo number_format($player->points, 2); ?></td>
+                    <td class="width-65-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
+                    <td class="width-25-percent text-align-left"><?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                 </tr>
         <?php
                 $count++;
@@ -320,9 +320,9 @@ class Player_Statistics_helper
         foreach ($statistics[$statisticGroup] as $player) {
             if ($player->matches_played >= $matchThreshold) { ?>
                 <tr>
-                    <td class="width-5-percent text-align-center"><?php echo $player->goals_gained; ?></td>
-                    <td class="width-80-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
-                    <td class="width-15-percent text-align-left"><?php echo $player->matches_played; ?> <?php echo $ci->lang->line($player->matches_played == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
+                    <td class="width-10-percent text-align-center"><?php echo $player->goals_gained; ?></td>
+                    <td class="width-65-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
+                    <td class="width-25-percent text-align-left"><?php echo $player->matches_played; ?> <?php echo $ci->lang->line($player->matches_played == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                 </tr>
         <?php
                 $count++;
@@ -365,9 +365,9 @@ class Player_Statistics_helper
         foreach ($statistics[$statisticGroup] as $player) {
             if ($player->matches >= $matchThreshold) { ?>
                 <tr>
-                    <td class="width-5-percent text-align-center"><?php echo number_format($player->goals_gained, 2); ?></td>
-                    <td class="width-80-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
-                    <td class="width-15-percent text-align-left"><?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
+                    <td class="width-10-percent text-align-center"><?php echo number_format($player->goals_gained, 2); ?></td>
+                    <td class="width-65-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
+                    <td class="width-25-percent text-align-left"><?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                 </tr>
         <?php
                 $count++;
@@ -410,9 +410,9 @@ class Player_Statistics_helper
         foreach ($statistics[$statisticGroup] as $player) {
             if ($player->matches_played >= $matchThreshold) { ?>
                 <tr>
-                    <td class="width-5-percent text-align-center"><?php echo $player->goals; ?></td>
-                    <td class="width-80-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
-                    <td class="width-15-percent text-align-left"><?php echo $player->matches_played; ?> <?php echo $ci->lang->line($player->matches_played == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
+                    <td class="width-10-percent text-align-center"><?php echo $player->goals; ?></td>
+                    <td class="width-65-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
+                    <td class="width-25-percent text-align-left"><?php echo $player->matches_played; ?> <?php echo $ci->lang->line($player->matches_played == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                 </tr>
         <?php
                 $count++;
@@ -455,9 +455,9 @@ class Player_Statistics_helper
         foreach ($statistics[$statisticGroup] as $player) {
             if ($player->matches >= $matchThreshold) { ?>
                 <tr>
-                    <td class="width-5-percent text-align-center"><?php echo number_format($player->goals, 2); ?></td>
-                    <td class="width-80-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
-                    <td class="width-15-percent text-align-left"><?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
+                    <td class="width-10-percent text-align-center"><?php echo number_format($player->goals, 2); ?></td>
+                    <td class="width-65-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
+                    <td class="width-25-percent text-align-left"><?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                 </tr>
         <?php
                 $count++;
@@ -501,9 +501,9 @@ class Player_Statistics_helper
         foreach ($players as $player) {
             if ($player->matches >= $matchThreshold) { ?>
                 <tr>
-                    <td class="width-5-percent text-align-center"><?php echo number_format($player->goals, 2); ?></td>
-                    <td class="width-80-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
-                    <td class="width-15-percent text-align-left"><?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
+                    <td class="width-10-percent text-align-center"><?php echo number_format($player->goals, 2); ?></td>
+                    <td class="width-65-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
+                    <td class="width-25-percent text-align-left"><?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                 </tr>
         <?php
                 $count++;
@@ -546,9 +546,9 @@ class Player_Statistics_helper
         foreach ($statistics[$statisticGroup] as $player) {
             if ($player->matches >= $matchThreshold) { ?>
                 <tr>
-                    <td class="width-5-percent text-align-center"><?php echo $player->clean_sheets; ?></td>
-                    <td class="width-80-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
-                    <td class="width-15-percent text-align-left"><?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
+                    <td class="width-10-percent text-align-center"><?php echo $player->clean_sheets; ?></td>
+                    <td class="width-65-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
+                    <td class="width-25-percent text-align-left"><?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                 </tr>
         <?php
                 $count++;
@@ -591,9 +591,9 @@ class Player_Statistics_helper
         foreach ($statistics[$statisticGroup] as $player) {
             if ($player->matches >= $matchThreshold) { ?>
                 <tr>
-                    <td class="width-5-percent text-align-center"><?php echo number_format($player->clean_sheets, 2); ?></td>
-                    <td class="width-80-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
-                    <td class="width-15-percent text-align-left"><?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
+                    <td class="width-10-percent text-align-center"><?php echo number_format($player->clean_sheets, 2); ?></td>
+                    <td class="width-65-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
+                    <td class="width-25-percent text-align-left"><?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                 </tr>
         <?php
                 $count++;
@@ -635,7 +635,7 @@ class Player_Statistics_helper
                 <tr>
                     <td class="width-20-percent text-align-center"><?php echo $player->sequence; ?> <?php echo $ci->lang->line($player->sequence == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                     <td class="width-40-percent"><?php echo Player_helper::fullName($player->playerId); ?></td>
-                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo Utility_helper::shortDate($player->sequenceFinish); ?></td>
+                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo $player->sequenceFinish == '' ? $ci->lang->line("player_statistics_present") : Utility_helper::shortDate($player->sequenceFinish); ?></td>
                 </tr>
         <?php
         } ?>
@@ -668,7 +668,7 @@ class Player_Statistics_helper
                 <tr>
                     <td class="width-20-percent text-align-center"><?php echo $player->sequence; ?> <?php echo $ci->lang->line($player->sequence == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                     <td class="width-40-percent"><?php echo Player_helper::fullName($player->playerId); ?></td>
-                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo Utility_helper::shortDate($player->sequenceFinish); ?></td>
+                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo $player->sequenceFinish == '' ? $ci->lang->line("player_statistics_present") : Utility_helper::shortDate($player->sequenceFinish); ?></td>
                 </tr>
         <?php
         } ?>
@@ -701,7 +701,7 @@ class Player_Statistics_helper
                 <tr>
                     <td class="width-20-percent text-align-center"><?php echo $player->sequence; ?> <?php echo $ci->lang->line($player->sequence == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                     <td class="width-40-percent"><?php echo Player_helper::fullName($player->playerId); ?></td>
-                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo Utility_helper::shortDate($player->sequenceFinish); ?></td>
+                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo $player->sequenceFinish == '' ? $ci->lang->line("player_statistics_present") : Utility_helper::shortDate($player->sequenceFinish); ?></td>
                 </tr>
         <?php
         } ?>
@@ -734,7 +734,7 @@ class Player_Statistics_helper
                 <tr>
                     <td class="width-20-percent text-align-center"><?php echo $player->sequence; ?> <?php echo $ci->lang->line($player->sequence == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                     <td class="width-40-percent"><?php echo Player_helper::fullName($player->playerId); ?></td>
-                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo Utility_helper::shortDate($player->sequenceFinish); ?></td>
+                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo $player->sequenceFinish == '' ? $ci->lang->line("player_statistics_present") : Utility_helper::shortDate($player->sequenceFinish); ?></td>
                 </tr>
         <?php
         } ?>
@@ -767,7 +767,7 @@ class Player_Statistics_helper
                 <tr>
                     <td class="width-20-percent text-align-center"><?php echo $player->sequence; ?> <?php echo $ci->lang->line($player->sequence == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                     <td class="width-40-percent"><?php echo Player_helper::fullName($player->playerId); ?></td>
-                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo Utility_helper::shortDate($player->sequenceFinish); ?></td>
+                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo $player->sequenceFinish == '' ? $ci->lang->line("player_statistics_present") : Utility_helper::shortDate($player->sequenceFinish); ?></td>
                 </tr>
         <?php
         } ?>

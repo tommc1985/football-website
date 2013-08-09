@@ -12,6 +12,8 @@ $lang['player_statistics_show']                                            = 'Sh
 $lang['player_statistics_matches']                                         = 'matches';
 $lang['player_statistics_match']                                           = 'match';
 
+$lang['player_statistics_present']                                         = 'present';
+
 $lang['player_statistics_hattricks']                                       = 'Hat Tricks';
 $lang['player_statistics_no_hattricks']                                    = 'No Hat Tricks were scored';
 $lang['player_statistics_hattricks_explanation']                           = 'List of Hat Tricks with most goals scored in a game at the top.';
