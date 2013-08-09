@@ -630,7 +630,7 @@ class Player_Statistics_helper
                 <tr>
                     <td class="width-20-percent text-align-center"><?php echo $player->sequence; ?> <?php echo $ci->lang->line($player->sequence == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                     <td class="width-40-percent"><?php echo Player_helper::fullName($player->playerId); ?></td>
-                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo $player->sequenceFinish == '' ? $ci->lang->line("player_statistics_present") : Utility_helper::shortDate($player->sequenceFinish); ?></td>
+                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo Utility_helper::shortDate($player->sequenceFinish) . ($player->ongoing ? ' *' : ''); ?></td>
                 </tr>
         <?php
         } ?>
@@ -663,7 +663,7 @@ class Player_Statistics_helper
                 <tr>
                     <td class="width-20-percent text-align-center"><?php echo $player->sequence; ?> <?php echo $ci->lang->line($player->sequence == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                     <td class="width-40-percent"><?php echo Player_helper::fullName($player->playerId); ?></td>
-                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo $player->sequenceFinish == '' ? $ci->lang->line("player_statistics_present") : Utility_helper::shortDate($player->sequenceFinish); ?></td>
+                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo Utility_helper::shortDate($player->sequenceFinish) . ($player->ongoing ? ' *' : ''); ?></td>
                 </tr>
         <?php
         } ?>
@@ -696,7 +696,7 @@ class Player_Statistics_helper
                 <tr>
                     <td class="width-20-percent text-align-center"><?php echo $player->sequence; ?> <?php echo $ci->lang->line($player->sequence == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                     <td class="width-40-percent"><?php echo Player_helper::fullName($player->playerId); ?></td>
-                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo $player->sequenceFinish == '' ? $ci->lang->line("player_statistics_present") : Utility_helper::shortDate($player->sequenceFinish); ?></td>
+                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo Utility_helper::shortDate($player->sequenceFinish) . ($player->ongoing ? ' *' : ''); ?></td>
                 </tr>
         <?php
         } ?>
@@ -729,7 +729,7 @@ class Player_Statistics_helper
                 <tr>
                     <td class="width-20-percent text-align-center"><?php echo $player->sequence; ?> <?php echo $ci->lang->line($player->sequence == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                     <td class="width-40-percent"><?php echo Player_helper::fullName($player->playerId); ?></td>
-                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo $player->sequenceFinish == '' ? $ci->lang->line("player_statistics_present") : Utility_helper::shortDate($player->sequenceFinish); ?></td>
+                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo Utility_helper::shortDate($player->sequenceFinish) . ($player->ongoing ? ' *' : ''); ?></td>
                 </tr>
         <?php
         } ?>
@@ -762,7 +762,7 @@ class Player_Statistics_helper
                 <tr>
                     <td class="width-20-percent text-align-center"><?php echo $player->sequence; ?> <?php echo $ci->lang->line($player->sequence == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                     <td class="width-40-percent"><?php echo Player_helper::fullName($player->playerId); ?></td>
-                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo $player->sequenceFinish == '' ? $ci->lang->line("player_statistics_present") : Utility_helper::shortDate($player->sequenceFinish); ?></td>
+                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo Utility_helper::shortDate($player->sequenceFinish) . ($player->ongoing ? ' *' : ''); ?></td>
                 </tr>
         <?php
         } ?>
