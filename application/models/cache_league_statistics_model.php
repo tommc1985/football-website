@@ -306,16 +306,17 @@ class Cache_League_Statistics_model extends CI_Model {
     {
         $records = array();
 
-        $record = new stdClass();
-        $record->clubId = NULL;
-        $record->sequence = 0;
-        $record->sequenceStart = '';
+        $record                 = new stdClass();
+        $record->clubId         = NULL;
+        $record->sequence       = 0;
+        $record->sequenceStart  = '';
         $record->sequenceFinish = '';
+        $record->ongoing        = false;
 
         if (count($matches) > 0) {
-            $highestSequence = 0;
-            $currentSequence = 0;
-            $currentSequenceStart = '';
+            $highestSequence       = 0;
+            $currentSequence       = 0;
+            $currentSequenceStart  = '';
             $currentSequenceFinish = '';
 
             foreach ($matches as $match) {
@@ -336,16 +337,18 @@ class Cache_League_Statistics_model extends CI_Model {
                     if ($currentSequence > $highestSequence) {
                         $highestSequence = $currentSequence;
 
-                        $record->sequence = $currentSequence;
-                        $record->sequenceStart = $currentSequenceStart;
+                        $record->sequence       = $currentSequence;
+                        $record->sequenceStart  = $currentSequenceStart;
                         $record->sequenceFinish = $currentSequenceFinish;
+                        $record->ongoing        = false;
 
                         $records = array();
                         $records[uniqid()] = $record;
                     } elseif ($currentSequence == $highestSequence && $currentSequence > 0) {
-                        $record->sequence = $currentSequence;
-                        $record->sequenceStart = $currentSequenceStart;
+                        $record->sequence       = $currentSequence;
+                        $record->sequenceStart  = $currentSequenceStart;
                         $record->sequenceFinish = $currentSequenceFinish;
+                        $record->ongoing        = false;
 
                         $records[uniqid()] = $record;
                     }
@@ -361,16 +364,18 @@ class Cache_League_Statistics_model extends CI_Model {
             if ($currentSequence > $highestSequence) {
                 $highestSequence = $currentSequence;
 
-                $record->sequence = $currentSequence;
-                $record->sequenceStart = $currentSequenceStart;
+                $record->sequence       = $currentSequence;
+                $record->sequenceStart  = $currentSequenceStart;
                 $record->sequenceFinish = $currentSequenceFinish;
+                $record->ongoing        = true;
 
                 $records = array();
                 $records[uniqid()] = $record;
             } elseif ($currentSequence == $highestSequence && $currentSequence > 0) {
-                $record->sequence = $currentSequence;
-                $record->sequenceStart = $currentSequenceStart;
+                $record->sequence       = $currentSequence;
+                $record->sequenceStart  = $currentSequenceStart;
                 $record->sequenceFinish = $currentSequenceFinish;
+                $record->ongoing        = true;
 
                 $records[uniqid()] = $record;
             }
@@ -865,7 +870,6 @@ class Cache_League_Statistics_model extends CI_Model {
         foreach ($leagues as $league) {
             foreach ($this->venues as $venue) {
                 foreach ($this->methodMap as $method) {
-                    echo "\$this->{$method}({$league->id}, {$venue});<br />";
                     $this->$method($league->id, $venue);
                 }
             }

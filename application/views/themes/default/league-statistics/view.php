@@ -13,7 +13,7 @@ foreach ($this->Cache_League_Statistics_model->methodMap as $statisticGroup => $
         } ?>
             <div class="span6">
                 <?php
-                League_Statistics_helper::$method($statistics, $venue); ?>
+                League_Statistics_helper::$method($statistics, $season, $venue); ?>
             </div>
         <?php
         if (1 == $i % 2) { ?>

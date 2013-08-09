@@ -6,6 +6,8 @@ $lang['league_statistics_title']                                     = 'League S
 $lang['league_statistics_match']                                     = 'match';
 $lang['league_statistics_matches']                                   = 'matches';
 
+$lang['league_statistics_ongoing_denotes']                           = '* denotes a sequence that is ongoing';
+
 $lang['league_statistics_biggest_win']                               = 'Biggest Win';
 $lang['league_statistics_biggest_win_h']                             = 'Biggest Home Win';
 $lang['league_statistics_biggest_win_a']                             = 'Biggest Away Win';

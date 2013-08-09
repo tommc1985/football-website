@@ -41,6 +41,7 @@ class League_Statistics extends Frontend_Controller {
 
         $this->templateData['statistics'] = $statistics;
         $this->templateData['id']         = $parameters['id'];
+        $this->templateData['season']     = $league->season;
         $this->templateData['venues']     = array(
             '',
             'h',
