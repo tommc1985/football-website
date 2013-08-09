@@ -48,7 +48,7 @@ foreach ($this->Cache_Club_Statistics_model->methodMap as $statisticGroup => $me
         } ?>
             <div class="span6">
                 <?php
-                Club_Statistics_helper::$method($statistics, $venue); ?>
+                Club_Statistics_helper::$method($statistics, $season, $venue); ?>
             </div>
         <?php
         if (1 == $i % 2) { ?>

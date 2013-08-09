@@ -12,6 +12,8 @@ $lang['player_statistics_show']                                            = 'Sh
 $lang['player_statistics_matches']                                         = 'matches';
 $lang['player_statistics_match']                                           = 'match';
 
+$lang['player_statistics_ongoing_denotes']                                 = '* denotes a sequence that is ongoing';
+
 $lang['player_statistics_present']                                         = 'present';
 
 $lang['player_statistics_hattricks']                                       = 'Hat Tricks';

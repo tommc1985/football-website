@@ -81,9 +81,10 @@ class Player_Statistics_helper
     /**
      * Show Hattricks
      * @param  array $statistics  Full set of Statistics
+     * @param  mixed $season      The selected season
      * @return NULL
      */
-    public static function hattricks($statistics)
+    public static function hattricks($statistics, $season)
     {
         $statisticGroup = "hattricks";
         if (!isset($statistics[$statisticGroup])) {
@@ -113,10 +114,10 @@ class Player_Statistics_helper
     /**
      * Show Real Points Gained
      * @param  array $statistics     Full set of Statistics
-     * @param  int $matchThreshold   Number of matches a player must have played to be included in the listed
+     * @param  mixed $season         The selected season
      * @return NULL
      */
-    public static function realPointsGained($statistics, $matchThreshold)
+    public static function realPointsGained($statistics, $season)
     {
         $statisticGroup = "real_points_gained";
         if (!isset($statistics[$statisticGroup])) {
@@ -132,16 +133,14 @@ class Player_Statistics_helper
             <tbody>
         <?php
         $count = 0;
-        foreach ($statistics[$statisticGroup] as $player) {
-            if ($player->matches_played >= $matchThreshold) { ?>
+        foreach ($statistics[$statisticGroup] as $player) { ?>
                 <tr>
                     <td class="width-10-percent text-align-center"><?php echo $player->points_gained; ?></td>
                     <td class="width-65-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
                     <td class="width-25-percent text-align-center"><?php echo $player->matches_played; ?> <?php echo $ci->lang->line($player->matches_played == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                 </tr>
         <?php
-                $count++;
-            }
+            $count++;
         }
 
         if ($count == 0) { ?>
@@ -158,10 +157,10 @@ class Player_Statistics_helper
     /**
      * Show Average Points Gained
      * @param  array $statistics     Full set of Statistics
-     * @param  int $matchThreshold   Number of matches a player must have played to be included in the listed
+     * @param  mixed $season         The selected season
      * @return NULL
      */
-    public static function averagePointsGained($statistics, $matchThreshold)
+    public static function averagePointsGained($statistics, $season)
     {
         $statisticGroup = "average_points_gained";
         if (!isset($statistics[$statisticGroup])) {
@@ -177,16 +176,14 @@ class Player_Statistics_helper
             <tbody>
         <?php
         $count = 0;
-        foreach ($statistics[$statisticGroup] as $player) {
-            if ($player->matches >= $matchThreshold) { ?>
+        foreach ($statistics[$statisticGroup] as $player) { ?>
                 <tr>
                     <td class="width-10-percent text-align-center"><?php echo number_format($player->points_gained, 2); ?></td>
                     <td class="width-65-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
                     <td class="width-25-percent text-align-left"><?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                 </tr>
         <?php
-                $count++;
-            }
+            $count++;
         }
 
         if ($count == 0) { ?>
@@ -203,10 +200,10 @@ class Player_Statistics_helper
     /**
      * Show Real Points
      * @param  array $statistics     Full set of Statistics
-     * @param  int $matchThreshold   Number of matches a player must have played to be included in the listed
+     * @param  mixed $season         The selected season
      * @return NULL
      */
-    public static function realPoints($statistics, $matchThreshold)
+    public static function realPoints($statistics, $season)
     {
         $statisticGroup = "real_points";
         if (!isset($statistics[$statisticGroup])) {
@@ -222,16 +219,14 @@ class Player_Statistics_helper
             <tbody>
         <?php
         $count = 0;
-        foreach ($statistics[$statisticGroup] as $player) {
-            if ($player->matches_played >= $matchThreshold) { ?>
+        foreach ($statistics[$statisticGroup] as $player) { ?>
                 <tr>
                     <td class="width-10-percent text-align-center"><?php echo $player->points; ?></td>
                     <td class="width-65-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
                     <td class="width-25-percent text-align-left"><?php echo $player->matches_played; ?> <?php echo $ci->lang->line($player->matches_played == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                 </tr>
         <?php
-                $count++;
-            }
+            $count++;
         }
 
         if ($count == 0) { ?>
@@ -248,10 +243,10 @@ class Player_Statistics_helper
     /**
      * Show Average Points
      * @param  array $statistics     Full set of Statistics
-     * @param  int $matchThreshold   Number of matches a player must have played to be included in the listed
+     * @param  mixed $season         The selected season
      * @return NULL
      */
-    public static function averagePoints($statistics, $matchThreshold)
+    public static function averagePoints($statistics, $season)
     {
         $statisticGroup = "average_points";
         if (!isset($statistics[$statisticGroup])) {
@@ -267,16 +262,14 @@ class Player_Statistics_helper
             <tbody>
         <?php
         $count = 0;
-        foreach ($statistics[$statisticGroup] as $player) {
-            if ($player->matches >= $matchThreshold) { ?>
+        foreach ($statistics[$statisticGroup] as $player) { ?>
                 <tr>
                     <td class="width-10-percent text-align-center"><?php echo number_format($player->points, 2); ?></td>
                     <td class="width-65-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
                     <td class="width-25-percent text-align-left"><?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                 </tr>
         <?php
-                $count++;
-            }
+            $count++;
         }
 
         if ($count == 0) { ?>
@@ -293,10 +286,10 @@ class Player_Statistics_helper
     /**
      * Show Real Goals Gained
      * @param  array $statistics     Full set of Statistics
-     * @param  int $matchThreshold   Number of matches a player must have played to be included in the listed
+     * @param  mixed $season         The selected season
      * @return NULL
      */
-    public static function realGoalsGained($statistics, $matchThreshold)
+    public static function realGoalsGained($statistics, $season)
     {
         $statisticGroup = "real_goals_gained";
         if (!isset($statistics[$statisticGroup])) {
@@ -312,16 +305,14 @@ class Player_Statistics_helper
             <tbody>
         <?php
         $count = 0;
-        foreach ($statistics[$statisticGroup] as $player) {
-            if ($player->matches_played >= $matchThreshold) { ?>
+        foreach ($statistics[$statisticGroup] as $player) { ?>
                 <tr>
                     <td class="width-10-percent text-align-center"><?php echo $player->goals_gained; ?></td>
                     <td class="width-65-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
                     <td class="width-25-percent text-align-left"><?php echo $player->matches_played; ?> <?php echo $ci->lang->line($player->matches_played == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                 </tr>
         <?php
-                $count++;
-            }
+            $count++;
         }
 
         if ($count == 0) { ?>
@@ -338,10 +329,10 @@ class Player_Statistics_helper
     /**
      * Show Average Goals Gained
      * @param  array $statistics     Full set of Statistics
-     * @param  int $matchThreshold   Number of matches a player must have played to be included in the listed
+     * @param  mixed $season         The selected season
      * @return NULL
      */
-    public static function averageGoalsGained($statistics, $matchThreshold)
+    public static function averageGoalsGained($statistics, $season)
     {
         $statisticGroup = "average_goals_gained";
         if (!isset($statistics[$statisticGroup])) {
@@ -357,16 +348,14 @@ class Player_Statistics_helper
             <tbody>
         <?php
         $count = 0;
-        foreach ($statistics[$statisticGroup] as $player) {
-            if ($player->matches >= $matchThreshold) { ?>
+        foreach ($statistics[$statisticGroup] as $player) { ?>
                 <tr>
                     <td class="width-10-percent text-align-center"><?php echo number_format($player->goals_gained, 2); ?></td>
                     <td class="width-65-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
                     <td class="width-25-percent text-align-left"><?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                 </tr>
         <?php
-                $count++;
-            }
+            $count++;
         }
 
         if ($count == 0) { ?>
@@ -383,10 +372,10 @@ class Player_Statistics_helper
     /**
      * Show Real Goals
      * @param  array $statistics     Full set of Statistics
-     * @param  int $matchThreshold   Number of matches a player must have played to be included in the listed
+     * @param  mixed $season         The selected season
      * @return NULL
      */
-    public static function realGoals($statistics, $matchThreshold)
+    public static function realGoals($statistics, $season)
     {
         $statisticGroup = "real_goals";
         if (!isset($statistics[$statisticGroup])) {
@@ -402,16 +391,14 @@ class Player_Statistics_helper
             <tbody>
         <?php
         $count = 0;
-        foreach ($statistics[$statisticGroup] as $player) {
-            if ($player->matches_played >= $matchThreshold) { ?>
+        foreach ($statistics[$statisticGroup] as $player) { ?>
                 <tr>
                     <td class="width-10-percent text-align-center"><?php echo $player->goals; ?></td>
                     <td class="width-65-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
                     <td class="width-25-percent text-align-left"><?php echo $player->matches_played; ?> <?php echo $ci->lang->line($player->matches_played == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                 </tr>
         <?php
-                $count++;
-            }
+            $count++;
         }
 
         if ($count == 0) { ?>
@@ -428,10 +415,10 @@ class Player_Statistics_helper
     /**
      * Show Average Goals For
      * @param  array $statistics     Full set of Statistics
-     * @param  int $matchThreshold   Number of matches a player must have played to be included in the listed
+     * @param  mixed $season         The selected season
      * @return NULL
      */
-    public static function averageGoalsFor($statistics, $matchThreshold)
+    public static function averageGoalsFor($statistics, $season)
     {
         $statisticGroup = "average_goals_for";
         if (!isset($statistics[$statisticGroup])) {
@@ -447,16 +434,14 @@ class Player_Statistics_helper
             <tbody>
         <?php
         $count = 0;
-        foreach ($statistics[$statisticGroup] as $player) {
-            if ($player->matches >= $matchThreshold) { ?>
+        foreach ($statistics[$statisticGroup] as $player) { ?>
                 <tr>
                     <td class="width-10-percent text-align-center"><?php echo number_format($player->goals, 2); ?></td>
                     <td class="width-65-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
                     <td class="width-25-percent text-align-left"><?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                 </tr>
         <?php
-                $count++;
-            }
+            $count++;
         }
 
         if ($count == 0) { ?>
@@ -473,10 +458,10 @@ class Player_Statistics_helper
     /**
      * Show Average Goals Against
      * @param  array $statistics     Full set of Statistics
-     * @param  int $matchThreshold   Number of matches a player must have played to be included in the listed
+     * @param  mixed $season         The selected season
      * @return NULL
      */
-    public static function averageGoalsAgainst($statistics, $matchThreshold)
+    public static function averageGoalsAgainst($statistics, $season)
     {
         $statisticGroup = "average_goals_against";
         if (!isset($statistics[$statisticGroup])) {
@@ -493,16 +478,14 @@ class Player_Statistics_helper
         <?php
         $count = 0;
         $players = array_reverse($statistics[$statisticGroup]);
-        foreach ($players as $player) {
-            if ($player->matches >= $matchThreshold) { ?>
+        foreach ($players as $player) { ?>
                 <tr>
                     <td class="width-10-percent text-align-center"><?php echo number_format($player->goals, 2); ?></td>
                     <td class="width-65-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
                     <td class="width-25-percent text-align-left"><?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                 </tr>
-        <?php
-                $count++;
-            }
+            <?php
+            $count++;
         }
 
         if ($count == 0) { ?>
@@ -519,10 +502,10 @@ class Player_Statistics_helper
     /**
      * Show Total Clean Sheets
      * @param  array $statistics     Full set of Statistics
-     * @param  int $matchThreshold   Number of matches a player must have played to be included in the listed
+     * @param  mixed $season         The selected season
      * @return NULL
      */
-    public static function totalCleanSheets($statistics, $matchThreshold)
+    public static function totalCleanSheets($statistics, $season)
     {
         $statisticGroup = "total_clean_sheets";
         if (!isset($statistics[$statisticGroup])) {
@@ -538,16 +521,14 @@ class Player_Statistics_helper
             <tbody>
         <?php
         $count = 0;
-        foreach ($statistics[$statisticGroup] as $player) {
-            if ($player->matches >= $matchThreshold) { ?>
+        foreach ($statistics[$statisticGroup] as $player) { ?>
                 <tr>
                     <td class="width-10-percent text-align-center"><?php echo $player->clean_sheets; ?></td>
                     <td class="width-65-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
                     <td class="width-25-percent text-align-left"><?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                 </tr>
         <?php
-                $count++;
-            }
+            $count++;
         }
 
         if ($count == 0) { ?>
@@ -564,10 +545,10 @@ class Player_Statistics_helper
     /**
      * Show Average Clean Sheets
      * @param  array $statistics     Full set of Statistics
-     * @param  int $matchThreshold   Number of matches a player must have played to be included in the listed
+     * @param  mixed $season         The selected season
      * @return NULL
      */
-    public static function averageCleanSheets($statistics, $matchThreshold)
+    public static function averageCleanSheets($statistics, $season)
     {
         $statisticGroup = "average_clean_sheets";
         if (!isset($statistics[$statisticGroup])) {
@@ -583,16 +564,14 @@ class Player_Statistics_helper
             <tbody>
         <?php
         $count = 0;
-        foreach ($statistics[$statisticGroup] as $player) {
-            if ($player->matches >= $matchThreshold) { ?>
+        foreach ($statistics[$statisticGroup] as $player) { ?>
                 <tr>
                     <td class="width-10-percent text-align-center"><?php echo number_format($player->clean_sheets, 2); ?></td>
                     <td class="width-65-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
                     <td class="width-25-percent text-align-left"><?php echo $player->matches; ?> <?php echo $ci->lang->line($player->matches == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                 </tr>
         <?php
-                $count++;
-            }
+            $count++;
         }
 
         if ($count == 0) { ?>
@@ -609,9 +588,10 @@ class Player_Statistics_helper
     /**
      * Show Consecutive Games Scored
      * @param  array $statistics  Full set of Statistics
+     * @param  mixed $season      The selected season
      * @return NULL
      */
-    public static function consecutiveGamesScored($statistics)
+    public static function consecutiveGamesScored($statistics, $season)
     {
         $statisticGroup = "consecutive_games_scored";
         if (!isset($statistics[$statisticGroup])) {
@@ -626,25 +606,29 @@ class Player_Statistics_helper
         <table class="table table-striped table-condensed">
             <tbody>
         <?php
-        foreach ($statistics[$statisticGroup] as $player) { ?>
+        foreach ($statistics[$statisticGroup] as $player) {
+            $ongoing = ($season == 'all-time' || $season == Season_model::fetchCurrentSeason()) && $player->ongoing ? '*' : ''; ?>
                 <tr>
                     <td class="width-20-percent text-align-center"><?php echo $player->sequence; ?> <?php echo $ci->lang->line($player->sequence == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                     <td class="width-40-percent"><?php echo Player_helper::fullName($player->playerId); ?></td>
-                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo Utility_helper::shortDate($player->sequenceFinish) . ($player->ongoing ? ' *' : ''); ?></td>
+                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo Utility_helper::shortDate($player->sequenceFinish) . $ongoing; ?></td>
                 </tr>
         <?php
         } ?>
             </tbody>
         </table>
+
+        <p class="muted"><?php echo $ci->lang->line("player_statistics_ongoing_denotes"); ?></p>
     <?php
     }
 
     /**
      * Show Consecutive Games Assisted
      * @param  array $statistics  Full set of Statistics
+     * @param  mixed $season      The selected season
      * @return NULL
      */
-    public static function consecutiveGamesAssisted($statistics)
+    public static function consecutiveGamesAssisted($statistics, $season)
     {
         $statisticGroup = "consecutive_games_assisted";
         if (!isset($statistics[$statisticGroup])) {
@@ -659,25 +643,29 @@ class Player_Statistics_helper
         <table class="table table-striped table-condensed">
             <tbody>
         <?php
-        foreach ($statistics[$statisticGroup] as $player) { ?>
+        foreach ($statistics[$statisticGroup] as $player) {
+            $ongoing = ($season == 'all-time' || $season == Season_model::fetchCurrentSeason()) && $player->ongoing ? '*' : ''; ?>
                 <tr>
                     <td class="width-20-percent text-align-center"><?php echo $player->sequence; ?> <?php echo $ci->lang->line($player->sequence == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                     <td class="width-40-percent"><?php echo Player_helper::fullName($player->playerId); ?></td>
-                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo Utility_helper::shortDate($player->sequenceFinish) . ($player->ongoing ? ' *' : ''); ?></td>
+                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo Utility_helper::shortDate($player->sequenceFinish) . $ongoing; ?></td>
                 </tr>
         <?php
         } ?>
             </tbody>
         </table>
+
+        <p class="muted"><?php echo $ci->lang->line("player_statistics_ongoing_denotes"); ?></p>
     <?php
     }
 
     /**
      * Show Consecutive Appearances
      * @param  array $statistics  Full set of Statistics
+     * @param  mixed $season      The selected season
      * @return NULL
      */
-    public static function consecutiveAppearances($statistics)
+    public static function consecutiveAppearances($statistics, $season)
     {
         $statisticGroup = "consecutive_appearances";
         if (!isset($statistics[$statisticGroup])) {
@@ -692,25 +680,29 @@ class Player_Statistics_helper
         <table class="table table-striped table-condensed">
             <tbody>
         <?php
-        foreach ($statistics[$statisticGroup] as $player) { ?>
+        foreach ($statistics[$statisticGroup] as $player) {
+            $ongoing = ($season == 'all-time' || $season == Season_model::fetchCurrentSeason()) && $player->ongoing ? '*' : ''; ?>
                 <tr>
                     <td class="width-20-percent text-align-center"><?php echo $player->sequence; ?> <?php echo $ci->lang->line($player->sequence == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                     <td class="width-40-percent"><?php echo Player_helper::fullName($player->playerId); ?></td>
-                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo Utility_helper::shortDate($player->sequenceFinish) . ($player->ongoing ? ' *' : ''); ?></td>
+                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo Utility_helper::shortDate($player->sequenceFinish) . $ongoing; ?></td>
                 </tr>
         <?php
         } ?>
             </tbody>
         </table>
+
+        <p class="muted"><?php echo $ci->lang->line("player_statistics_ongoing_denotes"); ?></p>
     <?php
     }
 
     /**
      * Show Consecutive Starting Appearances
      * @param  array $statistics  Full set of Statistics
+     * @param  mixed $season      The selected season
      * @return NULL
      */
-    public static function consecutiveStartingAppearances($statistics)
+    public static function consecutiveStartingAppearances($statistics, $season)
     {
         $statisticGroup = "consecutive_starting_appearances";
         if (!isset($statistics[$statisticGroup])) {
@@ -725,25 +717,29 @@ class Player_Statistics_helper
         <table class="table table-striped table-condensed">
             <tbody>
         <?php
-        foreach ($statistics[$statisticGroup] as $player) { ?>
+        foreach ($statistics[$statisticGroup] as $player) {
+            $ongoing = ($season == 'all-time' || $season == Season_model::fetchCurrentSeason()) && $player->ongoing ? '*' : ''; ?>
                 <tr>
                     <td class="width-20-percent text-align-center"><?php echo $player->sequence; ?> <?php echo $ci->lang->line($player->sequence == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                     <td class="width-40-percent"><?php echo Player_helper::fullName($player->playerId); ?></td>
-                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo Utility_helper::shortDate($player->sequenceFinish) . ($player->ongoing ? ' *' : ''); ?></td>
+                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo Utility_helper::shortDate($player->sequenceFinish) . $ongoing; ?></td>
                 </tr>
         <?php
         } ?>
             </tbody>
         </table>
+
+        <p class="muted"><?php echo $ci->lang->line("player_statistics_ongoing_denotes"); ?></p>
     <?php
     }
 
     /**
      * Show Consecutive Substitute Appearances
      * @param  array $statistics  Full set of Statistics
+     * @param  mixed $season      The selected season
      * @return NULL
      */
-    public static function consecutiveSubstituteAppearances($statistics)
+    public static function consecutiveSubstituteAppearances($statistics, $season)
     {
         $statisticGroup = "consecutive_substitute_appearances";
         if (!isset($statistics[$statisticGroup])) {
@@ -758,16 +754,19 @@ class Player_Statistics_helper
         <table class="table table-striped table-condensed">
             <tbody>
         <?php
-        foreach ($statistics[$statisticGroup] as $player) { ?>
+        foreach ($statistics[$statisticGroup] as $player) {
+            $ongoing = ($season == 'all-time' || $season == Season_model::fetchCurrentSeason()) && $player->ongoing ? '*' : ''; ?>
                 <tr>
                     <td class="width-20-percent text-align-center"><?php echo $player->sequence; ?> <?php echo $ci->lang->line($player->sequence == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                     <td class="width-40-percent"><?php echo Player_helper::fullName($player->playerId); ?></td>
-                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo Utility_helper::shortDate($player->sequenceFinish) . ($player->ongoing ? ' *' : ''); ?></td>
+                    <td class="width-40-percent"><?php echo Utility_helper::shortDate($player->sequenceStart); ?> - <?php echo Utility_helper::shortDate($player->sequenceFinish) . $ongoing; ?></td>
                 </tr>
         <?php
         } ?>
             </tbody>
         </table>
+
+        <p class="muted"><?php echo $ci->lang->line("player_statistics_ongoing_denotes"); ?></p>
     <?php
     }
 

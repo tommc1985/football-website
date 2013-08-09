@@ -78,7 +78,7 @@ foreach($this->Cache_Player_Statistics_model->methodMap as $statisticGroup => $m
         } ?>
             <div class="span6">
                 <?php
-        Player_Statistics_helper::$method($statistics, $venue, $thresholdMatches); ?>
+        Player_Statistics_helper::$method($statistics, $season); ?>
             </div>
         <?php
         if (1 == $i % 2) { ?>
@@ -104,7 +104,7 @@ foreach($this->Cache_Player_Statistics_model->hungryMethodMap as $statisticGroup
     } ?>
             <div class="span6">
                         <?php
-    Player_Statistics_helper::$method($statistics, $thresholdMatches); ?>
+    Player_Statistics_helper::$method($statistics, $season); ?>
             </div>
         <?php
     if (1 == $i % 2) { ?>
