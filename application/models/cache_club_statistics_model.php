@@ -672,6 +672,7 @@ ORDER BY m.date DESC";
         $record->sequence       = 0;
         $record->sequenceStart  = '';
         $record->sequenceFinish = '';
+        $record->ongoing        = false;
 
         if (count($matches) > 0) {
             $highestSequence       = 0;
@@ -680,41 +681,43 @@ ORDER BY m.date DESC";
             $currentSequenceFinish = '';
 
             foreach ($matches as $match) {
-                eval("\$comparisonResult = (" . $comparisonCode . ") && !is_null(\$match->h) && !is_null(\$match->a);");
+                if (!is_null($match->date) && !is_null($match->h) && !is_null($match->a)) {
+                    eval("\$comparisonResult = (" . $comparisonCode . ");");
 
-                if ($comparisonResult) {
-                    $currentSequence++;
+                    if ($comparisonResult) {
+                        $currentSequence++;
 
-                    if ($currentSequenceStart == '') {
-                        $currentSequenceStart = $match->date;
+                        if ($currentSequenceStart == '') {
+                            $currentSequenceStart = $match->date;
+                        }
+
+                        $currentSequenceFinish = $match->date;
+                    } else {
+                        $record = new stdClass();
+
+                        if ($currentSequence > $highestSequence) {
+                            $highestSequence = $currentSequence;
+
+                            $record->sequence       = $currentSequence;
+                            $record->sequenceStart  = $currentSequenceStart;
+                            $record->sequenceFinish = $currentSequenceFinish;
+                            $record->ongoing        = false;
+
+                            $records = array();
+                            $records[] = $record;
+                        } elseif ($currentSequence == $highestSequence && $currentSequence > 0) {
+                            $record->sequence       = $currentSequence;
+                            $record->sequenceStart  = $currentSequenceStart;
+                            $record->sequenceFinish = $currentSequenceFinish;
+                            $record->ongoing        = false;
+
+                            $records[] = $record;
+                        }
+
+                        $currentSequence       = 0;
+                        $currentSequenceStart  = '';
+                        $currentSequenceFinish = '';
                     }
-
-                    $currentSequenceFinish = $match->date;
-                } else {
-                    $record = new stdClass();
-
-                    if ($currentSequence > $highestSequence) {
-                        $highestSequence = $currentSequence;
-
-                        $record->sequence       = $currentSequence;
-                        $record->sequenceStart  = $currentSequenceStart;
-                        $record->sequenceFinish = $currentSequenceFinish;
-                        $record->ongoing        = false;
-
-                        $records = array();
-                        $records[] = $record;
-                    } elseif ($currentSequence == $highestSequence && $currentSequence > 0) {
-                        $record->sequence       = $currentSequence;
-                        $record->sequenceStart  = $currentSequenceStart;
-                        $record->sequenceFinish = $currentSequenceFinish;
-                        $record->ongoing        = false;
-
-                        $records[] = $record;
-                    }
-
-                    $currentSequence       = 0;
-                    $currentSequenceStart  = '';
-                    $currentSequenceFinish = '';
                 }
             }
 
