@@ -618,8 +618,11 @@ class Player_Statistics_helper
             </tbody>
         </table>
 
-        <p class="muted"><?php echo $ci->lang->line("player_statistics_ongoing_denotes"); ?></p>
-    <?php
+        <?php
+        if ($season == Season_model::fetchCurrentSeason()) { ?>
+            <p class="muted"><?php echo $ci->lang->line("player_statistics_ongoing_denotes"); ?></p>
+        <?php
+        }
     }
 
     /**
@@ -655,8 +658,11 @@ class Player_Statistics_helper
             </tbody>
         </table>
 
-        <p class="muted"><?php echo $ci->lang->line("player_statistics_ongoing_denotes"); ?></p>
-    <?php
+        <?php
+        if ($season == Season_model::fetchCurrentSeason()) { ?>
+            <p class="muted"><?php echo $ci->lang->line("player_statistics_ongoing_denotes"); ?></p>
+        <?php
+        }
     }
 
     /**
@@ -692,8 +698,11 @@ class Player_Statistics_helper
             </tbody>
         </table>
 
-        <p class="muted"><?php echo $ci->lang->line("player_statistics_ongoing_denotes"); ?></p>
-    <?php
+        <?php
+        if ($season == Season_model::fetchCurrentSeason()) { ?>
+            <p class="muted"><?php echo $ci->lang->line("player_statistics_ongoing_denotes"); ?></p>
+        <?php
+        }
     }
 
     /**
@@ -729,8 +738,11 @@ class Player_Statistics_helper
             </tbody>
         </table>
 
-        <p class="muted"><?php echo $ci->lang->line("player_statistics_ongoing_denotes"); ?></p>
-    <?php
+        <?php
+        if ($season == Season_model::fetchCurrentSeason()) { ?>
+            <p class="muted"><?php echo $ci->lang->line("player_statistics_ongoing_denotes"); ?></p>
+        <?php
+        }
     }
 
     /**
@@ -766,8 +778,11 @@ class Player_Statistics_helper
             </tbody>
         </table>
 
-        <p class="muted"><?php echo $ci->lang->line("player_statistics_ongoing_denotes"); ?></p>
-    <?php
+        <?php
+        if ($season == Season_model::fetchCurrentSeason()) { ?>
+            <p class="muted"><?php echo $ci->lang->line("player_statistics_ongoing_denotes"); ?></p>
+        <?php
+        }
     }
 
     /**
