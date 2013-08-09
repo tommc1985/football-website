@@ -6,6 +6,8 @@ $lang['club_statistics_title']                                  = 'Club Statisti
 $lang['club_statistics_match']                                  = 'match';
 $lang['club_statistics_matches']                                = 'matches';
 
+$lang['club_statistics_statistics_menu']                        = 'Statistics Menu';
+
 $lang['club_statistics_competition_type']                       = 'Competition Type';
 $lang['club_statistics_show']                                   = 'Show';
 

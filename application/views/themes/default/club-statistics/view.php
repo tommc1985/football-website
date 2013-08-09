@@ -33,6 +33,21 @@ $submit = array(
             </div>
         </div>
 </fieldset>
+
+                <h3><?php echo $this->lang->line("club_statistics_statistics_menu"); ?></h3>
+                <ul class="nav nav-tabs nav-stacked">
+                <?php
+                foreach ($this->Cache_Club_Statistics_model->methodMap as $statisticGroup => $method) { ?>
+                    <li><a href="#<?php echo $statisticGroup; ?>"><?php echo $this->lang->line("club_statistics_{$statisticGroup}"); ?></a></li>
+                <?php
+                } ?>
+                <?php
+                foreach ($this->Cache_Club_Statistics_model->hungryMethodMap as $statisticGroup => $method) { ?>
+                    <li><a href="#<?php echo $statisticGroup; ?>"><?php echo $this->lang->line("club_statistics_{$statisticGroup}"); ?></a></li>
+                <?php
+                } ?>
+                </ul>
+
 <?php
 echo form_close(); ?>
             </div>
@@ -74,7 +89,7 @@ foreach ($this->Cache_Club_Statistics_model->hungryMethodMap as $statisticGroup 
     } ?>
             <div class="span6">
                         <?php
-                Club_Statistics_helper::$method($statistics); ?>
+                Club_Statistics_helper::$method($statistics, $season); ?>
             </div>
         <?php
     if (1 == $i % 2) { ?>
