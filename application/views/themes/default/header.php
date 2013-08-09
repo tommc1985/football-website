@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<div class="navbar navbar-fixed-top">
+<div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
             <a class="brand" href="<?php echo site_url(); ?>"><?php echo Configuration::get('team_name'); ?></a>
@@ -34,7 +34,7 @@
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="#">Club Info<b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="<?php echo site_url("club-history"); ?>">History</a></li>
+                                <li><a href="<?php echo site_url("page/view/id/2"); ?>">History</a></li>
                                 <li><a href="<?php echo site_url("club-officials"); ?>">Officials</a></li>
                             </ul>
                         </li>
