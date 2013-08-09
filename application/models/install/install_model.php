@@ -806,6 +806,11 @@ class Install_Model extends CI_Model {
                 'constraint'     => 11,
                 'unsigned'       => TRUE,
             ),
+            'matches_played' => array(
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => TRUE,
+            ),
             'statistic_group' => array(
                 'type'           => 'VARCHAR',
                 'constraint'     => 100,
