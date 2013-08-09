@@ -73,8 +73,11 @@ class Club_Statistics_helper
             </dd>
         </dl>
 
-        <p class="muted"><?php echo $ci->lang->line("club_statistics_ongoing_denotes"); ?></p>
         <?php
+        if ($season == Season_model::fetchCurrentSeason()) { ?>
+            <p class="muted"><?php echo $ci->lang->line("club_statistics_ongoing_denotes"); ?></p>
+        <?php
+        }
     }
 
     /**
