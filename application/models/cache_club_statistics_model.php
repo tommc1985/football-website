@@ -668,15 +668,15 @@ ORDER BY m.date DESC";
 
         $records = array();
 
-        $record = new stdClass();
-        $record->sequence = 0;
-        $record->sequenceStart = '';
+        $record                 = new stdClass();
+        $record->sequence       = 0;
+        $record->sequenceStart  = '';
         $record->sequenceFinish = '';
 
         if (count($matches) > 0) {
-            $highestSequence = 0;
-            $currentSequence = 0;
-            $currentSequenceStart = '';
+            $highestSequence       = 0;
+            $currentSequence       = 0;
+            $currentSequenceStart  = '';
             $currentSequenceFinish = '';
 
             foreach ($matches as $match) {
@@ -696,22 +696,24 @@ ORDER BY m.date DESC";
                     if ($currentSequence > $highestSequence) {
                         $highestSequence = $currentSequence;
 
-                        $record->sequence = $currentSequence;
-                        $record->sequenceStart = $currentSequenceStart;
+                        $record->sequence       = $currentSequence;
+                        $record->sequenceStart  = $currentSequenceStart;
                         $record->sequenceFinish = $currentSequenceFinish;
+                        $record->ongoing        = false;
 
                         $records = array();
                         $records[] = $record;
                     } elseif ($currentSequence == $highestSequence && $currentSequence > 0) {
-                        $record->sequence = $currentSequence;
-                        $record->sequenceStart = $currentSequenceStart;
+                        $record->sequence       = $currentSequence;
+                        $record->sequenceStart  = $currentSequenceStart;
                         $record->sequenceFinish = $currentSequenceFinish;
+                        $record->ongoing        = false;
 
                         $records[] = $record;
                     }
 
-                    $currentSequence = 0;
-                    $currentSequenceStart = '';
+                    $currentSequence       = 0;
+                    $currentSequenceStart  = '';
                     $currentSequenceFinish = '';
                 }
             }
@@ -723,6 +725,7 @@ ORDER BY m.date DESC";
                 $record->sequence = $currentSequence;
                 $record->sequenceStart = $currentSequenceStart;
                 $record->sequenceFinish = $currentSequenceFinish;
+                $record->ongoing        = true;
 
                 $records = array();
                 $records[$match->id] = $record;
@@ -730,6 +733,7 @@ ORDER BY m.date DESC";
                 $record->sequence = $currentSequence;
                 $record->sequenceStart = $currentSequenceStart;
                 $record->sequenceFinish = $currentSequenceFinish;
+                $record->ongoing        = true;
 
                 $records[$match->id] = $record;
             }
