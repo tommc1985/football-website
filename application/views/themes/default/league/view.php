@@ -103,7 +103,7 @@ $submit = array(
 $inputFormMatchCount = array(
     'name'       => 'form-match-count',
     'id'         => 'form-match-count',
-    'options'    => $this->League_Collated_Results_model->fetchMaxCountFormDropdown($id, $dateUntil),
+    'options'    => $this->League_Collated_Results_model->fetchMaxCountFormDropdown($id, $dateUntil, $type),
     'value'      => set_value('form-match-count', $formMatchCount),
     'attributes' => 'class="input-mini"',
 );

@@ -67,15 +67,17 @@ class League_Collated_Results_model extends Base_Frontend_Model {
      * Return maximum number of matches played by a team this season
      * @param  int $leagueId      League ID
      * @param  string $dateUntil  Date Until
+     * @param  string $type       Overall, home or away
      * @return array              Distinct Dates
      */
-    public function fetchMaxMatchCount($leagueId, $dateUntil)
+    public function fetchMaxMatchCount($leagueId, $dateUntil, $type)
     {
         $this->db->select('MAX(played) as played');
         $this->db->from($this->tableName);
 
         $this->db->where('league_id', $leagueId);
         $this->db->where('date_until', $dateUntil);
+        $this->db->where('type', $type);
 
         $result = $this->db->get()->result();
 
@@ -90,11 +92,12 @@ class League_Collated_Results_model extends Base_Frontend_Model {
      * Return array of match count for Dropdown
      * @param  int $leagueId      League ID
      * @param  string $dateUntil  Date Until
+     * @param  string $type       Overall, home or away
      * @return array              Formatted Data
      */
-    public function fetchMaxCountFormDropdown($leagueId, $dateUntil)
+    public function fetchMaxCountFormDropdown($leagueId, $dateUntil, $type)
     {
-        $max = $this->fetchMaxMatchCount($leagueId, $dateUntil);
+        $max = $this->fetchMaxMatchCount($leagueId, $dateUntil, $type);
 
         $options = array();
         $i = 1;
