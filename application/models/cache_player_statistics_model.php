@@ -1474,8 +1474,14 @@ ORDER BY matches DESC";
 
         $records = $this->appearanceCombinationBase($type, $season);
 
+        $combinations = array();
+
         foreach ($records as $record) {
-            $this->insertCache($statisticGroup, $type, $season, $record->player_1_id, $record->matches, serialize($record));
+            if (!in_array("{$record->player_1_id}-{$record->player_2_id}", $combinations) && !in_array("{$record->player_2_id}-{$record->player_1_id}", $combinations)) {
+                $this->insertCache($statisticGroup, $type, $season, $record->player_1_id, $record->matches, serialize($record));
+
+                $combinations[] = "{$record->player_1_id}-{$record->player_2_id}";
+            }
         }
 
         $this->executeCacheData();
@@ -1495,8 +1501,14 @@ ORDER BY matches DESC";
 
         $records = $this->appearanceCombinationBase($type, $season, 2, array(4));
 
+        $combinations = array();
+
         foreach ($records as $record) {
-            $this->insertCache($statisticGroup, $type, $season, $record->player_1_id, $record->matches, serialize($record));
+            if (!in_array("{$record->player_1_id}-{$record->player_2_id}", $combinations) && !in_array("{$record->player_2_id}-{$record->player_1_id}", $combinations)) {
+                $this->insertCache($statisticGroup, $type, $season, $record->player_1_id, $record->matches, serialize($record));
+
+                $combinations[] = "{$record->player_1_id}-{$record->player_2_id}";
+            }
         }
 
         $this->executeCacheData();
@@ -1516,8 +1528,14 @@ ORDER BY matches DESC";
 
         $records = $this->appearanceCombinationBase($type, $season, 2, array(11));
 
+        $combinations = array();
+
         foreach ($records as $record) {
-            $this->insertCache($statisticGroup, $type, $season, $record->player_1_id, $record->matches, serialize($record));
+            if (!in_array("{$record->player_1_id}-{$record->player_2_id}", $combinations) && !in_array("{$record->player_2_id}-{$record->player_1_id}", $combinations)) {
+                $this->insertCache($statisticGroup, $type, $season, $record->player_1_id, $record->matches, serialize($record));
+
+                $combinations[] = "{$record->player_1_id}-{$record->player_2_id}";
+            }
         }
 
         $this->executeCacheData();
@@ -1537,8 +1555,14 @@ ORDER BY matches DESC";
 
         $records = $this->appearanceCombinationBase($type, $season, 2, array(2, 9));
 
+        $combinations = array();
+
         foreach ($records as $record) {
-            $this->insertCache($statisticGroup, $type, $season, $record->player_1_id, $record->matches, serialize($record));
+            if (!in_array("{$record->player_1_id}-{$record->player_2_id}", $combinations) && !in_array("{$record->player_2_id}-{$record->player_1_id}", $combinations)) {
+                $this->insertCache($statisticGroup, $type, $season, $record->player_1_id, $record->matches, serialize($record));
+
+                $combinations[] = "{$record->player_1_id}-{$record->player_2_id}";
+            }
         }
 
         $this->executeCacheData();
@@ -1558,8 +1582,14 @@ ORDER BY matches DESC";
 
         $records = $this->appearanceCombinationBase($type, $season, 2, array(3, 10));
 
+        $combinations = array();
+
         foreach ($records as $record) {
-            $this->insertCache($statisticGroup, $type, $season, $record->player_1_id, $record->matches, serialize($record));
+            if (!in_array("{$record->player_1_id}-{$record->player_2_id}", $combinations) && !in_array("{$record->player_2_id}-{$record->player_1_id}", $combinations)) {
+                $this->insertCache($statisticGroup, $type, $season, $record->player_1_id, $record->matches, serialize($record));
+
+                $combinations[] = "{$record->player_1_id}-{$record->player_2_id}";
+            }
         }
 
         $this->executeCacheData();
@@ -1579,8 +1609,14 @@ ORDER BY matches DESC";
 
         $records = $this->appearanceCombinationBase($type, $season, 2, array(16));
 
+        $combinations = array();
+
         foreach ($records as $record) {
-            $this->insertCache($statisticGroup, $type, $season, $record->player_1_id, $record->matches, serialize($record));
+            if (!in_array("{$record->player_1_id}-{$record->player_2_id}", $combinations) && !in_array("{$record->player_2_id}-{$record->player_1_id}", $combinations)) {
+                $this->insertCache($statisticGroup, $type, $season, $record->player_1_id, $record->matches, serialize($record));
+
+                $combinations[] = "{$record->player_1_id}-{$record->player_2_id}";
+            }
         }
 
         $this->executeCacheData();

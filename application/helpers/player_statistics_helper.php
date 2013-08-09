@@ -58,25 +58,20 @@ class Player_Statistics_helper
      */
     protected static function _displayCombinationTable($players, $statisticGroup, $fieldValue)
     {
-        $ci =& get_instance();
-        $combinations = array(); ?>
+        $ci =& get_instance(); ?>
 
         <h3><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
         <p><?php echo $ci->lang->line("player_statistics_{$statisticGroup}_explanation"); ?></p>
         <table class="table table-striped table-condensed">
             <tbody>
         <?php
-        foreach ($players as $player) {
-            if (!in_array("{$player->player_1_id}_{$player->player_2_id}", $combinations)) { ?>
+        foreach ($players as $player) { ?>
                 <tr>
                     <td class="width-10-percent text-align-center"><?php echo $player->$fieldValue; ?></td>
                     <td class="width-45-percent" itemscope itemtype="http://schema.org/Person"><span itemprop="name"><?php echo Player_helper::fullName($player->player_1_id); ?></span></td>
                     <td class="width-45-percent" itemscope itemtype="http://schema.org/Person"><span itemprop="name"><?php echo Player_helper::fullName($player->player_2_id); ?></span></td>
                 </tr>
         <?php
-                $combinations[] = "{$player->player_1_id}_{$player->player_2_id}";
-                $combinations[] = "{$player->player_2_id}_{$player->player_1_id}";
-            }
         } ?>
             </tbody>
         </table>
