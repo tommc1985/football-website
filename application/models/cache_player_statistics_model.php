@@ -1354,9 +1354,10 @@ ORDER BY m.date ASC";
                         $record = new stdClass();
                         if ($currentSequence > 1) {
                             $record->sequence = $currentSequence;
-                            $record->sequenceStart = $currentSequenceStart;
+                            $record->sequenceStart  = $currentSequenceStart;
                             $record->sequenceFinish = $currentSequenceFinish;
                             $record->playerId       = $playerId;
+                            $record->ongoing        = false;
 
                             $records[] = $record;
                         }
@@ -1374,6 +1375,7 @@ ORDER BY m.date ASC";
                 $record->sequenceStart  = $currentSequenceStart;
                 $record->sequenceFinish = $currentSequenceFinish;
                 $record->playerId       = $playerId;
+                $record->ongoing        = true;
 
                 $records[$match->id] = $record;
             }
