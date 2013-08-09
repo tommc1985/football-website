@@ -149,11 +149,11 @@ class League_model extends Base_Model {
         }
 
         if (!is_null($dateFrom)) {
-            $this->db->where("(lm.date >= '{$dateFrom}')", NULL, false);
+            $this->db->where("(lm.date >= '{$dateFrom} 00:00:00')", NULL, false);
         }
 
         if (!is_null($dateUntil)) {
-            $this->db->where("(lm.date <= '{$dateUntil}')", NULL, false);
+            $this->db->where("(lm.date <= '{$dateUntil} 23:59:59')", NULL, false);
         }
 
 
@@ -183,7 +183,7 @@ class League_model extends Base_Model {
      */
     public function fetchDistinctMatchDates($leagueId, $resultsOnly = true)
     {
-        $this->db->select('DISTINCT(lm.date) as date')
+        $this->db->select('DISTINCT(DATE(lm.date)) as date')
             ->from("{$this->leagueMatchTableName} lm")
             ->where('lm.league_id', $leagueId)
             ->where('lm.deleted', 0)
