@@ -51,19 +51,23 @@ class League_Match_helper
 
         $match = self::_convertObject($match);
 
-        switch($match->status) {
-            case 'hw': // Home walkeover
-                return $ci->lang->line('match_h_w');
-                break;
-            case 'aw': // Away Walkover
-                return $ci->lang->line('match_a_w');
-                break;
-            case 'p': // Postponed
-                return $ci->lang->line('match_p_p');
-                break;
-            case 'a': // Abandoned
-                return $ci->lang->line('match_a_a');
-                break;
+        if (is_null($match->status) && is_null($match->h_score)) {
+            return Utility_helper::formattedDate($match->date, "h:i a");
+        } else {
+            switch($match->status) {
+                case 'hw': // Home walkeover
+                    return $ci->lang->line('match_h_w');
+                    break;
+                case 'aw': // Away Walkover
+                    return $ci->lang->line('match_a_w');
+                    break;
+                case 'p': // Postponed
+                    return $ci->lang->line('match_p_p');
+                    break;
+                case 'a': // Abandoned
+                    return $ci->lang->line('match_a_a');
+                    break;
+            }
         }
 
         return "{$match->h_score} - {$match->a_score}";
@@ -75,19 +79,23 @@ class League_Match_helper
 
         $match = self::_convertObject($match);
 
-        switch($match->status) {
-            case 'hw': // Home walkeover
-                return $ci->lang->line('match_home_walkover');
-                break;
-            case 'aw': // Away Walkover
-                return $ci->lang->line('match_away_walkover');
-                break;
-            case 'p': // Postponed
-                return $ci->lang->line('match_postponed');
-                break;
-            case 'a': // Abandoned
-                return $ci->lang->line('match_abandoned');
-                break;
+        if (is_null($match->status) && is_null($match->h_score)) {
+            return Utility_helper::formattedDate($match->date, "h:i a");
+        } else {
+            switch($match->status) {
+                case 'hw': // Home walkeover
+                    return $ci->lang->line('match_home_walkover');
+                    break;
+                case 'aw': // Away Walkover
+                    return $ci->lang->line('match_away_walkover');
+                    break;
+                case 'p': // Postponed
+                    return $ci->lang->line('match_postponed');
+                    break;
+                case 'a': // Abandoned
+                    return $ci->lang->line('match_abandoned');
+                    break;
+            }
         }
 
         return "{$match->h_score} - {$match->a_score}";

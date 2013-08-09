@@ -35,14 +35,30 @@ $lang['league_edit']                    = 'Edit';
 $lang['league_delete']                  = 'Delete';
 
 $lang['league_no_leagues']              = 'No Leagues exist';
+$lang['league_no_matches_on_date']      = 'No Matches on this date';
 
 // Frontend Text
 $lang['league_title']                   = 'League';
 $lang['league_league_table']            = 'League Table';
 $lang['league_form']                    = 'Form';
 
-$lang['league_form_last_x_matches']     = 'Form (last %s matches)';
+$lang['league_form']                    = 'Form';
 $lang['league_fixtures_and_results']    = 'Fixtures &amp; Results';
+$lang['league_form_last_x_matches']     = 'Form';
+
+
+$lang['league_include_date_upto']       = 'Include data upto';
+$lang['league_date_until']              = 'Date Until';
+$lang['league_date']                    = 'Date';
+$lang['league_as_of']                   = 'As of %s';
+
+$lang['league_form_over_the_last']      = 'Form over the last';
+$lang['league_last_x_match']            = 'Last %d match';
+$lang['league_last_x_matches']          = 'Last %d matches';
+$lang['league_matches']                 = 'matches';
+
+$lang['league_refresh']                 = 'Refresh';
+
 
 $lang['league_team']                    = 'Team';
 $lang['league_p']                       = 'P';
