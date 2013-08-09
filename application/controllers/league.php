@@ -40,6 +40,7 @@ class League extends Frontend_Controller {
         }
 
         $type = 'overall';
+        $dateUntil = 'overall';
         if ($this->input->post()) {
             $redirectString = '/league/view/id/' . $parameters['id'];
 
@@ -48,7 +49,8 @@ class League extends Frontend_Controller {
                 $redirectString .= '/type/' . $postType;
             }
 
-            if ($this->input->post('date-until')) {
+            $postDateUntil = $this->input->post('date-until');
+            if ($postDateUntil != $dateUntil) {
                 $redirectString .= '/date-until/' . $this->input->post('date-until');
             }
 
@@ -67,7 +69,6 @@ class League extends Frontend_Controller {
             $type = $parameters['type'];
         }
 
-        $dateUntil = 'overall';
         if ($parameters['date-until'] !== false) {
             $dateUntil = $parameters['date-until'];
         }
