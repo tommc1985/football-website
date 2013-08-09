@@ -54,6 +54,7 @@ echo $this->lang->line('player_statistics_threshold_current');
 
 echo $threshold == 1 ? sprintf($this->lang->line('player_statistics_threshold_match'), $threshold) : sprintf($this->lang->line('player_statistics_threshold_matches'), $threshold); ?></p>
 
+                <h3><?php echo $this->lang->line("player_statistics_statistics_menu"); ?></h3>
                 <ul class="nav nav-tabs nav-stacked">
                 <?php
                 foreach ($this->Cache_Player_Statistics_model->methodMap as $statisticGroup => $method) { ?>

@@ -3,6 +3,8 @@
 // Frontend Text
 $lang['player_statistics_title']                                            = 'Player Statistics';
 
+$lang['player_statistics_statistics_menu']                                  = 'Statistics Menu';
+
 $lang['player_statistics_competition_type']                                 = 'Competition Type';
 $lang['player_statistics_season']                                           = 'Season';
 $lang['player_statistics_threshold']                                        = 'Threshold';
