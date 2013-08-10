@@ -82,8 +82,8 @@
                                 <li class="dropdown-submenu">
                                     <a tabindex="-1" href="#"><?php echo $menuSeasonFriendly; ?></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="<?php echo site_url("match/index/season/{$menuSeason}"); ?>">Fixtures &amp; Results</a></li>
                                         <li><a href="<?php echo site_url("player/index/season/{$menuSeason}"); ?>">Squad List</a></li>
+                                        <li><a href="<?php echo site_url("match/index/season/{$menuSeason}"); ?>">Fixtures &amp; Results</a></li>
                                         <li><a href="<?php echo site_url("club-statistics/view/season/{$menuSeason}"); ?>">Club Statistics</a></li>
                                         <li><a href="<?php echo site_url("player-statistics/view/season/{$menuSeason}"); ?>">Player Statistics</a></li>
                                         <li><a href="<?php echo site_url("fantasy-football/view/season/{$menuSeason}"); ?>">Fantasy Football</a></li>
