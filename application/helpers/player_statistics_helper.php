@@ -137,7 +137,7 @@ class Player_Statistics_helper
                 <tr>
                     <td class="width-10-percent text-align-center"><?php echo $player->points_gained; ?></td>
                     <td class="width-65-percent"><?php echo Player_helper::fullName($player->player_id); ?></td>
-                    <td class="width-25-percent text-align-center"><?php echo $player->matches_played; ?> <?php echo $ci->lang->line($player->matches_played == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
+                    <td class="width-25-percent text-align-left"><?php echo $player->matches_played; ?> <?php echo $ci->lang->line($player->matches_played == 1 ? "player_statistics_match" : "player_statistics_matches"); ?></td>
                 </tr>
         <?php
             $count++;
