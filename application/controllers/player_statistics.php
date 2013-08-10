@@ -46,7 +46,9 @@ class Player_Statistics extends Frontend_Controller {
             }
 
             if ($this->input->post('type')) {
-                $redirectString .= '/type/' . $this->input->post('type');
+                if ($this->input->post('type') != 'overall') {
+                    $redirectString .= '/type/' . $this->input->post('type');
+                }
             }
 
             if ($this->input->post('threshold')) {
