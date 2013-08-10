@@ -53,6 +53,8 @@ class Article extends Frontend_Controller {
 
         $this->templateData['articles']   = $articles;
         $this->templateData['pagination'] = $this->pagination->create_links();
+        $this->templateData['metaTitle']       = $this->lang->line($this->router->fetch_class() . '_' . $this->router->fetch_method() . '_frontend_meta_title');
+        $this->templateData['metaDescription'] = sprintf($this->lang->line($this->router->fetch_class() . '_' . $this->router->fetch_method() . '_frontend_meta_description'), Configuration::get('team_name'));
 
         $this->load->view("themes/{$this->theme}/header", $this->templateData);
         $this->load->view("themes/{$this->theme}/article/welcome_message", $this->templateData);
@@ -73,7 +75,9 @@ class Article extends Frontend_Controller {
             show_error($this->lang->line('article_not_found'), 404);
         }
 
-        $this->templateData['article']   = $article;
+        $this->templateData['article']         = $article;
+        $this->templateData['metaTitle']       = $article->title;
+        $this->templateData['metaDescription'] = Utility_helper::truncate($article->content, 200);
 
         $this->load->view("themes/{$this->theme}/header", $this->templateData);
         $this->load->view("themes/{$this->theme}/article/view", $this->templateData);
