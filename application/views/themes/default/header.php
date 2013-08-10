@@ -91,8 +91,8 @@
                                         $menuLeagues = $this->League_model->fetchAll(array(
                                             'season' => $menuSeason));
                                         foreach ($menuLeagues as $menuLeague) { ?>
-                                        <li><a href="<?php echo site_url("league-statistics/view/id/{$menuLeague->id}"); ?>"><?php echo $menuLeague->short_name; ?> Statistics</a></li>
                                         <li><a href="<?php echo site_url("league/view/id/{$menuLeague->id}"); ?>"><?php echo $menuLeague->short_name; ?> League Table</a></li>
+                                        <li><a href="<?php echo site_url("league-statistics/view/id/{$menuLeague->id}"); ?>"><?php echo $menuLeague->short_name; ?> Statistics</a></li>
                                         <?php
                                         } ?>
                                     </ul>
