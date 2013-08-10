@@ -257,7 +257,7 @@ class Utility_helper
     {
         $formattedString = Configuration::get('team_name');
         if ($title) {
-            $formattedString .= " | " . $title;
+            $formattedString = $title . " | " . $formattedString;
         }
 
         return "<title>{$formattedString}</title>";
@@ -271,5 +271,23 @@ class Utility_helper
     public static function metaDescription($description)
     {
         return '<meta name="description" content="' . htmlentities ($description) . '">';
+    }
+
+    /**
+     * Return truncated string
+     * @param  string $string        Original String
+     * @return string                Truncated String
+     */
+    public static function truncate($string, $chars = 50)
+    {
+        if (strlen($string) > $chars) {
+            $text = $string;
+            $text = substr($text, 0, $chars);
+            $text = $text . "...";
+
+            return $text;
+        }
+
+        return $string;
     }
 }
