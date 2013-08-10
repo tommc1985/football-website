@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Football Website</title>
+    <?php echo Utility_helper::metaTitle($metaTitle); ?>
+
+    <?php echo Utility_helper::metaDescription($metaDescription); ?>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <link href="<?php echo site_url("bootstrap/docs/assets/css/bootstrap.css"); ?>" rel="stylesheet">

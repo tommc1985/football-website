@@ -24,6 +24,9 @@ class Frontend_Controller extends CI_Controller
 
         $this->load->model('frontend/League_model');
         $this->load->model('Season_model');
+
+        $this->templateData['metaTitle']       = '';
+        $this->templateData['metaDescription'] = '';
     }
 }
 

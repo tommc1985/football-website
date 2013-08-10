@@ -247,4 +247,29 @@ class Utility_helper
 
         return $string;
     }
+
+    /**
+     * Return formatted Meta Title
+     * @param  string $title   Page Title
+     * @return string          Formatted tag
+     */
+    public static function metaTitle($title)
+    {
+        $formattedString = Configuration::get('team_name');
+        if ($title) {
+            $formattedString .= " | " . $title;
+        }
+
+        return "<title>{$formattedString}</title>";
+    }
+
+    /**
+     * Return formatted Meta Description
+     * @param  string $description   Original Content
+     * @return string                Formatted tag
+     */
+    public static function metaDescription($description)
+    {
+        return '<meta name="description" content="' . htmlentities ($description) . '">';
+    }
 }
