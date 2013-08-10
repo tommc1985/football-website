@@ -59,10 +59,36 @@ class Club_Statistics extends Frontend_Controller {
 
         $statistics = $this->Club_Statistics_model->fetchAll($season == 'all-time' ? 'career' : $season, $type);
 
-        $this->templateData['statistics'] = $statistics;
-        $this->templateData['season']     = $season;
-        $this->templateData['type']       = $type;
-        $this->templateData['venues']     = array(
+        switch (true) {
+            case $season == 'all-time' && $type == 'overall':
+                $metaTitleString       = 'club_statistics_view_frontend_meta_title_all_time';
+                $metaDescriptionString = 'club_statistics_view_frontend_meta_description_all_time';
+                break;
+            case is_numeric($season) && $type == 'overall':
+                $metaTitleString       = 'club_statistics_view_frontend_meta_title_season_only';
+                $metaDescriptionString = 'club_statistics_view_frontend_meta_description_season_only';
+                break;
+            case $season == 'all-time' && $type != 'overall':
+                $metaTitleString       = 'club_statistics_view_frontend_meta_title_all_time_and_type';
+                $metaDescriptionString = 'club_statistics_view_frontend_meta_description_all_time_and_type';
+                break;
+            default:
+                $metaTitleString       = 'club_statistics_view_frontend_meta_title_season_and_type';
+                $metaDescriptionString = 'club_statistics_view_frontend_meta_description_season_and_type';
+        }
+
+        $metaData = array(
+            Configuration::get('team_name'),
+            Utility_helper::formattedSeason($season),
+            $type != 'overall' ? Competition_helper::type($type) : '',
+        );
+
+        $this->templateData['metaTitle']       = vsprintf($this->lang->line($metaTitleString), $metaData);
+        $this->templateData['metaDescription'] = vsprintf($this->lang->line($metaDescriptionString), $metaData);
+        $this->templateData['statistics']      = $statistics;
+        $this->templateData['season']          = $season;
+        $this->templateData['type']            = $type;
+        $this->templateData['venues']          = array(
             '',
             'h',
             'a'
