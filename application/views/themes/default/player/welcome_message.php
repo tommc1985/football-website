@@ -6,8 +6,8 @@
             <thead>
                 <tr>
                     <td><?php echo $this->lang->line('player_player'); ?></td>
-                    <td class="width-15-percent text-align-center"><?php echo $this->lang->line('player_d_o_b'); ?></td>
-                    <td class="width-10-percent text-align-center"><?php echo $this->lang->line('player_apps'); ?></td>
+                    <td class="width-15-percent text-align-center"><?php echo $this->lang->line('player_d_o_b'); ?> <img src="<?php echo site_url('assets/themes/default/img/icons/sort-none.png'); ?>" alt="<?php echo $this->lang->line('sort_none'); ?>"></td>
+                    <td class="width-10-percent text-align-center"><img src="<?php echo site_url('assets/themes/default/img/icons/app-16x16.png'); ?>" alt="<?php echo $this->lang->line('player_apps'); ?>"> <img src="<?php echo site_url('assets/themes/default/img/icons/sort-none.png'); ?>" alt="<?php echo $this->lang->line('sort_none'); ?>"></td>
                     <td class="width-10-percent text-align-center"><img src="<?php echo site_url('assets/themes/default/img/icons/goal-16x16.png'); ?>" alt="<?php echo $this->lang->line('player_goals'); ?>"> <img src="<?php echo site_url('assets/themes/default/img/icons/sort-none.png'); ?>" alt="<?php echo $this->lang->line('sort_none'); ?>"></td>
                     <td class="width-10-percent text-align-center"><img src="<?php echo site_url('assets/themes/default/img/icons/assist-16x16.png'); ?>" alt="<?php echo $this->lang->line('player_assists'); ?>"> <img src="<?php echo site_url('assets/themes/default/img/icons/sort-none.png'); ?>" alt="<?php echo $this->lang->line('sort_none'); ?>"></td>
                     <td class="width-10-percent text-align-center"><img src="<?php echo site_url('assets/themes/default/img/icons/motm-16x16.png'); ?>" alt="<?php echo $this->lang->line('player_motms'); ?>"> <img src="<?php echo site_url('assets/themes/default/img/icons/sort-none.png'); ?>" alt="<?php echo $this->lang->line('sort_none'); ?>"></td>
