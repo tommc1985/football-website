@@ -46,6 +46,44 @@ class League_Collated_Results_model extends Base_Frontend_Model {
     }
 
     /**
+     * Fetch the Alternative Table for a particular league,
+     * @param  int $id            League ID
+     * @param  string $dateUntil  The date to include, or 'overall' for the current standings
+     * @param  string $type       Home, Away or overall)
+     * @return array              Ordered list of standings
+     */
+    public function fetchAlternativeTable($id, $dateUntil = 'overall', $type = 'overall')
+    {
+        $this->db->select('*')
+            ->from($this->tableName)
+            ->where('league_id', $id)
+            ->where('date_until', $dateUntil)
+            ->where('type', $type)
+            ->order_by($this->getOrderBy(), '');
+
+        $results = $this->db->get()->result();
+
+        $standings = array();
+        $maxPoints = 0;
+        foreach ($results as $result) {
+            if (!isset($standings[$result->points])) {
+                 $standings[$result->points] = array();
+            }
+
+            $standings[$result->points][] = Opposition_helper::name($result->opposition_id);
+
+            if ($result->points > $maxPoints) {
+                $maxPoints = $result->points;
+            }
+        }
+
+        return (object) array(
+            'standings' => $standings,
+            'maxPoints' => $maxPoints,
+        );
+    }
+
+    /**
      * Fetch the form for a particular league,
      * @param  array $standings      League Standings
      * @param  int $numberOfMatches  Number of matches to include in form

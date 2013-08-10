@@ -96,6 +96,44 @@ $submit = array(
                 } ?>
             </div>
         </div>
+
+        <div class="row-fluid">
+            <div class="span10 offset1">
+                <h3><?php echo $this->lang->line('league_alternative_league_table'); ?><?php echo $type != 'overall' ? " (" . $this->lang->line("league_{$type}_matches_only") . ")" : ''; ?></h3>
+                <?php
+                if ($dateUntil != 'overall') { ?>
+                <h4><?php echo sprintf($this->lang->line('league_as_of'), $dateUntil != 'overall' ? Utility_helper::shortDate($dateUntil) : Utility_helper::shortDate(time())); ?></h4>
+                <?php
+                } ?>
+                <?php
+                if ($standings) { ?>
+                <table class="width-100-percent table table-striped table-condensed">
+                    <thead>
+                        <tr>
+                            <td class="width-15-percent text-align-center"><?php echo $this->lang->line("league_points"); ?></td>
+                            <td class="width-85-percent"><?php echo $this->lang->line("league_team"); ?></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    $i = $alternativeTable->maxPoints;
+                    while ($i >= 0) { ?>
+                        <tr>
+                            <td class="text-align-center" data-title="<?php echo $this->lang->line('league_points'); ?>"><?php echo $i; ?></td>
+                            <td data-title="<?php echo $this->lang->line('league_team'); ?>"><?php echo isset($alternativeTable->standings[$i]) ? implode($alternativeTable->standings[$i], ", ") : ''; ?></td>
+                        </tr>
+                    <?php
+                        $i--;
+                    } ?>
+                    </tbody>
+                </table>
+                <?php
+                } else { ?>
+                <p><?php echo $this->lang->line("league_no_data"); ?></p>
+                <?php
+                } ?>
+            </div>
+        </div>
         <div class="row-fluid">
             <div class="span6">
                 <h3><?php echo $this->lang->line("league_form"); ?></h3>

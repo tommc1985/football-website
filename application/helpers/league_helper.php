@@ -90,6 +90,6 @@ class League_helper
         $trimmed_form = str_replace('1', $ci->lang->line("league_d"), $trimmed_form);
         $trimmed_form = str_replace('0', $ci->lang->line("league_l"), $trimmed_form);
 
-        return $trimmed_form;
+        return $trimmed_form ? $trimmed_form : '&nbsp;';
     }
 }

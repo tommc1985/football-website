@@ -84,22 +84,24 @@ class League extends Frontend_Controller {
             $formMatchCount = (int) $parameters['form-match-count'];
         }
 
-        $standings = $this->League_Collated_Results_model->fetchStandings($parameters['id'], $dateUntil, $type);
+        $standings        = $this->League_Collated_Results_model->fetchStandings($parameters['id'], $dateUntil, $type);
+        $alternativeTable = $this->League_Collated_Results_model->fetchAlternativeTable($parameters['id'], $dateUntil, $type);
 
         $formTeams = $this->League_Collated_Results_model->fetchForm($standings, $formMatchCount);
 
         $dropdownDates = $this->League_Match_model->fetchDatesForDropdown($parameters['id']);
         $leagueMatches = $this->League_Match_model->fetchByDate($parameters['id'], $matchDate);
 
-        $this->templateData['standings']      = $standings;
-        $this->templateData['formTeams']      = $formTeams;
-        $this->templateData['formMatchCount'] = $formMatchCount;
-        $this->templateData['id']             = $parameters['id'];
-        $this->templateData['type']           = $type;
-        $this->templateData['dateUntil']      = $dateUntil;
-        $this->templateData['matchDate']      = $matchDate;
-        $this->templateData['dropdownDates']  = $dropdownDates;
-        $this->templateData['leagueMatches']  = $leagueMatches;
+        $this->templateData['standings']        = $standings;
+        $this->templateData['alternativeTable'] = $alternativeTable;
+        $this->templateData['formTeams']        = $formTeams;
+        $this->templateData['formMatchCount']   = $formMatchCount;
+        $this->templateData['id']               = $parameters['id'];
+        $this->templateData['type']             = $type;
+        $this->templateData['dateUntil']        = $dateUntil;
+        $this->templateData['matchDate']        = $matchDate;
+        $this->templateData['dropdownDates']    = $dropdownDates;
+        $this->templateData['leagueMatches']    = $leagueMatches;
 
         $this->load->view("themes/{$this->theme}/header", $this->templateData);
         $this->load->view("themes/{$this->theme}/league/view", $this->templateData);
