@@ -43,8 +43,15 @@ class Player extends Frontend_Controller {
 
         $players = $this->Player_model->fetchPlayerList($season, $type, $orderBy, $order);
 
-        $this->templateData['players'] = $players;
-        $this->templateData['season']  = $season;
+        $metaData = array(
+            Configuration::get('team_name'),
+            Utility_helper::formattedSeason($season),
+        );
+
+        $this->templateData['metaTitle']       = vsprintf($this->lang->line('player_index_frontend_meta_title'), $metaData);
+        $this->templateData['metaDescription'] = vsprintf($this->lang->line('player_index_frontend_meta_description'), $metaData);
+        $this->templateData['players']         = $players;
+        $this->templateData['season']          = $season;
 
         $this->load->view("themes/{$this->theme}/header", $this->templateData);
         $this->load->view("themes/{$this->theme}/player/welcome_message", $this->templateData);
@@ -65,7 +72,14 @@ class Player extends Frontend_Controller {
             show_error($this->lang->line('player_not_found'), 404);
         }
 
-        $this->templateData['player'] = $player;
+        $metaData = array(
+            Configuration::get('team_name'),
+            Player_helper::fullName($player, false),
+        );
+
+        $this->templateData['metaTitle']       = vsprintf($this->lang->line('player_view_frontend_meta_title'), $metaData);
+        $this->templateData['metaDescription'] = vsprintf($this->lang->line('player_view_frontend_meta_description'), $metaData);
+        $this->templateData['player']          = $player;
 
         $this->load->view("themes/{$this->theme}/header", $this->templateData);
         $this->load->view("themes/{$this->theme}/player/view", $this->templateData);

@@ -39,6 +39,12 @@ $lang['player_no_players']                         = 'No Players exist';
 
 
 // Frontend Text
+$lang['player_index_frontend_meta_title']          = 'Squad List %2$s';
+$lang['player_index_frontend_meta_description']    = 'Squad List for %1$s for the %2$s season, with stats including Appearances, Goals, Assists, Man of the Matches, Yellows, Reds and Ratings.';
+
+$lang['player_view_frontend_meta_title']           = '%2$s - Player Profile';
+$lang['player_view_frontend_meta_description']     = 'Player Profile of %2$s for %1$s, with details that include Date of Birth, preferred positions, details of debut and first goal, career statistics broken down by season and competition type, awards, appearance data and charts.';
+
 $lang['player_player_profile']                     = 'Player Profile - %s';
 $lang['player_player_details']                     = 'Player Details';
 $lang['player_full_name']                          = 'Full Name';

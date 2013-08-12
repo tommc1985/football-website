@@ -40,7 +40,9 @@ class Page extends Frontend_Controller {
             show_error($this->lang->line('page_not_found'), 404);
         }
 
-        $this->templateData['article'] = $article;
+        $this->templateData['article']         = $article;
+        $this->templateData['metaTitle']       = $article->title;
+        $this->templateData['metaDescription'] = Utility_helper::truncate($article->content, 200);
 
         $this->load->view("themes/{$this->theme}/header", $this->templateData);
         $this->load->view("themes/{$this->theme}/page/view", $this->templateData);
