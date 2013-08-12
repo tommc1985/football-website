@@ -6,6 +6,13 @@ echo $opposition ? ' - ' . Opposition_helper::name($opposition) : ''; ?></h2>
 
         <div class="row-fluid">
             <div class="span12">
+            <?php
+            if ($isNextOpponent) { ?>
+                <div class="alert alert-info">
+                    <?php echo sprintf($this->lang->line('head_to_head_next_opponent'), Opposition_helper::name($opposition), Configuration::get('team_name')); ?>
+                </div>
+            <?php
+            } ?>
 
 <?php
 echo form_open($this->uri->uri_string(), array('class' => 'form-horizontal')); ?>

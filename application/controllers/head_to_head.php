@@ -46,6 +46,16 @@ class Head_To_Head extends Frontend_Controller {
             }
         }
 
+        $isNextOpponent = false;
+        if (!$opposition) {
+            $nextMatch = $this->Frontend_Match_model->fetchNextMatch();
+
+            if ($nextMatch) {
+                $opposition = $nextMatch->opposition_id;
+                $isNextOpponent = true;
+            }
+        }
+
         $matches = array();
         $accumulatedData = array();
         $scorers = array();
@@ -85,6 +95,7 @@ class Head_To_Head extends Frontend_Controller {
         $this->templateData['assisters']       = $assisters;
         $this->templateData['offenders']       = $offenders;
         $this->templateData['pointsGainers']   = $pointsGainers;
+        $this->templateData['isNextOpponent']  = $isNextOpponent;
 
         $this->load->view("themes/{$this->theme}/header", $this->templateData);
         $this->load->view("themes/{$this->theme}/head-to-head/view", $this->templateData);

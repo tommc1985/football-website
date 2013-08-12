@@ -22,6 +22,8 @@ $lang['head_to_head_no_assisters']                            = 'No goals have b
 $lang['head_to_head_no_worst_discipline']                     = 'No red or yellow cards have been issued against %s';
 $lang['head_to_head_no_top_point_gainers']                    = 'No points have been gained by a Player scoring against %s';
 
+$lang['head_to_head_next_opponent']                           = 'The Head to Head details against %s are displayed as they are the next opponents of %s.';
+
 $lang['head_to_head_venue_h']                                 = 'Home';
 $lang['head_to_head_venue_a']                                 = 'Away';
 $lang['head_to_head_venue_n']                                 = 'Neutral';
