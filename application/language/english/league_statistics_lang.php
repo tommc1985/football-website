@@ -1,6 +1,9 @@
 <?php
 
 // Frontend Text
+$lang['league_statistics_frontend_meta_title'] = '%1$s - Statistics';
+$lang['league_statistics_frontend_meta_description'] = '%1$s Statistics, featuring statistics including Biggest Win, Highest Scoring Match, Longest Sequence of Draws, Most Clean Sheets and Longest Sequence of Matches without Scoring.';
+
 $lang['league_statistics_title']                                     = 'League Statistics';
 
 $lang['league_statistics_match']                                     = 'match';

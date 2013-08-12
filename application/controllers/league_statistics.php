@@ -39,10 +39,16 @@ class League_Statistics extends Frontend_Controller {
 
         $statistics = $this->League_Statistics_model->fetchAll($parameters['id']);
 
-        $this->templateData['statistics'] = $statistics;
-        $this->templateData['id']         = $parameters['id'];
-        $this->templateData['season']     = $league->season;
-        $this->templateData['venues']     = array(
+        $metaData = array(
+            League_helper::name($parameters['id']),
+        );
+
+        $this->templateData['metaTitle']       = vsprintf($this->lang->line('league_statistics_frontend_meta_title'), $metaData);
+        $this->templateData['metaDescription'] = vsprintf($this->lang->line('league_statistics_frontend_meta_description'), $metaData);
+        $this->templateData['statistics']      = $statistics;
+        $this->templateData['id']              = $parameters['id'];
+        $this->templateData['season']          = $league->season;
+        $this->templateData['venues']          = array(
             '',
             'h',
             'a'
