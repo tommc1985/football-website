@@ -92,6 +92,12 @@ class League extends Frontend_Controller {
         $dropdownDates = $this->League_Match_model->fetchDatesForDropdown($parameters['id']);
         $leagueMatches = $this->League_Match_model->fetchByDate($parameters['id'], $matchDate);
 
+        $metaData = array(
+            League_helper::name($parameters['id']),
+        );
+
+        $this->templateData['metaTitle']        = League_helper::name($parameters['id']);
+        $this->templateData['metaDescription']  = vsprintf($this->lang->line('league_frontend_meta_description'), $metaData);
         $this->templateData['standings']        = $standings;
         $this->templateData['alternativeTable'] = $alternativeTable;
         $this->templateData['formTeams']        = $formTeams;
