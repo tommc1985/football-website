@@ -228,6 +228,27 @@ class Player_helper
     }
 
     /**
+     * Return a Player's Appearance Status
+     * @param  object $awards     Awards Array
+     * @return string             Awards
+     */
+    public static function appearanceStatus($status)
+    {
+        $ci =& get_instance();
+
+        switch ($status) {
+            case 'starter':
+                return $ci->lang->line('player_start');
+                break;
+            case 'substitute':
+                return $ci->lang->line('player_sub');
+                break;
+        }
+
+        return $ci->lang->line('player_unused');
+    }
+
+    /**
      * Return an OrderBy link for the specified data
      * @param  object $awards     Awards Array
      * @return string             Awards

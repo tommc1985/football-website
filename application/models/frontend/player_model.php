@@ -41,10 +41,11 @@ class Player_model extends Base_Frontend_Model {
 
     /**
      * Fetch data on a particular player for Player Profile Page
-     * @param  int $id         Player ID
-     * @return object          Player Details
+     * @param  int $id            Player ID
+     * @param  mixed $extraData   Extra Data to include as part of the Player's Details
+     * @return object             Player Details
      */
-    public function fetchPlayerDetails($id)
+    public function fetchPlayerDetails($id, $extraData = false)
     {
         // Basic Player details
         $player = $this->fetch($id);
@@ -62,9 +63,6 @@ class Player_model extends Base_Frontend_Model {
         // Player's First Goals across all competition types
         $player->firstGoal = $this->fetchPlayerFirstGoals($id);
 
-        // Player's Accumulated Season Statistics
-        $player->accumulatedStatistics = $this->fetchPlayerAccumulatedStatistics($id);
-
         // Player's Time between Debut & First Goal
         $player->timeBetweenDebutAndFirstGoal = $this->fetchPlayerTimeBetweenDebutAndFirstGoal($id);
 
@@ -73,6 +71,26 @@ class Player_model extends Base_Frontend_Model {
 
         // Player's Awards
         $player->awards = $this->fetchPlayerAwards($id);
+
+        // Player's Accumulated Season Statistics
+        $player->accumulatedStatistics  = $this->fetchPlayerAccumulatedStatistics($id);
+
+        if (isset($extraData['data'])) {
+            switch ($extraData['data']) {
+                case 'appearances':
+                    // Player's Appearances by Season
+                    $player->appearancesBySeason = $this->fetchPlayerAppearancesBySeason($id, $extraData['season']);
+                    break;
+                case 'goal-statistics':
+                    // Player's Goal Statistics by Season
+                    $player->goalStatisticsBySeason = $this->fetchPlayerGoalStatisticsBySeason($id, $extraData['season']);
+                    break;
+                case 'records':
+                    // Player's Records by Season
+                    $player->recordsBySeason = $this->fetchPlayerRecordsBySeason($id, $extraData['season']);
+                    break;
+            }
+        }
 
         return $player;
     }
@@ -247,6 +265,49 @@ class Player_model extends Base_Frontend_Model {
             ->order_by('pta.placing ASC, pta.season DESC, a.importance ASC');
 
         return $this->db->get()->result();
+    }
+
+    /**
+     * Fetch a particular Player's Appearances by Season
+     * @param  string $season     Season of Data
+     * @param  int $id            Player ID
+     * @return array              A Player's Appearances
+     */
+    public function fetchPlayerAppearancesBySeason($id, $season)
+    {
+        $this->db->select('vamc.*')
+            ->from('view_appearances_matches_combined vamc')
+            ->where('vamc.player_id', $id)
+            ->order_by('date', 'desc');
+
+        if ($season != 'all-time') {
+            $startEndDates = Season_model::generateStartEndDates($season, NULL, NULL, false);
+            $this->db->where($startEndDates);
+        }
+
+        return $this->db->get()->result();
+    }
+
+    /**
+     * Fetch a particular Player's Goal Statistics by Season
+     * @param  string $season     Season of Data
+     * @param  int $id            Player ID
+     * @return array              A Player's Appearances
+     */
+    public function fetchPlayerGoalStatisticsBySeason($id, $season)
+    {
+
+    }
+
+    /**
+     * Fetch a particular Player's Reocrds by Season
+     * @param  string $season     Season of Data
+     * @param  int $id            Player ID
+     * @return array              A Player's Appearances
+     */
+    public function fetchPlayerRecordsBySeason($id, $season)
+    {
+
     }
 
     /**

@@ -74,12 +74,19 @@ class Player extends Frontend_Controller {
      */
     public function view()
     {
-        $parameters = $this->uri->uri_to_assoc(3, array('id'));
+        $parameters = $this->uri->uri_to_assoc(3, array('id', 'info', 'season'));
 
-        $player = $this->Player_model->fetchPlayerDetails($parameters['id']);
+        $player = $this->Player_model->fetch($parameters['id']);
 
         if ($player === false) {
             show_error($this->lang->line('player_not_found'), 404);
+        }
+
+        $season = (int) $parameters['season'];
+        if ($parameters['season'] === false) {
+            $season = Season_model::fetchCurrentSeason();
+        } elseif ($parameters['season'] == 'all-time') {
+            $season = 'all-time';
         }
 
         $metaData = array(
@@ -87,9 +94,32 @@ class Player extends Frontend_Controller {
             Player_helper::fullName($player, false),
         );
 
+        switch ($parameters['info']) {
+            case 'appearances':
+                $info = 'appearances';
+                break;
+            case 'goal-statistics':
+                $info = 'goal-statistics';
+                break;
+            case 'records':
+                $info = 'records';
+                break;
+            default:
+                $info = 'career-statistics';
+        }
+
+        $player = $this->Player_model->fetchPlayerDetails($parameters['id'], array(
+            'data' => $info,
+            'season' => $season,
+            )
+        );
+
         $this->templateData['metaTitle']       = vsprintf($this->lang->line('player_view_frontend_meta_title'), $metaData);
         $this->templateData['metaDescription'] = vsprintf($this->lang->line('player_view_frontend_meta_description'), $metaData);
         $this->templateData['player']          = $player;
+        $this->templateData['baseURL']         = site_url("player/view/id/{$player->id}");
+        $this->templateData['info']            = $info;
+        $this->templateData['season']          = $season;
 
         $this->load->view("themes/{$this->theme}/header", $this->templateData);
         $this->load->view("themes/{$this->theme}/player/view", $this->templateData);

@@ -47,118 +47,64 @@
 
 <div class="row-fluid">
     <div class="span12">
-        <h3><?php echo $this->lang->line('player_season_statistics'); ?></h3>
-
-        <table class="no-more-tables table table-striped table-bordered table-condensed">
-            <thead>
-                <tr>
-                    <td class="width-5-percent text-align-center expand">&nbsp;</td>
-                    <td class="width-25-percent text-align-left season">&nbsp;</td>
-                    <td class="width-10-percent text-align-center"><img src="<?php echo site_url('assets/themes/default/img/icons/app-16x16.png'); ?>" alt="<?php echo $this->lang->line('player_apps'); ?>"></td>
-                    <td class="width-10-percent text-align-center"><img src="<?php echo site_url('assets/themes/default/img/icons/goal-16x16.png'); ?>" alt="<?php echo $this->lang->line('player_goals'); ?>"></td>
-                    <td class="width-10-percent text-align-center"><img src="<?php echo site_url('assets/themes/default/img/icons/assist-16x16.png'); ?>" alt="<?php echo $this->lang->line('player_assists'); ?>"></td>
-                    <td class="width-10-percent text-align-center"><img src="<?php echo site_url('assets/themes/default/img/icons/motm-16x16.png'); ?>" alt="<?php echo $this->lang->line('player_motms'); ?>"></td>
-                    <td class="width-10-percent text-align-center"><img src="<?php echo site_url('assets/themes/default/img/icons/yellow-16x16.png'); ?>" alt="<?php echo $this->lang->line('player_yellows'); ?>"></td>
-                    <td class="width-10-percent text-align-center"><img src="<?php echo site_url('assets/themes/default/img/icons/red-16x16.png'); ?>" alt="<?php echo $this->lang->line('player_reds'); ?>"></td>
-                    <?php
-                    if (Configuration::get('include_appearance_ratings') === true) { ?>
-                    <td class="width-10-percent text-align-center"><?php echo $this->lang->line('player_average_rating'); ?></td>
-                    <?php
-                    } ?>
-                </tr>
-            </thead>
-            <tbody>
-            <?php
-        if (count($player->accumulatedStatistics) > 0) {
-            foreach ($player->accumulatedStatistics as $season => $seasonStatistics) {
-                if ($season != 'career') { ?>
-                <tr class="season-<?php echo $season; ?>">
-                    <td class="width-5-percent text-align-center expand" data-title="&nbsp;">&nbsp;</td>
-                    <td class="width-25-percent text-align-left" data-title="<?php echo $this->lang->line('player_season'); ?>"><?php echo Utility_helper::formattedSeason($season); ?></td>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_appearances'); ?>"><?php echo $seasonStatistics['overall']->appearances; ?> (<?php echo $seasonStatistics['overall']->substitute_appearances; ?>)</td>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_goals'); ?>"><?php echo $seasonStatistics['overall']->goals; ?></td>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_assists'); ?>"><?php echo $seasonStatistics['overall']->assists; ?></td>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_motms'); ?>"><?php echo $seasonStatistics['overall']->motms; ?></td>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_yellows'); ?>"><?php echo $seasonStatistics['overall']->yellows; ?></td>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_reds'); ?>"><?php echo $seasonStatistics['overall']->reds; ?></td>
-                    <?php
-                    if (Configuration::get('include_appearance_ratings') === true) { ?>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_average_rating'); ?>"><?php echo Player_helper::rating($seasonStatistics['overall']->average_rating); ?></td>
-                    <?php
-                    } ?>
-                </tr>
+        <ul class="nav nav-pills">
+            <li class="<?php echo $info == 'career-statistics' ? 'active' : ''; ?>"><a href="<?php echo $baseURL; ?>"><?php echo $this->lang->line('player_career_statistics'); ?></a></li>
+            <li class="dropdown<?php echo $info == 'appearances' ? ' active' : ''; ?>">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo $this->lang->line('player_appearances_by_season'); ?> <b class="caret"></b></a>
+                <ul class="dropdown-menu">
                 <?php
-                }
-
-                if (is_numeric($season)) {
-                    foreach ($seasonStatistics as $competitionType => $statistics) {
-                        if ($competitionType != 'overall') { ?>
-                <tr class="season-breakdown-odd season-breakdown season-breakdown-<?php echo $season; ?>">
-                    <td class="width-5-percent text-align-center expand">&nbsp;</td>
-                    <td class="width-25-percent text-align-left" data-title="<?php echo $this->lang->line('player_competition'); ?>"><?php echo Competition_helper::type($competitionType); ?></td>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_appearances'); ?>"><?php echo $statistics->appearances; ?> (<?php echo $statistics->substitute_appearances; ?>)</td>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_goals'); ?>"><?php echo $statistics->goals; ?></td>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_assists'); ?>"><?php echo $statistics->assists; ?></td>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_motms'); ?>"><?php echo $statistics->motms; ?></td>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_yellows'); ?>"><?php echo $statistics->yellows; ?></td>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_reds'); ?>"><?php echo $statistics->reds; ?></td>
-                    <?php
-                    if (Configuration::get('include_appearance_ratings') === true) { ?>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_average_rating'); ?>"><?php echo Player_helper::rating($statistics->average_rating); ?></td>
-                    <?php
-                    } ?>
-                </tr>
-            <?php
+                    foreach ((array('all-time' => 'All Time') + $this->Season_model->fetchForDropdown())  as $menuSeason => $menuSeasonFriendly) {
+                        if (isset($player->accumulatedStatistics[$menuSeason]) || $menuSeason == 'all-time') { ?>
+                        <li class="<?php echo $info == 'appearances' && $menuSeason == $season ? 'active' : ''; ?>"><a href="<?php echo "{$baseURL}/info/appearances/season/{$menuSeason}"; ?>"><?php echo $menuSeasonFriendly; ?></a></li>
+                        <?php
                         }
-                    }
-                }
-            }
-
-            if (isset($player->accumulatedStatistics['career'])) { ?>
-                <tr class="season-career">
-                    <td class="width-5-percent text-align-center expand">&nbsp;</td>
-                    <td class="width-25-percent text-align-left season">Career</td>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_appearances'); ?>"><?php echo $player->accumulatedStatistics['career']['overall']->appearances; ?> (<?php echo $player->accumulatedStatistics['career']['overall']->substitute_appearances; ?>)</td>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_goals'); ?>"><?php echo $player->accumulatedStatistics['career']['overall']->goals; ?></td>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_assists'); ?>"><?php echo $player->accumulatedStatistics['career']['overall']->assists; ?></td>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_motms'); ?>"><?php echo $player->accumulatedStatistics['career']['overall']->motms; ?></td>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_yellows'); ?>"><?php echo $player->accumulatedStatistics['career']['overall']->yellows; ?></td>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_reds'); ?>"><?php echo $player->accumulatedStatistics['career']['overall']->reds; ?></td>
-                    <?php
-                    if (Configuration::get('include_appearance_ratings') === true) { ?>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_average_rating'); ?>"><?php echo Player_helper::rating($player->accumulatedStatistics['career']['overall']->average_rating); ?></td>
-                    <?php
                     } ?>
-                </tr>
+                </ul>
+            </li>
+            <li class="dropdown<?php echo $info == 'goal-statistics' ? ' active' : ''; ?>">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo $this->lang->line('player_goal_statistics_by_season'); ?> <b class="caret"></b></a>
+                <ul class="dropdown-menu">
                 <?php
-                foreach ($player->accumulatedStatistics['career'] as $competitionType => $statistics) {
-                    if ($competitionType != 'overall') { ?>
-                <tr class="season-breakdown-odd season-breakdown season-breakdown-<?php echo $season; ?>">
-                    <td class="width-5-percent text-align-center expand">&nbsp;</td>
-                    <td class="width-25-percent text-align-left" data-title="<?php echo $this->lang->line('player_competition'); ?>"><?php echo Competition_helper::type($competitionType); ?></td>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_appearances'); ?>"><?php echo $statistics->appearances; ?> (<?php echo $statistics->substitute_appearances; ?>)</td>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_goals'); ?>"><?php echo $statistics->goals; ?></td>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_assists'); ?>"><?php echo $statistics->assists; ?></td>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_motms'); ?>"><?php echo $statistics->motms; ?></td>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_yellows'); ?>"><?php echo $statistics->yellows; ?></td>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_reds'); ?>"><?php echo $statistics->reds; ?></td>
-                    <?php
-                    if (Configuration::get('include_appearance_ratings') === true) { ?>
-                    <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_average_rating'); ?>"><?php echo Player_helper::rating($statistics->average_rating); ?></td>
-                    <?php
+                    foreach ((array('all-time' => 'All Time') + $this->Season_model->fetchForDropdown())  as $menuSeason => $menuSeasonFriendly) {
+                        if (isset($player->accumulatedStatistics[$menuSeason]) || $menuSeason == 'all-time') { ?>
+                        <li class="<?php echo $info == 'goal-statistics' && $menuSeason == $season ? 'active' : ''; ?>"><a href="<?php echo "{$baseURL}/info/goal-statistics/season/{$menuSeason}"; ?>"><?php echo $menuSeasonFriendly; ?></a></li>
+                        <?php
+                        }
                     } ?>
-                </tr>
-            <?php
-                    }
-                }
-            }
-        } else { ?>
-                <tr class="">
-                    <td colspan="<?php echo Configuration::get('include_appearance_ratings') === true ? 9 : 8; ?>"><?php echo sprintf($this->lang->line('player_no_career_data_found'), Player_helper::fullName($player)); ?></td>
-                </tr>
-            <?php
-        } ?>
-            </tbody>
-        </table>
+                </ul>
+            </li>
+            <li class="dropdown<?php echo $info == 'records' ? ' active' : ''; ?>">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo $this->lang->line('player_records_by_season'); ?> <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                <?php
+                    foreach ((array('all-time' => 'All Time') + $this->Season_model->fetchForDropdown())  as $menuSeason => $menuSeasonFriendly) {
+                        if (isset($player->accumulatedStatistics[$menuSeason]) || $menuSeason == 'all-time') { ?>
+                        <li class="<?php echo $info == 'records' && $menuSeason == $season ? 'active' : ''; ?>"><a href="<?php echo "{$baseURL}/info/records/season/{$menuSeason}"; ?>"><?php echo $menuSeasonFriendly; ?></a></li>
+                        <?php
+                        }
+                    } ?>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="row-fluid">
+    <div class="span12">
+
+<?php
+switch ($info) {
+    case 'appearances':
+        $this->load->view("themes/{$theme}/player/_appearances");
+        break;
+    case 'goal-statistics':
+        $this->load->view("themes/{$theme}/player/_goal_statistics");
+        break;
+    case 'records':
+        $this->load->view("themes/{$theme}/player/_records");
+        break;
+    default:
+        $this->load->view("themes/{$theme}/player/_career_statistics");
+} ?>
     </div>
 </div>

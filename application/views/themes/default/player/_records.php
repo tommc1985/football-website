@@ -1,0 +1,1 @@
+<h3><?php echo $this->lang->line('player_records'); ?> - <?php echo Utility_helper::formattedSeason($season); ?></h3>

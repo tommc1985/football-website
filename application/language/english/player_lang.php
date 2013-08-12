@@ -57,8 +57,27 @@ $lang['player_first_goal']                         = 'First Goal';
 $lang['player_time_between_debut_and_first_goal']  = 'Time between Debut and First Goal';
 $lang['player_games_between_debut_and_first_goal'] = 'Games between Debut and First Goal';
 $lang['player_profile']                            = 'Profile';
-$lang['player_season_statistics']                  = 'Season Statistics';
+$lang['player_career_statistics']                  = 'Career Statistics';
 $lang['player_no_career_data_found']               = "No Career data can be found for %s";
+
+$lang['player_appearances_by_season']              = "Appearances by Season";
+$lang['player_goal_statistics_by_season']          = "Goal Statistics by Season";
+$lang['player_records_by_season']                  = "Records by Season";
+
+
+$lang['player_date']                               = "Date";
+$lang['player_opposition']                         = "Opposition";
+$lang['player_venue']                              = "Venue";
+$lang['player_score']                              = "Score";
+$lang['player_start_sub']                          = "Start/Sub";
+$lang['player_position']                           = "Position";
+$lang['player_cards']                              = "Cards";
+$lang['player_start']                              = "Start";
+$lang['player_sub']                                = "Sub";
+$lang['player_unused']                             = "Unused";
+
+$lang['player_goal_statistics']                    = "Goal Statistics";
+$lang['player_records']                            = "Records";
 
 $lang['player_squad_list']                         = 'Squad List';
 $lang['player_player']                             = 'Player';
