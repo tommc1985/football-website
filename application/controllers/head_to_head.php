@@ -87,7 +87,7 @@ class Head_To_Head extends Frontend_Controller {
         $this->templateData['pointsGainers']   = $pointsGainers;
 
         $this->load->view("themes/{$this->theme}/header", $this->templateData);
-        $this->load->view("themes/{$this->theme}/head_to_head/view", $this->templateData);
+        $this->load->view("themes/{$this->theme}/head-to-head/view", $this->templateData);
         $this->load->view("themes/{$this->theme}/footer", $this->templateData);
     }
 }
