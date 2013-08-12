@@ -26,16 +26,23 @@ class Player extends Frontend_Controller {
     {
         $parameters = $this->uri->uri_to_assoc(3, array('season', 'type', 'order-by', 'order'));
 
+        $baseURL = site_url('player/index');
+
         $season = (int) $parameters['season'];
         if ($parameters['season'] === false) {
             $season = Season_model::fetchCurrentSeason();
         } elseif ($parameters['season'] == 'career') {
             $season = 'career';
+            $baseURL .= '/season/all-time';
         }
 
         $type = $parameters['type'];
         if ($parameters['type'] === false) {
             $type = 'overall';
+        }
+
+        if ($type && $type != 'overall') {
+            $baseURL .= '/type/' . $type;
         }
 
         $orderBy = $this->Player_model->getOrderBy($parameters['order-by']);
@@ -52,6 +59,9 @@ class Player extends Frontend_Controller {
         $this->templateData['metaDescription'] = vsprintf($this->lang->line('player_index_frontend_meta_description'), $metaData);
         $this->templateData['players']         = $players;
         $this->templateData['season']          = $season;
+        $this->templateData['baseURL']         = $baseURL;
+        $this->templateData['orderBy']         = $parameters['order-by'];
+        $this->templateData['order']           = $parameters['order'];
 
         $this->load->view("themes/{$this->theme}/header", $this->templateData);
         $this->load->view("themes/{$this->theme}/player/welcome_message", $this->templateData);

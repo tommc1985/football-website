@@ -226,4 +226,28 @@ class Player_helper
 
         return implode("<br />", $formattedAwardStrings);
     }
+
+    /**
+     * Return an OrderBy link for the specified data
+     * @param  object $awards     Awards Array
+     * @return string             Awards
+     */
+    public static function orderByLink($baseURL, $field, $orderBy, $order)
+    {
+        $ci =& get_instance();
+
+        if ($field != $orderBy) {
+            if (in_array($field, array('name'))) {
+                return "<a href='{$baseURL}/order-by/{$field}'><img src='" . site_url('assets/themes/default/img/icons/sort-none.png') . "' alt='" . $ci->lang->line('sort_none') . "' /></a>";
+            }
+
+            return "<a href='{$baseURL}/order-by/{$field}/order/desc'><img src='" . site_url('assets/themes/default/img/icons/sort-none.png') . "' alt='" . $ci->lang->line('sort_none') . "' /></a>";
+        }
+
+        if ($order == 'desc') {
+            return "<a href='{$baseURL}/order-by/{$field}'><img src='" . site_url('assets/themes/default/img/icons/sort-desc.png') . "' alt='" . $ci->lang->line('sort_desc') . "' /></a>";
+        }
+
+        return "<a href='{$baseURL}/order-by/{$field}/order/desc'><img src='" . site_url('assets/themes/default/img/icons/sort-asc.png') . "' alt='" . $ci->lang->line('sort_asc') . "' /></a>";
+    }
 }
