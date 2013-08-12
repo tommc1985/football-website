@@ -13,8 +13,10 @@ class Match extends Frontend_Controller {
 
         $this->load->database();
         $this->load->model('frontend/Frontend_Match_model');
+        $this->load->model('frontend/Head_To_Head_model');
         $this->load->model('Season_model');
         $this->lang->load('factfile');
+        $this->lang->load('head_to_head');
         $this->lang->load('match');
         $this->load->helper(array('card', 'competition', 'competition_stage', 'factfile', 'goal', 'match', 'milestone', 'official', 'opposition', 'player', 'position', 'url', 'utility'));
     }
@@ -100,6 +102,20 @@ class Match extends Frontend_Controller {
             $this->templateData['preview'] = true;
             $this->templateData['metaTitle']       = vsprintf($this->lang->line('match_view_frontend_meta_title_preview'), $metaData);
             $this->templateData['metaDescription'] = vsprintf($this->lang->line('match_view_frontend_meta_description_preview'), $metaData);
+
+            $matches                               = $this->Frontend_Match_model->fetchMatchesByOpposition($match->opposition_id);
+            $accumulatedData                       = $this->Head_To_Head_model->calculateHeadToHeadAccumulatedData($matches);
+            $scorers                               = $this->Head_To_Head_model->fetchTopScorers($match->opposition_id);
+            $assisters                             = $this->Head_To_Head_model->fetchTopAssisters($match->opposition_id);
+            $offenders                             = $this->Head_To_Head_model->fetchWorstDiscipline($match->opposition_id);
+            $pointsGainers                         = $this->Head_To_Head_model->fetchPointsGained($match->opposition_id);
+            $this->templateData['opposition']      = $match->opposition_id;
+            $this->templateData['matches']         = $matches;
+            $this->templateData['accumulatedData'] = $accumulatedData;
+            $this->templateData['scorers']         = $scorers;
+            $this->templateData['assisters']       = $assisters;
+            $this->templateData['offenders']       = $offenders;
+            $this->templateData['pointsGainers']   = $pointsGainers;
 
             $templatePath = "themes/{$this->theme}/match/preview";
         } else {

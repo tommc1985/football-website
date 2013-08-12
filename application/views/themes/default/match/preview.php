@@ -46,6 +46,38 @@
             </div>
         </div>
 
+        <h2><?php echo $this->lang->line('head_to_head_title'); ?></h2>
+
+        <div class="row-fluid">
+            <div class="span6">
+                <?php $this->load->view("themes/{$theme}/head-to-head/_accumulated_statistics"); ?>
+            </div>
+
+            <div class="span6">
+                <?php $this->load->view("themes/{$theme}/head-to-head/_matches"); ?>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span6">
+                <?php $this->load->view("themes/{$theme}/head-to-head/_top_scorers"); ?>
+            </div>
+
+            <div class="span6">
+                <?php $this->load->view("themes/{$theme}/head-to-head/_top_assisters"); ?>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span6">
+                <?php $this->load->view("themes/{$theme}/head-to-head/_top_point_gainers"); ?>
+            </div>
+
+            <div class="span6">
+                <?php $this->load->view("themes/{$theme}/head-to-head/_worst_discipline"); ?>
+            </div>
+        </div>
+
         <?php
         } ?>
 
