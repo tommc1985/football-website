@@ -44,8 +44,25 @@ class Match extends Frontend_Controller {
 
         $matches = $this->Frontend_Match_model->fetchMatchList($season, $type, $orderBy, $order, Season_model::fetchCurrentSeason() == $season);
 
-        $this->templateData['matches'] = $matches;
-        $this->templateData['season']  = $season;
+        switch (true) {
+            case $season == 'all-time':
+                $metaTitleString       = 'match_index_frontend_meta_title_all_time';
+                $metaDescriptionString = 'match_index_frontend_meta_description_all_time';
+                break;
+            default:
+                $metaTitleString       = 'match_index_frontend_meta_title_season_only';
+                $metaDescriptionString = 'match_index_frontend_meta_description_season_only';
+        }
+
+        $metaData = array(
+            Configuration::get('team_name'),
+            Utility_helper::formattedSeason($season),
+        );
+
+        $this->templateData['metaTitle']       = vsprintf($this->lang->line($metaTitleString), $metaData);
+        $this->templateData['metaDescription'] = vsprintf($this->lang->line($metaDescriptionString), $metaData);
+        $this->templateData['matches']         = $matches;
+        $this->templateData['season']          = $season;
 
         $this->load->view("themes/{$this->theme}/header", $this->templateData);
         $this->load->view("themes/{$this->theme}/match/welcome_message", $this->templateData);
@@ -69,17 +86,31 @@ class Match extends Frontend_Controller {
         $this->templateData['match']   = $match;
         $this->templateData['preview'] = false;
 
-        $this->load->view("themes/{$this->theme}/header", $this->templateData);
+        $metaData = array(
+            Configuration::get('team_name'),
+            Opposition_helper::name($match->opposition_id),
+        );
 
         if (!is_null($match->h) || !is_null($match->status)) {
-            $this->load->view("themes/{$this->theme}/match/result", $this->templateData);
+            $this->templateData['metaTitle']       = vsprintf($this->lang->line('match_view_frontend_meta_title_result'), $metaData);
+            $this->templateData['metaDescription'] = vsprintf($this->lang->line('match_view_frontend_meta_description_result'), $metaData);
+
+            $templatePath = "themes/{$this->theme}/match/result";
         } else if(!is_null($match->date)) {
             $this->templateData['preview'] = true;
-            $this->load->view("themes/{$this->theme}/match/preview", $this->templateData);
+            $this->templateData['metaTitle']       = vsprintf($this->lang->line('match_view_frontend_meta_title_preview'), $metaData);
+            $this->templateData['metaDescription'] = vsprintf($this->lang->line('match_view_frontend_meta_description_preview'), $metaData);
+
+            $templatePath = "themes/{$this->theme}/match/preview";
         } else {
-            $this->load->view("themes/{$this->theme}/match/tbc", $this->templateData);
+            $this->templateData['metaTitle']       = vsprintf($this->lang->line('match_view_frontend_meta_title_tbc'), $metaData);
+            $this->templateData['metaDescription'] = vsprintf($this->lang->line('match_view_frontend_meta_description_tbc'), $metaData);
+
+            $templatePath = "themes/{$this->theme}/match/tbc";
         }
 
+        $this->load->view("themes/{$this->theme}/header", $this->templateData);
+        $this->load->view($templatePath, $this->templateData);
         $this->load->view("themes/{$this->theme}/footer", $this->templateData);
     }
 }
