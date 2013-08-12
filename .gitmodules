@@ -13,6 +13,3 @@
 [submodule "assets/font-awesome"]
 	path = assets/font-awesome
 	url = https://github.com/FortAwesome/Font-Awesome.git
-[submodule "assets/Modernizr"]
-	path = assets/Modernizr
-	url = https://github.com/Modernizr/Modernizr.git
