@@ -25,7 +25,7 @@ if (count($player->accumulatedStatistics) > 0) {
     foreach ($player->accumulatedStatistics as $season => $seasonStatistics) {
         if ($season != 'career') { ?>
         <tr class="season-row-<?php echo ($i % 2) == 1 ? 'odd' : 'even'; ?> season-<?php echo $season; ?> season">
-            <td class="width-5-percent text-align-center" data-title="&nbsp;"><a href="#" class="expand" id="<?php echo $season; ?>-expand" data-season="<?php echo $season; ?>" style="display: none;"><i class="icon-plus-sign-alt"></i></a><a href="#" class="collapse" id="<?php echo $season; ?>-collapse" data-season="<?php echo $season; ?>" style="display: none;"><i class="icon-minus-sign-alt"></i></a></td>
+            <td class="width-5-percent text-align-center" data-title="&nbsp;"><a href="#" class="statistics-expand" id="<?php echo $season; ?>-expand" data-season="<?php echo $season; ?>" style="display: none;"><i class="icon-plus-sign-alt"></i></a><a href="#" class="statistics-collapse" id="<?php echo $season; ?>-collapse" data-season="<?php echo $season; ?>" style="display: none;"><i class="icon-minus-sign-alt"></i></a></td>
             <td class="width-25-percent text-align-left" data-title="<?php echo $this->lang->line('player_season'); ?>"><?php echo Utility_helper::formattedSeason($season); ?></td>
             <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_appearances'); ?>"><?php echo $seasonStatistics['overall']->appearances; ?> (<?php echo $seasonStatistics['overall']->substitute_appearances; ?>)</td>
             <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_goals'); ?>"><?php echo $seasonStatistics['overall']->goals; ?></td>
@@ -47,7 +47,7 @@ if (count($player->accumulatedStatistics) > 0) {
             foreach (Competition_model::fetchTypes() as $competitionType => $competitionTypeFriendly) {
                 if (isset($seasonStatistics[$competitionType])) { ?>
         <tr class="season-row-<?php echo ($j % 2) == 1 ? 'odd' : 'even'; ?> season-breakdown season-breakdown-<?php echo $season; ?>">
-            <td class="width-5-percent text-align-center expand">&nbsp;</td>
+            <td class="width-5-percent text-align-center statistics-expand">&nbsp;</td>
             <td class="width-25-percent text-align-left" data-title="<?php echo $this->lang->line('player_competition'); ?>"><?php echo Competition_helper::type($competitionType); ?></td>
             <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_appearances'); ?>"><?php echo $seasonStatistics[$competitionType]->appearances; ?> (<?php echo $seasonStatistics[$competitionType]->substitute_appearances; ?>)</td>
             <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_goals'); ?>"><?php echo $seasonStatistics[$competitionType]->goals; ?></td>
@@ -72,7 +72,7 @@ if (count($player->accumulatedStatistics) > 0) {
 
     if (isset($player->accumulatedStatistics['career'])) { ?>
         <tr class="season-career season">
-            <td class="width-5-percent text-align-center"><a href="#" class="expand" id="career-expand" data-season="career" style="display: none;"><i class="icon-plus-sign-alt"></i></a><a href="#" class="collapse" id="career-collapse" data-season="career" style="display: none;"><i class="icon-minus-sign-alt"></i></a></td>
+            <td class="width-5-percent text-align-center"><a href="#" class="statistics-expand" id="career-expand" data-season="career" style="display: none;"><i class="icon-plus-sign-alt"></i></a><a href="#" class="statistics-collapse" id="career-collapse" data-season="career" style="display: none;"><i class="icon-minus-sign-alt"></i></a></td>
             <td class="width-25-percent text-align-left season">Career</td>
             <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_appearances'); ?>"><?php echo $player->accumulatedStatistics['career']['overall']->appearances; ?> (<?php echo $player->accumulatedStatistics['career']['overall']->substitute_appearances; ?>)</td>
             <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_goals'); ?>"><?php echo $player->accumulatedStatistics['career']['overall']->goals; ?></td>

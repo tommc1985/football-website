@@ -13,3 +13,26 @@
 #player-career-statistics tbody tr.season-career.season td, #player-career-statistics tbody tr.season-career.season th {
     background-color: #d8d8d8;
 }
+
+#player-career-statistics tbody tr.expanded {
+    display: table-row;
+}
+
+#player-career-statistics tbody tr.expanded td,
+#player-career-statistics tbody tr.expanded th {
+    display: table-cell;
+}
+
+#player-career-statistics tbody tr.collapsed,
+#player-career-statistics tbody tr.collapsed td,
+#player-career-statistics tbody tr.collapsed th {
+    display: none;
+}
+
+@media only screen and (max-width: 767px) {
+    #player-career-statistics tbody tr.expanded,
+    #player-career-statistics tbody tr.expanded td,
+    #player-career-statistics tbody tr.expanded th  {
+        display: block;
+    }
+}

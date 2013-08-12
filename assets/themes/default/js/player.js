@@ -1,9 +1,10 @@
 $(document).ready(function() {
-    $('.expand').show();
+    $('.statistics-expand').show();
 
-    $('.expand').click(function() {
+    $('.statistics-expand').click(function() {
         var season = $(this).attr('data-season');
-        $('.season-breakdown-' + season).css('display', $(window).width() <= 767 ? 'block' : 'table-row');
+        $('.season-breakdown-' + season).addClass('expanded');
+        $('.season-breakdown-' + season).removeClass('collapsed');
 
         $('#' + season + '-expand').hide();
         $('#' + season + '-collapse').show();
@@ -11,9 +12,10 @@ $(document).ready(function() {
         return false;
     });
 
-    $('.collapse').click(function() {
+    $('.statistics-collapse').click(function() {
         var season = $(this).attr('data-season');
-        $('.season-breakdown-' + season).css('display', 'none');
+        $('.season-breakdown-' + season).removeClass('expanded');
+        $('.season-breakdown-' + season).addClass('collapsed');
 
         $('#' + season + '-expand').show();
         $('#' + season + '-collapse').hide();
@@ -21,5 +23,5 @@ $(document).ready(function() {
         return false;
     });
 
-    $('tr.season-breakdown').css('display', 'none');
+    $('tr.season-breakdown').addClass('collapsed');
 });
