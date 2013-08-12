@@ -32,7 +32,7 @@ class Player extends Frontend_Controller {
         if ($parameters['season'] === false) {
             $season = Season_model::fetchCurrentSeason();
         } elseif ($parameters['season'] == 'all-time') {
-            $season = 'career';
+            $season = 'all-time';
             $baseURL .= '/season/all-time';
         }
 
@@ -48,7 +48,7 @@ class Player extends Frontend_Controller {
         $orderBy = $this->Player_model->getOrderBy($parameters['order-by']);
         $order = $this->Player_model->getOrder($parameters['order']);
 
-        $players = $this->Player_model->fetchPlayerList($season, $type, $orderBy, $order);
+        $players = $this->Player_model->fetchPlayerList($season == 'all-time' ? 'career' : $season, $type, $orderBy, $order);
 
         $metaData = array(
             Configuration::get('team_name'),

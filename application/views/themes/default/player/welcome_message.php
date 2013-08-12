@@ -1,6 +1,6 @@
 <div class="row-fluid">
     <div class="span12">
-        <h2><?php echo $this->lang->line('player_squad_list'); ?></h2>
+        <h2><?php echo $this->lang->line('player_squad_list'); ?> - <?php echo Utility_helper::formattedSeason($season); ?></h2>
 
         <table class="no-more-tables width-100-percent table table-striped table-condensed">
             <thead>

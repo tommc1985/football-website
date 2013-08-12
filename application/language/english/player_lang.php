@@ -39,7 +39,7 @@ $lang['player_no_players']                         = 'No Players exist';
 
 
 // Frontend Text
-$lang['player_index_frontend_meta_title']          = 'Squad List %2$s';
+$lang['player_index_frontend_meta_title']          = '%2$s Squad List';
 $lang['player_index_frontend_meta_description']    = 'Squad List for %1$s for the %2$s season, with stats including Appearances, Goals, Assists, Man of the Matches, Yellows, Reds and Ratings.';
 
 $lang['player_view_frontend_meta_title']           = '%2$s - Player Profile';
