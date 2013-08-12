@@ -32,6 +32,11 @@
     <script src="<?php echo site_url("bootstrap/docs/assets/js/bootstrap-carousel.js"); ?>"></script>
     <script src="<?php echo site_url("bootstrap/docs/assets/js/bootstrap-typeahead.js"); ?>"></script>
     <script src="<?php echo site_url("bootstrap/docs/assets/js/bootstrap-affix.js"); ?>"></script>
+    <script src="<?php echo site_url("assets/themes/default/js/player.js"); ?>"></script>
+
+<script>
+
+</script>
 
 </body>
 </html>

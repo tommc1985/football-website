@@ -9,8 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <link href="<?php echo site_url("bootstrap/docs/assets/css/bootstrap.css"); ?>" rel="stylesheet">
     <link href="<?php echo site_url("bootstrap/docs/assets/css/bootstrap-responsive.css"); ?>" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo site_url("assets/font-awesome/css/font-awesome.css"); ?>">
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="<?php echo site_url("assets/font-awesome/css/font-awesome-ie7.css"); ?>">
+    <![endif]-->
     <link href="<?php echo site_url("assets/css/tables.css"); ?>" rel="stylesheet">
     <link href="<?php echo site_url("assets/modules/fantasy-football/css/fantasy-football.css"); ?>" rel="stylesheet">
+    <link href="<?php echo site_url("assets/modules/player/css/player.css"); ?>" rel="stylesheet">
 
 
     <?php /*<link href="<?php echo site_url("bootstrap/docs/assets/css/docs.css"); ?>" rel="stylesheet">*/ ?>

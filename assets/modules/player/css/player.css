@@ -1,0 +1,15 @@
+#player-career-statistics tr.season.season-row-even td, #player-career-statistics tr.season.season-row-even th {
+    background-color: #e8e8e8;
+}
+
+#player-career-statistics tr.season.season-row-odd td, #player-career-statistics tr.season.season-row-odd th {
+    background-color: #f0f0f0;
+}
+
+#player-career-statistics tr.season-breakdown.season-row-even td, #player-career-statistics tr.season-breakdown.season-row-even th {
+    background-color: #f8f8f8;
+}
+
+#player-career-statistics tbody tr.season-career.season td, #player-career-statistics tbody tr.season-career.season th {
+    background-color: #d8d8d8;
+}

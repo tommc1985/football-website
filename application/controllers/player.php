@@ -13,6 +13,7 @@ class Player extends Frontend_Controller {
 
         $this->load->database();
         $this->load->model('frontend/Player_model');
+        $this->load->model('Competition_model');
         $this->load->model('Season_model');
         $this->lang->load('player');
         $this->load->helper(array('competition', 'nationality', 'player', 'position', 'url', 'utility'));
