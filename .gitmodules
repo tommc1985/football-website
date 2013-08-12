@@ -10,3 +10,6 @@
 [submodule "assets/js/chartjs-legend"]
 	path = assets/js/chartjs-legend
 	url = https://github.com/bebraw/Chart.js.legend.git
+[submodule "assets/font-awesome"]
+	path = assets/font-awesome
+	url = https://github.com/FortAwesome/Font-Awesome.git
