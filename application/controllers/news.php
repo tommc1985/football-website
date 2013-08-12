@@ -51,8 +51,10 @@ class News extends Frontend_Controller {
 
         $this->pagination->initialize($config);
 
-        $this->templateData['articles']   = $articles;
-        $this->templateData['pagination'] = $this->pagination->create_links();
+        $this->templateData['articles']        = $articles;
+        $this->templateData['pagination']      = $this->pagination->create_links();
+        $this->templateData['metaTitle']       = $this->lang->line($this->router->fetch_class() . '_' . $this->router->fetch_method() . '_frontend_meta_title');
+        $this->templateData['metaDescription'] = sprintf($this->lang->line($this->router->fetch_class() . '_' . $this->router->fetch_method() . '_frontend_meta_description'), Configuration::get('team_name'));
 
         $this->load->view("themes/{$this->theme}/header", $this->templateData);
         $this->load->view("themes/{$this->theme}/news/welcome_message", $this->templateData);
@@ -73,7 +75,9 @@ class News extends Frontend_Controller {
             show_error($this->lang->line('news_not_found'), 404);
         }
 
-        $this->templateData['article']   = $article;
+        $this->templateData['article']         = $article;
+        $this->templateData['metaTitle']       = $article->title;
+        $this->templateData['metaDescription'] = Utility_helper::truncate($article->content, 200);
 
         $this->load->view("themes/{$this->theme}/header", $this->templateData);
         $this->load->view("themes/{$this->theme}/news/view", $this->templateData);
