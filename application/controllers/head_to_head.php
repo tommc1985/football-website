@@ -61,6 +61,23 @@ class Head_To_Head extends Frontend_Controller {
             $pointsGainers   = $this->Head_To_Head_model->fetchPointsGained($opposition);
         }
 
+        switch (true) {
+            case $opposition:
+                $metaTitleString       = 'head_to_head_frontend_meta_title_selected_team';
+                $metaDescriptionString = 'head_to_head_frontend_meta_description_selected_team';
+                break;
+            default:
+                $metaTitleString       = 'head_to_head_frontend_meta_title';
+                $metaDescriptionString = 'head_to_head_frontend_meta_description';
+        }
+
+        $metaData = array(
+            Configuration::get('team_name'),
+            $opposition ? Opposition_helper::name($opposition) : '',
+        );
+
+        $this->templateData['metaTitle']       = vsprintf($this->lang->line($metaTitleString), $metaData);
+        $this->templateData['metaDescription'] = vsprintf($this->lang->line($metaDescriptionString), $metaData);
         $this->templateData['opposition']      = $opposition;
         $this->templateData['matches']         = $matches;
         $this->templateData['accumulatedData'] = $accumulatedData;
