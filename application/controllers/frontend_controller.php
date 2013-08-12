@@ -17,6 +17,7 @@ class Frontend_Controller extends CI_Controller
         $this->templateData['isLoggedIn'] = $this->tank_auth->is_logged_in();
 
         $this->theme = 'default';
+        $this->templateData['theme'] = $this->theme;
 
         $this->lang->load('global');
 
