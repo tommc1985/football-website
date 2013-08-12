@@ -73,11 +73,37 @@ class Player_Statistics extends Frontend_Controller {
 
         $statistics = $this->Player_Statistics_model->fetchAll($season == 'all-time' ? 'career' : $season, $type, $threshold);
 
-        $this->templateData['statistics'] = $statistics;
-        $this->templateData['season']     = $season;
-        $this->templateData['type']       = $type;
-        $this->templateData['matchCount'] = $matchCount;
-        $this->templateData['threshold']  = $threshold;
+        switch (true) {
+            case $season == 'all-time' && $type == 'overall':
+                $metaTitleString       = 'player_statistics_view_frontend_meta_title_all_time';
+                $metaDescriptionString = 'player_statistics_view_frontend_meta_description_all_time';
+                break;
+            case is_numeric($season) && $type == 'overall':
+                $metaTitleString       = 'player_statistics_view_frontend_meta_title_season_only';
+                $metaDescriptionString = 'player_statistics_view_frontend_meta_description_season_only';
+                break;
+            case $season == 'all-time' && $type != 'overall':
+                $metaTitleString       = 'player_statistics_view_frontend_meta_title_all_time_and_type';
+                $metaDescriptionString = 'player_statistics_view_frontend_meta_description_all_time_and_type';
+                break;
+            default:
+                $metaTitleString       = 'player_statistics_view_frontend_meta_title_season_and_type';
+                $metaDescriptionString = 'player_statistics_view_frontend_meta_description_season_and_type';
+        }
+
+        $metaData = array(
+            Configuration::get('team_name'),
+            Utility_helper::formattedSeason($season),
+            $type != 'overall' ? Competition_helper::type($type) : '',
+        );
+
+        $this->templateData['metaTitle']       = vsprintf($this->lang->line($metaTitleString), $metaData);
+        $this->templateData['metaDescription'] = vsprintf($this->lang->line($metaDescriptionString), $metaData);
+        $this->templateData['statistics']      = $statistics;
+        $this->templateData['season']          = $season;
+        $this->templateData['type']            = $type;
+        $this->templateData['matchCount']      = $matchCount;
+        $this->templateData['threshold']       = $threshold;
 
         $this->load->view("themes/{$this->theme}/header", $this->templateData);
         $this->load->view("themes/{$this->theme}/player-statistics/view", $this->templateData);

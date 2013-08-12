@@ -1,6 +1,15 @@
 <?php
 
 // Frontend Text
+$lang['player_statistics_view_frontend_meta_title_season_only']             = 'Player Statistics %2$s';
+$lang['player_statistics_view_frontend_meta_description_season_only']       = 'Player Statistics for %1$s for the %2$s season, including Consecutive Games Scored, Appeared or Assisted, Average Goals Against and Scored, Total/Average number of Points Gained and Most Common Two Player Combinations.';
+$lang['player_statistics_view_frontend_meta_title_season_and_type']         = 'Player Statistics %2$s (%3$s matches only)';
+$lang['player_statistics_view_frontend_meta_description_season_and_type']   = 'Player Statistics for %1$s for the %2$s season (%3$s matches only), including Consecutive Games Scored, Appeared or Assisted, Average Goals Against and Scored, Total/Average number of Points Gained and Most Common Two Player Combinations.';
+$lang['player_statistics_view_frontend_meta_title_all_time']                = 'All Time Player Statistics';
+$lang['player_statistics_view_frontend_meta_description_all_time']          = 'Player Statistics for %1$s for all time, including Consecutive Games Scored, Appeared or Assisted, Average Goals Against and Scored, Total/Average number of Points Gained and Most Common Two Player Combinations.';
+$lang['player_statistics_view_frontend_meta_title_all_time_and_type']       = 'All Time Player Statistics (%3$s matches only)';
+$lang['player_statistics_view_frontend_meta_description_all_time_and_type'] = 'Player Statistics for %1$s for all time (%3$s matches only), including Consecutive Games Scored, Appeared or Assisted, Average Goals Against and Scored, Total/Average number of Points Gained and Most Common Two Player Combinations.';
+
 $lang['player_statistics_title']                                            = 'Player Statistics';
 
 $lang['player_statistics_statistics_menu']                                  = 'Statistics Menu';
