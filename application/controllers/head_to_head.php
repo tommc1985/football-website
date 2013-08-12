@@ -24,13 +24,13 @@ class Head_To_Head extends Frontend_Controller {
      * Index Action
      * @return NULL
      */
-    public function index()
+    public function view()
     {
         $this->load->library('pagination');
         $parameters = $this->uri->uri_to_assoc(3, array('opposition'));
 
         if ($this->input->post()) {
-            $redirectString = '/head-to-head/index';
+            $redirectString = '/head-to-head/view';
 
             if ($this->input->post('opposition')) {
                 $redirectString .= '/opposition/' . $this->input->post('opposition');
@@ -87,7 +87,7 @@ class Head_To_Head extends Frontend_Controller {
         $this->templateData['pointsGainers']   = $pointsGainers;
 
         $this->load->view("themes/{$this->theme}/header", $this->templateData);
-        $this->load->view("themes/{$this->theme}/head_to_head/welcome_message", $this->templateData);
+        $this->load->view("themes/{$this->theme}/head_to_head/view", $this->templateData);
         $this->load->view("themes/{$this->theme}/footer", $this->templateData);
     }
 }

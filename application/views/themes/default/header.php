@@ -67,7 +67,7 @@
                                 <li><a href="<?php echo site_url("club-statistics/view"); ?>">Club Statistics</a></li>
                                 <li><a href="<?php echo site_url("player-statistics/view"); ?>">Player Statistics</a></li>
                                 <li><a href="<?php echo site_url("fantasy-football/view"); ?>">Fantasy Football</a></li>
-                                <li><a href="<?php echo site_url("head-to-head"); ?>">Head to Head</a></li>
+                                <li><a href="<?php echo site_url("head-to-head/view"); ?>">Head to Head</a></li>
                                 <?php
                                 foreach ($menuLeagues as $menuLeague) { ?>
                                 <li><a href="<?php echo site_url("league-statistics/view/id/{$menuLeague->id}"); ?>"><?php echo $menuLeague->short_name; ?> Statistics</a></li>
