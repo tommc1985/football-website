@@ -111,6 +111,32 @@ class Fantasy_Football extends Frontend_Controller {
         // Fetch Best Lineup for specified formation
         $bestLineup = $this->Fantasy_Football_model->fetchBestLineup($formation, $season == 'all-time' ? 'career' : $season, $type, $measurement);
 
+        switch (true) {
+            case $season == 'all-time' && $type == 'overall':
+                $metaTitleString       = 'fantasy_football_view_frontend_meta_title_all_time';
+                $metaDescriptionString = 'fantasy_football_view_frontend_meta_description_all_time';
+                break;
+            case is_numeric($season) && $type == 'overall':
+                $metaTitleString       = 'fantasy_football_view_frontend_meta_title_season_only';
+                $metaDescriptionString = 'fantasy_football_view_frontend_meta_description_season_only';
+                break;
+            case $season == 'all-time' && $type != 'overall':
+                $metaTitleString       = 'fantasy_football_view_frontend_meta_title_all_time_and_type';
+                $metaDescriptionString = 'fantasy_football_view_frontend_meta_description_all_time_and_type';
+                break;
+            default:
+                $metaTitleString       = 'fantasy_football_view_frontend_meta_title_season_and_type';
+                $metaDescriptionString = 'fantasy_football_view_frontend_meta_description_season_and_type';
+        }
+
+        $metaData = array(
+            Configuration::get('team_name'),
+            Utility_helper::formattedSeason($season),
+            $type != 'overall' ? Competition_helper::type($type) : '',
+        );
+
+        $this->templateData['metaTitle']           = vsprintf($this->lang->line($metaTitleString), $metaData);
+        $this->templateData['metaDescription']     = vsprintf($this->lang->line($metaDescriptionString), $metaData);
         $this->templateData['fantasyFootballData'] = $fantasyFootballData;
         $this->templateData['bestLineup']          = $bestLineup;
         $this->templateData['formationInfo']       = $formationInfo;

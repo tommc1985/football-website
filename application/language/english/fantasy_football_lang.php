@@ -1,6 +1,15 @@
 <?php
 
 // Frontend Text
+$lang['fantasy_football_view_frontend_meta_title_season_only']             = 'Fantasy Football %2$s';
+$lang['fantasy_football_view_frontend_meta_description_season_only']       = 'Fantasy Football Statistics for %1$s for the %2$s season, with features including leaderboards for points earned in a particular position (ordered by total points earned or average points earned) and best line up in a specified formation based on Total Points, Average Points or Appearances.';
+$lang['fantasy_football_view_frontend_meta_title_season_and_type']         = 'Fantasy Football %2$s (%3$s matches only)';
+$lang['fantasy_football_view_frontend_meta_description_season_and_type']   = 'Fantasy Football Statistics for %1$s for the %2$s season (%3$s matches only), with features including leaderboards for points earned in a particular position (ordered by total points earned or average points earned) and best line up in a specified formation based on Total Points, Average Points or Appearances.';
+$lang['fantasy_football_view_frontend_meta_title_all_time']                = 'All Time Fantasy Football';
+$lang['fantasy_football_view_frontend_meta_description_all_time']          = 'Fantasy Football Statistics for %1$s for all time, with features including leaderboards for points earned in a particular position (ordered by total points earned or average points earned) and best line up in a specified formation based on Total Points, Average Points or Appearances.';
+$lang['fantasy_football_view_frontend_meta_title_all_time_and_type']       = 'All Time Fantasy Football (%3$s matches only)';
+$lang['fantasy_football_view_frontend_meta_description_all_time_and_type'] = 'Fantasy Football Statistics for %1$s for all time (%3$s matches only), with features including leaderboards for points earned in a particular position (ordered by total points earned or average points earned) and best line up in a specified formation based on Total Points, Average Points or Appearances.';
+
 $lang['fantasy_football_title']                     = 'Fantasy Football';
 $lang['fantasy_football_matches']                   = 'Matches';
 
