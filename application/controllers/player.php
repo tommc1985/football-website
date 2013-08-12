@@ -31,7 +31,7 @@ class Player extends Frontend_Controller {
         $season = (int) $parameters['season'];
         if ($parameters['season'] === false) {
             $season = Season_model::fetchCurrentSeason();
-        } elseif ($parameters['season'] == 'career') {
+        } elseif ($parameters['season'] == 'all-time') {
             $season = 'career';
             $baseURL .= '/season/all-time';
         }
