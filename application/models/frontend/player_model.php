@@ -268,7 +268,6 @@ class Player_model extends Base_Frontend_Model {
      */
     public function getOrderBy($orderBy)
     {
-        echo($orderBy);
         switch ($orderBy) {
             case 'firstname':
                 return 'p.surname';
@@ -286,7 +285,7 @@ class Player_model extends Base_Frontend_Model {
                 return 'cpas.goals';
                 break;
             case 'assists':
-                return 'cpas.assist';
+                return 'cpas.assists';
                 break;
             case 'motms':
                 return 'cpas.motms';
