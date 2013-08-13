@@ -905,8 +905,8 @@ class Player_Statistics_helper
         krsort($statistics[$statisticGroup]);
         foreach ($statistics[$statisticGroup] as $player) { ?>
                 <tr>
-                    <td class="width-20-percent text-align-left"><?php echo sprintf($ci->lang->line("player_statistics_x_" . ($player->days_elapsed == 1 ? 'day' : 'days')), $player->days_elapsed); ?></td>
-                    <td class="width-80-percent" itemscope itemtype="http://schema.org/Person"><span itemprop="name"><?php echo Player_helper::fullName($player->player_id); ?></span></td>
+                    <td class="width-30-percent text-align-left"><?php echo Utility_helper::daysElapsed($player->days_elapsed); ?></td>
+                    <td class="width-70-percent" itemscope itemtype="http://schema.org/Person"><span itemprop="name"><?php echo Player_helper::fullName($player->player_id); ?></span></td>
                 </tr>
         <?php
         } ?>
