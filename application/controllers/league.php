@@ -23,6 +23,8 @@ class League extends Frontend_Controller {
         $this->lang->load('league_statistics');
         $this->lang->load('match');
         $this->load->helper(array('league', 'league_match', 'league_statistics', 'competition', 'competition_stage', 'form', 'goal', 'match', 'opposition', 'player', 'url', 'utility'));
+
+        Assets::addJs('assets/modules/league/js/league.js');
     }
 
     /**
@@ -39,10 +41,12 @@ class League extends Frontend_Controller {
             show_error($this->lang->line('league_not_found'), 404);
         }
 
+        $id = $parameters['id'];
+
         $type = 'overall';
         $dateUntil = 'overall';
         if ($this->input->post()) {
-            $redirectString = '/league/view/id/' . $parameters['id'];
+            $redirectString = '/league/view/id/' . $id;
 
             $postType = $this->input->post('type');
             if ($postType != $type) {
@@ -62,7 +66,9 @@ class League extends Frontend_Controller {
                 $redirectString .= '/form-match-count/' . $this->input->post('form-match-count');
             }
 
-            redirect($redirectString);
+            if (!$this->input->is_ajax_request()) {
+                redirect($redirectString);
+            }
         }
 
         if ($parameters['type'] !== false) {
@@ -73,10 +79,14 @@ class League extends Frontend_Controller {
             $dateUntil = $parameters['date-until'];
         }
 
-        $matchDate = $this->League_Match_model->fetchNextDate($parameters['id']);
-        $matchDate = $matchDate !== false ? $matchDate : $this->League_Match_model->fetchLastDate($parameters['id']);
+        $matchDate = $this->League_Match_model->fetchNextDate($id);
+        $matchDate = $matchDate !== false ? $matchDate : $this->League_Match_model->fetchLastDate($id);
         if ($parameters['match-date'] !== false) {
             $matchDate = $parameters['match-date'];
+        }
+
+        if ($this->input->post('match-date')) {
+            $matchDate = $this->input->post('match-date');
         }
 
         $formMatchCount = Configuration::get('form_match_count');
@@ -84,30 +94,47 @@ class League extends Frontend_Controller {
             $formMatchCount = (int) $parameters['form-match-count'];
         }
 
-        $standings        = $this->League_Collated_Results_model->fetchStandings($parameters['id'], $dateUntil, $type);
-        $alternativeTable = $this->League_Collated_Results_model->fetchAlternativeTable($parameters['id'], $dateUntil, $type);
+        if ($this->input->post('form-match-count')) {
+            $formMatchCount = (int) $this->input->post('form-match-count');
+        }
+
+        $standings        = $this->League_Collated_Results_model->fetchStandings($id, $dateUntil, $type);
+        $alternativeTable = $this->League_Collated_Results_model->fetchAlternativeTable($id, $dateUntil, $type);
 
         $formTeams = $this->League_Collated_Results_model->fetchForm($standings, $formMatchCount);
 
-        $dropdownDates = $this->League_Match_model->fetchDatesForDropdown($parameters['id']);
-        $leagueMatches = $this->League_Match_model->fetchByDate($parameters['id'], $matchDate);
+        $dropdownDates = $this->League_Match_model->fetchDatesForDropdown($id);
+        $leagueMatches = $this->League_Match_model->fetchByDate($id, $matchDate);
 
         $metaData = array(
-            League_helper::name($parameters['id']),
+            League_helper::name($id),
         );
 
-        $this->templateData['metaTitle']        = League_helper::name($parameters['id']);
+        $this->templateData['metaTitle']        = League_helper::name($id);
         $this->templateData['metaDescription']  = vsprintf($this->lang->line('league_frontend_meta_description'), $metaData);
         $this->templateData['standings']        = $standings;
         $this->templateData['alternativeTable'] = $alternativeTable;
         $this->templateData['formTeams']        = $formTeams;
         $this->templateData['formMatchCount']   = $formMatchCount;
-        $this->templateData['id']               = $parameters['id'];
+        $this->templateData['id']               = $id;
         $this->templateData['type']             = $type;
         $this->templateData['dateUntil']        = $dateUntil;
         $this->templateData['matchDate']        = $matchDate;
         $this->templateData['dropdownDates']    = $dropdownDates;
         $this->templateData['leagueMatches']    = $leagueMatches;
+
+        if ($this->input->is_ajax_request()) {
+            switch ($this->input->post('view')) {
+                case 'form':
+                    $this->load->view("themes/{$this->theme}/league/_form", $this->templateData);
+                    return;
+                    break;
+                case 'fixtures-and-results':
+                    $this->load->view("themes/{$this->theme}/league/_fixtures_and_results", $this->templateData);
+                    return;
+                    break;
+            }
+        }
 
         $this->load->view("themes/{$this->theme}/header", $this->templateData);
         $this->load->view("themes/{$this->theme}/league/view", $this->templateData);

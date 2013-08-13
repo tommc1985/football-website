@@ -1,7 +1,7 @@
 <div class="row-fluid">
     <div class="span12">
 <?php
-echo form_open($this->uri->uri_string(), array('class' => 'form-horizontal')); ?>
+echo form_open($this->uri->uri_string(), array('class' => 'form-horizontal', 'id' => 'league-form')); ?>
         <h2><?php echo $this->lang->line('league_title'); ?> - <?php echo League_helper::name($id); ?></h2><?php
 $inputType = array(
     'name'       => 'type',
@@ -148,7 +148,7 @@ $inputFormMatchCount = array(
 
 $submit = array(
     'name'    => 'submit',
-    'id'      => 'submit',
+    'id'      => 'submit-form-table',
     'value'   => $this->lang->line('league_refresh'),
     'class'   => 'btn',
 ); ?>
@@ -167,33 +167,9 @@ $submit = array(
         </div>
 </fieldset>
 
-                <?php
-                if ($dateUntil != 'overall') { ?>
-                    <h4><?php echo sprintf($formMatchCount == 1 ? $this->lang->line("league_last_x_match") : $this->lang->line("league_last_x_matches"), $formMatchCount, $this->lang->line("league_{$type}")) . ' ' . sprintf(strtolower($this->lang->line('league_as_of')), $dateUntil != 'overall' ? Utility_helper::shortDate($dateUntil) : Utility_helper::shortDate(time())); ?></h4>
-                <?php
-                } else { ?>
-                    <h4><?php echo sprintf($formMatchCount == 1 ? $this->lang->line("league_last_x_match") : $this->lang->line("league_last_x_matches"), $formMatchCount, $this->lang->line("league_{$type}")); ?></h4>
-                <?php
-                } ?>
-                <?php
-                if ($formTeams) { ?>
-                <table class="no-more-tables width-100-percent table table-striped table-condensed">
-                    <tbody>
-                    <?php
-                    foreach ($formTeams as $opposition_id => $formTeam) { ?>
-                        <tr itemscope itemtype="http://schema.org/SportsTeam">
-                            <td class="width-70-percent" itemprop="name" data-title="<?php echo $this->lang->line('league_team'); ?>"><?php echo Opposition_helper::name($standings[$opposition_id]->opposition_id); ?></td>
-                            <td class="width-70-percent" data-title="<?php echo $this->lang->line('league_form'); ?>"><?php echo League_helper::formattedForm($standings[$opposition_id]->form, $formMatchCount); ?></td>
-                        </tr>
-                    <?php
-                    } ?>
-                    </tbody>
-                </table>
-                <?php
-                } else { ?>
-                <p><?php echo $this->lang->line("league_no_data"); ?></p>
-                <?php
-                } ?>
+                <div id="form-table-wrapper">
+                    <?php $this->load->view("themes/{$theme}/league/_form"); ?>
+                </div>
             </div>
             <div class="span6">
                 <h3><?php echo $this->lang->line("league_fixtures_and_results"); ?></h3>
@@ -208,7 +184,7 @@ $inputMatchDate = array(
 
 $submit = array(
     'name'    => 'submit',
-    'id'      => 'submit',
+    'id'      => 'submit-fixtures-and-results',
     'value'   => $this->lang->line('league_refresh'),
     'class'   => 'btn',
 ); ?>
@@ -223,30 +199,15 @@ $submit = array(
             </div>
         </div>
 </fieldset>
-                <h4><?php echo Utility_helper::shortDate($matchDate); ?></h4>
-                <?php
-                if ($leagueMatches) { ?>
-                <table class="no-more-tables width-100-percent table table-striped table-condensed">
-                    <tbody>
-                    <?php
-                    foreach ($leagueMatches as $leagueMatch) { ?>
-                        <tr>
-                            <td class="width-40-percent text-align-right" data-title="<?php echo $this->lang->line('league_match_home_team'); ?>"><?php echo Opposition_helper::name($leagueMatch->h_opposition_id); ?></td>
-                            <td class="width-20-percent text-align-center" data-title="<?php echo $this->lang->line('league_match_score'); ?>"><?php echo League_Match_helper::score($leagueMatch); ?></td>
-                            <td class="width-40-percent text-align-left" data-title="<?php echo $this->lang->line('league_match_away_team'); ?>"><?php echo Opposition_helper::name($leagueMatch->a_opposition_id); ?></td>
-                        </tr>
-                    <?php
-                    } ?>
-                    </tbody>
-                </table>
-                <?php
-                } else { ?>
-                <p><?php echo $this->lang->line("league_no_matches_on_date"); ?></p>
-                <?php
-                } ?>
+                <div id="fixtures-and-results-wrapper">
+                    <?php $this->load->view("themes/{$theme}/league/_fixtures_and_results"); ?>
+                </div>
             </div>
         </div>
 <?php
 echo form_close(); ?>
     </div>
 </div>
+<script type="text/javascript">
+var leagueId = '<?php echo $id; ?>';
+</script>
