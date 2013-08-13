@@ -18,6 +18,8 @@ class Fantasy_Football extends Frontend_Controller {
         $this->load->model('Season_model');
         $this->lang->load('fantasy_football');
         $this->load->helper(array('club_statistics', 'competition', 'competition_stage', 'fantasy_football', 'form', 'goal', 'match', 'opposition', 'player', 'position', 'url', 'utility'));
+
+        Assets::addCss('assets/modules/fantasy-football/css/fantasy-football.css');
     }
 
     /**
