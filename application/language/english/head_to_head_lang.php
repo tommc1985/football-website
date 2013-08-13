@@ -29,6 +29,7 @@ $lang['head_to_head_venue_a']                                 = 'Away';
 $lang['head_to_head_venue_n']                                 = 'Neutral';
 $lang['head_to_head_venue_overall']                           = 'Overall';
 
+$lang['head_to_head_opposition']                              = 'Opposition';
 
 $lang['head_to_head_p']                                       = 'P';
 $lang['head_to_head_played']                                  = 'Played';
