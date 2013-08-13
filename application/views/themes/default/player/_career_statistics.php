@@ -1,6 +1,6 @@
-<h3><?php echo $this->lang->line('player_career_statistics'); ?></h3>
+<h4><?php echo $this->lang->line('player_career_statistics'); ?></h4>
 
-<table class="no-more-tables table table-bordered table-condensed" id="player-career-statistics">
+<table class="no-more-tables table table-condensed" id="player-career-statistics">
     <thead>
         <tr>
             <td class="width-5-percent text-align-center expand">&nbsp;</td>
@@ -26,7 +26,7 @@ if (count($player->accumulatedStatistics) > 0) {
         if ($season != 'career') { ?>
         <tr class="season-row-<?php echo ($i % 2) == 1 ? 'odd' : 'even'; ?> season-<?php echo $season; ?> season">
             <td class="width-5-percent text-align-center" data-title="&nbsp;"><a href="#" class="statistics-expand" id="<?php echo $season; ?>-expand" data-season="<?php echo $season; ?>" style="display: none;"><i class="icon-plus-sign-alt"></i></a><a href="#" class="statistics-collapse" id="<?php echo $season; ?>-collapse" data-season="<?php echo $season; ?>" style="display: none;"><i class="icon-minus-sign-alt"></i></a></td>
-            <td class="width-25-percent text-align-left" data-title="<?php echo $this->lang->line('player_season'); ?>"><?php echo Utility_helper::formattedSeason($season); ?></td>
+            <td class="width-25-percent text-align-left season-year" data-title="<?php echo $this->lang->line('player_season'); ?>"><?php echo Utility_helper::formattedSeason($season); ?></td>
             <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_appearances'); ?>"><?php echo $seasonStatistics['overall']->appearances; ?> (<?php echo $seasonStatistics['overall']->substitute_appearances; ?>)</td>
             <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_goals'); ?>"><?php echo $seasonStatistics['overall']->goals; ?></td>
             <td class="width-10-percent text-align-center" data-title="<?php echo $this->lang->line('player_assists'); ?>"><?php echo $seasonStatistics['overall']->assists; ?></td>

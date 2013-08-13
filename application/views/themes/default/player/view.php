@@ -47,6 +47,8 @@
 
 <div class="row-fluid">
     <div class="span12">
+        <h3><?php echo $this->lang->line('player_player_data'); ?></h3>
+
         <ul class="nav nav-pills">
             <li class="<?php echo $info == 'career-statistics' ? 'active' : ''; ?>"><a href="<?php echo $baseURL; ?>"><?php echo $this->lang->line('player_career_statistics'); ?></a></li>
             <li class="dropdown<?php echo $info == 'appearances' ? ' active' : ''; ?>">
@@ -91,7 +93,6 @@
 
 <div class="row-fluid">
     <div class="span12">
-
 <?php
 switch ($info) {
     case 'appearances':

@@ -60,6 +60,8 @@ $lang['player_profile']                            = 'Profile';
 $lang['player_career_statistics']                  = 'Career Statistics';
 $lang['player_no_career_data_found']               = "No Career data can be found for %s";
 
+$lang['player_player_data']                        = "Player Data";
+
 $lang['player_appearances_by_season']              = "Appearances by Season";
 $lang['player_goal_statistics_by_season']          = "Goal Statistics by Season";
 $lang['player_records_by_season']                  = "Records by Season";

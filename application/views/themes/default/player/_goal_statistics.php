@@ -1,1 +1,1 @@
-<h3><?php echo $this->lang->line('player_goal_statistics'); ?> - <?php echo Utility_helper::formattedSeason($season); ?></h3>
+<h4><?php echo $this->lang->line('player_goal_statistics'); ?> - <?php echo Utility_helper::formattedSeason($season); ?></h4>

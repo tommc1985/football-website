@@ -36,3 +36,7 @@
         display: block;
     }
 }
+
+tr.season-career, td.season-year {
+    font-weight: bold ;
+}
