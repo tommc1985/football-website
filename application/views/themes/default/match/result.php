@@ -73,7 +73,7 @@
                             <?php
                             } ?>
                             <td><?php echo Player_helper::fullName($appearance->player_id); ?> <?php echo !is_null($appearance->on) ? '\'' . $appearance->on . ' <i class="icon-circle-arrow-right"></i>' : ''; ?> <?php echo !is_null($appearance->off) ? ' <i class="icon-circle-arrow-left"></i> ' . '\'' . $appearance->off : ''; ?></td>
-                            <td class="width-10-percent text-align-center"><?php echo Position_helper::abbreviation($appearance->position); ?></td>
+                            <td class="width-10-percent text-align-center"><?php echo $appearance->position ? Position_helper::abbreviation($appearance->position) : ''; ?></td>
                         </tr>
                     <?php
                         }
