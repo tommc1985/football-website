@@ -113,6 +113,7 @@ $lang['match_postponed']                                   = 'Postponed';
 $lang['match_pens']                                        = 'pens';
 $lang['match_match_preview']                               = 'Match Preview';
 $lang['match_rating']                                      = 'Rating';
+$lang['match_red_card']                                    = 'Red Card';
 $lang['match_result_details']                              = 'Result details';
 $lang['match_score']                                       = 'Score';
 $lang['match_scorer']                                      = 'Scorer';
@@ -121,6 +122,7 @@ $lang['match_to_be_confirmed']                             = 'To be confirmed';
 $lang['match_type']                                        = 'Type';
 $lang['match_versus']                                      = 'versus';
 $lang['match_vs']                                          = 'vs';
+$lang['match_yellow_card']                                 = 'Yellow Card';
 
 /* End of file match.php */
 /* Location: ./application/language/english/match.php */

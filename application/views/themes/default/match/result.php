@@ -98,7 +98,17 @@
                     foreach ($match->cards  as $card) { ?>
                         <tr>
                             <td class="width-10-percent"><?php echo "'{$card->minute}"; ?><br />
-                                <?php echo $card->type; ?>
+                                <?php
+                                switch ($card->type) {
+                                    case 'y': ?>
+                                        <img src="<?php echo site_url('assets/themes/default/img/icons/yellow-16x16.png'); ?>" alt="<?php echo $this->lang->line('match_yellow'); ?>">
+                                    <?php
+                                        break;
+                                    case 'r': ?>
+                                        <img src="<?php echo site_url('assets/themes/default/img/icons/red-16x16.png'); ?>" alt="<?php echo $this->lang->line('match_red'); ?>">
+                                    <?php
+                                        break;
+                                } ?>
                             </td>
                             <td><?php echo Player_helper::fullName($card->player_id); ?><br />
                                 <?php echo Card_helper::offence($card); ?>
