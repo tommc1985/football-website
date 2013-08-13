@@ -4,7 +4,7 @@
 
         <div class="row-fluid">
             <div class="span12" itemscope itemtype="http://schema.org/SportsEvent">
-                <?php $this->load->view('themes/default/match/match_details.php'); ?>
+                <?php $this->load->view('themes/default/match/_match_details.php'); ?>
             </div>
         </div>
 
@@ -54,7 +54,7 @@
                             <td class="width-10-percent text-align-center"><?php echo $appearance->shirt; ?></td>
                             <?php
                             } ?>
-                            <td><?php echo Player_helper::fullName($appearance->player_id); ?> <?php echo !is_null($appearance->off) ? '\'' . $appearance->off . '<i class="icon-arrow-left"></i>' : ''; ?></td>
+                            <td><?php echo Player_helper::fullName($appearance->player_id); ?> <?php echo !is_null($appearance->off) ? ' <i class="icon-circle-arrow-left"></i> ' . '\'' . $appearance->off : ''; ?></td>
                             <td class="width-10-percent text-align-center"><?php echo Position_helper::abbreviation($appearance->position); ?></td>
                         </tr>
                     <?php
@@ -72,7 +72,7 @@
                             <td class="width-10-percent text-align-center"><?php echo $appearance->shirt; ?></td>
                             <?php
                             } ?>
-                            <td><?php echo Player_helper::fullName($appearance->player_id); ?> <?php echo !is_null($appearance->on) ? '\'' . $appearance->on . '<i class="icon-arrow-right"></i>' : ''; ?> <?php echo !is_null($appearance->off) ? '\'' . $appearance->off . '<i class="icon-arrow-left"></i>': ''; ?></td>
+                            <td><?php echo Player_helper::fullName($appearance->player_id); ?> <?php echo !is_null($appearance->on) ? '\'' . $appearance->on . ' <i class="icon-circle-arrow-right"></i>' : ''; ?> <?php echo !is_null($appearance->off) ? ' <i class="icon-circle-arrow-left"></i> ' . '\'' . $appearance->off : ''; ?></td>
                             <td class="width-10-percent text-align-center"><?php echo Position_helper::abbreviation($appearance->position); ?></td>
                         </tr>
                     <?php

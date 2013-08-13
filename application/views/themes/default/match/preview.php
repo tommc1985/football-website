@@ -4,7 +4,7 @@
 
         <div class="row-fluid">
             <div class="span6" itemscope itemtype="http://schema.org/SportsEvent">
-                <?php $this->load->view('themes/default/match/match_details.php'); ?>
+                <?php $this->load->view('themes/default/match/_match_details.php'); ?>
             </div>
             <div class="span6">
                 &nbsp;
