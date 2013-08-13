@@ -54,6 +54,8 @@ $configValues['team_name']                         = 'Hardy Athletic';
 
 $configValues['cache_key']                         = 'key';
 
+$configValues['google_maps_api_key']               = 'AIzaSyBkd8POuYkRkbMUXmBLdUnoYBR-TXBnWnU';
+
 class Configuration {
     public function _construct() {}
 

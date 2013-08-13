@@ -117,6 +117,16 @@ class Match extends Frontend_Controller {
             $this->templateData['offenders']       = $offenders;
             $this->templateData['pointsGainers']   = $pointsGainers;
 
+            $showMap = false;
+            if ($match->location) {
+                $showMap = true;
+                Assets::addJs('https://maps.googleapis.com/maps/api/js?key=' . Configuration::get('google_maps_api_key') . '&sensor=true&region=GB');
+                Assets::addJs('assets/modules/match/js/match.js');
+            }
+            $this->templateData['showMap']   = $showMap;
+
+
+
             $templatePath = "themes/{$this->theme}/match/preview";
         } else {
             $this->templateData['metaTitle']       = vsprintf($this->lang->line('match_view_frontend_meta_title_tbc'), $metaData);

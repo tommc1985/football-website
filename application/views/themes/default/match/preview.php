@@ -7,6 +7,17 @@
                 <?php $this->load->view('themes/default/match/_match_details.php'); ?>
             </div>
             <div class="span6">
+                <?php
+                if ($showMap) { ?>
+                <h3><?php echo $this->lang->line('match_map'); ?></h3>
+                <div id="map-canvas" style="width:100%;height:400px;">
+
+                </div>
+                <script type="text/javascript">
+                var mapLocation = '<?php echo htmlentities($match->location); ?>';
+                </script>
+                <?php
+                } ?>
                 &nbsp;
             </div>
         </div>

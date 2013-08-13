@@ -94,6 +94,7 @@ $lang['match_home_walkover']                               = 'Home Walkover';
 $lang['match_k_o']                                         = 'k.o.';
 $lang['match_kick_off']                                    = 'kick off';
 $lang['match_lineup']                                      = 'Lineup';
+$lang['match_map']                                         = 'Map';
 $lang['match_match_is_to_be_confirmed']                    = 'Match date is to be confirmed';
 $lang['match_match_tbc']                                   = 'Match to be confirmed';
 $lang['match_milestones']                                  = 'Milestones';
