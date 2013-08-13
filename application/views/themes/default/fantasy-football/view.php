@@ -2,7 +2,8 @@
     <div class="span12">
 
     <?php
-    echo form_open($this->uri->uri_string(), array('class' => 'form-horizontal')); ?>
+    echo form_open($this->uri->uri_string(), array('class' => 'form-horizontal', 'id' => 'fantasy-football-form'));
+echo form_hidden('season', $season); ?>
 
         <h2><?php echo $this->lang->line('fantasy_football_title'); ?> - <?php echo Utility_helper::formattedSeason($season); ?><?php echo ($type != 'overall' ? ' (' . Competition_helper::type($type) . ' ' . $this->lang->line("fantasy_football_matches") . ')' : ''); ?></h2>
 
@@ -61,7 +62,7 @@ $inputOrderBy = array(
 
 $submit = array(
     'name'    => 'submit',
-    'id'      => 'submit',
+    'id'      => 'leaderboard-submit',
     'value'   => $this->lang->line('fantasy_football_refresh'),
     'class'   => 'btn',
 ); ?>
@@ -86,37 +87,8 @@ $submit = array(
         </div>
 
         <div class="row-fluid">
-            <div class="span7">
-                <h4><?php echo $this->lang->line('fantasy_football_leaderboard'); ?></h4>
-                <table class="no-more-tables width-100-percent table table-striped table-condensed">
-                    <thead>
-                        <tr>
-                            <td class="width-40-percent"><?php echo $this->lang->line('fantasy_football_player'); ?></td>
-                            <td class="width-15-percent text-align-center"><?php echo $this->lang->line('fantasy_football_appearances'); ?></td>
-                            <td class="width-15-percent text-align-center"><?php echo $this->lang->line('fantasy_football_average'); ?></td>
-                            <td class="width-15-percent text-align-center"><?php echo $this->lang->line('fantasy_football_points'); ?></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        if ($fantasyFootballData) {
-                            foreach ($fantasyFootballData as $player) { ?>
-                        <tr itemscope itemtype="http://schema.org/Person">
-                            <td itemprop="name" data-title="<?php echo $this->lang->line('fantasy_football_player'); ?>"><?php echo Player_helper::fullNameReverse($player->player_id); ?></td>
-                            <td class="text-align-center" data-title="<?php echo $this->lang->line('fantasy_football_appearances'); ?>"><?php echo $player->appearances; ?></td>
-                            <td class="text-align-center" data-title="<?php echo $this->lang->line('fantasy_football_average'); ?>"><?php echo $player->points_per_game; ?></td>
-                            <td class="text-align-center" data-title="<?php echo $this->lang->line('fantasy_football_points'); ?>"><?php echo $player->total_points; ?></td>
-                        </tr>
-                        <?php
-                            }
-                        } else { ?>
-                        <tr>
-                            <td colspan="4"><?php echo $this->lang->line('fantasy_football_no_data'); ?></td>
-                        </tr>
-                        <?php
-                        } ?>
-                    </tbody>
-                </table>
+            <div class="span7" id="leaderboard-wrapper">
+                <?php $this->load->view("themes/{$theme}/fantasy-football/_leaderboard"); ?>
             </div>
 
             <div class="span5">
@@ -219,7 +191,7 @@ $inputFormation = array(
 
 $submit = array(
     'name'    => 'submit',
-    'id'      => 'submit',
+    'id'      => 'best-lineup-submit',
     'value'   => $this->lang->line('fantasy_football_refresh'),
     'class'   => 'btn',
 ); ?>
@@ -243,70 +215,8 @@ $submit = array(
             </div>
         </div>
 
-        <div class="row-fluid">
-            <div class="span5 offset1">
-                <h4><?php echo $this->lang->line('fantasy_football_formation'); ?></h4>
-                <div id="stadium">
-                    <div id="pitch" class="formation-<?php echo $formation; ?>">
-                    <?php
-                    if ($bestLineup !== false) {
-                        foreach ($formationInfo['positions'] as $position) {
-                            if (strpos($position, 'sub') === false) { ?>
-                        <div itemscope itemtype="http://schema.org/Person" class="position <?php echo $position; ?>">
-                            <span class="marker"><?php echo Fantasy_Football_helper::fetchSimplePosition($position, true); ?></span>
-                            <span itemprop="name" class="player"><?php echo Player_helper::initialSurname($bestLineup[$position]->player_id, false); ?></span>
-                            <span class="points"><?php echo $bestLineup[$position]->value; ?></span>
-                        </div>
-                    <?php
-                            }
-                        } ?>
-                    </div>
-                    <div id="dugout">
-                    <?php
-                        foreach ($formationInfo['positions'] as $position) {
-                            if (strpos($position, 'sub') !== false) { ?>
-                        <div itemscope itemtype="http://schema.org/Person" class="position <?php echo Fantasy_Football_helper::fetchSimplePosition($position); ?>">
-                            <span class="marker"><?php echo Fantasy_Football_helper::fetchSimplePosition($position, true); ?></span>
-                            <span itemprop="name" class="player"><?php echo Player_helper::initialSurname($bestLineup[$position]->player_id, false); ?></span>
-                            <span class="points"><?php echo $bestLineup[$position]->value; ?></span>
-                        </div>
-                    <?php
-                            }
-                        }
-                    } ?>
-                        <div class="clear"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="span6">
-                <h4><?php echo $this->lang->line('fantasy_football_lineup'); ?></h4>
-                <table class="width-100-percent table table-striped table-condensed">
-                    <thead>
-                        <tr>
-                            <td class="width-85-percent"><?php echo $this->lang->line('fantasy_football_player'); ?></td>
-                            <td class="width-15-percent text-align-center"><?php echo $this->lang->line('fantasy_football_position'); ?></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        if ($bestLineup !== false) {
-                            foreach ($formationInfo['positions'] as $position) { ?>
-                        <tr itemscope itemtype="http://schema.org/Person">
-                            <td itemprop="name" data-title="<?php echo $this->lang->line('fantasy_football_player'); ?>"><?php echo Player_helper::fullNameReverse($bestLineup[$position]->player_id); ?></td>
-                            <td class="text-align-center" data-title="<?php echo $this->lang->line('fantasy_football_position'); ?>"><?php echo Fantasy_Football_helper::fetchSimplePosition($position, true); ?></td>
-                        </tr>
-                        <?php
-                            }
-                        } else { ?>
-                        <tr>
-                            <td colspan="2"><?php echo $this->lang->line('fantasy_football_no_data'); ?></td>
-                        </tr>
-                        <?php
-                        }  ?>
-                    </tbody>
-                </table>
-            </div>
+        <div id="best-lineup-wrapper">
+            <?php $this->load->view("themes/{$theme}/fantasy-football/_best_lineup"); ?>
         </div>
 
     </div>

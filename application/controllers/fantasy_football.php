@@ -20,6 +20,7 @@ class Fantasy_Football extends Frontend_Controller {
         $this->load->helper(array('club_statistics', 'competition', 'competition_stage', 'fantasy_football', 'form', 'goal', 'match', 'opposition', 'player', 'position', 'url', 'utility'));
 
         Assets::addCss('assets/modules/fantasy-football/css/fantasy-football.css');
+        Assets::addJs('assets/modules/fantasy-football/js/fantasy-football.js');
     }
 
     /**
@@ -71,6 +72,10 @@ class Fantasy_Football extends Frontend_Controller {
                 $redirectString .= '/season/' . $season;
             }
 
+            if ($this->input->post('season')) {
+                $season = $this->input->post('season');
+            }
+
             if ($this->input->post('type')) {
                 $type = $this->input->post('type');
             }
@@ -97,7 +102,9 @@ class Fantasy_Football extends Frontend_Controller {
             $redirectString .= '/formation/' . $formation;
             $redirectString .= '/measurement/' . $measurement;
 
-            redirect($redirectString);
+            if (!$this->input->is_ajax_request()) {
+                redirect($redirectString);
+            }
         }
 
         // Fetch Formation Info
@@ -148,6 +155,19 @@ class Fantasy_Football extends Frontend_Controller {
         $this->templateData['position']            = $position;
         $this->templateData['orderBy']             = $orderBy;
         $this->templateData['measurement']         = $measurement;
+
+        if ($this->input->is_ajax_request()) {
+            switch ($this->input->post('view')) {
+                case 'leaderboard':
+                    $this->load->view("themes/{$this->theme}/fantasy-football/_leaderboard", $this->templateData);
+                    return;
+                    break;
+                case 'best-lineup':
+                    $this->load->view("themes/{$this->theme}/fantasy-football/_best_lineup", $this->templateData);
+                    return;
+                    break;
+            }
+        }
 
         $this->load->view("themes/{$this->theme}/header", $this->templateData);
         $this->load->view("themes/{$this->theme}/fantasy-football/view", $this->templateData);

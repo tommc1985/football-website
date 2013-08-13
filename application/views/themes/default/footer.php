@@ -17,11 +17,10 @@
 <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript">
+    var baseURL = '<?php echo site_url(); ?>';
+    </script>
     <?php echo Assets::js(); ?>
-
-<script>
-
-</script>
 
 </body>
 </html>
