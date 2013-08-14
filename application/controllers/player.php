@@ -16,7 +16,7 @@ class Player extends Frontend_Controller {
         $this->load->model('Competition_model');
         $this->load->model('Season_model');
         $this->lang->load('player');
-        $this->load->helper(array('competition', 'nationality', 'player', 'position', 'url', 'utility'));
+        $this->load->helper(array('chart', 'competition', 'nationality', 'player', 'position', 'url', 'utility'));
 
         Assets::addCss('assets/modules/player/css/player.css');
         Assets::addJs('assets/modules/player/js/player.js');
@@ -104,6 +104,9 @@ class Player extends Frontend_Controller {
                 break;
             case 'goal-statistics':
                 $info = 'goal-statistics';
+
+                Assets::addJs('assets/js/chartjs/Chart.min.js');
+                Assets::addJs('assets/js/charts.js');
                 break;
             case 'records':
                 $info = 'records';
@@ -113,8 +116,9 @@ class Player extends Frontend_Controller {
         }
 
         $player = $this->Player_model->fetchPlayerDetails($parameters['id'], array(
-            'data' => $info,
-            'season' => $season,
+            'data'   => $info,
+            'season' => $season == 'all-time' ? 'career' : $season,
+            'type'   => 'overall',
             )
         );
 

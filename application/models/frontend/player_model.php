@@ -83,7 +83,7 @@ class Player_model extends Base_Frontend_Model {
                     break;
                 case 'goal-statistics':
                     // Player's Goal Statistics by Season
-                    $player->goalStatisticsBySeason = $this->fetchPlayerGoalStatisticsBySeason($id, $extraData['season']);
+                    $player->goalStatisticsBySeason = $this->fetchPlayerGoalStatisticsBySeason($id, $extraData['season'], $extraData['type']);
                     break;
                 case 'records':
                     // Player's Records by Season
@@ -294,9 +294,20 @@ class Player_model extends Base_Frontend_Model {
      * @param  int $id            Player ID
      * @return array              A Player's Appearances
      */
-    public function fetchPlayerGoalStatisticsBySeason($id, $season)
+    public function fetchPlayerGoalStatisticsBySeason($id, $season, $type)
     {
+        $ci =& get_instance();
+        $ci->load->model('frontend/Player_Goal_Statistics_model');
 
+        $data = array();
+
+        $data['by_scorer'] = $ci->Player_Goal_Statistics_model->fetchByScorer($id, $season, $type);
+        $data['by_assister'] = $ci->Player_Goal_Statistics_model->fetchByAssister($id, $season, $type);
+        $data['by_goal_type'] = $ci->Player_Goal_Statistics_model->fetchByGoalType($id, $season, $type);
+        $data['by_body_part'] = $ci->Player_Goal_Statistics_model->fetchByBodyPart($id, $season, $type);
+        $data['by_minute_interval'] = $ci->Player_Goal_Statistics_model->fetchByMinuteInterval($id, $season, $type);
+
+        return $data;
     }
 
     /**

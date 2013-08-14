@@ -111,6 +111,24 @@ class Goal_model extends Base_Model {
     }
 
     /**
+     * Fetch Goal Minute Intervals for dropdown
+     * @return array List of Goal Distances
+     */
+    public static function fetchMinuteIntervals()
+    {
+        return array(
+            '1' => '1 - 15',
+            '2' => '16 - 30',
+            '3' => '31 - 45',
+            '4' => '46 - 60',
+            '5' => '61 - 75',
+            '6' => '76 - 90',
+            '7' => '91 - 105',
+            '8' => '106 - 120',
+        );
+    }
+
+    /**
      * Fetch ratings for dropdown
      * @return array List of ratings
      */

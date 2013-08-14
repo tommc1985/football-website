@@ -60,7 +60,7 @@ $lang['player_profile']                            = 'Profile';
 $lang['player_career_statistics']                  = 'Career Statistics';
 $lang['player_no_career_data_found']               = "No Career data can be found for %s";
 
-$lang['player_player_data']                        = "Player Data";
+$lang['player_statistics']                         = "Statistics";
 
 $lang['player_appearances_by_season']              = "Appearances by Season";
 $lang['player_goal_statistics_by_season']          = "Goal Statistics by Season";
@@ -99,6 +99,20 @@ $lang['player_average_rating']                     = 'Average Rating';
 
 $lang['player_overall']                            = 'Overall';
 $lang['player_competition']                        = 'Competition';
+
+
+
+$lang['player_goals_by_assister']                  = 'Goals by Assister';
+$lang['player_assists_by_scorer']                  = 'Assists by Scorer';
+$lang['player_goals_by_type']                      = 'Goals by Type';
+$lang['player_goals_by_body_part']                 = 'Goals by Body Part';
+$lang['player_goals_by_minute_interval']           = 'Goals by Minute Interval';
+
+$lang['player_assister']                           = 'Assister';
+$lang['player_scorer']                             = 'Scorer';
+$lang['player_goal_type']                          = 'Goal Type';
+$lang['player_body_part']                          = 'Body Part';
+$lang['player_minute_interval']                    = 'Minute Interval';
 
 /* End of file player.php */
 /* Location: ./application/language/english/player.php */
