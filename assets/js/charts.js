@@ -1,5 +1,13 @@
 $(document).ready(function() {
     for (i in charts) {
+        resizeChartCanvas(charts[i].id);
+        generateChart(charts[i]);
+    }
+});
+
+$(window).resize(function() {
+    for (i in charts) {
+        resizeChartCanvas(charts[i].id);
         generateChart(charts[i]);
     }
 });
@@ -26,4 +34,17 @@ function generateChart(chart) {
         default :
             new Chart(ctx).Bar(chart.data, chart.options);
     }
+}
+
+function resizeChartCanvas(id) {
+    var width = $('#' + id).parent().width();
+
+    var height = width * 0.66;
+
+    if (height < 400) {
+        height = 400;
+    }
+
+    $('#' + id).attr('width', width);
+    $('#' + id).attr('height', height);
 }
