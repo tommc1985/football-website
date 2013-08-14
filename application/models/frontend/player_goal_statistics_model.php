@@ -26,7 +26,7 @@ class Player_Goal_Statistics_model extends Base_Frontend_Model {
      * @param  string $type            Type of Statistics
      * @return array                   Returned Statistics
      */
-    public function fetchAll($statisticGroup, $playerId, $season, $type)
+    public function fetchAllByGroup($statisticGroup, $playerId, $season, $type)
     {
         $this->db->select('*');
         $this->db->from($this->tableName);
@@ -55,7 +55,7 @@ class Player_Goal_Statistics_model extends Base_Frontend_Model {
 
         $data = array();
 
-        $results = $this->fetchAll('by_scorer', $playerId, $season, $type);
+        $results = $this->fetchAllByGroup('by_scorer', $playerId, $season, $type);
 
         foreach ($results as $result) {
             $data[$result->statistic_key] = array(
@@ -83,7 +83,7 @@ class Player_Goal_Statistics_model extends Base_Frontend_Model {
 
         $data = array();
 
-        $results = $this->fetchAll('by_assister', $playerId, $season, $type);
+        $results = $this->fetchAllByGroup('by_assister', $playerId, $season, $type);
 
         foreach ($results as $result) {
             $data[$result->statistic_key] = array(
@@ -109,7 +109,7 @@ class Player_Goal_Statistics_model extends Base_Frontend_Model {
 
         $data = array();
 
-        $results   = $this->fetchAll('by_goal_type', $playerId, $season, $type);
+        $results   = $this->fetchAllByGroup('by_goal_type', $playerId, $season, $type);
         $goalTypes = Goal_model::fetchTypes();
 
         foreach ($results as $result) {
@@ -147,7 +147,7 @@ class Player_Goal_Statistics_model extends Base_Frontend_Model {
 
         $data = array();
 
-        $results = $this->fetchAll('by_body_part', $playerId, $season, $type);
+        $results = $this->fetchAllByGroup('by_body_part', $playerId, $season, $type);
         $bodyParts = Goal_model::fetchBodyParts();
 
         foreach ($results as $result) {
@@ -185,7 +185,7 @@ class Player_Goal_Statistics_model extends Base_Frontend_Model {
 
         $data = array();
 
-        $results = $this->fetchAll('by_distance', $playerId, $season, $type);
+        $results = $this->fetchAllByGroup('by_distance', $playerId, $season, $type);
         $distances = Goal_model::fetchDistances();
 
         foreach ($results as $result) {
@@ -223,7 +223,7 @@ class Player_Goal_Statistics_model extends Base_Frontend_Model {
 
         $data = array();
 
-        $results = $this->fetchAll('by_minute_interval', $playerId, $season, $type);
+        $results = $this->fetchAllByGroup('by_minute_interval', $playerId, $season, $type);
         $minuteIntervals = Goal_model::fetchMinuteIntervals();
 
         foreach ($results as $result) {
@@ -261,7 +261,7 @@ class Player_Goal_Statistics_model extends Base_Frontend_Model {
 
         $data = array();
 
-        $results   = $this->fetchAll('assist_by_goal_type', $playerId, $season, $type);
+        $results   = $this->fetchAllByGroup('assist_by_goal_type', $playerId, $season, $type);
         $goalTypes = Goal_model::fetchTypes();
 
         foreach ($results as $result) {
@@ -299,7 +299,7 @@ class Player_Goal_Statistics_model extends Base_Frontend_Model {
 
         $data = array();
 
-        $results = $this->fetchAll('assist_by_body_part', $playerId, $season, $type);
+        $results = $this->fetchAllByGroup('assist_by_body_part', $playerId, $season, $type);
         $bodyParts = Goal_model::fetchBodyParts();
 
         foreach ($results as $result) {
@@ -337,7 +337,7 @@ class Player_Goal_Statistics_model extends Base_Frontend_Model {
 
         $data = array();
 
-        $results = $this->fetchAll('assist_by_distance', $playerId, $season, $type);
+        $results = $this->fetchAllByGroup('assist_by_distance', $playerId, $season, $type);
         $distances = Goal_model::fetchDistances();
 
         foreach ($results as $result) {
@@ -375,7 +375,7 @@ class Player_Goal_Statistics_model extends Base_Frontend_Model {
 
         $data = array();
 
-        $results = $this->fetchAll('assist_by_minute_interval', $playerId, $season, $type);
+        $results = $this->fetchAllByGroup('assist_by_minute_interval', $playerId, $season, $type);
         $minuteIntervals = Goal_model::fetchMinuteIntervals();
 
         foreach ($results as $result) {
