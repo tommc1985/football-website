@@ -474,7 +474,7 @@ WHERE c.competitive = 1
      */
     public function byAssister($byType = false, $season = NULL, $playerId = NULL)
     {
-        self::deleteByDistance($byType, $season, $playerId);
+        self::deleteByAssister($byType, $season, $playerId);
 
         $competitionType = $byType ? '' : "'overall'";
         $statisticGroup  = 'by_assister';
@@ -529,7 +529,7 @@ WHERE c.competitive = 1
      */
     public function byScorer($byType = false, $season = NULL, $playerId = NULL)
     {
-        self::deleteByDistance($byType, $season, $playerId);
+        self::deleteByScorer($byType, $season, $playerId);
 
         $competitionType = $byType ? '' : "'overall'";
         $statisticGroup  = 'by_scorer';
@@ -917,7 +917,7 @@ WHERE c.competitive = 1
      * @param  int|NULL $playerId Specific player or all players
      * @return boolean            Were rows deleted
      */
-    public function deleteAssister($byType = false, $season = NULL, $playerId = NULL)
+    public function deleteByAssister($byType = false, $season = NULL, $playerId = NULL)
     {
         return $this->deleteRows('by_assister', $byType, $season, $playerId);
     }
@@ -929,7 +929,7 @@ WHERE c.competitive = 1
      * @param  int|NULL $playerId Specific player or all players
      * @return boolean            Were rows deleted
      */
-    public function deleteScorer($byType = false, $season = NULL, $playerId = NULL)
+    public function deleteByScorer($byType = false, $season = NULL, $playerId = NULL)
     {
         return $this->deleteRows('by_scorer', $byType, $season, $playerId);
     }
@@ -1041,7 +1041,7 @@ WHERE c.competitive = 1
         }
 
         if ($playerId) {
-            $whereConditions['player_id']   = $playerId;
+            $whereConditions['playe_id']   = $playerId;
         }
 
         return $this->db->delete($this->tableName, $whereConditions);
