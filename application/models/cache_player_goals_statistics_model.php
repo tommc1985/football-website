@@ -32,12 +32,16 @@ class Cache_Player_Goals_Statistics_model extends CI_Model {
         );
 
         $this->hungryMethodMap = array(
-            'by_goal_type'       => 'byGoalType',
-            'by_body_part'       => 'byBodyPart',
-            'by_distance'        => 'byDistance',
-            'by_assister'        => 'byAssister',
-            'by_scorer'          => 'byScorer',
-            'by_minute_interval' => 'byMinuteInterval'
+            'by_goal_type'              => 'byGoalType',
+            'by_body_part'              => 'byBodyPart',
+            'by_distance'               => 'byDistance',
+            'by_assister'               => 'byAssister',
+            'by_scorer'                 => 'byScorer',
+            'by_minute_interval'        => 'byMinuteInterval',
+            'assist_by_goal_type'       => 'assistByGoalType',
+            'assist_by_body_part'       => 'assistByBodyPart',
+            'assist_by_distance'        => 'assistByDistance',
+            'assist_by_minute_interval' => 'assistByMinuteInterval',
         );
     }
 
@@ -639,6 +643,238 @@ WHERE c.competitive = 1
     }
 
     /**
+     * Generate and cache Assist Type Statistics by season, type or player
+     * @param  boolean $byType      Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season     Season to generate, set to null for entire career
+     * @param  int|NULL $playerId   Specific player, leave empty for entire team
+     * @return boolean              Whether query was executed correctly
+     */
+    public function assistByGoalType($byType = false, $season = NULL, $playerId = NULL)
+    {
+        self::deleteAssistByGoalType($byType, $season, $playerId);
+
+        $competitionType = $byType ? '' : "'overall'";
+        $statisticGroup  = 'assist_by_goal_type';
+        $extraFields     = array();
+        $extraJoins      = array();
+        $whereConditions = array();
+        $groupBy         = array();
+        $orderBy         = array();
+        $limit           = '';
+
+        $extraFields[] = 'g.assist_id';
+        $extraFields[] = 'g.type';
+        $extraFields[] = 'COUNT(g.id) as frequency';
+
+        if ($playerId) {
+            $whereConditions[] = "g.assist_id = {$playerId}";
+        }
+
+        if ($season) {
+            $dates = Season_model::generateStartEndDates($season);
+            $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
+        }
+
+        $groupBy[] = 'g.assist_id';
+        $groupBy[] = 'g.type';
+
+        if ($byType) {
+            $groupBy[] = 'c.type';
+        }
+
+        $data = array('competition_type' => $competitionType,
+            'season' => $season,
+            'statistic_group' => $statisticGroup,
+            'extra_fields' => $extraFields,
+            'extra_joins' => $extraJoins,
+            'where_conditions' => implode(" \r\nAND ", $whereConditions),
+            'group_by' => $groupBy,
+            'order_by' => $orderBy,
+            'limit' => $limit);
+
+        $sql = self::insertSQLValues($data);
+
+        return $this->db->simple_query($sql);
+    }
+
+    /**
+     * Generate and cache Assist By Body Part Statistics, by season, type or player
+     * @param  boolean $byType      Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season     Season to generate, set to null for entire career
+     * @param  int|ULL $playerId    Specific player, leave empty for entire team
+     * @return boolean              Whether query was executed correctly
+     */
+    public function assistByBodyPart($byType = false, $season = NULL, $playerId = NULL)
+    {
+        self::deleteAssistByBodyPart($byType, $season, $playerId);
+
+        $competitionType = $byType ? '' : "'overall'";
+        $statisticGroup  = 'assist_by_body_part';
+        $extraFields     = array();
+        $extraJoins      = array();
+        $whereConditions = array();
+        $groupBy         = array();
+        $orderBy         = array();
+        $limit           = '';
+
+        $extraFields[] = 'g.assist_id';
+        $extraFields[] = 'g.body_part';
+        $extraFields[] = 'COUNT(g.id) as frequency';
+
+        if ($playerId) {
+            $whereConditions[] = "g.assist_id = {$playerId}";
+        }
+
+        if ($season) {
+            $dates = Season_model::generateStartEndDates($season);
+            $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
+        }
+
+        $groupBy[] = 'g.assist_id';
+        $groupBy[] = 'g.body_part';
+
+        if ($byType) {
+            $groupBy[] = 'c.type';
+        }
+
+        $data = array('competition_type' => $competitionType,
+            'season' => $season,
+            'statistic_group' => $statisticGroup,
+            'extra_fields' => $extraFields,
+            'extra_joins' => $extraJoins,
+            'where_conditions' => implode(" \r\nAND ", $whereConditions),
+            'group_by' => $groupBy,
+            'order_by' => $orderBy,
+            'limit' => $limit);
+
+        $sql = self::insertSQLValues($data);
+
+        return $this->db->simple_query($sql);
+    }
+
+    /**
+     * Generate and cache Assist Distance Statistics, by season, type or player
+     * @param  boolean $byType      Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season     Season to generate, set to null for entire career
+     * @param  int|ULL $playerId    Specific player, leave empty for entire team
+     * @return boolean              Whether query was executed correctly
+     */
+    public function assistByDistance($byType = false, $season = NULL, $playerId = NULL)
+    {
+        self::deleteAssistByDistance($byType, $season, $playerId);
+
+        $competitionType = $byType ? '' : "'overall'";
+        $statisticGroup  = 'assist_by_distance';
+        $extraFields     = array();
+        $extraJoins      = array();
+        $whereConditions = array();
+        $groupBy         = array();
+        $orderBy         = array();
+        $limit           = '';
+
+        $extraFields[] = 'g.assist_id';
+        $extraFields[] = 'g.distance';
+        $extraFields[] = 'COUNT(g.id) as frequency';
+
+        if ($playerId) {
+            $whereConditions[] = "g.assist_id = {$playerId}";
+        }
+
+        if ($season) {
+            $dates = Season_model::generateStartEndDates($season);
+            $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
+        }
+
+        $groupBy[] = 'g.assist_id';
+        $groupBy[] = 'g.distance';
+
+        if ($byType) {
+            $groupBy[] = 'c.type';
+        }
+
+        $data = array('competition_type' => $competitionType,
+            'season' => $season,
+            'statistic_group' => $statisticGroup,
+            'extra_fields' => $extraFields,
+            'extra_joins' => $extraJoins,
+            'where_conditions' => implode(" \r\nAND ", $whereConditions),
+            'group_by' => $groupBy,
+            'order_by' => $orderBy,
+            'limit' => $limit);
+
+        $sql = self::insertSQLValues($data);
+
+        return $this->db->simple_query($sql);
+    }
+
+    /**
+     * Generate and cache Assist by Minute Interval Statistics, by season, type or player
+     * @param  boolean $byType      Generate by competition type, set to false for "overall"
+     * @param  int|NULL $season     Season to generate, set to null for entire career
+     * @param  int|ULL $playerId    Specific player, leave empty for entire team
+     * @return boolean              Whether query was executed correctly
+     */
+    public function assistByMinuteInterval($byType = false, $season = NULL, $playerId = NULL)
+    {
+        self::deleteAssistByMinuteInterval($byType, $season, $playerId);
+
+        $competitionType = $byType ? '' : "'overall'";
+        $statisticGroup  = 'assist_by_minute_interval';
+        $extraFields     = array();
+        $extraJoins      = array();
+        $whereConditions = array();
+        $groupBy         = array();
+        $orderBy         = array();
+        $limit           = '';
+
+        $extraFields[] = 'g.assist_id';
+        $extraFields[] = "IF(g.minute > 0 AND g.minute <=15, 1,
+    IF(g.minute > 15 AND g.minute <=30, 2,
+        IF(g.minute > 30 AND g.minute <=45, 3,
+            IF(g.minute > 45 AND g.minute <=60, 4,
+                IF(g.minute > 60 AND g.minute <=75, 5,
+                    IF(g.minute > 75 AND g.minute <=90, 6,
+                        IF(g.minute > 90 AND g.minute <=105, 7, 8)
+                    )
+                )
+            )
+        )
+    )
+) as minute_interval";
+        $extraFields[] = 'COUNT(g.id) as frequency';
+
+        if ($playerId) {
+            $whereConditions[] = "g.assist_id = {$playerId}";
+        }
+
+        if ($season) {
+            $dates = Season_model::generateStartEndDates($season);
+            $whereConditions[] = "(m.date {$dates['startDate']} AND m.date {$dates['endDate']})";
+        }
+
+        $groupBy[] = 'g.assist_id';
+        $groupBy[] = 'minute_interval';
+
+        if ($byType) {
+            $groupBy[] = 'c.type';
+        }
+
+        $data = array('competition_type' => $competitionType,
+            'season' => $season,
+            'statistic_group' => $statisticGroup,
+            'extra_fields' => $extraFields,
+            'extra_joins' => $extraJoins,
+            'where_conditions' => implode(" \r\nAND ", $whereConditions),
+            'group_by' => $groupBy,
+            'order_by' => $orderBy,
+            'limit' => $limit);
+
+        $sql = self::insertSQLValues($data);
+
+        return $this->db->simple_query($sql);
+    }
+
+    /**
      * Delete cached Goal Type Statistics
      * @param  boolean  $byType   Competition Type
      * @param  int|NULL $season   Season or Career
@@ -708,6 +944,54 @@ WHERE c.competitive = 1
     public function deleteByMinuteInterval($byType = false, $season = NULL, $playerId = NULL)
     {
         return $this->deleteRows('by_minute_interval', $byType, $season, $playerId);
+    }
+
+    /**
+     * Delete cached Assist Type Statistics
+     * @param  boolean  $byType   Competition Type
+     * @param  int|NULL $season   Season or Career
+     * @param  int|NULL $playerId Specific player or all players
+     * @return boolean            Were rows deleted
+     */
+    public function deleteAssistByGoalType($byType = false, $season = NULL, $playerId = NULL)
+    {
+        return $this->deleteRows('assist_by_goal_type', $byType, $season, $playerId);
+    }
+
+    /**
+     * Delete cached Assist By Body Part Statistics
+     * @param  boolean  $byType   Competition Type
+     * @param  int|NULL $season   Season or Career
+     * @param  int|NULL $playerId Specific player or all players
+     * @return boolean            Were rows deleted
+     */
+    public function deleteAssistByBodyPart($byType = false, $season = NULL, $playerId = NULL)
+    {
+        return $this->deleteRows('assist_by_body_part', $byType, $season, $playerId);
+    }
+
+    /**
+     * Delete cached Assist by Distance Statistics
+     * @param  boolean  $byType   Competition Type
+     * @param  int|NULL $season   Season or Career
+     * @param  int|NULL $playerId Specific player or all players
+     * @return boolean            Were rows deleted
+     */
+    public function deleteAssistByDistance($byType = false, $season = NULL, $playerId = NULL)
+    {
+        return $this->deleteRows('assist_by_distance', $byType, $season, $playerId);
+    }
+
+    /**
+     * Delete cached Assist Minute Interval Statistics
+     * @param  boolean  $byType   Competition Type
+     * @param  int|NULL $season   Season or Career
+     * @param  int|NULL $playerId Specific player or all players
+     * @return boolean            Were rows deleted
+     */
+    public function deleteAssistByMinuteInterval($byType = false, $season = NULL, $playerId = NULL)
+    {
+        return $this->deleteRows('assist_by_minute_interval', $byType, $season, $playerId);
     }
 
     /**

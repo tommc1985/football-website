@@ -305,7 +305,12 @@ class Player_model extends Base_Frontend_Model {
         $data['by_assister'] = $ci->Player_Goal_Statistics_model->fetchByAssister($id, $season, $type);
         $data['by_goal_type'] = $ci->Player_Goal_Statistics_model->fetchByGoalType($id, $season, $type);
         $data['by_body_part'] = $ci->Player_Goal_Statistics_model->fetchByBodyPart($id, $season, $type);
+        $data['by_distance'] = $ci->Player_Goal_Statistics_model->fetchByDistance($id, $season, $type);
         $data['by_minute_interval'] = $ci->Player_Goal_Statistics_model->fetchByMinuteInterval($id, $season, $type);
+        $data['assist_by_goal_type'] = $ci->Player_Goal_Statistics_model->fetchAssistByGoalType($id, $season, $type);
+        $data['assist_by_body_part'] = $ci->Player_Goal_Statistics_model->fetchAssistByBodyPart($id, $season, $type);
+        $data['assist_by_distance'] = $ci->Player_Goal_Statistics_model->fetchAssistByDistance($id, $season, $type);
+        $data['assist_by_minute_interval'] = $ci->Player_Goal_Statistics_model->fetchAssistByMinuteInterval($id, $season, $type);
 
         return $data;
     }

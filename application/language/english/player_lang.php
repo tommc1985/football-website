@@ -103,10 +103,15 @@ $lang['player_competition']                        = 'Competition';
 
 
 $lang['player_goals_by_assister']                  = 'Goals by Assister';
-$lang['player_assists_by_scorer']                  = 'Assists by Scorer';
 $lang['player_goals_by_type']                      = 'Goals by Type';
 $lang['player_goals_by_body_part']                 = 'Goals by Body Part';
+$lang['player_goals_by_distance']                  = 'Goals by Distance';
 $lang['player_goals_by_minute_interval']           = 'Goals by Minute Interval';
+$lang['player_assists_by_scorer']                  = 'Assists by Scorer';
+$lang['player_assists_by_type']                    = 'Assists by Type';
+$lang['player_assists_by_body_part']               = 'Assists by Body Part';
+$lang['player_assists_by_distance']                = 'Assists by Distance';
+$lang['player_assists_by_minute_interval']         = 'Assists by Minute Interval';
 
 $lang['player_assister']                           = 'Assister';
 $lang['player_scorer']                             = 'Scorer';

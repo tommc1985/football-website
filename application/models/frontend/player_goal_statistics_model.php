@@ -172,6 +172,44 @@ class Player_Goal_Statistics_model extends Base_Frontend_Model {
     }
 
     /**
+     * Fetch all "By Distance" Goal Statistics
+     * @param  int $playerId           Player ID
+     * @param  string $season          Season of Statistics
+     * @param  string $type            Type of Statistics
+     * @return array                   Returned Statistics
+     */
+    public function fetchByDistance($playerId, $season, $type)
+    {
+        $ci =& get_instance();
+        $ci->load->model('Goal_model');
+
+        $data = array();
+
+        $results = $this->fetchAll('by_distance', $playerId, $season, $type);
+        $distances = Goal_model::fetchDistances();
+
+        foreach ($results as $result) {
+            $data[$result->statistic_key] = array(
+                'label' => $distances[$result->statistic_key],
+                'value' => (int) $result->statistic_value,
+            );
+        }
+
+        foreach ($distances as $index => $distance) {
+            if (!isset($data[$index]) && $index != 0) {
+                $data[$index] = array(
+                    'label' => $distance,
+                    'value' => 0,
+                );
+            }
+        }
+
+        ksort($data);
+
+        return $data;
+    }
+
+    /**
      * Fetch all "By Minute Interval" Goal Statistics
      * @param  int $playerId           Player ID
      * @param  string $season          Season of Statistics
@@ -186,6 +224,158 @@ class Player_Goal_Statistics_model extends Base_Frontend_Model {
         $data = array();
 
         $results = $this->fetchAll('by_minute_interval', $playerId, $season, $type);
+        $minuteIntervals = Goal_model::fetchMinuteIntervals();
+
+        foreach ($results as $result) {
+            $data[$result->statistic_key] = array(
+                'label' => $minuteIntervals[$result->statistic_key],
+                'value' => (int) $result->statistic_value,
+            );
+        }
+
+        foreach ($minuteIntervals as $index => $minuteInterval) {
+            if (!isset($data[$index]) && $index != 0) {
+                $data[$index] = array(
+                    'label' => $minuteInterval,
+                    'value' => 0,
+                );
+            }
+        }
+
+        ksort($data);
+
+        return $data;
+    }
+
+    /**
+     * Fetch all "Assist By Goal Type" Goal Statistics
+     * @param  int $playerId           Player ID
+     * @param  string $season          Season of Statistics
+     * @param  string $type            Type of Statistics
+     * @return array                   Returned Statistics
+     */
+    public function fetchAssistByGoalType($playerId, $season, $type)
+    {
+        $ci =& get_instance();
+        $ci->load->model('Goal_model');
+
+        $data = array();
+
+        $results   = $this->fetchAll('assist_by_goal_type', $playerId, $season, $type);
+        $goalTypes = Goal_model::fetchTypes();
+
+        foreach ($results as $result) {
+            $data[$result->statistic_key] = array(
+                'label' => $goalTypes[$result->statistic_key],
+                'value' => (int) $result->statistic_value,
+            );
+        }
+
+        foreach ($goalTypes as $index => $goalType) {
+            if (!isset($data[$index]) && $index != 0) {
+                $data[$index] = array(
+                    'label' => $goalType,
+                    'value' => 0,
+                );
+            }
+        }
+
+        ksort($data);
+
+        return $data;
+    }
+
+    /**
+     * Fetch all "Assist By Body Part" Goal Statistics
+     * @param  int $playerId           Player ID
+     * @param  string $season          Season of Statistics
+     * @param  string $type            Type of Statistics
+     * @return array                   Returned Statistics
+     */
+    public function fetchAssistByBodyPart($playerId, $season, $type)
+    {
+        $ci =& get_instance();
+        $ci->load->model('Goal_model');
+
+        $data = array();
+
+        $results = $this->fetchAll('assist_by_body_part', $playerId, $season, $type);
+        $bodyParts = Goal_model::fetchBodyParts();
+
+        foreach ($results as $result) {
+            $data[$result->statistic_key] = array(
+                'label' => $bodyParts[$result->statistic_key],
+                'value' => (int) $result->statistic_value,
+            );
+        }
+
+        foreach ($bodyParts as $index => $bodyPart) {
+            if (!isset($data[$index]) && $index != 0) {
+                $data[$index] = array(
+                    'label' => $bodyPart,
+                    'value' => 0,
+                );
+            }
+        }
+
+        ksort($data);
+
+        return $data;
+    }
+
+    /**
+     * Fetch all "Assist By Distance" Goal Statistics
+     * @param  int $playerId           Player ID
+     * @param  string $season          Season of Statistics
+     * @param  string $type            Type of Statistics
+     * @return array                   Returned Statistics
+     */
+    public function fetchAssistByDistance($playerId, $season, $type)
+    {
+        $ci =& get_instance();
+        $ci->load->model('Goal_model');
+
+        $data = array();
+
+        $results = $this->fetchAll('assist_by_distance', $playerId, $season, $type);
+        $distances = Goal_model::fetchDistances();
+
+        foreach ($results as $result) {
+            $data[$result->statistic_key] = array(
+                'label' => $distances[$result->statistic_key],
+                'value' => (int) $result->statistic_value,
+            );
+        }
+
+        foreach ($distances as $index => $distance) {
+            if (!isset($data[$index]) && $index != 0) {
+                $data[$index] = array(
+                    'label' => $distance,
+                    'value' => 0,
+                );
+            }
+        }
+
+        ksort($data);
+
+        return $data;
+    }
+
+    /**
+     * Fetch all "Asssit By Minute Interval" Goal Statistics
+     * @param  int $playerId           Player ID
+     * @param  string $season          Season of Statistics
+     * @param  string $type            Type of Statistics
+     * @return array                   Returned Statistics
+     */
+    public function fetchAssistByMinuteInterval($playerId, $season, $type)
+    {
+        $ci =& get_instance();
+        $ci->load->model('Goal_model');
+
+        $data = array();
+
+        $results = $this->fetchAll('assist_by_minute_interval', $playerId, $season, $type);
         $minuteIntervals = Goal_model::fetchMinuteIntervals();
 
         foreach ($results as $result) {
