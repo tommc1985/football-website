@@ -75,18 +75,18 @@ class Goal_helper
 
     /**
      * Return a Goal's Type
-     * @param  mixed $goal         Goal Object/Array
-     * @return string              The Goal's Type
+     * @param  int $type         Type ID
+     * @return string            The Goal's Type
      */
-    public static function type($goal)
+    public static function type($type)
     {
         $ci =& get_instance();
         $ci->load->model('Goal_model');
 
         $types = Goal_model::fetchTypes();
 
-        if (isset($types[$goal->type])) {
-            return $types[$goal->type];
+        if (isset($types[$type])) {
+            return $types[$type];
         }
 
         return $ci->lang->line('global_unknown');
@@ -94,7 +94,7 @@ class Goal_helper
 
     /**
      * Return a Goal's Body Part
-     * @param  mixed $goal         Goal Object/Array
+     * @param  int $bodyPart     Body Part ID
      * @return string              The Goal's Body Part
      */
     public static function bodyPart($goal)
@@ -104,8 +104,8 @@ class Goal_helper
 
         $bodyParts = Goal_model::fetchBodyParts();
 
-        if (isset($bodyParts[$goal->body_part])) {
-            return $bodyParts[$goal->body_part];
+        if (isset($bodyParts[$bodyPart])) {
+            return $bodyParts[$bodyPart];
         }
 
         return $ci->lang->line('global_unknown');
@@ -113,18 +113,18 @@ class Goal_helper
 
     /**
      * Return a Goal's Distance
-     * @param  mixed $goal         Goal Object/Array
+     * @param  int $distance     Distance ID
      * @return string              The Goal's Distance
      */
-    public static function distance($goal)
+    public static function distance($distance)
     {
         $ci =& get_instance();
         $ci->load->model('Goal_model');
 
         $distances = Goal_model::fetchDistances();
 
-        if (isset($distances[$goal->distance])) {
-            return $distances[$goal->distance];
+        if (isset($distances[$distance])) {
+            return $distances[$distance];
         }
 
         return $ci->lang->line('global_unknown');
