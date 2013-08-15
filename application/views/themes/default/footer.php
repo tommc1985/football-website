@@ -22,41 +22,17 @@
 
     </script>
     <?php echo Assets::js(); ?>
-    <script>
-    <?php
-    /*
-    var chartObject = {
-            id : 'position-progression',
-            type : 'line',
-            data : {
-                labels : ["2/9", "9/9", "16/9", "23/9", "30/9", "7/10", "14/10", "21/10", "28/10", "4/11", "11/11", "18/11", "25/11", "2/12", "9/12", "16/12", "23/12", "5/1", "12/1", "19/1", "26/1", "2/2", "9/2", "16/2", "23/2", "2/3", "9/3", "16/3", "23/3", "30/3", "6/4", "13/4", "20/4"],
-                datasets : [
-                    {
-            legend : [""],
-            fillColor : 'rgba(151,187,205,0)',
-            strokeColor : 'rgba(151,187,205,1)',
-            pointColor : 'rgba(151,187,205,1)',
-            pointStrokeColor : '#fff',
-            data : [1,2,3,4,5,6,7,8,9,10,11,11,10,9,8,7,6,5,4,3,2,1]
-        },
-        {
-            legend : [""],
-            fillColor : 'rgba(220,220,220,0)',
-            strokeColor : 'rgba(220,220,220,1)',
-            pointColor : 'rgba(220,220,220,1)',
-            pointStrokeColor : '#fff',
-            data : [11,10,9,8,7,6,5,4,3,2,1,1,2,3,4,5,6,7,8,9,10,11]
-        }
-                ]
-            },
-            options : {
-                scaleOverride: true,
-                scaleStartValue : 11,
-                scaleSteps : 10,
-                scaleStepWidth : -1,
-        }
-    };
-    charts[1] = chartObject;*/ ?>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', '<?php echo Configuration::get("google_analytics_tracking_id"); ?>']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
     </script>
 </body>
 </html>
