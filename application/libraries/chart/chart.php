@@ -35,7 +35,23 @@ class Chart
      * @return NULL
      */
     public function buildChart($id, $type, $data, $options = array())
-    { ?>
+    {
+        if (isset($options['fillColorOpacity'])) {
+            $this->fillColorOpacity = (float) $options['fillColorOpacity'];
+            unset($options['fillColorOpacity']);
+        }
+
+        if (isset($options['strokeColorOpacity'])) {
+            $this->strokeColorOpacity = (float) $options['strokeColorOpacity'];
+            unset($options['strokeColorOpacity']);
+        }
+
+        if (isset($options['pointColorOpacity'])) {
+            $this->pointColorOpacity = (float) $options['pointColorOpacity'];
+            unset($options['pointColorOpacity']);
+        }
+
+     ?>
         <canvas id="<?php echo $id; ?>" width="600" height="400"></canvas>
         <script type="text/javascript">
         var chartObject = {
@@ -197,68 +213,80 @@ class Chart
         $colours = array(
             array(
                 'fillColor'        => "rgba(151,187,205,{$this->fillColorOpacity})",
-                'strokeColor'      => "rgba(151,187,205,1)",
-                'pointColor'       => "rgba(151,187,205,1)",
+                'strokeColor'      => "rgba(151,187,205,{$this->strokeColorOpacity})",
+                'pointColor'       => "rgba(151,187,205,{$this->strokeColorOpacity})",
                 'pointStrokeColor' => "#fff",
             ),
             array(
                 'fillColor'        => "rgba(220,220,220,{$this->fillColorOpacity})",
-                'strokeColor'      => "rgba(220,220,220,1)",
-                'pointColor'       => "rgba(220,220,220,1)",
+                'strokeColor'      => "rgba(220,220,220,{$this->strokeColorOpacity})",
+                'pointColor'       => "rgba(220,220,220,{$this->pointColorOpacity})",
                 'pointStrokeColor' => "#fff",
             ),
             array(
                 'fillColor'        => "rgba(215,44,40,{$this->fillColorOpacity})",
-                'strokeColor'      => "rgba(215,44,40,1)",
-                'pointColor'       => "rgba(215,44,40,1)",
+                'strokeColor'      => "rgba(215,44,40,{$this->strokeColorOpacity})",
+                'pointColor'       => "rgba(215,44,40,{$this->pointColorOpacity})",
                 'pointStrokeColor' => "#fff",
             ),
             array(
                 'fillColor'        => "rgba(100,230,100,{$this->fillColorOpacity})",
-                'strokeColor'      => "rgba(100,230,100,1)",
-                'pointColor'       => "rgba(100,230,100,1)",
+                'strokeColor'      => "rgba(100,230,100,{$this->strokeColorOpacity})",
+                'pointColor'       => "rgba(100,230,100,{$this->pointColorOpacity})",
                 'pointStrokeColor' => "#fff",
             ),
             array(
                 'fillColor'        => "rgba(239,190,0,{$this->fillColorOpacity})",
-                'strokeColor'      => "rgba(239,190,0,1)",
-                'pointColor'       => "rgba(239,190,0,1)",
+                'strokeColor'      => "rgba(239,190,0,{$this->strokeColorOpacity})",
+                'pointColor'       => "rgba(239,190,0,{$this->pointColorOpacity})",
                 'pointStrokeColor' => "#fff",
             ),
             array(
                 'fillColor'        => "rgba(205,151,187,{$this->fillColorOpacity})",
-                'strokeColor'      => "rgba(205,151,187,1)",
-                'pointColor'       => "rgba(205,151,187,1)",
+                'strokeColor'      => "rgba(205,151,187,{$this->strokeColorOpacity})",
+                'pointColor'       => "rgba(205,151,187,{$this->pointColorOpacity})",
                 'pointStrokeColor' => "#fff",
             ),
             array(
                 'fillColor'        => "rgba(239,87,0,{$this->fillColorOpacity})",
-                'strokeColor'      => "rgba(239,87,0,1)",
-                'pointColor'       => "rgba(239,87,0,1)",
+                'strokeColor'      => "rgba(239,87,0,{$this->strokeColorOpacity})",
+                'pointColor'       => "rgba(239,87,0,{$this->pointColorOpacity})",
                 'pointStrokeColor' => "#fff",
             ),
             array(
                 'fillColor'        => "rgba(93,92,203,{$this->fillColorOpacity})",
-                'strokeColor'      => "rgba(93,92,203,1)",
-                'pointColor'       => "rgba(93,92,203,1)",
+                'strokeColor'      => "rgba(93,92,203,{$this->strokeColorOpacity})",
+                'pointColor'       => "rgba(93,92,203,{$this->pointColorOpacity})",
                 'pointStrokeColor' => "#fff",
             ),
             array(
                 'fillColor'        => "rgba(40,40,40,{$this->fillColorOpacity})",
-                'strokeColor'      => "rgba(40,40,40,1)",
-                'pointColor'       => "rgba(40,40,40,1)",
+                'strokeColor'      => "rgba(40,40,40,{$this->strokeColorOpacity})",
+                'pointColor'       => "rgba(40,40,40,{$this->pointColorOpacity})",
                 'pointStrokeColor' => "#fff",
             ),
             array(
                 'fillColor'        => "rgba(50,115,61,{$this->fillColorOpacity})",
-                'strokeColor'      => "rgba(50,115,61,1)",
-                'pointColor'       => "rgba(50,115,61,1)",
+                'strokeColor'      => "rgba(50,115,61,{$this->strokeColorOpacity})",
+                'pointColor'       => "rgba(50,115,61,{$this->pointColorOpacity})",
                 'pointStrokeColor' => "#fff",
             ),
             array(
                 'fillColor'        => "rgba(125,125,125,{$this->fillColorOpacity})",
-                'strokeColor'      => "rgba(125,125,125,1)",
-                'pointColor'       => "rgba(125,125,125,1)",
+                'strokeColor'      => "rgba(125,125,125,{$this->strokeColorOpacity})",
+                'pointColor'       => "rgba(125,125,125,{$this->pointColorOpacity})",
+                'pointStrokeColor' => "#fff",
+            ),
+            array(
+                'fillColor'        => "rgba(234,142,138,{$this->fillColorOpacity})",
+                'strokeColor'      => "rgba(234,142,138,{$this->strokeColorOpacity})",
+                'pointColor'       => "rgba(234,142,138,{$this->pointColorOpacity})",
+                'pointStrokeColor' => "#fff",
+            ),
+            array(
+                'fillColor'        => "rgba(0,144,137,{$this->fillColorOpacity})",
+                'strokeColor'      => "rgba(0,144,137,{$this->strokeColorOpacity})",
+                'pointColor'       => "rgba(0,144,137,{$this->pointColorOpacity})",
                 'pointStrokeColor' => "#fff",
             ),
         );

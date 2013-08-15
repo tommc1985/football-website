@@ -152,10 +152,11 @@ $positionProgressChart = array(
     'chartType' => 'line',
     'data'      => $positionProgress,
     'options'   => array(
-        'scaleOverride'   => 'true',
-        'scaleStartValue' => $positionProgress['maxValue'],
-        'scaleSteps'      => $positionProgress['maxValue'] - 1,
-        'scaleStepWidth'  => -1,
+        'scaleOverride'    => 'true',
+        'scaleStartValue'  => $positionProgress['maxValue'],
+        'scaleSteps'       => $positionProgress['maxValue'] - 1,
+        'scaleStepWidth'   => -1,
+        'fillColorOpacity' => 0,
     ),
 );
 $chart = new Chart();
