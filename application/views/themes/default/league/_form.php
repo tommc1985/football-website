@@ -14,7 +14,7 @@ if ($formTeams) { ?>
     foreach ($formTeams as $opposition_id => $formTeam) { ?>
         <tr itemscope itemtype="http://schema.org/SportsTeam">
             <td class="width-70-percent" itemprop="name" data-title="<?php echo $this->lang->line('league_team'); ?>"><?php echo Opposition_helper::name($standings[$opposition_id]->opposition_id); ?></td>
-            <td class="width-70-percent" data-title="<?php echo $this->lang->line('league_form'); ?>"><?php echo League_helper::formattedForm($standings[$opposition_id]->form, $formMatchCount); ?></td>
+            <td class="width-30-percent" data-title="<?php echo $this->lang->line('league_form'); ?>"><?php echo League_helper::formattedForm($standings[$opposition_id]->form, $formMatchCount); ?></td>
         </tr>
     <?php
     } ?>

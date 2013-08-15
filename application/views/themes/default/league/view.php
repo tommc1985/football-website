@@ -134,6 +134,32 @@ $submit = array(
                 } ?>
             </div>
         </div>
+
+        <div class="row-fluid">
+            <div class="span10 offset1">
+                <h3><?php echo $this->lang->line('league_position_progress'); ?><?php echo $type != 'overall' ? " (" . $this->lang->line("league_{$type}_matches_only") . ")" : ''; ?></h3>
+                <?php
+                if ($dateUntil != 'overall') { ?>
+                <h4><?php echo sprintf($this->lang->line('league_as_of'), $dateUntil != 'overall' ? Utility_helper::shortDate($dateUntil) : Utility_helper::shortDate(time())); ?></h4>
+                <?php
+                } ?>
+                <?php Chart_helper::init(); ?>
+<?php
+$positionProgressChart = array(
+    'id'        => 'position-progress',
+    'chartType' => 'line',
+    'data'      => $positionProgress,
+    'options'   => array(
+        'scaleOverride'   => 'true',
+        'scaleStartValue' => $positionProgress['maxValue'],
+        'scaleSteps'      => $positionProgress['maxValue'] - 1,
+        'scaleStepWidth'  => -1,
+    ),
+);
+Chart_helper::buildChart($positionProgressChart['id'], $positionProgressChart['chartType'], $positionProgressChart['data'], $positionProgressChart['options']); ?>
+            </div>
+        </div>
+
         <div class="row-fluid">
             <div class="span6">
                 <h3><?php echo $this->lang->line("league_form"); ?></h3>
