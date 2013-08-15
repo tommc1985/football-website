@@ -81,6 +81,11 @@ table td.text-align-right {
     }
 }
 
-/*table.table-striped tbody tr:nth-child(odd) td {
-    background-color: rgba(240, 240, 240, 0.4);
-}*/
+.legend-identifier {
+    float: left;
+    display: block;
+    width: 15px;
+    height: 15px;
+    border: 2px solid #000;
+    margin-right: 5px;
+}

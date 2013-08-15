@@ -57,7 +57,7 @@ class League_model extends Base_Frontend_Model {
 
             $position = 1;
             foreach ($standings as $standing) {
-                $data['standings'][$standing->opposition_id]['standings'][] = $positionCount - $position;
+                $data['standings'][$standing->opposition_id]['standings'][] = $position;
 
                 $position++;
             }

@@ -136,10 +136,10 @@ $submit = array(
         </div>
 
         <div class="row-fluid">
-            <div class="span12">
-                    <div class="row-fluid">
-                        <div class="span9">
+            <div class="span10 offset1">
                 <h3><?php echo $this->lang->line('league_position_progress'); ?><?php echo $type != 'overall' ? " (" . $this->lang->line("league_{$type}_matches_only") . ")" : ''; ?></h3>
+                <div class="row-fluid">
+                    <div class="span8">
                 <?php
                 if ($dateUntil != 'overall') { ?>
                 <h4><?php echo sprintf($this->lang->line('league_as_of'), $dateUntil != 'overall' ? Utility_helper::shortDate($dateUntil) : Utility_helper::shortDate(time())); ?></h4>
@@ -161,6 +161,30 @@ $positionProgressChart = array(
 );
 $chart = new Chart();
 $chart->buildChart($positionProgressChart['id'], $positionProgressChart['chartType'], $positionProgressChart['data'], $positionProgressChart['options']); ?>
+<script type="text/javascript">
+var oppositionCount = <?php echo count($standings); ?>
+</script>
+                    </div>
+                    <div class="span4">
+                        <table class="table width-100-percent table-striped table-condensed">
+                            <thead>
+                                <tr>
+                                    <td class="width-100-percent"><?php echo $this->lang->line('player_opposition'); ?></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $i = 0;
+                                foreach ($positionProgress['datasets'] as $index => $dataRow) {
+                                    $colour = Chart::fetchColour($i); ?>
+                                <tr>
+                                    <td><span class="legend-identifier" data-index="<?php echo $i; ?>" data-enabled="true" style="border-color: <?php echo $colour['strokeColor']; ?>; background-color: <?php echo $colour['fillColor']; ?>"></span> <a href="#" class="legend-opposition" data-index="<?php echo $i; ?>"><?php echo $dataRow['legend']; ?></a></td>
+                                </tr>
+                                <?php
+                                    $i++;
+                                } ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
