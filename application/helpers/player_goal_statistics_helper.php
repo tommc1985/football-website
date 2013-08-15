@@ -40,15 +40,15 @@ class Player_Goal_Statistics_helper
         <table class="table table-striped table-condensed">
             <thead>
                 <tr>
-                    <td class="width-15-percent text-align-center"><?php echo $ci->lang->line("player_goal_statistics_goals"); ?></td>
-                    <td class="width-85-percent"><?php echo $ci->lang->line("player_goal_statistics_scorer"); ?></td>
+                    <td class="width-10-percent text-align-center"><?php echo $ci->lang->line("player_goal_statistics_goals"); ?></td>
+                    <td class="width-90-percent"><?php echo $ci->lang->line("player_goal_statistics_scorer"); ?></td>
                 </tr>
             </thead>
             <tbody>
         <?php
         foreach ($statistics[$statisticGroup][$statisticKey] as $scorerId => $goals) { ?>
                 <tr itemscope itemtype="http://schema.org/Person">
-                    <td class="width-15-percent text-align-center"><?php echo $goals; ?></td>
+                    <td class="width-10-percent text-align-center"><?php echo $goals; ?></td>
                     <td><span itemprop="name"><?php echo $scorerId ? Player_helper::fullName($scorerId) : $ci->lang->line("player_goal_statistics_own_goal"); ?></span></td>
                 </tr>
         <?php
@@ -74,15 +74,15 @@ class Player_Goal_Statistics_helper
         <table class="table table-striped table-condensed">
             <thead>
                 <tr>
-                    <td class="width-15-percent text-align-center"><?php echo $ci->lang->line("player_goal_statistics_goals"); ?></td>
-                    <td class="width-85-percent"><?php echo $ci->lang->line("player_goal_statistics_assister"); ?></td>
+                    <td class="width-10-percent text-align-center"><?php echo $ci->lang->line("player_goal_statistics_goals"); ?></td>
+                    <td class="width-90-percent"><?php echo $ci->lang->line("player_goal_statistics_assister"); ?></td>
                 </tr>
             </thead>
             <tbody>
         <?php
         foreach ($statistics[$statisticGroup][$statisticKey] as $scorerId => $goals) { ?>
                 <tr itemscope itemtype="http://schema.org/Person">
-                    <td class="width-15-percent text-align-center"><?php echo $goals; ?></td>
+                    <td class="width-10-percent text-align-center"><?php echo $goals; ?></td>
                     <td><span itemprop="name"><?php echo $scorerId ? Player_helper::fullName($scorerId) : $ci->lang->line("player_goal_statistics_no_assist"); ?></span></td>
                 </tr>
         <?php
