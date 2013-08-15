@@ -24,6 +24,43 @@ function fetchFixturesAndResults()
     return false;
 }
 
+$(document).ready(function() {
+    $('.alternative-league-table-wrapper, .position-progress-wrapper').hide();
+
+    $('#league-table-button').click(function() {
+        $(this).addClass('active');
+        $('#alternative-league-table-button, #position-progress-button').removeClass('active');
+
+        $('.alternative-league-table-wrapper, .position-progress-wrapper').hide();
+        $('.league-table-wrapper').show();
+
+        return false;
+    });
+
+    $('#alternative-league-table-button').click(function() {
+        $(this).addClass('active');
+        $('#league-table-button, #position-progress-button').removeClass('active');
+
+        $('.league-table-wrapper, .position-progress-wrapper').hide();
+        $('.alternative-league-table-wrapper').show();
+
+        return false;
+    });
+
+    $('#position-progress-button').click(function() {
+        $(this).addClass('active');
+        $('#league-table-button, #alternative-league-table-button').removeClass('active');
+
+        $('.league-table-wrapper, .alternative-league-table-wrapper').hide();
+        $('.position-progress-wrapper').show();
+        resizeChartCanvas(charts['position-progress'].id);
+        generateChart(charts['position-progress']);
+
+        return false;
+    });
+});
+
+
 var progressionStatus = new Array();
 for (var i = 0; i < oppositionCount; i++) {
     progressionStatus[i] = true;

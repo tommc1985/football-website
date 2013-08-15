@@ -48,6 +48,14 @@ $submit = array(
 </fieldset>
 
         <div class="row-fluid">
+            <div class="span10 offset1 text-align-center">
+                <button id="league-table-button" class="btn span4 active"><?php echo $this->lang->line('league_league_table'); ?></button>
+                <button id="alternative-league-table-button" class="btn span4"><?php echo $this->lang->line('league_alternative_league_table'); ?></button>
+                <button id="position-progress-button" class="btn span4"><?php echo $this->lang->line('league_position_progress'); ?></button>
+            </div>
+        </div>
+
+        <div class="row-fluid league-table-wrapper">
             <div class="span10 offset1">
                 <h3><?php echo $this->lang->line('league_league_table'); ?><?php echo $type != 'overall' ? " (" . $this->lang->line("league_{$type}_matches_only") . ")" : ''; ?></h3>
                 <?php
@@ -97,7 +105,7 @@ $submit = array(
             </div>
         </div>
 
-        <div class="row-fluid">
+        <div class="row-fluid alternative-league-table-wrapper">
             <div class="span10 offset1">
                 <h3><?php echo $this->lang->line('league_alternative_league_table'); ?><?php echo $type != 'overall' ? " (" . $this->lang->line("league_{$type}_matches_only") . ")" : ''; ?></h3>
                 <?php
@@ -135,7 +143,7 @@ $submit = array(
             </div>
         </div>
 
-        <div class="row-fluid">
+        <div class="row-fluid position-progress-wrapper">
             <div class="span10 offset1">
                 <h3><?php echo $this->lang->line('league_position_progress'); ?><?php echo $type != 'overall' ? " (" . $this->lang->line("league_{$type}_matches_only") . ")" : ''; ?></h3>
                 <div class="row-fluid">

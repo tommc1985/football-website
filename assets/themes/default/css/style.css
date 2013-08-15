@@ -21,15 +21,15 @@ label {
     top: 40px;
 }
 
-table td.text-align-left {
+table td.text-align-left, .text-align-left {
     text-align: left;
 }
 
-table td.text-align-center {
+table td.text-align-center, .text-align-center {
     text-align: center;
 }
 
-table td.text-align-right {
+table td.text-align-right, .text-align-right {
     text-align: right;
 }
 
