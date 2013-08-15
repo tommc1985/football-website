@@ -26,6 +26,52 @@ class Player_Goal_Statistics_model extends Base_Frontend_Model {
      * @param  string $type            Type of Statistics
      * @return array                   Returned Statistics
      */
+    public function fetchAll($season, $type)
+    {
+        $this->db->select('*');
+        $this->db->from($this->tableName);
+        $this->db->where('season', $season);
+        $this->db->where('type', $type);
+        $this->db->order_by('CAST(`statistic_value` AS UNSIGNED) DESC');
+
+        $result = $this->db->get();
+
+        $statistics = array();
+
+        if ($result) {
+            foreach ($result->result() as $statistic) {
+                if ($statistic->statistic_group == 'by_scorer' || $statistic->statistic_group == 'by_assister') {
+                    if ($statistic->statistic_group == 'by_scorer') {
+                        if (!isset($statistics[$statistic->statistic_group])) {
+                            $statistics[$statistic->statistic_group] = array();
+                        }
+
+                        $statistics[$statistic->statistic_group][] = (object) array(
+                            'scorerId'   => $statistic->statistic_key,
+                            'assisterId' => $statistic->player_id,
+                            'value'      => (int) $statistic->statistic_value,
+                        );
+                    }
+                } else {
+                    if (!isset($statistics[$statistic->statistic_group][$statistic->statistic_key][$statistic->player_id])) {
+                        $statistics[$statistic->statistic_group][$statistic->statistic_key][$statistic->player_id] = array();
+                    }
+                    $statistics[$statistic->statistic_group][$statistic->statistic_key][$statistic->player_id] = (int) $statistic->statistic_value;
+                }
+            }
+        }
+
+        return $statistics;
+    }
+
+    /**
+     * Fetch all Player Goal Statistics
+     * @param  string $statisticGroup    Statistic Type
+     * @param  int $playerId           Player ID
+     * @param  string $season          Season of Statistics
+     * @param  string $type            Type of Statistics
+     * @return array                   Returned Statistics
+     */
     public function fetchAllByGroup($statisticGroup, $playerId, $season, $type)
     {
         $this->db->select('*');

@@ -59,6 +59,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="<?php echo site_url("club-statistics/view"); ?>">Club Statistics</a></li>
                                 <li><a href="<?php echo site_url("player-statistics/view"); ?>">Player Statistics</a></li>
+                                <li><a href="<?php echo site_url("player-goal-statistics/view"); ?>">Player Goal Statistics</a></li>
                                 <li><a href="<?php echo site_url("fantasy-football/view"); ?>">Fantasy Football</a></li>
                                 <li><a href="<?php echo site_url("head-to-head/view"); ?>">Head to Head</a></li>
                                 <?php
@@ -81,6 +82,7 @@
                                         <li><a href="<?php echo site_url("match/index/season/{$menuSeason}"); ?>">Fixtures &amp; Results</a></li>
                                         <li><a href="<?php echo site_url("club-statistics/view/season/{$menuSeason}"); ?>">Club Statistics</a></li>
                                         <li><a href="<?php echo site_url("player-statistics/view/season/{$menuSeason}"); ?>">Player Statistics</a></li>
+                                        <li><a href="<?php echo site_url("player-goal-statistics/view/season/{$menuSeason}"); ?>">Player Goal Statistics</a></li>
                                         <li><a href="<?php echo site_url("fantasy-football/view/season/{$menuSeason}"); ?>">Fantasy Football</a></li>
                                         <?php
                                         $menuLeagues = $this->League_model->fetchAll(array(
