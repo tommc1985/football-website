@@ -1,10 +1,14 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
- * Chart Helper
+ * Chart
  */
-class Chart_helper
+class Chart
 {
+    public $fillColorOpacity = 0.5;
+    public $strokeColorOpacity = 1;
+    public $pointColorOpacity = 1;
+
     /**
      * Constructor
      */
@@ -30,15 +34,15 @@ class Chart_helper
      * @param  array $options  Chart Options
      * @return NULL
      */
-    public static function buildChart($id, $type, $data, $options = array())
+    public function buildChart($id, $type, $data, $options = array())
     { ?>
         <canvas id="<?php echo $id; ?>" width="600" height="400"></canvas>
         <script type="text/javascript">
         var chartObject = {
             id : '<?php echo $id; ?>',
             type : '<?php echo $type; ?>',
-            data : <?php echo self::buildData($data, $type); ?>,
-            options : <?php echo self::buildOptions($options); ?>
+            data : <?php echo $this->buildData($data, $type); ?>,
+            options : <?php echo $this->buildOptions($options); ?>
         };
 
         charts['<?php echo $id; ?>'] = chartObject;
@@ -52,16 +56,16 @@ class Chart_helper
      * @param  string $type  Type of Chart (Bar, Line, etc)
      * @return string        Formatted data
      */
-    public static function buildData($data, $type)
+    public function buildData($data, $type)
     {
         switch ($type) {
             case 'polar':
             case 'pie':
             case 'doughnut':
-                return self::buildSingleData($data);
+                return $this->buildSingleData($data);
         }
 
-        return self::buildMultiData($data);
+        return $this->buildMultiData($data);
     }
 
     /**
@@ -69,12 +73,12 @@ class Chart_helper
      * @param  array $data   Chart Data
      * @return string        Formatted data
      */
-    public static function buildSingleData($data)
+    public function buildSingleData($data)
     {
         $dataset = array();
 
         foreach ($data['datasets'][0]['dataset'] as $index => $value) {
-            $colour = self::fetchColour($index);
+            $colour = $this->fetchColour($index);
 
             $dataset[] = "{
                 value : {$value},
@@ -92,12 +96,12 @@ class Chart_helper
      * @param  array $data   Chart Data
      * @return string        Formatted data
      */
-    public static function buildMultiData($data)
+    public function buildMultiData($data)
     {
         return "{
-                labels : [" . self::buildLabels($data['labels']) . "],
+                labels : [" . $this->buildLabels($data['labels']) . "],
                 datasets : [
-                    " . self::buildDatasets($data['datasets']) . "
+                    " . $this->buildDatasets($data['datasets']) . "
                 ]
             }";
     }
@@ -107,7 +111,7 @@ class Chart_helper
      * @param  array $labels  Labels
      * @return string        Formatted data
      */
-    public static function buildLabels($labels)
+    public function buildLabels($labels)
     {
         if (!$labels) {
             return '';
@@ -126,7 +130,7 @@ class Chart_helper
      * @param  array $datasets  Datasets
      * @return string           Formatted data
      */
-    public static function buildDatasets($datasets)
+    public function buildDatasets($datasets)
     {
         if (!$datasets) {
             return '';
@@ -134,7 +138,7 @@ class Chart_helper
 
         $processedDatasets = array();
         foreach ($datasets as $index => $dataset) {
-            $processedDatasets[] = self::buildDataset($dataset, $index);
+            $processedDatasets[] = $this->buildDataset($dataset, $index);
         }
 
         return implode(",\r\n", $processedDatasets);
@@ -146,9 +150,9 @@ class Chart_helper
      * @param  int $index      Index
      * @return string          Formatted data
      */
-    public static function buildDataset($dataset, $index)
+    public function buildDataset($dataset, $index)
     {
-        $colour = self::fetchColour($index);
+        $colour = $this->fetchColour($index);
 
         return "{
             legend : \"" . (isset($dataset['legend']) ? htmlentities($dataset['legend']) : '') . "\",
@@ -165,7 +169,7 @@ class Chart_helper
      * @param  array $options  Chart Options
      * @return string          Formatted data
      */
-    public static function buildOptions($options)
+    public function buildOptions($options)
     {
         $data = array();
 
@@ -188,71 +192,71 @@ class Chart_helper
      * @param  int $index    The ID of the Colour
      * @return array         Specified Colour Details
      */
-    public static function fetchColour($index)
+    public function fetchColour($index)
     {
         $colours = array(
             array(
-                'fillColor'        => "rgba(151,187,205,0.5)",
+                'fillColor'        => "rgba(151,187,205,{$this->fillColorOpacity})",
                 'strokeColor'      => "rgba(151,187,205,1)",
                 'pointColor'       => "rgba(151,187,205,1)",
                 'pointStrokeColor' => "#fff",
             ),
             array(
-                'fillColor'        => "rgba(220,220,220,0.5)",
+                'fillColor'        => "rgba(220,220,220,{$this->fillColorOpacity})",
                 'strokeColor'      => "rgba(220,220,220,1)",
                 'pointColor'       => "rgba(220,220,220,1)",
                 'pointStrokeColor' => "#fff",
             ),
             array(
-                'fillColor'        => "rgba(215,44,40,0.5)",
+                'fillColor'        => "rgba(215,44,40,{$this->fillColorOpacity})",
                 'strokeColor'      => "rgba(215,44,40,1)",
                 'pointColor'       => "rgba(215,44,40,1)",
                 'pointStrokeColor' => "#fff",
             ),
             array(
-                'fillColor'        => "rgba(100,230,100,0.5)",
+                'fillColor'        => "rgba(100,230,100,{$this->fillColorOpacity})",
                 'strokeColor'      => "rgba(100,230,100,1)",
                 'pointColor'       => "rgba(100,230,100,1)",
                 'pointStrokeColor' => "#fff",
             ),
             array(
-                'fillColor'        => "rgba(239,190,0,0.5)",
+                'fillColor'        => "rgba(239,190,0,{$this->fillColorOpacity})",
                 'strokeColor'      => "rgba(239,190,0,1)",
                 'pointColor'       => "rgba(239,190,0,1)",
                 'pointStrokeColor' => "#fff",
             ),
             array(
-                'fillColor'        => "rgba(205,151,187,0.5)",
+                'fillColor'        => "rgba(205,151,187,{$this->fillColorOpacity})",
                 'strokeColor'      => "rgba(205,151,187,1)",
                 'pointColor'       => "rgba(205,151,187,1)",
                 'pointStrokeColor' => "#fff",
             ),
             array(
-                'fillColor'        => "rgba(239,87,0,0.5)",
+                'fillColor'        => "rgba(239,87,0,{$this->fillColorOpacity})",
                 'strokeColor'      => "rgba(239,87,0,1)",
                 'pointColor'       => "rgba(239,87,0,1)",
                 'pointStrokeColor' => "#fff",
             ),
             array(
-                'fillColor'        => "rgba(93,92,203,0.5)",
+                'fillColor'        => "rgba(93,92,203,{$this->fillColorOpacity})",
                 'strokeColor'      => "rgba(93,92,203,1)",
                 'pointColor'       => "rgba(93,92,203,1)",
                 'pointStrokeColor' => "#fff",
             ),
             array(
-                'fillColor'        => "rgba(40,40,40,0.5)",
+                'fillColor'        => "rgba(40,40,40,{$this->fillColorOpacity})",
                 'strokeColor'      => "rgba(40,40,40,1)",
                 'pointColor'       => "rgba(40,40,40,1)",
                 'pointStrokeColor' => "#fff",
             ),
             array(
-                'fillColor'        => "rgba(50,115,61,0.5)",
+                'fillColor'        => "rgba(50,115,61,{$this->fillColorOpacity})",
                 'strokeColor'      => "rgba(50,115,61,1)",
                 'pointColor'       => "rgba(50,115,61,1)",
                 'pointStrokeColor' => "#fff",
             ),
             array(
-                'fillColor'        => "rgba(125,125,125,0.5)",
+                'fillColor'        => "rgba(125,125,125,{$this->fillColorOpacity})",
                 'strokeColor'      => "rgba(125,125,125,1)",
                 'pointColor'       => "rgba(125,125,125,1)",
                 'pointStrokeColor' => "#fff",

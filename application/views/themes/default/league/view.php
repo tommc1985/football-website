@@ -145,7 +145,7 @@ $submit = array(
                 <h4><?php echo sprintf($this->lang->line('league_as_of'), $dateUntil != 'overall' ? Utility_helper::shortDate($dateUntil) : Utility_helper::shortDate(time())); ?></h4>
                 <?php
                 } ?>
-                <?php Chart_helper::init(); ?>
+                <?php Chart::init(); ?>
 <?php
 $positionProgressChart = array(
     'id'        => 'position-progress',
@@ -158,7 +158,8 @@ $positionProgressChart = array(
         'scaleStepWidth'  => -1,
     ),
 );
-Chart_helper::buildChart($positionProgressChart['id'], $positionProgressChart['chartType'], $positionProgressChart['data'], $positionProgressChart['options']); ?>
+$chart = new Chart();
+$chart->buildChart($positionProgressChart['id'], $positionProgressChart['chartType'], $positionProgressChart['data'], $positionProgressChart['options']); ?>
                     </div>
                 </div>
             </div>

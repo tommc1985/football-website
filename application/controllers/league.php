@@ -22,7 +22,8 @@ class League extends Frontend_Controller {
         $this->lang->load('league_match');
         $this->lang->load('league_statistics');
         $this->lang->load('match');
-        $this->load->helper(array('chart', 'league', 'league_match', 'league_statistics', 'competition', 'competition_stage', 'form', 'goal', 'match', 'opposition', 'player', 'url', 'utility'));
+        $this->load->helper(array('league', 'league_match', 'league_statistics', 'competition', 'competition_stage', 'form', 'goal', 'match', 'opposition', 'player', 'url', 'utility'));
+        $this->load->library('chart');
 
 
         Assets::addJs('assets/js/chartjs/Chart.min.js');

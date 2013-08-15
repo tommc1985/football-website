@@ -2,7 +2,7 @@
 
 <?php
 
-Chart_helper::init();
+Chart::init();
 
 $data = array(
     'id' => 'testing-chart',
@@ -30,18 +30,19 @@ $data = array(
     <div class="span8">
 <?php
 
-$data = Chart_helper::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['by_assister']);
+$data = Chart::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['by_assister']);
 $byAssister = array(
     'id' => 'by_assister',
     'chartType' => 'bar',
     'data' => $data,
     'options' => array(
         'scaleOverride' => 'true',
-        'scaleSteps' => Chart_helper::scaleSteps($data['maxValue']),
-        'scaleStepWidth' => Chart_helper::scaleWidth($data['maxValue']),
+        'scaleSteps' => Chart::scaleSteps($data['maxValue']),
+        'scaleStepWidth' => Chart::scaleWidth($data['maxValue']),
     ),
 );
-Chart_helper::buildChart($byAssister['id'], $byAssister['chartType'], $byAssister['data'], $byAssister['options']); ?>
+$chart = new Chart();
+$chart->buildChart($byAssister['id'], $byAssister['chartType'], $byAssister['data'], $byAssister['options']); ?>
     </div>
     <div class="span4">
         <table class="table width-100-percent table-striped table-condensed">
@@ -69,14 +70,15 @@ Chart_helper::buildChart($byAssister['id'], $byAssister['chartType'], $byAssiste
 <div class="row-fluid">
     <div class="span8">
 <?php
-$data = Chart_helper::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['by_goal_type']);
+$data = Chart::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['by_goal_type']);
 $byTypeChart = array(
     'id' => 'by-goal-type',
     'chartType' => 'radar',
     'data' => $data,
     'options' => array(),
 );
-Chart_helper::buildChart($byTypeChart['id'], $byTypeChart['chartType'], $byTypeChart['data'], $byTypeChart['options']); ?>
+$chart = new Chart();
+$chart->buildChart($byTypeChart['id'], $byTypeChart['chartType'], $byTypeChart['data'], $byTypeChart['options']); ?>
     </div>
     <div class="span4">
         <table class="table width-100-percent table-striped table-condensed">
@@ -104,14 +106,15 @@ Chart_helper::buildChart($byTypeChart['id'], $byTypeChart['chartType'], $byTypeC
 <div class="row-fluid">
     <div class="span8">
 <?php
-$data = Chart_helper::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['by_body_part']);
+$data = Chart::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['by_body_part']);
 $byBodyPart = array(
     'id' => 'by-body-part',
     'chartType' => 'doughnut',
     'data' => $data,
     'options' => array(),
 );
-Chart_helper::buildChart($byBodyPart['id'], $byBodyPart['chartType'], $byBodyPart['data'], $byBodyPart['options']); ?>
+$chart = new Chart();
+$chart->buildChart($byBodyPart['id'], $byBodyPart['chartType'], $byBodyPart['data'], $byBodyPart['options']); ?>
     </div>
     <div class="span4">
         <table class="table width-100-percent table-striped table-condensed">
@@ -125,7 +128,7 @@ Chart_helper::buildChart($byBodyPart['id'], $byBodyPart['chartType'], $byBodyPar
                 <?php
                 $i = 0;
                 foreach ($player->goalStatisticsBySeason['by_body_part'] as $dataRow) {
-                    $colour = Chart_helper::fetchColour($i); ?>
+                    $colour = Chart::fetchColour($i); ?>
                 <tr>
                     <td><span class="legend-identifier" style="border-color: <?php echo $colour['strokeColor']; ?>; background-color: <?php echo $colour['fillColor']; ?>"></span> <?php echo $dataRow['label']; ?></td>
                     <td class="text-align-center"><?php echo $dataRow['value']; ?></td>
@@ -142,14 +145,15 @@ Chart_helper::buildChart($byBodyPart['id'], $byBodyPart['chartType'], $byBodyPar
 <div class="row-fluid">
     <div class="span8">
 <?php
-$data = Chart_helper::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['by_distance']);
+$data = Chart::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['by_distance']);
 $byDistance = array(
     'id' => 'by-distance',
     'chartType' => 'pie',
     'data' => $data,
     'options' => array(),
 );
-Chart_helper::buildChart($byDistance['id'], $byDistance['chartType'], $byDistance['data'], $byDistance['options']); ?>
+$chart = new Chart();
+$chart->buildChart($byDistance['id'], $byDistance['chartType'], $byDistance['data'], $byDistance['options']); ?>
     </div>
     <div class="span4">
         <table class="table width-100-percent table-striped table-condensed">
@@ -163,7 +167,7 @@ Chart_helper::buildChart($byDistance['id'], $byDistance['chartType'], $byDistanc
                 <?php
                 $i = 0;
                 foreach ($player->goalStatisticsBySeason['by_distance'] as $dataRow) {
-                    $colour = Chart_helper::fetchColour($i); ?>
+                    $colour = Chart::fetchColour($i); ?>
                 <tr>
                     <td><span class="legend-identifier" style="border-color: <?php echo $colour['strokeColor']; ?>; background-color: <?php echo $colour['fillColor']; ?>"></span> <?php echo $dataRow['label']; ?></td>
                     <td class="text-align-center"><?php echo $dataRow['value']; ?></td>
@@ -180,18 +184,19 @@ Chart_helper::buildChart($byDistance['id'], $byDistance['chartType'], $byDistanc
 <div class="row-fluid">
     <div class="span8">
 <?php
-$data = Chart_helper::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['by_minute_interval']);
+$data = Chart::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['by_minute_interval']);
 $byMinuteInterval = array(
     'id' => 'by-minute-interval',
     'chartType' => 'bar',
     'data' => $data,
     'options' => array(
         'scaleOverride' => 'true',
-        'scaleSteps' => Chart_helper::scaleSteps($data['maxValue']),
-        'scaleStepWidth' => Chart_helper::scaleWidth($data['maxValue']),
+        'scaleSteps' => Chart::scaleSteps($data['maxValue']),
+        'scaleStepWidth' => Chart::scaleWidth($data['maxValue']),
     ),
 );
-Chart_helper::buildChart($byMinuteInterval['id'], $byMinuteInterval['chartType'], $byMinuteInterval['data'], $byMinuteInterval['options']); ?>
+$chart = new Chart();
+$chart->buildChart($byMinuteInterval['id'], $byMinuteInterval['chartType'], $byMinuteInterval['data'], $byMinuteInterval['options']); ?>
     </div>
     <div class="span4">
         <table class="table width-100-percent table-striped table-condensed">
@@ -219,18 +224,19 @@ Chart_helper::buildChart($byMinuteInterval['id'], $byMinuteInterval['chartType']
 <div class="row-fluid">
     <div class="span8">
 <?php
-$data = Chart_helper::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['by_scorer']);
+$data = Chart::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['by_scorer']);
 $byScorer = array(
     'id' => 'by-scorer',
     'chartType' => 'bar',
     'data' => $data,
     'options' => array(
         'scaleOverride' => 'true',
-        'scaleSteps' => Chart_helper::scaleSteps($data['maxValue']),
-        'scaleStepWidth' => Chart_helper::scaleWidth($data['maxValue']),
+        'scaleSteps' => Chart::scaleSteps($data['maxValue']),
+        'scaleStepWidth' => Chart::scaleWidth($data['maxValue']),
     ),
 );
-Chart_helper::buildChart($byScorer['id'], $byScorer['chartType'], $byScorer['data'], $byScorer['options']); ?>
+$chart = new Chart();
+$chart->buildChart($byScorer['id'], $byScorer['chartType'], $byScorer['data'], $byScorer['options']); ?>
     </div>
     <div class="span4">
         <table class="table width-100-percent table-striped table-condensed">
@@ -258,14 +264,15 @@ Chart_helper::buildChart($byScorer['id'], $byScorer['chartType'], $byScorer['dat
 <div class="row-fluid">
     <div class="span8">
 <?php
-$data = Chart_helper::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['assist_by_goal_type']);
+$data = Chart::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['assist_by_goal_type']);
 $byTypeChart = array(
     'id' => 'assist-by-goal-type',
     'chartType' => 'radar',
     'data' => $data,
     'options' => array(),
 );
-Chart_helper::buildChart($byTypeChart['id'], $byTypeChart['chartType'], $byTypeChart['data'], $byTypeChart['options']); ?>
+$chart = new Chart();
+$chart->buildChart($byTypeChart['id'], $byTypeChart['chartType'], $byTypeChart['data'], $byTypeChart['options']); ?>
     </div>
     <div class="span4">
         <table class="table width-100-percent table-striped table-condensed">
@@ -293,14 +300,15 @@ Chart_helper::buildChart($byTypeChart['id'], $byTypeChart['chartType'], $byTypeC
 <div class="row-fluid">
     <div class="span8">
 <?php
-$data = Chart_helper::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['assist_by_body_part']);
+$data = Chart::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['assist_by_body_part']);
 $byBodyPart = array(
     'id' => 'assist-by-body-part',
     'chartType' => 'doughnut',
     'data' => $data,
     'options' => array(),
 );
-Chart_helper::buildChart($byBodyPart['id'], $byBodyPart['chartType'], $byBodyPart['data'], $byBodyPart['options']); ?>
+$chart = new Chart();
+$chart->buildChart($byBodyPart['id'], $byBodyPart['chartType'], $byBodyPart['data'], $byBodyPart['options']); ?>
     </div>
     <div class="span4">
         <table class="table width-100-percent table-striped table-condensed">
@@ -314,7 +322,7 @@ Chart_helper::buildChart($byBodyPart['id'], $byBodyPart['chartType'], $byBodyPar
                 <?php
                 $i = 0;
                 foreach ($player->goalStatisticsBySeason['assist_by_body_part'] as $dataRow) {
-                    $colour = Chart_helper::fetchColour($i); ?>
+                    $colour = Chart::fetchColour($i); ?>
                 <tr>
                     <td><span class="legend-identifier" style="border-color: <?php echo $colour['strokeColor']; ?>; background-color: <?php echo $colour['fillColor']; ?>"></span> <?php echo $dataRow['label']; ?></td>
                     <td class="text-align-center"><?php echo $dataRow['value']; ?></td>
@@ -331,14 +339,15 @@ Chart_helper::buildChart($byBodyPart['id'], $byBodyPart['chartType'], $byBodyPar
 <div class="row-fluid">
     <div class="span8">
 <?php
-$data = Chart_helper::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['assist_by_distance']);
+$data = Chart::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['assist_by_distance']);
 $assistByDistance = array(
     'id' => 'assist-by-distance',
     'chartType' => 'pie',
     'data' => $data,
     'options' => array(),
 );
-Chart_helper::buildChart($assistByDistance['id'], $assistByDistance['chartType'], $assistByDistance['data'], $assistByDistance['options']); ?>
+$chart = new Chart();
+$chart->buildChart($assistByDistance['id'], $assistByDistance['chartType'], $assistByDistance['data'], $assistByDistance['options']); ?>
     </div>
     <div class="span4">
         <table class="table width-100-percent table-striped table-condensed">
@@ -352,7 +361,7 @@ Chart_helper::buildChart($assistByDistance['id'], $assistByDistance['chartType']
                 <?php
                 $i = 0;
                 foreach ($player->goalStatisticsBySeason['assist_by_distance'] as $dataRow) {
-                    $colour = Chart_helper::fetchColour($i); ?>
+                    $colour = Chart::fetchColour($i); ?>
                 <tr>
                     <td><span class="legend-identifier" style="border-color: <?php echo $colour['strokeColor']; ?>; background-color: <?php echo $colour['fillColor']; ?>"></span> <?php echo $dataRow['label']; ?></td>
                     <td class="text-align-center"><?php echo $dataRow['value']; ?></td>
@@ -369,18 +378,19 @@ Chart_helper::buildChart($assistByDistance['id'], $assistByDistance['chartType']
 <div class="row-fluid">
     <div class="span8">
 <?php
-$data = Chart_helper::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['assist_by_minute_interval']);
+$data = Chart::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['assist_by_minute_interval']);
 $byMinuteInterval = array(
     'id' => 'assist-by-minute-interval',
     'chartType' => 'bar',
     'data' => $data,
     'options' => array(
         'scaleOverride' => 'true',
-        'scaleSteps' => Chart_helper::scaleSteps($data['maxValue']),
-        'scaleStepWidth' => Chart_helper::scaleWidth($data['maxValue']),
+        'scaleSteps' => Chart::scaleSteps($data['maxValue']),
+        'scaleStepWidth' => Chart::scaleWidth($data['maxValue']),
     ),
 );
-Chart_helper::buildChart($byMinuteInterval['id'], $byMinuteInterval['chartType'], $byMinuteInterval['data'], $byMinuteInterval['options']); ?>
+$chart = new Chart();
+$chart->buildChart($byMinuteInterval['id'], $byMinuteInterval['chartType'], $byMinuteInterval['data'], $byMinuteInterval['options']); ?>
     </div>
     <div class="span4">
         <table class="table width-100-percent table-striped table-condensed">

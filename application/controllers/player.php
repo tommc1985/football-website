@@ -16,7 +16,8 @@ class Player extends Frontend_Controller {
         $this->load->model('Competition_model');
         $this->load->model('Season_model');
         $this->lang->load('player');
-        $this->load->helper(array('chart', 'competition', 'nationality', 'player', 'position', 'url', 'utility'));
+        $this->load->helper(array('competition', 'nationality', 'player', 'position', 'url', 'utility'));
+        $this->load->library('chart');
 
         Assets::addCss('assets/modules/player/css/player.css');
         Assets::addJs('assets/modules/player/js/player.js');
