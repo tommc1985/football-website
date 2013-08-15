@@ -151,7 +151,7 @@ class Chart_helper
         $colour = self::fetchColour($index);
 
         return "{
-            legend : '" . htmlentities(isset($dataset['legend']) ? $dataset['legend'] : '') . "',
+            legend : \"" . (isset($dataset['legend']) ? htmlentities($dataset['legend']) : '') . "\",
             fillColor : '{$colour['fillColor']}',
             strokeColor : '{$colour['strokeColor']}',
             pointColor : '{$colour['pointColor']}',
@@ -271,8 +271,9 @@ class Chart_helper
     public static function buildDatasetsFromLabelValueArray($data)
     {
         $labels = array();
-        $dataset = array();
+        $datasets = array();
 
+        $dataset = array();
         $maxValue = 0;
         foreach ($data as $row) {
             $labels[]  = $row['label'];
@@ -283,12 +284,13 @@ class Chart_helper
             }
         }
 
+        $datasets[] = array(
+            'dataset' => $dataset,
+        );
+
         return array(
-            'labels' => $labels,
-            'datasets' => array(array(
-                'legend' => 'Thomas is great',
-                'dataset' => $dataset),
-            ),
+            'labels'   => $labels,
+            'datasets' => $datasets,
             'maxValue' => $maxValue,
         );
     }

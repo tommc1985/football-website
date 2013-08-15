@@ -43,6 +43,7 @@ $lang['league_frontend_meta_description'] = '%1$s, featuring information includi
 $lang['league_title']                     = 'League';
 $lang['league_league_table']              = 'League Table';
 $lang['league_alternative_league_table']  = 'Alternative League Table';
+$lang['league_position_progress']         = 'Position Progress';
 $lang['league_form']                      = 'Form';
 
 $lang['league_form']                      = 'Form';

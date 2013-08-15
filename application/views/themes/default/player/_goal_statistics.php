@@ -71,7 +71,7 @@ Chart_helper::buildChart($byAssister['id'], $byAssister['chartType'], $byAssiste
 <?php
 $data = Chart_helper::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['by_goal_type']);
 $byTypeChart = array(
-    'id' => 'by_goal-type',
+    'id' => 'by-goal-type',
     'chartType' => 'radar',
     'data' => $data,
     'options' => array(),
@@ -106,7 +106,7 @@ Chart_helper::buildChart($byTypeChart['id'], $byTypeChart['chartType'], $byTypeC
 <?php
 $data = Chart_helper::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['by_body_part']);
 $byBodyPart = array(
-    'id' => 'by_body_part',
+    'id' => 'by-body-part',
     'chartType' => 'doughnut',
     'data' => $data,
     'options' => array(),
@@ -144,7 +144,7 @@ Chart_helper::buildChart($byBodyPart['id'], $byBodyPart['chartType'], $byBodyPar
 <?php
 $data = Chart_helper::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['by_distance']);
 $byDistance = array(
-    'id' => 'by_distance',
+    'id' => 'by-distance',
     'chartType' => 'pie',
     'data' => $data,
     'options' => array(),
@@ -182,7 +182,7 @@ Chart_helper::buildChart($byDistance['id'], $byDistance['chartType'], $byDistanc
 <?php
 $data = Chart_helper::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['by_minute_interval']);
 $byMinuteInterval = array(
-    'id' => 'by_minute_interval',
+    'id' => 'by-minute-interval',
     'chartType' => 'bar',
     'data' => $data,
     'options' => array(
@@ -221,7 +221,7 @@ Chart_helper::buildChart($byMinuteInterval['id'], $byMinuteInterval['chartType']
 <?php
 $data = Chart_helper::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['by_scorer']);
 $byScorer = array(
-    'id' => 'by_scorer',
+    'id' => 'by-scorer',
     'chartType' => 'bar',
     'data' => $data,
     'options' => array(
@@ -260,7 +260,7 @@ Chart_helper::buildChart($byScorer['id'], $byScorer['chartType'], $byScorer['dat
 <?php
 $data = Chart_helper::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['assist_by_goal_type']);
 $byTypeChart = array(
-    'id' => 'assist_by_goal-type',
+    'id' => 'assist-by-goal-type',
     'chartType' => 'radar',
     'data' => $data,
     'options' => array(),
@@ -295,7 +295,7 @@ Chart_helper::buildChart($byTypeChart['id'], $byTypeChart['chartType'], $byTypeC
 <?php
 $data = Chart_helper::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['assist_by_body_part']);
 $byBodyPart = array(
-    'id' => 'assist_by_body_part',
+    'id' => 'assist-by-body-part',
     'chartType' => 'doughnut',
     'data' => $data,
     'options' => array(),
@@ -333,7 +333,7 @@ Chart_helper::buildChart($byBodyPart['id'], $byBodyPart['chartType'], $byBodyPar
 <?php
 $data = Chart_helper::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['assist_by_distance']);
 $assistByDistance = array(
-    'id' => 'assist_by_distance',
+    'id' => 'assist-by-distance',
     'chartType' => 'pie',
     'data' => $data,
     'options' => array(),
@@ -371,7 +371,7 @@ Chart_helper::buildChart($assistByDistance['id'], $assistByDistance['chartType']
 <?php
 $data = Chart_helper::buildDatasetsFromLabelValueArray($player->goalStatisticsBySeason['assist_by_minute_interval']);
 $byMinuteInterval = array(
-    'id' => 'assist_by_minute_interval',
+    'id' => 'assist-by-minute-interval',
     'chartType' => 'bar',
     'data' => $data,
     'options' => array(

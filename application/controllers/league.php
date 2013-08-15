@@ -22,8 +22,11 @@ class League extends Frontend_Controller {
         $this->lang->load('league_match');
         $this->lang->load('league_statistics');
         $this->lang->load('match');
-        $this->load->helper(array('league', 'league_match', 'league_statistics', 'competition', 'competition_stage', 'form', 'goal', 'match', 'opposition', 'player', 'url', 'utility'));
+        $this->load->helper(array('chart', 'league', 'league_match', 'league_statistics', 'competition', 'competition_stage', 'form', 'goal', 'match', 'opposition', 'player', 'url', 'utility'));
 
+
+        Assets::addJs('assets/js/chartjs/Chart.min.js');
+        Assets::addJs('assets/js/charts.js');
         Assets::addJs('assets/modules/league/js/league.js');
     }
 
@@ -100,6 +103,7 @@ class League extends Frontend_Controller {
 
         $standings        = $this->League_Collated_Results_model->fetchStandings($id, $dateUntil, $type);
         $alternativeTable = $this->League_Collated_Results_model->fetchAlternativeTable($id, $dateUntil, $type);
+        $positionProgress = $this->League_model->fetchPositionProgress($id, $dateUntil, $type);
 
         $formTeams = $this->League_Collated_Results_model->fetchForm($standings, $formMatchCount);
 
@@ -114,6 +118,7 @@ class League extends Frontend_Controller {
         $this->templateData['metaDescription']  = vsprintf($this->lang->line('league_frontend_meta_description'), $metaData);
         $this->templateData['standings']        = $standings;
         $this->templateData['alternativeTable'] = $alternativeTable;
+        $this->templateData['positionProgress'] = $positionProgress;
         $this->templateData['formTeams']        = $formTeams;
         $this->templateData['formMatchCount']   = $formMatchCount;
         $this->templateData['id']               = $id;
