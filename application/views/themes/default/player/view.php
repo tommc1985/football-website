@@ -5,40 +5,40 @@
         <h3><?php echo $this->lang->line('player_player_details'); ?></h3>
 
         <dl itemscope itemtype="http://schema.org/Person" class="dl-horizontal">
-          <dt><?php echo $this->lang->line('player_full_name'); ?>:</dt>
-          <dd itemprop="name"><?php echo Player_helper::fullNameReverse($player, false); ?></dd>
-          <dt><?php echo $this->lang->line('player_date_of_birth'); ?>:</dt>
-          <dd><?php
-          if ($player->dob) { ?>
-            <time itemprop="birthDate" datetime="<?php echo Utility_helper::formattedDate($player->dob, "c"); ?>"><?php echo Utility_helper::formattedDate($player->dob, "jS F Y"); ?></time>
-          <?php
-          } else { ?>
-            &nbsp;
-          <?php
-          } ?>
-          </dd><?php
-          if (Configuration::get('include_nationalities') === true) { ?>
-          <dt><?php echo $this->lang->line('player_nationality'); ?>:</dt>
-          <dd itemprop="nationality"><?php echo Nationality_helper::nationality($player->nationality_id); ?></dd>
-          <?php
-          } ?><?php
-          if (Configuration::get('include_genders') === true) { ?>
-          <dt><?php echo $this->lang->line('player_gender'); ?>:</dt>
-          <dd itemprop="gender"><?php echo Player_helper::gender($player); ?></dd>
-          <?php
-          } ?>
-          <dt><?php echo $this->lang->line('player_position_s'); ?>:</dt>
-          <dd><?php echo Player_helper::positionsAbbreviated($player->positions); ?></dd>
-          <dt><?php echo $this->lang->line('player_debut'); ?>:</dt>
-          <dd><?php echo isset($player->debut['overall']) ? Player_helper::debut($player->debut['overall']) : $this->lang->line('global_n_a'); ?></dd>
-          <dt><?php echo $this->lang->line('player_first_goal'); ?>:</dt>
-          <dd><?php echo isset($player->firstGoal['overall']) ? Player_helper::firstGoal($player->firstGoal['overall']) : $this->lang->line('global_n_a'); ?></dd>
-          <dt><?php echo $this->lang->line('player_time_between_debut_and_first_goal'); ?>:</dt>
-          <dd><?php echo isset($player->timeBetweenDebutAndFirstGoal['overall']) ? Player_helper::timeBetweenDebutAndFirstGoal($player->timeBetweenDebutAndFirstGoal['overall']) : $this->lang->line('global_n_a'); ?></dd>
-          <dt><?php echo $this->lang->line('player_games_between_debut_and_first_goal'); ?>:</dt>
-          <dd><?php echo isset($player->gamesBetweenDebutAndFirstGoal['overall']) ? Player_helper::gamesBetweenDebutAndFirstGoal($player->gamesBetweenDebutAndFirstGoal['overall']) : $this->lang->line('global_n_a'); ?></dd>
-          <dt><?php echo $this->lang->line('player_awards'); ?>:</dt>
-          <dd><?php echo $player->awards ? Player_helper::awards($player->awards) : $this->lang->line('global_none'); ?></dd>
+            <dt><?php echo $this->lang->line('player_full_name'); ?>:</dt>
+            <dd itemprop="name"><?php echo Player_helper::fullNameReverse($player, false); ?></dd>
+            <dt><?php echo $this->lang->line('player_date_of_birth'); ?>:</dt>
+            <dd><?php
+            if ($player->dob) { ?>
+                <time itemprop="birthDate" datetime="<?php echo Utility_helper::formattedDate($player->dob, "c"); ?>"><?php echo Utility_helper::formattedDate($player->dob, "jS F Y"); ?></time>
+            <?php
+            } else { ?>
+              &nbsp;
+            <?php
+            } ?>
+            </dd><?php
+            if (Configuration::get('include_nationalities') === true) { ?>
+                <dt><?php echo $this->lang->line('player_nationality'); ?>:</dt>
+                <dd itemprop="nationality"><?php echo Nationality_helper::nationality($player->nationality_id); ?></dd>
+            <?php
+            } ?><?php
+            if (Configuration::get('include_genders') === true) { ?>
+                <dt><?php echo $this->lang->line('player_gender'); ?>:</dt>
+                <dd itemprop="gender"><?php echo Player_helper::gender($player); ?></dd>
+            <?php
+            } ?>
+            <dt><?php echo $this->lang->line('player_position_s'); ?>:</dt>
+            <dd><?php echo Player_helper::positionsAbbreviated($player->positions); ?></dd>
+            <dt><?php echo $this->lang->line('player_debut'); ?>:</dt>
+            <dd><?php echo isset($player->debut['overall']) ? Player_helper::debut($player->debut['overall']) : $this->lang->line('global_n_a'); ?></dd>
+            <dt><?php echo $this->lang->line('player_first_goal'); ?>:</dt>
+            <dd><?php echo isset($player->firstGoal['overall']) ? Player_helper::firstGoal($player->firstGoal['overall']) : $this->lang->line('global_n_a'); ?></dd>
+            <dt><?php echo $this->lang->line('player_time_between_debut_and_first_goal'); ?>:</dt>
+            <dd><?php echo isset($player->timeBetweenDebutAndFirstGoal['overall']) ? Player_helper::timeBetweenDebutAndFirstGoal($player->timeBetweenDebutAndFirstGoal['overall']) : $this->lang->line('global_n_a'); ?></dd>
+            <dt><?php echo $this->lang->line('player_games_between_debut_and_first_goal'); ?>:</dt>
+            <dd><?php echo isset($player->gamesBetweenDebutAndFirstGoal['overall']) ? Player_helper::gamesBetweenDebutAndFirstGoal($player->gamesBetweenDebutAndFirstGoal['overall']) : $this->lang->line('global_n_a'); ?></dd>
+            <dt><?php echo $this->lang->line('player_awards'); ?>:</dt>
+            <dd><?php echo $player->awards ? Player_helper::awards($player->awards) : $this->lang->line('global_none'); ?></dd>
         </dl>
     </div>
 </div>
