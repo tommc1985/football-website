@@ -19,6 +19,17 @@ class Content_model extends Base_Frontend_Model {
     }
 
     /**
+     * Fetch latest content
+     * @param  string $type          Type of Content (page, article or news)
+     * @param  int|false $limit      Number of instances to return
+     * @return array                 Returned instances of content
+     */
+    public function fetchLatest($type, $limit = 5)
+    {
+        return $this->fetchAll(array('type' => $type), $limit, false, $this->getOrderBy(''), $this->getOrderBy('desc'));
+    }
+
+    /**
      * Return string of fields to order data by
      * @param  string $orderBy Fields passed
      * @return string          Processed string of fields
