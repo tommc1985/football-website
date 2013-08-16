@@ -7,7 +7,8 @@
                 <?php $this->load->view('themes/default/match/_match_details.php'); ?>
             </div>
         </div>
-
+        <?php
+        if (!$match->status) { ?>
         <div class="row-fluid">
             <div class="span6">
                 <h3><?php echo $this->lang->line('match_goals'); ?></h3>
@@ -138,5 +139,7 @@
                 } ?>
             </div>
         </div>
+        <?php
+        } ?>
     </div>
 </div>
