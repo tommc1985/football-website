@@ -1,5 +1,5 @@
         <div class="row-fluid">
-            <div class="span5 offset1">
+            <div class="span6 offset1">
                 <h4><?php echo $this->lang->line('fantasy_football_formation'); ?> (<?php echo $formationInfo['name']; ?>)</h4>
                 <div id="stadium">
                     <div id="pitch" class="formation-<?php echo $formation; ?>">
@@ -34,7 +34,7 @@
                 </div>
             </div>
 
-            <div class="span6">
+            <div class="span5">
                 <h4><?php echo $this->lang->line('fantasy_football_lineup'); ?> (<?php echo $formationInfo['name']; ?>)</h4>
                 <table class="width-100-percent table table-striped table-condensed">
                     <thead>
