@@ -113,7 +113,7 @@ class Auth extends CI_Controller
 	 *
 	 * @return void
 	 */
-	function register()
+	/*function register()
 	{
 		if ($this->tank_auth->is_logged_in()) {									// logged in
 			redirect('');
@@ -190,7 +190,7 @@ class Auth extends CI_Controller
 			$data['use_recaptcha'] = $use_recaptcha;
 			$this->load->view('auth/register_form', $data);
 		}
-	}
+	}*/
 
 	/**
 	 * Send activation email again, to the same or new email address
