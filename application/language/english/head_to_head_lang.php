@@ -7,6 +7,15 @@ $lang['head_to_head_frontend_meta_description_selected_team'] = 'Head to Head St
 
 $lang['head_to_head_title']                                   = 'Head to Head';
 
+$lang['head_to_head_explanation']                             = 'Details of the Head to Head record against the specified team, including a breakdown of home and away records, the list of all matches between the two teams, as well as a list of %s players that have scored, assisted or received red/yellow cards against the specified team.';
+
+$lang['head_to_head_accumulated_statistics_explanation']      = 'A breakdown of wins, draw, losses etc against %s, further broken down into matches played at home, away and at a neutral venue.';
+$lang['head_to_head_matches_explanation']                     = 'All matches that have been played between %s and %s.';
+$lang['head_to_head_top_scorers_explanation']                 = 'The top scorers for %s in matches against %s.';
+$lang['head_to_head_top_assisters_explanation']               = 'The top assisters for %s in matches against %s.';
+$lang['head_to_head_top_point_gainers_explanation']           = 'The list of %s players that have earned the team points by scoring or assisting a goal in matches against %s.';
+$lang['head_to_head_worst_discipline_explanation']            = 'The list of %s players that have been issued red or yellow cards in matches against %s.';
+
 $lang['head_to_head_show']                                    = 'Show';
 
 $lang['head_to_head_accumulated_statistics']                  = 'Accumulated Statistics';
@@ -20,7 +29,7 @@ $lang['head_to_head_no_statistics']                           = 'No matches have
 $lang['head_to_head_no_scorers']                              = 'No goals have been scored against %s';
 $lang['head_to_head_no_assisters']                            = 'No goals have been assisted against %s';
 $lang['head_to_head_no_worst_discipline']                     = 'No red or yellow cards have been issued against %s';
-$lang['head_to_head_no_top_point_gainers']                    = 'No points have been gained by a Player scoring against %s';
+$lang['head_to_head_no_top_point_gainers']                    = 'No points have been gained by a Player scoring or assisting a goal against %s';
 
 $lang['head_to_head_next_opponent']                           = 'The Head to Head details against %s are displayed as they are the next opponents of %s.';
 

@@ -1,8 +1,9 @@
 <div class="row-fluid">
     <div class="span12">
 
-<h2><?php echo $this->lang->line('head_to_head_title'); ?><?php
-echo $opposition ? ' - ' . Opposition_helper::name($opposition) : ''; ?></h2>
+        <h2><?php echo $this->lang->line('head_to_head_title'); ?><?php echo $opposition ? ' - ' . Opposition_helper::name($opposition) : ''; ?></h2>
+
+        <p><?php echo $this->lang->line('head_to_head_explanation'); ?></p>
 
         <div class="row-fluid">
             <div class="span12">

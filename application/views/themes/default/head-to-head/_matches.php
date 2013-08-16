@@ -1,4 +1,7 @@
 <h3><?php echo $this->lang->line('head_to_head_matches'); ?></h3>
+
+<p><?php echo sprintf($this->lang->line('head_to_head_matches_explanation'), Configuration::get('team_name'), Opposition_helper::name($opposition)); ?></p>
+
 <table class="no-more-tables width-100-percent table table-striped table-condensed">
     <thead>
         <tr>

@@ -1,4 +1,7 @@
 <h3><?php echo $this->lang->line('head_to_head_worst_discipline'); ?></h3>
+
+<p><?php echo sprintf($this->lang->line('head_to_head_worst_discipline_explanation'), Configuration::get('team_name'), Opposition_helper::name($opposition)); ?></p>
+
 <table class="width-100-percent table table-striped table-condensed">
     <thead>
         <tr>

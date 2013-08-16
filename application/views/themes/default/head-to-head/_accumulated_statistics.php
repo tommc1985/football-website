@@ -1,4 +1,7 @@
 <h3><?php echo $this->lang->line('head_to_head_accumulated_statistics'); ?></h3>
+
+<p><?php echo sprintf($this->lang->line('head_to_head_accumulated_statistics_explanation'), Opposition_helper::name($opposition)); ?></p>
+
 <table class="no-more-tables width-100-percent table table-striped table-condensed">
     <thead>
         <tr>
