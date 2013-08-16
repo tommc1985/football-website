@@ -90,6 +90,23 @@ class Player_helper
     }
 
     /**
+     * Return a Player's First Name
+     * @param  mixed $player    Player Object/Array
+     * @param  mixed $withLink  Wrap text in a href link
+     * @return string           The Player's First Name
+     */
+    public static function firstName($player, $withLink = true)
+    {
+        $player = self::_convertObject($player);
+
+        if ($withLink) {
+            return "<a href='" . site_url("player/view/id/{$player->id}") . "'>{$player->first_name}</a>";
+        }
+
+        return "{$player->first_name}";
+    }
+
+    /**
      * Return a Player's Gender
      * @param  mixed $player    Player Object/Array
      * @return string           The Player's Gender
