@@ -223,4 +223,28 @@ class Calendar_model extends Base_Frontend_Model {
         }
     }
 
+    /**
+     * Return string of fields to order data by
+     * @param  string $orderBy Fields passed
+     * @return string          Processed string of fields
+     */
+    public function getOrderBy($orderBy)
+    {
+        return 'start_datetime';
+    }
+
+    /**
+     * Return "asc" or "desc" depending on value passed
+     * @param  string $order Either "asc" or "desc"
+     * @return string        Either "asc" or "desc"
+     */
+    public function getOrder($order)
+    {
+        if ($order == 'asc') {
+            return 'asc';
+        }
+
+        return 'desc';
+    }
+
 }
