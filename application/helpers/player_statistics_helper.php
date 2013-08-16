@@ -19,7 +19,7 @@ class Player_Statistics_helper
     {
         $ci =& get_instance(); ?>
 
-        <h3 id="<?php echo $statisticGroup;?>" name="<?php echo $statisticGroup; ?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
+        <h3 id="<?php echo $statisticGroup;?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
         <p><?php echo $ci->lang->line("player_statistics_no_{$statisticGroup}"); ?></p>
     <?php
     }
@@ -34,7 +34,7 @@ class Player_Statistics_helper
     {
         $ci =& get_instance();?>
 
-        <h3 id="<?php echo $statisticGroup;?>" name="<?php echo $statisticGroup; ?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
+        <h3 id="<?php echo $statisticGroup;?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
         <table class="table table-striped table-condensed">
             <tbody>
         <?php
@@ -60,7 +60,7 @@ class Player_Statistics_helper
     {
         $ci =& get_instance(); ?>
 
-        <h3 id="<?php echo $statisticGroup;?>" name="<?php echo $statisticGroup; ?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
+        <h3 id="<?php echo $statisticGroup;?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
         <p><?php echo $ci->lang->line("player_statistics_{$statisticGroup}_explanation"); ?></p>
         <table class="table table-striped table-condensed">
             <tbody>
@@ -94,7 +94,7 @@ class Player_Statistics_helper
 
         $ci =& get_instance(); ?>
 
-        <h3 id="<?php echo $statisticGroup;?>" name="<?php echo $statisticGroup; ?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
+        <h3 id="<?php echo $statisticGroup;?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
         <p><?php echo $ci->lang->line("player_statistics_{$statisticGroup}_explanation"); ?></p>
         <table class="table table-striped table-condensed">
             <tbody>
@@ -127,7 +127,7 @@ class Player_Statistics_helper
 
         $ci =& get_instance(); ?>
 
-        <h3 id="<?php echo $statisticGroup;?>" name="<?php echo $statisticGroup; ?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
+        <h3 id="<?php echo $statisticGroup;?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
         <p><?php echo $ci->lang->line("player_statistics_{$statisticGroup}_explanation"); ?></p>
         <table class="table table-striped table-condensed">
             <tbody>
@@ -170,7 +170,7 @@ class Player_Statistics_helper
 
         $ci =& get_instance(); ?>
 
-        <h3 id="<?php echo $statisticGroup;?>" name="<?php echo $statisticGroup; ?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
+        <h3 id="<?php echo $statisticGroup;?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
         <p><?php echo $ci->lang->line("player_statistics_{$statisticGroup}_explanation"); ?></p>
         <table class="table table-striped table-condensed">
             <tbody>
@@ -213,7 +213,7 @@ class Player_Statistics_helper
 
         $ci =& get_instance(); ?>
 
-        <h3 id="<?php echo $statisticGroup;?>" name="<?php echo $statisticGroup; ?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
+        <h3 id="<?php echo $statisticGroup;?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
         <p><?php echo $ci->lang->line("player_statistics_{$statisticGroup}_explanation"); ?></p>
         <table class="table table-striped table-condensed">
             <tbody>
@@ -256,7 +256,7 @@ class Player_Statistics_helper
 
         $ci =& get_instance(); ?>
 
-        <h3 id="<?php echo $statisticGroup;?>" name="<?php echo $statisticGroup; ?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
+        <h3 id="<?php echo $statisticGroup;?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
         <p><?php echo $ci->lang->line("player_statistics_{$statisticGroup}_explanation"); ?></p>
         <table class="table table-striped table-condensed">
             <tbody>
@@ -299,7 +299,7 @@ class Player_Statistics_helper
 
         $ci =& get_instance(); ?>
 
-        <h3 id="<?php echo $statisticGroup;?>" name="<?php echo $statisticGroup; ?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
+        <h3 id="<?php echo $statisticGroup;?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
         <p><?php echo $ci->lang->line("player_statistics_{$statisticGroup}_explanation"); ?></p>
         <table class="table table-striped table-condensed">
             <tbody>
@@ -342,7 +342,7 @@ class Player_Statistics_helper
 
         $ci =& get_instance(); ?>
 
-        <h3 id="<?php echo $statisticGroup;?>" name="<?php echo $statisticGroup; ?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
+        <h3 id="<?php echo $statisticGroup;?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
         <p><?php echo $ci->lang->line("player_statistics_{$statisticGroup}_explanation"); ?></p>
         <table class="table table-striped table-condensed">
             <tbody>
@@ -385,7 +385,7 @@ class Player_Statistics_helper
 
         $ci =& get_instance(); ?>
 
-        <h3 id="<?php echo $statisticGroup;?>" name="<?php echo $statisticGroup; ?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
+        <h3 id="<?php echo $statisticGroup;?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
         <p><?php echo $ci->lang->line("player_statistics_{$statisticGroup}_explanation"); ?></p>
         <table class="table table-striped table-condensed">
             <tbody>
@@ -428,7 +428,7 @@ class Player_Statistics_helper
 
         $ci =& get_instance(); ?>
 
-        <h3 id="<?php echo $statisticGroup;?>" name="<?php echo $statisticGroup; ?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
+        <h3 id="<?php echo $statisticGroup;?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
         <p><?php echo $ci->lang->line("player_statistics_{$statisticGroup}_explanation"); ?></p>
         <table class="table table-striped table-condensed">
             <tbody>
@@ -471,7 +471,7 @@ class Player_Statistics_helper
 
         $ci =& get_instance(); ?>
 
-        <h3 id="<?php echo $statisticGroup;?>" name="<?php echo $statisticGroup; ?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
+        <h3 id="<?php echo $statisticGroup;?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
         <p><?php echo $ci->lang->line("player_statistics_{$statisticGroup}_explanation"); ?></p>
         <table class="table table-striped table-condensed">
             <tbody>
@@ -515,7 +515,7 @@ class Player_Statistics_helper
 
         $ci =& get_instance(); ?>
 
-        <h3 id="<?php echo $statisticGroup;?>" name="<?php echo $statisticGroup; ?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
+        <h3 id="<?php echo $statisticGroup;?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
         <p><?php echo $ci->lang->line("player_statistics_{$statisticGroup}_explanation"); ?></p>
         <table class="table table-striped table-condensed">
             <tbody>
@@ -558,7 +558,7 @@ class Player_Statistics_helper
 
         $ci =& get_instance(); ?>
 
-        <h3 id="<?php echo $statisticGroup;?>" name="<?php echo $statisticGroup; ?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
+        <h3 id="<?php echo $statisticGroup;?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
         <p><?php echo $ci->lang->line("player_statistics_{$statisticGroup}_explanation"); ?></p>
         <table class="table table-striped table-condensed">
             <tbody>
@@ -601,7 +601,7 @@ class Player_Statistics_helper
 
         $ci =& get_instance(); ?>
 
-        <h3 id="<?php echo $statisticGroup;?>" name="<?php echo $statisticGroup; ?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
+        <h3 id="<?php echo $statisticGroup;?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
         <p><?php echo $ci->lang->line("player_statistics_{$statisticGroup}_explanation"); ?></p>
         <table class="table table-striped table-condensed">
             <tbody>
@@ -641,7 +641,7 @@ class Player_Statistics_helper
 
         $ci =& get_instance(); ?>
 
-        <h3 id="<?php echo $statisticGroup;?>" name="<?php echo $statisticGroup; ?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
+        <h3 id="<?php echo $statisticGroup;?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
         <p><?php echo $ci->lang->line("player_statistics_{$statisticGroup}_explanation"); ?></p>
         <table class="table table-striped table-condensed">
             <tbody>
@@ -681,7 +681,7 @@ class Player_Statistics_helper
 
         $ci =& get_instance(); ?>
 
-        <h3 id="<?php echo $statisticGroup;?>" name="<?php echo $statisticGroup; ?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
+        <h3 id="<?php echo $statisticGroup;?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
         <p><?php echo $ci->lang->line("player_statistics_{$statisticGroup}_explanation"); ?></p>
         <table class="table table-striped table-condensed">
             <tbody>
@@ -721,7 +721,7 @@ class Player_Statistics_helper
 
         $ci =& get_instance(); ?>
 
-        <h3 id="<?php echo $statisticGroup;?>" name="<?php echo $statisticGroup; ?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
+        <h3 id="<?php echo $statisticGroup;?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
         <p><?php echo $ci->lang->line("player_statistics_{$statisticGroup}_explanation"); ?></p>
         <table class="table table-striped table-condensed">
             <tbody>
@@ -761,7 +761,7 @@ class Player_Statistics_helper
 
         $ci =& get_instance(); ?>
 
-        <h3 id="<?php echo $statisticGroup;?>" name="<?php echo $statisticGroup; ?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
+        <h3 id="<?php echo $statisticGroup;?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
         <p><?php echo $ci->lang->line("player_statistics_{$statisticGroup}_explanation"); ?></p>
         <table class="table table-striped table-condensed">
             <tbody>
@@ -897,7 +897,7 @@ class Player_Statistics_helper
 
         $ci =& get_instance(); ?>
 
-        <h3 id="<?php echo $statisticGroup;?>" name="<?php echo $statisticGroup; ?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
+        <h3 id="<?php echo $statisticGroup;?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
         <p><?php echo $ci->lang->line("player_statistics_{$statisticGroup}_explanation"); ?></p>
         <table class="table table-striped table-condensed">
             <tbody>
@@ -931,7 +931,7 @@ class Player_Statistics_helper
 
         $ci =& get_instance(); ?>
 
-        <h3 id="<?php echo $statisticGroup;?>" name="<?php echo $statisticGroup; ?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
+        <h3 id="<?php echo $statisticGroup;?>"><?php echo $ci->lang->line("player_statistics_{$statisticGroup}"); ?></h3>
         <p><?php echo $ci->lang->line("player_statistics_{$statisticGroup}_explanation"); ?></p>
         <table class="table table-striped table-condensed">
             <tbody>
