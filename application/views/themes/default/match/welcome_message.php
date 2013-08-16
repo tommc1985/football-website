@@ -21,8 +21,15 @@
         <?php
             foreach ($matches as $match) { ?>
                 <tr itemscope itemtype="http://schema.org/SportsEvent">
-                    <td data-title="<?php echo $this->lang->line('match_date'); ?>"><time itemprop="startDate" datetime="<?php echo Utility_helper::formattedDate($match->date, "c"); ?>"><?php echo $match->date ? Utility_helper::formattedDate($match->date, "jS M 'y") : $this->lang->line('match_t_b_c'); ?></time></td>
-                    <td itemprop="name" itemscope itemtype="http://schema.org/SportsTeam" data-title="<?php echo $this->lang->line('match_opposition'); ?>"><span itemprop="name" itemprop="legalName"><?php echo Opposition_helper::name($match->opposition_id); ?></span></td>
+                    <td data-title="<?php echo $this->lang->line('match_date'); ?>"><?php
+                    if ($match->date) { ?>
+                        <time itemprop="startDate" datetime="<?php echo Utility_helper::formattedDate($match->date, "c"); ?>"><?php echo Utility_helper::formattedDate($match->date, "jS M 'y"); ?></time>
+                    <?php
+                    } else {
+                        echo $this->lang->line('match_t_b_c');
+                    } ?>
+                    </td>
+                    <td itemprop="name" itemscope itemtype="http://schema.org/SportsTeam" data-title="<?php echo $this->lang->line('match_opposition'); ?>"><span itemprop="name"><?php echo Opposition_helper::name($match->opposition_id); ?></span></td>
                     <td data-title="<?php echo $this->lang->line('match_competition'); ?>"><?php echo Match_helper::fullCompetitionNameCombined($match); ?></td>
                     <td class="text-align-center" data-title="<?php echo $this->lang->line('match_venue'); ?>"><?php echo Match_helper::longVenue($match); ?></td><?php
                     if (Configuration::get('include_match_attendances') === true) { ?>
