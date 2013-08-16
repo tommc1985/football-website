@@ -19,7 +19,7 @@ class Club_Statistics_helper
     {
         $ci =& get_instance(); ?>
 
-        <h3 id="<?php echo $statisticGroup;?>" name="<?php echo $statisticGroup; ?>"><?php echo $ci->lang->line("club_statistics_{$statisticGroup}"); ?></h3>
+        <h3 id="<?php echo $statisticGroup;?>"><?php echo $ci->lang->line("club_statistics_{$statisticGroup}"); ?></h3>
         <p><?php echo $ci->lang->line("club_statistics_{$statisticGroup}_explanation"); ?></p>
         <p><?php echo $ci->lang->line("club_statistics_no_{$statisticGroup}"); ?></p>
     <?php
@@ -35,7 +35,7 @@ class Club_Statistics_helper
     {
         $ci =& get_instance();
 
-        echo "<h3 id='{$statisticGroup}' name='{$statisticGroup}'>" . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>'; ?>
+        echo "<h3 id='{$statisticGroup}'>" . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>'; ?>
         <p><?php echo $ci->lang->line("club_statistics_{$statisticGroup}_explanation"); ?></p>
         <?php
         foreach ($matches as $match) { ?>
@@ -57,7 +57,7 @@ class Club_Statistics_helper
     {
         $ci =& get_instance();
 
-        echo "<h3 id='{$statisticGroup}' name='{$statisticGroup}'>" . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>'; ?>
+        echo "<h3 id='{$statisticGroup}'>" . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>'; ?>
         <p><?php echo $ci->lang->line("club_statistics_{$statisticGroup}_explanation"); ?></p>
         <dl>
             <dt>
@@ -94,7 +94,7 @@ class Club_Statistics_helper
     {
         $ci =& get_instance();
 
-        echo "<h3 id='{$statisticGroup}' name='{$statisticGroup}'>" . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>'; ?>
+        echo "<h3 id='{$statisticGroup}'>" . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>'; ?>
         <p><?php echo $ci->lang->line("club_statistics_{$statisticGroup}_explanation"); ?></p>
         <?php
         foreach ($matches as $match) { ?>
@@ -357,7 +357,7 @@ class Club_Statistics_helper
 
         $ci =& get_instance();
 
-        echo "<h3 id='{$statisticGroup}' name='{$statisticGroup}'>" . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>'; ?>
+        echo "<h3 id='{$statisticGroup}'>" . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>'; ?>
         <p><?php echo $ci->lang->line("club_statistics_{$statisticGroup}_explanation"); ?></p>
         '<?php echo $statistics[$statisticGroup][0]->minute; ?><br />
         <?php
@@ -383,7 +383,7 @@ class Club_Statistics_helper
 
         $ci =& get_instance();
 
-        echo "<h3 id='{$statisticGroup}' name='{$statisticGroup}'>" . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>'; ?>
+        echo "<h3 id='{$statisticGroup}'>" . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>'; ?>
         <p><?php echo $ci->lang->line("club_statistics_{$statisticGroup}_explanation"); ?></p>
         <?php
         foreach ($statistics[$statisticGroup] as $cleanSheets) { ?>
@@ -408,7 +408,7 @@ class Club_Statistics_helper
 
         $ci =& get_instance();
 
-        echo "<h3 id='{$statisticGroup}' name='{$statisticGroup}'>" . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>'; ?>
+        echo "<h3 id='{$statisticGroup}'>" . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>'; ?>
         <p><?php echo $ci->lang->line("club_statistics_{$statisticGroup}_explanation"); ?></p>
         <?php
         foreach ($statistics[$statisticGroup] as $failedToScores) { ?>
@@ -433,7 +433,7 @@ class Club_Statistics_helper
 
         $ci =& get_instance();
 
-        echo "<h3 id='{$statisticGroup}' name='{$statisticGroup}'>" . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>'; ?>
+        echo "<h3 id='{$statisticGroup}'>" . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>'; ?>
         <p><?php echo $ci->lang->line("club_statistics_{$statisticGroup}_explanation"); ?></p>
         <?php echo Utility_helper::daysElapsed($statistics[$statisticGroup][0]->age); ?><br />
         <?php
@@ -459,7 +459,7 @@ class Club_Statistics_helper
 
         $ci =& get_instance();
 
-        echo "<h3 id='{$statisticGroup}' name='{$statisticGroup}'>" . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>'; ?>
+        echo "<h3 id='{$statisticGroup}'>" . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>'; ?>
         <p><?php echo $ci->lang->line("club_statistics_{$statisticGroup}_explanation"); ?></p>
         <?php echo Utility_helper::daysElapsed($statistics[$statisticGroup][0]->age); ?><br />
         <?php
@@ -485,7 +485,7 @@ class Club_Statistics_helper
 
         $ci =& get_instance();
 
-        echo "<h3 id='{$statisticGroup}' name='{$statisticGroup}'>" . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>'; ?>
+        echo "<h3 id='{$statisticGroup}'>" . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>'; ?>
         <p><?php echo $ci->lang->line("club_statistics_{$statisticGroup}_explanation"); ?></p>
         <?php echo Utility_helper::daysElapsed($statistics[$statisticGroup][0]->age); ?><br />
         <?php
@@ -511,7 +511,7 @@ class Club_Statistics_helper
 
         $ci =& get_instance();
 
-        echo "<h3 id='{$statisticGroup}' name='{$statisticGroup}'>" . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>'; ?>
+        echo "<h3 id='{$statisticGroup}'>" . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>'; ?>
         <p><?php echo $ci->lang->line("club_statistics_{$statisticGroup}_explanation"); ?></p>
         <?php echo Utility_helper::daysElapsed($statistics[$statisticGroup][0]->age); ?><br />
         <?php
@@ -537,7 +537,7 @@ class Club_Statistics_helper
 
         $ci =& get_instance();
 
-        echo "<h3 id='{$statisticGroup}' name='{$statisticGroup}'>" . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>'; ?>
+        echo "<h3 id='{$statisticGroup}'>" . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>'; ?>
         <p><?php echo $ci->lang->line("club_statistics_{$statisticGroup}_explanation"); ?></p>
         <?php echo Utility_helper::daysElapsed($statistics[$statisticGroup][0]->age); ?><br />
         <?php
@@ -563,7 +563,7 @@ class Club_Statistics_helper
 
         $ci =& get_instance();
 
-        echo "<h3 id='{$statisticGroup}' name='{$statisticGroup}'>" . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>'; ?>
+        echo "<h3 id='{$statisticGroup}'>" . $ci->lang->line("club_statistics_{$statisticGroup}") . '</h3>'; ?>
         <p><?php echo $ci->lang->line("club_statistics_{$statisticGroup}_explanation"); ?></p>
         <?php echo Utility_helper::daysElapsed($statistics[$statisticGroup][0]->age); ?><br />
         <?php
