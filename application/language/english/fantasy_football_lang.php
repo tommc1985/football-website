@@ -11,6 +11,15 @@ $lang['fantasy_football_view_frontend_meta_title_all_time_and_type']       = 'Al
 $lang['fantasy_football_view_frontend_meta_description_all_time_and_type'] = 'Fantasy Football Statistics for %1$s for all time (%3$s matches only), with features including leaderboards for points earned in a particular position (ordered by total points earned or average points earned) and best line up in a specified formation based on Total Points, Average Points or Appearances.';
 
 $lang['fantasy_football_title']                     = 'Fantasy Football';
+
+$lang['fantasy_football_explanation']                     = 'Just for a bit of fun, Fantasy Football involves players receiving points for making different contributions in every competitive match, whether it be an appearance, a goal, a clean sheet on an assist. Players can also lose points for things such as being issued red or yellow cards.';
+
+$lang['fantasy_football_leaderboard_explanation']                     = 'View the current Fantasy Football leaderboard, ordered by the total number of points each player has accumulated, or the average number of points they earn per game. You can also use the position dropdown to see exactly how players peform in a particular position.';
+
+$lang['fantasy_football_best_lineup_explanation']                     = 'An algorithm is used to determine the best lineup for the specified formation, based on a number of factors including the position(s) a player would prefer to appear in, which players would be preferred in a specific position, and a third measurement to be determined by you, selectable from the dropdown below. This can vary from the total or average number of points a player has earned in a specific (or similar) position or the number of appearances in a specific (or similar) position.';
+
+$lang['fantasy_football_scoring_system_explanation']                     = 'The table below describes how Fantasy Football points are earned by each player.';
+
 $lang['fantasy_football_matches']                   = 'Matches';
 
 $lang['fantasy_football_leaderboard']               = 'Leaderboard';

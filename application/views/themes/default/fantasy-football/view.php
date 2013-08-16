@@ -1,14 +1,16 @@
 <div class="row-fluid">
     <div class="span12">
 
+        <h2><?php echo $this->lang->line('fantasy_football_title'); ?> - <?php echo Utility_helper::formattedSeason($season); ?><?php echo ($type != 'overall' ? ' (' . Competition_helper::type($type) . ' ' . $this->lang->line("fantasy_football_matches") . ')' : ''); ?></h2>
+
+        <p><?php echo $this->lang->line('fantasy_football_explanation'); ?></p>
+
     <?php
     echo form_open($this->uri->uri_string(), array('class' => 'form-horizontal', 'id' => 'fantasy-football-form'));
 echo form_hidden('season', $season); ?>
 
-        <h2><?php echo $this->lang->line('fantasy_football_title'); ?> - <?php echo Utility_helper::formattedSeason($season); ?><?php echo ($type != 'overall' ? ' (' . Competition_helper::type($type) . ' ' . $this->lang->line("fantasy_football_matches") . ')' : ''); ?></h2>
-
         <div class="row-fluid">
-            <div class="span12">
+            <div class="span10 offset1">
 <?php
 $inputType = array(
     'name'    => 'type',
@@ -38,13 +40,15 @@ $submit = array(
         </div>
 
         <div class="row-fluid">
-            <div class="span12">
+            <div class="span10 offset1">
                 <h3><?php echo $this->lang->line("fantasy_football_leaderboard"); ?></h3>
+
+                <p><?php echo $this->lang->line('fantasy_football_leaderboard_explanation'); ?></p>
             </div>
         </div>
 
         <div class="row-fluid">
-            <div class="span12">
+            <div class="span10 offset1">
 <?php
 $inputPosition = array(
     'name'    => 'position',
@@ -87,12 +91,73 @@ $submit = array(
         </div>
 
         <div class="row-fluid">
-            <div class="span7" id="leaderboard-wrapper">
+            <div class="span10 offset1" id="leaderboard-wrapper">
                 <?php $this->load->view("themes/{$theme}/fantasy-football/_leaderboard"); ?>
             </div>
 
-            <div class="span5">
-                <h4><?php echo $this->lang->line('fantasy_football_scoring_system'); ?></h4>
+
+        </div>
+
+        <div class="row-fluid">
+            <div class="span10 offset1">
+                <h3><?php echo $this->lang->line("fantasy_football_best_lineup"); ?></h3>
+
+                <p><?php echo $this->lang->line('fantasy_football_best_lineup_explanation'); ?></p>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span10 offset1">
+<?php
+$inputMeasurement = array(
+    'name'    => 'measurement',
+    'id'      => 'measurement',
+    'options' => $this->Fantasy_Football_model->fetchMeasurementForDropdown(),
+    'value'   => set_value('measurement', $measurement),
+);
+
+$inputFormation = array(
+    'name'    => 'formation',
+    'id'      => 'formation',
+    'options' => $this->Fantasy_Football_model->fetchFormationsForDropdown(),
+    'value'   => set_value('formation', $formation),
+);
+
+$submit = array(
+    'name'    => 'submit',
+    'id'      => 'best-lineup-submit',
+    'value'   => $this->lang->line('fantasy_football_refresh'),
+    'class'   => 'btn',
+); ?>
+                <fieldset>
+                    <legend><?php echo $this->lang->line('global_filters');?></legend>
+                        <div class="control-group">
+                            <?php echo form_label($this->lang->line('fantasy_football_measurement'), $inputMeasurement['id'], array('class'  => 'control-label')); ?>
+                            <div class="controls">
+                                <?php echo form_dropdown($inputMeasurement['name'], $inputMeasurement['options'], $inputMeasurement['value'], "id='{$inputMeasurement['id']}'"); ?>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <?php echo form_label($this->lang->line('fantasy_football_formation'), $inputFormation['id'], array('class'  => 'control-label')); ?>
+                            <div class="controls">
+                                <?php echo form_dropdown($inputFormation['name'], $inputFormation['options'], $inputFormation['value'], "id='{$inputFormation['id']}'"); ?>
+                                <?php
+                                echo form_submit($submit); ?>
+                            </div>
+                        </div>
+                </fieldset>
+            </div>
+        </div>
+
+        <div id="best-lineup-wrapper">
+            <?php $this->load->view("themes/{$theme}/fantasy-football/_best_lineup"); ?>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span10 offset1">
+                <h3><?php echo $this->lang->line('fantasy_football_scoring_system'); ?></h3>
+
+                <p><?php echo $this->lang->line('fantasy_football_scoring_system_explanation'); ?></p>
                 <table class="width-100-percent table table-striped table-condensed">
                     <thead>
                         <tr>
@@ -108,6 +173,10 @@ $submit = array(
                         <tr>
                             <td data-title="<?php echo $this->lang->line('fantasy_football_criteria'); ?>"><?php echo $this->lang->line('fantasy_football_substitute_appearance'); ?></td>
                             <td class="text-align-center" data-title="<?php echo $this->lang->line('fantasy_football_points'); ?>"><?php echo Configuration::get('substitute_appearance_points'); ?></td>
+                        </tr>
+                        <tr>
+                            <td data-title="<?php echo $this->lang->line('fantasy_football_criteria'); ?>"><?php echo $this->lang->line('fantasy_football_clean_sheet_by_goalkeeper'); ?></td>
+                            <td class="text-align-center" data-title="<?php echo $this->lang->line('fantasy_football_points'); ?>"><?php echo Configuration::get('clean_sheet_by_goalkeeper_points'); ?></td>
                         </tr>
                         <tr>
                             <td data-title="<?php echo $this->lang->line('fantasy_football_criteria'); ?>"><?php echo $this->lang->line('fantasy_football_clean_sheet_by_defender'); ?></td>
@@ -165,61 +234,8 @@ $submit = array(
                 </table>
             </div>
         </div>
-
-        <div class="row-fluid">
-            <div class="span12">
-                <h3><?php echo $this->lang->line("fantasy_football_best_lineup"); ?></h3>
-            </div>
-        </div>
-
-        <div class="row-fluid">
-            <div class="span12">
-<?php
-$inputMeasurement = array(
-    'name'    => 'measurement',
-    'id'      => 'measurement',
-    'options' => $this->Fantasy_Football_model->fetchMeasurementForDropdown(),
-    'value'   => set_value('measurement', $measurement),
-);
-
-$inputFormation = array(
-    'name'    => 'formation',
-    'id'      => 'formation',
-    'options' => $this->Fantasy_Football_model->fetchFormationsForDropdown(),
-    'value'   => set_value('formation', $formation),
-);
-
-$submit = array(
-    'name'    => 'submit',
-    'id'      => 'best-lineup-submit',
-    'value'   => $this->lang->line('fantasy_football_refresh'),
-    'class'   => 'btn',
-); ?>
-                <fieldset>
-                    <legend><?php echo $this->lang->line('global_filters');?></legend>
-                        <div class="control-group">
-                            <?php echo form_label($this->lang->line('fantasy_football_measurement'), $inputMeasurement['id'], array('class'  => 'control-label')); ?>
-                            <div class="controls">
-                                <?php echo form_dropdown($inputMeasurement['name'], $inputMeasurement['options'], $inputMeasurement['value'], "id='{$inputMeasurement['id']}'"); ?>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <?php echo form_label($this->lang->line('fantasy_football_formation'), $inputFormation['id'], array('class'  => 'control-label')); ?>
-                            <div class="controls">
-                                <?php echo form_dropdown($inputFormation['name'], $inputFormation['options'], $inputFormation['value'], "id='{$inputFormation['id']}'"); ?>
-                                <?php
-                                echo form_submit($submit); ?>
-                            </div>
-                        </div>
-                </fieldset>
-            </div>
-        </div>
-
-        <div id="best-lineup-wrapper">
-            <?php $this->load->view("themes/{$theme}/fantasy-football/_best_lineup"); ?>
-        </div>
-
-    </div>
     <?php
     echo form_close(); ?>
+
+    </div>
 </div>
