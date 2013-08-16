@@ -113,6 +113,17 @@ $lang['player_assists_by_body_part']               = 'Assists by Body Part';
 $lang['player_assists_by_distance']                = 'Assists by Distance';
 $lang['player_assists_by_minute_interval']         = 'Assists by Minute Interval';
 
+$lang['player_goals_by_assister_explanation']                  = "A breakdown of which players have assisted %s's goals.";
+$lang['player_goals_by_type_explanation']                      = "%s's goals, broken down by type.";
+$lang['player_goals_by_body_part_explanation']                 = "%s's goals, broken down by which body part was used to score each goal.";
+$lang['player_goals_by_distance_explanation']                  = "%s's goals, broken down by the distance each goal was scored from.";
+$lang['player_goals_by_minute_interval_explanation']           = "%s's goals, broken down by the time interval in which each goal was scored.";
+$lang['player_assists_by_scorer_explanation']                  = "%s's assists, broken down by which player who scored the goals.";
+$lang['player_assists_by_type_explanation']                    = "%s's assists, broken down by type of goal that was scored.";
+$lang['player_assists_by_body_part_explanation']               = "%s's assists, broken down by which body part was used to score each goal (not what body part was used to assist the goal).";
+$lang['player_assists_by_distance_explanation']                = "%s's assists, broken down by the distance each goal was scored from.";
+$lang['player_assists_by_minute_interval_explanation']         = "%s's assists, broken down by the time interval in which each goal was scored.";
+
 $lang['player_assister']                           = 'Assister';
 $lang['player_scorer']                             = 'Scorer';
 $lang['player_goal_type']                          = 'Goal Type';

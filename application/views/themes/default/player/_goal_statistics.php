@@ -26,6 +26,7 @@ $data = array(
 ?>
 
 <h5><?php echo $this->lang->line('player_goals_by_assister'); ?></h5>
+<p><?php echo sprintf($this->lang->line('player_goals_by_assister_explanation'), Player_helper::firstName($player, false)); ?></p>
 <div class="row-fluid">
     <div class="span8">
 <?php
@@ -67,6 +68,7 @@ $chart->buildChart($byAssister['id'], $byAssister['chartType'], $byAssister['dat
 </div>
 
 <h5><?php echo $this->lang->line('player_goals_by_type'); ?></h5>
+<p><?php echo sprintf($this->lang->line('player_goals_by_type_explanation'), Player_helper::firstName($player, false)); ?></p>
 <div class="row-fluid">
     <div class="span8">
 <?php
@@ -103,6 +105,7 @@ $chart->buildChart($byTypeChart['id'], $byTypeChart['chartType'], $byTypeChart['
 </div>
 
 <h5><?php echo $this->lang->line('player_goals_by_body_part'); ?></h5>
+<p><?php echo sprintf($this->lang->line('player_goals_by_body_part_explanation'), Player_helper::firstName($player, false)); ?></p>
 <div class="row-fluid">
     <div class="span8">
 <?php
@@ -142,6 +145,7 @@ $chart->buildChart($byBodyPart['id'], $byBodyPart['chartType'], $byBodyPart['dat
 </div>
 
 <h5><?php echo $this->lang->line('player_goals_by_distance'); ?></h5>
+<p><?php echo sprintf($this->lang->line('player_goals_by_distance_explanation'), Player_helper::firstName($player, false)); ?></p>
 <div class="row-fluid">
     <div class="span8">
 <?php
@@ -181,6 +185,7 @@ $chart->buildChart($byDistance['id'], $byDistance['chartType'], $byDistance['dat
 </div>
 
 <h5><?php echo $this->lang->line('player_goals_by_minute_interval'); ?></h5>
+<p><?php echo sprintf($this->lang->line('player_goals_by_minute_interval_explanation'), Player_helper::firstName($player, false)); ?></p>
 <div class="row-fluid">
     <div class="span8">
 <?php
@@ -221,6 +226,7 @@ $chart->buildChart($byMinuteInterval['id'], $byMinuteInterval['chartType'], $byM
 </div>
 
 <h5><?php echo $this->lang->line('player_assists_by_scorer'); ?></h5>
+<p><?php echo sprintf($this->lang->line('player_assists_by_scorer_explanation'), Player_helper::firstName($player, false)); ?></p>
 <div class="row-fluid">
     <div class="span8">
 <?php
@@ -261,6 +267,7 @@ $chart->buildChart($byScorer['id'], $byScorer['chartType'], $byScorer['data'], $
 </div>
 
 <h5><?php echo $this->lang->line('player_assists_by_type'); ?></h5>
+<p><?php echo sprintf($this->lang->line('player_assists_by_type_explanation'), Player_helper::firstName($player, false)); ?></p>
 <div class="row-fluid">
     <div class="span8">
 <?php
@@ -297,6 +304,7 @@ $chart->buildChart($byTypeChart['id'], $byTypeChart['chartType'], $byTypeChart['
 </div>
 
 <h5><?php echo $this->lang->line('player_assists_by_body_part'); ?></h5>
+<p><?php echo sprintf($this->lang->line('player_assists_by_body_part_explanation'), Player_helper::firstName($player, false)); ?></p>
 <div class="row-fluid">
     <div class="span8">
 <?php
@@ -336,6 +344,7 @@ $chart->buildChart($byBodyPart['id'], $byBodyPart['chartType'], $byBodyPart['dat
 </div>
 
 <h5><?php echo $this->lang->line('player_assists_by_distance'); ?></h5>
+<p><?php echo sprintf($this->lang->line('player_assists_by_distance_explanation'), Player_helper::firstName($player, false)); ?></p>
 <div class="row-fluid">
     <div class="span8">
 <?php
@@ -375,6 +384,7 @@ $chart->buildChart($assistByDistance['id'], $assistByDistance['chartType'], $ass
 </div>
 
 <h5><?php echo $this->lang->line('player_assists_by_minute_interval'); ?></h5>
+<p><?php echo sprintf($this->lang->line('player_assists_by_minute_interval_explanation'), Player_helper::firstName($player, false)); ?></p>
 <div class="row-fluid">
     <div class="span8">
 <?php
