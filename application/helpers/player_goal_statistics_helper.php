@@ -20,6 +20,7 @@ class Player_Goal_Statistics_helper
         $ci =& get_instance(); ?>
 
         <h3 id="<?php echo "{$statisticGroup}_{$statisticKey}"; ?>"><?php echo $ci->lang->line("player_goal_statistics_{$statisticGroup}_{$statisticKey}"); ?></h3>
+        <p><?php echo $ci->lang->line("player_goal_statistics_{$statisticGroup}_{$statisticKey}_explanation"); ?></p>
         <p><?php echo $ci->lang->line("player_goal_statistics_no_{$statisticGroup}_{$statisticKey}"); ?></p>
     <?php
     }
