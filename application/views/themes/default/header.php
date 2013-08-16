@@ -29,8 +29,8 @@
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="#">Club Info<b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="<?php echo site_url("page/view/id/2"); ?>">History</a></li>
-                                <li><a href="<?php echo site_url("club-officials"); ?>">Officials</a></li>
+                                <li><a href="<?php echo site_url("page/view/id/2"); ?>">History</a></li><?php /*
+                                <li><a href="<?php echo site_url("club-officials"); ?>">Officials</a></li>*/ ?>
                             </ul>
                         </li>
                         <li class="dropdown">
