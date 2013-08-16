@@ -296,7 +296,7 @@ $chart->buildChart($byTypeChart['id'], $byTypeChart['chartType'], $byTypeChart['
     </div>
 </div>
 
-<h5><?php echo $this->lang->line('player_assist_by_body_part'); ?></h5>
+<h5><?php echo $this->lang->line('player_assists_by_body_part'); ?></h5>
 <div class="row-fluid">
     <div class="span8">
 <?php
