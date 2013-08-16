@@ -27,7 +27,13 @@
             foreach ($players as $player) { ?>
                 <tr itemscope itemtype="http://schema.org/Person">
                     <td itemprop="name" data-title="<?php echo $this->lang->line('player_player'); ?>"><?php echo Player_helper::fullNameReverse($player); ?></td>
-                    <td data-title="<?php echo $this->lang->line('player_d_o_b'); ?>" class="text-align-center"><time itemprop="birthDate" datetime="<?php echo Utility_helper::formattedDate($player->dob, "c"); ?>"><?php echo Utility_helper::formattedDate($player->dob, "jS M Y"); ?></time></td>
+                    <td data-title="<?php echo $this->lang->line('player_d_o_b'); ?>" class="text-align-center"><?php
+                    if ($player->dob) { ?><time itemprop="birthDate" datetime="<?php echo Utility_helper::formattedDate($player->dob, "c"); ?>"><?php echo Utility_helper::formattedDate($player->dob, "jS M Y"); ?></time><?php
+                    } else { ?>
+                        &nbsp;
+                    <?php
+                    } ?>
+                    </td>
                     <td data-title="<?php echo $this->lang->line('player_apps'); ?>" class="text-align-center"><?php echo $player->appearances; ?> (<?php echo $player->substitute_appearances; ?>)</td>
                     <td data-title="<?php echo $this->lang->line('player_goals'); ?>" class="text-align-center"><?php echo $player->goals; ?></td>
                     <td data-title="<?php echo $this->lang->line('player_assists'); ?>" class="text-align-center"><?php echo $player->assists; ?></td>

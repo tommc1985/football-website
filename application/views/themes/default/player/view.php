@@ -8,7 +8,15 @@
           <dt><?php echo $this->lang->line('player_full_name'); ?>:</dt>
           <dd itemprop="name"><?php echo Player_helper::fullNameReverse($player, false); ?></dd>
           <dt><?php echo $this->lang->line('player_date_of_birth'); ?>:</dt>
-          <dd><time itemprop="birthDate" datetime="<?php echo Utility_helper::formattedDate($player->dob, "c"); ?>"><?php echo Utility_helper::formattedDate($player->dob, "jS F Y"); ?></time></dd><?php
+          <dd><?php
+          if ($player->dob) { ?>
+            <time itemprop="birthDate" datetime="<?php echo Utility_helper::formattedDate($player->dob, "c"); ?>"><?php echo Utility_helper::formattedDate($player->dob, "jS F Y"); ?></time>
+          <?php
+          } else { ?>
+            &nbsp;
+          <?php
+          } ?>
+          </dd><?php
           if (Configuration::get('include_nationalities') === true) { ?>
           <dt><?php echo $this->lang->line('player_nationality'); ?>:</dt>
           <dd itemprop="nationality"><?php echo Nationality_helper::nationality($player->nationality_id); ?></dd>
