@@ -41,7 +41,7 @@ class Frontend_Match_model extends Base_Frontend_Model {
         }
 
         if ($includeTBC) {
-            $this->db->or_where('date', NULL);
+            $this->db->or_where('(date IS NULL && deleted = 0)', NULL, false);
         }
 
         return $this->db->get()->result();
