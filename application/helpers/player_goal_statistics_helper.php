@@ -15,13 +15,17 @@ class Player_Goal_Statistics_helper
      * @param  string $statisticGroup  Statistic Group
      * @return NULL
      */
-    protected static function _displayNoData($statisticGroup, $statisticKey)
+    protected static function _displayNoData($statisticGroup, $statisticKey = '')
     {
-        $ci =& get_instance(); ?>
+        $ci =& get_instance();
 
-        <h3 id="<?php echo "{$statisticGroup}_{$statisticKey}"; ?>"><?php echo $ci->lang->line("player_goal_statistics_{$statisticGroup}_{$statisticKey}"); ?></h3>
-        <p><?php echo $ci->lang->line("player_goal_statistics_{$statisticGroup}_{$statisticKey}_explanation"); ?></p>
-        <p><?php echo $ci->lang->line("player_goal_statistics_no_{$statisticGroup}_{$statisticKey}"); ?></p>
+        if ($statisticKey) {
+            $statisticKey = "_{$statisticKey}";
+        } ?>
+
+        <h3 id="<?php echo "{$statisticGroup}_{$statisticKey}"; ?>"><?php echo $ci->lang->line("player_goal_statistics_{$statisticGroup}{$statisticKey}"); ?></h3>
+        <p><?php echo $ci->lang->line("player_goal_statistics_{$statisticGroup}{$statisticKey}_explanation"); ?></p>
+        <p><?php echo $ci->lang->line("player_goal_statistics_no_{$statisticGroup}{$statisticKey}"); ?></p>
     <?php
     }
 
