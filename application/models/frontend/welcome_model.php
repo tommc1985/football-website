@@ -211,7 +211,7 @@ class Welcome_model extends Base_Frontend_Model {
         $where = array();
         $where['start_datetime >='] = date("Y-m-d 00:00:00", $now);
 
-        return $ci->Calendar_model->fetchAll($where, $limit, false, 'start_datetime', 'desc');
+        return $ci->Calendar_model->fetchAll($where, $limit, false, 'start_datetime', 'asc');
     }
 
     /**
