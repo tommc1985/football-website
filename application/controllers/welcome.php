@@ -28,7 +28,7 @@ class Welcome extends Frontend_Controller {
         $this->load->helper(array('competition', 'index', 'player', 'position', 'url', 'utility'));
 
         $limit = 5;
-        $season = 2012;
+        $season = Season_model::fetchCurrentSeason();
 
         $section = array();
         $section['latestNewsArticle']  = $this->Welcome_model->fetchLatestNewsArticle();

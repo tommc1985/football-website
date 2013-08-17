@@ -37,7 +37,9 @@ class Welcome_model extends Base_Frontend_Model {
             ->where('p.deleted', 0)
             ->order_by('cpas.goals', 'desc');
 
-        return $this->db->get()->result();
+        $players = $this->db->get()->result();
+
+        return $this->fetchSubset($players, $limit, 'goals');
     }
 
     /**
@@ -57,7 +59,9 @@ class Welcome_model extends Base_Frontend_Model {
             ->where('p.deleted', 0)
             ->order_by('cpas.assists', 'desc');
 
-        return $this->db->get()->result();
+        $players = $this->db->get()->result();
+
+        return $this->fetchSubset($players, $limit, 'assists');
     }
 
     /**
@@ -77,7 +81,9 @@ class Welcome_model extends Base_Frontend_Model {
             ->where('p.deleted', 0)
             ->order_by('cpas.motms', 'desc');
 
-        return $this->db->get()->result();
+        $players = $this->db->get()->result();
+
+        return $this->fetchSubset($players, $limit, 'motms');
     }
 
     /**
@@ -88,7 +94,7 @@ class Welcome_model extends Base_Frontend_Model {
      */
     public function fetchWorstDiscipline($season, $limit)
     {
-        $this->db->select('p.*, cpas.*')
+        $this->db->select('p.*, cpas.*, CONCAT(cpas.yellows,"_",cpas.reds) as concatenated_cards')
             ->from('cache_player_accumulated_statistics cpas')
             ->join('player p', 'p.id = cpas.player_id')
             ->where('cpas.type', 'overall')
@@ -97,7 +103,9 @@ class Welcome_model extends Base_Frontend_Model {
             ->where('p.deleted', 0)
             ->order_by('cpas.reds DESC, cpas.yellows DESC');
 
-        return $this->db->get()->result();
+        $players = $this->db->get()->result();
+
+        return $this->fetchSubset($players, $limit, 'concatenated_cards');
     }
 
     /**
@@ -118,7 +126,9 @@ class Welcome_model extends Base_Frontend_Model {
             ->where('p.deleted', 0)
             ->order_by('cffs.total_points DESC');
 
-        return $this->db->get()->result();
+        $players = $this->db->get()->result();
+
+        return $this->fetchSubset($players, $limit, 'total_points');
     }
 
     /**
@@ -210,6 +220,52 @@ class Welcome_model extends Base_Frontend_Model {
         }
 
         return false;
+    }
+
+    /**
+     * Return subset of data
+     * @param  array $players   Players
+     * @param  int $limit       The number of items to return
+     * @return array            Subset of players
+     */
+    public function fetchSubset($players, $limit, $comparitor)
+    {
+        $subset = array();
+
+        $i = 2;
+        $nthValue = false;
+        foreach ($players as $player) {
+            $addPlayer = true;
+            if ($i > $limit) {
+                $addPlayer = false;
+                if ($nthValue === false) {
+                    $nthValue = $player->$comparitor;
+                }
+
+                if ($nthValue == $player->$comparitor) {
+                    $addPlayer = true;
+                } else {
+                    break;
+                }
+            }
+
+            if ($addPlayer) {
+                $subset[] = $player;
+            }
+
+            $i++;
+        }
+
+        $extraPlayerCount = 0;
+        $playerCount = count($subset);
+        if ($playerCount > $limit) {
+            $extraPlayerCount = $playerCount - $limit;
+        }
+
+        return array(
+            'subset'           => array_slice($subset, 0, $limit),
+            'extraPlayerCount' => $extraPlayerCount,
+        );
     }
 
 }

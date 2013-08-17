@@ -46,12 +46,18 @@ class Index_helper
             </thead>
             <tbody>
             <?php
-            foreach ($players as $player) { ?>
+            $subsetCount = count($players['subset']);
+            $i = 1;
+            foreach ($players['subset'] as $player) { ?>
                 <tr>
-                    <td class="width-85-percent" data-title="<?php echo $ci->lang->line('player_player'); ?>"><?php echo Player_helper::fullNameReverse($player); ?></td>
+                    <td class="width-85-percent" data-title="<?php echo $ci->lang->line('player_player'); ?>"><?php echo Player_helper::fullNameReverse($player);
+                    if ($players['extraPlayerCount'] && $subsetCount == $i) {
+                        echo $players['extraPlayerCount'] == 1 ? $ci->lang->line('index_plus_one_other') : sprintf($ci->lang->line('index_plus_n_others'), $players['extraPlayerCount']);
+                    } ?></td>
                     <td class="width-15-percent text-align-center" data-title="<?php echo $ci->lang->line('player_goals'); ?>"><?php echo $player->goals; ?></td>
                 </tr>
             <?php
+                $i++;
             } ?>
             </tbody>
         </table>
@@ -78,12 +84,18 @@ class Index_helper
             </thead>
             <tbody>
             <?php
-            foreach ($players as $player) { ?>
+            $subsetCount = count($players['subset']);
+            $i = 1;
+            foreach ($players['subset'] as $player) { ?>
                 <tr>
-                    <td class="width-85-percent" data-title="<?php echo $ci->lang->line('player_player'); ?>"><?php echo Player_helper::fullNameReverse($player); ?></td>
+                    <td class="width-85-percent" data-title="<?php echo $ci->lang->line('player_player'); ?>"><?php echo Player_helper::fullNameReverse($player);
+                    if ($players['extraPlayerCount'] && $subsetCount == $i) {
+                        echo $players['extraPlayerCount'] == 1 ? $ci->lang->line('index_plus_one_other') : sprintf($ci->lang->line('index_plus_n_others'), $players['extraPlayerCount']);
+                    } ?></td>
                     <td class="width-15-percent text-align-center" data-title="<?php echo $ci->lang->line('player_assists'); ?>"><?php echo $player->assists; ?></td>
                 </tr>
             <?php
+                $i++;
             } ?>
             </tbody>
         </table>
@@ -110,12 +122,18 @@ class Index_helper
             </thead>
             <tbody>
             <?php
-            foreach ($players as $player) { ?>
+            $subsetCount = count($players['subset']);
+            $i = 1;
+            foreach ($players['subset'] as $player) { ?>
                 <tr>
-                    <td class="width-85-percent" data-title="<?php echo $ci->lang->line('player_player'); ?>"><?php echo Player_helper::fullNameReverse($player); ?></td>
+                    <td class="width-85-percent" data-title="<?php echo $ci->lang->line('player_player'); ?>"><?php echo Player_helper::fullNameReverse($player);
+                    if ($players['extraPlayerCount'] && $subsetCount == $i) {
+                        echo $players['extraPlayerCount'] == 1 ? $ci->lang->line('index_plus_one_other') : sprintf($ci->lang->line('index_plus_n_others'), $players['extraPlayerCount']);
+                    } ?></td>
                     <td class="width-15-percent text-align-center" data-title="<?php echo $ci->lang->line('player_motms'); ?>"><?php echo $player->motms; ?></td>
                 </tr>
             <?php
+                $i++;
             } ?>
             </tbody>
         </table>
@@ -143,13 +161,19 @@ class Index_helper
             </thead>
             <tbody>
             <?php
-            foreach ($players as $player) { ?>
+            $subsetCount = count($players['subset']);
+            $i = 1;
+            foreach ($players['subset'] as $player) { ?>
                 <tr>
-                    <td class="width-80-percent" data-title="<?php echo $ci->lang->line('player_player'); ?>"><?php echo Player_helper::fullNameReverse($player); ?></td>
+                    <td class="width-80-percent" data-title="<?php echo $ci->lang->line('player_player'); ?>"><?php echo Player_helper::fullNameReverse($player);
+                    if ($players['extraPlayerCount'] && $subsetCount == $i) {
+                        echo $players['extraPlayerCount'] == 1 ? $ci->lang->line('index_plus_one_other') : sprintf($ci->lang->line('index_plus_n_others'), $players['extraPlayerCount']);
+                    } ?></td>
                     <td class="width-10-percent text-align-center" data-title="<?php echo $ci->lang->line('player_reds'); ?>"><?php echo $player->reds; ?></td>
                     <td class="width-10-percent text-align-center" data-title="<?php echo $ci->lang->line('player_yellows'); ?>"><?php echo $player->yellows; ?></td>
                 </tr>
             <?php
+                $i++;
             } ?>
             </tbody>
         </table>
@@ -176,12 +200,18 @@ class Index_helper
             </thead>
             <tbody>
             <?php
-            foreach ($players as $player) { ?>
+            $subsetCount = count($players['subset']);
+            $i = 1;
+            foreach ($players['subset'] as $player) { ?>
                 <tr>
-                    <td class="width-85-percent" data-title="<?php echo $ci->lang->line('fantasy_football_player'); ?>"><?php echo Player_helper::fullNameReverse($player); ?></td>
+                    <td class="width-85-percent" data-title="<?php echo $ci->lang->line('fantasy_football_player'); ?>"><?php echo Player_helper::fullNameReverse($player);
+                    if ($players['extraPlayerCount'] && $subsetCount == $i) {
+                        echo $players['extraPlayerCount'] == 1 ? $ci->lang->line('index_plus_one_other') : sprintf($ci->lang->line('index_plus_n_others'), $players['extraPlayerCount']);
+                    } ?></td>
                     <td class="width-15-percent text-align-center" data-title="<?php echo $ci->lang->line('fantasy_football_points'); ?>"><?php echo $player->total_points; ?></td>
                 </tr>
             <?php
+                $i++;
             } ?>
             </tbody>
         </table>

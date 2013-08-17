@@ -18,6 +18,9 @@ $lang['index_most_motms']              = 'Most MotMs';
 $lang['index_worst_discipline']        = 'Worst Discipline';
 $lang['index_top_fantasy_footballers'] = 'Top Fantasy Footballers';
 
+$lang['index_plus_one_other']          = ' +1 other';
+$lang['index_plus_n_others']           = ' +%d others';
+
 
 $lang['index_read_more']               = 'read more';
 $lang['index_all_day_event']           = 'All Day Event';
