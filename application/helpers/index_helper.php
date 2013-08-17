@@ -256,24 +256,30 @@ class Index_helper
 
     /**
      * Display On This Day Section
-     * @param  array $matches   Matches
+     * @param  object $match   Match
      * @return NULL
      */
-    public static function onThisDay($matches)
+    public static function onThisDay($match)
     {
         $ci =& get_instance();
         $ci->load->helper(array('competition', 'match', 'opposition', 'player', 'utility')); ?>
 
         <h2><?php echo $ci->lang->line('index_on_this_day'); ?></h2>
         <?php
-        if ($matches) {
-            $index = array_rand($matches);
-            $match = $matches[$index]; ?>
+        if ($match) {; ?>
         <h3><?php echo Utility_helper::formattedDate($match->date, "Y"); ?></h3>
         <h4><?php echo Match_helper::score($match); ?> <?php echo $ci->lang->line('match_vs'); ?> <?php echo Opposition_helper::name($match->opposition_id); ?></h4>
         <p><?php echo Match_helper::shortCompetitionNameCombined($match); ?></p>
-        <p><a href="<?php echo site_url("match/view/id/{$match->id}"); ?>"><?php echo $ci->lang->line('index_view_match_details'); ?></a></p>
         <?php
+            $scorers = array();
+            if ($match->goals) { ?>
+            <h5><?php echo count($match->goals) == 1 ? $ci->lang->line('index_scorer') : $ci->lang->line('index_scorers'); ?></h5>
+        <?php
+            foreach ($match->goals as $goal) {
+                $scorers[] = $goal->scorer_id ? Player_helper::initialSurname($goal->scorer_id, false) : $ci->lang->line('goal_own_goal');
+            }
+                echo '<p>' . implode(", ", $scorers) . '</p>';
+            }
         } else { ?>
             <?php echo $ci->lang->line('index_on_this_day_no_data'); ?>
         <?php

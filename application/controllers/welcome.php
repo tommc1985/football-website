@@ -24,6 +24,7 @@ class Welcome extends Frontend_Controller {
         $this->load->model('frontend/Welcome_model');
         $this->lang->load('index');
         $this->lang->load('fantasy_football');
+        $this->lang->load('goal');
         $this->lang->load('player');
         $this->load->helper(array('competition', 'index', 'player', 'position', 'url', 'utility'));
 

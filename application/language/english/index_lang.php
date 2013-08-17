@@ -32,6 +32,9 @@ $lang['index_top_fantasy_footballers_no_data'] = 'No players have earned Fantasy
 $lang['index_plus_one_other']                  = ' +1 other';
 $lang['index_plus_n_others']                   = ' +%d others';
 
+$lang['index_scorer']                          = 'Scorer';
+$lang['index_scorers']                         = 'Scorers';
+
 
 $lang['index_read_more']                       = 'read more';
 $lang['index_all_day_event']                   = 'All Day Event';

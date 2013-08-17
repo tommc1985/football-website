@@ -147,7 +147,18 @@ class Welcome_model extends Base_Frontend_Model {
             ->where('vcm.status', NULL)
             ->order_by('vcm.date', 'desc');
 
-        return $this->db->get()->result();
+        $matches = $this->db->get()->result();
+
+        if ($matches) {
+            $index = array_rand($matches);
+
+            $ci =& get_instance();
+            $ci->load->model('frontend/Frontend_Match_model');
+
+            return $ci->Frontend_Match_model->fetchMatchDetails($matches[$index]->id);
+        }
+
+        return false;
     }
 
     /**
