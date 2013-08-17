@@ -39,6 +39,8 @@ class Player extends Frontend_Controller {
         } elseif ($parameters['season'] == 'all-time') {
             $season = 'all-time';
             $baseURL .= '/season/all-time';
+        } else {
+            $baseURL .= '/season/' . $season;
         }
 
         $type = $parameters['type'];
