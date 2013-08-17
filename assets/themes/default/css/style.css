@@ -93,3 +93,7 @@ table td.text-align-right, .text-align-right {
 .section {
     min-height: 250px;
 }
+
+.calendar-link {
+    word-wrap: break-word;
+}

@@ -100,8 +100,9 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="#">Links<b class="caret"></b></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="#">Misc<b class="caret"></b></a>
                             <ul class="dropdown-menu">
+                                <li><a href="<?php echo site_url("calendar"); ?>">Calendar Subscription</a></li>
                                 <li><a href="http://www.mpkautos.co.uk" target="_blank">MPK Autos</a></li>
                                 <li><a href="http://www.leaguewebsite.co.uk/esfc" target="_blank">Essex Sunday Football Combination Website</a></li>
                                 <li><a href="http://full-time.thefa.com/Index.do?league=2113065" target="_blank">E.S.F.C. Full Time Website</a></li>

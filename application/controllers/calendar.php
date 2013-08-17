@@ -18,6 +18,20 @@ class Calendar extends Frontend_Controller {
     }
 
     /**
+     * Index Action
+     * @return NULL
+     */
+    public function index()
+    {
+        $this->templateData['metaTitle']       = $this->lang->line('calendar_index_frontend_meta_title');
+        $this->templateData['metaDescription'] = sprintf($this->lang->line('calendar_index_frontend_meta_description'), Configuration::get('team_name'));
+
+        $this->load->view("themes/{$this->theme}/header", $this->templateData);
+        $this->load->view("themes/{$this->theme}/calendar/welcome_message", $this->templateData);
+        $this->load->view("themes/{$this->theme}/footer", $this->templateData);
+    }
+
+    /**
      * Subscribe to Combined Calendars Action
      * @return NULL
      */
