@@ -262,7 +262,7 @@ class Player_model extends Base_Frontend_Model {
             ->where('p.deleted', 0)
             ->where('pta.deleted', 0)
             ->where('a.deleted', 0)
-            ->order_by('pta.placing ASC, pta.season DESC, a.importance ASC');
+            ->order_by('pta.placing ASC, a.importance ASC, pta.season DESC');
 
         return $this->db->get()->result();
     }
