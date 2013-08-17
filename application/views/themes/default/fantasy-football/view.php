@@ -94,8 +94,6 @@ $submit = array(
             <div class="span10 offset1" id="leaderboard-wrapper">
                 <?php $this->load->view("themes/{$theme}/fantasy-football/_leaderboard"); ?>
             </div>
-
-
         </div>
 
         <div class="row-fluid">
@@ -149,8 +147,10 @@ $submit = array(
             </div>
         </div>
 
-        <div id="best-lineup-wrapper">
-            <?php $this->load->view("themes/{$theme}/fantasy-football/_best_lineup"); ?>
+        <div class="row-fluid">
+            <div class="span10 offset1" id="best-lineup-wrapper">
+                <?php $this->load->view("themes/{$theme}/fantasy-football/_best_lineup"); ?>
+            </div>
         </div>
 
         <div class="row-fluid">

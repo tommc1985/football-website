@@ -1,5 +1,5 @@
         <div class="row-fluid">
-            <div class="span6 offset1">
+            <div class="span7">
                 <h4><?php echo $this->lang->line('fantasy_football_formation'); ?> (<?php echo $formationInfo['name']; ?>)</h4>
                 <div id="stadium">
                     <div id="pitch" class="formation-<?php echo $formation; ?>">

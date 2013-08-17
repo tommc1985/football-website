@@ -4,6 +4,8 @@ $('#leaderboard-submit').click(function() {
 
 function fetchLeaderboardTable()
 {
+    $('#leaderboard-wrapper').prepend('<div class="progress progress-striped active"><div class="bar" style="width: 90%;"></div></div>');
+
     $.post(baseURL + 'fantasy-football/view', $('#fantasy-football-form').serialize() + '&view=leaderboard', function (data) {
         $('#leaderboard-wrapper').html(data);
     });
@@ -17,6 +19,8 @@ $('#best-lineup-submit').click(function() {
 
 function fetchBestLineUp()
 {
+    $('#best-lineup-wrapper').prepend('<div class="progress progress-striped active"><div class="bar" style="width: 90%;"></div></div>');
+
     $.post(baseURL + 'fantasy-football/view', $('#fantasy-football-form').serialize() + '&view=best-lineup', function (data) {
         $('#best-lineup-wrapper').html(data);
     });
