@@ -89,3 +89,7 @@ table td.text-align-right, .text-align-right {
     border: 2px solid #000;
     margin-right: 5px;
 }
+
+.section {
+    min-height: 250px;
+}

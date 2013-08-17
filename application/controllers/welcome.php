@@ -21,9 +21,29 @@ class Welcome extends Frontend_Controller {
      */
     public function index()
     {
-        $this->load->database();
+        $this->load->model('frontend/Welcome_model');
+        $this->lang->load('index');
+        $this->lang->load('fantasy_football');
+        $this->lang->load('player');
+        $this->load->helper(array('competition', 'index', 'player', 'position', 'url', 'utility'));
 
-        $data = array();
+        $limit = 5;
+        $season = 2012;
+
+        $section = array();
+        $section['latestNewsArticle']  = $this->Welcome_model->fetchLatestNewsArticle();
+        $section['topScorers']         = $this->Welcome_model->fetchTopScorers($season, $limit);
+        $section['topAssisters']       = $this->Welcome_model->fetchTopAssisters($season, $limit);
+        $section['mostMotMs']           = $this->Welcome_model->fetchMostMotMs($season, $limit);
+        $section['worstDiscipline']    = $this->Welcome_model->fetchWorstDiscipline($season, $limit);
+        $section['fantasyFootballers'] = $this->Welcome_model->fetchFantasyFootballers($season, $limit);
+        $section['onThisDay']          = $this->Welcome_model->fetchOnThisDay();
+        $section['recentResults']      = $this->Welcome_model->fetchRecentResults($limit);
+        $section['upcomingFixtures']   = $this->Welcome_model->fetchUpcomingFixtures($limit);
+        $section['upcomingEvents']     = $this->Welcome_model->fetchUpcomingEvents($limit);
+
+        $this->templateData['section'] = $section;
+
         $this->load->view("themes/{$this->theme}/header", $this->templateData);
         $this->load->view("themes/{$this->theme}/index/welcome_message", $this->templateData);
         $this->load->view("themes/{$this->theme}/footer", $this->templateData);

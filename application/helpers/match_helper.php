@@ -172,6 +172,21 @@ class Match_helper
     }
 
     /**
+     * Return abbreviated Competition Name (and Stage if set)
+     * @param  mixed $competition  Competition Object/Array
+     * @return string              The Competition's Description
+     */
+    public static function abbreviatedCompetitionNameCombined($match)
+    {
+        $ci =& get_instance();
+        $ci->load->helper(array('competition', 'competition_stage'));
+
+        $match = self::_convertObject($match);
+
+        return Competition_helper::abbreviation($match->competition_id) . (is_null($match->competition_stage_id) ? '' : ', ' . Competition_Stage_helper::abbreviation($match->competition_stage_id));
+    }
+
+    /**
      * Return a Match's Venue
      * @param  mixed $match        Match Object/Array
      * @return string              The Match's Venue
