@@ -38,6 +38,7 @@ class League_model extends Base_Frontend_Model {
         $data = array(
             'teamCount' => count($currentStandings),
             'dates'     => array(),
+            'standings' => array(),
         );
         foreach ($currentStandings as $currentStanding) {
             if (!isset($data['standings'][$currentStanding->opposition_id])) {
