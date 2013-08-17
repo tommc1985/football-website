@@ -4,6 +4,8 @@ $('#submit-form-table').click(function() {
 
 function fetchFormTable()
 {
+    $('#form-table-wrapper').prepend('<div class="progress progress-striped active"><div class="bar" style="width: 90%;"></div></div>');
+
     $.post(baseURL + 'league/view/id/' + leagueId, $('#league-form').serialize() + '&view=form', function (data) {
         $('#form-table-wrapper').html(data);
     });
@@ -17,6 +19,8 @@ $('#submit-fixtures-and-results').click(function() {
 
 function fetchFixturesAndResults()
 {
+    $('#fixtures-and-results-wrapper').prepend('<div class="progress progress-striped active"><div class="bar" style="width: 90%;"></div></div>');
+
     $.post(baseURL + 'league/view/id/' + leagueId, $('#league-form').serialize() + '&view=fixtures-and-results', function (data) {
         $('#fixtures-and-results-wrapper').html(data);
     });
