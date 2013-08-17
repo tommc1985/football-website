@@ -23,7 +23,7 @@ class Player_Goal_Statistics_helper
             $statisticKey = "_{$statisticKey}";
         } ?>
 
-        <h3 id="<?php echo "{$statisticGroup}_{$statisticKey}"; ?>"><?php echo $ci->lang->line("player_goal_statistics_{$statisticGroup}{$statisticKey}"); ?></h3>
+        <h3 id="<?php echo "{$statisticGroup}{$statisticKey}"; ?>"><?php echo $ci->lang->line("player_goal_statistics_{$statisticGroup}{$statisticKey}"); ?></h3>
         <p><?php echo $ci->lang->line("player_goal_statistics_{$statisticGroup}{$statisticKey}_explanation"); ?></p>
         <p><?php echo $ci->lang->line("player_goal_statistics_no_{$statisticGroup}{$statisticKey}"); ?></p>
     <?php

@@ -4,37 +4,37 @@
 
         <div class="row-fluid">
             <div class="span12">
-<?php
-echo form_open($this->uri->uri_string(), array('class' => 'form-horizontal'));
-
-$inputType = array(
-    'name'    => 'type',
-    'id'      => 'type',
-    'options' => array('overall' => 'Overall') + Competition_model::fetchTypes(),
-    'value'   => set_value('type', $type),
-);
-
-$submit = array(
-    'name'    => 'submit',
-    'id'      => 'submit',
-    'value'   => $this->lang->line('player_goal_statistics_show'),
-    'class'   => 'btn',
-); ?>
-
-<fieldset>
-        <legend><?php echo $this->lang->line('global_filters');?></legend>
-        <div class="control-group">
-            <?php echo form_label($this->lang->line('player_goal_statistics_competition_type'), $inputType['id'], array('class' => 'control-label')); ?>
-            <div class="controls">
-                <?php echo form_dropdown($inputType['name'], $inputType['options'], $inputType['value'], "id='{$inputType['id']}'"); ?>
                 <?php
-                echo form_submit($submit); ?>
-            </div>
-        </div>
-</fieldset>
+                echo form_open($this->uri->uri_string(), array('class' => 'form-horizontal'));
 
-<?php
-echo form_close(); ?>
+                $inputType = array(
+                    'name'    => 'type',
+                    'id'      => 'type',
+                    'options' => array('overall' => 'Overall') + Competition_model::fetchTypes(),
+                    'value'   => set_value('type', $type),
+                );
+
+                $submit = array(
+                    'name'    => 'submit',
+                    'id'      => 'submit',
+                    'value'   => $this->lang->line('player_goal_statistics_show'),
+                    'class'   => 'btn',
+                ); ?>
+
+                <fieldset>
+                        <legend><?php echo $this->lang->line('global_filters');?></legend>
+                        <div class="control-group">
+                            <?php echo form_label($this->lang->line('player_goal_statistics_competition_type'), $inputType['id'], array('class' => 'control-label')); ?>
+                            <div class="controls">
+                                <?php echo form_dropdown($inputType['name'], $inputType['options'], $inputType['value'], "id='{$inputType['id']}'"); ?>
+                                <?php
+                                echo form_submit($submit); ?>
+                            </div>
+                        </div>
+                </fieldset>
+
+                <?php
+                echo form_close(); ?>
 
                 <h3><?php echo $this->lang->line("player_goal_statistics_statistics_menu"); ?></h3>
                 <ul class="nav nav-tabs nav-stacked">
@@ -78,127 +78,125 @@ echo form_close(); ?>
             </div>
             <div class="span6"></div>
         </div><?php
-$i = 0;
-foreach($goalTypes as $goalType => $goalTypeFriendly) {
-    if ($goalType != 0) {
-        if (0 == $i % 2) { ?>
-        <div class="row-fluid">
-        <?php
-        } ?>
-            <div class="span6">
-        <?php
-        Player_Goal_Statistics_helper::scorerByGoalType($statistics, $goalType); ?>
-            </div>
-        <?php
+        $i = 0;
+        foreach($goalTypes as $goalType => $goalTypeFriendly) {
+            if ($goalType != 0) {
+                if (0 == $i % 2) { ?>
+                <div class="row-fluid">
+                <?php
+                } ?>
+                    <div class="span6">
+                <?php
+                Player_Goal_Statistics_helper::scorerByGoalType($statistics, $goalType); ?>
+                    </div>
+                <?php
+                if (1 == $i % 2) { ?>
+                </div>
+                <?php
+                }
+
+                $i++;
+            }
+        }
+
         if (1 == $i % 2) { ?>
         </div>
         <?php
         }
 
-        $i++;
-    }
-}
-
-if (1 == $i % 2) { ?>
-</div>
-<?php
-}
-
-$i = 0;
-foreach($bodyParts as $bodyPart => $bodyPartFriendly) {
-    if (0 == $i % 2) { ?>
-        <div class="row-fluid">
-    <?php
-    } ?>
-            <div class="span6">
+        $i = 0;
+        foreach($bodyParts as $bodyPart => $bodyPartFriendly) {
+            if (0 == $i % 2) { ?>
+                <div class="row-fluid">
+            <?php
+            } ?>
+                    <div class="span6">
+                        <?php
+                Player_Goal_Statistics_helper::scorerByBodyPart($statistics, $bodyPart); ?>
+                    </div>
                 <?php
-        Player_Goal_Statistics_helper::scorerByBodyPart($statistics, $bodyPart); ?>
-            </div>
-        <?php
+                if (1 == $i % 2) { ?>
+                </div>
+            <?php
+            }
+
+            $i++;
+        }
+
         if (1 == $i % 2) { ?>
         </div>
-    <?php
-    }
-
-    $i++;
-}
-
-if (1 == $i % 2) { ?>
-</div>
-<?php
-}
-
-$i = 0;
-foreach($distances as $distance => $distanceFriendly) {
-    if (0 == $i % 2) { ?>
-        <div class="row-fluid">
-    <?php
-    } ?>
-            <div class="span6">
-                <?php
-        Player_Goal_Statistics_helper::scorerByDistance($statistics, $distance); ?>
-            </div>
         <?php
+        }
+
+        $i = 0;
+        foreach($distances as $distance => $distanceFriendly) {
+            if (0 == $i % 2) { ?>
+                <div class="row-fluid">
+            <?php
+            } ?>
+                    <div class="span6">
+                        <?php
+                Player_Goal_Statistics_helper::scorerByDistance($statistics, $distance); ?>
+                    </div>
+                <?php
+                if (1 == $i % 2) { ?>
+                </div>
+            <?php
+            }
+
+            $i++;
+        }
+
         if (1 == $i % 2) { ?>
         </div>
-    <?php
-    }
-
-    $i++;
-}
-
-if (1 == $i % 2) { ?>
-</div>
-<?php
-}
-
-$i = 0;
-foreach($minuteIntervals as $minuteIntervals => $minuteIntervalsFriendly) {
-    if (0 == $i % 2) { ?>
-        <div class="row-fluid">
-    <?php
-    } ?>
-            <div class="span6">
-                <?php
-        Player_Goal_Statistics_helper::scorerByMinuteInterval($statistics, $minuteIntervals); ?>
-            </div>
         <?php
+        }
+
+        $i = 0;
+        foreach($minuteIntervals as $minuteIntervals => $minuteIntervalsFriendly) {
+            if (0 == $i % 2) { ?>
+                <div class="row-fluid">
+            <?php
+            } ?>
+                    <div class="span6">
+                        <?php
+                Player_Goal_Statistics_helper::scorerByMinuteInterval($statistics, $minuteIntervals); ?>
+                    </div>
+                <?php
+                if (1 == $i % 2) { ?>
+                </div>
+            <?php
+            }
+
+            $i++;
+        }
+
         if (1 == $i % 2) { ?>
         </div>
-    <?php
-    }
-
-    $i++;
-}
-
-if (1 == $i % 2) { ?>
-</div>
-<?php
-}
-
-$i = 0;
-foreach($goalTypes as $goalType => $goalTypeFriendly) {
-    if (0 == $i % 2) { ?>
-        <div class="row-fluid">
-    <?php
-    } ?>
-            <div class="span6">
         <?php
-        Player_Goal_Statistics_helper::assistByGoalType($statistics, $goalType); ?>
-            </div>
-    <?php
-    if (1 == $i % 2) { ?>
+        }
+
+        $i = 0;
+        foreach($goalTypes as $goalType => $goalTypeFriendly) {
+            if (0 == $i % 2) { ?>
+                <div class="row-fluid">
+            <?php
+            } ?>
+                    <div class="span6">
+                <?php
+                Player_Goal_Statistics_helper::assistByGoalType($statistics, $goalType); ?>
+                    </div>
+            <?php
+            if (1 == $i % 2) { ?>
+                </div>
+            <?php
+            }
+
+            $i++;
+        }
+
+        if (1 == $i % 2) { ?>
         </div>
-    <?php
-    }
-
-    $i++;
-}
-
-if (1 == $i % 2) { ?>
-</div>
-<?php
-} ?>
-
-    </div>
+        <?php
+        } ?>
 </div>
