@@ -491,7 +491,7 @@ ORDER BY {$orderBy} DESC";
             $simplePosition = Fantasy_Football_helper::fetchSimplePosition($position);
 
             if ($simplePosition == 'sub') {
-                $player[$position] = (float) ("-0.{$subCount}");
+                $player[$position] = (float) - 1000 - ("{$subCount}");
                 $subCount--;
             }
         }
