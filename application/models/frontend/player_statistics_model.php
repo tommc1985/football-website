@@ -33,7 +33,7 @@ class Player_Statistics_model extends Base_Frontend_Model {
         $this->db->where('season', $season);
         $this->db->where('type', $type);
         $this->db->where("(matches_played >= {$threshold} || matches_played IS NULL)", NULL, false);
-        $this->db->order_by('CAST(`statistic_key` AS DECIMAL(5, 2)) DESC, matches_played ASC');
+        $this->db->order_by('CAST(`statistic_key` AS DECIMAL(5, 2)) DESC, matches_played ASC', null, false);
 
         $result = $this->db->get();
 

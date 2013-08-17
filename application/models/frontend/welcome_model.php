@@ -94,7 +94,7 @@ class Welcome_model extends Base_Frontend_Model {
      */
     public function fetchWorstDiscipline($season, $limit)
     {
-        $this->db->select('p.*, cpas.*, CONCAT(cpas.yellows,"_",cpas.reds) as concatenated_cards')
+        $this->db->select('p.*, cpas.*, CONCAT(cpas.yellows,"_",cpas.reds) as concatenated_cards', false)
             ->from('cache_player_accumulated_statistics cpas')
             ->join('player p', 'p.id = cpas.player_id')
             ->where('cpas.type', 'overall')

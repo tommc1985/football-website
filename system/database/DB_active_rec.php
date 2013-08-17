@@ -813,7 +813,7 @@ class CI_DB_active_record extends CI_DB_driver {
      * @param    string    direction: asc or desc
      * @return    object
      */
-    public function order_by($orderby, $direction = '')
+    public function order_by($orderby, $direction = '', $escape = true)
     {
         if (strtolower($direction) == 'random')
         {
@@ -834,7 +834,7 @@ class CI_DB_active_record extends CI_DB_driver {
                 $part = trim($part);
                 if ( ! in_array($part, $this->ar_aliased_tables))
                 {
-                    $part = $this->_protect_identifiers(trim($part));
+                    $part = $this->_protect_identifiers(trim($part), FALSE, $escape);
                 }
 
                 $temp[] = $part;
