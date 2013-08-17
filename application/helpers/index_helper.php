@@ -21,9 +21,15 @@ class Index_helper
         $ci->load->helper('utility'); ?>
 
         <h2><?php echo $ci->lang->line('index_latest_news'); ?></h2>
+        <?php
+        if ($article) { ?>
         <h3><?php echo $article->title; ?></h3>
         <p><?php echo Utility_helper::truncate($article->content, 200); ?> (<a href="<?php echo site_url("news/view/id/{$article->id}"); ?>"><?php echo $ci->lang->line('index_read_more'); ?></a>)</p>
         <?php
+        } else { ?>
+            <?php echo $ci->lang->line('index_latest_news_no_data'); ?>
+        <?php
+        }
     }
 
     /**
@@ -37,6 +43,8 @@ class Index_helper
         $ci->load->helper(array('player', 'utility')); ?>
 
         <h2><?php echo $ci->lang->line('index_top_scorers'); ?></h2>
+        <?php
+        if ($players['subset']) { ?>
         <table class="width-100-percent table table-condensed table-striped">
             <thead>
                 <tr>
@@ -49,19 +57,23 @@ class Index_helper
             $subsetCount = count($players['subset']);
             $i = 1;
             foreach ($players['subset'] as $player) { ?>
-                <tr>
-                    <td class="width-85-percent" data-title="<?php echo $ci->lang->line('player_player'); ?>"><?php echo Player_helper::fullNameReverse($player);
-                    if ($players['extraPlayerCount'] && $subsetCount == $i) {
-                        echo $players['extraPlayerCount'] == 1 ? $ci->lang->line('index_plus_one_other') : sprintf($ci->lang->line('index_plus_n_others'), $players['extraPlayerCount']);
-                    } ?></td>
-                    <td class="width-15-percent text-align-center" data-title="<?php echo $ci->lang->line('player_goals'); ?>"><?php echo $player->goals; ?></td>
-                </tr>
+                    <tr>
+                        <td class="width-85-percent" data-title="<?php echo $ci->lang->line('player_player'); ?>"><?php echo Player_helper::fullNameReverse($player);
+                        if ($players['extraPlayerCount'] && $subsetCount == $i) {
+                            echo $players['extraPlayerCount'] == 1 ? $ci->lang->line('index_plus_one_other') : sprintf($ci->lang->line('index_plus_n_others'), $players['extraPlayerCount']);
+                        } ?></td>
+                        <td class="width-15-percent text-align-center" data-title="<?php echo $ci->lang->line('player_goals'); ?>"><?php echo $player->goals; ?></td>
+                    </tr>
             <?php
                 $i++;
             } ?>
             </tbody>
         </table>
         <?php
+        } else { ?>
+            <?php echo $ci->lang->line('index_top_scorers_no_data'); ?>
+        <?php
+        }
     }
 
     /**
@@ -75,6 +87,8 @@ class Index_helper
         $ci->load->helper(array('player', 'utility')); ?>
 
         <h2><?php echo $ci->lang->line('index_top_assisters'); ?></h2>
+        <?php
+        if ($players['subset']) { ?>
         <table class="width-100-percent table table-condensed table-striped">
             <thead>
                 <tr>
@@ -100,6 +114,10 @@ class Index_helper
             </tbody>
         </table>
         <?php
+        } else { ?>
+            <?php echo $ci->lang->line('index_top_assisters_no_data'); ?>
+        <?php
+        }
     }
 
     /**
@@ -113,6 +131,8 @@ class Index_helper
         $ci->load->helper(array('player', 'utility')); ?>
 
         <h2><?php echo $ci->lang->line('index_most_motms'); ?></h2>
+        <?php
+        if ($players['subset']) { ?>
         <table class="width-100-percent table table-condensed table-striped">
             <thead>
                 <tr>
@@ -138,6 +158,10 @@ class Index_helper
             </tbody>
         </table>
         <?php
+        } else { ?>
+            <?php echo $ci->lang->line('index_most_motms_no_data'); ?>
+        <?php
+        }
     }
 
     /**
@@ -151,6 +175,8 @@ class Index_helper
         $ci->load->helper(array('player', 'utility')); ?>
 
         <h2><?php echo $ci->lang->line('index_worst_discipline'); ?></h2>
+        <?php
+        if ($players['subset']) { ?>
         <table class="width-100-percent table table-condensed table-striped">
             <thead>
                 <tr>
@@ -178,6 +204,10 @@ class Index_helper
             </tbody>
         </table>
         <?php
+        } else { ?>
+            <?php echo $ci->lang->line('index_worst_discipline_no_data'); ?>
+        <?php
+        }
     }
 
     /**
@@ -191,6 +221,8 @@ class Index_helper
         $ci->load->helper(array('player', 'utility')); ?>
 
         <h2><?php echo $ci->lang->line('index_top_fantasy_footballers'); ?></h2>
+        <?php
+        if ($players['subset']) { ?>
         <table class="width-100-percent table table-condensed table-striped">
             <thead>
                 <tr>
@@ -216,6 +248,10 @@ class Index_helper
             </tbody>
         </table>
         <?php
+        } else { ?>
+            <?php echo $ci->lang->line('index_top_fantasy_footballers_no_data'); ?>
+        <?php
+        }
     }
 
     /**
@@ -226,17 +262,22 @@ class Index_helper
     public static function onThisDay($matches)
     {
         $ci =& get_instance();
-        $ci->load->helper(array('competition', 'match', 'opposition', 'player', 'utility'));
-
-        $index = array_rand($matches);
-        $match = $matches[$index]; ?>
+        $ci->load->helper(array('competition', 'match', 'opposition', 'player', 'utility')); ?>
 
         <h2><?php echo $ci->lang->line('index_on_this_day'); ?></h2>
+        <?php
+        if ($matches) {
+            $index = array_rand($matches);
+            $match = $matches[$index]; ?>
         <h3><?php echo Utility_helper::formattedDate($match->date, "Y"); ?></h3>
         <h4><?php echo Match_helper::score($match); ?> <?php echo $ci->lang->line('match_vs'); ?> <?php echo Opposition_helper::name($match->opposition_id); ?></h4>
         <p><?php echo Match_helper::shortCompetitionNameCombined($match); ?></p>
         <p><a href="<?php echo site_url("match/view/id/{$match->id}"); ?>"><?php echo $ci->lang->line('index_view_match_details'); ?></a></p>
         <?php
+        } else { ?>
+            <?php echo $ci->lang->line('index_on_this_day_no_data'); ?>
+        <?php
+        }
     }
 
     /**
@@ -250,6 +291,8 @@ class Index_helper
         $ci->load->helper(array('competition', 'match', 'opposition', 'player', 'utility')); ?>
 
         <h2><?php echo $ci->lang->line('index_recent_results'); ?></h2>
+        <?php
+        if ($matches) { ?>
         <table class="no-more-tables table table-condensed table-striped">
             <thead>
                 <tr>
@@ -275,6 +318,10 @@ class Index_helper
             </tbody>
         </table>
         <?php
+        } else { ?>
+            <?php echo $ci->lang->line('index_recent_results_no_data'); ?>
+        <?php
+        }
     }
 
     /**
@@ -289,6 +336,8 @@ class Index_helper
         $ci->load->helper(array('competition', 'match', 'opposition', 'player', 'utility')); ?>
 
         <h2><?php echo $ci->lang->line('index_upcoming_fixtures'); ?></h2>
+        <?php
+        if ($matches) { ?>
         <table class="no-more-tables table table-condensed table-striped">
             <thead>
                 <tr>
@@ -314,6 +363,10 @@ class Index_helper
             </tbody>
         </table>
         <?php
+        } else { ?>
+            <?php echo $ci->lang->line('index_upcoming_fixtures_no_data'); ?>
+        <?php
+        }
     }
 
     /**
@@ -327,6 +380,8 @@ class Index_helper
         $ci->load->helper(array('competition', 'match', 'opposition', 'player', 'utility')); ?>
 
         <h2><?php echo $ci->lang->line('index_upcoming_events'); ?></h2>
+        <?php
+        if ($events) { ?>
         <table class="no-more-tables table table-condensed table-striped">
             <thead>
                 <tr>
@@ -358,5 +413,9 @@ class Index_helper
             </tbody>
         </table>
         <?php
+        } else { ?>
+            <?php echo $ci->lang->line('index_upcoming_events_no_data'); ?>
+        <?php
+        }
     }
 }

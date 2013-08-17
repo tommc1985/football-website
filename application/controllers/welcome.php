@@ -34,7 +34,7 @@ class Welcome extends Frontend_Controller {
         $section['latestNewsArticle']  = $this->Welcome_model->fetchLatestNewsArticle();
         $section['topScorers']         = $this->Welcome_model->fetchTopScorers($season, $limit);
         $section['topAssisters']       = $this->Welcome_model->fetchTopAssisters($season, $limit);
-        $section['mostMotMs']           = $this->Welcome_model->fetchMostMotMs($season, $limit);
+        $section['mostMotMs']          = $this->Welcome_model->fetchMostMotMs($season, $limit);
         $section['worstDiscipline']    = $this->Welcome_model->fetchWorstDiscipline($season, $limit);
         $section['fantasyFootballers'] = $this->Welcome_model->fetchFantasyFootballers($season, $limit);
         $section['onThisDay']          = $this->Welcome_model->fetchOnThisDay();
