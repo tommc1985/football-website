@@ -49,6 +49,8 @@ $configValues['default_threshold']                = 60;
 
 $configValues['form_match_count']                 = 6;
 
+$configValues['motm_placings']                    = 3;
+
 $configValues['team_name']                        = 'Hardy Athletic';
 
 $configValues['cache_key']                        = 'key';
